@@ -8,7 +8,7 @@
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 
 return array(
-        'theme'=>'bootstrap',
+    'theme'=>'bootstrap',
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'PEA Project Tracking',
 
@@ -68,13 +68,11 @@ return array(
                 ),
 
 
-		'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),
+		
 		// uncomment the following to use a MySQL database
 		
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=pea_project_tracking',
+			'connectionString' => 'mysql:host=localhost;dbname=pea_proj_tracking',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => 'meroot',

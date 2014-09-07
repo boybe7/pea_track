@@ -17,33 +17,33 @@ function getUsername(){
 // access it by Yii::app()->user->title
 function getTitle(){
     $user = $this->loadUser(Yii::app()->user->id);
-    return $user->title;
+    return "";//$user->title;
     
 }
 // access it by Yii::app()->user->firstname
 function getFirstName(){
     $user = $this->loadUser(Yii::app()->user->id);
-    return $user->firstname;
+    return "";//$user->firstname;
     
 }
 // access it by Yii::app()->user->lastname
 function getLastName(){
     $user = $this->loadUser(Yii::app()->user->id);
-    return $user->lastname;
+    return "";//$user->lastname;
     
 }
 
 // access it by Yii::app()->user->usertype
 function getUsertype(){
     $user = $this->loadUser(Yii::app()->user->id);
-    $usertype=StaffType::model()->findByPk($user->type_id);
+    
     if(Yii::app()->user->id == 0)
     {  
-        $usertype = new StaffType();
-        return $usertype->name = "guest";     
+        
+        return "guest";     
     }
     else    
-         return $usertype->name;
+         return "user";
 }
 
 // This is a function that checks the field 'role'
@@ -55,20 +55,16 @@ function getUsertype(){
 // Yii::app()->user->isCashier()
  function isAdmin(){
     $user = $this->loadUser(Yii::app()->user->id);
-    return $user->type_id == "A";
+    return $user->u_group == "1";
   }
 
-function isDoctor(){
+function isSuperUser(){
     $user = $this->loadUser(Yii::app()->user->id);
-    return $user->type_id == "D";
+    return $user->u_group == "2";
 }
-function isNurse(){
+function isUser(){
     $user = $this->loadUser(Yii::app()->user->id);
-    return $user->type_id == "N";
-}
-function isCashier(){
-    $user = $this->loadUser(Yii::app()->user->id);
-    return $user->type_id == "C";
+    return $user->u_group == "3";
 }
 
 // Load user model.
@@ -77,10 +73,10 @@ protected function loadUser($id=null)
     if($this->_model===null)
     {
         if($id!==null)
-            $this->_model=Staff::model()->findByPk($id);
+            $this->_model=User::model()->findByPk($id);
         else
         {
-            $this->_model = new Staff();
+            $this->_model = new User();
             $this->_model->username = "Guest";
             $this->_model->type_id = 0;
         }

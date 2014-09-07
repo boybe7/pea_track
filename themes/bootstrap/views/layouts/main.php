@@ -94,7 +94,7 @@ text-shadow: 0 0 0 #ffffff;
 <?php 
    
 
-if(!Yii::app()->user->isGuest && !Yii::app()->user->isDoctor())
+if(!Yii::app()->user->isGuest)
 {
 
    $this->widget('bootstrap.widgets.TbNavbar',array(
@@ -106,27 +106,8 @@ if(!Yii::app()->user->isGuest && !Yii::app()->user->isDoctor())
         array(
             'class'=>'bootstrap.widgets.TbMenu',
             'items'=>array(
-                //array('label'=>'Home','icon'=>'home', 'url'=>array('/site/index')),
-                array('label'=>'จัดการข้อมูล','icon'=>'wrench', 'url'=>'#','items'=>array(
-                    array('label'=>'ข้อมูลยา', 'url'=>array('/drug/index')),
-                    array('label'=>'ข้อมูลอาการ', 'url'=>array('/symptom/index')),
-                     array('label'=>'ข้อมูลคำวินิจฉัยโรค', 'url'=>array('/diagnosis/index')),
-                     array('label'=>'ข้อมูลวิธีการใช้ยา', 'url'=>array('/drugmethod/index')),
-                    ), 'visible'=>Yii::app()->user->isNurse(),
-                     ),
-                array('label'=>'รายชื่อผู้เข้ารับบริการ','icon'=>'user', 'url'=>array('/treatmentRecord/index'), 'visible'=>Yii::app()->user->isNurse()),
-                array('label'=>'เวชระเบียนผู้ป่วย','icon'=>'patient', 'url'=>array('/patient/index'), 'visible'=>Yii::app()->user->isNurse()),
-                array('label'=>'ผู้ใช้งานระบบ','icon'=>'user', 'url'=>array('/staff/admin'),'visible'=>Yii::app()->user->isAdmin()),
-                array('label'=>'รายชื่อผู้เข้ารับบริการ','icon'=>'user', 'url'=>array('/treatmentRecord/indexDoctor'), 'visible'=>Yii::app()->user->isDoctor()),
-                array('label'=>'รายชื่อผู้เข้ารับบริการ','icon'=>'user', 'url'=>array('/bill/index'), 'visible'=>Yii::app()->user->isCashier()),
-               
-                array('label'=>'รายงาน','icon'=>'signal', 'url'=>'#','items'=>array(
-                    array('label'=>'รายงานจำนวนผู้เข้ารับบริการ', 'url'=>array('/treatmentRecord/report'), 'visible'=>Yii::app()->user->isNurse()),
-                    array('label'=>'รายงานการวินิจฉัยโรคตามช่วงเวลา', 'url'=>array('/treatmentRecord/reportDiag'), 'visible'=>Yii::app()->user->isNurse()),
-                     array('label'=>'รายงานสรุปยอดเงินรายรับสถานพยาบาล', 'url'=>array('/treatmentRecord/reportIncome'), 'visible'=>Yii::app()->user->isCashier()),
-                    
-                    )
-                     ),
+                array('label'=>'Home','icon'=>'home', 'url'=>array('/site/index')),
+                
                 
             ),
         ),    
@@ -135,7 +116,8 @@ if(!Yii::app()->user->isGuest && !Yii::app()->user->isDoctor())
             'htmlOptions'=>array('class'=>'pull-right'),
             'type'=>'success', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
             'buttons'=>array(
-                    array('label'=>Yii::app()->user->title.Yii::app()->user->firstname."   ".Yii::app()->user->lastname,'icon'=>Yii::app()->user->usertype, 'url'=>'#'),
+                    //array('label'=>Yii::app()->user->title.Yii::app()->user->firstname."   ".Yii::app()->user->lastname,'icon'=>Yii::app()->user->usertype, 'url'=>'#'),
+                    array('label'=>Yii::app()->user->username,'icon'=>Yii::app()->user->usertype, 'url'=>'#'),
                     array('items'=>array(
                         array('label'=>'เปลี่ยนรหัสผ่าน','icon'=>'cog', 'url'=>array('/staff/password/'.Yii::app()->user->ID), 'visible'=>!Yii::app()->user->isGuest),
                         '---',

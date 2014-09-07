@@ -37,13 +37,13 @@ class UserIdentity extends CUserIdentity
     public function authenticate()
     {
         $username=strtolower($this->username);
-        $user=Staff::model()->find('LOWER(username)=?',array($username));
+        $user=User::model()->find('LOWER(username)=?',array($username));
         if($user===null){
             $this->errorCode=self::ERROR_USERNAME_INVALID;
         } else if(!$user->validatePassword($this->password)){
             $this->errorCode=self::ERROR_PASSWORD_INVALID;
         } else {
-            $this->_id=$user->staff_id;
+            $this->_id=$user->u_id;
             $this->username=$user->username;
             $this->errorCode=self::ERROR_NONE;
 
