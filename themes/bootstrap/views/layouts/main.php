@@ -119,7 +119,7 @@ if(!Yii::app()->user->isGuest)
                     //array('label'=>Yii::app()->user->title.Yii::app()->user->firstname."   ".Yii::app()->user->lastname,'icon'=>Yii::app()->user->usertype, 'url'=>'#'),
                     array('label'=>Yii::app()->user->username,'icon'=>Yii::app()->user->usertype, 'url'=>'#'),
                     array('items'=>array(
-                        array('label'=>'เปลี่ยนรหัสผ่าน','icon'=>'cog', 'url'=>array('/staff/password/'.Yii::app()->user->ID), 'visible'=>!Yii::app()->user->isGuest),
+                        array('label'=>'เปลี่ยนรหัสผ่าน','icon'=>'cog', 'url'=>array('/user/password/'.Yii::app()->user->ID), 'visible'=>!Yii::app()->user->isGuest),
                         '---',
                         array('label'=>'ออกจากระบบ','icon'=>'off', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
                     )),
@@ -129,7 +129,7 @@ if(!Yii::app()->user->isGuest)
         ),
     ));
 }
-else if(!Yii::app()->user->isGuest)
+else if(Yii::app()->user->isAdmin())
 {
     
    $this->widget('bootstrap.widgets.TbNavbar',array(
@@ -152,7 +152,7 @@ else if(!Yii::app()->user->isGuest)
             'buttons'=>array(
                     array('label'=>Yii::app()->user->title.Yii::app()->user->firstname."   ".Yii::app()->user->lastname,'icon'=>Yii::app()->user->usertype, 'url'=>'#'),
                     array('items'=>array(
-                        array('label'=>'เปลี่ยนรหัสผ่าน','icon'=>'cog', 'url'=>array('/staff/password/'.Yii::app()->user->ID), 'visible'=>!Yii::app()->user->isGuest),
+                        array('label'=>'เปลี่ยนรหัสผ่าน','icon'=>'cog', 'url'=>array('/user/password/'.Yii::app()->user->ID), 'visible'=>!Yii::app()->user->isGuest),
                         '---',
                         array('label'=>'ออกจากระบบ','icon'=>'off', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
                     )),

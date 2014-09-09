@@ -36,7 +36,7 @@ class ChangePasswordForm extends CFormModel
   
   public function init()
   {
-    $this->_user = Staff::model()->findByAttributes( array( 'username'=>Yii::app()->User->username ) );
+    $this->_user = User::model()->findByAttributes( array( 'username'=>Yii::app()->User->username ) );
   }
   
   public function attributeLabels()
