@@ -99,6 +99,24 @@ class User extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	public function getGroupName($gid)
+    {
+        switch ($gid) {
+        	case 1:
+        		$name = "admin";
+        		break;
+        	case 2:
+        		$name = "superuser";
+        		break;
+        	case 3:
+        		$name = "user";
+        		break;	
+        	default:
+        		$name = "";
+        		break;
+        }
+        return $name;
+    }
 	public function validatePassword($password)
     {
         return $password===$this->password;
