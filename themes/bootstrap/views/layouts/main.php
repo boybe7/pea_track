@@ -107,7 +107,7 @@ if(!Yii::app()->user->isGuest)
             'class'=>'bootstrap.widgets.TbMenu',
             'items'=>array(
                 array('label'=>'Home','icon'=>'home', 'url'=>array('/site/index')),
-                
+                array('label'=>'User','icon'=>'user', 'url'=>array('/user/index'), 'visible'=>Yii::app()->user->isAdmin()),
                 
             ),
         ),    

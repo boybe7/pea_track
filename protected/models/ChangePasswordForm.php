@@ -28,7 +28,7 @@ class ChangePasswordForm extends CFormModel
   
   public function compareCurrentPassword($attribute,$params)
   {
-    if( $this->currentPassword !== $this->_user->password )
+    if(sha1($this->currentPassword) !== $this->_user->password )
     {
       $this->addError($attribute,'รหัสผ่านเก่าไม่ถูกต้อง');
     }
@@ -42,9 +42,9 @@ class ChangePasswordForm extends CFormModel
   public function attributeLabels()
   {
     return array(
-      'currentPassword'=>'Old password',
-      'newPassword'=>'New password',
-      'newPassword_repeat'=>'Confirm new password',
+      'currentPassword'=>'กรอกรหัสผ่านเก่า',
+      'newPassword'=>'กรอกรหัสผ่านใหม่',
+      'newPassword_repeat'=>'ยืนยันรหัสผ่านใหม่',
     );
   }
   

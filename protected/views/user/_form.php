@@ -1,5 +1,5 @@
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
-	'id'=>'staff-form',
+	'id'=>'user-form',
 	'enableAjaxValidation'=>false,
         'type'=>'vertical',
         'htmlOptions'=>  array('class'=>'well','style'=>'width:650px;margin:0 auto;;'),
@@ -7,12 +7,7 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-  <div class="row-fluid">
-    <div class="span2">
-     <?php echo $form->textFieldRow($model,'title',array('label'=>'คำนำ','class'=>'span12','maxlength'=>20)); ?>
-    </div>
-   
-  </div>
+  
   <div class="row-fluid">
    
     <div class="span6">

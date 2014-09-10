@@ -78,7 +78,7 @@ protected function loadUser($id=null)
         {
             $this->_model = new User();
             $this->_model->username = "Guest";
-            $this->_model->type_id = 0;
+            $this->_model->u_group = 0;
         }
     }
     return $this->_model;

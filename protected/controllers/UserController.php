@@ -35,7 +35,7 @@ class UserController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','updateuser','getusergroup'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -158,7 +158,7 @@ class UserController extends Controller
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));*/
-                $model=new User('search');
+        $model=new User('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Staff']))
 			$model->attributes=$_GET['Staff'];
@@ -208,4 +208,22 @@ class UserController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionUpdateUser()
+    {
+	    $es = new EditableSaver('User');
+	    try {
+	    	$es->update();
+	    } catch(CException $e) {
+	    	echo CJSON::encode(array('success' => false, 'msg' => $e->getMessage()));
+	    	return;
+	    }
+	    echo CJSON::encode(array('success' => true));
+    }
+
+    public function actionGetUserGroup()
+    {
+    	$data = array(array("value"=>"1","text"=>"Admin"),array("value"=>"2","text"=>"SuperUser"),array("value"=>"3","text"=>"User"));
+        echo CJSON::encode($data);
+    }
 }

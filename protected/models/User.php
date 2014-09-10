@@ -57,7 +57,7 @@ class User extends CActiveRecord
 			'u_id' => 'U',
 			'username' => 'Username',
 			'password' => 'Password',
-			'u_group' => 'U Group',
+			'u_group' => 'กลุ่มผู้ใช้งาน',
 		);
 	}
 
@@ -119,11 +119,15 @@ class User extends CActiveRecord
     }
 	public function validatePassword($password)
     {
-        return $password===$this->password;
+        return sha1($password)===$this->password;
     }
-    public function hashPassword($password,$username)
+    
+    public function beforeSave()
     {
-        return md5($username.$password);
+        
+            $this->password= sha1($this->password);
+             
+            return parent::beforeSave();
     }
 
 }
