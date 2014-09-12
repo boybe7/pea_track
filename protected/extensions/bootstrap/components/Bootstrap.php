@@ -111,7 +111,11 @@ class Bootstrap extends CApplicationComponent
 		$cs->registerScriptFile($this->getAssetsUrl().'/js/'.$filename, $position);
    
 		$cs->registerScriptFile($this->getAssetsUrl().'/bootstrap-datepicker/js/bootstrap-datepicker.js', CClientScript::POS_END);
-                $cs->registerScriptFile($this->getAssetsUrl().'/bootstrap-timepicker/js/bootstrap-timepicker.js', CClientScript::POS_END);
+        $cs->registerScriptFile($this->getAssetsUrl().'/bootstrap-timepicker/js/bootstrap-timepicker.js', CClientScript::POS_END);
+	
+        $cs->registerScriptFile($this->getAssetsUrl().'/bootbox/bootbox.js', CClientScript::POS_END);
+	
+
 	}
 
 	/**

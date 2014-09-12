@@ -19,6 +19,13 @@ class User extends CActiveRecord
 		return 'user';
 	}
 
+	public function primaryKey()
+	{
+	    return 'u_id';
+	    // For composite primary key, return an array like the following
+	    // return array('column name 1', 'column name 2');
+	}
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */

@@ -35,7 +35,7 @@ class UserController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','updateuser','getusergroup'),
+				'actions'=>array('admin','delete','updateuser','getusergroup','deleteSelected'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -103,7 +103,7 @@ class UserController extends Controller
 		));
 	}
         
-        public function actionPassword($id)
+    public function actionPassword($id)
 	{
 		$model = new ChangePasswordForm;
                 if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
@@ -173,7 +173,7 @@ class UserController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Staff('search');
+		$model=new User('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['User']))
 			$model->attributes=$_GET['User'];
@@ -225,5 +225,17 @@ class UserController extends Controller
     {
     	$data = array(array("value"=>"1","text"=>"Admin"),array("value"=>"2","text"=>"SuperUser"),array("value"=>"3","text"=>"User"));
         echo CJSON::encode($data);
+    }
+
+    public function actionDeleteSelected()
+    {
+    	$autoIdAll = $_POST['selectedID'];
+        if(count($autoIdAll)>0)
+        {
+            foreach($autoIdAll as $autoId)
+            {
+                $this->loadModel($autoId)->delete();
+            }
+        }    
     }
 }

@@ -210,4 +210,22 @@ class TbInputHorizontal extends TbInput
 		echo $this->getError().$this->getHint();
 		echo '</div>';
 	}
+	
+	protected function datepickerField()
+	{
+		echo $this->getLabel();
+		echo '<div class="controls">';
+		echo CHtml::tag('span', $this->htmlOptions, $this->model->{$this->attribute});
+		echo $this->getError().$this->getHint();
+		echo '</div>';
+	}
+	
+	protected function timepickerField()
+	{
+		echo $this->getLabel();
+		echo '<div class="controls">';
+		echo CHtml::tag('span', $this->htmlOptions, $this->model->{$this->attribute});
+		echo $this->getError().$this->getHint();
+		echo '</div>';
+	}
 }
