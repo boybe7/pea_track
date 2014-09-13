@@ -35,7 +35,7 @@ class UserController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','updateuser','getusergroup','deleteSelected'),
+				'actions'=>array('admin','delete','updateuser','getusergroup','deleteSelected','resetPassword'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -235,6 +235,23 @@ class UserController extends Controller
             foreach($autoIdAll as $autoId)
             {
                 $this->loadModel($autoId)->delete();
+            }
+        }    
+    }
+
+    public function actionResetPassword()
+    {
+    	$autoIdAll = $_POST['selectedID'];
+        if(count($autoIdAll)>0)
+        {
+            foreach($autoIdAll as $autoId)
+            {
+                $model = $this->loadModel($autoId);
+                $model->password = "12345";
+			    if($model->save())
+			    	echo "success";
+			    else
+			        echo "error";	 
             }
         }    
     }
