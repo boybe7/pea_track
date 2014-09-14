@@ -35277,3 +35277,12 @@ REQUEST_URI=/pea_track/
 in C:\xampp\htdocs\pea_track\protected\components\WebUser.php (58)
 in C:\xampp\htdocs\pea_track\themes\bootstrap\views\layouts\main.php (110)
 in C:\xampp\htdocs\pea_track\protected\views\layouts\column1.php (6)
+2014/09/14 02:18:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "img/intro-bg.jpg".' in C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('img/intro-bg.jp...')
+#1 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/pea_track/img/intro-bg.jpg
+HTTP_REFERER=http://localhost/pea_track/site/login
+---

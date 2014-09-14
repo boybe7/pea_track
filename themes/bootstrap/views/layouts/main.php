@@ -17,42 +17,49 @@
         <?php echo Yii::app()->bootstrap->init();?>
 </head>
 <link rel="shortcut icon" href="../favicon.ico">
-    <style>
+<style>
+
+
 .navbar .brand {
 display: block;
 float: left;
 padding: 10px 20px 10px;
-margin-left: -20px;
+/*margin-left: -20px;*/
 font-size: 20px;
 font-weight: 200;
 color: #fff;
 text-shadow: 0 0 0 #ffffff;
 }        
+
         
 .navbar .nav > li > a{
 float: none;
-padding: 10px 15px 10px;
+padding: 20px 15px 10px;
 color: #fff;
 text-decoration: none;
 text-shadow: 0 0 0 #ffffff;
+height: 35px;
 }       
 
+.navbar .btn, .navbar .btn-group {
+    margin-top: 15px;
+}
 .navbar .nav  > li > a:hover, .nav > li > a:focus {
     float: none;
-padding: 10px 15px 10px;
-color: #fff;
-text-decoration: none;
-text-shadow: 0 0 0 #ffffff;
+    padding: 20px 15px 10px;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 0 0 #ffffff;
     background-color: #33aa33;
 }
 .navbar .nav  > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
     color: #ffffff;
-     background-color: #499249;
+    background-color: #499249;
 
 }       
  .navbar-inner {
 	background-color:#229922;
-        color:#ffffff;
+    color:#ffffff;
   	border-radius:0;
 }
   
@@ -86,10 +93,51 @@ text-shadow: 0 0 0 #ffffff;
 	background-color: #33aa33;
 	border-color: #428bca;
 }
-        
-    </style>     
+
+.navbar-inner {
+    min-height: 0px;
+}
+
+
+
+@font-face {
+    font-family: 'Boon400';
+    src: url('../fonts/boon-400.eot');
+    src: url('../fonts/boon-400.eot') format('embedded-opentype'),
+         url('../fonts/boon-400.woff') format('woff'),
+         url('../fonts/boon-400.ttf') format('truetype'),
+         url('../fonts/boon-400.svg#Boon400') format('svg');
+}
+
+@font-face {
+    font-family: 'Boon700';
+    src: url('../fonts/boon-700.eot');
+    src: url('../fonts/boon-700.eot') format('embedded-opentype'),
+         url('../fonts/boon-700.woff') format('woff'),
+         url('../fonts/boon-700.ttf') format('truetype'),
+         url('../fonts/boon-700.svg#Boon700') format('svg');
+}
+
+body{
+    
+    
+     width:100%;
+     min-height:340px;
+     position: relative;
+     /*background: url(../images/intro-bg.jpg) no-repeat center center;*/
+     background-size: cover;
+     font: 16px/1.6em 'Boon400',sans-serif;
+     font-weight: normal;
+}
+
+h1,h2,h3,h4{
+        font-family: 'Boon700',sans-serif;
+        font-weight: normal;
+}
+
+</style>     
      
-<body>
+<body class="body">
 
 <?php 
    
@@ -101,7 +149,7 @@ if(!Yii::app()->user->isGuest)
     'fixed'=>'top',
     'collapse'=>true,    
     'htmlOptions'=>array('class'=>'noPrint'),
-    'brand' =>  CHtml::image(Yii::app()->getBaseUrl() . '/dist/img/hospital-icon.png', 'Logo', array('width' => '20', 'height' => '20'))."  ".Yii::app()->name,
+    'brand' =>  CHtml::image(Yii::app()->getBaseUrl() . '../images/pea_logo.png', 'Logo', array('width'=>'30','height' => '30'))."  ".Yii::app()->name,
     'items'=>array(
         array(
             'class'=>'bootstrap.widgets.TbMenu',
@@ -168,14 +216,14 @@ else{
     'fixed'=>'top',
     'collapse'=>true,    
     'htmlOptions'=>array('class'=>'noprint'),
-    'brand' =>  CHtml::image(Yii::app()->getBaseUrl() . '/dist/img/hospital-icon.png', 'Logo', array('width' => '20', 'height' => '20'))."  ".Yii::app()->name,
+    'brand' =>  CHtml::image(Yii::app()->getBaseUrl() . '../images/pea_logo.png', 'Logo', array('width' => '30', 'height' => '30'))."  ".Yii::app()->name,
    
     ));
 }   
  
    ?>
 
-    <div class="container" id="page" style="padding-top: 50px">
+    <div class="container" id="page" style="padding-top: 70px">
 
 	<?php if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
