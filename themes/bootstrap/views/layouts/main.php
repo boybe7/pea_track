@@ -41,6 +41,11 @@ text-shadow: 0 0 0 #ffffff;
 height: 35px;
 }       
 
+.navbar .nav > li > a >  i{
+float: none;
+margin-top: 5px;
+}
+
 .navbar .btn, .navbar .btn-group {
     margin-top: 15px;
 }
@@ -155,6 +160,7 @@ if(!Yii::app()->user->isGuest)
             'class'=>'bootstrap.widgets.TbMenu',
             'items'=>array(
                 array('label'=>'Home','icon'=>'home', 'url'=>array('/site/index')),
+                array('label'=>'Project','icon'=>'flag', 'url'=>array('/project/index')),
                 array('label'=>'User','icon'=>'user', 'url'=>array('/user/index'), 'visible'=>Yii::app()->user->isAdmin()),
                 
             ),

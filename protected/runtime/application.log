@@ -35286,3 +35286,21 @@ Stack trace:
 REQUEST_URI=/pea_track/img/intro-bg.jpg
 HTTP_REFERER=http://localhost/pea_track/site/login
 ---
+2014/09/16 00:13:39 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'จะต้องเข้าสู่ระบบ' in C:\xampp\htdocs\pea_track\framework\web\auth\CWebUser.php:394
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\auth\CAccessControlFilter.php(180): CWebUser->loginRequired()
+#1 C:\xampp\htdocs\pea_track\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), '???????????????...')
+#2 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('getUserGroup')
+#9 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('user/getUserGro...')
+#10 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/pea_track/user/getUserGroup?_=1410801219545
+HTTP_REFERER=http://localhost/pea_track/user/index
+---
