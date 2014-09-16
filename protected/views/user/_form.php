@@ -22,6 +22,27 @@
     </div>
   </div>
   <div class="row-fluid">
+   
+    <div class="span8">
+      <?php echo $form->textFieldRow($model,'title',array('class'=>'span12','maxlength'=>10)); ?>
+    </div>
+    
+  </div>
+  <div class="row-fluid">
+   
+    <div class="span12">
+      <?php echo $form->textFieldRow($model,'firstname',array('class'=>'span12','maxlength'=>100)); ?>
+    </div>
+    
+  </div>
+  <div class="row-fluid">
+   
+    <div class="span12">
+      <?php echo $form->textFieldRow($model,'lastname',array('class'=>'span12','maxlength'=>100)); ?>
+    </div>
+    
+  </div>
+  <div class="row-fluid">
     
     <div class="span12">
       <?php //echo $form->textFieldRow($model,'type_id',array('class'=>'span12','maxlength'=>1)); ?>

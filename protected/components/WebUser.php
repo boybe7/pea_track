@@ -17,19 +17,19 @@ function getUsername(){
 // access it by Yii::app()->user->title
 function getTitle(){
     $user = $this->loadUser(Yii::app()->user->id);
-    return "";//$user->title;
+    return $user->title;
     
 }
 // access it by Yii::app()->user->firstname
 function getFirstName(){
     $user = $this->loadUser(Yii::app()->user->id);
-    return "";//$user->firstname;
+    return $user->firstname;
     
 }
 // access it by Yii::app()->user->lastname
 function getLastName(){
     $user = $this->loadUser(Yii::app()->user->id);
-    return "";//$user->lastname;
+    return $user->lastname;
     
 }
 
