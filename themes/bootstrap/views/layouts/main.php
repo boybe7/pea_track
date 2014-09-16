@@ -162,7 +162,7 @@ if(!Yii::app()->user->isGuest)
                 array('label'=>'Home','icon'=>'home', 'url'=>array('/site/index')),
                 array('label'=>'Project','icon'=>'flag', 'url'=>array('/project/index')),
                 array('label'=>'User','icon'=>'user', 'url'=>array('/user/index'), 'visible'=>Yii::app()->user->isAdmin()),
-                
+                array('label'=>'Vendor','icon'=>'briefcase', 'url'=>array('/vendor/admin'), 'visible'=>Yii::app()->user->isAdmin()),
             ),
         ),    
         array(
