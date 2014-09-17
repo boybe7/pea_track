@@ -1,3 +1,12 @@
+<style type="text/css">
+	
+.pagination {
+   margin: 0px 0;
+}
+
+</style>
+
+
 <?php
 $this->breadcrumbs=array(
 	//'Vendors'=>array('index'),
@@ -79,6 +88,7 @@ $this->widget('bootstrap.widgets.TbButton', array(
 	'htmlOptions'=>array('style'=>'padding-top:40px'),
     'enablePagination' => true,
     'summaryText'=>'แสดงผล {start} ถึง {end} จากทั้งหมด {count} ข้อมูล',
+    'template'=>"{items}<div class='row-fluid'><div class='span6'>{pager}</div><div class='span6'>{summary}</div></div>",
 	'columns'=>array(
 		'checkbox'=> array(
         	    'id'=>'selectedID',
@@ -94,7 +104,7 @@ $this->widget('bootstrap.widgets.TbButton', array(
 			    'name' => 'v_name',
 			    'filter'=>CHtml::activeTextField($model, 'v_name',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_name"))),
 				'headerHtmlOptions' => array('style' => 'width:30%;text-align:center;background-color: #f5f5f5'),  	            	  	
-				'htmlOptions'=>array('style'=>'text-align:center')
+				'htmlOptions'=>array('style'=>'text-align:left;padding-left:10px;')
 	  	),
 		//'v_address',
 		'v_tax_id'=>array(
@@ -118,7 +128,7 @@ $this->widget('bootstrap.widgets.TbButton', array(
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 			'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),
-			'template' => '{view}{update}',
+			'template' => '{view}  {update}',
 			// 'buttons' => array(
 			// 	'deleteC' => array
 			// 	(

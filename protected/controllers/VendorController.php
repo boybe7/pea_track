@@ -69,15 +69,19 @@ class VendorController extends Controller
 		if(isset($_POST['Vendor']))
 		{
 			$model->attributes=$_POST['Vendor'];
-			if($model->save())
-				$this->render('admin',array(
-						'model'=>$model,
-					));///$this->redirect(array('view','id'=>$model->v_id));
+			if($model->save()){
+				//$this->actionAdmin();
+				$this->redirect(array('admin'));
+			}
 		}
+        else{
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
+		 	$this->render('create',array(
+				'model'=>$model,
+			));	
+        } 
+        
+			
 	}
 
 	/**
@@ -96,9 +100,7 @@ class VendorController extends Controller
 		{
 			$model->attributes=$_POST['Vendor'];
 			if($model->save())
-				$this->render('admin',array(
-						'model'=>$model,
-					));//$this->redirect(array('view','id'=>$model->v_id));
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('update',array(

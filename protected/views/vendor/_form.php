@@ -27,7 +27,7 @@
 	</div>	
 	<div class="row-fluid">
     	<div class="span8">	
-			<?php echo $form->textFieldRow($model,'v_tel',array('class'=>'span12','maxlength'=>15)); ?>
+			<?php echo $form->textFieldRow($model,'v_tel',array('class'=>'span12','maxlength'=>25)); ?>
 		</div>
 	</div>	
 	<div class="row-fluid">

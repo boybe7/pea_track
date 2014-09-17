@@ -32,7 +32,7 @@ class Vendor extends CActiveRecord
 			array('v_name, v_address, v_tax_id', 'required'),
 			array('v_tax_id', 'numerical', 'integerOnly'=>true),
 			array('v_name', 'length', 'max'=>200),
-			array('v_tel', 'length', 'max'=>15),
+			array('v_tel', 'length', 'max'=>25),
 			array('v_contractor', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

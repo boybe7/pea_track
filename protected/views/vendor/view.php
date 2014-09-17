@@ -1,3 +1,13 @@
+<style type="text/css">
+	table.detail-view th
+	{
+        background-color: #f5f5f5;
+        color: #08C;
+        font-weight: bold;
+	}
+
+</style>
+
 <?php
 $this->breadcrumbs=array(
 	'Vendors'=>array('admin'),
@@ -10,6 +20,7 @@ $this->breadcrumbs=array(
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
+	'type'=>'bordered condensed',
 	'attributes'=>array(
 		
 		'v_name',
