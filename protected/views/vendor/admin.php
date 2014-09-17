@@ -3,7 +3,9 @@
 .pagination {
    margin: 0px 0;
 }
-
+.summary {
+	 color: #08C;
+}
 </style>
 
 
