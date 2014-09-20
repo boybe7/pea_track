@@ -1,6 +1,6 @@
 <?php
 
-class ProjectController extends Controller
+class WorkCategoryController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -35,7 +35,7 @@ class ProjectController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','DeleteSelected'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -61,21 +61,20 @@ class ProjectController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Project;
+		$model=new WorkCategory;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Project']))
+		if(isset($_POST['name']) && $_POST['name']!="")
 		{
-			$model->attributes=$_POST['Project'];
+			$model->wc_name=$_POST['name'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->pj_id));
+				echo "OK";//$this->redirect(array('admin'));
+			else
+				echo "Error";
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
 	}
 
 	/**
@@ -83,24 +82,18 @@ class ProjectController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate()
 	{
-		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Project']))
-		{
-			$model->attributes=$_POST['Project'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->pj_id));
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));
+		$es = new EditableSaver('WorkCategory');
+	    try {
+	    	$es->update();
+	    } catch(CException $e) {
+	    	echo CJSON::encode(array('success' => false, 'msg' => $e->getMessage()));
+	    	return;
+	    }
+	    echo CJSON::encode(array('success' => true));
 	}
+
 
 	/**
 	 * Deletes a particular model.
@@ -122,12 +115,23 @@ class ProjectController extends Controller
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
+	public function actionDeleteSelected()
+    {
+    	$autoIdAll = $_POST['selectedID'];
+        if(count($autoIdAll)>0)
+        {
+            foreach($autoIdAll as $autoId)
+            {
+                $this->loadModel($autoId)->delete();
+            }
+        }    
+    }
 	/**
 	 * Lists all models.
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Project');
+		$dataProvider=new CActiveDataProvider('WorkCategory');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -138,10 +142,10 @@ class ProjectController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Project('search');
+		$model=new WorkCategory('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Project']))
-			$model->attributes=$_GET['Project'];
+		if(isset($_GET['WorkCategory']))
+			$model->attributes=$_GET['WorkCategory'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -155,11 +159,13 @@ class ProjectController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Project::model()->findByPk($id);
+		$model=WorkCategory::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+
+
 
 	/**
 	 * Performs the AJAX validation.
@@ -167,7 +173,7 @@ class ProjectController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='project-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='work-category-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

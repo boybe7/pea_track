@@ -9,6 +9,8 @@
 
 	<?php echo $form->textFieldRow($model,'pj_name',array('class'=>'span5','maxlength'=>400)); ?>
 
+	<?php echo $form->textFieldRow($model,'pj_vendor_id',array('class'=>'span5')); ?>
+
 	<?php echo $form->textFieldRow($model,'pj_work_cat',array('class'=>'span5')); ?>
 
 	<?php echo $form->textFieldRow($model,'pj_fiscalyear',array('class'=>'span5')); ?>

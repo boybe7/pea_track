@@ -64,22 +64,32 @@ class VendorController extends Controller
 		$model=new Vendor;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
+		//$this->performAjaxValidation($model);
 		if(isset($_POST['Vendor']))
 		{
 			$model->attributes=$_POST['Vendor'];
-			if($model->save()){
-				//$this->actionAdmin();
+			if($model->save())
 				$this->redirect(array('admin'));
-			}
 		}
-        else{
 
-		 	$this->render('create',array(
-				'model'=>$model,
-			));	
-        } 
+		$this->render('create',array(
+			'model'=>$model,
+		));
+		
+		// if(isset($_POST['Vendor']))
+		// {
+		// 	$model->attributes=$_POST['Vendor'];
+		// 	if($model->save()){
+		// 		//$this->actionAdmin();
+		// 		$this->redirect(array('admin'));
+		// 	}
+		// }
+  //       else{
+
+		//  	$this->render('create',array(
+		// 		'model'=>$model,
+		// 	));	
+  //       } 
         
 			
 	}

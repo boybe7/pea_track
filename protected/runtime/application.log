@@ -36640,3 +36640,153 @@ Stack trace:
 REQUEST_URI=/pea_track/vendor/fonts/boon-400.svg
 HTTP_REFERER=http://localhost/pea_track/vendor/update/14
 ---
+2014/09/20 17:22:31 [error] [exception.CException] exception 'CException' with message 'TbActiveForm and its behaviors do not have a method or closure named "numberFieldRow".' in C:\xampp\htdocs\pea_track\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\views\project\_form.php(35): CComponent->__call('numberFieldRow', Array)
+#1 C:\xampp\htdocs\pea_track\protected\views\project\_form.php(35): TbActiveForm->numberFieldRow(Object(Project), 'pj_fiscalyear', Array)
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\pea_track\protected\views\project\create.php(11): CController->renderPartial('_form', Array)
+#6 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#7 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('create', Array, true)
+#10 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(78): CController->render('create', Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ProjectController->actionCreate()
+#12 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#13 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#15 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#16 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#17 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#18 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('create')
+#21 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/create')
+#22 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/pea_track/project/create
+HTTP_REFERER=http://localhost/pea_track/project/create
+---
+2014/09/20 20:56:57 [warning] [application] Failed to set unsafe attribute "pj_code" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 20:56:57 [warning] [application] Failed to set unsafe attribute "pj_details" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 20:56:57 [warning] [application] Failed to set unsafe attribute "pj_name" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 20:56:57 [warning] [application] Failed to set unsafe attribute "pj_work_cat" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 20:56:57 [warning] [application] Failed to set unsafe attribute "pj_date_approved" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 20:56:57 [warning] [application] Failed to set unsafe attribute "pj_user_create" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 20:56:57 [warning] [application] Failed to set unsafe attribute "pj_user_update" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 21:25:24 [warning] [application] Failed to set unsafe attribute "pj_code" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 21:25:24 [warning] [application] Failed to set unsafe attribute "pj_details" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 21:25:24 [warning] [application] Failed to set unsafe attribute "pj_name" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 21:25:24 [warning] [application] Failed to set unsafe attribute "pj_work_cat" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 21:25:24 [warning] [application] Failed to set unsafe attribute "pj_date_approved" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 21:25:24 [warning] [application] Failed to set unsafe attribute "pj_user_create" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 21:25:24 [warning] [application] Failed to set unsafe attribute "pj_user_update" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 21:25:24 [warning] [application] Failed to set unsafe attribute "pj_code" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 21:25:24 [warning] [application] Failed to set unsafe attribute "pj_details" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 21:25:24 [warning] [application] Failed to set unsafe attribute "pj_name" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 21:25:24 [warning] [application] Failed to set unsafe attribute "pj_work_cat" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 21:25:24 [warning] [application] Failed to set unsafe attribute "pj_date_approved" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 21:25:24 [warning] [application] Failed to set unsafe attribute "pj_user_create" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 21:25:24 [warning] [application] Failed to set unsafe attribute "pj_user_update" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (71)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/20 23:31:54 [error] [exception.CException] exception 'CException' with message 'WorkCategoryController ไม่สามารถค้นหา "_search" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:878
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\views\workCategory\admin.php(37): CController->renderPartial('_search', Array)
+#1 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#5 C:\xampp\htdocs\pea_track\protected\controllers\WorkCategoryController.php(148): CController->render('admin', Array)
+#6 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): WorkCategoryController->actionAdmin()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('admin')
+#16 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('workcategory/ad...')
+#17 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/pea_track/workcategory/admin
+HTTP_REFERER=http://localhost/pea_track/project/create
+---
+2014/09/21 00:51:47 [error] [exception.CException] exception 'CException' with message 'คุณสมบัติ "TbDataColumn.editable" ยังไม่ถูกกำหนด' in C:\xampp\htdocs\pea_track\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\YiiBase.php(220): CComponent->__set('editable', Array)
+#1 C:\xampp\htdocs\pea_track\framework\zii\widgets\grid\CGridView.php(388): YiiBase::createComponent(Array, Object(TbGridView))
+#2 C:\xampp\htdocs\pea_track\protected\extensions\bootstrap\widgets\TbGridView.php(91): CGridView->initColumns()
+#3 C:\xampp\htdocs\pea_track\framework\zii\widgets\grid\CGridView.php(359): TbGridView->initColumns()
+#4 C:\xampp\htdocs\pea_track\protected\extensions\bootstrap\widgets\TbGridView.php(49): CGridView->init()
+#5 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(147): TbGridView->init()
+#6 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(172): CBaseController->createWidget('bootstrap.widge...', Array)
+#7 C:\xampp\htdocs\pea_track\protected\views\workCategory\admin.php(137): CBaseController->widget('bootstrap.widge...', Array)
+#8 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#9 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#12 C:\xampp\htdocs\pea_track\protected\controllers\WorkCategoryController.php(152): CController->render('admin', Array)
+#13 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): WorkCategoryController->actionAdmin()
+#14 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#18 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#19 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#20 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#21 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('admin')
+#23 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('workcategory/ad...')
+#24 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#25 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/pea_track/workcategory/admin
+HTTP_REFERER=http://localhost/pea_track/project/create
+---

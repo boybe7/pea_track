@@ -12,6 +12,10 @@
 	<?php echo CHtml::encode($data->pj_name); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('pj_vendor_id')); ?>:</b>
+	<?php echo CHtml::encode($data->pj_vendor_id); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('pj_work_cat')); ?>:</b>
 	<?php echo CHtml::encode($data->pj_work_cat); ?>
 	<br />
@@ -24,11 +28,11 @@
 	<?php echo CHtml::encode($data->pj_date_approved); ?>
 	<br />
 
+	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('pj_details')); ?>:</b>
 	<?php echo CHtml::encode($data->pj_details); ?>
 	<br />
 
-	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('pj_user_create')); ?>:</b>
 	<?php echo CHtml::encode($data->pj_user_create); ?>
 	<br />

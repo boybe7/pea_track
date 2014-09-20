@@ -183,7 +183,10 @@ class TbActiveForm extends CActiveForm
 	{
 		return $this->inputRow(TbInput::TYPE_PASSWORD, $model, $attribute, null, $htmlOptions);
 	}
-
+	public function numberFieldRow($model, $attribute, $htmlOptions = array())
+	{
+		return $this->inputRow(TbInput::TYPE_PASSWORD, $model, $attribute, null, $htmlOptions);
+	}
 	/**
 	 * Renders a radio button input row.
 	 * @param CModel $model the data model

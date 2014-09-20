@@ -7,6 +7,7 @@
  * @property integer $pj_id
  * @property string $pj_code
  * @property string $pj_name
+ * @property integer $pj_vendor_id
  * @property integer $pj_work_cat
  * @property integer $pj_fiscalyear
  * @property string $pj_date_approved
@@ -32,13 +33,13 @@ class Project extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pj_code, pj_name, pj_work_cat, pj_fiscalyear, pj_date_approved, pj_details, pj_user_create, pj_user_update', 'required'),
-			array('pj_work_cat, pj_fiscalyear, pj_user_create, pj_user_update', 'numerical', 'integerOnly'=>true),
+			array('pj_code, pj_name, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_date_approved, pj_details, pj_user_create, pj_user_update', 'required'),
+			array('pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_user_create, pj_user_update', 'numerical', 'integerOnly'=>true),
 			array('pj_code', 'length', 'max'=>50),
 			array('pj_name', 'length', 'max'=>400),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('pj_id, pj_code, pj_name, pj_work_cat, pj_fiscalyear, pj_date_approved, pj_details, pj_user_create, pj_user_update', 'safe', 'on'=>'search'),
+			array('pj_id, pj_code, pj_name, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_date_approved, pj_details, pj_user_create, pj_user_update', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,6 +63,7 @@ class Project extends CActiveRecord
 			'pj_id' => 'id project',
 			'pj_code' => 'หมายเลขงานโครงการ',
 			'pj_name' => 'ชื่อโครงการ',
+			'pj_vendor_id' => 'id บริษัทที่ว่าจ้าง',
 			'pj_work_cat' => 'ประเภทงาน',
 			'pj_fiscalyear' => 'ปีงบประมาณ',
 			'pj_date_approved' => 'วันที่อนุมัติ',
@@ -92,6 +94,7 @@ class Project extends CActiveRecord
 		$criteria->compare('pj_id',$this->pj_id);
 		$criteria->compare('pj_code',$this->pj_code,true);
 		$criteria->compare('pj_name',$this->pj_name,true);
+		$criteria->compare('pj_vendor_id',$this->pj_vendor_id);
 		$criteria->compare('pj_work_cat',$this->pj_work_cat);
 		$criteria->compare('pj_fiscalyear',$this->pj_fiscalyear);
 		$criteria->compare('pj_date_approved',$this->pj_date_approved,true);

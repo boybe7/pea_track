@@ -45,10 +45,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'pj_id',
 		'pj_code',
 		'pj_name',
+		'pj_vendor_id',
 		'pj_work_cat',
 		'pj_fiscalyear',
-		'pj_date_approved',
 		/*
+		'pj_date_approved',
 		'pj_details',
 		'pj_user_create',
 		'pj_user_update',

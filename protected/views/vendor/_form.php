@@ -1,6 +1,6 @@
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'vendor-form',
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
 	'type'=>'horizontal',
 	'htmlOptions'=>  array('class'=>'well span10 text-center')
 )); ?>

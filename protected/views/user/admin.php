@@ -204,8 +204,8 @@ $this->widget('bootstrap.widgets.TbGridView',array(
 					'placement' => 'right',
 					'display' => 'js: function() {
 					    
-					    $(this).attr( "rel", "tooltip");
-					    $(this).attr( "data-original-title", "คลิกเพื่อแก้ไข");
+					    //$(this).attr( "rel", "tooltip");
+					    //$(this).attr( "data-original-title", "คลิกเพื่อแก้ไข");
 					    
 					}'
 				)
@@ -239,8 +239,8 @@ $this->widget('bootstrap.widgets.TbGridView',array(
 					'placement' => 'right',
 					'display' => 'js: function() {
 					    
-					    $(this).attr( "rel", "tooltip");
-					    $(this).attr( "data-original-title", "คลิกเพื่อแก้ไข");
+					    //$(this).attr( "rel", "tooltip");
+					    //$(this).attr( "data-original-title", "คลิกเพื่อแก้ไข");
 					    
 					}'
 				)
@@ -274,8 +274,8 @@ $this->widget('bootstrap.widgets.TbGridView',array(
 					'placement' => 'right',
 					'display' => 'js: function() {
 					    
-					    $(this).attr( "rel", "tooltip");
-					    $(this).attr( "data-original-title", "คลิกเพื่อแก้ไข");
+					    //$(this).attr( "rel", "tooltip");
+					    //$(this).attr( "data-original-title", "คลิกเพื่อแก้ไข");
 					    
 					}'
 				)
@@ -307,10 +307,10 @@ $this->widget('bootstrap.widgets.TbGridView',array(
 
 					), 
 					'placement' => 'right',
-					'display' => 'js: function() {
-					    
-					    $(this).attr( "rel", "tooltip");
-					    $(this).attr( "data-original-title", "คลิกเพื่อแก้ไข");
+					'display' => 'js: function(value, sourceData) {
+					    console.log(sourceData);
+					    //$(this).attr( "rel", "tooltip");
+					    //$(this).attr( "data-original-title", "แก้ไขนามสกุล");
 					    
 					}'
 				)

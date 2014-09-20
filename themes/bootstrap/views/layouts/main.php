@@ -159,10 +159,11 @@ if(!Yii::app()->user->isGuest)
         array(
             'class'=>'bootstrap.widgets.TbMenu',
             'items'=>array(
-                array('label'=>'Home','icon'=>'home', 'url'=>array('/site/index')),
-                array('label'=>'Project','icon'=>'flag', 'url'=>array('/project/index')),
-                array('label'=>'User','icon'=>'user', 'url'=>array('/user/index'), 'visible'=>Yii::app()->user->isAdmin()),
-                array('label'=>'Vendor','icon'=>'briefcase', 'url'=>array('/vendor/admin'), 'visible'=>Yii::app()->user->isAdmin()),
+                array('label'=>'หน้าแรก','icon'=>'home', 'url'=>array('/site/index')),
+                array('label'=>'โครงการ','icon'=>'flag', 'url'=>array('/project/index')),
+                array('label'=>'ผู้ใช้งาน','icon'=>'user', 'url'=>array('/user/index'), 'visible'=>Yii::app()->user->isAdmin()),
+                array('label'=>'คู่สัญญา','icon'=>'briefcase', 'url'=>array('/vendor/admin'), 'visible'=>Yii::app()->user->isAdmin()),
+                array('label'=>'ประเภทงาน','icon'=>'briefcase', 'url'=>array('/workcategory/admin'), 'visible'=>Yii::app()->user->isAdmin()),
             ),
         ),    
         array(
