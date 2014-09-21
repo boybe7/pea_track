@@ -31,7 +31,7 @@ class VendorController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','DeleteSelected'),
+				'actions'=>array('create','update','DeleteSelected','GetVendor'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -117,6 +117,20 @@ class VendorController extends Controller
 			'model'=>$model,
 		));
 	}
+
+	public function actionGetVendor(){
+            $request=trim($_GET['term']);
+                    
+            $model=Vendor::model()->findAll(array("condition"=>"v_name like '$request%'"));
+            $data=array();
+            foreach($model as $get){
+                $data[]["label"]=$get->v_name;
+                $data[]["id"]=$get->v_id;
+            }
+            $this->layout='empty';
+            echo json_encode($data);
+        
+    }
 
 	/**
 	 * Deletes a particular model.

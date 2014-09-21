@@ -36790,3 +36790,81 @@ Stack trace:
 REQUEST_URI=/pea_track/workcategory/admin
 HTTP_REFERER=http://localhost/pea_track/project/create
 ---
+2014/09/21 23:52:30 [error] [php] Undefined index: type (C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php:44)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): AjaxController->runAction()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): AjaxController->runActionWithFilters()
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): AjaxController->run()
+#3 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/Ajax/GetDrug?term=dsadad
+in C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php (44)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/21 23:52:31 [error] [php] Undefined index: type (C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php:44)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): AjaxController->runAction()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): AjaxController->runActionWithFilters()
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): AjaxController->run()
+#3 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/Ajax/GetDrug?term=dsada
+in C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php (44)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/21 23:52:32 [error] [php] Undefined index: type (C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php:44)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): AjaxController->runAction()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): AjaxController->runActionWithFilters()
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): AjaxController->run()
+#3 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/Ajax/GetDrug?term=
+in C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php (44)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/21 23:58:18 [error] [php] Undefined index: type (C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php:44)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): AjaxController->runAction()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): AjaxController->runActionWithFilters()
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): AjaxController->run()
+#3 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/Ajax/GetDrug?term=ss
+in C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php (44)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/21 23:58:19 [error] [php] Undefined index: type (C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php:44)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): AjaxController->runAction()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): AjaxController->runActionWithFilters()
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): AjaxController->run()
+#3 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/Ajax/GetDrug?term=
+in C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php (44)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/22 00:00:42 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.drug' doesn't exist. The SQL statement executed was: SELECT `unit`, `drug_id`
+FROM `drug`
+WHERE drug_name=:id.
+in C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php (35)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/09/22 00:00:42 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.drug' doesn't exist. The SQL statement executed was: SELECT `unit`, `drug_id`
+FROM `drug`
+WHERE drug_name=:id' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php(35): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): AjaxController->actionGetUnit()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('getUnit')
+#7 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('Ajax/getUnit')
+#8 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/pea_track/Ajax/getUnit
+HTTP_REFERER=http://localhost/pea_track/project/create
+---
