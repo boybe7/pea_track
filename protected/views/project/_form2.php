@@ -9,7 +9,41 @@
     	e.target // activated tab
     	e.relatedTarget // previous tab
     })
-
+    function addWorkCode(){
+  
+         
+         $('#tgrid').find('tbody').append('<tr id='+$("#work_code").val()+'><td width="90%">'+
+                 $("#work_code").val()+
+                 '</td><td style="text-align:center;width:10%;"><a href="#" onclick=deleteRow("'+$("#work_code").val()+'")><i class="icon-remove red"></i></a></td></tr>');
+        
+         id=0;
+         var code = '';
+         $('#tgrid tbody tr td').each(function(key, value) {
+            
+                   //console.log($(this).text())
+                   code += $(this).text()+",";
+                    
+                   
+               // console.log(key+":"+$(this).text())
+         });
+         $("#workCode").val(code.substring(0,code.length-1));
+         
+    }
+    function deleteRow(id){
+     
+         $("#tgrid tr[id='"+id+"']").remove();
+         id=0;
+         var code = '';
+         $('#tgrid tbody tr td').each(function(key, value) {
+              
+                   console.log($(this).text())
+                   code += $(this).text()+",";
+                     
+                  
+                console.log(key+":"+$(this).text())
+         });
+         $("#workCode").val(code.substring(0,code.length-1));
+    }
 </script>
 	<!-- <p class="help-block">Fields with <span class="required">*</span> are required.</p> -->
 <div class="well">
@@ -23,40 +57,30 @@
       	<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 			'id'=>'project-form',
 			'enableAjaxValidation'=>false,
-			'type'=>'horizontal',
+			'type'=>'vertical',
   			'htmlOptions'=>  array('class'=>'','style'=>''),
 		)); ?>
     	
 
 		
     	<div style="text-align:left"><?php echo $form->errorSummary($model); ?></div>
-		<div class="well">
+		
 		<div class="row-fluid">
-			<div class="offset8 span4">
-      			<?php echo $form->textFieldRow($model,'pj_fiscalyear',array('class'=>'span12','maxlength'=>4)); ?>
-    		</div>
-    	
-  		</div>
-  		
-		<div class="row-fluid">
-    		<div class="span4">
-      			<?php echo $form->textFieldRow($model,'pj_code',array('class'=>'span12','maxlength'=>100)); ?>
-    		</div>
-    		<div class="span8">
-      			<?php echo $form->textFieldRow($model,'pj_details',array('class'=>'span12','maxlength'=>500)); ?>
-    		</div>
-  		</div>
-  		<div class="row-fluid">
-    		<div class="span4">
-    			<div class="row-fluid">
-    				<div class="span6">
-    					<?php echo $form->labelEx($model,'pj_date_approved',array('class'=>'span12','style'=>'text-align:right;padding-right:10px;'));?>
+			<div class="well span8">
+      			
+      				<!-- <span style='display: block;margin-bottom: 5px;'>คู่สัญญา</span>  -->
+      				
+				<div class="row-fluid">
+					<div class="span4">
+      					<?php echo $form->textFieldRow($model,'pj_fiscalyear',array('class'=>'span12','maxlength'=>4)); ?>
     				</div>
-    				<div class="span6">
+    				<div class="span8">
+      					<?php echo $form->labelEx($model,'pj_date_approved',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
+    					
     					<?php 
 
       			 
-		                echo '<div class="input-append">'; //ใส่ icon ลงไป
+		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
 		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
 
 		                    array(
@@ -69,36 +93,29 @@
 		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
 		                                          'showAnim' => 'slideDown',
 		                                          ),
-		                        'htmlOptions'=>array('class'=>'span10', 'value'=>$model->pj_date_approved),  // ใส่ค่าเดิม ในเหตุการ Update 
+		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$model->pj_date_approved),  // ใส่ค่าเดิม ในเหตุการ Update 
 		                     )
 		                );
 		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
 
 		      			 ?>
-    				</div>	
-      			</div>
-    		</div>
-    		<div class="span8">
-      			<?php 
-      			//echo $form->textFieldRow($model,'pj_work_cat',array('class'=>'span12')); 
-      			$workcat = Yii::app()->db->createCommand()
+		      		</div>
+		      		
+		    		<?php 
+      				//echo $form->textFieldRow($model,'pj_work_cat',array('class'=>'span12')); 
+      				$workcat = Yii::app()->db->createCommand()
                     ->select('wc_id,wc_name as name')
                     ->from('work_category')
                     ->queryAll();
      
-             	$typelist = CHtml::listData($workcat,'wc_id','name');
-             	echo $form->dropDownListRow($model, 'pj_work_cat', $typelist,array('class'=>'span12'), array('options' => array('pj_work_cat'=>array('selected'=>true)))); 
+             		$typelist = CHtml::listData($workcat,'wc_id','name');
+             		echo $form->dropDownListRow($model, 'pj_work_cat', $typelist,array('class'=>'span12'), array('options' => array('pj_work_cat'=>array('selected'=>true)))); 
              
 
-      			?>
-    		</div>
-  		</div>
-  		</div>
-
-  		<div class="well">
-  		<div class="row-fluid">
-  			<div class="span6">
-  				<?php 
+      				?>
+      				<?php 
+  						echo $form->labelEx($model,'pj_vendor_id',array('class'=>'span12','style'=>'text-align:left;margin-left:-1px;margin-bottom:-5px'));
+    					
   						$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
                             'name'=>'pj_vendor_id',
                             'id'=>'pj_vendor_id',
@@ -119,26 +136,9 @@
                              }',
                             // additional javascript options for the autocomplete plugin
                             'options'=>array(
-                                    'showAnim'=>'fold',
+                                     'showAnim'=>'fold',
                                      'minLength'=>'0',
                                      'select'=>'js: function(event, ui) {
-                                        
-                                        
-                                        $.ajax({
-                                            url: "'.$this->createUrl('Ajax/getUnit').'",
-                                            type: "POST",
-                                            
-                                            data: {
-                                                drug_id: ui.item.value
-                                            },
-                                            success: function (data) {
-                                                data = data.split(":");
-                                                $("#unit").val(data[0]);
-                                                $("#drug_code").val(data[1]);
-                                                 $("#drug_name").val(ui.item.value)
-                                            }
-                                        
-                                        })
                                         
                                            
                                      }',
@@ -146,11 +146,91 @@
                                      
                             ),
                            'htmlOptions'=>array(
-                                'class'=>'span12'
+                                'class'=>'span10'
                             ),
                                   
                         ));
+						
+						$this->widget('bootstrap.widgets.TbButton', array(
+						    'buttonType'=>'link',
+						    
+						    'type'=>'success',
+						    'label'=>'เพิ่มคู่สัญญา',
+						    'icon'=>'plus-sign',
+						    //'url'=>array('vendor/create'),
+						    'htmlOptions'=>array(
+						        //'data-toggle'=>'modal',
+						        //'data-target'=>'#myModal',
+						        'onclick'=>'js:bootbox.confirm($("#modal-body").html(),"ยกเลิก","ตกลง",
+			                   			function(confirmed){
+			                   	 	        
+			                   	 			
+                                			if(confirmed)
+			                   	 		    {
+			                   	 		    	$.ajax({
+													type: "POST",
+													url: "../vendor/create",
+													data: $(".modal-body #vendor-form").serialize()
+													})
+													.done(function( msg ) {
+														
+													});
+			                   	 		    }
+										})',
+			                  
+						        'class'=>'pull-right'
+						    ),
+						));
+						
 				?>
+    			</div>
+    		</div>	
+			<div class="well span4">
+      			<?php 
+      			//echo $form->textFieldRow($model,'pj_code',array('class'=>'span10','maxlength'=>100)); 
+      			echo "<span style='display: block;'>หมายเลขงาน</span>"; 
+               echo CHtml::textField('work_code','',array('class'=>'span10'));
+
+      			$this->widget('bootstrap.widgets.TbButton', array(
+						    'buttonType'=>'link',
+						    
+						    'type'=>'success',
+						    'label'=>'',
+						    'icon'=>'plus-sign white',
+						    //'url'=>array('vendor/create'),
+						    'htmlOptions'=>array('class'=>'pull-right','onclick'=>'addWorkCode()')
+						    ));	
+      			?>
+      			<table class="table" style="background-color: white" name="tgrid" id="tgrid" width="100%" cellpadding="0" cellspacing="0">                    
+	                <tbody>
+                            <?php
+                                    $workCode = Yii::app()->db->createCommand()
+                                                ->select('code,id')
+                                                ->from('work_code')
+                                                ->where('pj_id=:id', array(':id'=>$model->pj_id))
+                                                ->queryAll();
+                                    if(!empty($workCode))
+                                    {    
+                                       echo "<tr id='".$model->pj_id."'><td>".$workCode->code."</td><td style='text-align:center'><a href='#' onclick=deleteRow('".$workCode->id."')><i class='icon-remove'></i></a></td></tr>";
+                        
+                                    }
+                               
+                            ?>
+                            <input type="hidden" name="workCode" id="workCode">
+                        </tbody>
+                        
+            </table>
+    		</div>
+    		
+    		
+  		</div>
+  		
+  		
+
+  		<div class="well">
+  		<div class="row-fluid">
+  			<div class="span6">
+  				
   			</div>
   		</div>
 		</div>
@@ -169,3 +249,14 @@
 	</div>		
 </div>	
 
+<div id="modal-content" class="hide">
+    <div id="modal-body">
+<!-- put whatever you want to show up on bootbox here -->
+    	<?php 
+    	//$model = Vendor::model()->findByPk(14);
+    	$model2=new Vendor;
+    	$this->renderPartial('/vendor/_form2',array('model'=>$model2)); 
+
+    	?>
+    </div>
+</div>

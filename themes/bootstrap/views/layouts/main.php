@@ -135,6 +135,10 @@ body{
      font-weight: normal;
 }
 
+input, select, textarea {
+font-family: 'Boon400', sans-serif;
+}
+
 h1,h2,h3,h4{
         font-family: 'Boon700',sans-serif;
         font-weight: normal;

@@ -33,7 +33,7 @@ class Project extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pj_code, pj_name, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_date_approved, pj_details, pj_user_create, pj_user_update', 'required'),
+			array(' pj_name, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_details, pj_user_create, pj_user_update', 'required'),
 			array('pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_user_create, pj_user_update', 'numerical', 'integerOnly'=>true),
 			array('pj_code', 'length', 'max'=>50),
 			array('pj_name', 'length', 'max'=>400),
@@ -63,7 +63,7 @@ class Project extends CActiveRecord
 			'pj_id' => 'id project',
 			'pj_code' => 'หมายเลขงานโครงการ',
 			'pj_name' => 'ชื่อโครงการ',
-			'pj_vendor_id' => 'id บริษัทที่ว่าจ้าง',
+			'pj_vendor_id' => 'คู่สัญญา',
 			'pj_work_cat' => 'ประเภทงาน',
 			'pj_fiscalyear' => 'ปีงบประมาณ',
 			'pj_date_approved' => 'วันที่อนุมัติ',
