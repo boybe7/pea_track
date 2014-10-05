@@ -31,9 +31,12 @@ class Vendor extends CActiveRecord
 		return array(
 			array('v_name, v_address, v_tax_id', 'required'),
 			array('v_tax_id', 'numerical', 'integerOnly'=>true),
+			array('v_tax_id', 'length', 'min'=>13,'max'=>13,'tooLong'=>"{attribute} ต้องมี 13 ตัวเลข.",'tooShort'=>"{attribute} ต้องมี 13 ตัวเลข"),
+		
 			array('v_name', 'length', 'max'=>200),
 			array('v_tel', 'length', 'max'=>25),
 			array('v_contractor', 'length', 'max'=>100),
+			 array('v_tax_id', 'unique',"message"=>"ข้อมูลซ้ำ"),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('v_id, v_name, v_address, v_tax_id, v_tel, v_contractor', 'safe', 'on'=>'search'),

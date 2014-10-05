@@ -1,4 +1,4 @@
-<h5>เพิ่มข้อมูลคู่สัญญา</h5>
+<h3>เพิ่มข้อมูลคู่สัญญา</h3>
 
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'vendor-form',

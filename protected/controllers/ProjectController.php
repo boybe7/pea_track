@@ -62,19 +62,63 @@ class ProjectController extends Controller
 	public function actionCreate()
 	{
 		$model=new Project;
+		$modelContract = new ProjectContract;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Project']))
 		{
-			$model->attributes=$_POST['Project'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->pj_id));
+			// $model->attributes=$_POST['Project'];
+			// $model->pj_user_create = Yii::app()->user->ID;
+			// $model->pj_user_update = Yii::app()->user->ID;
+			// $model->pj_vendor_id = $_POST["vendor_id"];
+			// $model->pj_name = $_POST["pj_vendor_id"];
+			// //if($model->save())
+			// //	$this->redirect(array('view','id'=>$model->pj_id));
+			// $modelContract = new ProjectContract;
+   //          $modelContract->attributes = $_POST['ProjectContract'];
+   //          if ($model->validate() && $modelContract->validate()) {
+   //              $model->save(false);   //second validation pass is not needed
+   //              $modelContract->proj_id = $model->id;
+   //              $modelContract->save(false);
+   //              $this->redirect(array('view', 'id' => $model->id));
+ 
+   //          }
+
+			$transaction=Yii::app()->db->beginTransaction();
+		    try {
+		        $model->attributes = $_POST['Project'];
+		        $model->pj_user_create = Yii::app()->user->ID;
+			    $model->pj_user_update = Yii::app()->user->ID;
+			    //$model->pj_vendor_id = $_POST["vendor_id"];
+			    $model->pj_name = $_POST["pj_vendor_id"];
+			   
+		        if ($model->save()) {
+		            $modelContract = new ProjectContract;
+		            $modelContract->attributes = $_POST['ProjectContract'];
+		            $modelContract->pc_proj_id = $model->pj_id;
+		            // $transaction->commit();
+		            if ($modelContract->save()) {
+		                $transaction->commit();
+		                $this->redirect(array('view', 'id' => $model->id));
+		            }
+		            
+		        }
+		        //something went wrong...
+		        $transaction->rollBack();
+		    }
+		    catch(Exception $e) { // an exception is raised if a query fails
+		        //something was really wrong - exception!
+		        $transaction->rollBack();
+		        Yii::trace(CVarDumper::dumpAsString($e->getMessage()));
+		        //you should do sth with this exception (at least log it or show on page)
+		        Yii::log( 'Exception when saving data: ' . $e->getMessage(), CLogger::LEVEL_ERROR );
+		    }
 		}
 
 		$this->render('create',array(
-			'model'=>$model,
+			'model'=>$model,'modelContract'=>$modelContract
 		));
 	}
 
@@ -165,11 +209,11 @@ class ProjectController extends Controller
 	 * Performs the AJAX validation.
 	 * @param CModel the model to be validated
 	 */
-	protected function performAjaxValidation($model)
+	protected function performAjaxValidation($model,$modelContract)
 	{
 		if(isset($_POST['ajax']) && $_POST['ajax']==='project-form')
 		{
-			echo CActiveForm::validate($model);
+			echo CActiveForm::validate(array($model,$modelContract));
 			Yii::app()->end();
 		}
 	}

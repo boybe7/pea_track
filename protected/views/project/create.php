@@ -9,4 +9,4 @@ $this->breadcrumbs=array(
 
 <h1>Create Project</h1>
 
-<?php echo $this->renderPartial('_form2', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form2', array('model'=>$model,'modelContract'=>$modelContract)); ?>

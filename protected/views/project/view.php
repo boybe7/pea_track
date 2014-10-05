@@ -19,7 +19,6 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'pj_id',
-		'pj_code',
 		'pj_name',
 		'pj_vendor_id',
 		'pj_work_cat',

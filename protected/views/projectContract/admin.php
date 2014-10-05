@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Projects'=>array('index'),
+	'Project Contracts'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List Project','url'=>array('index')),
-	array('label'=>'Create Project','url'=>array('create')),
+	array('label'=>'List ProjectContract','url'=>array('index')),
+	array('label'=>'Create ProjectContract','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +15,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('project-grid', {
+	$.fn.yiiGridView.update('project-contract-grid', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Projects</h1>
+<h1>Manage Project Contracts</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -38,20 +38,23 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
-	'id'=>'project-grid',
+	'id'=>'project-contract-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'pj_id',
-		'pj_name',
-		'pj_vendor_id',
-		'pj_work_cat',
-		'pj_fiscalyear',
+		'pc_id',
+		'pc_code',
+		'pc_proj_id',
+		'pc_vendor_id',
+		'pc_sign_date',
+		'pc_end_date',
 		/*
-		'pj_date_approved',
-		'pj_details',
-		'pj_user_create',
-		'pj_user_update',
+		'pc_cost',
+		'pc_T_percent',
+		'pc_A_percent',
+		'pc_guarantee',
+		'pc_user_create',
+		'pc_user_update',
 		*/
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',

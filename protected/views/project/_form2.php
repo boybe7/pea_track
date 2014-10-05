@@ -14,7 +14,7 @@
          
          $('#tgrid').find('tbody').append('<tr id='+$("#work_code").val()+'><td width="90%">'+
                  $("#work_code").val()+
-                 '</td><td style="text-align:center;width:10%;"><a href="#" onclick=deleteRow("'+$("#work_code").val()+'")><i class="icon-remove red"></i></a></td></tr>');
+                 '</td><td style="text-align:center;width:10%;"><a href="#" onclick=deleteRow("'+$("#work_code").val()+'")><i class="icon-red icon-remove"></i></a></td></tr>');
         
          id=0;
          var code = '';
@@ -56,14 +56,14 @@
       <div class="tab-pane active" id="projTab">  
       	<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 			'id'=>'project-form',
-			'enableAjaxValidation'=>false,
+			'enableAjaxValidation'=>true,
 			'type'=>'vertical',
   			'htmlOptions'=>  array('class'=>'','style'=>''),
 		)); ?>
     	
 
 		
-    	<div style="text-align:left"><?php echo $form->errorSummary($model); ?></div>
+    	<div style="text-align:left"><?php echo $form->errorSummary(array($model,$modelContract));?></div>
 		
 		<div class="row-fluid">
 			<div class="well span8">
@@ -113,13 +113,15 @@
              
 
       				?>
+      				<!-- <input type="hidden" name="vendor_id" id="vendor_id"> -->
       				<?php 
+  						echo $form->hiddenField($model,'pj_vendor_id');
   						echo $form->labelEx($model,'pj_vendor_id',array('class'=>'span12','style'=>'text-align:left;margin-left:-1px;margin-bottom:-5px'));
-    					
+    					 
   						$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
                             'name'=>'pj_vendor_id',
                             'id'=>'pj_vendor_id',
-                       
+                            'value'=>$model->pj_name,
                            // 'source'=>$this->createUrl('Ajax/GetDrug'),
                            'source'=>'js: function(request, response) {
                                 $.ajax({
@@ -131,6 +133,7 @@
                                     },
                                     success: function (data) {
                                             response(data);
+
                                     }
                                 })
                              }',
@@ -140,7 +143,8 @@
                                      'minLength'=>'0',
                                      'select'=>'js: function(event, ui) {
                                         
-                                           
+                                           //console.log(ui.item.id)
+                                            $("#Project_pj_vendor_id").val(ui.item.id);
                                      }',
                                      //'close'=>'js:function(){$(this).val("");}',
                                      
@@ -170,10 +174,40 @@
 			                   	 		    	$.ajax({
 													type: "POST",
 													url: "../vendor/create",
+													dataType:"json",
 													data: $(".modal-body #vendor-form").serialize()
 													})
 													.done(function( msg ) {
-														
+														if(msg.status=="failure")
+														{
+															$("#modal-body").html(msg.div);
+															js:bootbox.confirm($("#modal-body").html(),"ยกเลิก","ตกลง",
+								                   			function(confirmed){
+								                   	 	        
+								                   	 			
+					                                			if(confirmed)
+								                   	 		    {
+								                   	 		    	$.ajax({
+																		type: "POST",
+																		url: "../vendor/create",
+																		dataType:"json",
+																		data: $(".modal-body #vendor-form").serialize()
+																		})
+																		.done(function( msg ) {
+																			if(msg.status=="failure")
+																			{
+																				js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+																			}
+																			else{
+																				js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+																			}
+																		});
+								                   	 		    }
+															})
+														}
+														else{
+																				js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+																			}
 													});
 			                   	 		    }
 										})',
@@ -227,14 +261,18 @@
   		
   		
 
-  		<div class="well">
-  		<div class="row-fluid">
-  			<div class="span6">
-  				
-  			</div>
-  		</div>
+   		<div class="well">
+	  		<div class="row-fluid">
+	  			<div class="span6">
+	  			    <?php echo $form->textFieldRow($modelContract,'pc_code',array('class'=>'span12','maxlength'=>4)); ?>
+
+	  			</div>
+	  			<div class="span6">
+					
+	  			</div>
+	  		</div>
 		</div>
-			<div class="form-actions">
+ 			<div class="form-actions">
 				<?php $this->widget('bootstrap.widgets.TbButton', array(
 					'buttonType'=>'submit',
 					'type'=>'primary',
@@ -255,7 +293,17 @@
     	<?php 
     	//$model = Vendor::model()->findByPk(14);
     	$model2=new Vendor;
-    	$this->renderPartial('/vendor/_form2',array('model'=>$model2)); 
+    	$this->renderPartial('/vendor/_form2',array('model'=>$model2),false); 
+
+    	?>
+    </div>
+
+    <div id="modal-body-contract">
+<!-- put whatever you want to show up on bootbox here -->
+    	<?php 
+    	//$model = Vendor::model()->findByPk(14);
+    	//$modelContract = new Vendor;
+    	//$this->renderPartial('/vendor/_form2',array('model'=>$model2)); 
 
     	?>
     </div>

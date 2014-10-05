@@ -55,7 +55,7 @@ class VendorController extends Controller
 		));
 	}
 
-	
+
 
 	/**
 	 * Creates a new model.
@@ -70,9 +70,33 @@ class VendorController extends Controller
 		if(isset($_POST['Vendor']))
 		{
 			$model->attributes=$_POST['Vendor'];
-			if($model->save())
+			if (Yii::app()->request->isAjaxRequest)
+	        {
+	           
+	            if($model->save())
+	            	 echo CJSON::encode(array(
+	                'status'=>'success'
+	                ));
+	            else
+	                echo CJSON::encode(array(
+	                'status'=>'failure','div'=>$this->renderPartial('_form2', array('model'=>$model), true)));
+	                
+	            exit;
+				        
+	        }		
+			else
+			  if($model->save())
 				$this->redirect(array('admin'));
+
 		}
+
+		if (Yii::app()->request->isAjaxRequest)
+        {
+            echo CJSON::encode(array(
+                'status'=>'failure', 
+                'div'=>$this->renderPartial('_form2', array('model'=>$model), true)));
+            exit;               
+        }
 
 		$this->render('create',array(
 			'model'=>$model,
@@ -123,11 +147,16 @@ class VendorController extends Controller
 	public function actionGetVendor(){
             $request=trim($_GET['term']);
                     
-            $model=Vendor::model()->findAll(array("condition"=>"v_name like '$request%'"));
+            $models=Vendor::model()->findAll(array("condition"=>"v_name like '$request%'"));
             $data=array();
-            foreach($model as $get){
-                $data[]["label"]=$get->v_name;
-                $data[]["id"]=$get->v_id;
+            foreach($models as $model){
+                //$data[]["label"]=$get->v_name;
+                //$data[]["id"]=$get->v_id;
+                $data[] = array(
+                        'id'=>$model['v_id'],
+                        'label'=>$model['v_name'],
+                );
+
             }
             $this->layout='empty';
             echo json_encode($data);
