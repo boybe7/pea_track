@@ -13,6 +13,8 @@
 
 	<?php echo $form->textFieldRow($model,'pc_vendor_id',array('class'=>'span5')); ?>
 
+	<?php echo $form->textAreaRow($model,'pc_details',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+
 	<?php echo $form->textFieldRow($model,'pc_sign_date',array('class'=>'span5')); ?>
 
 	<?php echo $form->textFieldRow($model,'pc_end_date',array('class'=>'span5')); ?>

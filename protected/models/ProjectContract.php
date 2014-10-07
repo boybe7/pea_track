@@ -8,6 +8,7 @@
  * @property string $pc_code
  * @property integer $pc_proj_id
  * @property integer $pc_vendor_id
+ * @property string $pc_details
  * @property string $pc_sign_date
  * @property string $pc_end_date
  * @property double $pc_cost
@@ -35,14 +36,14 @@ class ProjectContract extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pc_code, pc_proj_id', 'required'),
+			array('pc_code, pc_proj_id, pc_end_date', 'required'),
 			array('pc_proj_id, pc_vendor_id, pc_T_percent, pc_A_percent, pc_user_create, pc_user_update', 'numerical', 'integerOnly'=>true),
 			array('pc_cost', 'numerical'),
 			array('pc_code', 'length', 'max'=>30),
 			array('pc_guarantee', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('pc_id, pc_code, pc_proj_id, pc_vendor_id, pc_sign_date, pc_end_date, pc_cost, pc_T_percent, pc_A_percent, pc_guarantee, pc_user_create, pc_user_update', 'safe', 'on'=>'search'),
+			array('pc_id, pc_code, pc_proj_id, pc_vendor_id, pc_details, pc_sign_date, pc_end_date, pc_cost, pc_T_percent, pc_A_percent, pc_guarantee, pc_user_create, pc_user_update', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,11 +68,12 @@ class ProjectContract extends CActiveRecord
 			'pc_code' => 'เลขที่สัญญา',
 			'pc_proj_id' => 'id project',
 			'pc_vendor_id' => 'id คู่สัญญา',
+			'pc_details' => 'รายละเอียดสัญญา',
 			'pc_sign_date' => 'วันที่ลงนาม',
 			'pc_end_date' => 'วันที่ครบกำหนด',
 			'pc_cost' => 'วงเงิน',
-			'pc_T_percent' => 'เปอร์เซ็นต์ความก้าวหน้าของงาน',
-			'pc_A_percent' => 'เปอร์เซ็นต์ความก้าวหน้าของเงิน',
+			'pc_T_percent' => '%T',
+			'pc_A_percent' => '%A',
 			'pc_guarantee' => 'หนังสือค้ำประกัน',
 			'pc_user_create' => 'ผู้สร้างสัญญา',
 			'pc_user_update' => 'ผู้บันทึก',
@@ -100,6 +102,7 @@ class ProjectContract extends CActiveRecord
 		$criteria->compare('pc_code',$this->pc_code,true);
 		$criteria->compare('pc_proj_id',$this->pc_proj_id);
 		$criteria->compare('pc_vendor_id',$this->pc_vendor_id);
+		$criteria->compare('pc_details',$this->pc_details,true);
 		$criteria->compare('pc_sign_date',$this->pc_sign_date,true);
 		$criteria->compare('pc_end_date',$this->pc_end_date,true);
 		$criteria->compare('pc_cost',$this->pc_cost);
