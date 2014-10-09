@@ -80,6 +80,14 @@ class ProjectContract extends CActiveRecord
 		);
 	}
 
+	public function beforeSave()
+    {
+        
+            $str_date = explode("/", $this->pc_end_date);
+            $this->pc_end_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+            return parent::beforeSave();
+   }
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *

@@ -18,8 +18,23 @@
 	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
+
+
+.ui-autocomplete { max-height: 180px; overflow-y: auto; overflow-x: hidden;}
 </style>
 <script type="text/javascript">
+	
+	$(function(){
+        //autocomplete search on focus    	
+	    $("#pj_vendor_id").autocomplete({
+       
+                minLength: 0
+            }).bind('focus', function () {
+                $(this).autocomplete("search");
+            });
+    });
+
+
 	$('#tabs a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
@@ -31,7 +46,8 @@
     })
     function addWorkCode(){
   
-         
+        if($("#work_code").val()!="")
+        { 
          $('#tgrid').find('tbody').append('<tr id='+$("#work_code").val()+'><td width="90%">'+
                  $("#work_code").val()+
                  '</td><td style="text-align:center;width:10%;"><a href="#" onclick=deleteRow("'+$("#work_code").val()+'")><i class="icon-red icon-remove"></i></a></td></tr>');
@@ -40,14 +56,16 @@
          var code = '';
          $('#tgrid tbody tr td').each(function(key, value) {
             
-                   //console.log($(this).text())
+                 //  console.log($(this).text())
+                 if(key%2==0)  
                    code += $(this).text()+",";
-                    
-                   
+                                       
                // console.log(key+":"+$(this).text())
          });
          $("#workCode").val(code.substring(0,code.length-1));
-         
+         console.log($("#workCode").val());
+         $("#work_code").val("");
+        } 
     }
     function deleteRow(id){
      
@@ -56,13 +74,15 @@
          var code = '';
          $('#tgrid tbody tr td').each(function(key, value) {
               
-                   console.log($(this).text())
+                //   console.log($(this).text())
+                if(key%2==0)  
                    code += $(this).text()+",";
                      
                   
-                console.log(key+":"+$(this).text())
+              //  console.log(key+":"+$(this).text())
          });
          $("#workCode").val(code.substring(0,code.length-1));
+         console.log($("#workCode").val());
     }
 </script>
 	<!-- <p class="help-block">Fields with <span class="required">*</span> are required.</p> -->
@@ -83,7 +103,7 @@
     	
 
 		
-    	<div style="text-align:left"><?php echo $form->errorSummary(array($model,$modelContract));?></div>
+    	<div style="text-align:left"><?php echo $form->errorSummary(array($model));?></div>
 		
 		<div class="row-fluid">
 			<div class="well span8">
@@ -160,7 +180,7 @@
                             // additional javascript options for the autocomplete plugin
                             'options'=>array(
                                      'showAnim'=>'fold',
-                                     'minLength'=>'0',
+                                     'minLength'=>0,
                                      'select'=>'js: function(event, ui) {
                                         
                                            //console.log(ui.item.id)
@@ -258,19 +278,28 @@
       			<table class="table" style="background-color: white" name="tgrid" id="tgrid" width="100%" cellpadding="0" cellspacing="0">                    
 	                <tbody>
                             <?php
-                                    $workCode = Yii::app()->db->createCommand()
-                                                ->select('code,id')
-                                                ->from('work_code')
-                                                ->where('pj_id=:id', array(':id'=>$model->pj_id))
-                                                ->queryAll();
-                                    if(!empty($workCode))
-                                    {    
-                                       echo "<tr id='".$model->pj_id."'><td>".$workCode->code."</td><td style='text-align:center'><a href='#' onclick=deleteRow('".$workCode->id."')><i class='icon-remove'></i></a></td></tr>";
+                                    // $workCode = Yii::app()->db->createCommand()
+                                    //             ->select('code,id')
+                                    //             ->from('work_code')
+                                    //             ->where('pj_id=:id', array(':id'=>$model->pj_id))
+                                    //             ->queryAll();
+                                    // if(!empty($workCode))
+                                    // {    
+                                    //    echo "<tr id='".$model->pj_id."'><td>".$workCode->code."</td><td style='text-align:center'><a href='#' onclick=deleteRow('".$workCode->id."')><i class='icon-remove'></i></a></td></tr>";
                         
-                                    }
-                               
+                                    // }
+                            		 $workCodeArray = explode(",", $workcodes);
+                            		 foreach ($workCodeArray as $i=>$workcode) {
+                            		 	if($workcode!="")
+                            		 	{ 
+                            		 		echo "<tr id='".$workcode."'><td width='90%'>".$workcode."</td><td style='width:10%;text-align:center'><a href='#' onclick=deleteRow('".$workcode."')><i class='icon-red icon-remove'></i></a></td></tr>";
+                        				    
+                        				}
+                            		 }
+                            
+                            	echo '<input type="hidden" name="workCode" id="workCode" value="'.$workcodes.'">';   
                             ?>
-                            <input type="hidden" name="workCode" id="workCode">
+                            
                         </tbody>
                         
             </table>
@@ -278,9 +307,12 @@
     		
     		
   		</div>
-        <input type="hidden" id="numContract" name="numContract" value="1">
+        
+
   		<div class="row-fluid">
       <?php
+        echo '<input type="hidden" id="numContract" name="numContract" value="'.$numContracts.'">';
+
   		$this->widget('bootstrap.widgets.TbButton', array(
 			    'buttonType'=>'link',
 			    
@@ -333,13 +365,14 @@
   		
   		<fieldset class="well the-fieldset">
            <legend class="the-legend">สัญญาที่ 1</legend>
+           <div style="text-align:left"><?php echo $form->errorSummary(array($modelContract));?></div>
            <div class="row-fluid">
 	  			<div class="span3">
-	  			    <?php echo $form->textFieldRow($modelContract,'pc_code',array('class'=>'span12','maxlength'=>4)); ?>
+	  			    <?php echo $form->textFieldRow($modelContract,'[0]pc_code',array('class'=>'span12')); ?>
 
 	  			</div>
 	  			<div class="span3">
-					<?php echo $form->textFieldRow($modelContract,'pc_cost',array('class'=>'span12')); ?>
+					<?php echo $form->textFieldRow($modelContract,'[0]pc_cost',array('class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span3">
       					<?php echo $form->labelEx($modelContract,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
@@ -351,8 +384,8 @@
 		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
 
 		                    array(
-		                        'name'=>'pc_sign_date',
-		                        'attribute'=>'pc_sign_date',
+		                        'name'=>'[0]pc_sign_date',
+		                        'attribute'=>'[0]pc_sign_date',
 		                        'model'=>$modelContract,
 		                        'options' => array(
 		                                          'mode'=>'focus',
@@ -375,7 +408,7 @@
 
 		                    array(
 		                        'name'=>'pc_end_date',
-		                        'attribute'=>'pc_end_date',
+		                        'attribute'=>'[0]pc_end_date',
 		                        'model'=>$modelContract,
 		                        'options' => array(
 		                                          'mode'=>'focus',
@@ -393,32 +426,37 @@
 	  		</div>
 	  		<div class="row-fluid">
 	  			<div class="span6">
-	  			 <?php echo $form->textAreaRow($modelContract,'pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
+	  			 <?php echo $form->textAreaRow($modelContract,'[0]pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span4">
-	                  <?php echo $form->textFieldRow($modelContract,'pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
+	                  <?php echo $form->textFieldRow($modelContract,'[0]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'pc_T_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract,'[0]pc_T_percent',array('class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'pc_A_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract,'[0]pc_A_percent',array('class'=>'span12')); ?>
 	  			</div>
 	  		</div>		
         </fieldset>
-
-        <fieldset id="contract2" class="hide well the-fieldset">
+        <?php 
+           if($modelContract2->pc_code!="")
+ 		       echo '<fieldset id="contract2" class="well the-fieldset">';
+            else
+               echo '<fieldset id="contract2" class="hide well the-fieldset">';
+        ?>   
            <legend class="the-legend">สัญญาที่ 2</legend>
+           <div style="text-align:left"><?php echo $form->errorSummary(array($modelContract2));?></div>
            <div class="row-fluid">
 	  			<div class="span3">
-	  			    <?php echo $form->textFieldRow($modelContract,'pc_code',array('class'=>'span12','maxlength'=>4)); ?>
+	  			    <?php echo $form->textFieldRow($modelContract2,'[1]pc_code',array('class'=>'span12')); ?>
 
 	  			</div>
 	  			<div class="span3">
-					<?php echo $form->textFieldRow($modelContract,'pc_cost',array('class'=>'span12')); ?>
+					<?php echo $form->textFieldRow($modelContract2,'[1]pc_cost',array('class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span3">
-      					<?php echo $form->labelEx($modelContract,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
+      					<?php echo $form->labelEx($modelContract2,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
     					
     					<?php 
 
@@ -427,16 +465,16 @@
 		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
 
 		                    array(
-		                        'name'=>'pc_sign_date',
-		                        'attribute'=>'pc_sign_date',
-		                        'model'=>$modelContract,
+		                        'name'=>'[1]pc_sign_date',
+		                        'attribute'=>'[1]pc_sign_date',
+		                        'model'=>$modelContract2,
 		                        'options' => array(
 		                                          'mode'=>'focus',
 		                                          //'language' => 'th',
 		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
 		                                          'showAnim' => 'slideDown',
 		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract->pc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract2->pc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
 		                     )
 		                );
 		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -444,22 +482,22 @@
 		      			 ?>
 		      	</div>
 		      	<div class="span3">
-      					<?php echo $form->labelEx($modelContract,'pc_end_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>    					
+      					<?php echo $form->labelEx($modelContract2,'pc_end_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>    					
     					<?php       			 
 		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
 		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
 
 		                    array(
-		                        'name'=>'pc_end_date',
-		                        'attribute'=>'pc_end_date',
-		                        'model'=>$modelContract,
+		                        'name'=>'[1]pc_end_date',
+		                        'attribute'=>'[1]pc_end_date',
+		                        'model'=>$modelContract2,
 		                        'options' => array(
 		                                          'mode'=>'focus',
 		                                          //'language' => 'th',
 		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
 		                                          'showAnim' => 'slideDown',
 		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract->pc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract2->pc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
 		                     )
 		                );
 		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -469,108 +507,39 @@
 	  		</div>
 	  		<div class="row-fluid">
 	  			<div class="span6">
-	  			 <?php echo $form->textAreaRow($modelContract,'pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
+	  			 <?php echo $form->textAreaRow($modelContract2,'[1]pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span4">
-	                  <?php echo $form->textFieldRow($modelContract,'pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
+	                  <?php echo $form->textFieldRow($modelContract2,'[1]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'pc_T_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract2,'[1]pc_T_percent',array('class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'pc_A_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract2,'[1]pc_A_percent',array('class'=>'span12')); ?>
 	  			</div>
 	  		</div>		
         </fieldset>
 
-         <fieldset id="contract2" class="hide well the-fieldset">
-           <legend class="the-legend">สัญญาที่ 2</legend>
-           <div class="row-fluid">
-	  			<div class="span3">
-	  			    <?php echo $form->textFieldRow($modelContract,'pc_code',array('class'=>'span12','maxlength'=>4)); ?>
 
-	  			</div>
-	  			<div class="span3">
-					<?php echo $form->textFieldRow($modelContract,'pc_cost',array('class'=>'span12')); ?>
-	  			</div>
-	  			<div class="span3">
-      					<?php echo $form->labelEx($modelContract,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
-    					
-    					<?php 
-
-      			 
-		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
-		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
-
-		                    array(
-		                        'name'=>'pc_sign_date',
-		                        'attribute'=>'pc_sign_date',
-		                        'model'=>$modelContract,
-		                        'options' => array(
-		                                          'mode'=>'focus',
-		                                          //'language' => 'th',
-		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
-		                                          'showAnim' => 'slideDown',
-		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract->pc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
-		                     )
-		                );
-		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-		      			 ?>
-		      	</div>
-		      	<div class="span3">
-      					<?php echo $form->labelEx($modelContract,'pc_end_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>    					
-    					<?php       			 
-		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
-		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
-
-		                    array(
-		                        'name'=>'pc_end_date',
-		                        'attribute'=>'pc_end_date',
-		                        'model'=>$modelContract,
-		                        'options' => array(
-		                                          'mode'=>'focus',
-		                                          //'language' => 'th',
-		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
-		                                          'showAnim' => 'slideDown',
-		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract->pc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
-		                     )
-		                );
-		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-		      			 ?>
-		      	</div>
-	  		</div>
-	  		<div class="row-fluid">
-	  			<div class="span6">
-	  			 <?php echo $form->textAreaRow($modelContract,'pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
-	  			</div>
-	  			<div class="span4">
-	                  <?php echo $form->textFieldRow($modelContract,'pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
-	  			</div>
-	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'pc_T_percent',array('class'=>'span12')); ?>
-	  			</div>
-	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'pc_A_percent',array('class'=>'span12')); ?>
-	  			</div>
-	  		</div>		
-        </fieldset>
-
-   		 <fieldset id="contract3" class="hide well the-fieldset">
+   		<?php 
+           if($modelContract3->pc_code!="")
+ 		       echo '<fieldset id="contract3" class="well the-fieldset">';
+            else
+               echo '<fieldset id="contract3" class="hide well the-fieldset">';
+        ?>   
            <legend class="the-legend">สัญญาที่ 3</legend>
+           <div style="text-align:left"><?php echo $form->errorSummary(array($modelContract3));?></div>
            <div class="row-fluid">
 	  			<div class="span3">
-	  			    <?php echo $form->textFieldRow($modelContract,'pc_code',array('class'=>'span12','maxlength'=>4)); ?>
+	  			    <?php echo $form->textFieldRow($modelContract3,'[2]pc_code',array('class'=>'span12')); ?>
 
 	  			</div>
 	  			<div class="span3">
-					<?php echo $form->textFieldRow($modelContract,'pc_cost',array('class'=>'span12')); ?>
+					<?php echo $form->textFieldRow($modelContract3,'[2]pc_cost',array('class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span3">
-      					<?php echo $form->labelEx($modelContract,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
+      					<?php echo $form->labelEx($modelContract3,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
     					
     					<?php 
 
@@ -579,16 +548,16 @@
 		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
 
 		                    array(
-		                        'name'=>'pc_sign_date',
-		                        'attribute'=>'pc_sign_date',
-		                        'model'=>$modelContract,
+		                        'name'=>'[2]pc_sign_date',
+		                        'attribute'=>'[2]pc_sign_date',
+		                        'model'=>$modelContract3,
 		                        'options' => array(
 		                                          'mode'=>'focus',
 		                                          //'language' => 'th',
 		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
 		                                          'showAnim' => 'slideDown',
 		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract->pc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract3->pc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
 		                     )
 		                );
 		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -596,22 +565,22 @@
 		      			 ?>
 		      	</div>
 		      	<div class="span3">
-      					<?php echo $form->labelEx($modelContract,'pc_end_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>    					
+      					<?php echo $form->labelEx($modelContract3,'pc_end_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>    					
     					<?php       			 
 		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
 		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
 
 		                    array(
-		                        'name'=>'pc_end_date',
-		                        'attribute'=>'pc_end_date',
-		                        'model'=>$modelContract,
+		                        'name'=>'[2]pc_end_date',
+		                        'attribute'=>'[2]pc_end_date',
+		                        'model'=>$modelContract3,
 		                        'options' => array(
 		                                          'mode'=>'focus',
 		                                          //'language' => 'th',
 		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
 		                                          'showAnim' => 'slideDown',
 		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract->pc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract3->pc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
 		                     )
 		                );
 		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -621,32 +590,38 @@
 	  		</div>
 	  		<div class="row-fluid">
 	  			<div class="span6">
-	  			 <?php echo $form->textAreaRow($modelContract,'pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
+	  			 <?php echo $form->textAreaRow($modelContract3,'[2]pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span4">
-	                  <?php echo $form->textFieldRow($modelContract,'pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
+	                  <?php echo $form->textFieldRow($modelContract3,'[2]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'pc_T_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract3,'[2]pc_T_percent',array('class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'pc_A_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract3,'[2]pc_A_percent',array('class'=>'span12')); ?>
 	  			</div>
 	  		</div>		
         </fieldset>
 
-         <fieldset id="contract4" class="hide well the-fieldset">
+        <?php 
+           if($modelContract4->pc_code!="")
+ 		       echo '<fieldset id="contract4" class="well the-fieldset">';
+            else
+               echo '<fieldset id="contract4" class="hide well the-fieldset">';
+        ?>   
            <legend class="the-legend">สัญญาที่ 4</legend>
+           <div style="text-align:left"><?php echo $form->errorSummary(array($modelContract4));?></div>
            <div class="row-fluid">
 	  			<div class="span3">
-	  			    <?php echo $form->textFieldRow($modelContract,'pc_code',array('class'=>'span12','maxlength'=>4)); ?>
+	  			    <?php echo $form->textFieldRow($modelContract4,'[3]pc_code',array('class'=>'span12')); ?>
 
 	  			</div>
 	  			<div class="span3">
-					<?php echo $form->textFieldRow($modelContract,'pc_cost',array('class'=>'span12')); ?>
+					<?php echo $form->textFieldRow($modelContract4,'[3]pc_cost',array('class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span3">
-      					<?php echo $form->labelEx($modelContract,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
+      					<?php echo $form->labelEx($modelContract4,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
     					
     					<?php 
 
@@ -655,16 +630,16 @@
 		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
 
 		                    array(
-		                        'name'=>'pc_sign_date',
-		                        'attribute'=>'pc_sign_date',
-		                        'model'=>$modelContract,
+		                        'name'=>'[3]pc_sign_date',
+		                        'attribute'=>'[3]pc_sign_date',
+		                        'model'=>$modelContract4,
 		                        'options' => array(
 		                                          'mode'=>'focus',
 		                                          //'language' => 'th',
 		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
 		                                          'showAnim' => 'slideDown',
 		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract->pc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract4->pc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
 		                     )
 		                );
 		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -672,22 +647,22 @@
 		      			 ?>
 		      	</div>
 		      	<div class="span3">
-      					<?php echo $form->labelEx($modelContract,'pc_end_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>    					
+      					<?php echo $form->labelEx($modelContract4,'pc_end_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>    					
     					<?php       			 
 		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
 		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
 
 		                    array(
-		                        'name'=>'pc_end_date',
-		                        'attribute'=>'pc_end_date',
-		                        'model'=>$modelContract,
+		                        'name'=>'[3]pc_end_date',
+		                        'attribute'=>'[3]pc_end_date',
+		                        'model'=>$modelContract4,
 		                        'options' => array(
 		                                          'mode'=>'focus',
 		                                          //'language' => 'th',
 		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
 		                                          'showAnim' => 'slideDown',
 		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract->pc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract4->pc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
 		                     )
 		                );
 		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -697,32 +672,38 @@
 	  		</div>
 	  		<div class="row-fluid">
 	  			<div class="span6">
-	  			 <?php echo $form->textAreaRow($modelContract,'pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
+	  			 <?php echo $form->textAreaRow($modelContract4,'[3]pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span4">
-	                  <?php echo $form->textFieldRow($modelContract,'pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
+	                  <?php echo $form->textFieldRow($modelContract4,'[3]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'pc_T_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract4,'[3]pc_T_percent',array('class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'pc_A_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract4,'[3]pc_A_percent',array('class'=>'span12')); ?>
 	  			</div>
 	  		</div>		
         </fieldset>
 
-         <fieldset id="contract5" class="hide well the-fieldset">
+        <?php 
+           if($modelContract5->pc_code!="")
+ 		       echo '<fieldset id="contract5" class="well the-fieldset">';
+            else
+               echo '<fieldset id="contract5" class="hide well the-fieldset">';
+        ?>   
            <legend class="the-legend">สัญญาที่ 5</legend>
+           <div style="text-align:left"><?php echo $form->errorSummary(array($modelContract5));?></div>
            <div class="row-fluid">
 	  			<div class="span3">
-	  			    <?php echo $form->textFieldRow($modelContract,'pc_code',array('class'=>'span12','maxlength'=>4)); ?>
+	  			    <?php echo $form->textFieldRow($modelContract5,'[4]pc_code',array('class'=>'span12')); ?>
 
 	  			</div>
 	  			<div class="span3">
-					<?php echo $form->textFieldRow($modelContract,'pc_cost',array('class'=>'span12')); ?>
+					<?php echo $form->textFieldRow($modelContract5,'[4]pc_cost',array('class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span3">
-      					<?php echo $form->labelEx($modelContract,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
+      					<?php echo $form->labelEx($modelContract5,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
     					
     					<?php 
 
@@ -731,16 +712,16 @@
 		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
 
 		                    array(
-		                        'name'=>'pc_sign_date',
-		                        'attribute'=>'pc_sign_date',
-		                        'model'=>$modelContract,
+		                        'name'=>'[4]pc_sign_date',
+		                        'attribute'=>'[4]pc_sign_date',
+		                        'model'=>$modelContract5,
 		                        'options' => array(
 		                                          'mode'=>'focus',
 		                                          //'language' => 'th',
 		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
 		                                          'showAnim' => 'slideDown',
 		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract->pc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract5->pc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
 		                     )
 		                );
 		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -748,22 +729,22 @@
 		      			 ?>
 		      	</div>
 		      	<div class="span3">
-      					<?php echo $form->labelEx($modelContract,'pc_end_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>    					
+      					<?php echo $form->labelEx($modelContract5,'pc_end_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>    					
     					<?php       			 
 		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
 		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
 
 		                    array(
-		                        'name'=>'pc_end_date',
-		                        'attribute'=>'pc_end_date',
-		                        'model'=>$modelContract,
+		                        'name'=>'[4]pc_end_date',
+		                        'attribute'=>'[4]pc_end_date',
+		                        'model'=>$modelContract5,
 		                        'options' => array(
 		                                          'mode'=>'focus',
 		                                          //'language' => 'th',
 		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
 		                                          'showAnim' => 'slideDown',
 		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract->pc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract5->pc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
 		                     )
 		                );
 		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -773,20 +754,20 @@
 	  		</div>
 	  		<div class="row-fluid">
 	  			<div class="span6">
-	  			 <?php echo $form->textAreaRow($modelContract,'pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
+	  			 <?php echo $form->textAreaRow($modelContract5,'[4]pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span4">
-	                  <?php echo $form->textFieldRow($modelContract,'pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
+	                  <?php echo $form->textFieldRow($modelContract5,'[4]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'pc_T_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract5,'[4]pc_T_percent',array('class'=>'span12')); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'pc_A_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract5,'[4]pc_A_percent',array('class'=>'span12')); ?>
 	  			</div>
 	  		</div>		
         </fieldset>
- 			<div class="form-actions">
+  			<div class="form-actions">
 				<?php $this->widget('bootstrap.widgets.TbButton', array(
 					'buttonType'=>'submit',
 					'type'=>'primary',

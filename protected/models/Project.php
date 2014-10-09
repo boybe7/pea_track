@@ -101,6 +101,20 @@ class Project extends CActiveRecord
 		));
 	}
 
+	protected function afterFind(){
+            // parent::afterFind();
+            // $str_date = explode("-", $this->visit_date);
+            // $this->visit_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+            
+    }
+    public function beforeSave()
+    {
+        
+            $str_date = explode("/", $this->pj_date_approved);
+                        $this->pj_date_approved= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+            return parent::beforeSave();
+   }
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

@@ -63,7 +63,18 @@ class ProjectController extends Controller
 	{
 		$model=new Project;
 		$modelContract = new ProjectContract;
+		$modelContract2 = new ProjectContract;
+		$modelContract3 = new ProjectContract;
+		$modelContract4 = new ProjectContract;
+		$modelContract5 = new ProjectContract;
+		$modelWorkCode = new WorkCode;
 
+		$workcodes = "";
+		//array_push($workcodes, new WorkCode);
+
+
+		$numContracts = 1;
+        
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -85,24 +96,121 @@ class ProjectController extends Controller
    //              $this->redirect(array('view', 'id' => $model->id));
  
    //          }
-
+			$numContracts = $_POST["numContract"];
 			$transaction=Yii::app()->db->beginTransaction();
 		    try {
 		        $model->attributes = $_POST['Project'];
 		        $model->pj_user_create = Yii::app()->user->ID;
 			    $model->pj_user_update = Yii::app()->user->ID;
 			    //$model->pj_vendor_id = $_POST["vendor_id"];
+			    
+			    
+			    
+
 			    $model->pj_name = $_POST["pj_vendor_id"];
-			   
+			    if(isset($_POST['ProjectContract'][0]))
+		        {
+		         	$modelContract->attributes = $_POST['ProjectContract'][0];
+		         	$modelContract->pc_sign_date = $_POST['ProjectContract'][0]["pc_sign_date"];
+		         	$modelContract->pc_details = $_POST['ProjectContract'][0]["pc_details"];
+		        } 	
+		        if($numContracts==2 && isset($_POST['ProjectContract'][1]))
+		        { 
+		        	$modelContract2->attributes = $_POST['ProjectContract'][1];
+		        	//$numContracts++;
+		        }	
+		        if($numContracts==3 && isset($_POST['ProjectContract'][2]))
+		        { 
+		        	$modelContract3->attributes = $_POST['ProjectContract'][2];
+		        	//$numContracts++;
+		        }
+		        if($numContracts==4 && isset($_POST['ProjectContract'][3]))
+		        { 
+		        	$modelContract4->attributes = $_POST['ProjectContract'][3];
+		        	//$numContracts++;
+		        }
+		        if($numContracts==5 && isset($_POST['ProjectContract'][4]))
+		        { 
+		        	$modelContract5->attributes = $_POST['ProjectContract'][4];
+		        	//$numContracts++;
+		        }
+		        $workcodes = $_POST['workCode'];
+		        $workCodeArray = explode(",", $_POST['workCode']);
+				
+				// foreach ($workCodeArray as $key => $value) {
+		  //       		$wk = new WorkCode;
+		  //       		$wk->code = $value;
+		        		
+		  //       		array_push($workcodes, $wk);
+		        			
+		  //       }
+		        			    	
 		        if ($model->save()) {
-		            $modelContract = new ProjectContract;
-		            $modelContract->attributes = $_POST['ProjectContract'];
-		            $modelContract->pc_proj_id = $model->pj_id;
-		            // $transaction->commit();
-		            if ($modelContract->save()) {
-		                $transaction->commit();
-		                $this->redirect(array('view', 'id' => $model->id));
-		            }
+
+		        	
+		        	foreach ($workCodeArray as $key => $value) {
+		        		$wk = new WorkCode;
+		         		//$wk->id = $key;
+		         		$wk->code = $value;
+		        		$wk->pj_id = $model->pj_id;
+		        		
+		        		$wk->save();	
+		        	}
+		        	
+		        	switch ($numContracts) {
+		        		case 2:
+		        			$modelContract->pc_proj_id = $model->pj_id;
+		        		    $modelContract2->pc_proj_id = $model->pj_id;
+		        		    
+		        			if  ( $modelContract->save() && $modelContract2->save()) {
+					                $transaction->commit();
+					                $this->redirect(array('view', 'id' => $model->pj_id));
+					            }
+		        			break;
+		        		case 3:
+		        			$modelContract->pc_proj_id = $model->pj_id;
+		        		    $modelContract2->pc_proj_id = $model->pj_id;
+		        		    $modelContract3->pc_proj_id = $model->pj_id;
+		        		    
+		        			if  ( $modelContract->save() && $modelContract2->save() && $modelContract3->save()) {
+					                $transaction->commit();
+					                $this->redirect(array('view', 'id' => $model->pj_id));
+					            }
+		        			break;
+		        		case 4:
+		        			$modelContract->pc_proj_id = $model->pj_id;
+		        		    $modelContract2->pc_proj_id = $model->pj_id;
+		        		    $modelContract3->pc_proj_id = $model->pj_id;
+		        		    $modelContract4->pc_proj_id = $model->pj_id;
+		        		    
+
+		        			if  ( $modelContract->save() && $modelContract2->save() && $modelContract3->save() && $modelContract4->save()) {
+					                $transaction->commit();
+					                $this->redirect(array('view', 'id' => $model->pj_id));
+					            }
+		        			break;
+		        		case 5:
+		        		    $modelContract->pc_proj_id = $model->pj_id;
+		        		    $modelContract2->pc_proj_id = $model->pj_id;
+		        		    $modelContract3->pc_proj_id = $model->pj_id;
+		        		    $modelContract4->pc_proj_id = $model->pj_id;
+		        		    $modelContract5->pc_proj_id = $model->pj_id;
+
+		        			if  ( $modelContract->save() && $modelContract2->save() && $modelContract3->save() && $modelContract4->save() && $modelContract5->save()) {
+					                $transaction->commit();
+					                $this->redirect(array('view', 'id' => $model->pj_id));
+					            }
+		        			break;
+		        		
+		        		default:
+		        		    $modelContract->pc_proj_id = $model->pj_id;
+		        			if  ( $modelContract->save()) {
+					                $transaction->commit();
+					                $this->redirect(array('view', 'id' => $model->pj_id));
+					            }
+		        			break;
+		        	}
+		            
 		            
 		        }
 		        //something went wrong...
@@ -118,7 +226,8 @@ class ProjectController extends Controller
 		}
 
 		$this->render('create',array(
-			'model'=>$model,'modelContract'=>$modelContract
+			'model'=>$model,'workcodes'=>$workcodes,'numContracts'=>$numContracts,'modelContract'=>$modelContract,'modelContract2'=>$modelContract2,'modelContract3'=>$modelContract3,'modelContract4'=>$modelContract4,'modelContract5'=>$modelContract5
+			
 		));
 	}
 
