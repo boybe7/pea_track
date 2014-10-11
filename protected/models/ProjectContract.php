@@ -80,9 +80,23 @@ class ProjectContract extends CActiveRecord
 		);
 	}
 
+	protected function beforeValidate()
+	{
+		 if($this->pc_cost!="")
+		 {
+		     $this->pc_cost = str_replace(",", "", $this->pc_cost); 
+		 }
+		  
+		 return parent::beforeValidate();
+	}
 	public function beforeSave()
     {
-        
+         if($this->pc_cost!="")
+		 {
+		     $this->pc_cost = str_replace(",", "", $this->pc_cost); 
+		 }
+		  
+
             $str_date = explode("/", $this->pc_end_date);
             $this->pc_end_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
             return parent::beforeSave();

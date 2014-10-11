@@ -362,7 +362,20 @@
 			)); 
          ?>
          </div>
-  		
+  		<?php
+  			$this->widget('application.extensions.moneymask.MMask',array(
+                    'element'=>'#ProjectContract_0_pc_cost',
+                    'currency'=>'บาท',
+                    'config'=>array(
+                        'symbolStay'=>true,
+                        'thousands'=>',',
+                        'decimal'=>'.',
+                        'precision'=>2,
+                    )
+                ));
+
+
+  		?>
   		<fieldset class="well the-fieldset">
            <legend class="the-legend">สัญญาที่ 1</legend>
            <div style="text-align:left"><?php echo $form->errorSummary(array($modelContract));?></div>

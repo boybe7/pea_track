@@ -109,10 +109,15 @@ class Project extends CActiveRecord
     }
     public function beforeSave()
     {
-        
+        if($this->pj_date_approved!="")
+        {
+
             $str_date = explode("/", $this->pj_date_approved);
-                        $this->pj_date_approved= $str_date[2]."-".$str_date[1]."-".$str_date[0];
-            return parent::beforeSave();
+            $this->pj_date_approved= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+
+        }	
+
+        return parent::beforeSave();
    }
 
 	/**
