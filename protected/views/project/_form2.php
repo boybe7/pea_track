@@ -364,7 +364,7 @@
          </div>
   		<?php
   			$this->widget('application.extensions.moneymask.MMask',array(
-                    'element'=>'#ProjectContract_0_pc_cost',
+                    'element'=>'#ProjectContract_0_pc_cost,#ProjectContract_1_pc_cost,#ProjectContract_2_pc_cost,#ProjectContract_3_pc_cost,#ProjectContract_4_pc_cost',
                     'currency'=>'บาท',
                     'config'=>array(
                         'symbolStay'=>true,
@@ -453,7 +453,7 @@
 	  		</div>		
         </fieldset>
         <?php 
-           if($modelContract2->pc_code!="")
+           if($numContracts>1)
  		       echo '<fieldset id="contract2" class="well the-fieldset">';
             else
                echo '<fieldset id="contract2" class="hide well the-fieldset">';
@@ -536,7 +536,7 @@
 
 
    		<?php 
-           if($modelContract3->pc_code!="")
+           if($numContracts>2)
  		       echo '<fieldset id="contract3" class="well the-fieldset">';
             else
                echo '<fieldset id="contract3" class="hide well the-fieldset">';
@@ -618,7 +618,7 @@
         </fieldset>
 
         <?php 
-           if($modelContract4->pc_code!="")
+           if($numContracts>3)
  		       echo '<fieldset id="contract4" class="well the-fieldset">';
             else
                echo '<fieldset id="contract4" class="hide well the-fieldset">';
@@ -700,7 +700,7 @@
         </fieldset>
 
         <?php 
-           if($modelContract5->pc_code!="")
+           if($numContracts>4)
  		       echo '<fieldset id="contract5" class="well the-fieldset">';
             else
                echo '<fieldset id="contract5" class="hide well the-fieldset">';

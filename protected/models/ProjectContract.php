@@ -101,6 +101,18 @@ class ProjectContract extends CActiveRecord
             $this->pc_end_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
             return parent::beforeSave();
    }
+     protected function afterSave(){
+            parent::afterSave();
+            $str_date = explode("-", $this->pc_end_date);
+            $this->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+            //$this->visit_date=date('Y/m/d', strtotime(str_replace("-", "", $this->visit_date)));       
+    }
+    protected function afterFind(){
+            parent::afterFind();
+            $str_date = explode("-", $this->pc_end_date);
+            $this->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+            //$this->visit_date=date('Y/m/d', strtotime(str_replace("-", "", $this->visit_date)));       
+    }
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
