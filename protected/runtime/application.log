@@ -41261,3 +41261,223 @@ in C:\xampp\htdocs\pea_track\index.php (13)
 2014/10/14 00:47:04 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
 in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
 in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:24:34 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:24:34 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:24:41 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:24:41 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:24:47 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:24:47 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:24:48 [error] [exception.CDbException] exception 'CDbException' with message 'CDbTransaction ไม่ได้ใช้งานและไม่สามารถดำเนินการกระทำต่อหรือย้อนกลับการดำเนินการได้' in C:\xampp\htdocs\pea_track\framework\db\CDbTransaction.php:84
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(226): CDbTransaction->rollback()
+#1 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ProjectController->actionCreate()
+#2 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#3 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#6 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('create')
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/create')
+#12 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/pea_track/project/create
+HTTP_REFERER=http://localhost/pea_track/project/create
+---
+2014/10/14 23:31:15 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:31:15 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:31:15 [error] [exception.CDbException] exception 'CDbException' with message 'CDbTransaction ไม่ได้ใช้งานและไม่สามารถดำเนินการกระทำต่อหรือย้อนกลับการดำเนินการได้' in C:\xampp\htdocs\pea_track\framework\db\CDbTransaction.php:84
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(230): CDbTransaction->rollback()
+#1 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ProjectController->actionCreate()
+#2 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#3 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#6 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('create')
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/create')
+#12 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/pea_track/project/create
+HTTP_REFERER=http://localhost/pea_track/project/create
+---
+2014/10/14 23:32:25 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:32:25 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:35:13 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:35:13 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:35:19 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:35:19 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:35:23 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:35:23 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:35:23 [error] [php] urlencode() expects parameter 1 to be string, object given (C:\xampp\htdocs\pea_track\framework\web\CUrlManager.php:440)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CUrlManager.php(785): CUrlManager->createPathInfo()
+#1 C:\xampp\htdocs\pea_track\framework\web\CUrlManager.php(302): CUrlRule->createUrl()
+#2 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(543): CUrlManager->createUrl()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(967): CWebApplication->createUrl()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(1028): ProjectController->createUrl()
+#5 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(215): ProjectController->redirect()
+#6 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ProjectController->actionCreate()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#9 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#15 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#16 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#17 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (215)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:36:49 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:36:49 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:36:49 [error] [php] urlencode() expects parameter 1 to be string, object given (C:\xampp\htdocs\pea_track\framework\web\CUrlManager.php:440)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CUrlManager.php(302): CUrlRule->createUrl()
+#1 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(543): CUrlManager->createUrl()
+#2 C:\xampp\htdocs\pea_track\framework\web\CController.php(967): CWebApplication->createUrl()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(1028): ProjectController->createUrl()
+#4 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(215): ProjectController->redirect()
+#5 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ProjectController->actionCreate()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#14 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#15 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (215)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:36:54 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:36:54 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:36:54 [error] [php] urlencode() expects parameter 1 to be string, object given (C:\xampp\htdocs\pea_track\framework\web\CUrlManager.php:440)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CUrlManager.php(302): CUrlRule->createUrl()
+#1 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(543): CUrlManager->createUrl()
+#2 C:\xampp\htdocs\pea_track\framework\web\CController.php(967): CWebApplication->createUrl()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(1028): ProjectController->createUrl()
+#4 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(215): ProjectController->redirect()
+#5 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ProjectController->actionCreate()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#14 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#15 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (215)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:47:35 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:47:35 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:47:35 [error] [exception.CDbException] exception 'CDbException' with message 'CDbTransaction ไม่ได้ใช้งานและไม่สามารถดำเนินการกระทำต่อหรือย้อนกลับการดำเนินการได้' in C:\xampp\htdocs\pea_track\framework\db\CDbTransaction.php:84
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(233): CDbTransaction->rollback()
+#1 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ProjectController->actionCreate()
+#2 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#3 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#6 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('create')
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/create')
+#12 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/pea_track/project/create
+HTTP_REFERER=http://localhost/pea_track/project/create
+---
+2014/10/14 23:52:51 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:52:51 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:53:17 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:53:17 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:56:22 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:56:22 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:56:54 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/10/14 23:56:54 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (113)
+in C:\xampp\htdocs\pea_track\index.php (13)

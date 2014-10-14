@@ -88,13 +88,34 @@
 	<!-- <p class="help-block">Fields with <span class="required">*</span> are required.</p> -->
 <div class="well">
 	<ul class="nav nav-tabs">
-        <li class="active"><a href="#projTab" data-toggle="tab">โครงการ</a></li>
-         <li><a href="#outTab" data-toggle="tab">สัญญาจ้างต่อ</a></li>
+      <?php  
+        if($activeTab==1)
+        {
+           echo '<li class="active"><a href="#projTab" data-toggle="tab">โครงการ</a></li>
+                 <li><a href="#outTab" data-toggle="tab">สัญญาจ้างต่อ</a></li>
+                ';	
+        } 
+        else
+        {
+        	echo '<li><a href="#projTab" data-toggle="tab">โครงการ</a></li>
+                 <li  class="active"><a href="#outTab" data-toggle="tab">สัญญาจ้างต่อ</a></li>
+                ';	
+        }
+         
+      ?>
+        
     </ul>
          
     <div class="tab-content">
-      <div class="tab-pane active" id="projTab">  
-      	<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+        
+      	<?php 
+
+        if($activeTab==1)
+        	echo '<div class="tab-pane active" id="projTab">';
+        else
+        	echo '<div class="tab-pane" id="projTab">';
+
+      	$form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 			'id'=>'project-form',
 			'enableAjaxValidation'=>true,
 			'type'=>'vertical',
@@ -790,8 +811,16 @@
 						
 		</div>
         <?php $this->endWidget(); ?>
-		<div class="tab-pane" id="outTab">
-		</div>
+		
+        <!-- tab@2 -->
+		<?php 
+			if($activeTab==2)
+				echo '<div class="tab-pane active" id="outTab">';		    
+		    else
+		    	echo '<div class="tab-pane" id="outTab">';
+
+		 ?>   
+		</div><!--  endtab2 -->
 	</div>		
 </div>	
 

@@ -72,7 +72,7 @@ class ProjectController extends Controller
 		$workcodes = "";
 		//array_push($workcodes, new WorkCode);
 
-
+		$activeTab  = 1;	
 		$numContracts = 1;
         
 		// Uncomment the following line if AJAX validation is needed
@@ -164,7 +164,8 @@ class ProjectController extends Controller
 		        		    
 		        			if  ( $modelContract->save() && $modelContract2->save()) {
 					                $transaction->commit();
-					                $this->redirect(array('view', 'id' => $model->pj_id));
+					                //$this->redirect(array('view', 'id' => $model->pj_id));
+					                $activeTab = 2;
 					            }
 		        			break;
 		        		case 3:
@@ -174,7 +175,8 @@ class ProjectController extends Controller
 		        		    
 		        			if  ( $modelContract->save() && $modelContract2->save() && $modelContract3->save()) {
 					                $transaction->commit();
-					                $this->redirect(array('view', 'id' => $model->pj_id));
+					                //$this->redirect(array('view', 'id' => $model->pj_id));
+					                $activeTab = 2;
 					            }
 		        			break;
 		        		case 4:
@@ -186,7 +188,8 @@ class ProjectController extends Controller
 
 		        			if  ( $modelContract->save() && $modelContract2->save() && $modelContract3->save() && $modelContract4->save()) {
 					                $transaction->commit();
-					                $this->redirect(array('view', 'id' => $model->pj_id));
+					                //$this->redirect(array('view', 'id' => $model->pj_id));
+					                $activeTab = 2;
 					            }
 		        			break;
 		        		case 5:
@@ -198,23 +201,32 @@ class ProjectController extends Controller
 
 		        			if  ( $modelContract->save() && $modelContract2->save() && $modelContract3->save() && $modelContract4->save() && $modelContract5->save()) {
 					                $transaction->commit();
-					                $this->redirect(array('view', 'id' => $model->pj_id));
+					                //$this->redirect(array('view', 'id' => $model->pj_id));
+					                $activeTab = 2;
 					            }
 		        			break;
 		        		
 		        		default:
 		        		    $modelContract->pc_proj_id = $model->pj_id;
 		        			if  ( $modelContract->save()) {
+					                $activeTab = 2;
 					                $transaction->commit();
-					                $this->redirect(array('view', 'id' => $model->pj_id));
+					      //           $this->redirect(array('create',
+									 	// 'model'=>$model,'activeTab'=>$activeTab,'workcodes'=>$workcodes,'numContracts'=>$numContracts,'modelContract'=>$modelContract,'modelContract2'=>$modelContract2,'modelContract3'=>$modelContract3,'modelContract4'=>$modelContract4,'modelContract5'=>$modelContract5
+			        //                  ));
+					                
+					    //             $this->render('create',array(
+									// 	'model'=>$model,'activeTab'=>$activeTab,'workcodes'=>$workcodes,'numContracts'=>$numContracts,'modelContract'=>$modelContract,'modelContract2'=>$modelContract2,'modelContract3'=>$modelContract3,'modelContract4'=>$modelContract4,'modelContract5'=>$modelContract5
+			
+									// ));
 					            }
 		        			break;
 		        	}
 		            
 		            
 		        }
-		        //something went wrong...
-		        $transaction->rollBack();
+		        else   //something went wrong...
+		           $transaction->rollBack();
 		    }
 		    catch(Exception $e) { // an exception is raised if a query fails
 		        //something was really wrong - exception!
@@ -226,7 +238,7 @@ class ProjectController extends Controller
 		}
 
 		$this->render('create',array(
-			'model'=>$model,'workcodes'=>$workcodes,'numContracts'=>$numContracts,'modelContract'=>$modelContract,'modelContract2'=>$modelContract2,'modelContract3'=>$modelContract3,'modelContract4'=>$modelContract4,'modelContract5'=>$modelContract5
+			'model'=>$model,'activeTab'=>$activeTab,'workcodes'=>$workcodes,'numContracts'=>$numContracts,'modelContract'=>$modelContract,'modelContract2'=>$modelContract2,'modelContract3'=>$modelContract3,'modelContract4'=>$modelContract4,'modelContract5'=>$modelContract5
 			
 		));
 	}
