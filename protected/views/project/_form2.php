@@ -812,14 +812,55 @@
 		</div>
         <?php $this->endWidget(); ?>
 		
-        <!-- tab@2 -->
+        <!-- tab@2  Outsource Contracts -->
 		<?php 
 			if($activeTab==2)
 				echo '<div class="tab-pane active" id="outTab">';		    
 		    else
 		    	echo '<div class="tab-pane" id="outTab">';
 
-		 ?>   
+		    $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+				'id'=>'project-form2',
+				'enableAjaxValidation'=>true,
+				'type'=>'vertical',
+  				'htmlOptions'=>  array('class'=>'','style'=>''),
+			));
+
+ 		    
+ 		//    echo '<fieldset id="contract5" class="well the-fieldset">';
+            
+        ?>  
+
+        <?php
+	    	echo CHtml::link('Add', '#', array('id' => 'loadOutsourceByAjax'));
+	    ?>
+	    <div id="outsource">
+	        <?php
+	        $index = 0;
+	        if($model->isNewRecord) 
+	        	$this->renderPartial('//outsourceContract/_form', array(
+	                'model' => $outsource,
+	                'index' => 0,
+	                'display' => 'block'
+	            ));
+
+	        $index++;
+	        foreach ($model->outsource as $id => $child):
+
+	            $this->renderPartial('//outsourceContract/_form', array(
+	                'model' => $child,
+	                'index' => $id,
+	                'display' => 'block'
+	            ));
+	            $index++;
+	        endforeach;
+	        ?>
+	    </div>
+	  
+        
+
+		   
+		  <?php $this->endWidget();//end form widget ?>
 		</div><!--  endtab2 -->
 	</div>		
 </div>	
@@ -845,3 +886,27 @@
     	?>
     </div>
 </div>
+
+ 
+<?php
+Yii::app()->clientScript->registerCoreScript('jquery');
+Yii::app()->clientScript->registerScript('loadoutsource', '
+var _index = ' . $index . ';
+$("#loadOutsourceByAjax").click(function(e){
+    e.preventDefault();
+    var _url = "' . Yii::app()->controller->createUrl("loadOutsourceByAjax", array("load_for" => $this->action->id)) . '&index="+_index;
+    $.ajax({
+        url: _url,
+        success:function(response){
+            $("#outsource").append(response);
+            $("#outsource .crow").last().animate({
+                opacity : 1,
+                left: "+50",
+                height: "toggle"
+            });
+        }
+    });
+    _index++;
+});
+', CClientScript::POS_END);
+?>

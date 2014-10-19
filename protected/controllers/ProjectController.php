@@ -15,6 +15,7 @@ class ProjectController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -31,7 +32,7 @@ class ProjectController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','loadOutsourceByAjax'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -68,6 +69,7 @@ class ProjectController extends Controller
 		$modelContract4 = new ProjectContract;
 		$modelContract5 = new ProjectContract;
 		$modelWorkCode = new WorkCode;
+		$modelOutsource = new OutsourceContract;
 
 		$workcodes = "";
 		//array_push($workcodes, new WorkCode);
@@ -238,7 +240,7 @@ class ProjectController extends Controller
 		}
 
 		$this->render('create',array(
-			'model'=>$model,'activeTab'=>$activeTab,'workcodes'=>$workcodes,'numContracts'=>$numContracts,'modelContract'=>$modelContract,'modelContract2'=>$modelContract2,'modelContract3'=>$modelContract3,'modelContract4'=>$modelContract4,'modelContract5'=>$modelContract5
+			'model'=>$model,'outsource'=>$modelOutsource,'activeTab'=>$activeTab,'workcodes'=>$workcodes,'numContracts'=>$numContracts,'modelContract'=>$modelContract,'modelContract2'=>$modelContract2,'modelContract3'=>$modelContract3,'modelContract4'=>$modelContract4,'modelContract5'=>$modelContract5
 			
 		));
 	}
@@ -338,4 +340,14 @@ class ProjectController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionLoadOutsourceByAjax($index)
+    {
+        $model = new OutsourceContract;
+        $this->renderPartial('//outsourceContract/_form', array(
+            'model' => $model,
+            'index' => $index,
+//            'display' => 'block',
+        ), false, true);
+    }
 }

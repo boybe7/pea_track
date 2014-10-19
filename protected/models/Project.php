@@ -42,15 +42,23 @@ class Project extends CActiveRecord
 	}
 
 	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-		);
-	}
+     * @return array relational rules.
+     */
+    public function relations()
+    {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array(
+            'outsource' => array(self::HAS_MANY, 'OutsourceContract', 'oc_proj_id'),
+        );
+    }
+
+    public function behaviors()
+    {
+        return array('ESaveRelatedBehavior' => array(
+                'class' => 'application.components.ESaveRelatedBehavior')
+        );
+    }
 
 	/**
 	 * @return array customized attribute labels (name=>label)
