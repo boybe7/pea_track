@@ -31,8 +31,12 @@
                 minLength: 0
             }).bind('focus', function () {
                 $(this).autocomplete("search");
-            });
-    });
+      });
+ 
+  });
+
+      
+
 
 
 	$('#tabs a').click(function (e) {
@@ -824,16 +828,25 @@
 				'enableAjaxValidation'=>true,
 				'type'=>'vertical',
   				'htmlOptions'=>  array('class'=>'','style'=>''),
-			));
+			   ));
+     
+        echo '<div class="row-fluid">';
+         $this->widget('bootstrap.widgets.TbButton', array(
+              'buttonType'=>'link',
+              
+              'type'=>'success',
+              'label'=>'เพิ่มสัญญา',
+              'icon'=>'plus-sign',
+              
+              'htmlOptions'=>array(
+                'class'=>'pull-right',
+                'style'=>'margin:0px 10px 0px 10px;',
+                'id'=>'loadOutsourceByAjax'
+              ),
+          )); 
+        echo '</div>';    
+    ?>  
 
- 		    
- 		//    echo '<fieldset id="contract5" class="well the-fieldset">';
-            
-        ?>  
-
-        <?php
-	    	echo CHtml::link('Add', '#', array('id' => 'loadOutsourceByAjax'));
-	    ?>
 	    <div id="outsource">
 	        <?php
 	        $index = 0;

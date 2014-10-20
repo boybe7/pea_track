@@ -74,7 +74,7 @@ class OutsourceContract extends CActiveRecord
 			'oc_id' => 'id สัญญา',
 			'oc_code' => 'เลขที่สัญญา',
 			'oc_proj_id' => 'id project',
-			'oc_vendor_id' => 'id คู่สัญญา',
+			'oc_vendor_id' => 'คู่สัญญา',
 			'oc_sign_date' => 'วันที่ลงนาม',
 			'oc_end_date' => 'วันที่ครบกำหนด',
 			'oc_approve_date' => 'วันที่รับรองงบ',
