@@ -2,7 +2,8 @@
 	
 	.the-legend {
     
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: bold;
     margin-bottom: 0;
     width:inherit; /* Or auto */
     padding:0 10px; /* To give a bit of padding on the left and right */
@@ -844,6 +845,7 @@
                 'id'=>'loadOutsourceByAjax'
               ),
           )); 
+         
         echo '</div>';    
     ?>  
 
@@ -920,6 +922,10 @@ $("#loadOutsourceByAjax").click(function(e){
         }
     });
     _index++;
+});
+$("#deleteOutsource").click(function(e){
+    $(element).remove();
+    _index--;
 });
 ', CClientScript::POS_END);
 ?>

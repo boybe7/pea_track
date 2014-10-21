@@ -8,6 +8,7 @@
  * @property string $oc_code
  * @property integer $oc_proj_id
  * @property integer $oc_vendor_id
+ * @property string $oc_detail
  * @property string $oc_sign_date
  * @property string $oc_end_date
  * @property string $oc_approve_date
@@ -45,9 +46,10 @@ class OutsourceContract extends CActiveRecord
 			array('oc_code', 'length', 'max'=>30),
 			array('oc_guarantee', 'length', 'max'=>100),
 			array('oc_adv_guarantee, oc_insurance, oc_letter', 'length', 'max'=>200),
+			array('oc_detail', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('oc_id, oc_code, oc_proj_id, oc_vendor_id, oc_sign_date, oc_end_date, oc_approve_date, oc_cost, oc_T_percent, oc_A_percent, oc_guarantee, oc_adv_guarantee, oc_insurance, oc_letter, oc_user_create, oc_user_update', 'safe', 'on'=>'search'),
+			array('oc_id, oc_code, oc_proj_id, oc_vendor_id, oc_detail, oc_sign_date, oc_end_date, oc_approve_date, oc_cost, oc_T_percent, oc_A_percent, oc_guarantee, oc_adv_guarantee, oc_insurance, oc_letter, oc_user_create, oc_user_update', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,11 +61,8 @@ class OutsourceContract extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-            'project' => array(self::BELONGS_TO, 'Project', 'oc_proj_id'),
-        );
+		);
 	}
-
-	
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -74,13 +73,14 @@ class OutsourceContract extends CActiveRecord
 			'oc_id' => 'id สัญญา',
 			'oc_code' => 'เลขที่สัญญา',
 			'oc_proj_id' => 'id project',
-			'oc_vendor_id' => 'คู่สัญญา',
+			'oc_vendor_id' => 'id คู่สัญญา',
+			'oc_detail' => 'รายละเอียด',
 			'oc_sign_date' => 'วันที่ลงนาม',
 			'oc_end_date' => 'วันที่ครบกำหนด',
 			'oc_approve_date' => 'วันที่รับรองงบ',
 			'oc_cost' => 'วงเงิน',
-			'oc_T_percent' => 'เปอร์เซ็นต์ความก้าวหน้าของงาน',
-			'oc_A_percent' => 'เปอร์เซ็นต์ความก้าวหน้าของเงิน',
+			'oc_T_percent' => 'T%',
+			'oc_A_percent' => 'B%',
 			'oc_guarantee' => 'หนังสือค้ำประกัน',
 			'oc_adv_guarantee' => 'ค้ำประกันล่วงหน้า',
 			'oc_insurance' => 'กรมธรรม์ประกันภัย',
@@ -112,6 +112,7 @@ class OutsourceContract extends CActiveRecord
 		$criteria->compare('oc_code',$this->oc_code,true);
 		$criteria->compare('oc_proj_id',$this->oc_proj_id);
 		$criteria->compare('oc_vendor_id',$this->oc_vendor_id);
+		$criteria->compare('oc_detail',$this->oc_detail,true);
 		$criteria->compare('oc_sign_date',$this->oc_sign_date,true);
 		$criteria->compare('oc_end_date',$this->oc_end_date,true);
 		$criteria->compare('oc_approve_date',$this->oc_approve_date,true);
