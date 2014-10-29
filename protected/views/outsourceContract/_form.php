@@ -1,4 +1,5 @@
 
+
 <fieldset class="well the-fieldset">
         <legend class="the-legend">สัญญาที่ <?php echo ($index+1);?></legend>
         
@@ -92,7 +93,7 @@
                <?php 
 
                     echo CHtml::activeLabelEx($model, '[' . $index . ']oc_sign_date'); 
-                    echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
+                    echo '<div class="input-append" style="margin-top:0px;">'; //ใส่ icon ลงไป
                         $this->widget('zii.widgets.jui.CJuiDatePicker',
 
                         array(
@@ -117,7 +118,7 @@
                <?php 
 
                     echo CHtml::activeLabelEx($model, '[' . $index . ']oc_end_date'); 
-                    echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
+                    echo '<div class="input-append" style="margin-top:0px;">'; //ใส่ icon ลงไป
                         $this->widget('zii.widgets.jui.CJuiDatePicker',
 
                         array(
@@ -142,7 +143,7 @@
                <?php 
 
                     echo CHtml::activeLabelEx($model, '[' . $index . ']oc_approve_date'); 
-                    echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
+                    echo '<div class="input-append" style="margin-top:0px;">'; //ใส่ icon ลงไป
                         $this->widget('zii.widgets.jui.CJuiDatePicker',
 
                         array(
@@ -199,6 +200,21 @@
           </div> 
         </div>
 </fieldset>
+
+<?php 
+
+		$this->widget('application.extensions.moneymask.MMask',array(
+                    'element'=>'#OutsourceContract_' . $index . '_oc_cost',
+                    'currency'=>'บาท',
+                    'config'=>array(
+                        'symbolStay'=>true,
+                        'thousands'=>',',
+                        'decimal'=>'.',
+                        'precision'=>2,
+                    )
+                ));
+?> 
+
         
 <script type="text/javascript">
   

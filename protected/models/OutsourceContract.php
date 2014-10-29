@@ -40,7 +40,7 @@ class OutsourceContract extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('oc_code, oc_proj_id, oc_vendor_id, oc_sign_date, oc_end_date, oc_approve_date, oc_cost, oc_T_percent, oc_A_percent, oc_guarantee, oc_user_create, oc_user_update', 'required'),
+			array('oc_code, oc_proj_id, oc_vendor_id, oc_sign_date, oc_end_date, oc_approve_date, oc_cost, oc_user_create, oc_user_update', 'required'),
 			array('oc_proj_id, oc_vendor_id, oc_T_percent, oc_A_percent, oc_user_create, oc_user_update', 'numerical', 'integerOnly'=>true),
 			array('oc_cost', 'numerical'),
 			array('oc_code', 'length', 'max'=>30),
@@ -73,8 +73,8 @@ class OutsourceContract extends CActiveRecord
 			'oc_id' => 'id สัญญา',
 			'oc_code' => 'เลขที่สัญญา',
 			'oc_proj_id' => 'id project',
-			'oc_vendor_id' => 'id คู่สัญญา',
-			'oc_detail' => 'รายละเอียด',
+			'oc_vendor_id' => 'บริษัท',
+			'oc_detail' => 'รายละเอียดสัญญา',
 			'oc_sign_date' => 'วันที่ลงนาม',
 			'oc_end_date' => 'วันที่ครบกำหนด',
 			'oc_approve_date' => 'วันที่รับรองงบ',

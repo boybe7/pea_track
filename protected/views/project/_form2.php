@@ -389,6 +389,8 @@
          ?>
          </div>
   		<?php
+
+  		    //money format with 2 decimal  x,xxx.xx
   			$this->widget('application.extensions.moneymask.MMask',array(
                     'element'=>'#ProjectContract_0_pc_cost,#ProjectContract_1_pc_cost,#ProjectContract_2_pc_cost,#ProjectContract_3_pc_cost,#ProjectContract_4_pc_cost',
                     'currency'=>'บาท',
@@ -872,7 +874,14 @@
 	        ?>
 	    </div>
 	  
-        
+             <div class="form-actions">
+				<?php $this->widget('bootstrap.widgets.TbButton', array(
+					'buttonType'=>'submit',
+					'type'=>'primary',
+					'label'=>$model->isNewRecord ? 'Create' : 'Save',
+				)); ?>
+			</div>
+			
 
 		   
 		  <?php $this->endWidget();//end form widget ?>
