@@ -35,6 +35,7 @@ class Project extends CActiveRecord
 			array('pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_user_create, pj_user_update', 'numerical', 'integerOnly'=>true),
 			array('pj_name', 'length', 'max'=>400),
 			array('pj_date_approved', 'safe'),
+
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('pj_id, pj_name, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_date_approved, pj_user_create, pj_user_update', 'safe', 'on'=>'search'),
@@ -121,6 +122,7 @@ class Project extends CActiveRecord
         {
 
             $str_date = explode("/", $this->pj_date_approved);
+            if(count($str_date)>1)
             $this->pj_date_approved= $str_date[2]."-".$str_date[1]."-".$str_date[0];
 
         }	

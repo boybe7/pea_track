@@ -41,6 +41,8 @@ class ProjectContract extends CActiveRecord
 			array('pc_cost', 'numerical'),
 			array('pc_code', 'length', 'max'=>30),
 			array('pc_guarantee', 'length', 'max'=>100),
+			array('pc_T_percent', 'application.extensions.numericRangeValidator', 'min'=>0, 'max'=>100),
+			array('pc_A_percent', 'application.extensions.numericRangeValidator', 'min'=>0, 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('pc_id, pc_code, pc_proj_id, pc_vendor_id, pc_details, pc_sign_date, pc_end_date, pc_cost, pc_T_percent, pc_A_percent, pc_guarantee, pc_user_create, pc_user_update', 'safe', 'on'=>'search'),
@@ -97,20 +99,33 @@ class ProjectContract extends CActiveRecord
 		 }
 		  
 
-            $str_date = explode("/", $this->pc_end_date);
-            $this->pc_end_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
-            return parent::beforeSave();
+        $str_date = explode("/", $this->pc_sign_date);
+        if(count($str_date)>1)
+        	$this->pc_sign_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+        $str_date = explode("/", $this->pc_end_date);
+        if(count($str_date)>1)
+        	$this->pc_end_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+        return parent::beforeSave();
    }
      protected function afterSave(){
             parent::afterSave();
-            $str_date = explode("-", $this->pc_end_date);
-            $this->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+            $str_date = explode("-", $this->pc_sign_date);
+            if(count($str_date)>1)
+            	$this->pc_sign_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+             $str_date = explode("-", $this->pc_end_date);
+            if(count($str_date)>1)
+            	$this->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
             //$this->visit_date=date('Y/m/d', strtotime(str_replace("-", "", $this->visit_date)));       
     }
     protected function afterFind(){
             parent::afterFind();
+            $str_date = explode("-", $this->pc_sign_date);
+            if(count($str_date)>1)
+            	$this->pc_sign_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
             $str_date = explode("-", $this->pc_end_date);
-            $this->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+            if(count($str_date)>1)
+            	$this->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+            
             //$this->visit_date=date('Y/m/d', strtotime(str_replace("-", "", $this->visit_date)));       
     }
 

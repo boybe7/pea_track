@@ -85,12 +85,16 @@ hr {
 
 
 <div class="well">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#projTab" data-toggle="tab">โครงการ</a></li>
+  </ul>
+
 	<h4>รายละเอียดโครงการ</h4>
 	<hr>
 	<?php
       	$form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 			'id'=>'project-form',
-			'enableAjaxValidation'=>true,
+			'enableAjaxValidation'=>false,
 			'type'=>'vertical',
   			'htmlOptions'=>  array('class'=>'','style'=>''),
 		)); ?>
@@ -444,10 +448,10 @@ hr {
 	                  <?php echo $form->textFieldRow($modelContract,'[0]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'[0]pc_T_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract,'[0]pc_T_percent',array('class'=>'span12','maxlength'=>3)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'[0]pc_A_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract,'[0]pc_A_percent',array('class'=>'span12','maxlength'=>3)); ?>
 	  			</div>
 	  		</div>		
         </fieldset>
@@ -525,10 +529,10 @@ hr {
 	                  <?php echo $form->textFieldRow($modelContract2,'[1]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract2,'[1]pc_T_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract2,'[1]pc_T_percent',array('class'=>'span12','maxlength'=>3)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract2,'[1]pc_A_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract2,'[1]pc_A_percent',array('class'=>'span12','maxlength'=>3)); ?>
 	  			</div>
 	  		</div>		
         </fieldset>
@@ -608,10 +612,10 @@ hr {
 	                  <?php echo $form->textFieldRow($modelContract3,'[2]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract3,'[2]pc_T_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract3,'[2]pc_T_percent',array('class'=>'span12','maxlength'=>3)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract3,'[2]pc_A_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract3,'[2]pc_A_percent',array('class'=>'span12','maxlength'=>3)); ?>
 	  			</div>
 	  		</div>		
         </fieldset>
@@ -690,10 +694,10 @@ hr {
 	                  <?php echo $form->textFieldRow($modelContract4,'[3]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract4,'[3]pc_T_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract4,'[3]pc_T_percent',array('class'=>'span12','maxlength'=>3)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract4,'[3]pc_A_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract4,'[3]pc_A_percent',array('class'=>'span12','maxlength'=>3)); ?>
 	  			</div>
 	  		</div>		
         </fieldset>
@@ -772,10 +776,10 @@ hr {
 	                  <?php echo $form->textFieldRow($modelContract5,'[4]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract5,'[4]pc_T_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract5,'[4]pc_T_percent',array('class'=>'span12','maxlength'=>3)); ?>
 	  			</div>
 	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract5,'[4]pc_A_percent',array('class'=>'span12')); ?>
+	  			      <?php echo $form->textFieldRow($modelContract5,'[4]pc_A_percent',array('class'=>'span12','maxlength'=>3)); ?>
 	  			</div>
 	  		</div>		
         </fieldset>
