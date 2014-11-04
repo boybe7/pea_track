@@ -111,9 +111,17 @@ class Project extends CActiveRecord
 	}
 
 	protected function afterFind(){
-            // parent::afterFind();
-            // $str_date = explode("-", $this->visit_date);
-            // $this->visit_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+            parent::afterFind();
+            $str_date = explode("-", $this->pj_date_approved);
+            if(count($str_date)>1)
+            	$this->pj_date_approved = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+            
+    }
+    protected function afterSave(){
+            parent::afterSave();
+            $str_date = explode("-", $this->pj_date_approved);
+            if(count($str_date)>1)
+            	$this->pj_date_approved = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
             
     }
     public function beforeSave()

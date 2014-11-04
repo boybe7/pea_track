@@ -43077,3 +43077,54 @@ in C:\xampp\htdocs\pea_track\index.php (13)
 2014/11/03 17:18:28 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
 in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (121)
 in C:\xampp\htdocs\pea_track\index.php (13)
+<<<<<<< HEAD
+=======
+2014/11/04 00:39:30 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (115)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:39:30 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (115)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:39:30 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (121)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:39:30 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (121)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:42:57 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (115)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:42:57 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (115)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:42:57 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (121)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:42:57 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (121)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:43:47 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (115)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:43:47 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (115)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:43:47 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (121)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:43:47 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (121)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:45:21 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (115)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:45:21 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (115)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:45:21 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (121)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 00:45:21 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (121)
+in C:\xampp\htdocs\pea_track\index.php (13)
+>>>>>>> 16c16d792d90a263a9cc9df69aa1e794ff680bd9
