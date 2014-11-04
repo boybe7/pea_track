@@ -119,21 +119,29 @@ class ProjectController extends Controller
 		        if($numContracts>1 && isset($_POST['ProjectContract'][1]))
 		        { 
 		        	$modelContract2->attributes = $_POST['ProjectContract'][1];
+		        	$modelContract2->pc_sign_date = $_POST['ProjectContract'][1]["pc_sign_date"];
+		         	$modelContract2->pc_details = $_POST['ProjectContract'][1]["pc_details"];
 		        	//$numContracts++;
 		        }	
 		        if($numContracts>2 && isset($_POST['ProjectContract'][2]))
 		        { 
 		        	$modelContract3->attributes = $_POST['ProjectContract'][2];
+		        	$modelContract3->pc_sign_date = $_POST['ProjectContract'][2]["pc_sign_date"];
+		         	$modelContract3->pc_details = $_POST['ProjectContract'][2]["pc_details"];
 		        	//$numContracts++;
 		        }
 		        if($numContracts>3 && isset($_POST['ProjectContract'][3]))
 		        { 
 		        	$modelContract4->attributes = $_POST['ProjectContract'][3];
+		        	$modelContract4->pc_sign_date = $_POST['ProjectContract'][3]["pc_sign_date"];
+		         	$modelContract4->pc_details = $_POST['ProjectContract'][3]["pc_details"];
 		        	//$numContracts++;
 		        }
 		        if($numContracts>4 && isset($_POST['ProjectContract'][4]))
 		        { 
 		        	$modelContract5->attributes = $_POST['ProjectContract'][4];
+		        	$modelContract5->pc_sign_date = $_POST['ProjectContract'][4]["pc_sign_date"];
+		         	$modelContract5->pc_details = $_POST['ProjectContract'][4]["pc_details"];
 		        	//$numContracts++;
 		        }
 		        $workcodes = $_POST['workCode'];
