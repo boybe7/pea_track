@@ -32,7 +32,7 @@ class ProjectController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','loadOutsourceByAjax'),
+				'actions'=>array('create','create2','update','loadOutsourceByAjax'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -52,6 +52,14 @@ class ProjectController extends Controller
 	public function actionView($id)
 	{
 		$this->render('view',array(
+			'model'=>$this->loadModel($id),
+		));
+	}
+
+	public function actionCreate2($id)
+	{
+		
+		$this->render('create2',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
@@ -221,6 +229,7 @@ class ProjectController extends Controller
 		        			if  ( $modelContract->save()) {
 					                $activeTab = 2;
 					                $transaction->commit();
+					                $this->redirect(array('create2', 'id' => $model->pj_id));
 					      //           $this->redirect(array('create',
 									 	// 'model'=>$model,'activeTab'=>$activeTab,'workcodes'=>$workcodes,'numContracts'=>$numContracts,'modelContract'=>$modelContract,'modelContract2'=>$modelContract2,'modelContract3'=>$modelContract3,'modelContract4'=>$modelContract4,'modelContract5'=>$modelContract5
 			        //                  ));

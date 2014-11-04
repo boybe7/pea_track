@@ -43128,3 +43128,1487 @@ in C:\xampp\htdocs\pea_track\index.php (13)
 in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (121)
 in C:\xampp\htdocs\pea_track\index.php (13)
 >>>>>>> 16c16d792d90a263a9cc9df69aa1e794ff680bd9
+2014/11/04 11:21:56 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (115)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 11:21:56 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (115)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 11:21:56 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (121)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 11:21:56 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (121)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 17:37:36 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (123)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 17:37:36 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (123)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 17:37:36 [error] [php] Undefined variable: outsource (C:\xampp\htdocs\pea_track\protected\views\project\create2.php:12)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#3 unknown(0): ProjectController->actionCreate2()
+#4 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#14 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#15 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2014/11/04 17:39:00 [error] [php] Undefined variable: activeTab (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:97)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (97)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 17:55:10 [error] [php] Undefined variable: workcodes (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:309)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (309)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 17:56:34 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:306)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (306)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 17:57:34 [error] [php] Undefined variable: numContracts (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:322)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (322)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 17:58:12 [error] [php] Undefined variable: modelContract (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:390)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (390)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 18:00:49 [error] [php] Undefined variable: activeTab (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:333)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (333)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 18:00:52 [error] [php] Undefined variable: activeTab (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:333)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (333)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 18:00:52 [error] [php] Undefined variable: activeTab (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:333)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (333)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 18:01:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:01:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:01:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:01:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:01:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "favicon.ico" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('favicon.ico')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('favicon.ico')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/favicon...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/favicon.ico
+---
+2014/11/04 18:01:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:01:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:01:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:01:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:02:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:02:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:02:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:02:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:03:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:03:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:03:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:03:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:05:07 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:298)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (298)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 18:05:21 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:298)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (298)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 18:05:23 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:298)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (298)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 18:05:23 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:298)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (298)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 18:05:24 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:298)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (298)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 18:05:24 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:298)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (298)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 18:05:25 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\pea_track\protected\views\project\_form2.php:298)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\project\create2.php(12): ProjectController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(64): ProjectController->render()
+#7 unknown(0): ProjectController->actionCreate2()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/create2/197
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (298)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (64)
+2014/11/04 18:05:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:05:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:05:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:05:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:08:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:08:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:08:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:08:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:08:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:08:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:08:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:08:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:09:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:09:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:09:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:09:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:19:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:19:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:19:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:19:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:21:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:21:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:21:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:21:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:22:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:22:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:22:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:22:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:22:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:22:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:22:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:22:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:23:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:23:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:23:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:23:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:23:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:23:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:23:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:23:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:23:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:23:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:23:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:23:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:24:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:24:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:24:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:24:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:25:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:25:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:25:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:25:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:32:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:32:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:32:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:32:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:32:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:32:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:32:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:32:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:33:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:33:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:33:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:33:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:33:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:33:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:33:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:33:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:35:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:35:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:35:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:35:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:37:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:37:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.woff
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:37:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-400.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
+2014/11/04 18:37:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "fonts" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('fonts')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('fonts')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/fonts/b...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/project/fonts/boon-700.ttf
+HTTP_REFERER=http://localhost:8080/pea_track/project/create2/197
+---
