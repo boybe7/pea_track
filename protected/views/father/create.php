@@ -27,19 +27,22 @@
  
     <?php
     echo CHtml::link('Add Child', '#', array('id' => 'loadChildByAjax'));
+    echo CHtml::link('Del Child', '#', array('id' => 'delChildByAjax'));
     ?>
     <div id="children">
+        <input type="hidden" id="num" value="1">
         <?php
-        $index = 0;
+        $index = 1;
         if($model->isNewRecord) 
         $this->renderPartial('//child/_form', array(
                 'model' => $child,
-                'index' => 0,
+                'index' => 1,
                 'display' => 'block'
             ));
         $index++;
+        
         foreach ($model->children as $id => $child):
-
+            
             $this->renderPartial('//child/_form', array(
                 'model' => $child,
                 'index' => $id,
@@ -63,7 +66,13 @@
 Yii::app()->clientScript->registerCoreScript('jquery');
 Yii::app()->clientScript->registerScript('loadchild', '
 var _index = ' . $index . ';
+var _index = $("#num").val();
+
 $("#loadChildByAjax").click(function(e){
+    var _index = $("#num").val();
+    //if(_index==0)
+         _index++;
+
     e.preventDefault();
     var _url = "' . Yii::app()->controller->createUrl("loadChildByAjax", array("load_for" => $this->action->id)) . '&index="+_index;
     $.ajax({
@@ -75,9 +84,39 @@ $("#loadChildByAjax").click(function(e){
                 left: "+50",
                 height: "toggle"
             });
+            //_index++;
+            $("#num").val(_index);
+            console.log("add num:"+$("#num").val());
+             _index = $("#num").val();
+            //console.log("add index:"+_index);
         }
     });
-    _index++;
+   
+    //_index++;
+});
+', CClientScript::POS_END);
+Yii::app()->clientScript->registerScript('delchild', '
+$("#delChildByAjax").click(function(e){
+    var _index = $("#num").val();
+    console.log("del index:"+_index);
+    elm = "#Child_"+_index+"_name";
+    console.log($(elm));
+    element=$(elm).parent().parent();
+    /* animate div */
+
+    $(element).animate(
+    {
+        opacity: 0.25,
+        left: "+=50",
+        height: "toggle"
+    }, 500,
+    function() {
+        /* remove div */
+        $(element).remove();
+    });
+    _index--;
+    $("#num").val(_index);
+    console.log("del num:"+$("#num").val());
 });
 ', CClientScript::POS_END);
 ?>

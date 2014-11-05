@@ -3,12 +3,11 @@
 	<div class="row-fluid">
 	  <div class="span4">	
 	    <?php 
-
 	    //echo $form->textFieldRow($model,'[' . $index . ']name',array('class'=>'span12','maxlength'=>255)); 
 
-
+       echo $index;
 	    ?>
-
+       
 	    <?php echo CHtml::activeLabelEx($model, '[' . $index . ']name'); ?>
         <?php echo CHtml::activeTextField($model, '[' . $index . ']name', array('size' => 20, 'maxlength' => 255)); ?>
         <?php echo CHtml::error($model, '[' . $index . ']name'); ?>
@@ -41,5 +40,9 @@ function deleteChild(elm, index)
         /* remove div */
         $(element).remove();
     });
+    num = $('#num').val();
+    num--;
+    $('#num').val(num);
+    console.log('del num:'+$('#num').val());
 }", CClientScript::POS_END);
 ?>
