@@ -16,7 +16,7 @@
         ?>
         <?php echo Yii::app()->bootstrap->init();?>
 </head>
-<link rel="shortcut icon" href="../favicon.ico">
+<link rel="shortcut icon" href="/pea_track/favicon.ico">
 <style>
 
 
@@ -107,20 +107,20 @@ margin-top: 5px;
 
 @font-face {
     font-family: 'Boon400';
-    src: url('../fonts/boon-400.eot');
-    src: url('../fonts/boon-400.eot') format('embedded-opentype'),
-         url('../fonts/boon-400.woff') format('woff'),
-         url('../fonts/boon-400.ttf') format('truetype'),
-         url('../fonts/boon-400.svg#Boon400') format('svg');
+    src: url('/pea_track/fonts/boon-400.eot');
+    src: url('/pea_track/fonts/boon-400.eot') format('embedded-opentype'),
+         url('/pea_track/fonts/boon-400.woff') format('woff'),
+         url('/pea_track/fonts/boon-400.ttf') format('truetype'),
+         url('/pea_track/fonts/boon-400.svg#Boon400') format('svg');
 }
 
 @font-face {
     font-family: 'Boon700';
-    src: url('../fonts/boon-700.eot');
-    src: url('../fonts/boon-700.eot') format('embedded-opentype'),
-         url('../fonts/boon-700.woff') format('woff'),
-         url('../fonts/boon-700.ttf') format('truetype'),
-         url('../fonts/boon-700.svg#Boon700') format('svg');
+    src: url('/pea_track/fonts/boon-700.eot');
+    src: url('/pea_track/fonts/boon-700.eot') format('embedded-opentype'),
+         url('/pea_track/fonts/boon-700.woff') format('woff'),
+         url('/pea_track/fonts/boon-700.ttf') format('truetype'),
+         url('/pea_track/fonts/boon-700.svg#Boon700') format('svg');
 }
 
 body{
@@ -158,7 +158,7 @@ if(!Yii::app()->user->isGuest)
     'fixed'=>'top',
     'collapse'=>true,    
     'htmlOptions'=>array('class'=>'noPrint'),
-    'brand' =>  CHtml::image(Yii::app()->getBaseUrl() . '../images/pea_logo.png', 'Logo', array('width'=>'30','height' => '30'))."  ".Yii::app()->name,
+    'brand' =>  CHtml::image(Yii::app()->getBaseUrl() . '/images/pea_logo.png', 'Logo', array('width'=>'30','height' => '30'))."  ".Yii::app()->name,
     'items'=>array(
         array(
             'class'=>'bootstrap.widgets.TbMenu',

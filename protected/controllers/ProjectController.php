@@ -58,9 +58,9 @@ class ProjectController extends Controller
 
 	public function actionCreate2($id)
 	{
-		
+		$modelOutsource = new OutsourceContract;
 		$this->render('create2',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$this->loadModel($id),'outsource'=>$modelOutsource
 		));
 	}
 

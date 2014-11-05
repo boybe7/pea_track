@@ -19,7 +19,10 @@
 	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
-
+hr {
+  border-bottom: 1px solid #E3E3E3;
+  margin: -5px 0 18px 0;
+}
 
 .ui-autocomplete { max-height: 180px; overflow-y: auto; overflow-x: hidden;}
 </style>
@@ -61,23 +64,24 @@
       ?>
         
     </ul>
-         
+        
     <div class="tab-content">
         
-      	<?php 
+      <?php 
 
    
-        echo '<div class="tab-pane" id="projTab">';
+          echo '<div class="tab-pane" id="projTab">';
 
-      	$form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
-    			'id'=>'project-form',
-    			'enableAjaxValidation'=>false,
-    			'type'=>'vertical',
-      			'htmlOptions'=>  array('class'=>'','style'=>''),
-    		)); 
+        	$form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+      			'id'=>'project-form',
+      			'enableAjaxValidation'=>false,
+      			'type'=>'vertical',
+        			'htmlOptions'=>  array('class'=>'','style'=>''),
+      		)); 
 
-    ?>
-    	
+      ?>
+     <h4>รายละเอียดโครงการ</h4>
+     <hr>
 
 		
 		<div class="row-fluid">
@@ -139,7 +143,7 @@
       			echo "<span style='display: block;'>หมายเลขงาน</span>"; 
             
       			?>
-      			<table class="table" style="background-color: white" name="tgrid" id="tgrid" width="100%" cellpadding="0" cellspacing="0">                    
+      			<table class="table table-bordered " style="background-color: #eeeeee" name="tgrid" id="tgrid" width="100%" cellpadding="0" cellspacing="0">                    
 	                <tbody>
                             <?php
                                     $workCode = Yii::app()->db->createCommand()
@@ -164,15 +168,70 @@
     		
     		
   		</div>
-        
+      <h4>สัญญาโครงการ</h4>
+      <hr>
+      <?php 
+            $project_contract = Yii::app()->db->createCommand()
+                        ->select('*')
+                        ->from('project_contract')
+                        ->where('pc_proj_id=:id', array(':id'=>$model->pj_id))
+                        ->queryAll();
 
-  			<div class="form-actions">
-				<?php $this->widget('bootstrap.widgets.TbButton', array(
-					'buttonType'=>'submit',
-					'type'=>'primary',
-					'label'=>$model->isNewRecord ? 'Create' : 'Save',
-				)); ?>
-			</div>
+            if(!empty($project_contract))
+            {    
+                $id = 1; 
+                foreach ($project_contract as $key => $value) {
+                    $modelPC =new ProjectContract;
+                    $modelPC->attributes = $value;
+                    $str_date = explode("-", $value["pc_sign_date"]);
+                    if(count($str_date)>1)
+                      $modelPC->pc_sign_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+                    $str_date = explode("-", $value["pc_end_date"]);
+                    if(count($str_date)>1)
+                      $modelPC->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+                    $modelPC->pc_details = $value["pc_details"];
+                    //print_r($value); 
+                    echo '<fieldset class="">';                  
+                    echo '<legend class="the-legend">สัญญาที่ '.$id.'</legend>';
+                        echo '<div class="row-fluid">';
+                          echo '<div class="span3">';
+                          echo $form->textFieldRow($modelPC,'pc_code',array('class'=>'span12','readonly'=>true));
+                          echo '</div>';
+                          echo '<div class="span3">';
+                          echo $form->textFieldRow($modelPC,'pc_cost',array('class'=>'span12','readonly'=>true));
+                          echo '</div>';
+                          echo '<div class="span3">';
+                          echo $form->textFieldRow($modelPC,'pc_sign_date',array('class'=>'span12','readonly'=>true));
+                          echo '</div>';
+                          echo '<div class="span3">';
+                          echo $form->textFieldRow($modelPC,'pc_end_date',array('class'=>'span12','readonly'=>true));
+                          echo '</div>';
+                        echo '</div>';
+                        echo '<div class="row-fluid">';
+                          echo '<div class="span6">';
+                          echo $form->textFieldRow($modelPC,'pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12','readonly'=>true));
+                          echo '</div>';
+                          echo '<div class="span4">';
+                          echo $form->textFieldRow($modelPC,'pc_guarantee',array('class'=>'span12','readonly'=>true));
+                          echo '</div>';
+                          echo '<div class="span1">';
+                          echo $form->textFieldRow($modelPC,'pc_T_percent',array('class'=>'span12','readonly'=>true));
+                          echo '</div>';
+                          echo '<div class="span1">';
+                          echo $form->textFieldRow($modelPC,'pc_A_percent',array('class'=>'span12','readonly'=>true));
+                          echo '</div>';
+                        echo '</div>';
+                    echo '</fieldset">';   
+                    $id++;  
+                }
+            }              
+          
+            
+        ?>   
+           
+           
+
+
 						
 		</div>
         <?php $this->endWidget(); ?>
@@ -211,7 +270,7 @@
 	    <div id="outsource">
 	        <?php
 	        $index = 0;
-	        if($model->isNewRecord) 
+
 	        	$this->renderPartial('//outsourceContract/_form', array(
 	                'model' => $outsource,
 	                'index' => 0,
