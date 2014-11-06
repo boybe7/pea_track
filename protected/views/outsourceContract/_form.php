@@ -1,15 +1,15 @@
 
 
 <fieldset class="well the-fieldset">
-        <legend class="the-legend">สัญญาที่ <?php echo ($index+1);?></legend>
+        <legend class="the-legend">สัญญาที่ <?php echo ($index);?></legend>
         
         <div class="row-fluid">
-        	  <div class="span4">		  
+        	  <div class="span3">		  
         	    <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_code'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_code', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_code'); ?>
             </div>  
-            <div class="span7">
+            <div class="span6">
         		  <?php
                     echo CHtml::activeHiddenField($model, '[' . $index . ']oc_vendor_id'); 
                     echo CHtml::activeLabelEx($model, '[' . $index . ']oc_vendor_id'); 
@@ -53,42 +53,20 @@
 
                ?>
             </div>
-            <div class="span1">
-                <?php 
-                    
-                   $this->widget('bootstrap.widgets.TbButton', array(
-                        'buttonType'=>'link',
-                        
-                        'type'=>'danger',
-                        'label'=>'',
-                        'icon'=>'icon-remove icon-white',
-                        
-                        'htmlOptions'=>array(
-                          'class'=>'pull-right',
-                          'style'=>'margin:0px 10px 0px 10px;',
-                          'onclick'=>'deleteChild(this, ' . $index . '); return false;'
-                        ),
-                    ));  
-
-                  //echo CHtml::link('<i class="icon-red icon-remove"></i>', '#', array('onclick' => 'deleteChild(this, ' . $index . '); return false;'));
-               ?>
-            </div>
-        </div>
-
-        <div class="row-fluid">
-          <div class="span4">     
+            <div class="span3">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_cost'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_cost', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_cost'); ?>          
           </div>  
-          <div class="span7">     
+        </div>
+
+        <div class="row-fluid">
+          <div class="span5">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_detail'); ?>
               <?php echo CHtml::activeTextArea($model, '[' . $index . ']oc_detail', array('rows' => 2, 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_detail'); ?>          
           </div> 
-        </div>
-        <div class="row-fluid">
-          <div class="span4">
+          <div class="span2">
 
                <?php 
 
@@ -106,19 +84,19 @@
                                               'format'=>'dd/mm/yyyy', //กำหนด date Format
                                               'showAnim' => 'slideDown',
                                               ),
-                            'htmlOptions'=>array('class'=>'span12', 'value'=>$model->oc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+                            'htmlOptions'=>array('class'=>'span10', 'value'=>$model->oc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
                          )
                     );
                     echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
 
                ?> 
           </div> 
-          <div class="span4">
+          <div class="span2">
 
                <?php 
 
                     echo CHtml::activeLabelEx($model, '[' . $index . ']oc_end_date'); 
-                    echo '<div class="input-append" style="margin-top:0px;">'; //ใส่ icon ลงไป
+                    echo '<div class="input-append" style="margin-top:0px;margin-left:0px;">'; //ใส่ icon ลงไป
                         $this->widget('zii.widgets.jui.CJuiDatePicker',
 
                         array(
@@ -131,19 +109,19 @@
                                               'format'=>'dd/mm/yyyy', //กำหนด date Format
                                               'showAnim' => 'slideDown',
                                               ),
-                            'htmlOptions'=>array('class'=>'span12', 'value'=>$model->oc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+                            'htmlOptions'=>array('class'=>'span10', 'value'=>$model->oc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
                          )
                     );
                     echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
 
                ?> 
           </div> 
-          <div class="span4">
+          <div class="span2">
 
                <?php 
 
                     echo CHtml::activeLabelEx($model, '[' . $index . ']oc_approve_date'); 
-                    echo '<div class="input-append" style="margin-top:0px;">'; //ใส่ icon ลงไป
+                    echo '<div class="input-append" style="margin-top:0px;margin-left:0px;">'; //ใส่ icon ลงไป
                         $this->widget('zii.widgets.jui.CJuiDatePicker',
 
                         array(
@@ -156,7 +134,7 @@
                                               'format'=>'dd/mm/yyyy', //กำหนด date Format
                                               'showAnim' => 'slideDown',
                                               ),
-                            'htmlOptions'=>array('class'=>'span12', 'value'=>$model->oc_approve_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+                            'htmlOptions'=>array('class'=>'span10', 'value'=>$model->oc_approve_date),  // ใส่ค่าเดิม ในเหตุการ Update 
                          )
                     );
                     echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -165,17 +143,17 @@
           </div> 
         </div>
         <div class="row-fluid">
-          <div class="span4">     
+          <div class="span5">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_guarantee'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_guarantee', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_guarantee'); ?>          
           </div>  
-          <div class="span4">     
+          <div class="span5">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_adv_guarantee'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_adv_guarantee', array( 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_adv_guarantee'); ?>          
           </div> 
-          <div class="span3">     
+          <div class="span2">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_T_percent'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_T_percent', array( 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_T_percent'); ?>          
@@ -183,17 +161,17 @@
         </div>
 
         <div class="row-fluid">
-          <div class="span4">     
+          <div class="span5">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_insurance'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_insurance', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_insurance'); ?>          
           </div>  
-          <div class="span4">     
+          <div class="span5">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_letter'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_letter', array( 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_letter'); ?>          
           </div> 
-          <div class="span3">     
+          <div class="span2">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_A_percent'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_A_percent', array( 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_A_percent'); ?>          
