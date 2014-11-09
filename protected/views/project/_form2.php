@@ -244,7 +244,7 @@ hr {
 
 		    $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 				'id'=>'project-form2',
-				'enableAjaxValidation'=>true,
+				'enableAjaxValidation'=>false,
 				'type'=>'vertical',
   				'htmlOptions'=>  array('class'=>'','style'=>''),
 			   ));
@@ -263,17 +263,32 @@ hr {
                 'id'=>'loadOutsourceByAjax'
               ),
           )); 
+
+         $this->widget('bootstrap.widgets.TbButton', array(
+              'buttonType'=>'link',
+              
+              'type'=>'danger',
+              'label'=>'ลบสัญญา',
+              'icon'=>'minus-sign',
+              
+              'htmlOptions'=>array(
+                'class'=>'pull-right',
+                'style'=>'margin:0px 10px 0px 10px;',
+                'id'=>'delOutsourceByAjax'
+              ),
+          )); 
          
         echo '</div>';    
     ?>  
 
 	    <div id="outsource">
+          <input type="hidden" id="num" value="1">
 	        <?php
-	        $index = 0;
+	        $index = 1;
 
 	        	$this->renderPartial('//outsourceContract/_form', array(
 	                'model' => $outsource,
-	                'index' => 0,
+	                'index' => 1,
 	                'display' => 'block'
 	            ));
 
@@ -332,7 +347,10 @@ hr {
 Yii::app()->clientScript->registerCoreScript('jquery');
 Yii::app()->clientScript->registerScript('loadoutsource', '
 var _index = ' . $index . ';
+var _index = $("#num").val();
 $("#loadOutsourceByAjax").click(function(e){
+     var _index = $("#num").val();
+     _index++;
     e.preventDefault();
     var _url = "' . Yii::app()->controller->createUrl("loadOutsourceByAjax", array("load_for" => $this->action->id)) . '&index="+_index;
     $.ajax({
@@ -344,13 +362,41 @@ $("#loadOutsourceByAjax").click(function(e){
                 left: "+50",
                 height: "toggle"
             });
+
+            //_index++;
+            $("#num").val(_index);
+            console.log("add num:"+$("#num").val());
+             _index = $("#num").val();
+            //console.log("add index:"+_index);
         }
+
     });
-    _index++;
+    //_index++;
 });
-$("#deleteOutsource").click(function(e){
-    $(element).remove();
+', CClientScript::POS_END);
+
+Yii::app()->clientScript->registerScript('delOutsource', '
+$("#delOutsourceByAjax").click(function(e){
+    var _index = $("#num").val();
+    console.log("del index:"+_index);
+    elm = "#OutsourceContract_"+_index+"_oc_code";
+    console.log($(elm));
+    element=$(elm).parent().parent().parent();
+    /* animate div */
+
+    $(element).animate(
+    {
+        opacity: 0.25,
+        left: "+=50",
+        height: "toggle"
+    }, 500,
+    function() {
+        /* remove div */
+        $(element).remove();
+    });
     _index--;
+    $("#num").val(_index);
+    console.log("del num:"+$("#num").val());
 });
 ', CClientScript::POS_END);
 ?>
