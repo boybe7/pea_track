@@ -40,9 +40,9 @@ class OutsourceContract extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('oc_code, oc_proj_id, oc_vendor_id, oc_sign_date, oc_end_date, oc_approve_date, oc_cost, oc_user_create, oc_user_update', 'required'),
+			array('oc_code, oc_proj_id, oc_vendor_id, oc_end_date, oc_cost', 'required'),
 			array('oc_proj_id, oc_vendor_id, oc_T_percent, oc_A_percent, oc_user_create, oc_user_update', 'numerical', 'integerOnly'=>true),
-			array('oc_cost', 'numerical'),
+			//array('oc_cost', 'numerical'),
 			array('oc_code', 'length', 'max'=>30),
 			array('oc_guarantee', 'length', 'max'=>100),
 			array('oc_adv_guarantee, oc_insurance, oc_letter', 'length', 'max'=>200),
@@ -63,7 +63,22 @@ class OutsourceContract extends CActiveRecord
 		return array(
 		);
 	}
+	public function beforeSave()
+    {
+         if($this->oc_cost!="")
+		 {
+		     $this->oc_cost = str_replace(",", "", $this->oc_cost); 
+		 }
+		  
 
+        $str_date = explode("/", $this->oc_sign_date);
+        if(count($str_date)>1)
+        	$this->oc_sign_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+        $str_date = explode("/", $this->oc_end_date);
+        if(count($str_date)>1)
+        	$this->oc_end_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+        return parent::beforeSave();
+   }
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

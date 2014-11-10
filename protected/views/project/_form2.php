@@ -282,22 +282,24 @@ hr {
     ?>  
 
 	    <div id="outsource">
-          <input type="hidden" id="num" value="1">
+         
 	        <?php
+
+	        echo  '<input type="hidden" id="num" name="num" value="'.$numContracts.'">';
 	        $index = 1;
 
-	        	$this->renderPartial('//outsourceContract/_form', array(
-	                'model' => $outsource,
-	                'index' => 1,
-	                'display' => 'block'
-	            ));
+	        // 	$this->renderPartial('//outsourceContract/_form', array(
+	        //         'model' => $outsource,
+	        //         'index' => 1,
+	        //         'display' => 'block'
+	        //     ));
 
-	        $index++;
-	        foreach ($model->outsource as $id => $child):
+	        // $index++;
+	        foreach ($outsource as $id => $child):
 
 	            $this->renderPartial('//outsourceContract/_form', array(
 	                'model' => $child,
-	                'index' => $id,
+	                'index' => $index,
 	                'display' => 'block'
 	            ));
 	            $index++;

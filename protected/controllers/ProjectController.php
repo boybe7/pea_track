@@ -58,11 +58,63 @@ class ProjectController extends Controller
 
 	public function actionCreate2($id)
 	{
-		$modelOutsource = new OutsourceContract;
+		$modelOutsource = array();
+		//$modelOutsource = new OutsourceContract;
+		$numContracts = 1;
+		array_push($modelOutsource, new OutsourceContract);
+		//$modelOutsource = $this->getContracts();
+
+		if(isset($_POST['OutsourceContract']))
+		{
+			$modelOutsource = array();
+            $numContracts = $_POST['num'];
+		    for($i=1;$i<$numContracts+1;$i++)
+		    {
+		        //if(isset($_POST['OutsourceContract'][$i]))
+		        //{
+		            $contracts = new OutsourceContract;
+		            $contracts->attributes = $_POST['OutsourceContract'][$i];
+		            $contracts->oc_proj_id = $id;
+		            $contracts->oc_end_date = $_POST['OutsourceContract'][$i]["oc_end_date"];//$_POST[$i."_oc_end_date"];
+		            array_push($modelOutsource, $contracts);
+		            //$contracts->validate();
+		            $contracts->save();
+		        //}
+		    }
+
+			// $valid=true;
+	  //       foreach($modelOutsource as $i=>$item)
+	  //       {
+	  //           if(isset($_POST['OutsourceContract'][$i]))
+	  //               $item->attributes=$_POST['OutsourceContract'][$i];
+	  //           $valid=$item->validate() && $valid;
+	  //       }
+		}
+
 		$this->render('create2',array(
-			'model'=>$this->loadModel($id),'outsource'=>$modelOutsource
+			'model'=>$this->loadModel($id),'outsource'=>$modelOutsource,'numContracts'=>$numContracts
 		));
 	}
+
+	public function getContracts() {
+        // Create an empty list of records
+        $items = array();
+ 
+        // Iterate over each item from the submitted form
+        if (isset($_POST['OutsourceContract'])) {
+            foreach ($_POST['OutsourceContract'] as $item) {
+                // If item id is available, read the record from database 
+                if ( array_key_exists('id', $item) ){
+                    $items[] = OutsourceContract::model()->findByPk($item['id']);
+                }
+                // Otherwise create a new record
+                else {
+                    $items[] = new OutsourceContract();
+                }
+            }
+        }
+        return $items;
+    }
 
 	/**
 	 * Creates a new model.

@@ -13,10 +13,18 @@
         		  <?php
                     echo CHtml::activeHiddenField($model, '[' . $index . ']oc_vendor_id'); 
                     echo CHtml::activeLabelEx($model, '[' . $index . ']oc_vendor_id'); 
+
+                    $vendor = Yii::app()->db->createCommand()
+                        ->select('v_name')
+                        ->from('vendor')
+                        ->where('v_id=:id', array(':id'=>$model->oc_vendor_id))
+                        ->queryAll();
+                    //print_r($vendor);    
+
                     $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
                             'name'=>'[' . $index . ']oc_vendor_id',
                             'id'=>$index.'oc_vendor_id',
-                            'value'=>$model->oc_vendor_id,
+                            'value'=>$vendor[0]['v_name'],
                            // 'source'=>$this->createUrl('Ajax/GetDrug'),
                            'source'=>'js: function(request, response) {
                                 $.ajax({
@@ -94,22 +102,23 @@
           <div class="span2">
 
                <?php 
-
+                   
                     echo CHtml::activeLabelEx($model, '[' . $index . ']oc_end_date'); 
                     echo '<div class="input-append" style="margin-top:0px;margin-left:0px;">'; //ใส่ icon ลงไป
                         $this->widget('zii.widgets.jui.CJuiDatePicker',
 
                         array(
-                            'name'=>'[' . $index . ']oc_end_date',
+                            'name'=>'OutsourceContract[' . $index . '][oc_end_date]',
                             'id'=>$index.'oc_end_date',
                             'model'=>$model,
+                            'value'=>$model->oc_end_date,
                             'options' => array(
                                               'mode'=>'focus',
                                               //'language' => 'th',
                                               'format'=>'dd/mm/yyyy', //กำหนด date Format
                                               'showAnim' => 'slideDown',
                                               ),
-                            'htmlOptions'=>array('class'=>'span10', 'value'=>$model->oc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+                            'htmlOptions'=>array('class'=>'span10'),  // ใส่ค่าเดิม ในเหตุการ Update 
                          )
                     );
                     echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
