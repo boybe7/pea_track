@@ -65,11 +65,12 @@ class OutsourceContract extends CActiveRecord
 	}
 	public function beforeSave()
     {
-         if($this->oc_cost!="")
-		 {
-		     $this->oc_cost = str_replace(",", "", $this->oc_cost); 
-		 }
-		  
+   //       if($this->oc_cost!="")
+		 // {
+		 //     $this->oc_cost = str_replace(",", "", $this->oc_cost); 
+		 // }
+		//$this->oc_cost = str_replace(",", "", $this->oc_cost);
+		 $this->oc_cost = Yii::app()->format->unformatNumber($this->oc_cost); 
 
         $str_date = explode("/", $this->oc_sign_date);
         if(count($str_date)>1)
@@ -79,6 +80,15 @@ class OutsourceContract extends CActiveRecord
         	$this->oc_end_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
         return parent::beforeSave();
    }
+
+   public function afterFind() {
+	    $this->oc_cost = Yii::app()->format->number($this->oc_cost);
+	    return parent::afterFind();
+	}
+	public function afterSave() {
+	    $this->oc_cost = Yii::app()->format->number($this->oc_cost);
+	    return parent::afterSave();
+	}
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

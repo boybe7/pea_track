@@ -54,7 +54,11 @@ return array(
             'defaults'  => array(              //default settings for all editable elements
                'emptytext' => 'Click to edit'
             )
-        ),          
+        ),    
+        'format'=>array(
+        	'class'=>'application.components.Formatter',
+        	'numberFormat'=>array('decimals'=>2, 'decimalSeparator'=>'.', 'thousandSeparator'=>','),
+    	),      
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,

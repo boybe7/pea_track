@@ -74,6 +74,7 @@ class ProjectController extends Controller
 		        //{
 		            $contracts = new OutsourceContract;
 		            $contracts->attributes = $_POST['OutsourceContract'][$i];
+		            //$contracts->oc_cost = Yii::app()->format->unformatNumber($_POST['OutsourceContract'][$i]['oc_cost']);
 		            $contracts->oc_proj_id = $id;
 		            $contracts->oc_end_date = $_POST['OutsourceContract'][$i]["oc_end_date"];//$_POST[$i."_oc_end_date"];
 		            array_push($modelOutsource, $contracts);

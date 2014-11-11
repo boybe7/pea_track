@@ -100,7 +100,7 @@
                                               'format'=>'dd/mm/yyyy', //กำหนด date Format
                                               'showAnim' => 'slideDown',
                                               ),
-                            'htmlOptions'=>array('class'=>'span10', 'value'=>$model->oc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+                            'htmlOptions'=>array('class'=>'span8', 'value'=>$model->oc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
                          )
                     );
                     echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -112,7 +112,7 @@
                <?php 
                    
                     echo CHtml::activeLabelEx($model, '[' . $index . ']oc_end_date'); 
-                    echo '<div class="input-append" style="margin-top:0px;margin-left:0px;">'; //ใส่ icon ลงไป
+                    echo '<div class="input-append" style="">'; //ใส่ icon ลงไป
                         $this->widget('zii.widgets.jui.CJuiDatePicker',
 
                         array(
@@ -126,10 +126,11 @@
                                               'format'=>'dd/mm/yyyy', //กำหนด date Format
                                               'showAnim' => 'slideDown',
                                               ),
-                            'htmlOptions'=>array('class'=>'span10'),  // ใส่ค่าเดิม ในเหตุการ Update 
+                            'htmlOptions'=>array('class'=>'span8'),  // ใส่ค่าเดิม ในเหตุการ Update 
                          )
                     );
                     echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
+                    echo CHtml::error($model, '[' . $index . ']oc_end_date',array('class'=>'help-block error'));
 
                ?> 
           </div> 
@@ -151,7 +152,7 @@
                                               'format'=>'dd/mm/yyyy', //กำหนด date Format
                                               'showAnim' => 'slideDown',
                                               ),
-                            'htmlOptions'=>array('class'=>'span10', 'value'=>$model->oc_approve_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+                            'htmlOptions'=>array('class'=>'span8', 'value'=>$model->oc_approve_date),  // ใส่ค่าเดิม ในเหตุการ Update 
                          )
                     );
                     echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
