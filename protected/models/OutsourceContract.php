@@ -78,15 +78,41 @@ class OutsourceContract extends CActiveRecord
         $str_date = explode("/", $this->oc_end_date);
         if(count($str_date)>1)
         	$this->oc_end_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+        $str_date = explode("/", $this->oc_approve_date);
+        if(count($str_date)>1)
+        	$this->oc_approve_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+
         return parent::beforeSave();
    }
 
    public function afterFind() {
 	    $this->oc_cost = Yii::app()->format->number($this->oc_cost);
+	    $str_date = explode("-", $this->oc_sign_date);
+        if(count($str_date)>1)
+        	$this->oc_sign_date= $str_date[2]."/".$str_date[1]."/".$str_date[0];
+        $str_date = explode("-", $this->oc_end_date);
+        if(count($str_date)>1)
+        	$this->oc_end_date= $str_date[2]."/".$str_date[1]."/".$str_date[0];
+        $str_date = explode("-", $this->oc_approve_date);
+        if(count($str_date)>1)
+        	$this->oc_approve_date= $str_date[2]."/".$str_date[1]."/".$str_date[0];
+        
+
 	    return parent::afterFind();
 	}
 	public function afterSave() {
 	    $this->oc_cost = Yii::app()->format->number($this->oc_cost);
+	    $str_date = explode("-", $this->oc_sign_date);
+        if(count($str_date)>1)
+        	$this->oc_sign_date= $str_date[2]."/".$str_date[1]."/".$str_date[0];
+        $str_date = explode("-", $this->oc_end_date);
+        if(count($str_date)>1)
+        	$this->oc_end_date= $str_date[2]."/".$str_date[1]."/".$str_date[0];
+        $str_date = explode("-", $this->oc_approve_date);
+        if(count($str_date)>1)
+        	$this->oc_approve_date= $str_date[2]."/".$str_date[1]."/".$str_date[0];
+        
+
 	    return parent::afterSave();
 	}
 	/**
