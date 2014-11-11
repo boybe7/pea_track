@@ -1,5 +1,10 @@
 
+<style type="text/css">
+  .error {
+    font-size: 14px;
+  }
 
+</style>
 <fieldset class="well the-fieldset">
         <legend class="the-legend">สัญญาที่ <?php echo ($index);?></legend>
         
@@ -7,7 +12,7 @@
         	  <div class="span3">		  
         	    <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_code'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_code', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
-              <?php echo CHtml::error($model, '[' . $index . ']oc_code'); ?>
+              <?php echo CHtml::error($model, '[' . $index . ']oc_code',array('class'=>'help-block error')); ?>
             </div>  
             <div class="span6">
         		  <?php
@@ -19,12 +24,13 @@
                         ->from('vendor')
                         ->where('v_id=:id', array(':id'=>$model->oc_vendor_id))
                         ->queryAll();
-                    //print_r($vendor);    
+                    //print_r($model->hasErrors('oc_vendor_id'));  
+                    //if($model->hasErrors('oc_vendor_id')) echo "error";  
 
                     $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
                             'name'=>'[' . $index . ']oc_vendor_id',
                             'id'=>$index.'oc_vendor_id',
-                            'value'=>$vendor[0]['v_name'],
+                            'value'=> empty($vendor[0])? '' : $vendor[0]['v_name'],
                            // 'source'=>$this->createUrl('Ajax/GetDrug'),
                            'source'=>'js: function(request, response) {
                                 $.ajax({
@@ -54,17 +60,19 @@
                                      
                             ),
                            'htmlOptions'=>array(
-                                'class'=>'span12'
+
+                                'class'=>$model->hasErrors('oc_vendor_id')?'span12 error':'span12'
                             ),
                                   
                         ));
 
+                         echo CHtml::error($model, '[' . $index . ']oc_vendor_id',array('class'=>'help-block error'));
                ?>
             </div>
             <div class="span3">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_cost'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_cost', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
-              <?php echo CHtml::error($model, '[' . $index . ']oc_cost'); ?>          
+              <?php echo CHtml::error($model, '[' . $index . ']oc_cost',array('class'=>'help-block error')); ?>          
           </div>  
         </div>
 
@@ -72,7 +80,7 @@
           <div class="span5">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_detail'); ?>
               <?php echo CHtml::activeTextArea($model, '[' . $index . ']oc_detail', array('rows' => 2, 'maxlength' => 255,'class'=>'span12')); ?>
-              <?php echo CHtml::error($model, '[' . $index . ']oc_detail'); ?>          
+              <?php echo CHtml::error($model, '[' . $index . ']oc_detail',array('class'=>'help-block error')); ?>          
           </div> 
           <div class="span2">
 
@@ -155,17 +163,17 @@
           <div class="span5">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_guarantee'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_guarantee', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
-              <?php echo CHtml::error($model, '[' . $index . ']oc_guarantee'); ?>          
+              <?php echo CHtml::error($model, '[' . $index . ']oc_guarantee',array('class'=>'help-block error')); ?>          
           </div>  
           <div class="span5">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_adv_guarantee'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_adv_guarantee', array( 'maxlength' => 255,'class'=>'span12')); ?>
-              <?php echo CHtml::error($model, '[' . $index . ']oc_adv_guarantee'); ?>          
+              <?php echo CHtml::error($model, '[' . $index . ']oc_adv_guarantee',array('class'=>'help-block error')); ?>          
           </div> 
           <div class="span2">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_T_percent'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_T_percent', array( 'maxlength' => 255,'class'=>'span12')); ?>
-              <?php echo CHtml::error($model, '[' . $index . ']oc_T_percent'); ?>          
+              <?php echo CHtml::error($model, '[' . $index . ']oc_T_percent',array('class'=>'help-block error')); ?>          
           </div> 
         </div>
 
@@ -173,17 +181,17 @@
           <div class="span5">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_insurance'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_insurance', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
-              <?php echo CHtml::error($model, '[' . $index . ']oc_insurance'); ?>          
+              <?php echo CHtml::error($model, '[' . $index . ']oc_insurance',array('class'=>'help-block error')); ?>          
           </div>  
           <div class="span5">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_letter'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_letter', array( 'maxlength' => 255,'class'=>'span12')); ?>
-              <?php echo CHtml::error($model, '[' . $index . ']oc_letter'); ?>          
+              <?php echo CHtml::error($model, '[' . $index . ']oc_letter',array('class'=>'help-block error')); ?>          
           </div> 
           <div class="span2">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_A_percent'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_A_percent', array( 'maxlength' => 255,'class'=>'span12')); ?>
-              <?php echo CHtml::error($model, '[' . $index . ']oc_A_percent'); ?>          
+              <?php echo CHtml::error($model, '[' . $index . ']oc_A_percent',array('class'=>'help-block error')); ?>          
           </div> 
         </div>
 </fieldset>
