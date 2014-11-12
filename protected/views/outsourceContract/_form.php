@@ -175,7 +175,7 @@
           </div> 
           <div class="span2">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_T_percent'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_T_percent', array( 'maxlength' => 255,'class'=>'span12')); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_T_percent', array( 'maxlength' => 3,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_T_percent',array('class'=>'help-block error')); ?>          
           </div> 
         </div>
@@ -193,7 +193,7 @@
           </div> 
           <div class="span2">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_A_percent'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_A_percent', array( 'maxlength' => 255,'class'=>'span12')); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_A_percent', array( 'maxlength' => 3,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_A_percent',array('class'=>'help-block error')); ?>          
           </div> 
         </div>
