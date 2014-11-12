@@ -43,6 +43,8 @@ class OutsourceContract extends CActiveRecord
 			array('oc_code, oc_proj_id, oc_vendor_id, oc_end_date, oc_cost', 'required'),
 			array('oc_proj_id, oc_vendor_id, oc_T_percent, oc_A_percent, oc_user_create, oc_user_update', 'numerical', 'integerOnly'=>true),
 			//array('oc_cost', 'numerical'),
+			array('oc_T_percent', 'application.extensions.numericRangeValidator', 'min'=>0, 'max'=>100),
+			array('oc_A_percent', 'application.extensions.numericRangeValidator', 'min'=>0, 'max'=>100),
 			array('oc_code', 'length', 'max'=>30),
 			array('oc_guarantee', 'length', 'max'=>100),
 			array('oc_adv_guarantee, oc_insurance, oc_letter', 'length', 'max'=>200),
