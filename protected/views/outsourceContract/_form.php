@@ -1,4 +1,6 @@
-
+<?php
+Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/bootstrap-datepicker/css/datepicker.css'); 
+?>
 <style type="text/css">
   .error {
     font-size: 14px;
@@ -85,7 +87,7 @@
           <div class="span2">
 
                <?php 
-
+                   
                     echo CHtml::activeLabelEx($model, '[' . $index . ']oc_sign_date'); 
                     echo '<div class="input-append" style="margin-top:0px;">'; //ใส่ icon ลงไป
                         $this->widget('zii.widgets.jui.CJuiDatePicker',

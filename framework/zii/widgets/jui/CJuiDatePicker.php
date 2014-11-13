@@ -124,5 +124,7 @@ class CJuiDatePicker extends CJuiInputWidget
 			$cs->registerScript(__CLASS__,$this->defaultOptions!==null?'jQuery.datepicker.setDefaults('.CJavaScript::encode($this->defaultOptions).');':'');
 		}
 		$cs->registerScript(__CLASS__.'#'.$id,$js);
+
+		
 	}
 }
