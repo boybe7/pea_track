@@ -14,7 +14,8 @@
         Yii::app()->bootstrap->register();   */
         
         ?>
-        <?php echo Yii::app()->bootstrap->init();?>
+        <?php echo Yii::app()->bootstrap->init();
+        ?>
 </head>
 <link rel="shortcut icon" href="/pea_track/favicon.ico">
 <style>

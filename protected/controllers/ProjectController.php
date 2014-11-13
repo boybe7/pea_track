@@ -62,6 +62,8 @@ class ProjectController extends Controller
 		//$modelOutsource = new OutsourceContract;
 		$numContracts = 1;
 		array_push($modelOutsource, new OutsourceContract);
+		//array_push($modelOutsource, new OutsourceContract);
+		//array_push($modelOutsource, new OutsourceContract);
 		//$modelOutsource = $this->getContracts();
 
 		if(isset($_POST['OutsourceContract']))
@@ -419,7 +421,9 @@ class ProjectController extends Controller
         $this->renderPartial('//outsourceContract/_form', array(
             'model' => $model,
             'index' => $index,
-//            'display' => 'block',
+           'display' => 'block',
         ), false, true);
+
+        
     }
 }

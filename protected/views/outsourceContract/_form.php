@@ -228,23 +228,4 @@
   });
  </script> 
 
-<?php
-Yii::app()->clientScript->registerScript('deleteChild', "
-function deleteChild(elm, index)
-{
-    element=$(elm).parent().parent().parent();
-    /* animate div */
-    $(element).animate(
-    {
-        opacity: 0.25,
-        left: '+=50',
-        height: 'toggle'
-    }, 500,
-    function() {
-        /* remove div */
-        $(element).remove();
-    });
-}", CClientScript::POS_END);
-
-
-?>
+<script type="text/javascript" src="/pea_track/assets/7d883f12/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>

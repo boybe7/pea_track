@@ -343,10 +343,37 @@ hr {
     	?>
     </div>
 </div>
+<script type="text/javascript">
 
+	var _index = $("#num").val();
+	$("#loadOutsourceByAjax2").click(function(e){
+	     var _index = $("#num").val();
+	     _index++;
+	    e.preventDefault();
+	    var _url = "../loadOutsourceByAjax?load_for=create2&index="+_index;
+	    $.ajax({
+	        url: _url,
+	        success:function(response){
+	            $("#outsource").append(response);
+	            $("#outsource .crow").last().animate({
+	                opacity : 1,
+	                left: "+0",
+	                height: "toggle"
+	            });
+
+	           
+	            $("#num").val(_index);
+	            
+	             _index = $("#num").val();
+	         
+	        }
+
+	    });
+	});
+</script>
  
 <?php
-Yii::app()->clientScript->registerCoreScript('jquery');
+//Yii::app()->clientScript->registerCoreScript('jquery');
 Yii::app()->clientScript->registerScript('loadoutsource', '
 var _index = ' . $index . ';
 var _index = $("#num").val();
@@ -361,13 +388,13 @@ $("#loadOutsourceByAjax").click(function(e){
             $("#outsource").append(response);
             $("#outsource .crow").last().animate({
                 opacity : 1,
-                left: "+50",
+                left: "+0",
                 height: "toggle"
             });
 
             //_index++;
             $("#num").val(_index);
-            console.log("add num:"+$("#num").val());
+            //console.log("add num:"+$("#num").val());
              _index = $("#num").val();
             //console.log("add index:"+_index);
         }

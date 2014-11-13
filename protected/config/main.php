@@ -68,6 +68,7 @@ return array(
 		
 		 'bootstrap'=>array(
                     'class'=>'bootstrap.components.Bootstrap',
+
                 ),
 		
 		// uncomment the following to enable URLs in path-format
