@@ -416,6 +416,8 @@ class ProjectController extends Controller
 	public function actionLoadOutsourceByAjax($index)
     {
         $model = new OutsourceContract;
+        Yii::app()->clientscript->scriptMap['jquery.js'] = false;
+        Yii::app()->clientscript->scriptMap['jquery-ui.min.js'] = false;
         $this->renderPartial('//outsourceContract/_form', array(
             'model' => $model,
             'index' => $index,

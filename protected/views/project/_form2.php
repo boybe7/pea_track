@@ -367,7 +367,7 @@ $("#loadOutsourceByAjax").click(function(e){
 
             //_index++;
             $("#num").val(_index);
-            console.log("add num:"+$("#num").val());
+            //console.log("add num:"+$("#num").val());
              _index = $("#num").val();
             //console.log("add index:"+_index);
         }
@@ -380,9 +380,9 @@ $("#loadOutsourceByAjax").click(function(e){
 Yii::app()->clientScript->registerScript('delOutsource', '
 $("#delOutsourceByAjax").click(function(e){
     var _index = $("#num").val();
-    console.log("del index:"+_index);
+    //console.log("del index:"+_index);
     elm = "#OutsourceContract_"+_index+"_oc_code";
-    console.log($(elm));
+    //console.log($(elm));
     element=$(elm).parent().parent().parent();
     /* animate div */
 
@@ -398,7 +398,7 @@ $("#delOutsourceByAjax").click(function(e){
     });
     _index--;
     $("#num").val(_index);
-    console.log("del num:"+$("#num").val());
+    //console.log("del num:"+$("#num").val());
 });
 ', CClientScript::POS_END);
 ?>
