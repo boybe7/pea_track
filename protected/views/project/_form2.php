@@ -72,6 +72,7 @@ hr {
    
           echo '<div class="tab-pane" id="projTab">';
 
+        	
         	$form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
       			'id'=>'project-form',
       			'enableAjaxValidation'=>false,

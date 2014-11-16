@@ -159,7 +159,7 @@ if(!Yii::app()->user->isGuest)
     'fixed'=>'top',
     'collapse'=>true,    
     'htmlOptions'=>array('class'=>'noPrint'),
-    'brand' =>  CHtml::image(Yii::app()->getBaseUrl() . '/images/pea_logo.png', 'Logo', array('width'=>'30','height' => '30'))."  ".Yii::app()->name,
+    'brand' =>  CHtml::image(Yii::app()->getBaseUrl() . '../images/pea_logo.png', 'Logo', array('width' => '260', 'height' => '30')),
     'items'=>array(
         array(
             'class'=>'bootstrap.widgets.TbMenu',
@@ -196,7 +196,7 @@ else if(Yii::app()->user->isAdmin())
     'fixed'=>'top',
     'collapse'=>true,    
     'htmlOptions'=>array('class'=>'noPrint'),
-    'brand' =>  CHtml::image(Yii::app()->getBaseUrl() . '/dist/img/hospital-icon.png', 'Logo', array('width' => '20', 'height' => '20'))."  ".Yii::app()->name,
+    'brand' =>  CHtml::image(Yii::app()->getBaseUrl() . '../images/pea_logo.png', 'Logo', array('width' => '260', 'height' => '30')),
     'items'=>array(
         array(
             'class'=>'bootstrap.widgets.TbMenu',
@@ -228,7 +228,7 @@ else{
     'fixed'=>'top',
     'collapse'=>true,    
     'htmlOptions'=>array('class'=>'noprint'),
-    'brand' =>  CHtml::image(Yii::app()->getBaseUrl() . '../images/pea_logo.png', 'Logo', array('width' => '30', 'height' => '30'))."  ".Yii::app()->name,
+    'brand' =>  CHtml::image(Yii::app()->getBaseUrl() . '../images/pea_logo.png', 'Logo', array('width' => '260', 'height' => '30')),
    
     ));
 }   
