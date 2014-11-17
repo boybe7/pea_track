@@ -5,8 +5,6 @@
 
 	<?php echo $form->textFieldRow($model,'pj_id',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'pj_code',array('class'=>'span5','maxlength'=>50)); ?>
-
 	<?php echo $form->textFieldRow($model,'pj_name',array('class'=>'span5','maxlength'=>400)); ?>
 
 	<?php echo $form->textFieldRow($model,'pj_vendor_id',array('class'=>'span5')); ?>
@@ -16,8 +14,6 @@
 	<?php echo $form->textFieldRow($model,'pj_fiscalyear',array('class'=>'span5')); ?>
 
 	<?php echo $form->textFieldRow($model,'pj_date_approved',array('class'=>'span5')); ?>
-
-	<?php echo $form->textAreaRow($model,'pj_details',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
 	<?php echo $form->textFieldRow($model,'pj_user_create',array('class'=>'span5')); ?>
 

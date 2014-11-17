@@ -18,6 +18,9 @@ class Project extends CActiveRecord
 	/**
 	 * @return string the associated database table name
 	 */
+
+	public $workcat_search;
+
 	public function tableName()
 	{
 		return 'project';
@@ -38,7 +41,7 @@ class Project extends CActiveRecord
 
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('pj_id, pj_name, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_date_approved, pj_user_create, pj_user_update', 'safe', 'on'=>'search'),
+			array('pj_id, pj_name, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_date_approved, pj_user_create, pj_user_update,workcat_search', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,6 +54,8 @@ class Project extends CActiveRecord
         // class name for the relations automatically generated below.
         return array(
             'outsource' => array(self::HAS_MANY, 'OutsourceContract', 'oc_proj_id'),
+            'workcat' => array(self::BELONGS_TO, 'WorkCategory', 'pj_work_cat'),
+
         );
     }
 
@@ -104,6 +109,7 @@ class Project extends CActiveRecord
 		$criteria->compare('pj_date_approved',$this->pj_date_approved,true);
 		$criteria->compare('pj_user_create',$this->pj_user_create);
 		$criteria->compare('pj_user_update',$this->pj_user_update);
+		$criteria->compare('workcat.wc_name',$this->workcat_search);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -148,4 +154,6 @@ class Project extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+
 }

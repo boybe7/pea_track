@@ -32,7 +32,7 @@ class ProjectController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','create2','update','loadOutsourceByAjax'),
+				'actions'=>array('create','create2','update','loadOutsourceByAjax','DeleteSelected'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -326,7 +326,7 @@ class ProjectController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
+		/*$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -340,6 +340,40 @@ class ProjectController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+		));*/
+
+
+		$modelOutsource = array();
+
+		$numContracts = 1;
+		array_push($modelOutsource, new OutsourceContract);
+
+
+		if(isset($_POST['OutsourceContract']))
+		{
+			$modelOutsource = array();
+            $numContracts = $_POST['num'];
+		    for($i=1;$i<$numContracts+1;$i++)
+		    {
+		        //if(isset($_POST['OutsourceContract'][$i]))
+		        //{
+		            $contracts = new OutsourceContract;
+		            $contracts->attributes = $_POST['OutsourceContract'][$i];
+		            //$contracts->oc_cost = Yii::app()->format->unformatNumber($_POST['OutsourceContract'][$i]['oc_cost']);
+		            $contracts->oc_proj_id = $id;
+		            $contracts->oc_sign_date = $_POST['OutsourceContract'][$i]["oc_sign_date"];//$_POST[$i."_oc_end_date"];
+		            $contracts->oc_end_date = $_POST['OutsourceContract'][$i]["oc_end_date"];
+		            $contracts->oc_approve_date = $_POST['OutsourceContract'][$i]["oc_approve_date"];
+		            array_push($modelOutsource, $contracts);
+		            //$contracts->validate();
+		            $contracts->save();
+		        //}
+		    }
+
+		}
+
+		$this->render('create2',array(
+			'model'=>$this->loadModel($id),'outsource'=>$modelOutsource,'numContracts'=>$numContracts
 		));
 	}
 
@@ -368,9 +402,17 @@ class ProjectController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Project');
+		/*$dataProvider=new CActiveDataProvider('Project');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
+		));*/
+		$model=new Project('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Project']))
+			$model->attributes=$_GET['Project'];
+
+		$this->render('admin',array(
+			'model'=>$model,
 		));
 	}
 
@@ -415,6 +457,18 @@ class ProjectController extends Controller
 		}
 	}
 
+
+	public function actionDeleteSelected()
+    {
+    	$autoIdAll = $_POST['selectedID'];
+        if(count($autoIdAll)>0)
+        {
+            foreach($autoIdAll as $autoId)
+            {
+                $this->loadModel($autoId)->delete();
+            }
+        }    
+    }
 	public function actionLoadOutsourceByAjax($index)
     {
         $model = new OutsourceContract;
@@ -428,4 +482,6 @@ class ProjectController extends Controller
 
         
     }
+
+  
 }

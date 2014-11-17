@@ -3,10 +3,6 @@ $this->breadcrumbs=array(
 	'Projects',
 );
 
-$this->menu=array(
-	array('label'=>'Create Project','url'=>array('create')),
-	array('label'=>'Manage Project','url'=>array('admin')),
-);
 ?>
 
 <h1>Projects</h1>

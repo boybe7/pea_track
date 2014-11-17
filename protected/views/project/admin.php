@@ -1,13 +1,9 @@
 <?php
 $this->breadcrumbs=array(
-	'Projects'=>array('index'),
-	'Manage',
+	'Projects'=>array('index')
 );
 
-$this->menu=array(
-	array('label'=>'List Project','url'=>array('index')),
-	array('label'=>'Create Project','url'=>array('create')),
-);
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -23,21 +19,113 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Projects</h1>
+<h1>ข้อมูลโครงการ</h1>
 
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+<?php
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
+$this->widget('bootstrap.widgets.TbButton', array(
+    'buttonType'=>'link',
+    
+    'type'=>'success',
+    'label'=>'เพิ่ม โครงการ',
+    'icon'=>'plus-sign',
+    'url'=>array('create'),
+    'htmlOptions'=>array('class'=>'pull-right','style'=>'margin:0px 10px 0px 10px;'),
+)); 
 
-<?php $this->widget('bootstrap.widgets.TbGridView',array(
+$this->widget('bootstrap.widgets.TbButton', array(
+    'buttonType'=>'link',
+    
+    'type'=>'danger',
+    'label'=>'ลบ โครงการ',
+    'icon'=>'minus-sign',
+    //'url'=>array('delAll'),
+    //'htmlOptions'=>array('id'=>"buttonDel2",'class'=>'pull-right'),
+    'htmlOptions'=>array(
+        //'data-toggle'=>'modal',
+        //'data-target'=>'#myModal',
+        'onclick'=>'      
+                       //console.log($.fn.yiiGridView.getSelection("vendor-grid").length);
+                       if($.fn.yiiGridView.getSelection("vendor-grid").length==0)
+                       		js:bootbox.alert("กรุณาเลือกแถวข้อมูลที่ต้องการลบ?","ตกลง");
+                       else  
+                          js:bootbox.confirm("คุณต้องการจะลบข้อมูล?","ยกเลิก","ตกลง",
+			                   function(confirmed){
+			                   	 	
+			                   	 //console.log("Confirmed: "+confirmed);
+			                   	 //console.log($.fn.yiiGridView.getSelection("user-grid"));
+                                if(confirmed)
+			                   	 $.ajax({
+										type: "POST",
+										url: "deleteSelected",
+										data: { selectedID: $.fn.yiiGridView.getSelection("vendor-grid")}
+										})
+										.done(function( msg ) {
+											$("#vendor-grid").yiiGridView("update",{});
+										});
+			                  })',
+        'class'=>'pull-right'
+    ),
+)); 
+
+ $this->widget('bootstrap.widgets.TbGridView',array(
+	'id'=>'vendor-grid',
+	'dataProvider'=>$model->search(),
+	'type'=>'bordered condensed',
+	'dataProvider'=>$model->search(),
+	'filter'=>$model,
+	'selectableRows' =>2,
+	'htmlOptions'=>array('style'=>'padding-top:40px'),
+    'enablePagination' => true,
+    'summaryText'=>'แสดงผล {start} ถึง {end} จากทั้งหมด {count} ข้อมูล',
+    'template'=>"{items}<div class='row-fluid'><div class='span6'>{pager}</div><div class='span6'>{summary}</div></div>",
+	'columns'=>array(
+		'checkbox'=> array(
+        	    'id'=>'selectedID',
+            	'class'=>'CCheckBoxColumn',
+            	//'selectableRows' => 2, 
+        		 'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),
+	  	         'htmlOptions'=>array(
+	  	            	  			'style'=>'text-align:center'
+
+	  	            	  		)   	  		
+        ),
+		'pj_name'=>array(
+			    'name' => 'pj_name',
+			    'filter'=>CHtml::activeTextField($model, 'pj_name',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_name"))),
+				'headerHtmlOptions' => array('style' => 'width:30%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				'htmlOptions'=>array('style'=>'text-align:left;padding-left:10px;')
+	  	),
+		//'v_address',
+		'pj_work_cat'=>array(
+			    'name' => 'pj_work_cat',
+			    'value'=> 'WorkCategory::model()->FindByPk($data->pj_work_cat)->wc_name',
+			    //'filter'=>CHtml::activeTextField($model, 'pj_work_cat',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_work_cat"))),
+				'filter'=>CHtml::listData(WorkCategory::model()->findAll(), 'wc_id', 'wc_name'),
+				//'filter'=>CHtml::dropDownList('pj_work_cat','wc_id',CHtml::listData(WorkCategory::model()->findAll(), 'wc_id', 'wc_name')),
+				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				'htmlOptions'=>array('style'=>'text-align:center')
+	  	),
+		'pj_fiscalyear'=>array(
+			    'name' => 'pj_fiscalyear',
+			    'filter'=>CHtml::activeTextField($model, 'pj_fiscalyear',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
+				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				'htmlOptions'=>array('style'=>'text-align:center')
+	  	),
+		// 'v_contractor'=>array(
+		// 	    'name' => 'v_contractor',
+		// 	    'filter'=>CHtml::activeTextField($model, 'v_contractor',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_contractor"))),
+		// 		'headerHtmlOptions' => array('style' => 'width:20%;text-align:center;background-color: #f5f5f5'),  	            	  	
+		// 		'htmlOptions'=>array('style'=>'text-align:center')
+	 //  	),
+		array(
+			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),
+			'template' => '{view}  {update}'
+		),
+	),
+));
+ /*$this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'project-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
@@ -47,14 +135,10 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'pj_vendor_id',
 		'pj_work_cat',
 		'pj_fiscalyear',
-		/*
-		'pj_date_approved',
-		'pj_details',
-		'pj_user_create',
-		'pj_user_update',
-		*/
+		
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),
 	),
-)); ?>
+));*/
+ ?>

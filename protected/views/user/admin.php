@@ -1,7 +1,8 @@
+
 <?php
 $this->breadcrumbs=array(
-	//'Staff'=>array('index'),
-	'จัดการผู้ใช้งานระบบ',
+	'User'=>array('admin'),
+
 );
 
 
@@ -22,7 +23,7 @@ $('.search-form form').submit(function(){
 
 Yii::app()->clientScript->registerScript('delete','
 $("#buttonDel").click(function(){
-	    console.log($("#user-grid").yiiGridView("getChecked","username"))
+	    //console.log($("#user-grid").yiiGridView("getChecked","username"))
         var checked=$("#user-grid").yiiGridView("getChecked","user-grid_c0");
         var count=checked.length;
         if(count>0 && confirm("Do you want to delete these "+count+" item(s)"))
@@ -308,7 +309,7 @@ $this->widget('bootstrap.widgets.TbGridView',array(
 					), 
 					'placement' => 'right',
 					'display' => 'js: function(value, sourceData) {
-					    console.log(sourceData);
+					    //console.log(sourceData);
 					    //$(this).attr( "rel", "tooltip");
 					    //$(this).attr( "data-original-title", "แก้ไขนามสกุล");
 					    

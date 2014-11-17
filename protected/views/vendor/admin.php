@@ -11,8 +11,8 @@
 
 <?php
 $this->breadcrumbs=array(
-	//'Vendors'=>array('index'),
-	'Manage',
+	'Vendors'=>array('index'),
+	//'Manage',
 );
 
 
