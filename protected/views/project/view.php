@@ -69,7 +69,7 @@ hr {
       <?php  
         
         	echo '<li  class="active"><a href="#projTab" data-toggle="tab">โครงการ</a></li>
-                 <li ><a href="#outTab" data-toggle="tab">สัญญาจ้างต่อ</a></li>
+                 <li ><a href="#outTab" data-toggle="tab">สัญญาจ้างช่วง/ซื้อ</a></li>
                 ';	
        
       ?>
@@ -180,7 +180,7 @@ hr {
     		
     		
   		</div>
-      <h4>สัญญาโครงการ</h4>
+      <h4>สัญญาหลัก</h4>
       <hr>
       <?php 
             $project_contract = Yii::app()->db->createCommand()
@@ -279,8 +279,9 @@ hr {
             {    
                 $index = 1;	 
                 foreach ($outsourceContracts as $key => $value) {
-                	$modelOS =new OutsourceContract;
-                    $modelOS->attributes = $value;
+                	//$modelOS =new OutsourceContract;
+                  //$modelOS->attributes = $value;
+                  $modelOS = OutsourceContract::model()->findByPk($value["oc_id"]);
                 	$this->renderPartial('//outsourceContract/_form', array(
 		                'model' => $modelOS,
 		                'index' => $index,

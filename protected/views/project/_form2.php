@@ -58,7 +58,7 @@ hr {
       <?php  
         
         	echo '<li><a href="#projTab" data-toggle="tab">โครงการ</a></li>
-                 <li  class="active"><a href="#outTab" data-toggle="tab">สัญญาจ้างต่อ</a></li>
+                 <li  class="active"><a href="#outTab" data-toggle="tab">สัญญาจ้างช่วง/ซื้อ</a></li>
                 ';	
        
       ?>
@@ -169,7 +169,7 @@ hr {
     		
     		
   		</div>
-      <h4>สัญญาโครงการ</h4>
+      <h4>สัญญาหลัก</h4>
       <hr>
       <?php 
             $project_contract = Yii::app()->db->createCommand()
