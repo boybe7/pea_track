@@ -20,6 +20,8 @@ class Project extends CActiveRecord
 	 */
 
 	public $workcat_search;
+	public $sumcost = 0;
+
 
 	public function tableName()
 	{
@@ -41,7 +43,7 @@ class Project extends CActiveRecord
 
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('pj_id, pj_name, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_date_approved, pj_user_create, pj_user_update,workcat_search', 'safe', 'on'=>'search'),
+			array('pj_id,pj_cost, pj_name,pj_CA, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_date_approved, pj_user_create, pj_user_update,workcat_search', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,6 +56,7 @@ class Project extends CActiveRecord
         // class name for the relations automatically generated below.
         return array(
             'outsource' => array(self::HAS_MANY, 'OutsourceContract', 'oc_proj_id'),
+            'contract' => array(self::HAS_MANY, 'ProjectContract', 'pc_proj_id'),
             'workcat' => array(self::BELONGS_TO, 'WorkCategory', 'pj_work_cat'),
 
         );
@@ -80,6 +83,8 @@ class Project extends CActiveRecord
 			'pj_date_approved' => 'วันที่อนุมัติ',
 			'pj_user_create' => 'ผู้สร้างโครงการ',
 			'pj_user_update' => 'ผู้บันทึก',
+			'pj_CA' => 'หมายเลข CA',
+			'pj_cost'=> 'วงเงินรวม'
 		);
 	}
 
@@ -102,6 +107,7 @@ class Project extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('pj_id',$this->pj_id);
+		//$criteria->compare('pj_cost',$this->sumcost);
 		$criteria->compare('pj_name',$this->pj_name,true);
 		$criteria->compare('pj_vendor_id',$this->pj_vendor_id);
 		$criteria->compare('pj_work_cat',$this->pj_work_cat);
@@ -109,6 +115,7 @@ class Project extends CActiveRecord
 		$criteria->compare('pj_date_approved',$this->pj_date_approved,true);
 		$criteria->compare('pj_user_create',$this->pj_user_create);
 		$criteria->compare('pj_user_update',$this->pj_user_update);
+		$criteria->compare('pj_CA',$this->pj_CA,true);
 		$criteria->compare('workcat.wc_name',$this->workcat_search);
 
 		return new CActiveDataProvider($this, array(
@@ -122,6 +129,11 @@ class Project extends CActiveRecord
             if(count($str_date)>1)
             	$this->pj_date_approved = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
             
+
+            foreach($this->getRelated('contract') as $projectCost)
+   			{
+     			$this->sumcost += $projectCost->pc_cost;
+   			}
     }
     protected function afterSave(){
             parent::afterSave();

@@ -29,7 +29,7 @@ class ProjectController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','create2','update','loadOutsourceByAjax','DeleteSelected'),
@@ -372,7 +372,7 @@ class ProjectController extends Controller
 
 		}
 
-		$this->render('create2',array(
+		$this->render('update',array(
 			'model'=>$this->loadModel($id),'outsource'=>$modelOutsource,'numContracts'=>$numContracts
 		));
 	}

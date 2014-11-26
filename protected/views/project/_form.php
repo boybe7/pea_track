@@ -261,7 +261,7 @@ hr {
       			<?php 
       			//echo $form->textFieldRow($model,'pj_code',array('class'=>'span10','maxlength'=>100)); 
       			echo "<span style='display: block;'>หมายเลขงาน</span>"; 
-               echo CHtml::textField('work_code','',array('class'=>'span10'));
+            echo CHtml::textField('work_code','',array('class'=>'span10'));
 
       			$this->widget('bootstrap.widgets.TbButton', array(
 						    'buttonType'=>'link',
@@ -301,6 +301,9 @@ hr {
                         </tbody>
                         
             </table>
+
+            <?php echo $form->textFieldRow($model,'pj_CA',array('class'=>'span12','maxlength'=>200)); ?>
+            
     		</div>
     		
     		
@@ -787,7 +790,7 @@ hr {
 				<?php $this->widget('bootstrap.widgets.TbButton', array(
 					'buttonType'=>'submit',
 					'type'=>'primary',
-					'label'=>$model->isNewRecord ? 'Create' : 'Save',
+					'label'=>$model->isNewRecord ? 'บันทึก' : 'บันทึก',
 				)); ?>
 			</div>
 						

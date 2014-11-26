@@ -108,6 +108,7 @@ $this->widget('bootstrap.widgets.TbButton', array(
 				'headerHtmlOptions' => array('style' => 'width:30%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:left;padding-left:10px;')
 	  	),
+
 		//'v_address',
 		'v_tax_id'=>array(
 			    'name' => 'v_tax_id',
@@ -124,7 +125,13 @@ $this->widget('bootstrap.widgets.TbButton', array(
 		'v_contractor'=>array(
 			    'name' => 'v_contractor',
 			    'filter'=>CHtml::activeTextField($model, 'v_contractor',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_contractor"))),
-				'headerHtmlOptions' => array('style' => 'width:20%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				'headerHtmlOptions' => array('style' => 'width:10%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				'htmlOptions'=>array('style'=>'text-align:center')
+	  	),
+	  	'type'=>array(
+			    'name' => 'type',
+			    'filter'=>CHtml::activeTextField($model, 'type',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("type"))),
+				'headerHtmlOptions' => array('style' => 'width:10%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:center')
 	  	),
 		array(

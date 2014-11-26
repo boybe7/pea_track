@@ -16,6 +16,10 @@ class Vendor extends CActiveRecord
 	/**
 	 * @return string the associated database table name
 	 */
+    
+    public $type_id;
+    
+
 	public function tableName()
 	{
 		return 'vendor';
@@ -29,19 +33,28 @@ class Vendor extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('v_name, v_address, v_tax_id', 'required'),
+			array('v_name, v_address, v_tax_id,type', 'required'),
 			array('v_tax_id', 'numerical', 'integerOnly'=>true),
 			array('v_tax_id', 'length', 'min'=>13,'max'=>13,'tooLong'=>"{attribute} ต้องมี 13 ตัวเลข.",'tooShort'=>"{attribute} ต้องมี 13 ตัวเลข"),
 		
 			array('v_name', 'length', 'max'=>200),
 			array('v_tel', 'length', 'max'=>25),
 			array('v_contractor', 'length', 'max'=>100),
-			 array('v_tax_id', 'unique',"message"=>"ข้อมูลซ้ำ"),
+			 array('v_tax_id', 'unique',"message"=>"ข้อมูลซ้ำ",'on'=>'insert'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('v_id, v_name, v_address, v_tax_id, v_tel, v_contractor', 'safe', 'on'=>'search'),
+			array('v_id, v_name, v_address, v_tax_id, v_tel, v_contractor,type,v_BP', 'safe', 'on'=>'search'),
 		);
 	}
+
+	
+
+	public function beforeSave()
+    {
+    	    
+
+            return parent::beforeSave();
+    }
 
 	/**
 	 * @return array relational rules.
@@ -59,6 +72,9 @@ class Vendor extends CActiveRecord
 	 */
 	public function attributeLabels()
 	{
+		$bp_label ='หมายเลข BP';
+		if($this->type_id==1)
+		$bp_label = 'หมายเลข Vendor';
 		return array(
 			'v_id' => 'id คู่สัญญา',
 			'v_name' => 'ชื่อบริษัท',
@@ -66,8 +82,14 @@ class Vendor extends CActiveRecord
 			'v_tax_id' => 'เลขประจำตัวผู้เสียภาษี',
 			'v_tel' => 'เบอร์โทรติดต่อ',
 			'v_contractor' => 'ชื่อผู้ติดต่อ',
+			'v_BP' => $bp_label,
+			'type' => 'ประเภทคู่สัญญา',
 		);
 	}
+
+	public function behaviors()  {
+    	return array( 'CCompare'); // <-- and other behaviors your model may have
+  	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -93,6 +115,8 @@ class Vendor extends CActiveRecord
 		$criteria->compare('v_tax_id',$this->v_tax_id);
 		$criteria->compare('v_tel',$this->v_tel,true);
 		$criteria->compare('v_contractor',$this->v_contractor,true);
+		$criteria->compare('v_BP',$this->v_BP,true);
+		$criteria->compare('type',$this->type,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

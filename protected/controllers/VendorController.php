@@ -131,13 +131,17 @@ class VendorController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+		
 
 		if(isset($_POST['Vendor']))
 		{
+			
 			$model->attributes=$_POST['Vendor'];
 			if($model->save())
 				$this->redirect(array('admin'));
 		}
+
+		$model->type_id = $model->type=="Owner"?0:1;
 
 		$this->render('update',array(
 			'model'=>$model,

@@ -103,10 +103,10 @@ hr {
       				
 				<div class="row-fluid">
 					<div class="span4">
-      					<?php echo $form->textFieldRow($model,'pj_fiscalyear',array('class'=>'span12','maxlength'=>4,'readonly'=>false)); ?>
+      					<?php echo $form->textFieldRow($model,'pj_fiscalyear',array('class'=>'span12','maxlength'=>4,'readonly'=>true)); ?>
     				</div>
     				<div class="span8">
-      					<?php echo $form->textFieldRow($model,'pj_date_approved',array('class'=>'span6','readonly'=>false));?>
+      					<?php echo $form->textFieldRow($model,'pj_date_approved',array('class'=>'span6','readonly'=>true));?>
     				
 		      		</div>
 		      		
@@ -124,7 +124,7 @@ hr {
 
               echo $form->labelEx($model,'pj_work_cat',array('class'=>'span12','style'=>'text-align:left;margin-left:-1px;margin-bottom:-5px'));
                
-              echo CHtml::textField('pj_work_cat',$workcatName,array('class'=>'span12','readonly'=>false));
+              echo CHtml::textField('pj_work_cat',$workcatName,array('class'=>'span12','readonly'=>true));
             
 
       				?>
@@ -143,7 +143,7 @@ hr {
               if(!empty($vendor))
                 $vendorName = $vendor[0]["name"];
 
-              echo CHtml::textField('pj_vendor_id',$vendorName,array('class'=>'span12','readonly'=>false));
+              echo CHtml::textField('pj_vendor_id',$vendorName,array('class'=>'span12','readonly'=>true));
             
 						
 				      ?>
@@ -207,30 +207,30 @@ hr {
                     echo '<legend class="the-legend">สัญญาที่ '.$id.'</legend>';
                         echo '<div class="row-fluid">';
                           echo '<div class="span3">';
-                          echo $form->textFieldRow($modelPC,'pc_code',array('class'=>'span12','readonly'=>false));
+                          echo $form->textFieldRow($modelPC,'pc_code',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
                           echo '<div class="span3">';
-                          echo $form->textFieldRow($modelPC,'pc_cost',array('class'=>'span12','readonly'=>false));
+                          echo $form->textFieldRow($modelPC,'pc_cost',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
                           echo '<div class="span3">';
-                          echo $form->textFieldRow($modelPC,'pc_sign_date',array('class'=>'span12','readonly'=>false));
+                          echo $form->textFieldRow($modelPC,'pc_sign_date',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
                           echo '<div class="span3">';
-                          echo $form->textFieldRow($modelPC,'pc_end_date',array('class'=>'span12','readonly'=>false));
+                          echo $form->textFieldRow($modelPC,'pc_end_date',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
                         echo '</div>';
                         echo '<div class="row-fluid">';
                           echo '<div class="span6">';
-                          echo $form->textFieldRow($modelPC,'pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12','readonly'=>false));
+                          echo $form->textFieldRow($modelPC,'pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12','readonly'=>true));
                           echo '</div>';
                           echo '<div class="span4">';
-                          echo $form->textFieldRow($modelPC,'pc_guarantee',array('class'=>'span12','readonly'=>false));
+                          echo $form->textFieldRow($modelPC,'pc_guarantee',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
                           echo '<div class="span1">';
-                          echo $form->textFieldRow($modelPC,'pc_T_percent',array('class'=>'span12','readonly'=>false));
+                          echo $form->textFieldRow($modelPC,'pc_T_percent',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
                           echo '<div class="span1">';
-                          echo $form->textFieldRow($modelPC,'pc_A_percent',array('class'=>'span12','readonly'=>false));
+                          echo $form->textFieldRow($modelPC,'pc_A_percent',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
                         echo '</div>';
                     echo '</fieldset">';   
@@ -274,7 +274,7 @@ hr {
                         ->from('outsource_contract')
                         ->where('oc_proj_id=:id', array(':id'=>$model->pj_id))
                         ->queryAll();
-
+            $index = 1;  
             if(!empty($outsourceContracts))
             {    
                 $index = 1;	 

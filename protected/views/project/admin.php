@@ -112,6 +112,14 @@ $this->widget('bootstrap.widgets.TbButton', array(
 				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:center')
 	  	),
+	  	'pj_cost'=>array(
+			    'header' => '<a class="sort-link">วงเงินรวม</a>',
+			    'headerHtmlOptions'=>array(),
+			    'value' => '$data->sumcost',
+			    //'filter'=>CHtml::activeTextField($model, 'pj_fiscalyear',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
+				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				'htmlOptions'=>array('style'=>'text-align:center')
+	  	),
 		// 'v_contractor'=>array(
 		// 	    'name' => 'v_contractor',
 		// 	    'filter'=>CHtml::activeTextField($model, 'v_contractor',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_contractor"))),

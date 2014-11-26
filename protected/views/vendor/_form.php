@@ -1,6 +1,6 @@
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'vendor-form',
-	'enableAjaxValidation'=>true,
+	'enableAjaxValidation'=>false,
 	'type'=>'horizontal',
 	'htmlOptions'=>  array('class'=>'well span10 text-center')
 )); ?>
@@ -9,8 +9,31 @@
 
 	<div style="text-align:left"><?php echo $form->errorSummary($model); ?></div>
 	<div class="row-fluid">
+    	
     	<div class="span8">
-      		<?php echo $form->textFieldRow($model,'v_name',array('class'=>'span12','maxlength'=>200)); ?>
+      		<?php
+
+      		 
+      		 $typelist = array("Owner" => "Owner", "Supplier" => "Supplier");
+             echo $form->dropDownListRow($model, 'type', $typelist,array('class'=>'span12'), array('options' => array('pj_work_cat'=>array('selected'=>true)))); 
+
+
+      		 ?>
+    	</div>
+  	</div>
+	<div class="row-fluid">
+    	<div class="span8">
+      		<?php 
+
+      		echo $form->textFieldRow($model,'v_name',array('class'=>'span12','maxlength'=>200));
+
+      		 ?>
+    	</div>
+    	
+  	</div>
+  	<div class="row-fluid">
+    	<div class="span8">
+      		<?php echo $form->textFieldRow($model,'v_BP',array('class'=>'span12','maxlength'=>200)); ?>
     	</div>
     	
   	</div>
@@ -63,4 +86,17 @@
 	</div>
   </div>
 <?php $this->endWidget(); ?>
+
+<script type="text/javascript">
+$(function() {
+		//console.log( "ready!" );
+		$( "#Vendor_type" ).change(function() {
+		   if($( "#Vendor_type" ).val()=="Owner")	
+			 $("label[for='Vendor_v_BP']").text("หมายเลข BP")
+		   else
+		   	 $("label[for='Vendor_v_BP']").text("หมายเลข Vendor")
+		});
+});	
+
+</script>
 

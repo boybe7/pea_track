@@ -165,6 +165,8 @@ hr {
                         </tbody>
                         
             </table>
+             <?php echo $form->textFieldRow($model,'pj_CA',array('class'=>'span12','maxlength'=>200,'readonly'=>true)); ?>
+            
     		</div>
     		
     		
@@ -312,7 +314,7 @@ hr {
 				<?php $this->widget('bootstrap.widgets.TbButton', array(
 					'buttonType'=>'submit',
 					'type'=>'primary',
-					'label'=>$model->isNewRecord ? 'Create' : 'Save',
+					'label'=>'บันทึก',
 				)); ?>
 			</div>
 			
