@@ -33,7 +33,7 @@ class FatherController extends Controller
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'loadChildByAjax'),
+                'actions' => array('create', 'update', 'loadChildByAjax', 'loadGrandChildByAjax'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -67,7 +67,8 @@ class FatherController extends Controller
     
         // Uncomment the following line if AJAX validation is needed
         $this->performAjaxValidation($model);
-        $model2 = new Child; 
+        $model2 = new Child;
+        $model3 = new GrandChild; 
         if (isset($_POST['Father']))
         {
             $model->attributes = $_POST['Father'];
@@ -85,7 +86,7 @@ class FatherController extends Controller
         }
  
         $this->render('create', array(
-            'model' => $model,'child'=>$model2
+            'model' => $model,'child'=>$model2,'grandchild'=>$model3
         ));
     }
  
@@ -188,10 +189,22 @@ class FatherController extends Controller
     public function actionLoadChildByAjax($index)
     {
         $model = new Child;
+        $model3 = new GrandChild; 
         $this->renderPartial('//child/_form', array(
             'model' => $model,
+            'grandchild'=>$model3,
             'index' => $index,
 //            'display' => 'block',
+        ), false, true);
+    }
+
+    public function actionLoadGrandChildByAjax($index)
+    {
+       
+        $model3 = new GrandChild; 
+        $this->renderPartial('//grandchild/_form', array(
+            'model' => $model3,
+            'index' => $index,
         ), false, true);
     }
  

@@ -1,4 +1,4 @@
-
+  <div>
 
 	<div class="row-fluid">
 	  <div class="span4">	
@@ -22,13 +22,73 @@
         ?>
        </div>
     </div>
-
-
+        
+        <?php
+        echo CHtml::link('Add GrandChild', '#', array('id' => 'loadGrandChildByAjax'));
+        
+        ?>
+        <div id="grandchild">
+            
+            <?php
+            echo '<input type="hidden" id="numc['.$index.']" value="1">';
+            $index2 = 1;
+            if($model->isNewRecord) 
+            $this->renderPartial('//grandchild/_form', array(
+                    'model' => $grandchild,
+                    'index' => 1,
+                    'display' => 'block'
+                ));
+            $index2++;
+            
+            foreach ($model->grandchild as $id => $child):
+                
+                $this->renderPartial('//grandchild/_form', array(
+                    'model' => $child,
+                    'index' => $id,
+                    'display' => 'block'
+                ));
+                $index2++;
+            endforeach;
+            ?>
+        </div>
+</div>        
 <?php
+Yii::app()->clientScript->registerCoreScript('jquery');
+Yii::app()->clientScript->registerScript('loadchild2', '
+var _index = ' . $index . ';
+var _index = $("#numc['.$index.']").val();
+
+$("#loadGrandChildByAjax").click(function(e){
+    var _index = $("#numc['.$index.']").val();
+    //if(_index==0)
+         _index++;
+
+    e.preventDefault();
+    var _url = "' . Yii::app()->controller->createUrl("loadGrandChildByAjax", array("load_for" => $this->action->id)) . '&index="+_index;
+    $.ajax({
+        url: _url,
+        success:function(response){
+            $("#grandchild").append(response);
+            $("#grandchild .crow").last().animate({
+                opacity : 1,
+                left: "+50",
+                height: "toggle"
+            });
+            //_index++;
+            $("#numc['.$index.']").val(_index);
+            console.log("add num:"+$("#numc").val());
+             _index = $("#numc['.$index.']").val();
+            //console.log("add index:"+_index);
+        }
+    });
+   
+    //_index++;
+});
+', CClientScript::POS_END);
 Yii::app()->clientScript->registerScript('deleteChild', "
 function deleteChild(elm, index)
 {
-    element=$(elm).parent().parent();
+    element=$(elm).parent().parent().parent();
     /* animate div */
     $(element).animate(
     {

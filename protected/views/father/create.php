@@ -36,6 +36,7 @@
         if($model->isNewRecord) 
         $this->renderPartial('//child/_form', array(
                 'model' => $child,
+                'grandchild' => $grandchild,
                 'index' => 1,
                 'display' => 'block'
             ));

@@ -94,19 +94,11 @@
 <div class="well">
 	<ul class="nav nav-tabs">
       <?php  
-        if($activeTab==1)
-        {
+        
            echo '<li class="active"><a href="#projTab" data-toggle="tab">โครงการ</a></li>
                  <li><a href="#outTab" data-toggle="tab">สัญญาจ้างต่อ</a></li>
                 ';	
-        } 
-        else
-        {
-        	echo '<li><a href="#projTab" data-toggle="tab">โครงการ</a></li>
-                 <li  class="active"><a href="#outTab" data-toggle="tab">สัญญาจ้างต่อ</a></li>
-                ';	
-        }
-         
+        
       ?>
         
     </ul>
@@ -115,11 +107,9 @@
         
       	<?php 
 
-        if($activeTab==1)
+        
         	echo '<div class="tab-pane active" id="projTab">';
-        else
-        	echo '<div class="tab-pane" id="projTab">';
-
+        
       	$form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 			'id'=>'project-form',
 			'enableAjaxValidation'=>true,
@@ -821,10 +811,7 @@
 		
         <!-- tab@2  Outsource Contracts -->
 		<?php 
-			if($activeTab==2)
-				echo '<div class="tab-pane active" id="outTab">';		    
-		    else
-		    	echo '<div class="tab-pane" id="outTab">';
+			  	echo '<div class="tab-pane" id="outTab">';
 
 		    $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 				'id'=>'project-form2',

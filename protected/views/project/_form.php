@@ -205,7 +205,7 @@ hr {
 						        //'data-target'=>'#myModal',
 						        'onclick'=>'js:bootbox.confirm($("#modal-body").html(),"ยกเลิก","ตกลง",
 			                   			function(confirmed){
-			                   	 	        
+			                   	 	    console.log($(".modal-body #vendor-form").serialize());    
 			                   	 			
                                 			if(confirmed)
 			                   	 		    {
@@ -318,474 +318,42 @@ hr {
         echo '<input type="hidden" id="numContract" name="numContract" value="'.$numContracts.'">';
 
   		$this->widget('bootstrap.widgets.TbButton', array(
-			    'buttonType'=>'link',
-			    
-			    'type'=>'success',
-			    'label'=>'เพิ่มสัญญา',
-			    'icon'=>'plus-sign',
-			    
-			    'htmlOptions'=>array(
-			    	'class'=>'pull-right',
-			    	'style'=>'margin:0px 10px 0px 10px;',
-			    	'onclick'=>'
-                         var no = $("#numContract").val();
-                         no++;
-                         if(no<6)
-                         {	
-                           $("#numContract").val(no);                         
-                           $("#contract"+no).removeClass("hide");
-                         } 
-			    	'
-			    ),
-			)); 
+              'buttonType'=>'link',
+              
+              'type'=>'success',
+              'label'=>'เพิ่มสัญญา',
+              'icon'=>'plus-sign',
+              
+              'htmlOptions'=>array(
+                'class'=>'pull-right',
+                'style'=>'margin:0px 10px 0px 10px;',
+                'id'=>'loadContractByAjax'
+              ),
+          ));
 
-			$this->widget('bootstrap.widgets.TbButton', array(
-			    'buttonType'=>'link',
-			    
-			    'type'=>'danger',
-			    'label'=>'ลบสัญญา',
-			    'icon'=>'minus-sign',
-			    //'url'=>array('delAll'),
-			    //'htmlOptions'=>array('id'=>"buttonDel2",'class'=>'pull-right'),
-			    'htmlOptions'=>array(
-			        //'data-toggle'=>'modal',
-			        //'data-target'=>'#myModal',
-			        'onclick'=>'      
-								var no = $("#numContract").val();
-                         		if(no>1)
-                         		{
-                         			$("#contract"+no).addClass("hide");
-                         			no--;
-                         			$("#numContract").val(no);             
-                         		}
-                         		
-
-			                    ',
-			        'class'=>'pull-right'
-			    ),
-			)); 
          ?>
          </div>
-  		<?php
 
-  		    //money format with 2 decimal  x,xxx.xx
-  			$this->widget('application.extensions.moneymask.MMask',array(
-                    'element'=>'#ProjectContract_0_pc_cost,#ProjectContract_1_pc_cost,#ProjectContract_2_pc_cost,#ProjectContract_3_pc_cost,#ProjectContract_4_pc_cost',
-                    'currency'=>'บาท',
-                    'config'=>array(
-                        'symbolStay'=>true,
-                        'thousands'=>',',
-                        'decimal'=>'.',
-                        'precision'=>2,
-                    )
-                ));
+         <div id="pj_contract">
+         
+          <?php
 
+          echo  '<input type="hidden" id="num" name="num" value="'.$numContracts.'">';
+          $index = 1;
 
-  		?>
-  		<fieldset class="well the-fieldset">
-           <legend class="the-legend">สัญญาที่ 1</legend>
-           <div style="text-align:left"><?php echo $form->errorSummary(array($modelContract));?></div>
-           <div class="row-fluid">
-	  			<div class="span3">
-	  			    <?php echo $form->textFieldRow($modelContract,'[0]pc_code',array('class'=>'span12')); ?>
+          foreach ($contract as $id => $con):
 
-	  			</div>
-	  			<div class="span3">
-					<?php echo $form->textFieldRow($modelContract,'[0]pc_cost',array('class'=>'span12')); ?>
-	  			</div>
-	  			<div class="span3">
-      					<?php echo $form->labelEx($modelContract,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
-    					
-    					<?php 
+              $this->renderPartial('//ProjectContract/_form', array(
+                  'model' => $con,
+                  'index' => $index,
+                  'display' => 'block'
+              ));
+              $index++;
+          endforeach;
+          ?>
+      </div>
+    
 
-      			 
-		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
-		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
-
-		                    array(
-		                        'name'=>'[0]pc_sign_date',
-		                        'attribute'=>'[0]pc_sign_date',
-		                        'model'=>$modelContract,
-		                        'options' => array(
-		                                          'mode'=>'focus',
-		                                          //'language' => 'th',
-		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
-		                                          'showAnim' => 'slideDown',
-		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract->pc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
-		                     )
-		                );
-		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-		      			 ?>
-		      	</div>
-		      	<div class="span3">
-      					<?php echo $form->labelEx($modelContract,'pc_end_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>    					
-    					<?php       			 
-		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
-		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
-
-		                    array(
-		                        'name'=>'pc_end_date',
-		                        'attribute'=>'[0]pc_end_date',
-		                        'model'=>$modelContract,
-		                        'options' => array(
-		                                          'mode'=>'focus',
-		                                          //'language' => 'th',
-		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
-		                                          'showAnim' => 'slideDown',
-		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract->pc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
-		                     )
-		                );
-		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-		      			 ?>
-		      	</div>
-	  		</div>
-	  		<div class="row-fluid">
-	  			<div class="span6">
-	  			 <?php echo $form->textAreaRow($modelContract,'[0]pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
-	  			</div>
-	  			<div class="span4">
-	                  <?php echo $form->textFieldRow($modelContract,'[0]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
-	  			</div>
-	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'[0]pc_T_percent',array('class'=>'span12','maxlength'=>3)); ?>
-	  			</div>
-	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract,'[0]pc_A_percent',array('class'=>'span12','maxlength'=>3)); ?>
-	  			</div>
-	  		</div>		
-        </fieldset>
-        <?php 
-           if($numContracts>1)
- 		       echo '<fieldset id="contract2" class="well the-fieldset">';
-            else
-               echo '<fieldset id="contract2" class="hide well the-fieldset">';
-        ?>   
-           <legend class="the-legend">สัญญาที่ 2</legend>
-           <div style="text-align:left"><?php echo $form->errorSummary(array($modelContract2));?></div>
-           <div class="row-fluid">
-	  			<div class="span3">
-	  			    <?php echo $form->textFieldRow($modelContract2,'[1]pc_code',array('class'=>'span12')); ?>
-
-	  			</div>
-	  			<div class="span3">
-					<?php echo $form->textFieldRow($modelContract2,'[1]pc_cost',array('class'=>'span12')); ?>
-	  			</div>
-	  			<div class="span3">
-      					<?php echo $form->labelEx($modelContract2,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
-    					
-    					<?php 
-
-      			 
-		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
-		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
-
-		                    array(
-		                        'name'=>'[1]pc_sign_date',
-		                        'attribute'=>'[1]pc_sign_date',
-		                        'model'=>$modelContract2,
-		                        'options' => array(
-		                                          'mode'=>'focus',
-		                                          //'language' => 'th',
-		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
-		                                          'showAnim' => 'slideDown',
-		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract2->pc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
-		                     )
-		                );
-		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-		      			 ?>
-		      	</div>
-		      	<div class="span3">
-      					<?php echo $form->labelEx($modelContract2,'pc_end_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>    					
-    					<?php       			 
-		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
-		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
-
-		                    array(
-		                        'name'=>'[1]pc_end_date',
-		                        'attribute'=>'[1]pc_end_date',
-		                        'model'=>$modelContract2,
-		                        'options' => array(
-		                                          'mode'=>'focus',
-		                                          //'language' => 'th',
-		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
-		                                          'showAnim' => 'slideDown',
-		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract2->pc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
-		                     )
-		                );
-		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-		      			 ?>
-		      	</div>
-	  		</div>
-	  		<div class="row-fluid">
-	  			<div class="span6">
-	  			 <?php echo $form->textAreaRow($modelContract2,'[1]pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
-	  			</div>
-	  			<div class="span4">
-	                  <?php echo $form->textFieldRow($modelContract2,'[1]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
-	  			</div>
-	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract2,'[1]pc_T_percent',array('class'=>'span12','maxlength'=>3)); ?>
-	  			</div>
-	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract2,'[1]pc_A_percent',array('class'=>'span12','maxlength'=>3)); ?>
-	  			</div>
-	  		</div>		
-        </fieldset>
-
-
-   		<?php 
-           if($numContracts>2)
- 		       echo '<fieldset id="contract3" class="well the-fieldset">';
-            else
-               echo '<fieldset id="contract3" class="hide well the-fieldset">';
-        ?>   
-           <legend class="the-legend">สัญญาที่ 3</legend>
-           <div style="text-align:left"><?php echo $form->errorSummary(array($modelContract3));?></div>
-           <div class="row-fluid">
-	  			<div class="span3">
-	  			    <?php echo $form->textFieldRow($modelContract3,'[2]pc_code',array('class'=>'span12')); ?>
-
-	  			</div>
-	  			<div class="span3">
-					<?php echo $form->textFieldRow($modelContract3,'[2]pc_cost',array('class'=>'span12')); ?>
-	  			</div>
-	  			<div class="span3">
-      					<?php echo $form->labelEx($modelContract3,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
-    					
-    					<?php 
-
-      			 
-		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
-		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
-
-		                    array(
-		                        'name'=>'[2]pc_sign_date',
-		                        'attribute'=>'[2]pc_sign_date',
-		                        'model'=>$modelContract3,
-		                        'options' => array(
-		                                          'mode'=>'focus',
-		                                          //'language' => 'th',
-		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
-		                                          'showAnim' => 'slideDown',
-		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract3->pc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
-		                     )
-		                );
-		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-		      			 ?>
-		      	</div>
-		      	<div class="span3">
-      					<?php echo $form->labelEx($modelContract3,'pc_end_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>    					
-    					<?php       			 
-		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
-		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
-
-		                    array(
-		                        'name'=>'[2]pc_end_date',
-		                        'attribute'=>'[2]pc_end_date',
-		                        'model'=>$modelContract3,
-		                        'options' => array(
-		                                          'mode'=>'focus',
-		                                          //'language' => 'th',
-		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
-		                                          'showAnim' => 'slideDown',
-		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract3->pc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
-		                     )
-		                );
-		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-		      			 ?>
-		      	</div>
-	  		</div>
-	  		<div class="row-fluid">
-	  			<div class="span6">
-	  			 <?php echo $form->textAreaRow($modelContract3,'[2]pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
-	  			</div>
-	  			<div class="span4">
-	                  <?php echo $form->textFieldRow($modelContract3,'[2]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
-	  			</div>
-	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract3,'[2]pc_T_percent',array('class'=>'span12','maxlength'=>3)); ?>
-	  			</div>
-	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract3,'[2]pc_A_percent',array('class'=>'span12','maxlength'=>3)); ?>
-	  			</div>
-	  		</div>		
-        </fieldset>
-
-        <?php 
-           if($numContracts>3)
- 		       echo '<fieldset id="contract4" class="well the-fieldset">';
-            else
-               echo '<fieldset id="contract4" class="hide well the-fieldset">';
-        ?>   
-           <legend class="the-legend">สัญญาที่ 4</legend>
-           <div style="text-align:left"><?php echo $form->errorSummary(array($modelContract4));?></div>
-           <div class="row-fluid">
-	  			<div class="span3">
-	  			    <?php echo $form->textFieldRow($modelContract4,'[3]pc_code',array('class'=>'span12')); ?>
-
-	  			</div>
-	  			<div class="span3">
-					<?php echo $form->textFieldRow($modelContract4,'[3]pc_cost',array('class'=>'span12')); ?>
-	  			</div>
-	  			<div class="span3">
-      					<?php echo $form->labelEx($modelContract4,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
-    					
-    					<?php 
-
-      			 
-		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
-		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
-
-		                    array(
-		                        'name'=>'[3]pc_sign_date',
-		                        'attribute'=>'[3]pc_sign_date',
-		                        'model'=>$modelContract4,
-		                        'options' => array(
-		                                          'mode'=>'focus',
-		                                          //'language' => 'th',
-		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
-		                                          'showAnim' => 'slideDown',
-		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract4->pc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
-		                     )
-		                );
-		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-		      			 ?>
-		      	</div>
-		      	<div class="span3">
-      					<?php echo $form->labelEx($modelContract4,'pc_end_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>    					
-    					<?php       			 
-		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
-		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
-
-		                    array(
-		                        'name'=>'[3]pc_end_date',
-		                        'attribute'=>'[3]pc_end_date',
-		                        'model'=>$modelContract4,
-		                        'options' => array(
-		                                          'mode'=>'focus',
-		                                          //'language' => 'th',
-		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
-		                                          'showAnim' => 'slideDown',
-		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract4->pc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
-		                     )
-		                );
-		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-		      			 ?>
-		      	</div>
-	  		</div>
-	  		<div class="row-fluid">
-	  			<div class="span6">
-	  			 <?php echo $form->textAreaRow($modelContract4,'[3]pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
-	  			</div>
-	  			<div class="span4">
-	                  <?php echo $form->textFieldRow($modelContract4,'[3]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
-	  			</div>
-	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract4,'[3]pc_T_percent',array('class'=>'span12','maxlength'=>3)); ?>
-	  			</div>
-	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract4,'[3]pc_A_percent',array('class'=>'span12','maxlength'=>3)); ?>
-	  			</div>
-	  		</div>		
-        </fieldset>
-
-        <?php 
-           if($numContracts>4)
- 		       echo '<fieldset id="contract5" class="well the-fieldset">';
-            else
-               echo '<fieldset id="contract5" class="hide well the-fieldset">';
-        ?>   
-           <legend class="the-legend">สัญญาที่ 5</legend>
-           <div style="text-align:left"><?php echo $form->errorSummary(array($modelContract5));?></div>
-           <div class="row-fluid">
-	  			<div class="span3">
-	  			    <?php echo $form->textFieldRow($modelContract5,'[4]pc_code',array('class'=>'span12')); ?>
-
-	  			</div>
-	  			<div class="span3">
-					<?php echo $form->textFieldRow($modelContract5,'[4]pc_cost',array('class'=>'span12')); ?>
-	  			</div>
-	  			<div class="span3">
-      					<?php echo $form->labelEx($modelContract5,'pc_sign_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
-    					
-    					<?php 
-
-      			 
-		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
-		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
-
-		                    array(
-		                        'name'=>'[4]pc_sign_date',
-		                        'attribute'=>'[4]pc_sign_date',
-		                        'model'=>$modelContract5,
-		                        'options' => array(
-		                                          'mode'=>'focus',
-		                                          //'language' => 'th',
-		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
-		                                          'showAnim' => 'slideDown',
-		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract5->pc_sign_date),  // ใส่ค่าเดิม ในเหตุการ Update 
-		                     )
-		                );
-		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-		      			 ?>
-		      	</div>
-		      	<div class="span3">
-      					<?php echo $form->labelEx($modelContract5,'pc_end_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>    					
-    					<?php       			 
-		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
-		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
-
-		                    array(
-		                        'name'=>'[4]pc_end_date',
-		                        'attribute'=>'[4]pc_end_date',
-		                        'model'=>$modelContract5,
-		                        'options' => array(
-		                                          'mode'=>'focus',
-		                                          //'language' => 'th',
-		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
-		                                          'showAnim' => 'slideDown',
-		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$modelContract5->pc_end_date),  // ใส่ค่าเดิม ในเหตุการ Update 
-		                     )
-		                );
-		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-		      			 ?>
-		      	</div>
-	  		</div>
-	  		<div class="row-fluid">
-	  			<div class="span6">
-	  			 <?php echo $form->textAreaRow($modelContract5,'[4]pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?>
-	  			</div>
-	  			<div class="span4">
-	                  <?php echo $form->textFieldRow($modelContract5,'[4]pc_guarantee',array('class'=>'span12','maxlength'=>100)); ?>
-	  			</div>
-	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract5,'[4]pc_T_percent',array('class'=>'span12','maxlength'=>3)); ?>
-	  			</div>
-	  			<div class="span1">
-	  			      <?php echo $form->textFieldRow($modelContract5,'[4]pc_A_percent',array('class'=>'span12','maxlength'=>3)); ?>
-	  			</div>
-	  		</div>		
-        </fieldset>
   			<div class="form-actions">
 				<?php $this->widget('bootstrap.widgets.TbButton', array(
 					'buttonType'=>'submit',
@@ -811,6 +379,47 @@ hr {
 
     	?>
     </div>
+    <div id="modal-body2">
+<!-- put whatever you want to show up on bootbox here -->
+      <?php 
+      //$model = Vendor::model()->findByPk(14);
+      $model3=new ContractApproveHistory;
+      $this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
 
+      ?>
+    </div>
 </div>
 
+<?php
+//Yii::app()->clientScript->registerCoreScript('jquery');
+Yii::app()->clientScript->registerScript('loadcontract', '
+var _index = ' . $index . ';
+var _index = $("#num").val();
+$("#loadContractByAjax").click(function(e){
+     var _index = $("#num").val();
+     _index++;
+    e.preventDefault();
+    var _url = "' . Yii::app()->controller->createUrl("loadContractByAjax", array("load_for" => $this->action->id)) . '&index="+_index;
+    $.ajax({
+        url: _url,
+        success:function(response){
+            $("#pj_contract").append(response);
+            $("#pj_contract .crow").last().animate({
+                opacity : 1,
+                left: "+0",
+                height: "toggle"
+            });
+
+            //_index++;
+            $("#num").val(_index);
+            //console.log("add num:"+$("#num").val());
+             _index = $("#num").val();
+            //console.log("add index:"+_index);
+        }
+
+    });
+    //_index++;
+});
+', CClientScript::POS_END);
+
+?>

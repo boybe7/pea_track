@@ -114,9 +114,10 @@ $this->widget('bootstrap.widgets.TbButton', array(
 	  	),
 	  	'pj_cost'=>array(
 			    'header' => '<a class="sort-link">วงเงินรวม</a>',
+			    //'name'=>'cost',
 			    'headerHtmlOptions'=>array(),
 			    'value' => '$data->sumcost',
-			    //'filter'=>CHtml::activeTextField($model, 'pj_fiscalyear',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
+			    //'filter'=>CHtml::activeTextField($model, 'sumcost',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
 				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:center')
 	  	),

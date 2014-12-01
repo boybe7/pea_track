@@ -12,6 +12,7 @@
  * @property string $pj_date_approved
  * @property integer $pj_user_create
  * @property integer $pj_user_update
+ * @property integer $pj_cost
  */
 class Project extends CActiveRecord
 {
@@ -43,7 +44,7 @@ class Project extends CActiveRecord
 
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('pj_id,pj_cost, pj_name,pj_CA, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_date_approved, pj_user_create, pj_user_update,workcat_search', 'safe', 'on'=>'search'),
+			array('pj_id,cost, pj_name,pj_CA, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_date_approved, pj_user_create, pj_user_update,workcat_search', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -84,7 +85,7 @@ class Project extends CActiveRecord
 			'pj_user_create' => 'ผู้สร้างโครงการ',
 			'pj_user_update' => 'ผู้บันทึก',
 			'pj_CA' => 'หมายเลข CA',
-			'pj_cost'=> 'วงเงินรวม'
+			'cost'=> 'วงเงินรวม'
 		);
 	}
 
@@ -107,7 +108,7 @@ class Project extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('pj_id',$this->pj_id);
-		//$criteria->compare('pj_cost',$this->sumcost);
+		//$criteria->compare('cost',$this->sumcost);
 		$criteria->compare('pj_name',$this->pj_name,true);
 		$criteria->compare('pj_vendor_id',$this->pj_vendor_id);
 		$criteria->compare('pj_work_cat',$this->pj_work_cat);
@@ -118,9 +119,29 @@ class Project extends CActiveRecord
 		$criteria->compare('pj_CA',$this->pj_CA,true);
 		$criteria->compare('workcat.wc_name',$this->workcat_search);
 
+		$sort=new CSort;
+                $sort->attributes=array(
+                        
+                        '*',
+                        'cost'=>array(
+                                'asc'=>'cost DESC',
+                                'desc'=>'cost ASC',
+                        ),
+                );
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>$sort
 		));
+	}
+
+	public function getCost(){
+	     	$sum = 0;
+	     	foreach($this->getRelated('contract') as $projectCost)
+   			{
+     			$sum += $projectCost->pc_cost;
+   			}
+    		return $sum;
 	}
 
 	protected function afterFind(){
