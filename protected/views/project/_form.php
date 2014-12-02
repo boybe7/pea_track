@@ -141,6 +141,14 @@ hr {
 		      		
 		    		<?php 
       				//echo $form->textFieldRow($model,'pj_work_cat',array('class'=>'span12')); 
+
+              $test = Yii::app()->db->createCommand()
+                    ->select('*')
+                    ->from('TempApproveTable')
+                    ->queryAll();
+              print_r($test);      
+
+
       				$workcat = Yii::app()->db->createCommand()
                     ->select('wc_id,wc_name as name')
                     ->from('work_category')

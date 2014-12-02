@@ -133,6 +133,11 @@ class ProjectController extends Controller
 		$modelContract = array();
 		$numContracts = 1;
 		array_push($modelContract, new ProjectContract);
+
+		$query = "DROP TABLE if exists TempApproveTable;";
+	    $query = "CREATE TEMPORARY TABLE TempApproveTable  AS (SELECT * FROM contract_approve_history WHERE 1=2);";
+
+    	Yii::app()->db->createCommand($query)->execute();
 		
 		if(isset($_POST['Project']))
 		{
