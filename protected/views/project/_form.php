@@ -142,11 +142,11 @@ hr {
 		    		<?php 
       				//echo $form->textFieldRow($model,'pj_work_cat',array('class'=>'span12')); 
 
-              $test = Yii::app()->db->createCommand()
-                    ->select('*')
-                    ->from('TempApproveTable')
-                    ->queryAll();
-              print_r($test);      
+              // $test = Yii::app()->db->createCommand()
+              //       ->select('*')
+              //       ->from('TempApproveTable')
+              //       ->queryAll();
+              // print_r($test);      
 
 
       				$workcat = Yii::app()->db->createCommand()
@@ -391,7 +391,7 @@ hr {
 <!-- put whatever you want to show up on bootbox here -->
       <?php 
       //$model = Vendor::model()->findByPk(14);
-      $model3=new ContractApproveHistory;
+      $model3=new ContractApproveHistoryTemp;
       $this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
 
       ?>

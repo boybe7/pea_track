@@ -134,11 +134,11 @@ class ProjectController extends Controller
 		$numContracts = 1;
 		array_push($modelContract, new ProjectContract);
 
-		$query = "DROP TABLE if exists TempApproveTable;";
-	    $query = "CREATE TEMPORARY TABLE TempApproveTable  AS (SELECT * FROM contract_approve_history WHERE 1=2);";
+		//$query = "DROP TABLE if exists TempApproveTable;";
+	    //$query = "CREATE TEMPORARY TABLE TempApproveTable  AS (SELECT * FROM contract_approve_history WHERE 1=2);";
+		//Yii::app()->db->createCommand($query)->execute();
 
-    	Yii::app()->db->createCommand($query)->execute();
-		
+
 		if(isset($_POST['Project']))
 		{
 			
@@ -190,6 +190,10 @@ class ProjectController extends Controller
 	  //               $item->attributes=$_POST['OutsourceContract'][$i];
 	  //           $valid=$item->validate() && $valid;
 	  //       }
+		}
+		else{
+			//Yii::app()->db->createCommand('TRUNCATE contract_approve_history_temp')->execute();
+		
 		}
 
 		 $this->render('create', array(

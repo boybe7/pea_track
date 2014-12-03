@@ -9,6 +9,9 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
   	text-align: center;
   	vertical-align: middle;
   }
+  .tr_white {
+  	background-color: white;
+  }
 </style>
 <fieldset class="well the-fieldset">
         <legend class="the-legend">สัญญาที่ <?php echo ($index);?></legend>
@@ -138,26 +141,29 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 	                       
 				     'onclick'=>'js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
 			                   			function(confirmed){
-			                   	 	        
-			                   	 			
+			                   	 	        console.log("con:"+confirmed)
+			                   	 						
                                 			if(confirmed)
 			                   	 		    {
-			                   	 		    	console.log($(".modal-body #contract-approve-history-form").serialize());
-			                   	 		    	var data = $(".modal-body #contract-approve-history-form").serializeArray();
-			                   	 		    	console.log(data.length);
 
-												var obj = {};
-												for (var i = 0, l = data.length; i < l; i++) {
-												    obj[data[i].name] = data[i].value;
-												    console.log(data[i].name+":"+data[i].value);
-												}
+			         //           	 		    	console.log($(".modal-body #contract-approve-history-form").serialize());
+			         //           	 		    	var data = $(".modal-body #contract-approve-history-form").serializeArray();
+			         //           	 		    	console.log(data.length);
+
+												// var obj = {};
+												// for (var i = 0, l = data.length; i < l; i++) {
+												//     obj[data[i].name] = data[i].value;
+												//     console.log(data[i].name+":"+data[i].value);
+												// }
 			                   	 		    	$.ajax({
 													type: "POST",
-													url: "",
+													url: "../contractapprovehistory/createTemp",
 													dataType:"json",
-													data: $("#modal-body2 #contract-approve-history-form").serialize()
+													data: $(".modal-body #contract-approve-history-form").serialize()
 													})
 													.done(function( msg ) {
+														$("#approve-grid").yiiGridView("update",{});
+														consloe.log("ajax");
 														if(msg.status=="failure")
 														{
 															$("#modal-body2").html(msg.div);
@@ -169,9 +175,9 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 								                   	 		    {
 								                   	 		    	$.ajax({
 																		type: "POST",
-																		url: "../vendor/create",
+																		url: "../contractapprovehistory/createTemp",
 																		dataType:"json",
-																		data: $(".modal-body2 #contract-approve-history-form").serialize()
+																		data: $(".modal-body #contract-approve-history-form").serialize()
 																		})
 																		.done(function( msg ) {
 																			if(msg.status=="failure")
@@ -187,13 +193,95 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 														}
 														else{
 															js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+
 														}
 													});
+												$("#approve-grid").yiiGridView("update",{});
+											
 			                   	 		    }
 										})',
 			                
 	              ),
 	          ));
+
+                  
+				$this->widget('bootstrap.widgets.TbGridView',array(
+					'id'=>'approve-grid',
+				    'type'=>'bordered condensed',
+					'dataProvider'=>ContractApproveHistoryTemp::model()->search(),
+					//'filter'=>$model,
+					'selectableRows' => 2,
+					'enableSorting' => false,
+					'rowCssClassExpression'=>'"tr_white"',
+
+				    // 'template'=>"{summary}{items}{pager}",
+				    'htmlOptions'=>array('style'=>'padding-top:40px;'),
+				    'enablePagination' => false,
+				    'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
+					'columns'=>array(
+						    'No.'=>array(
+						        'header'=>'ลำดับ',
+						        'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),  	            	  		
+								'htmlOptions'=>array(
+	  	            	  			'style'=>'text-align:center'
+
+	  	        				),
+						        'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+						      ),
+							'detail'=>array(
+							    // 'header'=>'', 
+								
+								'name' => 'detail',
+
+								'headerHtmlOptions' => array('style' => 'width:40%;text-align:center;background-color: #f5f5f5'),  	            	  		
+								//'headerHtmlOptions' => array('style' => 'width: 110px'),
+								'htmlOptions'=>array(
+					  	            	  			'style'=>'text-align:left'
+
+					  	        )
+					  	    ),
+					  	    'approve by'=>array(
+							    // 'header'=>'', 
+								
+								'header' => 'อนุมัติโดย/<br>ลงวันที่',
+								'type'=>'raw', //to use html tag
+								'value'=> '$data->approveBy."<br>".$data->dateApprove',	
+								'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  		
+								//'headerHtmlOptions' => array('style' => 'width: 110px'),
+								'htmlOptions'=>array(
+					  	            	  			'style'=>'text-align:center'
+
+					  	        )
+					  	    ),
+					  	    'cost'=>array(
+							    'header'=>'วงเงิน/<br>เป็นเงินเพิ่ม', 
+								
+								'name' => 'cost',
+								// 'type'=>'raw', //to use html tag
+								'value'=> function($data){
+						            return number_format($data->cost, 2);
+						        },	
+								'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  		
+								'htmlOptions'=>array(
+					  	            	  			'style'=>'text-align:right'
+
+					  	        )
+					  	    ),
+					  	    'time'=>array(
+							    'header'=>'ระยะเวลาแล้วเสร็จ/<br>ระยะเลาขอขยาย', 
+								
+								'name' => 'timeSpend',
+								// 'type'=>'raw', //to use html tag
+									
+								'headerHtmlOptions' => array('style' => 'width:25%;text-align:center;background-color: #f5f5f5'),  	            	  		
+								'htmlOptions'=>array(
+					  	            	  			'style'=>'text-align:left'
+
+					  	        )
+					  	    ),	
+						)
+
+					));
 
 	         ?>
 	        </div>
