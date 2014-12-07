@@ -224,6 +224,7 @@ hr {
 													data: $(".modal-body #vendor-form").serialize()
 													})
 													.done(function( msg ) {
+                            console.log(msg)
 														if(msg.status=="failure")
 														{
 															$("#modal-body").html(msg.div);
@@ -387,11 +388,23 @@ hr {
 
     	?>
     </div>
+  
     <div id="modal-body2">
 <!-- put whatever you want to show up on bootbox here -->
       <?php 
       //$model = Vendor::model()->findByPk(14);
       $model3=new ContractApproveHistoryTemp;
+      
+      $this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
+
+      ?>
+    </div>
+    <div id="modal-body3">
+<!-- put whatever you want to show up on bootbox here -->
+      <?php 
+      //$model = Vendor::model()->findByPk(14);
+      $model3=new ContractApproveHistoryTemp;
+
       $this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
 
       ?>
@@ -423,9 +436,21 @@ $("#loadContractByAjax").click(function(e){
             //console.log("add num:"+$("#num").val());
              _index = $("#num").val();
             //console.log("add index:"+_index);
+             
+              
+              //rearrange no.
+              var collection = $(".contract_no");
+              for(var i=0; i<collection.length; i++){
+                  var element = collection.eq(i);
+                  element.html("สัญญาที่ "+(i+1));
+                  //console.log(element.html());
+              }                  
+              
         }
 
     });
+
+  
     //_index++;
 });
 ', CClientScript::POS_END);

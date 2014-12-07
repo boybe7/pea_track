@@ -31,11 +31,11 @@ class ContractApproveHistoryController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','createTemp','update'),
+				'actions'=>array('create','createTemp','update','updateTemp','delete','deleteTemp'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -81,22 +81,45 @@ class ContractApproveHistoryController extends Controller
 
 	public function actionCreateTemp()
 	{
-		$model=new ContractApproveHistoryTemp;
+	
+
+		 $model=new ContractApproveHistoryTemp;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
+		//$this->performAjaxValidation($model);
 		if(isset($_POST['ContractApproveHistoryTemp']))
 		{
 			$model->attributes=$_POST['ContractApproveHistoryTemp'];
-			$model->save();
-			
+			$model->contract_id = 0;
+			if (Yii::app()->request->isAjaxRequest)
+	        {
+	           
+	            if($model->save())
+	            	 echo CJSON::encode(array(
+	                'status'=>'success'
+	                ));
+	            else
+	                echo CJSON::encode(array(
+	                'status'=>'failure','div'=>$this->renderPartial('_form', array('model'=>$model), true)));
+	                
+	            exit;
+				        
+	        }		
+			else
+			  if($model->save())
+				$this->redirect(array('admin'));
+
 		}
 
-		// $this->render('create',array(
-		// 	'model'=>$model,
-		// ));
-		 $this->renderPartial('_form',array('model'=>$model));	
+		if (Yii::app()->request->isAjaxRequest)
+        {
+            echo CJSON::encode(array(
+                'status'=>'failure', 
+                'div'=>$this->renderPartial('_form', array('model'=>$model), true)));
+            exit;               
+        }
+
+		$this->renderPartial('_form',array('model'=>$model));
 	}
 
 	/**
@@ -123,6 +146,72 @@ class ContractApproveHistoryController extends Controller
 		));
 	}
 
+	public function actionUpdateTemp($id)
+	{
+		$model=ContractApproveHistoryTemp::model()->findByPk($id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['ContractApproveHistoryTemp']))
+		{
+			$model->attributes=$_POST['ContractApproveHistoryTemp'];
+
+			if (Yii::app()->request->isAjaxRequest)
+	        {
+	           
+	            if($model->save())
+	            	 echo CJSON::encode(array(
+	                'status'=>'success'
+	                ));
+	            else
+	                echo CJSON::encode(array(
+	                'status'=>'failure','div'=>$this->renderPartial('_form', array('model'=>$model), true)));
+	                
+	            exit;
+				        
+	        }		
+			else
+			  if($model->save())
+				$this->redirect(array('admin'));
+
+		}
+
+		$this->renderPartial('_form',array('model'=>$model));
+
+		// if(isset($_POST['ContractApproveHistoryTemp']))
+		// {
+		// 	$model->attributes=$_POST['ContractApproveHistoryTemp'];
+		// 	if (Yii::app()->request->isAjaxRequest)
+	 //        {
+	           
+	 //            if($model->save())
+	 //            	 echo CJSON::encode(array(
+	 //                'status'=>'success'
+	 //                ));
+	 //            else
+	 //                echo CJSON::encode(array(
+	 //                'status'=>'failure','div'=>$this->renderPartial('_form', array('model'=>$model), true)));
+	                
+	 //            exit;
+				        
+	 //        }		
+		// 	else
+		// 	  if($model->save())
+		// 		$this->redirect(array('admin'));
+
+		// }
+		// if (Yii::app()->request->isAjaxRequest)
+  //       {
+  //           echo CJSON::encode(array(
+  //               'status'=>'failure', 
+  //               'div'=>$this->renderPartial('_form', array('model'=>$model), true)));
+  //           exit;               
+  //       }
+
+		// $this->renderPartial('_form',array('model'=>$model));
+	}
+
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -141,6 +230,13 @@ class ContractApproveHistoryController extends Controller
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+
+	public function actionDeleteTemp($id)
+	{
+		$model = ContractApproveHistoryTemp::model()->findByPk($id);
+		$model->delete();
+
 	}
 
 	/**

@@ -132,8 +132,8 @@ class ProjectController extends Controller
 		$workcodes = "";
 		$modelContract = array();
 		$numContracts = 1;
-		array_push($modelContract, new ProjectContract);
-
+		$modelPC = new ProjectContract;
+		
 		//$query = "DROP TABLE if exists TempApproveTable;";
 	    //$query = "CREATE TEMPORARY TABLE TempApproveTable  AS (SELECT * FROM contract_approve_history WHERE 1=2);";
 		//Yii::app()->db->createCommand($query)->execute();
@@ -145,23 +145,64 @@ class ProjectController extends Controller
 			$model->attributes = $_POST['Project'];
 			if (isset($_POST['ProjectContract']))
             {
-                $model->contracts = $_POST['ProjectContract'];
+                $model->contract = $_POST['ProjectContract'];                         
+                $transaction=Yii::app()->db->beginTransaction();
+		    	try {
+			        //$model->attributes = $_POST['Project'];
+			        $model->pj_user_create = Yii::app()->user->ID;
+				    $model->pj_user_update = Yii::app()->user->ID;
+				
+				    $model->pj_name = $_POST["pj_vendor_id"];
+
+                //header('Content-type: text/plain');
+ 				
+ 				//print_r($model->contract); 
+				    if ($model->save()) {
+				    	
+		 				foreach ($model->contract as $contracts => $contract) 
+		 				{
+		 				     //print_r($contract);
+		 					$saveOK = false;
+		 				     $modelC = new ProjectContract;
+		 				     $modelC->attributes = $contract;
+		 				     $modelC->pc_id = "";
+		 				     $modelC->pc_proj_id = $model->pj_id;
+		 				     if($modelC->save())
+		 				     {
+		 				     	$saveOK = true;
+		 				     } 
+		 				}
+
+		 				if($saveOK)
+		 				   $transaction->commit();	
+
+		 			}
+		 			else
+		 				$transaction->rollBack(); 
+	 			}
+	 			catch(Exception $e)
+	 			{
+	 				$transaction->rollBack();	
+	 			}                         
+
+ 				//exit;
             }
-            if ($model->saveWithRelated('contract'))
-            {
-            	$workcodes = $_POST['workCode'];
-	 	        $workCodeArray = explode(",", $_POST['workCode']);
-	 	        foreach ($workCodeArray as $key => $value) 
-	 	        {
-	 	        		$wk = new WorkCode;
-	 	         		$wk->code = $value;
-	 	        		$wk->pj_id = $model->pj_id;
+
+           //  if ($model->saveWithRelated('contract'))
+           //  {
+           //  	$workcodes = $_POST['workCode'];
+	 	        // $workCodeArray = explode(",", $_POST['workCode']);
+	 	        // foreach ($workCodeArray as $key => $value) 
+	 	        // {
+	 	        // 		$wk = new WorkCode;
+	 	        //  		$wk->code = $value;
+	 	        // 		$wk->pj_id = $model->pj_id;
 		        		
-	 	        		$wk->save();	
-	 	        }
-            }
-            else
-                $model->addError('contract', 'Error occured while saving contracts.');
+	 	        // 		$wk->save();	
+	 	        // }
+           //  }
+           //  else
+           //      $model->addError('contract', 'Error occured while saving contracts.');
 
 			// $modelContract = array();
    //          $numContracts = $_POST['num'];
@@ -195,6 +236,9 @@ class ProjectController extends Controller
 			//Yii::app()->db->createCommand('TRUNCATE contract_approve_history_temp')->execute();
 		
 		}
+
+		$modelPC->pc_id = 1;
+		array_push($modelContract, $modelPC);
 
 		 $this->render('create', array(
             'model' => $model,'contract'=>$modelContract,'workcodes'=>$workcodes,'numContracts'=>$numContracts
@@ -513,12 +557,13 @@ class ProjectController extends Controller
 	public function actionLoadOutsourceByAjax($index)
     {
         $model = new OutsourceContract;
+
         Yii::app()->clientscript->scriptMap['jquery.js'] = false;
         Yii::app()->clientscript->scriptMap['jquery-ui.min.js'] = false;
         $this->renderPartial('//outsourceContract/_form', array(
             'model' => $model,
             'index' => $index,
-           'display' => 'block',
+            'display' => 'block',
         ), false, true);
 
         
@@ -526,12 +571,13 @@ class ProjectController extends Controller
     public function actionLoadContractByAjax($index)
     {
         $model = new ProjectContract;
+        $model->pc_id = $index;
         Yii::app()->clientscript->scriptMap['jquery.js'] = false;
         Yii::app()->clientscript->scriptMap['jquery-ui.min.js'] = false;
         $this->renderPartial('//ProjectContract/_form', array(
             'model' => $model,
             'index' => $index,
-           'display' => 'block',
+            'display' => 'block',
         ), false, true);
 
         

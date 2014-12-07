@@ -80,14 +80,14 @@ class ContractApproveHistoryTemp extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($id)
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('contract_id',$this->contract_id);
+		$criteria->compare('contract_id',$id);
 		$criteria->compare('detail',$this->detail,true);
 		$criteria->compare('dateApprove',$this->dateApprove,true);
 		$criteria->compare('approveBy',$this->approveBy,true);
