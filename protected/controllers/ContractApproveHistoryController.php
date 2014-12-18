@@ -79,7 +79,7 @@ class ContractApproveHistoryController extends Controller
 		 $this->renderPartial('_form',array('model'=>$model)); 
 	}
 
-	public function actionCreateTemp()
+	public function actionCreateTemp($id)
 	{
 	
 
@@ -90,7 +90,7 @@ class ContractApproveHistoryController extends Controller
 		if(isset($_POST['ContractApproveHistoryTemp']))
 		{
 			$model->attributes=$_POST['ContractApproveHistoryTemp'];
-			$model->contract_id = 0;
+			$model->contract_id = $id;
 			if (Yii::app()->request->isAjaxRequest)
 	        {
 	           

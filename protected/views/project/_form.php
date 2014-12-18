@@ -400,6 +400,28 @@ hr {
     </div>
 </div>
 
+<div id="modalApproveCreate"  class="approveCreate modal hide fade">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>เพิ่มข้อมูลการอนุมัติ</h3>
+    </div>
+    <div class="modal-body" id="bodyApproveCreate">
+      <?php 
+      //$model = Vendor::model()->findByPk(14);
+      $model3=new ContractApproveHistoryTemp;
+      
+      $this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
+
+
+      ?>
+    <!-- Date here: <input type="text" id="datePicker2" > -->
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn btn-danger" id="modalCancel2">ยกเลิก</a>
+    <a href="#" class="btn btn-primary" id="modalSubmit2">บันทึก</a>
+    </div>
+</div>
+
 <div id="modal-content" class="hide">
     <div id="modal-body">
 <!-- put whatever you want to show up on bootbox here -->

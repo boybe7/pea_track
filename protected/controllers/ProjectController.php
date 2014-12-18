@@ -172,6 +172,8 @@ class ProjectController extends Controller
 		 	        	}
 				    	$saveOK = 1;
 
+				    	
+
 				    	$index = 1;
 		 				foreach ($model->contract as $contracts => $contract) 
 		 				{
@@ -179,9 +181,13 @@ class ProjectController extends Controller
 		 					 
 		 				     $modelC = new ProjectContract;
 		 				     $modelC->attributes = $contract;
+		 				     $modelC->pc_details = $contract["pc_details"];
+		 				     $modelC->pc_sign_date = $contract["pc_sign_date"];
+		 				     $modelC->pc_PO = $contract["pc_PO"];
+		 				     $modelC->pc_vendor_id = $model->pj_vendor_id;
 
 		 				     array_push($modelContractOld, $modelC);
-		 				     $modelC->pc_id = "";
+		 				     //$modelC->pc_id = "";
 		 				     $modelC->pc_proj_id = $model->pj_id;
 
 		 				     
@@ -201,16 +207,17 @@ class ProjectController extends Controller
 						        foreach ($modelTemps as $key => $mTemp) {
 
 						        // header('Content-type: text/plain');
-              //            		print_r($mTemp);                    
-              //            	    exit;
+              //             		print_r($modelC);                    
+              //             	    exit;
                                         $modelApprove = new ContractApproveHistory;
                                         $modelApprove->attributes = $mTemp;
                                         $modelApprove->dateApprove = $mTemp['dateApprove'];
-                                        $modelApprove->id = "";
+                                        //$modelApprove->id = "";
+                                        $modelApprove->contract_id = $modelC->pc_id;
                                         if($modelApprove->save())
                                            $msg =  "successful";
                                         else{
-                                           $model->addError('contract', 'rrrกรุณากรอกข้อมูล "สัญญา" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+                                           $model->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ "'.$index.' ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
 		 				            	   $saveOK = 0;
                                         }   	
 						        }            

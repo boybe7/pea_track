@@ -45,7 +45,7 @@ class ProjectContract extends CActiveRecord
 			array('pc_A_percent', 'application.extensions.numericRangeValidator', 'min'=>0, 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('pc_id, pc_code, pc_proj_id, pc_vendor_id, pc_details, pc_sign_date, pc_end_date, pc_cost, pc_T_percent, pc_A_percent, pc_guarantee, pc_last_update, pc_user_update', 'safe', 'on'=>'search'),
+			array('pc_id, pc_code, pc_proj_id, pc_vendor_id,pc_PO, pc_details, pc_sign_date, pc_end_date, pc_cost, pc_T_percent, pc_A_percent, pc_guarantee, pc_last_update, pc_user_update', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -79,6 +79,7 @@ class ProjectContract extends CActiveRecord
 			'pc_guarantee' => 'หนังสือค้ำประกัน',
 			'pc_user_create' => 'ผู้สร้างสัญญา',
 			'pc_user_update' => 'ผู้บันทึก',
+			'pc_PO'=>'เลข PO'
 		);
 	}
 

@@ -16,7 +16,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 </style>
 <fieldset class="well the-fieldset">
         <legend class="the-legend contract_no">สัญญาที่ <?php echo ($index);?></legend>
-        <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_id'); ?>
+        <?php //echo CHtml::activeTextField($model, '[' . $index . ']pc_id'); ?>
         <div class="row-fluid">
         	<div class="span3">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_code'); ?>
@@ -100,7 +100,12 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
             </div>
         </div>
         <div class="row-fluid">
-        	<div class="span12">		  
+        	<div class="span3">		  
+        	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_PO'); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_PO', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
+              <?php echo CHtml::error($model, '[' . $index . ']pc_PO',array('class'=>'help-block error')); ?>
+            </div>
+        	<div class="span9">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_details'); ?>
               <?php echo CHtml::activeTextArea($model, '[' . $index . ']pc_details', array('rows'=>2, 'cols'=>50,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']pc_details',array('class'=>'help-block error')); ?>
@@ -139,73 +144,64 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 	              'htmlOptions'=>array(
 	                'class'=>'pull-right',
 	                'style'=>'margin:0px 10px 10px 10px;',
-	                       
-				     'onclick'=>'
-				                  //$("#modal-body2").html($("#modal-body3").html());
-				     			  $clone = 	$("#modal-body2").clone().data( "arr", $.extend( [], $("#modal-body2").data( "arr" ) ) );
-                                  //console.log($("#modal-content")); 
-                                  //console.log($("#modal-body2"));
-
-                                                                  
-                                  if($("#modal-body2").length)
-                                       $clone = $("#modal-body2");
-                                  else
-                                       $clone = $("#modal-body3");      
-                                  
-				                  js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
-			                   			function(confirmed){
-			                   	 	        console.log("con:"+confirmed)
+	                'onclick'=>'createApprove(' . $index . ')'
+	             
+				     // 'onclick'=>'
+				                  
+				     //              js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
+			      //              			function(confirmed){
+			      //              	 	        console.log("con:"+confirmed)
 			                   	 						
-                                			if(confirmed)
-			                   	 		    {
+         //                        			if(confirmed)
+			      //              	 		    {
 
-			                   	 		    	$.ajax({
-													type: "POST",
-													url: "../contractapprovehistory/createTemp",
-													dataType:"json",
-													data: $(".modal-body #contract-approve-history-form").serialize()
-													})									
-													.done(function( msg ) {
-														$("#approve-grid").yiiGridView("update",{});
-														//consloe.log(msg);
-														if(msg.status=="failure")
-														{
-															$("#modal-body2").html(msg.div);
-															js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
-								                   			function(confirmed){
+			      //              	 		    	$.ajax({
+									// 				type: "POST",
+									// 				url: "../contractapprovehistory/createTemp",
+									// 				dataType:"json",
+									// 				data: $(".modal-body #contract-approve-history-form").serialize()
+									// 				})									
+									// 				.done(function( msg ) {
+									// 					$("#approve-grid").yiiGridView("update",{});
+									// 					//consloe.log(msg);
+									// 					if(msg.status=="failure")
+									// 					{
+									// 						$("#modal-body2").html(msg.div);
+									// 						js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
+								 //                   			function(confirmed){
 								                   	 	        
 								                   	 			
-					                                			if(confirmed)
-								                   	 		    {
-								                   	 		    	$.ajax({
-																		type: "POST",
-																		url: "../contractapprovehistory/createTemp",
-																		dataType:"json",
-																		data: $(".modal-body #contract-approve-history-form").serialize()
-																		})
-																		.done(function( msg ) {
-																			if(msg.status=="failure")
-																			{
-																				js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
-																			}
-																			else{
-																				js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
-																			}
-																		});
-								                   	 		    }
-															})
-														}
-														else{
-															js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+					    //                             			if(confirmed)
+								 //                   	 		    {
+								 //                   	 		    	$.ajax({
+									// 									type: "POST",
+									// 									url: "../contractapprovehistory/createTemp",
+									// 									dataType:"json",
+									// 									data: $(".modal-body #contract-approve-history-form").serialize()
+									// 									})
+									// 									.done(function( msg ) {
+									// 										if(msg.status=="failure")
+									// 										{
+									// 											js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+									// 										}
+									// 										else{
+									// 											js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+									// 										}
+									// 									});
+								 //                   	 		    }
+									// 						})
+									// 					}
+									// 					else{
+									// 						js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
 
-														}
-													});
-												$("#approve-grid").yiiGridView("update",{});
+									// 					}
+									// 				});
+									// 			$("#approve-grid").yiiGridView("update",{});
 											
-			                   	 		    }
-										})
+			      //              	 		    }
+									// 	})
 											
-										',
+									// 	',
 			                
 	              ),
 	          ));
@@ -333,52 +329,10 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
           }
 
        ?>  
-           <div id="myModal"  class="modal hide fade">
-    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Modal header</h3>
-    </div>
-    <div class="modal-body">
-    Date here: <input type="text" id="datePicker2" >
-    </div>
-    <div class="modal-footer">
-    <a href="#" class="btn">Close</a>
-    <a href="#" class="btn btn-primary">Save changes</a>
-    </div>
-    </div>
 
 
-       <input type="button" value="Show Popup" id="pop_button"/>
-		<div id="popup" >
-		    <div>
-		        Date here: <input type="text" id="datePicker" >
-		    </div>
-		</div>
 </fieldset>
-<script type="text/javascript">
-	$(document).ready(function() {
 
-	//$('#myModal').modal('hide');	
-    $("#popup").dialog({
-        open: function() {
-            $('#datePicker').removeAttr("disabled");
-        },
-        close: function () {
-            $('#datePicker').datepicker('hide');
-        }
-    });
-    $("#popup").dialog("close");
-
-    $("#datePicker").datepicker();
-    $("#datePicker2").datepicker();
-
-    $("#pop_button").click(function() {
-        //$('#datePicker').attr("disabled", true);
-        $('#myModal').modal('show');
-        //$("#popup").dialog("open");
-    });
-});
-</script>
 <?php 
 
 		$this->widget('application.extensions.moneymask.MMask',array(
@@ -393,7 +347,45 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
                 ));
 ?> 
 
+<script type="text/javascript">
+	$("#modalCancel2").click(function(e){
+    	$("#modalApproveCreate").modal("hide");
+    });
 
+    $("#modalSubmit2").click(function(e){
+       console.log("submit"+$("#contract-approve-history-form").html());	
+      
+       //console.log(link);
+       $.ajax( {
+      		type: "POST",
+      		url: "../contractapprovehistory/createTemp",
+			dataType:"json",
+			data: $(".approveCreate #contract-approve-history-form").serialize(),
+      		//data: $("#contract-approve-history-form").serialize(),
+      		success: function( msg ) {
+        		//console.log(msg.status);
+
+        		//$("#modalApprove").modal("hide");
+
+        		if(msg.status=="failure")									
+        		{
+					//js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+					$(".approveCreate  #contract-approve-history-form").html(msg.div);
+				}
+				else{
+					$("#modalApproveCreate").modal("hide");
+					//js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+				}
+
+				$("#approve-grid").yiiGridView("update",{});
+      		}
+    	} 
+    	);
+
+    });
+
+	
+</script>
 
 <?php
 // $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
@@ -537,7 +529,50 @@ Yii::app()->clientScript->registerScript('edit','
 
 ');
 
+Yii::app()->clientScript->registerScript('createApprove', '
+function createApprove(index)
+{
+	
+	$("#modalApproveCreate").modal("show");
 
+	$("#modalCancel2").click(function(e){
+    	$("#modalApproveCreate").modal("hide");
+    });
+
+    $("#modalSubmit2").click(function(e){
+       //console.log("submit"+$("#contract-approve-history-form").html());	
+      
+       //console.log(link);
+       $.ajax( {
+      		type: "POST",
+      		url: "../contractapprovehistory/createTemp/"+index,
+			dataType:"json",
+			data: $(".approveCreate #contract-approve-history-form").serialize(),
+      		//data: $("#contract-approve-history-form").serialize(),
+      		success: function( msg ) {
+        		//console.log(msg.status);
+
+        		//$("#modalApprove").modal("hide");
+
+        		if(msg.status=="failure")									
+        		{
+					//js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+					$(".approveCreate  #contract-approve-history-form").html(msg.div);
+				}
+				else{
+					$("#modalApproveCreate").modal("hide");
+					//js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+				}
+
+				$("#approve-grid").yiiGridView("update",{});
+      		}
+    	} 
+    	);
+
+    });
+
+    
+}', CClientScript::POS_END);
 
 
 ///Yii::app()->clientScript->registerCoreScript('jquery');
