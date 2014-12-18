@@ -2,7 +2,7 @@
 	
 	.the-legend {
     
-    font-size: 16px;
+    font: 16px/1.6em 'Boon700',sans-serif;
     font-weight: bold;
     margin-bottom: 0;
     width:inherit; /* Or auto */
@@ -100,8 +100,8 @@ hr {
 		)); ?>
     	
 
-		
-    	<div style="text-align:left"><?php echo $form->errorSummary(array($model));?></div>
+		<div style="text-align:left">กรุณากรอกข้อมูลในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน</div>
+    <div style="text-align:left"><?php echo $form->errorSummary(array($model));?></div>
 		
 		<div class="row-fluid">
 			<div class="well span8">
@@ -378,6 +378,28 @@ hr {
 	</div>		
 </div>	
 
+<div id="modalApprove"  class="modal hide fade">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>แก้ไขข้อมูลการอนุมัติ</h3>
+    </div>
+    <div class="modal-body" id="bodyApprove">
+      <?php 
+      //$model = Vendor::model()->findByPk(14);
+      //$model3=new ContractApproveHistoryTemp;
+      
+      //$this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
+
+
+      ?>
+    <!-- Date here: <input type="text" id="datePicker2" > -->
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn btn-danger" id="modalCancel">ยกเลิก</a>
+    <a href="#" class="btn btn-primary" id="modalSubmit">บันทึก</a>
+    </div>
+</div>
+
 <div id="modal-content" class="hide">
     <div id="modal-body">
 <!-- put whatever you want to show up on bootbox here -->
@@ -389,7 +411,7 @@ hr {
     	?>
     </div>
   
-    <div id="modal-body2">
+    <div id="modal-body2" class="modal">
 <!-- put whatever you want to show up on bootbox here -->
       <?php 
       //$model = Vendor::model()->findByPk(14);
@@ -397,15 +419,19 @@ hr {
       
       $this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
 
+
       ?>
+      <script type="text/javascript">
+         
+      </script>
     </div>
     <div id="modal-body3">
 <!-- put whatever you want to show up on bootbox here -->
       <?php 
       //$model = Vendor::model()->findByPk(14);
-      $model3=new ContractApproveHistoryTemp;
+      //$model3=new ContractApproveHistoryTemp;
 
-      $this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
+      //$this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
 
       ?>
     </div>

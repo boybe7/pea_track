@@ -224,7 +224,7 @@ class OutsourceContract extends CActiveRecord
 			'oc_letter' => 'เลขที่หนังสือสั่งจ้าง',
 			'oc_user_create' => 'ผู้สร้างสัญญา',
 			'oc_user_update' => 'ผู้บันทึก',
-			'oc_last_update' => 'บันทึกล่าสุดเมื่อ',
+			'oc_last_update' => 'แก้ไขล่าสุดเมื่อ',
 		);
 	}
 

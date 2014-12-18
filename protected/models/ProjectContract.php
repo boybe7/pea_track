@@ -37,7 +37,7 @@ class ProjectContract extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('pc_code, pc_proj_id, pc_end_date', 'required'),
-			array('pc_proj_id, pc_vendor_id, pc_T_percent, pc_A_percent, pc_user_create, pc_user_update', 'numerical', 'integerOnly'=>true),
+			array('pc_proj_id, pc_vendor_id, pc_T_percent, pc_A_percent, pc_user_update', 'numerical', 'integerOnly'=>true),
 			array('pc_cost', 'numerical'),
 			array('pc_code', 'length', 'max'=>30),
 			array('pc_guarantee', 'length', 'max'=>100),
@@ -45,7 +45,7 @@ class ProjectContract extends CActiveRecord
 			array('pc_A_percent', 'application.extensions.numericRangeValidator', 'min'=>0, 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('pc_id, pc_code, pc_proj_id, pc_vendor_id, pc_details, pc_sign_date, pc_end_date, pc_cost, pc_T_percent, pc_A_percent, pc_guarantee, pc_user_create, pc_user_update', 'safe', 'on'=>'search'),
+			array('pc_id, pc_code, pc_proj_id, pc_vendor_id, pc_details, pc_sign_date, pc_end_date, pc_cost, pc_T_percent, pc_A_percent, pc_guarantee, pc_last_update, pc_user_update', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -158,7 +158,7 @@ class ProjectContract extends CActiveRecord
 		$criteria->compare('pc_T_percent',$this->pc_T_percent);
 		$criteria->compare('pc_A_percent',$this->pc_A_percent);
 		$criteria->compare('pc_guarantee',$this->pc_guarantee,true);
-		$criteria->compare('pc_user_create',$this->pc_user_create);
+		$criteria->compare('pc_last_update',$this->pc_user_create);
 		$criteria->compare('pc_user_update',$this->pc_user_update);
 
 		return new CActiveDataProvider($this, array(

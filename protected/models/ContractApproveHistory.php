@@ -30,7 +30,7 @@ class ContractApproveHistory extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('contract_id, detail, dateApprove, approveBy, cost, timeSpend', 'required'),
+			array('contract_id', 'required'),
 			array('contract_id', 'numerical', 'integerOnly'=>true),
 			array('cost', 'numerical'),
 			array('detail', 'length', 'max'=>500),

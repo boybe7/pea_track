@@ -157,8 +157,8 @@ class ContractApproveHistoryController extends Controller
 		{
 			$model->attributes=$_POST['ContractApproveHistoryTemp'];
 
-			if (Yii::app()->request->isAjaxRequest)
-	        {
+			 if (Yii::app()->request->isAjaxRequest)
+	         {
 	           
 	            if($model->save())
 	            	 echo CJSON::encode(array(
@@ -169,11 +169,8 @@ class ContractApproveHistoryController extends Controller
 	                'status'=>'failure','div'=>$this->renderPartial('_form', array('model'=>$model), true)));
 	                
 	            exit;
-				        
-	        }		
-			else
-			  if($model->save())
-				$this->redirect(array('admin'));
+			}	        
+	        	//$this->redirect(array('admin'));
 
 		}
 

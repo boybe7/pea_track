@@ -131,6 +131,7 @@ class ProjectController extends Controller
 		$model = new Project;
 		$workcodes = "";
 		$modelContract = array();
+		$modelContractOld = array();
 		$numContracts = 1;
 		$modelPC = new ProjectContract;
 		
@@ -138,11 +139,12 @@ class ProjectController extends Controller
 	    //$query = "CREATE TEMPORARY TABLE TempApproveTable  AS (SELECT * FROM contract_approve_history WHERE 1=2);";
 		//Yii::app()->db->createCommand($query)->execute();
 
-
 		if(isset($_POST['Project']))
 		{
 			
 			$model->attributes = $_POST['Project'];
+			$model->pj_CA = $_POST['Project']['pj_CA'];
+
 			if (isset($_POST['ProjectContract']))
             {
                 $model->contract = $_POST['ProjectContract'];                         
@@ -155,34 +157,108 @@ class ProjectController extends Controller
 				    $model->pj_name = $_POST["pj_vendor_id"];
 
                 //header('Content-type: text/plain');
+				    $workcodes = $_POST['workCode'];
+	    	        $workCodeArray = explode(",", $_POST['workCode']);
  				
  				//print_r($model->contract); 
 				    if ($model->save()) {
-				    	
+
+				    	foreach ($workCodeArray as $key => $value) {
+			        		$wk = new WorkCode;
+			         		$wk->code = $value;
+			        		$wk->pj_id = $model->pj_id;
+			        		
+			        		$wk->save();	
+		 	        	}
+				    	$saveOK = 1;
+
+				    	$index = 1;
 		 				foreach ($model->contract as $contracts => $contract) 
 		 				{
 		 				     //print_r($contract);
-		 					$saveOK = false;
+		 					 
 		 				     $modelC = new ProjectContract;
 		 				     $modelC->attributes = $contract;
+
+		 				     array_push($modelContractOld, $modelC);
 		 				     $modelC->pc_id = "";
 		 				     $modelC->pc_proj_id = $model->pj_id;
+
+		 				     
+
+		 				     $modelC->pc_last_update = date("Y-m-d H:i:s");
+				    		 $modelC->pc_user_update = Yii::app()->user->ID;
+
+		 				    
 		 				     if($modelC->save())
 		 				     {
-		 				     	$saveOK = true;
-		 				     } 
-		 				}
+		 				     	//$saveOK = true;
+		 				     	$modelTemps = Yii::app()->db->createCommand()
+						                    ->select('*')
+						                    ->from('contract_approve_history_temp')
+						                    ->where('contract_id=:id', array(':id'=>$index))
+						                    ->queryAll();
+						        foreach ($modelTemps as $key => $mTemp) {
 
-		 				if($saveOK)
-		 				   $transaction->commit();	
+						        // header('Content-type: text/plain');
+              //            		print_r($mTemp);                    
+              //            	    exit;
+                                        $modelApprove = new ContractApproveHistory;
+                                        $modelApprove->attributes = $mTemp;
+                                        $modelApprove->dateApprove = $mTemp['dateApprove'];
+                                        $modelApprove->id = "";
+                                        if($modelApprove->save())
+                                           $msg =  "successful";
+                                        else{
+                                           $model->addError('contract', 'rrrกรุณากรอกข้อมูล "สัญญา" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+		 				            	   $saveOK = 0;
+                                        }   	
+						        }            
+		 				     	//$modelTemp = ContractApproveHistoryTemp::model()->findByAttributes(array('contract_id'=>$contract['pc_id']));
+		 				     	
+		 				     }else{
+		 				     	$saveOK = 0;	
+		 				     	$modelC->pc_id = $contract["pc_id"];
+		 				     }
+
+		 				     $index++;
+
+		 				      array_push($modelContract, $modelC); 
+		 				    	
+		 				}
+		 				 
+		 				
+
+		 				if($saveOK==1)
+		 				{
+		 					$transaction->commit();
+		 					// header('Content-type: text/plain');
+        //                 		//print_r($modelC);
+        //                 		echo "save".$saveOK;
+        //                 	exit;
+		 				}   	
+		 				else
+		 				{
+		 					$transaction->rollBack();
+		 					$modelContract = $modelContractOld;
+		 				    $model->addError('contract', 'กรุณากรอกข้อมูล "สัญญา" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+		 				}
 
 		 			}
 		 			else
-		 				$transaction->rollBack(); 
+		 			{	
+		 				$transaction->rollBack();
+		 				$model->addError('contract', 'Error occured while saving contracts.');
+		 			}	 
 	 			}
 	 			catch(Exception $e)
 	 			{
 	 				$transaction->rollBack();	
+	 				$model->addError('contract', 'Error occured while saving contracts.');
+	 				Yii::trace(CVarDumper::dumpAsString($e->getMessage()));
+	 	        	//you should do sth with this exception (at least log it or show on page)
+	 	        	Yii::log( 'Exception when saving data: ' . $e->getMessage(), CLogger::LEVEL_ERROR );
+	 
 	 			}                         
 
  				//exit;
@@ -234,12 +310,14 @@ class ProjectController extends Controller
 		}
 		else{
 			//Yii::app()->db->createCommand('TRUNCATE contract_approve_history_temp')->execute();
+			$modelPC->pc_id = 1;
+     		array_push($modelContract, $modelPC);
+
+
 		
 		}
 
-		$modelPC->pc_id = 1;
-		array_push($modelContract, $modelPC);
-
+		
 		 $this->render('create', array(
             'model' => $model,'contract'=>$modelContract,'workcodes'=>$workcodes,'numContracts'=>$numContracts
         ));

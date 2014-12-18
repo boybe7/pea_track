@@ -2,9 +2,14 @@
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'contract-approve-history-form',
 	'enableAjaxValidation'=>true,
+	 'enableClientValidation'=>true,
+        'clientOptions'=>array(
+                'validateOnSubmit'=>true,
+                ),
+
 )); ?>
-<h3>เพิ่มข้อมูลการอนุมัติ</h3>
-<form id="contract-approve-history-form">
+<!-- <h3>เพิ่มข้อมูลการอนุมัติ</h3> -->
+
 	<p class="help-block">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
@@ -26,13 +31,14 @@
 		                        'name'=>'dateApprove',
 		                        'attribute'=>'dateApprove',
 		                        'model'=>$model,
-		                        'options' => array(
+		                        'defaultOptions' => array(
 		                                          'mode'=>'focus',
+		                                          'showOn' => 'both',
 		                                          //'language' => 'th',
 		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
 		                                          'showAnim' => 'slideDown',
 		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$model->dateApprove),  // ใส่ค่าเดิม ในเหตุการ Update 
+		                        'htmlOptions'=>array('class'=>'span12 d-picker', 'value'=>$model->dateApprove),  // ใส่ค่าเดิม ในเหตุการ Update 
 		                     )
 		                );
 		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -46,12 +52,15 @@
 	<?php echo $form->textFieldRow($model,'cost',array('class'=>'span5')); ?>
 
 	<?php echo $form->textFieldRow($model,'timeSpend',array('class'=>'span5','maxlength'=>200)); ?>
-</form>
+
+   
+
+
 <script type="text/javascript">
 	$(function () {
-		jQuery('#dateApprove').datepicker({'mode':'focus','format':'dd/mm/yyyy','showAnim':'slideDown'});
-       
-  
+		$("#dateApprove").datepicker();
+		$("#dateApprove").datepicker("option", {dateFormat: "dd/mm/yyyy"});
+		
 	});
 
 </script>

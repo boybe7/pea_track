@@ -38,8 +38,9 @@
 		</div>
 	</div>
 	
-
-	
-  
 <?php $this->endWidget(); ?>
+
+<script type="text/javascript">
+
+</script>
 

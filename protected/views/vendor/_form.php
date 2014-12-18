@@ -85,11 +85,13 @@
     ?>
 	</div>
   </div>
+ 
 <?php $this->endWidget(); ?>
-
+ 
 <script type="text/javascript">
 $(function() {
 		//console.log( "ready!" );
+		
 		$( "#Vendor_type" ).change(function() {
 		   if($( "#Vendor_type" ).val()=="Owner")	
 			 $("label[for='Vendor_v_BP']").text("หมายเลข BP")

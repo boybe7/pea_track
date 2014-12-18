@@ -99,6 +99,33 @@ class ContractApproveHistoryTemp extends CActiveRecord
 		));
 	}
 
+   protected function afterFind(){
+            parent::afterFind();
+            $str_date = explode("-", $this->dateApprove);
+            if(count($str_date)>1)
+            	$this->dateApprove = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+   
+    }
+    protected function afterSave(){
+            parent::afterSave();
+            $str_date = explode("-", $this->dateApprove);
+            if(count($str_date)>1)
+            	$this->dateApprove = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+            
+    }
+    public function beforeSave()
+    {
+        if($this->dateApprove!="")
+        {
+
+            $str_date = explode("/", $this->dateApprove);
+            if(count($str_date)>1)
+            $this->dateApprove= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+
+        }	
+
+        return parent::beforeSave();
+   }
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
