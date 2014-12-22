@@ -175,6 +175,7 @@ class ProjectController extends Controller
 				    	
 
 				    	$index = 1;
+
 		 				foreach ($model->contract as $contracts => $contract) 
 		 				{
 		 				     //print_r($contract);
@@ -225,7 +226,10 @@ class ProjectController extends Controller
 		 				     	
 		 				     }else{
 		 				     	$saveOK = 0;	
-		 				     	$modelC->pc_id = $contract["pc_id"];
+		 				     	if($contract["pc_id"]!="")
+		 				     	  $modelC->pc_id = $contract["pc_id"];
+		 				     	else
+		 				     	  $modelC->pc_id = 1;	
 		 				     }
 
 		 				     $index++;
@@ -316,7 +320,9 @@ class ProjectController extends Controller
 	  //       }
 		}
 		else{
-			//Yii::app()->db->createCommand('TRUNCATE contract_approve_history_temp')->execute();
+		 if (!Yii::app()->request->isAjaxRequest)	
+			Yii::app()->db->createCommand('TRUNCATE contract_approve_history_temp')->execute();
+			
 			$modelPC->pc_id = 1;
      		array_push($modelContract, $modelPC);
 

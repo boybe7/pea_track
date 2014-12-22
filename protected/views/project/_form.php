@@ -378,6 +378,29 @@ hr {
 	</div>		
 </div>	
 
+<?php echo'<div id="modalApproveCreate"  class="approveCreate modal hide fade">';?>
+<!-- <div id="modalApproveCreate"  class="approveCreate modal hide fade"> -->
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>เพิ่มข้อมูลการอนุมัติ</h3>
+    </div>
+    <div class="modal-body" id="bodyApproveCreate">
+      <?php 
+      //$model = Vendor::model()->findByPk(14);
+      $model3=new ContractApproveHistoryTemp;
+      
+      $this->renderPartial('/contractApproveHistory/_form2',array('model'=>$model3,'index'=>$index),false); 
+
+
+      ?>
+    <!-- Date here: <input type="text" id="datePicker2" > -->
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn btn-danger" id="modalCancel2">ยกเลิก</a>
+   <?php echo '<a href="#" class="btn btn-primary" id="modalSubmit2">บันทึก</a>'; ?>
+    </div>
+</div>
+
 <div id="modalApprove"  class="modal hide fade">
     <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -400,27 +423,7 @@ hr {
     </div>
 </div>
 
-<div id="modalApproveCreate"  class="approveCreate modal hide fade">
-    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>เพิ่มข้อมูลการอนุมัติ</h3>
-    </div>
-    <div class="modal-body" id="bodyApproveCreate">
-      <?php 
-      //$model = Vendor::model()->findByPk(14);
-      $model3=new ContractApproveHistoryTemp;
-      
-      $this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
-
-
-      ?>
-    <!-- Date here: <input type="text" id="datePicker2" > -->
-    </div>
-    <div class="modal-footer">
-    <a href="#" class="btn btn-danger" id="modalCancel2">ยกเลิก</a>
-    <a href="#" class="btn btn-primary" id="modalSubmit2">บันทึก</a>
-    </div>
-</div>
+<input type="hidden" id="pre_index">
 
 <div id="modal-content" class="hide">
     <div id="modal-body">
@@ -437,9 +440,9 @@ hr {
 <!-- put whatever you want to show up on bootbox here -->
       <?php 
       //$model = Vendor::model()->findByPk(14);
-      $model3=new ContractApproveHistoryTemp;
+      //$model3=new ContractApproveHistoryTemp;
       
-      $this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
+      //$this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
 
 
       ?>

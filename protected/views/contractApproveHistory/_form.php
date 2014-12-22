@@ -1,11 +1,8 @@
 
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'contract-approve-history-form',
-	'enableAjaxValidation'=>true,
-	 'enableClientValidation'=>true,
-        'clientOptions'=>array(
-                'validateOnSubmit'=>true,
-                ),
+	'enableAjaxValidation'=>false,
+	
 
 )); ?>
 <!-- <h3>เพิ่มข้อมูลการอนุมัติ</h3> -->
@@ -53,7 +50,7 @@
 
 	<?php echo $form->textFieldRow($model,'timeSpend',array('class'=>'span5','maxlength'=>200)); ?>
 
-   
+    <?php //echo '<a href="#" class="btn btn-primary" id="modalSubmit">บันทึก</a>'; ?>
 
 
 <script type="text/javascript">

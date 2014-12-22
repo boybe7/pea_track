@@ -100,7 +100,7 @@ class ContractApproveHistoryController extends Controller
 	                ));
 	            else
 	                echo CJSON::encode(array(
-	                'status'=>'failure','div'=>$this->renderPartial('_form', array('model'=>$model), true)));
+	                'status'=>'failure','div'=>$this->renderPartial('_form', array('model'=>$model,'index'=>$id), true)));
 	                
 	            exit;
 				        
@@ -115,11 +115,11 @@ class ContractApproveHistoryController extends Controller
         {
             echo CJSON::encode(array(
                 'status'=>'failure', 
-                'div'=>$this->renderPartial('_form', array('model'=>$model), true)));
+                'div'=>$this->renderPartial('_form', array('model'=>$model,'index'=>$id), true)));
             exit;               
         }
 
-		$this->renderPartial('_form',array('model'=>$model));
+		$this->renderPartial('_form',array('model'=>$model,'index'=>$id));
 	}
 
 	/**
