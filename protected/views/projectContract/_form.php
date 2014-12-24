@@ -144,64 +144,70 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 	              'htmlOptions'=>array(
 	                'class'=>'pull-right',
 	                'style'=>'margin:0px 10px 10px 10px;',
-	                'onclick'=>'createApprove(' . $index . ')'
+	                //'onclick'=>'createApprove(' . $index . ')'
 	             
-				     // 'onclick'=>'
+				     'onclick'=>'
 				                  
-				     //              js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
-			      //              			function(confirmed){
-			      //              	 	        console.log("con:"+confirmed)
+							        //console.log($("#modal-body2"))
+							        //console.log($("#modal-body2").html())	
+							        //$("#modal-body2");
+									js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
+			                   			function(confirmed){
+			                   	 	        //console.log("con:"+confirmed)
 			                   	 						
-         //                        			if(confirmed)
-			      //              	 		    {
+                                			if(confirmed)
+			                   	 		    {
 
-			      //              	 		    	$.ajax({
-									// 				type: "POST",
-									// 				url: "../contractapprovehistory/createTemp",
-									// 				dataType:"json",
-									// 				data: $(".modal-body #contract-approve-history-form").serialize()
-									// 				})									
-									// 				.done(function( msg ) {
-									// 					$("#approve-grid").yiiGridView("update",{});
-									// 					//consloe.log(msg);
-									// 					if(msg.status=="failure")
-									// 					{
-									// 						$("#modal-body2").html(msg.div);
-									// 						js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
-								 //                   			function(confirmed){
+			                   	 		    	$.ajax({
+													type: "POST",
+													url: "../contractapprovehistory/createTemp/' . $index . '",
+													dataType:"json",
+													data: $(".modal-body #contract-approve-history-form").serialize()
+													})									
+													.done(function( msg ) {
+														//console.log($("#approve-grid2"));
+														//console.log($("#approve-grid1"));
+														jQuery.fn.yiiGridView.update("approve-grid'.$index.'");
+														//($("#approve-grid' . $index . '").yiiGridView("update",{}));
+														
+														if(msg.status=="failure")
+														{
+															$("#modal-body2").html(msg.div);
+															js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
+								                   			function(confirmed){
 								                   	 	        
 								                   	 			
-					    //                             			if(confirmed)
-								 //                   	 		    {
-								 //                   	 		    	$.ajax({
-									// 									type: "POST",
-									// 									url: "../contractapprovehistory/createTemp",
-									// 									dataType:"json",
-									// 									data: $(".modal-body #contract-approve-history-form").serialize()
-									// 									})
-									// 									.done(function( msg ) {
-									// 										if(msg.status=="failure")
-									// 										{
-									// 											js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
-									// 										}
-									// 										else{
-									// 											js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
-									// 										}
-									// 									});
-								 //                   	 		    }
-									// 						})
-									// 					}
-									// 					else{
-									// 						js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+					                                			if(confirmed)
+								                   	 		    {
+								                   	 		    	$.ajax({
+																		type: "POST",
+																		url: "../contractapprovehistory/createTemp",
+																		dataType:"json",
+																		data: $(".modal-body #contract-approve-history-form").serialize()
+																		})
+																		.done(function( msg ) {
+																			if(msg.status=="failure")
+																			{
+																				js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+																			}
+																			else{
+																				js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+																			}
+																		});
+								                   	 		    }
+															})
+														}
+														else{
+															js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
 
-									// 					}
-									// 				});
-									// 			$("#approve-grid").yiiGridView("update",{});
+														}
+													});
+												//$("#approve-grid").yiiGridView("update",{});
 											
-			      //              	 		    }
-									// 	})
+			                   	 		    }
+										})
 											
-									// 	',
+										',
 			                
 	              ),
 	          ));
@@ -294,7 +300,8 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 										),
 										'update'=>array(
 
-											'url'=>'Yii::app()->createUrl("ContractApproveHistory/updateTemp", array("id"=>$data->id))',	
+											'url'=>'Yii::app()->createUrl("ContractApproveHistory/updateTemp", array("id"=>$data->id))',
+											//'click'=>'updateApprove($data->id)'	
 											
 										)
 
@@ -363,7 +370,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 
 
 
-
+Yii::app()->clientScript->registerCoreScript('jquery');
 Yii::app()->clientScript->registerScript('edit','
     var link;
     var myBackup2;
@@ -372,8 +379,7 @@ Yii::app()->clientScript->registerScript('edit','
     	
     	myBackup2 = $("#modalApprove").clone();
 						$("#modalApprove").modal("hide");
-						$("#modalApprove").removeData("modal");
-						$("#modalApprove").remove();
+						$("#bodyApprove").html();
 						console.log("clear editmodal");
     });
 
@@ -401,8 +407,9 @@ Yii::app()->clientScript->registerScript('edit','
 					//js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
 					   myBackup2 = $("#modalApprove").clone();
 						$("#modalApprove").modal("hide");
-						$("#modalApprove").removeData("modal");
-						$("#modalApprove").remove();
+						$("#bodyApprove").html();
+						//$("#modalApprove").removeData("modal");
+						//$("#modalApprove").remove();
 						console.log("clear editmodal");
 				}
 
@@ -417,10 +424,10 @@ Yii::app()->clientScript->registerScript('edit','
     
 	$("body").on("click",".update,#link",function(e){
 				link = $(this).attr("href");
-				console.log(link)
+				console.log(myBackup2)
 
-				if(myBackup2!="")
-					 $("body").append(myBackup2);
+				//if(myBackup2!="")
+				//	 $("body").append(myBackup2);
 
 				$.ajax({
                  type:"GET",
@@ -509,7 +516,7 @@ Yii::app()->clientScript->registerScript('edit','
 
 
 ');
-Yii::app()->clientScript->registerCoreScript('jquery');
+
 Yii::app()->clientScript->registerScript('createApprove', '
 var myBackup;
 function createApprove(index2)
@@ -518,7 +525,7 @@ function createApprove(index2)
 		
 	if(index2!=0)
 	{	
-		//console.log(myBackup);
+		console.log(myBackup);
 		if(myBackup!="")
 		 $("body").append(myBackup);
 

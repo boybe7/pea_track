@@ -8,14 +8,16 @@
 
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
-
+<script type="text/javascript" src="/pea_track/themes/bootstrap/js/jquery.yiigridview.js"></script>
 	<?php 
        /* Yii::app()->getClientScript()->reset(); 
         Yii::app()->bootstrap->register();   */
+
         
-        ?>
-        <?php echo Yii::app()->bootstrap->init();
-        ?>
+        Yii::app()->bootstrap->init();
+        //$cs = Yii::app()->clientScript;
+        //$cs->registerScriptFile(Yii::app()->theme->getBaseUrl().'/js/jquery.yiigridview.js');
+  ?>
 </head>
 <link rel="shortcut icon" href="/pea_track/favicon.ico">
 <style>
@@ -150,7 +152,7 @@ h1,h2,h3,h4{
 <body class="body">
 
 <?php 
-   
+ //echo Yii::app()->theme->getBaseUrl(); 
 
 if(!Yii::app()->user->isGuest)
 {

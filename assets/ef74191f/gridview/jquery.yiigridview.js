@@ -247,7 +247,8 @@
 					$grid = $(this),
 					id = $grid.attr('id'),
 					settings = gridSettings[id];
-
+					console.log(id);
+					console.log(settings);
 				options = $.extend({
 					type: settings.ajaxType,
 					url: $grid.yiiGridView('getUrl'),

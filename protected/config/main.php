@@ -43,6 +43,7 @@ return array(
                     ),
         ),
 	),
+	
 
 	// application components
 	'components'=>array(
@@ -54,7 +55,13 @@ return array(
             'defaults'  => array(              //default settings for all editable elements
                'emptytext' => 'Click to edit'
             )
-        ),    
+        ),  
+        'clientScript' => array(
+	        // disable yiigridview auto include
+	        'scriptMap'=>array(
+	               'jquery.yiigridview.js'=>false
+		    )
+		),  
         'format'=>array(
         	'class'=>'application.components.Formatter',
         	'numberFormat'=>array('decimals'=>2, 'decimalSeparator'=>'.', 'thousandSeparator'=>','),

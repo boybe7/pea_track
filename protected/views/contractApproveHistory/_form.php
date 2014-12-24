@@ -53,13 +53,4 @@
     <?php //echo '<a href="#" class="btn btn-primary" id="modalSubmit">บันทึก</a>'; ?>
 
 
-<script type="text/javascript">
-	$(function () {
-		$("#dateApprove").datepicker();
-		$("#dateApprove").datepicker("option", {dateFormat: "dd/mm/yyyy"});
-		
-	});
-
-</script>
-
 <?php $this->endWidget(); ?>

@@ -436,19 +436,19 @@ hr {
     	?>
     </div>
   
-    <div id="modal-body2" class="modal">
+    <div id="modal-body2" class="modal-body">
 <!-- put whatever you want to show up on bootbox here -->
+    
       <?php 
       //$model = Vendor::model()->findByPk(14);
-      //$model3=new ContractApproveHistoryTemp;
+      $model3=new ContractApproveHistoryTemp;
       
-      //$this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
+      $this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
 
 
       ?>
-      <script type="text/javascript">
-         
-      </script>
+
+      
     </div>
     <div id="modal-body3">
 <!-- put whatever you want to show up on bootbox here -->

@@ -262,6 +262,11 @@ var bootbox = window.bootbox || (function(document, $) {
                 e.preventDefault();
                 div.find(".btn-primary").click();
             });
+
+            //console.log("form"+form);
+
+            form.find("input[type=text]").datepicker();
+
         });
 
         div.modal("show");
@@ -395,6 +400,7 @@ var bootbox = window.bootbox || (function(document, $) {
 
         // now we've built up the div properly we can inject the content whether it was a string or a jQuery object
         div.find(".modal-body").html(str);
+        //console.log("str"+str)
 
         function onCancel(source) {
             // for now source is unused, but it will be in future
@@ -427,6 +433,9 @@ var bootbox = window.bootbox || (function(document, $) {
         // well, *if* we have a primary - give the first dom element focus
         div.on('shown', function() {
             div.find("a.btn-primary:first").focus();
+
+            //console.log("shown");
+            $(".d-picker").datepicker();
         });
 
         div.on('hidden', function(e) {
@@ -651,6 +660,8 @@ var bootbox = window.bootbox || (function(document, $) {
         // if we can't do anything then bail out with whatever string was passed in - last resort
         return str;
     }
+
+
 
     return that;
 
