@@ -23,6 +23,8 @@ class Project extends CActiveRecord
 	public $workcat_search;
 	public $sumcost = 0;
 
+	private $idCache;
+
 
 	public function tableName()
 	{
@@ -186,6 +188,40 @@ class Project extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function beforeDelete()
+	{
+	 $this->idCache = $this->pj_id;
+	 
+	 return parent::beforeDelete();
+	}
+
+	public function afterDelete()
+	{
+		 $criteria = new CDbCriteria(array(
+		   'condition' => 'pc_proj_id=:projectId',
+		   'params' => array(
+		    ':projectId' => $this->idCache),
+		  ));
+		 
+		 $contracts_associated_with_project = ProjectContract::model()->findAll($criteria);
+		 
+		 foreach ($contracts_associated_with_project as $contract)
+		 {
+		    $contract->delete();
+		 }
+		  
+		 //ProjectContract::model()->deleteAll("pc_proj_id ='" . $this->idCache . "'");
+		 WorkCode::model()->deleteAll("pj_id ='" . $this->idCache . "'");
+		  
+		 // $filename=$this->getImagePath($this->idCache);
+		 // if(file_exists($filename))
+		 // {
+		 //  unlink($filename);
+		 // }
+		 
+		 parent::afterDelete();
 	}
 
 

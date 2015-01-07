@@ -565,6 +565,13 @@ class ProjectController extends Controller
 			// we only allow deletion via POST request
 			$this->loadModel($id)->delete();
 
+			//delete projectContracts
+			//ProjectContract::model()->deleteAll("pc_proj_id ='" . $id . "'");
+
+			//delete workcodes
+			//ProjectContract::model()->deleteAll("pc_proj_id ='" . $id . "'");
+
+
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
 				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));

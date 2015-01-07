@@ -23,6 +23,9 @@ class ProjectContract extends CActiveRecord
 	/**
 	 * @return string the associated database table name
 	 */
+
+	private $idCache;
+
 	public function tableName()
 	{
 		return 'project_contract';
@@ -129,6 +132,21 @@ class ProjectContract extends CActiveRecord
             
             //$this->visit_date=date('Y/m/d', strtotime(str_replace("-", "", $this->visit_date)));       
     }
+
+    public function beforeDelete()
+	{
+	 $this->idCache = $this->pc_id;
+	 
+	 return parent::beforeDelete();
+	}
+
+	public function afterDelete()
+	{
+		  
+		 ContractApproveHistory::model()->deleteAll("contract_id ='" . $this->idCache . "'");
+		 
+		 parent::afterDelete();
+	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
