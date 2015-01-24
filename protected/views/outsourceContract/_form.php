@@ -9,14 +9,33 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 </style>
 <fieldset class="well the-fieldset">
         <legend class="the-legend">สัญญาที่ <?php echo ($index);?></legend>
-        
+          <div class="row-fluid"> 
+            <div class="span12">
+            <?php
+                $this->widget('bootstrap.widgets.TbButton', array(
+                  'buttonType'=>'link',
+                  
+                  'type'=>'danger',
+                  'label'=>'ลบสัญญา',
+                  'icon'=>'minus-sign',
+                  
+                  'htmlOptions'=>array(
+                    'class'=>'pull-right',
+                    'style'=>'margin:0px 10px 0px 10px;',
+                    'onclick' => 'deleteOutsourceContract(this, ' . $index . ');'
+                  ),
+              ));
+
+            ?>
+            </div>  
+        </div>
         <div class="row-fluid">
         	  <div class="span3">		  
         	    <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_code'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_code', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_code',array('class'=>'help-block error')); ?>
             </div>  
-            <div class="span7">
+            <div class="span5">
         		  <?php
                     echo CHtml::activeHiddenField($model, '[' . $index . ']oc_vendor_id'); 
                     echo CHtml::activeLabelEx($model, '[' . $index . ']oc_vendor_id'); 
@@ -71,7 +90,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
                          echo CHtml::error($model, '[' . $index . ']oc_vendor_id',array('class'=>'help-block error'));
                ?>
             </div>
-            <div class="span2">     
+            <div class="span4">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_cost'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_cost', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_cost',array('class'=>'help-block error')); ?>          
@@ -274,6 +293,195 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
            
            
         </div>
+
+        <fieldset class="well the-fieldset">
+          <legend class="the-legend">รายละเอียดการอนุมัติ</legend>
+          <div class="row-fluid"> 
+          <?php 
+        $this->widget('bootstrap.widgets.TbButton', array(
+                'buttonType'=>'link',
+                
+                'type'=>'success',
+                'label'=>'เพิ่มการอนุมัติ',
+                'icon'=>'plus-sign',
+                
+                'htmlOptions'=>array(
+                  'class'=>'pull-right',
+                  'style'=>'margin:0px 10px 10px 10px;',
+                  //'onclick'=>'createApprove(' . $index . ')'
+               
+             'onclick'=>'
+                          
+                      //console.log($("#modal-body2"))
+                      //console.log($("#modal-body2").html()) 
+                      //$("#modal-body2");
+                  js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
+                              function(confirmed){
+                                    //console.log("con:"+confirmed)
+                                      
+                                      if(confirmed)
+                                  {
+
+                                    $.ajax({
+                          type: "POST",
+                          url: "../../contractapprovehistory/createOutsourceTemp/' . $index . '",
+                          dataType:"json",
+                          data: $(".modal-body #contract-approve-history-form").serialize()
+                          })                  
+                          .done(function( msg ) {
+                            //console.log($("#approve-grid2"));
+                            //console.log($("#approve-grid1"));
+                            jQuery.fn.yiiGridView.update("approve-grid'.$index.'");
+                            //($("#approve-grid' . $index . '").yiiGridView("update",{}));
+                            
+                            if(msg.status=="failure")
+                            {
+                              $("#modal-body2").html(msg.div);
+                              js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
+                                        function(confirmed){
+                                              
+                                          
+                                                if(confirmed)
+                                            {
+                                              $.ajax({
+                                    type: "POST",
+                                    url: "../contractapprovehistory/createTemp",
+                                    dataType:"json",
+                                    data: $(".modal-body #contract-approve-history-form").serialize()
+                                    })
+                                    .done(function( msg ) {
+                                      if(msg.status=="failure")
+                                      {
+                                        js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+                                      }
+                                      else{
+                                        //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+                                      }
+                                    });
+                                            }
+                              })
+                            }
+                            else{
+                              //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+
+                            }
+                          });
+                        //$("#approve-grid").yiiGridView("update",{});
+                      
+                                  }
+                    })
+                      
+                    ',
+                      
+                ),
+            ));
+
+                  
+        $this->widget('bootstrap.widgets.TbGridView',array(
+          'id'=>'approve-grid'.$index,
+          
+          'type'=>'bordered condensed',
+          'dataProvider'=>ContractApproveHistoryTemp::model()->search($index),
+          //'filter'=>$model,
+          'selectableRows' => 2,
+          'enableSorting' => false,
+          'rowCssClassExpression'=>'"tr_white"',
+
+            // 'template'=>"{summary}{items}{pager}",
+            'htmlOptions'=>array('style'=>'padding-top:40px;'),
+            'enablePagination' => false,
+            'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
+          'columns'=>array(
+                'No.'=>array(
+                    'header'=>'ลำดับ',
+                    'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),                        
+                'htmlOptions'=>array(
+                            'style'=>'text-align:center'
+
+                      ),
+                    'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+                  ),
+              'detail'=>array(
+                  // 'header'=>'', 
+                
+                'name' => 'detail',
+
+                'headerHtmlOptions' => array('style' => 'width:35%;text-align:center;background-color: #f5f5f5'),                       
+                //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:left'
+
+                      )
+                  ),
+                  'approve by'=>array(
+                  // 'header'=>'', 
+                
+                'header' => 'อนุมัติโดย/<br>ลงวันที่',
+                'type'=>'raw', //to use html tag
+                'value'=> '$data->approveBy."<br>".$data->dateApprove', 
+                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),                       
+                //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:center'
+
+                      )
+                  ),
+                  'cost'=>array(
+                  'header'=>'วงเงิน/<br>เป็นเงินเพิ่ม', 
+                
+                'name' => 'cost',
+                // 'type'=>'raw', //to use html tag
+                'value'=> function($data){
+                        return number_format($data->cost, 2);
+                    },  
+                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),                       
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:right'
+
+                      )
+                  ),
+                  'time'=>array(
+                  'header'=>'ระยะเวลาแล้วเสร็จ/<br>ระยะเลาขอขยาย', 
+                
+                'name' => 'timeSpend',
+                // 'type'=>'raw', //to use html tag
+                  
+                'headerHtmlOptions' => array('style' => 'width:20%;text-align:center;background-color: #f5f5f5'),                       
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:left'
+
+                      )
+                  ),  
+                  array(
+                'class'=>'bootstrap.widgets.TbButtonColumn',
+                'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),
+                'template' => '{update}   {delete}',
+                // 'deleteConfirmation'=>'js:bootbox.confirm("Are you sure to want to delete")',
+                'buttons'=>array(
+                    'delete'=>array(
+                      'url'=>'Yii::app()->createUrl("ContractApproveHistory/deleteTemp", array("id"=>$data->id))',  
+
+                    ),
+                    'update'=>array(
+
+                      'url'=>'Yii::app()->createUrl("ContractApproveHistory/updateTemp", array("id"=>$data->id))',
+                      //'click'=>'updateApprove($data->id)' 
+                      
+                    )
+
+                  )
+
+                
+              ),
+            )
+
+          ));
+
+           ?>
+          </div>
+        
+    </fieldset>
+        
        <?php   
           
           if(!$model->isNewRecord) 
@@ -314,5 +522,135 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
       });       
   });
  </script> 
+
+<?php  
+
+
+Yii::app()->clientScript->registerCoreScript('jquery');
+Yii::app()->clientScript->registerScript('edit','
+    var link;
+    var myBackup2;
+    
+    $("#modalCancel").click(function(e){
+      
+      myBackup2 = $("#modalApprove").clone();
+            $("#modalApprove").modal("hide");
+            $("#bodyApprove").html();
+            //console.log("clear editmodal");
+    });
+
+    $("#modalSubmit").click(function(e){
+       //console.log("submit"+$("#contract-approve-history-form").html());  
+      
+       //console.log("edit");
+       $.ajax( {
+          type: "POST",
+          url: link,
+          dataType:"json",
+          data: $("#contract-approve-history-form").serialize(),
+          success: function( msg ) {
+            //console.log(msg.status);
+
+            //$("#modalApprove").modal("hide");
+
+            if(msg.status=="failure")                 
+            {
+          //js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+          $("#contract-approve-history-form").html(msg.div);
+        }
+        else{
+          
+          //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+             myBackup2 = $("#modalApprove").clone();
+            $("#modalApprove").modal("hide");
+            $("#bodyApprove").html();
+            //$("#modalApprove").removeData("modal");
+            //$("#modalApprove").remove();
+            //console.log("clear editmodal");
+        }
+                jQuery.fn.yiiGridView.update("approve-grid'.$index.'");
+        //$("[id^=approve-grid]").yiiGridView("update",{});
+          }
+      } 
+      );
+
+    });
+
+
+    
+  $("body").on("click",".update,#link",function(e){
+        link = $(this).attr("href");
+        //console.log(myBackup2)
+
+        //if(myBackup2!="")
+        //   $("body").append(myBackup2);
+
+        $.ajax({
+                 type:"GET",
+                 cache: false,
+                 url:$(this).attr("href"),
+                 success:function(data){
+                          //console.log(data);
+                          //var $selector = $("#modal-body2");
+
+                      //$("#contract-approve-history-form .d-picker").datepicker();
+                      $("#bodyApprove").html(data);
+                      //console.log($("#modalApprove").html());
+                      $("#dateApprove").datepicker();
+              $("#dateApprove").datepicker("option", {dateFormat: "dd/mm/yyyy"});
+    
+
+                       $("#modalApprove").modal("show");
+
+            
+                 },
+
+                });
+          return false;
+    });
+            
+');
+
+
+Yii::app()->clientScript->registerScript('deleteOutsourceContract', "
+function deleteOutsourceContract(elm, index)
+{
+  js:bootbox.confirm('คุณต้องการจะลบข้อมูล?','ยกเลิก','ตกลง',
+    function(confirmed){
+            if(confirmed)
+            { 
+          element=$(elm).parent().parent().parent();
+            /* animate div */
+            $(element).animate(
+            {
+                opacity: 0.25,
+                left: '+=50',
+                height: 'toggle'
+            }, 0,
+            function() {
+                /* remove div */
+                $(element).remove();
+            });
+            num = $('#num').val();
+            num--;
+            //$('#num').val(num);
+            
+            //console.log('del num:'+$('#num').val());
+            //rearrange no.
+                  var collection = $('.contract_no');
+                  //console.log(collection);
+                  for(var k=0; k<collection.length; k++){
+                      var element = collection.eq(k);
+                      element.html('สัญญาที่ '+(k+1));
+                      //console.log(element.html());
+                  }
+                                          
+            }
+                
+    });
+
+    
+}", CClientScript::POS_END);
+?>
 
 <script type="text/javascript" src="/pea_track/assets/7d883f12/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>

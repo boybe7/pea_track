@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Projects'=>array('index'),
-	'Create2',
+	'เพิ่มสัญญาจ้างช่วง/ซื้อ',
 );
 
 

@@ -37,7 +37,7 @@ class ContractApproveHistory extends CActiveRecord
 			array('approveBy, timeSpend', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, contract_id, detail, dateApprove, approveBy, cost, timeSpend', 'safe', 'on'=>'search'),
+			array('id, type,contract_id, detail, dateApprove, approveBy, cost, timeSpend', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -80,6 +80,19 @@ class ContractApproveHistory extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
+	public function searchByContractID($cid,$type) {
+
+		$criteria=new CDbCriteria;
+		$criteria->select = '*';
+		//$criteria->join = 'JOIN foodType food ON foodtype = food.foodtype '; 
+		$criteria->condition = "contract_id='$cid' AND type='$type' ";
+		//$criteria->group = 'foodtype ';
+		
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.

@@ -217,7 +217,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 					'id'=>'approve-grid'.$index,
 					
 				    'type'=>'bordered condensed',
-					'dataProvider'=>ContractApproveHistoryTemp::model()->search($index),
+					'dataProvider'=>ContractApproveHistoryTemp::model()->searchByUser($index,1,Yii::app()->user->ID),
 					//'filter'=>$model,
 					'selectableRows' => 2,
 					'enableSorting' => false,

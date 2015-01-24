@@ -134,7 +134,7 @@ body{
      position: relative;
      /*background: url(../images/intro-bg.jpg) no-repeat center center;*/
      background-size: cover;
-     font: 16px/1.6em 'Boon400',sans-serif;
+     font: 14px/1.4em 'Boon400',sans-serif;
      font-weight: normal;
 }
 

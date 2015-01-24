@@ -31,7 +31,7 @@ class ContractApproveHistoryController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','createTemp','update','updateTemp','delete','deleteTemp'),
+				'actions'=>array('create','createTemp','createOutsourceTemp','update','updateTemp','delete','deleteTemp'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -91,6 +91,53 @@ class ContractApproveHistoryController extends Controller
 		{
 			$model->attributes=$_POST['ContractApproveHistoryTemp'];
 			$model->contract_id = $id;
+			$model->u_id = Yii::app()->user->ID;
+			$model->type = 1;
+			if (Yii::app()->request->isAjaxRequest)
+	        {
+	           
+	            if($model->save())
+	            	 echo CJSON::encode(array(
+	                'status'=>'success'
+	                ));
+	            else
+	                echo CJSON::encode(array(
+	                'status'=>'failure','div'=>$this->renderPartial('_form', array('model'=>$model,'index'=>$id), true)));
+	                
+	            exit;
+				        
+	        }		
+			else
+			  if($model->save())
+				$this->redirect(array('admin'));
+
+		}
+
+		if (Yii::app()->request->isAjaxRequest)
+        {
+            echo CJSON::encode(array(
+                'status'=>'failure', 
+                'div'=>$this->renderPartial('_form', array('model'=>$model,'index'=>$id), true)));
+            exit;               
+        }
+
+		$this->renderPartial('_form',array('model'=>$model,'index'=>$id));
+	}
+
+	public function actionCreateOutsourceTemp($id)
+	{
+	
+
+		 $model=new ContractApproveHistoryTemp;
+
+		// Uncomment the following line if AJAX validation is needed
+		//$this->performAjaxValidation($model);
+		if(isset($_POST['ContractApproveHistoryTemp']))
+		{
+			$model->attributes=$_POST['ContractApproveHistoryTemp'];
+			$model->contract_id = $id;
+			$model->u_id = Yii::app()->user->ID;
+			$model->type = 2;
 			if (Yii::app()->request->isAjaxRequest)
 	        {
 	           
@@ -156,7 +203,7 @@ class ContractApproveHistoryController extends Controller
 		if(isset($_POST['ContractApproveHistoryTemp']))
 		{
 			$model->attributes=$_POST['ContractApproveHistoryTemp'];
-
+            //$model->type = 1;
 			 if (Yii::app()->request->isAjaxRequest)
 	         {
 	           

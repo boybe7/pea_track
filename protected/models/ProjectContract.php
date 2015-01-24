@@ -179,6 +179,8 @@ class ProjectContract extends CActiveRecord
 		$criteria->compare('pc_guarantee',$this->pc_guarantee,true);
 		$criteria->compare('pc_last_update',$this->pc_user_create);
 		$criteria->compare('pc_user_update',$this->pc_user_update);
+		$criteria->compare('pc_PO',$this->pc_PO);
+
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

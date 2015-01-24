@@ -32,7 +32,7 @@ class ProjectController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','create2','update','loadOutsourceByAjax','loadContractByAjax','DeleteSelected'),
+				'actions'=>array('create','createOutsource','update','loadOutsourceByAjax','loadContractByAjax','DeleteSelected'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -56,7 +56,7 @@ class ProjectController extends Controller
 		));
 	}
 
-	public function actionCreate2($id)
+	public function actionCreateOutsource($id)
 	{
 		$modelOutsource = array();
 		//$modelOutsource = new OutsourceContract;
@@ -95,6 +95,14 @@ class ProjectController extends Controller
 	  //           $valid=$item->validate() && $valid;
 	  //       }
 		}
+		else
+        {
+        	if (!Yii::app()->request->isAjaxRequest)	
+			  Yii::app()->db->createCommand('DELETE FROM contract_approve_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
+		
+			  // Yii::app()->db->createCommand('TRUNCATE contract_approve_history_temp')->execute();
+			
+        }
 
 		$this->render('create2',array(
 			'model'=>$this->loadModel($id),'outsource'=>$modelOutsource,'numContracts'=>$numContracts
@@ -118,6 +126,7 @@ class ProjectController extends Controller
                 }
             }
         }
+        
         return $items;
     }
 
@@ -135,9 +144,9 @@ class ProjectController extends Controller
 		$numContracts = 1;
 		$modelPC = new ProjectContract;
 		
-		//$query = "DROP TABLE if exists TempApproveTable;";
-	    //$query = "CREATE TEMPORARY TABLE TempApproveTable  AS (SELECT * FROM contract_approve_history WHERE 1=2);";
-		//Yii::app()->db->createCommand($query)->execute();
+		// $query = "DROP TABLE if exists contract_approve_history_temp;";
+	 //    $query = "CREATE TEMPORARY TABLE contract_approve_history_temp  AS (SELECT * FROM contract_approve_history WHERE 1=2);";
+		// Yii::app()->db->createCommand($query)->execute();
 
 		if(isset($_POST['Project']))
 		{
@@ -203,7 +212,7 @@ class ProjectController extends Controller
 		 				     	$modelTemps = Yii::app()->db->createCommand()
 						                    ->select('*')
 						                    ->from('contract_approve_history_temp')
-						                    ->where('contract_id=:id', array(':id'=>$index))
+						                    ->where('contract_id=:id AND type=1 AND u_id=:user', array(':id'=>$index,':user'=>Yii::app()->user->ID))
 						                    ->queryAll();
 						        foreach ($modelTemps as $key => $mTemp) {
 
@@ -215,6 +224,8 @@ class ProjectController extends Controller
                                         $modelApprove->dateApprove = $mTemp['dateApprove'];
                                         //$modelApprove->id = "";
                                         $modelApprove->contract_id = $modelC->pc_id;
+                                        $modelApprove->type = 1;
+                                        
                                         if($modelApprove->save())
                                            $msg =  "successful";
                                         else{
@@ -243,6 +254,7 @@ class ProjectController extends Controller
 		 				if($saveOK==1)
 		 				{
 		 					$transaction->commit();
+		 					$this->redirect(array('createOutsource', 'id' => $model->pj_id));
 		 					// header('Content-type: text/plain');
         //                 		//print_r($modelC);
         //                 		echo "save".$saveOK;
@@ -320,9 +332,12 @@ class ProjectController extends Controller
 	  //       }
 		}
 		else{
+		 
 		 if (!Yii::app()->request->isAjaxRequest)	
-			Yii::app()->db->createCommand('TRUNCATE contract_approve_history_temp')->execute();
-			
+			Yii::app()->db->createCommand('DELETE FROM contract_approve_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
+		
+		 //Yii::app()->db->createCommand('TRUNCATE contract_approve_history_temp')->execute();
+				
 			$modelPC->pc_id = 1;
      		array_push($modelContract, $modelPC);
 
