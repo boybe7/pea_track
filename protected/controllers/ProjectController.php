@@ -59,9 +59,12 @@ class ProjectController extends Controller
 	public function actionCreateOutsource($id)
 	{
 		$modelOutsource = array();
+		$modelContract = array();
+		$modelContractOld = array();
+		$model = new OutsourceContract;
 		//$modelOutsource = new OutsourceContract;
 		$numContracts = 1;
-		array_push($modelOutsource, new OutsourceContract);
+		array_push($modelOutsource, $model);
 		//array_push($modelOutsource, new OutsourceContract);
 		//array_push($modelOutsource, new OutsourceContract);
 		//$modelOutsource = $this->getContracts();
@@ -90,28 +93,32 @@ class ProjectController extends Controller
 		    $modelOutsources = $_POST['OutsourceContract'];
 		    $transaction=Yii::app()->db->beginTransaction();
 		    try {
+			            
+		    			$index = 1;
+		    			$saveOK = 1;
 			            foreach ($modelOutsources as $c => $outsource) 
 		 				{
 		 				     //print_r($contract);
-		 					header('Content-type: text/plain');
-                               print_r($outsource);                    
-                           	exit;
+		 					
 		 					 
-		 				     $modelC = new ProjectContract;
-		 				     $modelC->attributes = $contract;
-		 				     $modelC->pc_details = $contract["pc_details"];
-		 				     $modelC->pc_sign_date = $contract["pc_sign_date"];
-		 				     $modelC->pc_PO = $contract["pc_PO"];
-		 				     $modelC->pc_vendor_id = $model->pj_vendor_id;
-
-		 				     array_push($modelContractOld, $modelC);
+		 				     $modelC = new OutsourceContract;
+		 				     $modelC->attributes = $outsource;
+		 				     $modelC->oc_sign_date = $outsource["oc_sign_date"];
+		 				     $modelC->oc_approve_date = $outsource["oc_approve_date"];
+		 				     $modelC->oc_insurance_start = $outsource["oc_insurance_start"];
+		 				     $modelC->oc_insurance_end = $outsource["oc_insurance_end"];
+		 				    
 		 				     //$modelC->pc_id = "";
-		 				     $modelC->pc_proj_id = $model->pj_id;
+		 				     $modelC->oc_proj_id = $id;
 
-		 				     
+		 				     $modelC->oc_last_update = (date("Y")+543).date("-m-d H:i:s");
+				    		 $modelC->oc_user_update = Yii::app()->user->ID;
+				    		 $modelC->oc_user_create = Yii::app()->user->ID;
+				    		  array_push($modelContractOld, $modelC);
+				    		  //header('Content-type: text/plain');
+                              // print_r($modelC);                    
+                           	  //exit;
 
-		 				     $modelC->pc_last_update = date("Y-m-d H:i:s");
-				    		 $modelC->pc_user_update = Yii::app()->user->ID;
 
 		 				    
 		 				     if($modelC->save())
@@ -131,7 +138,7 @@ class ProjectController extends Controller
                                         $modelApprove->attributes = $mTemp;
                                         $modelApprove->dateApprove = $mTemp['dateApprove'];
                                         //$modelApprove->id = "";
-                                        $modelApprove->contract_id = $modelC->pc_id;
+                                        $modelApprove->contract_id = $modelC->oc_id;
                                         $modelApprove->type = 2;
                                         
                                         if($modelApprove->save())
@@ -145,10 +152,10 @@ class ProjectController extends Controller
 		 				     	
 		 				     }else{
 		 				     	$saveOK = 0;	
-		 				     	if($contract["pc_id"]!="")
-		 				     	  $modelC->pc_id = $contract["pc_id"];
-		 				     	else
-		 				     	  $modelC->pc_id = 1;	
+		 				     	// if($contract["pc_id"]!="")
+		 				     	//   $modelC->pc_id = $contract["pc_id"];
+		 				     	// else
+		 				     	//   $modelC->pc_id = 1;	
 		 				     }
 
 		 				     $index++;
@@ -162,7 +169,7 @@ class ProjectController extends Controller
 		 				if($saveOK==1)
 		 				{
 		 					$transaction->commit();
-		 					$this->redirect(array('createOutsource', 'id' => $model->pj_id));
+		 					//$this->redirect(array('createOutsource', 'id' => $model->pj_id));
 		 					// header('Content-type: text/plain');
         //                 		//print_r($modelC);
         //                 		echo "save".$saveOK;

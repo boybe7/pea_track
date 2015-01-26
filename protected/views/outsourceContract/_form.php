@@ -381,7 +381,7 @@
           'id'=>'approve-grid'.$index,
           
           'type'=>'bordered condensed',
-          'dataProvider'=>ContractApproveHistoryTemp::model()->searchByUser($index,1,Yii::app()->user->ID),
+          'dataProvider'=>ContractApproveHistoryTemp::model()->searchByUser($index,2,Yii::app()->user->ID),
           //'filter'=>$model,
           'selectableRows' => 2,
           'enableSorting' => false,
@@ -704,19 +704,10 @@
        
                 minLength: 0
       }).bind('focus', function () {
+             //console.log("focus");
                 $(this).autocomplete("search");
       });
-
-      $( "input[name*='oc_vendor_id_temp']" ).autocomplete({
-       
-                minLength: 0
-      }).bind('focus', function () {
-                $(this).autocomplete("search");
-      });
-
-
-
-
+  });
  </script> 
 
 <?php  

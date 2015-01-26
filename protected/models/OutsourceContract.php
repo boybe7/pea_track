@@ -116,6 +116,7 @@ class OutsourceContract extends CActiveRecord
         $oldattributes = $this->getOldAttributes();
         // compare old and new
         $difference = false;
+        if($oldattributes!=null)
         foreach ($newattributes as $name => $value) {
                 $old = $oldattributes[$name]; 
                 if ($value != $old) 

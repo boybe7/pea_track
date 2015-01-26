@@ -436,7 +436,7 @@ var bootbox = window.bootbox || (function(document, $) {
 
             //console.log("shown");
             $(".d-picker").datepicker();
-            $(".ui-autocomplete-input").autocomplete();
+           
         });
 
         div.on('hidden', function(e) {
