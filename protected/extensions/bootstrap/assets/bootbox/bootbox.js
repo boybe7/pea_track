@@ -265,7 +265,7 @@ var bootbox = window.bootbox || (function(document, $) {
 
             //console.log("form"+form);
 
-            form.find("input[type=text]").datepicker();
+            // form.find("input[type=text]").datepicker();
 
         });
 
@@ -436,6 +436,7 @@ var bootbox = window.bootbox || (function(document, $) {
 
             //console.log("shown");
             $(".d-picker").datepicker();
+            $(".ui-autocomplete-input").autocomplete();
         });
 
         div.on('hidden', function(e) {

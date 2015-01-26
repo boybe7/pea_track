@@ -68,24 +68,123 @@ class ProjectController extends Controller
 
 		if(isset($_POST['OutsourceContract']))
 		{
-			$modelOutsource = array();
-            $numContracts = $_POST['num'];
-		    for($i=1;$i<$numContracts+1;$i++)
-		    {
-		        //if(isset($_POST['OutsourceContract'][$i]))
-		        //{
-		            $contracts = new OutsourceContract;
-		            $contracts->attributes = $_POST['OutsourceContract'][$i];
-		            //$contracts->oc_cost = Yii::app()->format->unformatNumber($_POST['OutsourceContract'][$i]['oc_cost']);
-		            $contracts->oc_proj_id = $id;
-		            $contracts->oc_sign_date = $_POST['OutsourceContract'][$i]["oc_sign_date"];//$_POST[$i."_oc_end_date"];
-		            $contracts->oc_end_date = $_POST['OutsourceContract'][$i]["oc_end_date"];
-		            $contracts->oc_approve_date = $_POST['OutsourceContract'][$i]["oc_approve_date"];
-		            array_push($modelOutsource, $contracts);
-		            //$contracts->validate();
-		            $contracts->save();
-		        //}
-		    }
+			$modelOutsources = array();
+      //       $numContracts = $_POST['num'];
+		    // for($i=1;$i<$numContracts+1;$i++)
+		    // {
+		    //     //if(isset($_POST['OutsourceContract'][$i]))
+		    //     //{
+		    //         $contracts = new OutsourceContract;
+		    //         $contracts->attributes = $_POST['OutsourceContract'][$i];
+		    //         //$contracts->oc_cost = Yii::app()->format->unformatNumber($_POST['OutsourceContract'][$i]['oc_cost']);
+		    //         $contracts->oc_proj_id = $id;
+		    //         $contracts->oc_sign_date = $_POST['OutsourceContract'][$i]["oc_sign_date"];//$_POST[$i."_oc_end_date"];
+		    //         $contracts->oc_end_date = $_POST['OutsourceContract'][$i]["oc_end_date"];
+		    //         $contracts->oc_approve_date = $_POST['OutsourceContract'][$i]["oc_approve_date"];
+		    //         array_push($modelOutsource, $contracts);
+		    //         //$contracts->validate();
+		    //         $contracts->save();
+		    //     //}
+		    // }
+
+		    $modelOutsources = $_POST['OutsourceContract'];
+		    $transaction=Yii::app()->db->beginTransaction();
+		    try {
+			            foreach ($modelOutsources as $c => $outsource) 
+		 				{
+		 				     //print_r($contract);
+		 					header('Content-type: text/plain');
+                               print_r($outsource);                    
+                           	exit;
+		 					 
+		 				     $modelC = new ProjectContract;
+		 				     $modelC->attributes = $contract;
+		 				     $modelC->pc_details = $contract["pc_details"];
+		 				     $modelC->pc_sign_date = $contract["pc_sign_date"];
+		 				     $modelC->pc_PO = $contract["pc_PO"];
+		 				     $modelC->pc_vendor_id = $model->pj_vendor_id;
+
+		 				     array_push($modelContractOld, $modelC);
+		 				     //$modelC->pc_id = "";
+		 				     $modelC->pc_proj_id = $model->pj_id;
+
+		 				     
+
+		 				     $modelC->pc_last_update = date("Y-m-d H:i:s");
+				    		 $modelC->pc_user_update = Yii::app()->user->ID;
+
+		 				    
+		 				     if($modelC->save())
+		 				     {
+		 				     	//$saveOK = true;
+		 				     	$modelTemps = Yii::app()->db->createCommand()
+						                    ->select('*')
+						                    ->from('contract_approve_history_temp')
+						                    ->where('contract_id=:id AND type=2 AND u_id=:user', array(':id'=>$index,':user'=>Yii::app()->user->ID))
+						                    ->queryAll();
+						        foreach ($modelTemps as $key => $mTemp) {
+
+						        // header('Content-type: text/plain');
+              //             		print_r($modelC);                    
+              //             	    exit;
+                                        $modelApprove = new ContractApproveHistory;
+                                        $modelApprove->attributes = $mTemp;
+                                        $modelApprove->dateApprove = $mTemp['dateApprove'];
+                                        //$modelApprove->id = "";
+                                        $modelApprove->contract_id = $modelC->pc_id;
+                                        $modelApprove->type = 2;
+                                        
+                                        if($modelApprove->save())
+                                           $msg =  "successful";
+                                        else{
+                                           $model->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ "'.$index.' ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+		 				            	   $saveOK = 0;
+                                        }   	
+						        }            
+		 				     	//$modelTemp = ContractApproveHistoryTemp::model()->findByAttributes(array('contract_id'=>$contract['pc_id']));
+		 				     	
+		 				     }else{
+		 				     	$saveOK = 0;	
+		 				     	if($contract["pc_id"]!="")
+		 				     	  $modelC->pc_id = $contract["pc_id"];
+		 				     	else
+		 				     	  $modelC->pc_id = 1;	
+		 				     }
+
+		 				     $index++;
+
+		 				      array_push($modelContract, $modelC); 
+		 				    	
+		 				}
+		 				 
+		 				
+
+		 				if($saveOK==1)
+		 				{
+		 					$transaction->commit();
+		 					$this->redirect(array('createOutsource', 'id' => $model->pj_id));
+		 					// header('Content-type: text/plain');
+        //                 		//print_r($modelC);
+        //                 		echo "save".$saveOK;
+        //                 	exit;
+		 				}   	
+		 				else
+		 				{
+		 					$transaction->rollBack();
+		 					$modelContract = $modelContractOld;
+		 				    $model->addError('contract', 'กรุณากรอกข้อมูล "สัญญา" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+		 				}
+
+			}
+			catch(Exception $e)
+	 		{
+	 				$transaction->rollBack();	
+	 				$model->addError('Outsource', 'Error occured while saving outsorces.');
+	 				Yii::trace(CVarDumper::dumpAsString($e->getMessage()));
+	 	        	//you should do sth with this exception (at least log it or show on page)
+	 	        	Yii::log( 'Exception when saving data: ' . $e->getMessage(), CLogger::LEVEL_ERROR );
+	 
+	 		}         
 
 			// $valid=true;
 	  //       foreach($modelOutsource as $i=>$item)
@@ -180,9 +279,6 @@ class ProjectController extends Controller
 			        		$wk->save();	
 		 	        	}
 				    	$saveOK = 1;
-
-				    	
-
 				    	$index = 1;
 
 		 				foreach ($model->contract as $contracts => $contract) 
@@ -202,7 +298,7 @@ class ProjectController extends Controller
 
 		 				     
 
-		 				     $modelC->pc_last_update = date("Y-m-d H:i:s");
+		 				     $modelC->pc_last_update = (date("Y")+543).date("-m-d H:i:s");
 				    		 $modelC->pc_user_update = Yii::app()->user->ID;
 
 		 				    

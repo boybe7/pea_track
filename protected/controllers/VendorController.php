@@ -31,7 +31,7 @@ class VendorController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','DeleteSelected','GetVendor'),
+				'actions'=>array('create','update','DeleteSelected','GetVendor','GetSupplier'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -151,7 +151,26 @@ class VendorController extends Controller
 	public function actionGetVendor(){
             $request=trim($_GET['term']);
                     
-            $models=Vendor::model()->findAll(array("condition"=>"v_name like '$request%'"));
+            $models=Vendor::model()->findAll(array("condition"=>"v_name like '$request%'  AND type='Owner'"));
+            $data=array();
+            foreach($models as $model){
+                //$data[]["label"]=$get->v_name;
+                //$data[]["id"]=$get->v_id;
+                $data[] = array(
+                        'id'=>$model['v_id'],
+                        'label'=>$model['v_name'],
+                );
+
+            }
+            $this->layout='empty';
+            echo json_encode($data);
+        
+    }
+
+    public function actionGetSupplier(){
+            $request=trim($_GET['term']);
+                    
+            $models=Vendor::model()->findAll(array("condition"=>"v_name like '$request%' AND type='Supplier'"));
             $data=array();
             foreach($models as $model){
                 //$data[]["label"]=$get->v_name;

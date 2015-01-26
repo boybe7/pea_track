@@ -1,5 +1,5 @@
 <?php
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/bootstrap-datepicker/css/datepicker.css'); 
+// Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/bootstrap-datepicker/css/datepicker.css'); 
 ?>
 <style type="text/css">
   .error {
@@ -55,7 +55,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
                            // 'source'=>$this->createUrl('Ajax/GetDrug'),
                            'source'=>'js: function(request, response) {
                                 $.ajax({
-                                    url: "'.$this->createUrl('Vendor/GetVendor').'",
+                                    url: "'.$this->createUrl('Vendor/GetSupplier').'",
                                     dataType: "json",
                                     data: {
                                         term: request.term,
@@ -301,13 +301,13 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
         $this->widget('bootstrap.widgets.TbButton', array(
                 'buttonType'=>'link',
                 
-                'type'=>'success',
+                'type'=>'info',
                 'label'=>'เพิ่มการอนุมัติ',
                 'icon'=>'plus-sign',
                 
                 'htmlOptions'=>array(
                   'class'=>'pull-right',
-                  'style'=>'margin:0px 10px 10px 10px;',
+                  'style'=>'margin:-10px 10px 10px 10px;',
                   //'onclick'=>'createApprove(' . $index . ')'
                
              'onclick'=>'
@@ -381,14 +381,14 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
           'id'=>'approve-grid'.$index,
           
           'type'=>'bordered condensed',
-          'dataProvider'=>ContractApproveHistoryTemp::model()->search($index),
+          'dataProvider'=>ContractApproveHistoryTemp::model()->searchByUser($index,1,Yii::app()->user->ID),
           //'filter'=>$model,
           'selectableRows' => 2,
           'enableSorting' => false,
           'rowCssClassExpression'=>'"tr_white"',
 
             // 'template'=>"{summary}{items}{pager}",
-            'htmlOptions'=>array('style'=>'padding-top:40px;'),
+            'htmlOptions'=>array('style'=>'padding-top:30px;'),
             'enablePagination' => false,
             'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
           'columns'=>array(
@@ -481,7 +481,194 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
           </div>
         
     </fieldset>
+    
+
+    <fieldset class="well the-fieldset">
+          <legend class="the-legend">สัญญาย่อย</legend>
+          <div class="row-fluid"> 
+          <?php 
+        $this->widget('bootstrap.widgets.TbButton', array(
+                'buttonType'=>'link',
+                
+                'type'=>'warning',
+                'label'=>'เพิ่มสัญญาย่อย',
+                'icon'=>'plus-sign',
+                
+                'htmlOptions'=>array(
+                  'class'=>'pull-right',
+                  'style'=>'margin:-10px 10px 10px 10px;',
+                  //'onclick'=>'createApprove(' . $index . ')'
+               
+             'onclick'=>'
+                  
+                  js:bootbox.confirm($("#modal-body4").html(),"ยกเลิก","ตกลง",
+                    
+                      function(confirmed){
+                                    //console.log("con:"+confirmed)
+                                      
+                        if(confirmed)
+                        {
+
+                          $.ajax({
+                            type: "POST",
+                            url: "../../OutsourceSubcontract/createTemp/' . $index . '",
+                            dataType:"json",
+                            data: $(".modal-body #subcontract-temp-form").serialize()
+                          })                  
+                          .done(function( msg ) {
+                            
+                            jQuery.fn.yiiGridView.update("subcontract-grid'.$index.'");
+                            
+                            if(msg.status=="failure")
+                            {
+                              $("#modal-body4").html(msg.div);
+                              js:bootbox.confirm($("#modal-body4").html(),"ยกเลิก","ตกลง",
+                                        function(confirmed){
+                                              
+                                          
+                                           if(confirmed)
+                                            {
+                                              $.ajax({
+                                                type: "POST",
+                                                url: "../OutsourceSubcontract/createTemp",
+                                                dataType:"json",
+                                                data: $(".modal-body #subcontract-temp-form").serialize()
+                                                })
+                                                .done(function( msg ) {
+                                                  if(msg.status=="failure")
+                                                  {
+                                                    js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+                                                  }
+                                                  else{
+                                                    //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+                                                  }
+                                                });
+                                            }
+                              })
+                            }
+                            else{
+                              //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+
+                            }
+                          });
+                      
+                                  }
+                    })
+                      
+                    ',
+                      
+                ),
+            ));
+
+                  
+        $this->widget('bootstrap.widgets.TbGridView',array(
+          'id'=>'subcontract-grid'.$index,
+          
+          'type'=>'bordered condensed',
+          'dataProvider'=>OutsourceSubcontractTemp::model()->searchByUser($index,Yii::app()->user->ID),
+          //'filter'=>$model,
+          'selectableRows' => 2,
+          'enableSorting' => false,
+          'rowCssClassExpression'=>'"tr_white"',
+
+            // 'template'=>"{summary}{items}{pager}",
+          'htmlOptions'=>array('style'=>'padding-top:30px;'),
+          'enablePagination' => false,
+          'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
+          'columns'=>array(
+                'No.'=>array(
+                    'header'=>'ลำดับ',
+                    'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),                        
+                    'htmlOptions'=>array(
+                            'style'=>'text-align:center'
+
+                      ),
+                    'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+                  ),
+                'code'=>array(
+                
+                  'name' => 'oc_code',
+
+                  'headerHtmlOptions' => array('style' => 'width:10%;text-align:center;background-color: #f5f5f5'),                       
+                  //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                  'htmlOptions'=>array(
+                                      'style'=>'text-align:left'
+
+                        )
+                ),
+                'detail'=>array(
+                
+                  'header' => 'รายละเอียด',
+                  'type'=>'raw', //to use html tag
+                  'value'=> '$data->oc_vendor_id."<br>".$data->oc_detail',     
+                  'headerHtmlOptions' => array('style' => 'width:30%;text-align:center;background-color: #f5f5f5'),                       
+                  //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                  'htmlOptions'=>array(
+                                      'style'=>'text-align:left'
+
+                        )
+                ),
+                'cost'=>array(
+                
+                  'name' => 'oc_cost',
+                  'value'=> function($data){
+                            return number_format($data->oc_cost, 2);
+                        },
+                  'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),                       
+                  //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                  'htmlOptions'=>array(
+                                      'style'=>'text-align:right'
+
+                        )
+                ),
+                'begin date'=>array(
+                    'name' => 'oc_sign_date',
+                      
+                    'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),                       
+                    'htmlOptions'=>array(
+                                        'style'=>'text-align:center'
+
+                      )
+                ),
+                'end date'=>array(
+                    'name' => 'oc_end_date',
+                      
+                    'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),                       
+                    'htmlOptions'=>array(
+                                        'style'=>'text-align:center'
+
+                      )
+                ),    
+                array(
+                'class'=>'bootstrap.widgets.TbButtonColumn',
+                'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),
+                'template' => '{update}   {delete}',
+                // 'deleteConfirmation'=>'js:bootbox.confirm("Are you sure to want to delete")',
+                'buttons'=>array(
+                    'delete'=>array(
+                      'url'=>'Yii::app()->createUrl("ContractApproveHistory/deleteTemp", array("id"=>$data->id))',  
+
+                    ),
+                    'update'=>array(
+
+                      'url'=>'Yii::app()->createUrl("ContractApproveHistory/updateTemp", array("id"=>$data->id))',
+                      //'click'=>'updateApprove($data->id)' 
+                      
+                    )
+
+                  )
+
+                
+              ),
+            )
+
+          ));
+
+           ?>
+          </div>
         
+    </fieldset>
+            
        <?php   
           
           if(!$model->isNewRecord) 
@@ -507,8 +694,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
                     )
                 ));
 ?> 
-
-        
+       
 <script type="text/javascript">
   
   $(function(){
@@ -519,8 +705,18 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
                 minLength: 0
       }).bind('focus', function () {
                 $(this).autocomplete("search");
-      });       
-  });
+      });
+
+      $( "input[name*='oc_vendor_id_temp']" ).autocomplete({
+       
+                minLength: 0
+      }).bind('focus', function () {
+                $(this).autocomplete("search");
+      });
+
+
+
+
  </script> 
 
 <?php  
@@ -610,6 +806,12 @@ Yii::app()->clientScript->registerScript('edit','
     });
             
 ');
+Yii::app()->clientScript->registerScript('createSubOutsourceTemp','
+    function getSubcontract()
+    {
+    }
+            
+');
 
 
 Yii::app()->clientScript->registerScript('deleteOutsourceContract', "
@@ -653,4 +855,4 @@ function deleteOutsourceContract(elm, index)
 }", CClientScript::POS_END);
 ?>
 
-<script type="text/javascript" src="/pea_track/assets/7d883f12/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<!-- <script type="text/javascript" src="/pea_track/assets/7d883f12/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> -->

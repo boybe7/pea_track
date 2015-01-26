@@ -198,6 +198,7 @@ hr {
                     $modelPC->pc_details = $value["pc_details"];
                     $modelPC->pc_PO = $value["pc_PO"];
                     $modelPC->pc_id = $value["pc_id"];
+                    $modelPC->pc_last_update = $value["pc_last_update"];
                     $modelPC->pc_cost = number_format($value["pc_cost"],2);
                     //print_r($modelPC->pc_id);
                     echo'<fieldset class="well the-fieldset">';
@@ -370,19 +371,19 @@ hr {
               ),
           )); 
 
-         $this->widget('bootstrap.widgets.TbButton', array(
-              'buttonType'=>'link',
+         // $this->widget('bootstrap.widgets.TbButton', array(
+         //      'buttonType'=>'link',
               
-              'type'=>'danger',
-              'label'=>'ลบสัญญา',
-              'icon'=>'minus-sign',
+         //      'type'=>'danger',
+         //      'label'=>'ลบสัญญา',
+         //      'icon'=>'minus-sign',
               
-              'htmlOptions'=>array(
-                'class'=>'pull-right',
-                'style'=>'margin:0px 10px 0px 10px;',
-                'id'=>'delOutsourceByAjax'
-              ),
-          )); 
+         //      'htmlOptions'=>array(
+         //        'class'=>'pull-right',
+         //        'style'=>'margin:0px 10px 0px 10px;',
+         //        'id'=>'delOutsourceByAjax'
+         //      ),
+         //  )); 
          
         echo '</div>';    
     ?>  
@@ -508,7 +509,19 @@ hr {
 
       
     </div>
+    <div id="modal-body4" class="modal-body">
+      <?php 
+      
+      $model4 = new OutsourceSubcontractTemp;
+      $this->renderPartial('/outsourceContract/_formTemp',array('model'=>$model4),false); 
+
+  
+      ?>
+
+      
+    </div>
 </div>
+
 <script type="text/javascript">
 
 	var _index = $("#num").val();
