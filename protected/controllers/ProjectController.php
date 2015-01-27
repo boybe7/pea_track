@@ -168,7 +168,7 @@ class ProjectController extends Controller
 		 				    	
 		 				}
 		 				 
-		 				
+		 				$numContracts = $index-1;  
 
 		 				if($saveOK==1)
 		 				{

@@ -548,6 +548,7 @@ hr {
  
 <?php
 //Yii::app()->clientScript->registerCoreScript('jquery');
+
 Yii::app()->clientScript->registerScript('loadoutsource', '
 var _index = ' . $index . ';
 var _index = $("#num").val();
@@ -568,9 +569,17 @@ $("#loadOutsourceByAjax").click(function(e){
 
             //_index++;
             $("#num").val(_index);
-            //console.log("add num:"+$("#num").val());
+            console.log("add num:"+$("#num").val());
              _index = $("#num").val();
-            //console.log("add index:"+_index);
+            console.log("add index:"+_index);
+
+             //rearrange no.
+              var collection = $(".contract_no");
+              for(var i=0; i<collection.length; i++){
+                  var element = collection.eq(i);
+                  element.html("สัญญาที่ "+(i+1));
+                  console.log(element.html());
+              }        
         }
 
     });
@@ -600,6 +609,7 @@ $("#delOutsourceByAjax").click(function(e){
     _index--;
     $("#num").val(_index);
     //console.log("del num:"+$("#num").val());
+
 });
 ', CClientScript::POS_END);
 ?>
