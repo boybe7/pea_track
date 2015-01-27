@@ -106,6 +106,11 @@ margin-top: 0px;
     min-height: 0px;
 }
 
+.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  color: white;  
+  background-color: #33aa33;
+  border-color: #428bca;
+}
 
 
 @font-face {
@@ -167,11 +172,18 @@ if(!Yii::app()->user->isGuest)
             'class'=>'bootstrap.widgets.TbMenu',
             'items'=>array(
                 array('label'=>'หน้าแรก','icon'=>'home', 'url'=>array('/site/index')),
-                array('label'=>'โครงการ','icon'=>'flag', 'url'=>array('/project/index')),
+                // array('label'=>'โครงการ','icon'=>'flag', 'url'=>array('/project/index')),
+                array('label'=>'โครงการ','icon'=>'flag', 'url'=>'#','items'=>array(
+                     array('label'=>'ข้อมูลโครงการ', 'url'=>array('/project/index')),
+                     array('label'=>'บันทึกความก้าวหน้าสัญญาหลัก', 'url'=>array('/paymentProjectContract/index')),
+                     array('label'=>'บันทึกความก้าวหน้าสัญญาจ้างช่วง/ซื้อ', 'url'=>array('/paymentOutsourceContract/index')),
+                     
+                    ),
+                ),
                
                 array('label'=>'คู่สัญญา','icon'=>'briefcase', 'url'=>array('/vendor/admin'), 'visible'=>Yii::app()->user->isAdmin()),
                 array('label'=>'ประเภทงาน','icon'=>'briefcase', 'url'=>array('/workcategory/admin'), 'visible'=>Yii::app()->user->isAdmin()),
-                 array('label'=>'ผู้ใช้งาน','icon'=>'user', 'url'=>array('/user/index'), 'visible'=>Yii::app()->user->isAdmin()),
+                array('label'=>'ผู้ใช้งาน','icon'=>'user', 'url'=>array('/user/index'), 'visible'=>Yii::app()->user->isAdmin()),
             ),
         ),    
         array(
