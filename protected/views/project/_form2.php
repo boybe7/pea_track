@@ -355,7 +355,7 @@ hr {
 				'type'=>'vertical',
   				'htmlOptions'=>  array('class'=>'','style'=>''),
 			   ));
-     
+        echo '<div style="text-align:left">'.$form->errorSummary(array($modelValidate)).'</div>';
         echo '<div class="row-fluid">';
          $this->widget('bootstrap.widgets.TbButton', array(
               'buttonType'=>'link',
@@ -386,27 +386,22 @@ hr {
          //  )); 
          
         echo '</div>';    
-    ?>  
+      
 
-	    <div id="outsource">
-         
-	        <?php
+	   echo  '<div id="outsource">';
+    ?>
 
+	         
+    <?php
 	        echo  '<input type="hidden" id="num" name="num" value="'.$numContracts.'">';
 	        $index = 1;
-
-	        // 	$this->renderPartial('//outsourceContract/_form', array(
-	        //         'model' => $outsource,
-	        //         'index' => 1,
-	        //         'display' => 'block'
-	        //     ));
-
-	        // $index++;
+  
 	        foreach ($outsource as $id => $child):
 
 	            $this->renderPartial('//outsourceContract/_form', array(
 	                'model' => $child,
 	                'index' => $index,
+                  //'form' => $form,
 	                'display' => 'block'
 	            ));
 	            $index++;
@@ -414,7 +409,7 @@ hr {
 	        ?>
 	    </div>
 	  
-             <div class="form-actions">
+      <div class="form-actions">
 				<?php $this->widget('bootstrap.widgets.TbButton', array(
 					'buttonType'=>'submit',
 					'type'=>'primary',

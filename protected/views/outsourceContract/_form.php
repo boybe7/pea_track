@@ -1,6 +1,12 @@
 <?php
-// Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/bootstrap-datepicker/css/datepicker.css'); 
-?>
+    //     $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+    //   'id'=>$index.'_outsource-form',
+    //   'enableAjaxValidation'=>false,
+    //   'type'=>'vertical',
+    //     'htmlOptions'=>  array('class'=>'','style'=>''),
+    // ));
+
+     ?>
 <style type="text/css">
   .error {
     font-size: 14px;
@@ -9,6 +15,7 @@
 </style>
 <fieldset class="well the-fieldset">
         <legend class="the-legend">สัญญาที่ <?php echo ($index);?></legend>
+       
           <div class="row-fluid"> 
             <div class="span12">
             <?php
@@ -680,7 +687,7 @@
 
        ?>  
 </fieldset>
-
+ <?php //$this->endWidget(); ?>
 <?php 
 
 		$this->widget('application.extensions.moneymask.MMask',array(

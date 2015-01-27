@@ -72,6 +72,7 @@ class ProjectController extends Controller
 		if(isset($_POST['OutsourceContract']))
 		{
 			$modelOutsources = array();
+			$modelOutsource = array();
       //       $numContracts = $_POST['num'];
 		    // for($i=1;$i<$numContracts+1;$i++)
 		    // {
@@ -114,10 +115,11 @@ class ProjectController extends Controller
 		 				     $modelC->oc_last_update = (date("Y")+543).date("-m-d H:i:s");
 				    		 $modelC->oc_user_update = Yii::app()->user->ID;
 				    		 $modelC->oc_user_create = Yii::app()->user->ID;
-				    		  array_push($modelContractOld, $modelC);
+				    		  
 				    		  //header('Content-type: text/plain');
                               // print_r($modelC);                    
                            	  //exit;
+				    		 //array_push($modelOutsource, $modelC); 
 
 
 		 				    
@@ -152,6 +154,8 @@ class ProjectController extends Controller
 		 				     	
 		 				     }else{
 		 				     	$saveOK = 0;	
+		 				     	$model->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ '.$index.'" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+		 						
 		 				     	// if($contract["pc_id"]!="")
 		 				     	//   $modelC->pc_id = $contract["pc_id"];
 		 				     	// else
@@ -160,7 +164,7 @@ class ProjectController extends Controller
 
 		 				     $index++;
 
-		 				      array_push($modelContract, $modelC); 
+		 				      array_push($modelOutsource, $modelC); 
 		 				    	
 		 				}
 		 				 
@@ -178,8 +182,8 @@ class ProjectController extends Controller
 		 				else
 		 				{
 		 					$transaction->rollBack();
-		 					$modelContract = $modelContractOld;
-		 				    $model->addError('contract', 'กรุณากรอกข้อมูล "สัญญา" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+		 					//$modelOutsource = $modelContractOld;
+		 				    //$model->addError('contract', 'กรุณากรอกข้อมูล "สัญญา" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
 		 				}
 
 			}
@@ -211,7 +215,7 @@ class ProjectController extends Controller
         }
 
 		$this->render('create2',array(
-			'model'=>$this->loadModel($id),'outsource'=>$modelOutsource,'numContracts'=>$numContracts
+			'model'=>$this->loadModel($id),'outsource'=>$modelOutsource,'numContracts'=>$numContracts,'modelValidate'=>$model
 		));
 	}
 
