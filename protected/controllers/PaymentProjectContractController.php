@@ -6,7 +6,7 @@ class PaymentProjectContractController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='//layouts/main';
 
 	/**
 	 * @return array action filters
@@ -127,9 +127,18 @@ class PaymentProjectContractController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('PaymentProjectContract');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+		// $dataProvider=new CActiveDataProvider('PaymentProjectContract');
+		// $this->render('index',array(
+		// 	'dataProvider'=>$dataProvider,
+		// ));
+
+		$model=new PaymentProjectContract('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['PaymentProjectContract']))
+			$model->attributes=$_GET['PaymentProjectContract'];
+
+		$this->render('admin',array(
+			'model'=>$model,
 		));
 	}
 

@@ -7,6 +7,26 @@ class ProjectContractController extends Controller
 		$this->render('index');
 	}
 
+	public function actionGetProjectContract(){
+            $request=trim($_GET['term']);
+                    
+            $models=ProjectContract::model()->findAll(array("condition"=>"pc_code like '$request%'"));
+            $data=array();
+            foreach($models as $model){
+                //$data[]["label"]=$get->v_name;
+                //$data[]["id"]=$get->v_id;
+                $modelVendor = Vendor::model()->FindByPk($model['pc_vendor_id']);
+                $data[] = array(
+                        'id'=>$model['pc_id'],
+                        'label'=>$model['pc_code']." ".$modelVendor->v_name,
+                        'cost'=>number_format($model['pc_cost'],2)
+                );
+
+            }
+            $this->layout='empty';
+            echo json_encode($data);
+        
+    }
 	// Uncomment the following methods and override them if needed
 	/*
 	public function filters()
