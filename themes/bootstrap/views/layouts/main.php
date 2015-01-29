@@ -22,6 +22,53 @@
 <link rel="shortcut icon" href="/pea_track/favicon.ico">
 <style>
 
+.dropdown-menu {
+   /*background-color: #33aa33;*/
+   
+}
+.navbar .nav > li > .dropdown-menu:after {
+  /*border-bottom: 6px solid #33aa33;*/
+}
+.dropdown-menu > li > a {
+  /*color: white;*/
+
+}
+.dropdown-menu > li > a:hover {
+  background-color: white;
+  
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #62c462;
+  background-image: -moz-linear-gradient(top, #62c462, #51a351);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
+  background-image: -webkit-linear-gradient(top, #62c462, #51a351);
+  background-image: -o-linear-gradient(top,  #62c462, #51a351);
+  background-image: linear-gradient(to bottom ,#62c462, #51a351);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff51a351', GradientType=0);
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #62c462;
+  background-image: -moz-linear-gradient(top, #62c462, #51a351);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
+  background-image: -webkit-linear-gradient(top, #62c462, #51a351);
+  background-image: -o-linear-gradient(top,  #62c462, #51a351);
+  background-image: linear-gradient(to bottom ,#62c462, #51a351);
+  background-repeat: repeat-x;
+  outline: 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff51a351', GradientType=0);
+}
 
 .navbar .brand {
 display: block;

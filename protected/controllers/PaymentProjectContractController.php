@@ -62,6 +62,8 @@ class PaymentProjectContractController extends Controller
 	public function actionCreate()
 	{
 		$model=new PaymentProjectContract;
+		$t = 0;
+		$a = 0;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -70,11 +72,11 @@ class PaymentProjectContractController extends Controller
 		{
 			$model->attributes=$_POST['PaymentProjectContract'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->id,'t'=>$t,'a'=>$a));
 		}
 
 		$this->render('create',array(
-			'model'=>$model,
+			'model'=>$model,'t'=>$t,'a'=>$a
 		));
 	}
 

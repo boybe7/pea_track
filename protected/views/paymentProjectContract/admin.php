@@ -93,7 +93,7 @@ $('.search-form form').submit(function(){
                         ));
 						
 
-        //echo "สัญญาโครงการ ".$form->textFieldRow($model,'firstname',array('class'=>'span10','maxlength'=>200,'labelOptions' => array('label' => false))); ?>
+         ?>
        </div>
         <div class="span3"> 
         <?php 
@@ -108,7 +108,7 @@ $('.search-form form').submit(function(){
             'label'=>'ค้นหา',
             'icon'=>'search white',
         // 'url'=>array('update'),
-            'htmlOptions'=>array('class'=>'search-button','style'=>'margin:20px 10px 0px 10px;'),
+            'htmlOptions'=>array('class'=>'search-button','style'=>'margin:24px 10px 0px 0px;'),
         ));
          
 			$this->widget('bootstrap.widgets.TbButton', array(
@@ -118,7 +118,7 @@ $('.search-form form').submit(function(){
 			    'label'=>'เพิ่มรายการ',
 			    'icon'=>'plus-sign',
 			    'url'=>array('create'),
-			    'htmlOptions'=>array('class'=>'','style'=>'margin:20px 10px 0px 10px;'),
+			    'htmlOptions'=>array('class'=>'','style'=>'margin:24px 10px 0px 10px;'),
 			)); 
 
 			$this->widget('bootstrap.widgets.TbButton', array(
@@ -153,7 +153,7 @@ $('.search-form form').submit(function(){
 													});
 						                  })',
 			        'class'=>'',
-			        'style'=>'margin:20px 10px 0px 10px',
+			        'style'=>'margin:24px 10px 0px 10px',
 			    ),
 			)); 
  

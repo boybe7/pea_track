@@ -34,7 +34,7 @@ class PaymentProjectContract extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('proj_id, detail, money, invoice_no, invoice_date, bill_no, bill_date, user_create, user_update, last_update', 'required'),
+			array('proj_id, money, invoice_no, invoice_date, bill_no, bill_date, user_create, user_update, last_update', 'required'),
 			array('proj_id, user_create, user_update', 'numerical', 'integerOnly'=>true),
 			array('money', 'numerical'),
 			array('invoice_no, bill_no', 'length', 'max'=>200),

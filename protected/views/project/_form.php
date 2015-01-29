@@ -115,7 +115,7 @@ hr {
     				<div class="span8">
       					<?php echo $form->labelEx($model,'pj_date_approved',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
     					
-    					<?php 
+    					   <?php 
 
       			 
 		                echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
