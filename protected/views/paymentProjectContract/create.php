@@ -4,10 +4,7 @@ $this->breadcrumbs=array(
 	'Create',
 );
 
-$this->menu=array(
-	array('label'=>'List PaymentProjectContract','url'=>array('index')),
-	array('label'=>'Manage PaymentProjectContract','url'=>array('admin')),
-);
+
 ?>
 
 <h3>เพิ่มรายการเงินงวดสัญญาโครงการ</h3>

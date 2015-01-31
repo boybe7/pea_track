@@ -31,7 +31,7 @@ class PaymentProjectContractController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','DeleteSelected'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -70,9 +70,49 @@ class PaymentProjectContractController extends Controller
 
 		if(isset($_POST['PaymentProjectContract']))
 		{
-			$model->attributes=$_POST['PaymentProjectContract'];
+			$model->attributes = $_POST['PaymentProjectContract'];
+			$model->detail = $_POST['PaymentProjectContract']["detail"];
+			$model->money = str_replace(",", "", $_POST['PaymentProjectContract']["money"]);
+
+			$model->user_create = Yii::app()->user->ID;
+			$model->user_update = Yii::app()->user->ID;
+			//$model->user_create = Yii::app()->user->ID;
+			// $t = $_POST["t_percent"];
+			// $a = $_POST["a_percent"];
+			
+
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id,'t'=>$t,'a'=>$a));
+			{
+				$modelPC = ProjectContract::model()->FindByPk($model->proj_id);
+				// $modelPC->pc_T_percent = $t;
+				// $modelPC->pc_A_percent = $a;
+				// $modelPC->pc_user_update = Yii::app()->user->ID;
+				// $modelPC->pc_last_update =  (date("Y")+543).date("-m-d H:i:s");
+				// $modelPC->save();
+				
+				$update = 0;
+				if($model->T > $modelPC->pc_T_percent)
+				{
+					$update = 1;
+					$modelPC->pc_T_percent = $model->T;	
+				}
+				if($model->A > $modelPC->pc_A_percent)
+				{
+					$update = 1;
+					$modelPC->pc_A_percent = $model->A;	
+				}
+				if($update==1)
+				{
+					$modelPC->pc_user_update = Yii::app()->user->ID;
+				    $modelPC->pc_last_update =  (date("Y")+543).date("-m-d H:i:s");
+				    $modelPC->save();
+						
+				}
+
+				$this->redirect(array('admin'));
+			}	
+			else
+				$model->money = number_format($model->money,2);
 		}
 
 		$this->render('create',array(
@@ -88,19 +128,66 @@ class PaymentProjectContractController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+		$t = ProjectContract::model()->FindByPk($model->proj_id)->pc_T_percent;
+		$a = ProjectContract::model()->FindByPk($model->proj_id)->pc_A_percent;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['PaymentProjectContract']))
 		{
-			$model->attributes=$_POST['PaymentProjectContract'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			    $model->attributes=$_POST['PaymentProjectContract'];
+			    $model->money = str_replace(",", "", $_POST['PaymentProjectContract']["money"]);
+
+				$model->user_create = Yii::app()->user->ID;
+				$model->user_update = Yii::app()->user->ID;
+				//$model->user_create = Yii::app()->user->ID;
+				// $t = $_POST["t_percent"];
+				// $a = $_POST["a_percent"];
+				
+		
+
+			 	// $modelPC = ProjectContract::model()->FindByPk($model->proj_id);
+				// $modelPC->pc_T_percent = $t;
+				// $modelPC->pc_A_percent = $a;
+				// $modelPC->pc_user_update = Yii::app()->user->ID;
+				// $modelPC->pc_last_update =  (date("Y")+543).date("-m-d H:i:s");
+				// $modelPC->save();
+				
+				if($model->save())
+				{
+					
+					$modelPC = ProjectContract::model()->FindByPk($model->proj_id);
+					// $modelPC->pc_T_percent = $t;
+					// $modelPC->pc_A_percent = $a;
+					// $modelPC->pc_user_update = Yii::app()->user->ID;
+					// $modelPC->pc_last_update =  (date("Y")+543).date("-m-d H:i:s");
+					// $modelPC->save();
+					
+					$update = 0;
+					if($model->T > $modelPC->pc_T_percent)
+					{
+						$update = 1;
+						$modelPC->pc_T_percent = $model->T;	
+					}
+					if($model->A > $modelPC->pc_A_percent)
+					{
+						$update = 1;
+						$modelPC->pc_A_percent = $model->A;	
+					}
+					if($update==1)
+					{
+						$modelPC->pc_user_update = Yii::app()->user->ID;
+					    $modelPC->pc_last_update =  (date("Y")+543).date("-m-d H:i:s");
+					    $modelPC->save();
+							
+					}
+					$this->redirect(array('admin'));
+				}
 		}
 
 		$this->render('update',array(
-			'model'=>$model,
+			'model'=>$model,'t'=>$t,'a'=>$a
 		));
 	}
 
@@ -184,4 +271,16 @@ class PaymentProjectContractController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionDeleteSelected()
+    {
+    	$autoIdAll = $_POST['selectedID'];
+        if(count($autoIdAll)>0)
+        {
+            foreach($autoIdAll as $autoId)
+            {
+                $this->loadModel($autoId)->delete();
+            }
+        }    
+    }
 }
