@@ -112,7 +112,7 @@ class PaymentProjectContractController extends Controller
 				$this->redirect(array('admin'));
 			}	
 			else
-				$model->money = number_format($model->money,2);
+				$model->money = $_POST['PaymentProjectContract']["money"];
 		}
 
 		$this->render('create',array(

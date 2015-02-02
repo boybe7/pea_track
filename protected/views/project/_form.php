@@ -431,6 +431,7 @@ hr {
     	<?php 
     	//$model = Vendor::model()->findByPk(14);
     	$model2=new Vendor;
+      $model2->type = 'Owner';
     	$this->renderPartial('/vendor/_form2',array('model'=>$model2),false); 
 
     	?>

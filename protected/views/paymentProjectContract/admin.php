@@ -48,7 +48,7 @@ $('#search-form form').submit(function(){
 </script> 
 
 
-<h1>รายการรับเงินงวดของโครงการ</h1>
+<h1>รายการรับเงินงวดของสัญญาหลัก</h1>
 
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'id'=>'search-form',
@@ -147,7 +147,10 @@ $('#search-form form').submit(function(){
                         ->queryAll();
             //echo ($pc[0]["sum"]);
 
-            $rm_cost = number_format($pc[0]["sum"],2);            
+            $cost = str_replace(",", "", $cost);
+            $diff = $cost - $pc[0]["sum"]; 
+            $rm_cost = number_format($diff,2);
+                       
         }    
 
         echo "<input type='text' class='span12' id='rm_cost' style='text-align:right' name='rm_cost' value='$rm_cost' disabled>";?>

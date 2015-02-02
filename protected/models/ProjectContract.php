@@ -80,7 +80,7 @@ class ProjectContract extends CActiveRecord
 			'pc_cost' => 'วงเงิน',
 			'pc_T_percent' => '%ความก้าวหน้าด้านเทคนิค',
 			'pc_A_percent' => '%ความก้าวหน้าการเรียกเก็บเงิน',
-			'pc_guarantee' => 'หนังสือค้ำประกัน',
+			'pc_guarantee' => 'หนังสือค้ำประกันสัญญา',
 			'pc_user_create' => 'ผู้สร้างสัญญา',
 			'pc_user_update' => 'ผู้บันทึก',
 			'pc_PO'=>'เลข PO'

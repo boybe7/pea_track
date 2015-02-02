@@ -31,7 +31,7 @@ class OutsourceContractController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','GetContract'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -43,6 +43,34 @@ class OutsourceContractController extends Controller
 			),
 		);
 	}
+
+	public function actionGetContract(){
+            $request=trim($_GET['term']);
+                    
+            $models=OutsourceContract::model()->findAll(array("condition"=>"oc_code like '$request%'"));
+            $data=array();
+            foreach($models as $model){
+                //$data[]["label"]=$get->v_name;
+                //$data[]["id"]=$get->v_id;
+                
+                $modelVendor = Vendor::model()->FindByPk($model['oc_vendor_id']);
+                
+                // header('Content-type: text/plain');
+                //              print_r($model["oc_cost"]);                    
+                //  exit;
+                $oc_cost = str_replace(",", "", $model['oc_cost']);
+                $data[] = array(
+                        'id'=>$model['oc_id'],
+                        'label'=>$model['oc_code'].' '.$modelVendor->v_name,
+                        'cost'=>number_format($oc_cost,2)
+                );
+
+
+            }
+            $this->layout='empty';
+            echo json_encode($data);
+        
+    }
 
 	/**
 	 * Displays a particular model.

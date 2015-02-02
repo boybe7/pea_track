@@ -11,6 +11,12 @@
 
 	<div style="text-align:left"><?php echo $form->errorSummary($model); ?></div>
 	<div class="row-fluid">
+    	
+    	<div class="span12">
+      		<?php echo $form->hiddenField($model,'type',array('value'=>'Owner')); ?>
+    	</div>
+  	</div>
+	<div class="row-fluid">
     	<div class="span12">
       		<?php echo $form->textFieldRow($model,'v_name',array('class'=>'span12','maxlength'=>200)); ?>
     	</div>
@@ -25,6 +31,17 @@
 	<div class="row-fluid">
     	<div class="span12">	
 			<?php echo $form->textAreaRow($model,'v_address',array('rows'=>3, 'cols'=>50, 'class'=>'span12')); ?>
+		</div>
+	</div>
+	<div class="row-fluid">
+    	<div class="span12">	
+			<?php 
+			if($model->type=='Owner')	
+			    echo $form->textFieldRow($model,'v_BP',array('class'=>'span12','maxlength'=>25)); 
+            else{
+            	echo $form->textFieldRow( $model, 'v_BP', array( 'labelOptions' => array('label' => false)));
+            }
+			?>
 		</div>
 	</div>	
 	<div class="row-fluid">

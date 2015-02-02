@@ -112,6 +112,15 @@ class ContractApproveHistory extends CActiveRecord
 		));
 	}
 
+	protected function afterFind(){
+            parent::afterFind();
+            //$this->money = number_format($this->money,2);
+
+            $str_date = explode("-", $this->dateApprove);
+            if(count($str_date)>1)
+            	$this->dateApprove = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+    }
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

@@ -340,7 +340,7 @@
                             //console.log($("#approve-grid1"));
                             jQuery.fn.yiiGridView.update("approve-gridOutsource'.$index.'");
 
-                            location.reload(); //temporary fix problem ???? 
+                            //location.reload(); //temporary fix problem ???? 
                             //console.log($("approve-gridOutsource'.$index.'"));
                             
                             if(msg.status=="failure")

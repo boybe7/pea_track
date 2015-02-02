@@ -6,7 +6,7 @@ class PaymentOutsourceContractController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='//layouts/main';
 
 	/**
 	 * @return array action filters
@@ -31,7 +31,7 @@ class PaymentOutsourceContractController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','DeleteSelected'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -62,19 +62,60 @@ class PaymentOutsourceContractController extends Controller
 	public function actionCreate()
 	{
 		$model=new PaymentOutsourceContract;
-
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['PaymentOutsourceContract']))
 		{
-			$model->attributes=$_POST['PaymentOutsourceContract'];
+			$model->attributes = $_POST['PaymentOutsourceContract'];
+			$model->detail = $_POST['PaymentOutsourceContract']["detail"];
+			$model->money = str_replace(",", "", $_POST['PaymentOutsourceContract']["money"]);
+			$model->T = $_POST['PaymentOutsourceContract']["T"];
+			$model->B = $_POST['PaymentOutsourceContract']["B"];
+			$model->user_create = Yii::app()->user->ID;
+			$model->user_update = Yii::app()->user->ID;
+			//$model->user_create = Yii::app()->user->ID;
+			// $t = $_POST["t_percent"];
+			// $a = $_POST["a_percent"];
+			
+
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			{
+				$modelOC = OutsourceContract::model()->FindByPk($model->contract_id);
+				// $modelPC->pc_T_percent = $t;
+				// $modelPC->pc_A_percent = $a;
+				// $modelPC->pc_user_update = Yii::app()->user->ID;
+				// $modelPC->pc_last_update =  (date("Y")+543).date("-m-d H:i:s");
+				// $modelPC->save();
+				
+				$update = 0;
+				if($model->T > $modelOC->oc_T_percent)
+				{
+					$update = 1;
+					$modelOC->oc_T_percent = $model->T;	
+				}
+				if($model->B > $modelOC->oc_A_percent)
+				{
+					$update = 1;
+					$modelOC->oc_A_percent = $model->B;	
+				}
+				if($update==1)
+				{
+					$modelOC->oc_user_update = Yii::app()->user->ID;
+				    $modelOC->oc_last_update =  (date("Y")+543).date("-m-d H:i:s");
+				    $modelOC->save();
+						
+				}
+
+				$this->redirect(array('admin'));
+			}	
+			else
+				$model->money = $_POST['PaymentOutsourceContract']["money"];
 		}
 
 		$this->render('create',array(
-			'model'=>$model,
+			'model'=>$model
 		));
 	}
 
@@ -86,19 +127,65 @@ class PaymentOutsourceContractController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['PaymentOutsourceContract']))
 		{
-			$model->attributes=$_POST['PaymentOutsourceContract'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			    $model->attributes=$_POST['PaymentOutsourceContract'];
+			    $model->money = str_replace(",", "", $_POST['PaymentOutsourceContract']["money"]);
+			    $model->T = $_POST['PaymentOutsourceContract']["T"];
+			    $model->B = $_POST['PaymentOutsourceContract']["B"];
+				$model->user_create = Yii::app()->user->ID;
+				$model->user_update = Yii::app()->user->ID;
+				//$model->user_create = Yii::app()->user->ID;
+				// $t = $_POST["t_percent"];
+				// $a = $_POST["a_percent"];
+				
+		
+
+			 	// $modelPC = ProjectContract::model()->FindByPk($model->proj_id);
+				// $modelPC->pc_T_percent = $t;
+				// $modelPC->pc_A_percent = $a;
+				// $modelPC->pc_user_update = Yii::app()->user->ID;
+				// $modelPC->pc_last_update =  (date("Y")+543).date("-m-d H:i:s");
+				// $modelPC->save();
+				
+				if($model->save())
+				{
+					
+					$modelPC = OutsourceContract::model()->FindByPk($model->contract_id);
+					// $modelPC->pc_T_percent = $t;
+					// $modelPC->pc_A_percent = $a;
+					// $modelPC->pc_user_update = Yii::app()->user->ID;
+					// $modelPC->pc_last_update =  (date("Y")+543).date("-m-d H:i:s");
+					// $modelPC->save();
+					
+					$update = 0;
+					if($model->T > $modelPC->oc_T_percent)
+					{
+						$update = 1;
+						$modelPC->oc_T_percent = $model->T;	
+					}
+					if($model->B > $modelPC->oc_A_percent)
+					{
+						$update = 1;
+						$modelPC->oc_A_percent = $model->B;	
+					}
+					if($update==1)
+					{
+						$modelPC->oc_user_update = Yii::app()->user->ID;
+					    $modelPC->oc_last_update =  (date("Y")+543).date("-m-d H:i:s");
+					    $modelPC->save();
+							
+					}
+					$this->redirect(array('admin'));
+				}
 		}
 
 		$this->render('update',array(
-			'model'=>$model,
+			'model'=>$model
 		));
 	}
 
@@ -127,9 +214,17 @@ class PaymentOutsourceContractController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('PaymentOutsourceContract');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+		// $dataProvider=new CActiveDataProvider('PaymentOutsourceContract');
+		// $this->render('index',array(
+		// 	'dataProvider'=>$dataProvider,
+		// ));
+		$model=new PaymentOutsourceContract('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['PaymentOutsourceContract']))
+			$model->attributes=$_GET['PaymentOutsourceContract'];
+
+		$this->render('admin',array(
+			'model'=>$model,
 		));
 	}
 
@@ -173,4 +268,16 @@ class PaymentOutsourceContractController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionDeleteSelected()
+    {
+    	$autoIdAll = $_POST['selectedID'];
+        if(count($autoIdAll)>0)
+        {
+            foreach($autoIdAll as $autoId)
+            {
+                $this->loadModel($autoId)->delete();
+            }
+        }    
+    }
 }

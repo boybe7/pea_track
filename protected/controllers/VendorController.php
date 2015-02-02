@@ -31,7 +31,7 @@ class VendorController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','DeleteSelected','GetVendor','GetSupplier'),
+				'actions'=>array('create','update','DeleteSelected','GetVendor','GetSupplier','createVendor','createSupplier'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -61,6 +61,57 @@ class VendorController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
+
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function actionCreateVendor($type)
+	{
+		$model=new Vendor;
+
+		// Uncomment the following line if AJAX validation is needed
+		//$this->performAjaxValidation($model);
+		if(isset($_POST['Vendor']))
+		{
+			$model->attributes=$_POST['Vendor'];
+			$model->type = 'Owner';
+			$model->v_BP = $_POST['Vendor']["v_BP"];
+			if (Yii::app()->request->isAjaxRequest)
+	        {
+	           
+	            if($model->save())
+	            	 echo CJSON::encode(array(
+	                'status'=>'success'
+	                ));
+	            else
+	                echo CJSON::encode(array(
+	                'status'=>'failure','div'=>$this->renderPartial('_form2', array('model'=>$model), true)));
+	                
+	            exit;
+				        
+	        }		
+			else
+			  if($model->save())
+				$this->redirect(array('admin'));
+
+		}
+
+		if (Yii::app()->request->isAjaxRequest)
+        {
+            echo CJSON::encode(array(
+                'status'=>'failure', 
+                'div'=>$this->renderPartial('_form2', array('model'=>$model), true)));
+            exit;               
+        }
+
+		$this->render('create',array(
+			'model'=>$model,
+		));
+        
+			
+	}
+
 	public function actionCreate()
 	{
 		$model=new Vendor;
@@ -70,6 +121,7 @@ class VendorController extends Controller
 		if(isset($_POST['Vendor']))
 		{
 			$model->attributes=$_POST['Vendor'];
+			$model->v_BP = $_POST['Vendor']["v_BP"];
 			if (Yii::app()->request->isAjaxRequest)
 	        {
 	           
@@ -137,6 +189,7 @@ class VendorController extends Controller
 		{
 			
 			$model->attributes=$_POST['Vendor'];
+			$model->v_BP = $_POST['Vendor']["v_BP"];
 			if($model->save())
 				$this->redirect(array('admin'));
 		}

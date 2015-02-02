@@ -26,6 +26,28 @@ $('.search-form form').submit(function(){
 $this->widget('bootstrap.widgets.TbButton', array(
     'buttonType'=>'link',
     
+    'type'=>'info',
+    'label'=>'บันทึกสัญญาจ้างช่วง/ซื้อ',
+    'icon'=>'plus-sign',
+    //'url'=>array('delAll'),
+    //'htmlOptions'=>array('id'=>"buttonDel2",'class'=>'pull-right'),
+    'htmlOptions'=>array(
+        //'data-toggle'=>'modal',
+        //'data-target'=>'#myModal',
+        'onclick'=>'      
+                       console.log($.fn.yiiGridView.getSelection("vendor-grid")[0]);
+                       if($.fn.yiiGridView.getSelection("vendor-grid").length==0 )
+                       		js:bootbox.alert("กรุณาเลือกโครงการ?","ตกลง");
+                       else  
+                       	   window.location.href = "../project/createOutsource/"+$.fn.yiiGridView.getSelection("vendor-grid")[0];
+                          ',
+        'class'=>'pull-right'
+    ),
+)); 
+
+$this->widget('bootstrap.widgets.TbButton', array(
+    'buttonType'=>'link',
+    
     'type'=>'success',
     'label'=>'เพิ่ม โครงการ',
     'icon'=>'plus-sign',
@@ -45,10 +67,9 @@ $this->widget('bootstrap.widgets.TbButton', array(
         //'data-toggle'=>'modal',
         //'data-target'=>'#myModal',
         'onclick'=>'      
-                       //console.log($.fn.yiiGridView.getSelection("vendor-grid").length);
                        if($.fn.yiiGridView.getSelection("vendor-grid").length==0)
-                       		js:bootbox.alert("กรุณาเลือกแถวข้อมูลที่ต้องการลบ?","ตกลง");
-                       else  
+                       	  js:bootbox.alert("กรุณาเลือกแถวข้อมูลที่ต้องการลบ?","ตกลง");	
+                       else   
                           js:bootbox.confirm("คุณต้องการจะลบข้อมูล?","ยกเลิก","ตกลง",
 			                   function(confirmed){
 			                   	 	
@@ -116,7 +137,7 @@ $this->widget('bootstrap.widgets.TbButton', array(
 			    'header' => '<a class="sort-link">วงเงินรวม</a>',
 			    //'name'=>'cost',
 			    'headerHtmlOptions'=>array(),
-			    'value' => '$data->sumcost',
+			    'value' => 'number_format($data->sumcost,2)',
 			    //'filter'=>CHtml::activeTextField($model, 'sumcost',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
 				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:center')

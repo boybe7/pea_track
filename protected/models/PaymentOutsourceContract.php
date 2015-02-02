@@ -33,13 +33,13 @@ class PaymentOutsourceContract extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('contract_id, detail, money, invoice_no, invoice_date, approve_date, user_create, user_update, last_update', 'required'),
+			array('contract_id, money, invoice_no, invoice_date, approve_date', 'required'),
 			array('contract_id, user_create, user_update', 'numerical', 'integerOnly'=>true),
 			array('money', 'numerical'),
 			array('invoice_no', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, contract_id, detail, money, invoice_no, invoice_date, approve_date, user_create, user_update, last_update', 'safe', 'on'=>'search'),
+			array('id, contract_id,T,B, detail, money, invoice_no, invoice_date, approve_date, user_create, user_update, last_update', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,6 +70,8 @@ class PaymentOutsourceContract extends CActiveRecord
 			'user_create' => 'User Create',
 			'user_update' => 'User Update',
 			'last_update' => 'Last Update',
+			'T'=>'%ความก้าวหน้าด้านเทคนิค',
+			'B'=>'%ความก้าวหน้าการจ่ายเงิน',
 		);
 	}
 
@@ -117,4 +119,44 @@ class PaymentOutsourceContract extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function beforeSave()
+    {
+         if($this->money!="")
+		 {
+		     $this->money = str_replace(",", "", $this->money); 
+		 }
+		  
+
+        $str_date = explode("/", $this->invoice_date);
+        if(count($str_date)>1)
+        	$this->invoice_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+        $str_date = explode("/", $this->approve_date);
+        if(count($str_date)>1)
+        	$this->approve_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+        return parent::beforeSave();
+   }
+
+	protected function afterSave(){
+            parent::afterSave();
+            $str_date = explode("-", $this->invoice_date);
+            if(count($str_date)>1)
+            	$this->invoice_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+             $str_date = explode("-", $this->approve_date);
+            if(count($str_date)>1)
+            	$this->approve_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+            //$this->visit_date=date('Y/m/d', strtotime(str_replace("-", "", $this->visit_date)));       
+    }
+
+	protected function afterFind(){
+            parent::afterFind();
+            $this->money = number_format($this->money,2);
+
+            $str_date = explode("-", $this->invoice_date);
+            if(count($str_date)>1)
+            	$this->invoice_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+            $str_date = explode("-", $this->approve_date);
+            if(count($str_date)>1)
+            	$this->approve_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+     }
 }
