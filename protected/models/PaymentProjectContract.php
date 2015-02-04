@@ -72,8 +72,8 @@ class PaymentProjectContract extends CActiveRecord
 			'user_create' => 'User Create',
 			'user_update' => 'User Update',
 			'last_update' => 'Last Update',
-			'T'=>'%ความก้าวหน้าด้านเทคนิค',
-			'A'=>'%ความก้าวหน้าการเรียกเก็บเงิน',
+			'T'=>'%ความก้าวหน้าด้านเทคนิค (T)',
+			'A'=>'%ความก้าวหน้าการเรียกเก็บเงิน (A)',
 		);
 	}
 

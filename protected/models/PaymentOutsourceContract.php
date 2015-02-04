@@ -70,8 +70,8 @@ class PaymentOutsourceContract extends CActiveRecord
 			'user_create' => 'User Create',
 			'user_update' => 'User Update',
 			'last_update' => 'Last Update',
-			'T'=>'%ความก้าวหน้าด้านเทคนิค',
-			'B'=>'%ความก้าวหน้าการจ่ายเงิน',
+			'T'=>'%ความก้าวหน้าด้านเทคนิค (T)',
+			'B'=>'%ความก้าวหน้าการจ่ายเงิน (B)',
 		);
 	}
 

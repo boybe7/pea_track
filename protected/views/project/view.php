@@ -155,7 +155,7 @@ hr {
       			echo "<span style='display: block;'>หมายเลขงาน</span>"; 
             
       			?>
-      			<table class="table table-bordered " style="background-color: white" name="tgrid" id="tgrid" width="100%" cellpadding="0" cellspacing="0">                    
+      			<table class="table table-bordered " style="background-color: #eeeeee"name="tgrid" id="tgrid" width="100%" cellpadding="0" cellspacing="0">                    
 	                <tbody>
                             <?php
                                     $workCode = Yii::app()->db->createCommand()
@@ -176,6 +176,9 @@ hr {
                         </tbody>
                         
             </table>
+
+             <?php echo $form->textFieldRow($model,'pj_CA',array('class'=>'span12','maxlength'=>200,'readonly'=>true)); ?>
+            
     		</div>
     		
     		
@@ -183,7 +186,7 @@ hr {
       <h4>สัญญาหลัก</h4>
       <hr>
       <?php 
-            $project_contract = Yii::app()->db->createCommand()
+                  $project_contract = Yii::app()->db->createCommand()
                         ->select('*')
                         ->from('project_contract')
                         ->where('pc_proj_id=:id', array(':id'=>$model->pj_id))
@@ -194,6 +197,8 @@ hr {
                 $id = 1; 
                 foreach ($project_contract as $key => $value) {
                     $modelPC =new ProjectContract;
+
+                    //print_r($value);
                     $modelPC->attributes = $value;
                     $str_date = explode("-", $value["pc_sign_date"]);
                     if(count($str_date)>1)
@@ -202,10 +207,14 @@ hr {
                     if(count($str_date)>1)
                       $modelPC->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
                     $modelPC->pc_details = $value["pc_details"];
-                    //print_r($value); 
-                    echo '<fieldset class="">';                  
-                    echo '<legend class="the-legend">สัญญาที่ '.$id.'</legend>';
-                        echo '<div class="row-fluid">';
+                    $modelPC->pc_PO = $value["pc_PO"];
+                    $modelPC->pc_id = $value["pc_id"];
+                    $modelPC->pc_last_update = $value["pc_last_update"];
+                    $modelPC->pc_cost = number_format($value["pc_cost"],2);
+                    //print_r($modelPC->pc_id);
+                    echo'<fieldset class="well the-fieldset">';
+                    echo'  <legend class="the-legend contract_no">สัญญาที่ '.$id.'</legend>';
+                    echo '<div class="row-fluid">';
                           echo '<div class="span3">';
                           echo $form->textFieldRow($modelPC,'pc_code',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
@@ -220,24 +229,122 @@ hr {
                           echo '</div>';
                         echo '</div>';
                         echo '<div class="row-fluid">';
-                          echo '<div class="span6">';
+                          echo '<div class="span3">';
+                          echo $form->textFieldRow($modelPC,'pc_PO',array('class'=>'span12','readonly'=>true));
+                          echo '</div>';
+                          echo '<div class="span9">';
                           echo $form->textFieldRow($modelPC,'pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12','readonly'=>true));
                           echo '</div>';
-                          echo '<div class="span4">';
+                         
+                        echo '</div>';
+                        echo '<div class="row-fluid">';
+                          
+                          echo '<div class="span6">';
                           echo $form->textFieldRow($modelPC,'pc_guarantee',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
-                          echo '<div class="span1">';
+                          echo '<div class="span3">';
                           echo $form->textFieldRow($modelPC,'pc_T_percent',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
-                          echo '<div class="span1">';
+                          echo '<div class="span3">';
                           echo $form->textFieldRow($modelPC,'pc_A_percent',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
                         echo '</div>';
-                    echo '</fieldset">';   
+                        echo '<fieldset class="well the-fieldset">
+                        <legend class="the-legend">รายละเอียดการอนุมัติ</legend>
+                        <div class="row-fluid">'; 
+                  
+
+                            
+                      $this->widget('bootstrap.widgets.TbGridView',array(
+                    
+                      'type'=>'bordered condensed',
+                      'dataProvider'=>ContractApproveHistory::model()->searchByContractID($modelPC->pc_id,1),
+                      //'filter'=>$model,
+                      'selectableRows' => 2,
+                      'enableSorting' => false,
+                      'rowCssClassExpression'=>'"tr_white"',
+
+                      // 'template'=>"{summary}{items}{pager}",
+                      'htmlOptions'=>array('style'=>'padding-top:0px;'),
+                      'enablePagination' => false,
+                      'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
+                      'columns'=>array(
+                          'No.'=>array(
+                              'header'=>'ลำดับ',
+                              'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),                        
+                              'htmlOptions'=>array(
+                                      'style'=>'text-align:center'
+
+                                ),
+                              'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+                            ),
+                          'detail'=>array(
+                            // 'header'=>'', 
+                          
+                          'name' => 'detail',
+
+                          'headerHtmlOptions' => array('style' => 'width:40%;text-align:center;background-color: #eeeeee'),                       
+                          //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                          'htmlOptions'=>array(
+                                              'style'=>'text-align:left'
+
+                                )
+                            ),
+                            'approve by'=>array(
+                            // 'header'=>'', 
+                          
+                          'header' => 'อนุมัติโดย/<br>ลงวันที่',
+                          'type'=>'raw', //to use html tag
+                          'value'=> '$data->approveBy."<br>".$data->dateApprove', 
+                          'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
+                          //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                          'htmlOptions'=>array(
+                                              'style'=>'text-align:center'
+
+                                )
+                            ),
+                            'cost'=>array(
+                            'header'=>'วงเงิน/<br>เป็นเงินเพิ่ม', 
+                          
+                          'name' => 'cost',
+                          // 'type'=>'raw', //to use html tag
+                          'value'=> function($data){
+                                  return number_format($data->cost, 2);
+                              },  
+                          'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
+                          'htmlOptions'=>array(
+                                              'style'=>'text-align:right'
+
+                                )
+                            ),
+                            'time'=>array(
+                            'header'=>'ระยะเวลาแล้วเสร็จ/<br>ระยะเลาขอขยาย', 
+                          
+                          'name' => 'timeSpend',
+                          // 'type'=>'raw', //to use html tag
+                            
+                          'headerHtmlOptions' => array('style' => 'width:20%;text-align:center;background-color: #eeeeee'),                       
+                          'htmlOptions'=>array(
+                                              'style'=>'text-align:left'
+
+                                )
+                            )
+                      )
+
+                    ));
+
+                     
+                    echo '</div></fieldset>';
+                    $user = User::model()->findByPk($modelPC->pc_user_update);  
+                    echo '<div class="pull-right"><b>แก้ไขล่าสุดโดย : '.$user->title.$user->firstname.'  '.$user->lastname.'</b>';
+                    echo '<br><b>วันที่ : '.$modelPC->pc_last_update.'</b></div>';  
+                    echo'</fieldset>'; 
+                    
                     $id++;  
                 }
             }              
           
+    
             
         ?>   
            
@@ -282,7 +389,7 @@ hr {
                 	//$modelOS =new OutsourceContract;
                   //$modelOS->attributes = $value;
                   $modelOS = OutsourceContract::model()->findByPk($value["oc_id"]);
-                	$this->renderPartial('//outsourceContract/_form', array(
+                	$this->renderPartial('//outsourceContract/_formView', array(
 		                'model' => $modelOS,
 		                'index' => $index,
 		                'display' => 'block'

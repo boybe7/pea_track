@@ -112,10 +112,33 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
             </div>
         </div> 
         <div class="row-fluid">
-        	<div class="span6">		  
+        	<div class="span3">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_guarantee'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_guarantee', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']pc_guarantee',array('class'=>'help-block error')); ?>
+            </div>
+            <div class="span3">		  
+        	  <?php  
+        	        echo CHtml::activeLabelEx($model, '[' . $index . ']pc_garantee_date'); 
+                    echo '<div class="input-append" style="margin-top:0px;">'; //ใส่ icon ลงไป
+                        $this->widget('zii.widgets.jui.CJuiDatePicker',
+
+                        array(
+                            'name'=>'ProjectContract[' . $index . '][pc_garantee_date]',
+                            'id'=>$index.'pc_garantee_date',
+                            'model'=>$model,
+                            'value'=>$model->pc_garantee_date,
+                            'options' => array(
+                                              'mode'=>'focus',
+                                              //'language' => 'th',
+                                              'format'=>'dd/mm/yyyy', //กำหนด date Format
+                                              'showAnim' => 'slideDown',
+                                              ),
+                            'htmlOptions'=>array('class'=>'span12'),  // ใส่ค่าเดิม ในเหตุการ Update 
+                         )
+                    );
+                    echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
+             ?>
             </div>  
             <div class="span3">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_T_percent'); ?>
