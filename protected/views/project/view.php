@@ -206,6 +206,9 @@ hr {
                     $str_date = explode("-", $value["pc_end_date"]);
                     if(count($str_date)>1)
                       $modelPC->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+                    $str_date = explode("-", $value["pc_garantee_date"]);
+                    if(count($str_date)>1)
+                      $modelPC->pc_garantee_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
                     $modelPC->pc_details = $value["pc_details"];
                     $modelPC->pc_PO = $value["pc_PO"];
                     $modelPC->pc_id = $value["pc_id"];
@@ -239,8 +242,11 @@ hr {
                         echo '</div>';
                         echo '<div class="row-fluid">';
                           
-                          echo '<div class="span6">';
+                          echo '<div class="span3">';
                           echo $form->textFieldRow($modelPC,'pc_guarantee',array('class'=>'span12','readonly'=>true));
+                          echo '</div>';
+                          echo '<div class="span3">';
+                          echo $form->textFieldRow($modelPC,'pc_garantee_date',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
                           echo '<div class="span3">';
                           echo $form->textFieldRow($modelPC,'pc_T_percent',array('class'=>'span12','readonly'=>true));

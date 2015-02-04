@@ -384,7 +384,7 @@ class ProjectController extends Controller
 	 			catch(Exception $e)
 	 			{
 	 				$transaction->rollBack();	
-	 				$model->addError('contract', 'Error occured while saving contracts.');
+	 				$model->addError('contract', 'Error occured while saving contracts 2.');
 	 				Yii::trace(CVarDumper::dumpAsString($e->getMessage()));
 	 	        	//you should do sth with this exception (at least log it or show on page)
 	 	        	Yii::log( 'Exception when saving data: ' . $e->getMessage(), CLogger::LEVEL_ERROR );
