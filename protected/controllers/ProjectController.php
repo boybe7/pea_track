@@ -253,6 +253,7 @@ class ProjectController extends Controller
 		$modelContractOld = array();
 		$numContracts = 1;
 		$modelPC = new ProjectContract;
+		array_push($modelContract, $modelPC);
 		
 		// $query = "DROP TABLE if exists contract_approve_history_temp;";
 	 //    $query = "CREATE TEMPORARY TABLE contract_approve_history_temp  AS (SELECT * FROM contract_approve_history WHERE 1=2);";
@@ -378,13 +379,13 @@ class ProjectController extends Controller
 		 			else
 		 			{	
 		 				$transaction->rollBack();
-		 				$model->addError('contract', 'Error occured while saving contracts.');
+		 				//$model->addError('contract', 'Error occured while saving contracts.');
 		 			}	 
 	 			}
 	 			catch(Exception $e)
 	 			{
 	 				$transaction->rollBack();	
-	 				$model->addError('contract', 'Error occured while saving contracts 2.');
+	 				$model->addError('contract', 'Error occured while saving contracts.');
 	 				Yii::trace(CVarDumper::dumpAsString($e->getMessage()));
 	 	        	//you should do sth with this exception (at least log it or show on page)
 	 	        	Yii::log( 'Exception when saving data: ' . $e->getMessage(), CLogger::LEVEL_ERROR );
@@ -446,7 +447,7 @@ class ProjectController extends Controller
 		 //Yii::app()->db->createCommand('TRUNCATE contract_approve_history_temp')->execute();
 				
 			$modelPC->pc_id = 1;
-     		array_push($modelContract, $modelPC);
+     		//array_push($modelContract, $modelPC);
 
 
 		

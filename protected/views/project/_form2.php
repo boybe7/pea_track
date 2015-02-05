@@ -228,8 +228,11 @@ hr {
                         echo '</div>';
                         echo '<div class="row-fluid">';
                           
-                          echo '<div class="span6">';
+                          echo '<div class="span3">';
                           echo $form->textFieldRow($modelPC,'pc_guarantee',array('class'=>'span12','readonly'=>true));
+                          echo '</div>';
+                          echo '<div class="span3">';
+                          echo $form->textFieldRow($modelPC,'pc_garantee_date',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
                           echo '<div class="span3">';
                           echo $form->textFieldRow($modelPC,'pc_T_percent',array('class'=>'span12','readonly'=>true));
