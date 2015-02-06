@@ -403,7 +403,7 @@
           'columns'=>array(
                 'No.'=>array(
                     'header'=>'ลำดับ',
-                    'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),                        
+                    'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),                        
                 'htmlOptions'=>array(
                             'style'=>'text-align:center'
 
@@ -415,7 +415,7 @@
                 
                 'name' => 'detail',
 
-                'headerHtmlOptions' => array('style' => 'width:35%;text-align:center;background-color: #f5f5f5'),                       
+                'headerHtmlOptions' => array('style' => 'width:35%;text-align:center;background-color: #eeeeee'),                       
                 //'headerHtmlOptions' => array('style' => 'width: 110px'),
                 'htmlOptions'=>array(
                                     'style'=>'text-align:left'
@@ -428,7 +428,7 @@
                 'header' => 'อนุมัติโดย/<br>ลงวันที่',
                 'type'=>'raw', //to use html tag
                 'value'=> '$data->approveBy."<br>".$data->dateApprove', 
-                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),                       
+                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
                 //'headerHtmlOptions' => array('style' => 'width: 110px'),
                 'htmlOptions'=>array(
                                     'style'=>'text-align:center'
@@ -443,7 +443,7 @@
                 'value'=> function($data){
                         return number_format($data->cost, 2);
                     },  
-                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),                       
+                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
                 'htmlOptions'=>array(
                                     'style'=>'text-align:right'
 
@@ -455,7 +455,7 @@
                 'name' => 'timeSpend',
                 // 'type'=>'raw', //to use html tag
                   
-                'headerHtmlOptions' => array('style' => 'width:20%;text-align:center;background-color: #f5f5f5'),                       
+                'headerHtmlOptions' => array('style' => 'width:20%;text-align:center;background-color: #eeeeee'),                       
                 'htmlOptions'=>array(
                                     'style'=>'text-align:left'
 
@@ -463,7 +463,7 @@
                   ),  
                   array(
                 'class'=>'bootstrap.widgets.TbButtonColumn',
-                'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),
+                'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),
                 'template' => '{update}   {delete}',
                 // 'deleteConfirmation'=>'js:bootbox.confirm("Are you sure to want to delete")',
                 'buttons'=>array(

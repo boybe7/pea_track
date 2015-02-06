@@ -454,10 +454,9 @@ hr {
     <div id="modal-body3">
 <!-- put whatever you want to show up on bootbox here -->
       <?php 
-      //$model = Vendor::model()->findByPk(14);
-      //$model3=new ContractApproveHistoryTemp;
-
-      //$this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
+       $model4=new ContractChangeHistoryTemp;
+      
+      $this->renderPartial('/contractChangeHistory/_form',array('model'=>$model4),false); 
 
       ?>
     </div>

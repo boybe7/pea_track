@@ -28,14 +28,14 @@ class ContractChangeHistoryTemp extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cost, type', 'required'),
+			array('cost, type,u_id,contract_id', 'required'),
 			array('type', 'numerical', 'integerOnly'=>true),
 			array('cost', 'numerical'),
 			array('ref_no', 'length', 'max'=>255),
 			array('detail', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, ref_no, detail, cost, type', 'safe', 'on'=>'search'),
+			array('id,u_id, ref_no, detail, cost, type,contract_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -102,5 +102,18 @@ class ContractChangeHistoryTemp extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function searchByUser($cid,$type,$uid) {
+
+		$criteria=new CDbCriteria;
+		$criteria->select = '*';
+		//$criteria->join = 'JOIN foodType food ON foodtype = food.foodtype '; 
+		$criteria->condition = "contract_id='$cid' AND type='$type' AND u_id='$uid'";
+		//$criteria->group = 'foodtype ';
+		
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
 	}
 }
