@@ -28,14 +28,14 @@ class ContractChangeHistory extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cost, type', 'required'),
+			array('cost, type,contract_id', 'required'),
 			array('type', 'numerical', 'integerOnly'=>true),
 			array('cost', 'numerical'),
 			array('ref_no', 'length', 'max'=>255),
 			array('detail', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, ref_no, detail, cost, type', 'safe', 'on'=>'search'),
+			array('id,contract_id, ref_no, detail, cost, type', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,6 +61,7 @@ class ContractChangeHistory extends CActiveRecord
 			'detail' => 'รายละเอียด',
 			'cost' => 'จำนวนเงินเพิ่ม/ลด',
 			'type' => 'ประเภทสัญญา',
+			'contract_id'=>'id สัญญา'
 		);
 	}
 
@@ -76,6 +77,20 @@ class ContractChangeHistory extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
+
+	public function searchByContractID($cid,$type) {
+
+		$criteria=new CDbCriteria;
+		$criteria->select = '*';
+		//$criteria->join = 'JOIN foodType food ON foodtype = food.foodtype '; 
+		$criteria->condition = "contract_id='$cid' AND type='$type' ";
+		//$criteria->group = 'foodtype ';
+		
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+	
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.

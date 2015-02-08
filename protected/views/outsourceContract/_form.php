@@ -301,6 +301,178 @@
            
         </div>
 
+
+        <fieldset class="well the-fieldset">
+          <legend class="the-legend">รายละเอียดการเพิ่ม-ลดวงเงิน</legend>
+          <div class="row-fluid"> 
+          <?php 
+        $this->widget('bootstrap.widgets.TbButton', array(
+                'buttonType'=>'link',
+                
+                'type'=>'success',
+                'label'=>'เพิ่มการรายการ',
+                'icon'=>'plus-sign',
+                
+                'htmlOptions'=>array(
+                  'class'=>'pull-right',
+                  'style'=>'margin:0px 10px 10px 10px;',
+                  //'onclick'=>'createApprove(' . $index . ')'
+               
+             'onclick'=>'
+                   
+                  js:bootbox.confirm($("#modal-body3").html(),"ยกเลิก","ตกลง",
+                              function(confirmed){
+                                 
+                                      if(confirmed)
+                                  {
+
+                                    $.ajax({
+                          type: "POST",
+                          url: "../contractChangeHistory/createTemp/' . $index . '",
+                          dataType:"json",
+                          data: $(".modal-body #contract-change-history-form").serialize()
+                          })                  
+                          .done(function( msg ) {
+                            
+                            jQuery.fn.yiiGridView.update("change-grid'.$index.'");
+                            //($("#approve-grid' . $index . '").yiiGridView("update",{}));
+                            
+                            if(msg.status=="failure")
+                            {
+                              $("#modal-body2").html(msg.div);
+                              js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
+                                        function(confirmed){
+                                              
+                                          
+                                                if(confirmed)
+                                            {
+                                              $.ajax({
+                                    type: "POST",
+                                    url: "../contractChangeHistory/createTemp",
+                                    dataType:"json",
+                                    data: $(".modal-body #contract-change-history-form").serialize()
+                                    })
+                                    .done(function( msg ) {
+                                      if(msg.status=="failure")
+                                      {
+                                        js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+                                      }
+                                      else{
+                                        //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+                                      }
+                                    });
+                                            }
+                              })
+                            }
+                            else{
+                              //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+
+                            }
+                          });
+                      
+                                  }
+                    })
+                      
+                    ',
+                      
+                ),
+            ));
+
+                  
+        $this->widget('bootstrap.widgets.TbGridView',array(
+          'id'=>'change-grid'.$index,
+          
+            'type'=>'bordered condensed',
+          'dataProvider'=>ContractChangeHistoryTemp::model()->searchByUser($index,1,Yii::app()->user->ID),
+          //'filter'=>$model,
+          'selectableRows' => 2,
+          'enableSorting' => false,
+          'rowCssClassExpression'=>'"tr_white"',
+
+            // 'template'=>"{summary}{items}{pager}",
+            'htmlOptions'=>array('style'=>'padding-top:40px;'),
+            'enablePagination' => false,
+            'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
+          'columns'=>array(
+                'No.'=>array(
+                    'header'=>'ลำดับ',
+                    'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),                        
+                'htmlOptions'=>array(
+                            'style'=>'text-align:center'
+
+                      ),
+                    'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+                  ),
+              'detail'=>array(
+                  // 'header'=>'', 
+                
+                'name' => 'detail',
+
+                'headerHtmlOptions' => array('style' => 'width:35%;text-align:center;background-color: #eeeeee'),                       
+                //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:left'
+
+                      )
+                  ),
+                  'ref_no'=>array(
+                  // 'header'=>'', 
+                
+                'header' => 'เลขที่หนังสืออ้างอิง',
+                'name' => 'ref_no',
+                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
+                //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:center'
+
+                      )
+                  ),
+                  'cost'=>array(
+                  'header'=>'วงเงินเพิ่ม-ลด', 
+                
+                'name' => 'cost',
+                // 'type'=>'raw', //to use html tag
+                'value'=> function($data){
+                        return number_format($data->cost, 2);
+                    },  
+                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:right'
+
+                      )
+                  ),
+                 
+                  array(
+                'class'=>'bootstrap.widgets.TbButtonColumn',
+                'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),
+                'template' => '{update}   {delete}',
+                // 'deleteConfirmation'=>'js:bootbox.confirm("Are you sure to want to delete")',
+                'buttons'=>array(
+                    'delete'=>array(
+                      'url'=>'Yii::app()->createUrl("ContractChangeHistory/deleteTemp", array("id"=>$data->id))', 
+
+                    ),
+                    'update'=>array(
+
+                      'url'=>'Yii::app()->createUrl("ContractChangeHistory/updateTemp", array("id"=>$data->id))',
+                      //'click'=>'updateApprove($data->id)' 
+                      
+                    )
+
+                  )
+
+                
+              ),
+            )
+
+          ));
+
+           ?>
+          </div>
+        
+    </fieldset>
+
+
         <fieldset class="well the-fieldset">
           <legend class="the-legend">รายละเอียดการอนุมัติ</legend>
           <div class="row-fluid"> 

@@ -343,6 +343,31 @@ class ProjectController extends Controller
 						        }            
 		 				     	//$modelTemp = ContractApproveHistoryTemp::model()->findByAttributes(array('contract_id'=>$contract['pc_id']));
 		 				     	
+		 				     	$modelTemps = Yii::app()->db->createCommand()
+						                    ->select('*')
+						                    ->from('contract_change_history_temp')
+						                    ->where('contract_id=:id AND type=1 AND u_id=:user', array(':id'=>$index,':user'=>Yii::app()->user->ID))
+						                    ->queryAll();
+						        foreach ($modelTemps as $key => $mTemp) {
+
+                                        $modelApprove = new ContractChangeHistory;
+                                        $modelApprove->attributes = $mTemp;
+                                       
+                                        $modelApprove->contract_id = $modelC->pc_id;
+                                        $modelApprove->type = 1;
+                                        
+                                        if($modelApprove->save())
+                                        {
+                                            $msg =  "successful";
+                                            $mt = ContractChangeHistoryTemp::model()->findByPk($mTemp['id']);
+                                            $mt->delete();
+                                        }	                                          
+                                        else{
+                                           $model->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ "'.$index.' ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+		 				            	   $saveOK = 0;
+                                        }   	
+						        }            
+		 				     	
 		 				     }else{
 		 				     	$saveOK = 0;	
 		 				     	if($contract["pc_id"]!="")
@@ -442,8 +467,11 @@ class ProjectController extends Controller
 		else{
 		 
 		 if (!Yii::app()->request->isAjaxRequest)	
-			Yii::app()->db->createCommand('DELETE FROM contract_approve_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
+		 {
+		 	 Yii::app()->db->createCommand('DELETE FROM contract_approve_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
+		 	 Yii::app()->db->createCommand('DELETE FROM contract_change_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
 		
+		 }	
 		 //Yii::app()->db->createCommand('TRUNCATE contract_approve_history_temp')->execute();
 				
 			$modelPC->pc_id = 1;

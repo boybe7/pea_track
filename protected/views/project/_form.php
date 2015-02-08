@@ -423,6 +423,21 @@ hr {
     </div>
 </div>
 
+<div id="modalChange"  class="modal hide fade">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>แก้ไขข้อมูลรายการเพิ่ม-ลดวงเงิน</h3>
+    </div>
+    <div class="modal-body" id="bodyChange">
+     
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn btn-danger" id="modalChangeCancel">ยกเลิก</a>
+    <a href="#" class="btn btn-primary" id="modalChangeSubmit">บันทึก</a>
+    </div>
+</div>
+
+
 <input type="hidden" id="pre_index">
 
 <div id="modal-content" class="hide">

@@ -268,14 +268,14 @@
 
                ?> 
           </div>
-          <div class="span2  offset1">     
+          <div class="span3  offset1">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_T_percent'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_T_percent', array( 'maxlength' => 3,'class'=>'span12','readonly'=>true)); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_T_percent', array( 'maxlength' => 3,'class'=>'span6','readonly'=>true)); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_T_percent',array('class'=>'help-block error')); ?>          
           </div> 
-          <div class="span2">     
+          <div class="span3">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_A_percent'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_A_percent', array( 'maxlength' => 3,'class'=>'span12','readonly'=>true)); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_A_percent', array( 'maxlength' => 3,'class'=>'span6','readonly'=>true)); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_A_percent',array('class'=>'help-block error')); ?>          
           </div> 
            
@@ -283,8 +283,9 @@
            
         </div>
 
+
         <fieldset class="well the-fieldset">
-          <legend class="the-legend">รายละเอียดการอนุมัติ</legend>
+          <legend class="the-legend">รายละเอียดการเพิ่ม-ลดวงเงิน</legend>
           <div class="row-fluid"> 
           <?php 
         
@@ -300,7 +301,7 @@
           'rowCssClassExpression'=>'"tr_white"',
 
             // 'template'=>"{summary}{items}{pager}",
-            'htmlOptions'=>array('style'=>'padding-top:30px;'),
+            'htmlOptions'=>array('style'=>'padding-top:0px;'),
             'enablePagination' => false,
             'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
           'columns'=>array(
@@ -364,39 +365,98 @@
 
                       )
                   ),  
-                  array(
-                'class'=>'bootstrap.widgets.TbButtonColumn',
-                'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),
-                'template' => '{update}   {delete}',
-                // 'deleteConfirmation'=>'js:bootbox.confirm("Are you sure to want to delete")',
-                'buttons'=>array(
-                    'delete'=>array(
-                      'url'=>'Yii::app()->createUrl("ContractApproveHistory/deleteTemp", array("id"=>$data->id))',  
-                      'click'=>"function(){
-                                    $.fn.yiiGridView.update('approve-gridOutsource".$index."', {
-                                        type:'POST',
-                                        url:$(this).attr('href'),
-                                        success:function(data) {
-                                            
-                                              $.fn.yiiGridView.update('approve-gridOutsource".$index."');
-                                              location.reload();
-                                        }
-                                    })
-                                    return false;
-                              }
-                     ",
-                    ),
-                    'update'=>array(
+                  
+            )
 
-                      'url'=>'Yii::app()->createUrl("ContractApproveHistory/updateTemp", array("id"=>$data->id))',
-                      //'click'=>'updateApprove($data->id)' 
-                      
-                    )
+          ));
 
-                  )
+           ?>
+          </div>
+        
+    </fieldset>
+    
 
+        <fieldset class="well the-fieldset">
+          <legend class="the-legend">รายละเอียดการอนุมัติ</legend>
+          <div class="row-fluid"> 
+          <?php 
+        
+                  
+        $this->widget('bootstrap.widgets.TbGridView',array(
+          'id'=>'approve-gridOutsource'.$index,
+          
+          'type'=>'bordered condensed',
+          'dataProvider'=>ContractApproveHistoryTemp::model()->searchByUser($index,2,Yii::app()->user->ID),
+          //'filter'=>$model,
+          'selectableRows' => 2,
+          'enableSorting' => false,
+          'rowCssClassExpression'=>'"tr_white"',
+
+            // 'template'=>"{summary}{items}{pager}",
+            'htmlOptions'=>array('style'=>'padding-top:0px;'),
+            'enablePagination' => false,
+            'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
+          'columns'=>array(
+                'No.'=>array(
+                    'header'=>'ลำดับ',
+                    'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),                        
+                'htmlOptions'=>array(
+                            'style'=>'text-align:center'
+
+                      ),
+                    'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+                  ),
+              'detail'=>array(
+                  // 'header'=>'', 
                 
-              ),
+                'name' => 'detail',
+
+                'headerHtmlOptions' => array('style' => 'width:35%;text-align:center;background-color: #eeeeee'),                       
+                //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:left'
+
+                      )
+                  ),
+                  'approve by'=>array(
+                  // 'header'=>'', 
+                
+                'header' => 'อนุมัติโดย/<br>ลงวันที่',
+                'type'=>'raw', //to use html tag
+                'value'=> '$data->approveBy."<br>".$data->dateApprove', 
+                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
+                //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:center'
+
+                      )
+                  ),
+                  'cost'=>array(
+                  'header'=>'วงเงิน/<br>เป็นเงินเพิ่ม', 
+                
+                'name' => 'cost',
+                // 'type'=>'raw', //to use html tag
+                'value'=> function($data){
+                        return number_format($data->cost, 2);
+                    },  
+                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:right'
+
+                      )
+                  ),
+                  'time'=>array(
+                  'header'=>'ระยะเวลาแล้วเสร็จ/<br>ระยะเลาขอขยาย', 
+                
+                'name' => 'timeSpend',
+                // 'type'=>'raw', //to use html tag
+                  
+                'headerHtmlOptions' => array('style' => 'width:20%;text-align:center;background-color: #eeeeee'),                       
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:left'
+
+                      )
+                  )
             )
 
           ));

@@ -189,17 +189,19 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 														
 														if(msg.status=="failure")
 														{
-															$("#modal-body2").html(msg.div);
-															js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
+															$("#modal-body3").html(msg.div);
+															js:bootbox.confirm($("#modal-body3").html(),"ยกเลิก","ตกลง",
 								                   			function(confirmed){
 								                   	 	        
 								                   	 			
 					                                			if(confirmed)
 								                   	 		    {
+								                   	 		    	
 								                   	 		    	$.ajax({
 																		type: "POST",
-																		url: "../contractChangeHistory/createTemp",
+																		url: "../contractChangeHistory/createTemp/' . $index . '",
 																		dataType:"json",
+																		//contentType:"application/json; charset=utf-8",
 																		data: $(".modal-body #contract-change-history-form").serialize()
 																		})
 																		.done(function( msg ) {
@@ -209,6 +211,8 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 																			}
 																			else{
 																				//js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+																				jQuery.fn.yiiGridView.update("change-grid'.$index.'");
+														
 																			}
 																		});
 								                   	 		    }
@@ -374,7 +378,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 								                   	 		    {
 								                   	 		    	$.ajax({
 																		type: "POST",
-																		url: "../contractapprovehistory/createTemp",
+																		url: "../contractapprovehistory/createTemp/' . $index . '",
 																		dataType:"json",
 																		data: $(".modal-body #contract-approve-history-form").serialize()
 																		})
@@ -385,6 +389,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 																			}
 																			else{
 																				//js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+																				jQuery.fn.yiiGridView.update("approve-grid'.$index.'");
 																			}
 																		});
 								                   	 		    }
@@ -576,6 +581,14 @@ Yii::app()->clientScript->registerScript('edit','
 						//console.log("clear editmodal");
     });
 
+	$("#modalChangeCancel").click(function(e){
+    	
+    	//myBackup2 = $("#modalApprove").clone();
+						$("#modalChange").modal("hide");
+						$("#bodyChange").html();
+						//console.log("clear editmodal");
+    });
+
     $("#modalSubmit").click(function(e){
        //console.log("submit"+$("#contract-approve-history-form").html());	
       
@@ -613,9 +626,35 @@ Yii::app()->clientScript->registerScript('edit','
 
     });
 
+	$("#modalChangeSubmit").click(function(e){
+     
+       $.ajax( {
+      		type: "POST",
+      		url: link,
+      		dataType:"json",
+      		data: $("#contract-change-history-form").serialize(),
+      		success: function( msg ) {
+        	
+        		if(msg.status=="failure")									
+        		{
+			
+					$("#contract-change-history-form").html(msg.div);
+				}
+				else{
+					$("#modalChange").modal("hide");
+				    $("#bodyChange").html();
+				}
+                jQuery.fn.yiiGridView.update("change-grid'.$index.'");
+				
+      		}
+    	} 
+    	);
+
+    });
+
 
     
-	$("body").on("click",".update,#link",function(e){
+	$("body").on("click","#approve-grid'.$index.'update,#link",function(e){
 				link = $(this).attr("href");
 				//console.log(myBackup2)
 
@@ -645,6 +684,27 @@ Yii::app()->clientScript->registerScript('edit','
                 });
          	return false;
     });
+
+	$("body").on("click","#change-grid'.$index.' .update,#link",function(e){
+				link = $(this).attr("href");
+			
+				$.ajax({
+                 type:"GET",
+                 cache: false,
+                 url:$(this).attr("href"),
+                 success:function(data){
+                 	    
+                 			 $("#bodyChange").html(data);
+                 		
+                 			 $("#modalChange").modal("show");
+
+						
+                 },
+
+                });
+         	return false;
+    });
+		
 						
 // link = $(this).attr("href");
 // $("body").on("click",".update,#link",function(e){

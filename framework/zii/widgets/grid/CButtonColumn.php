@@ -262,24 +262,54 @@ class CButtonColumn extends CGridColumn
 			if($this->afterDelete===null)
 				$this->afterDelete='function(){}';
 
-			$this->buttons['delete']['click']=<<<EOD
-function() {
-	$confirmation
-	var th = this,
-		afterDelete = $this->afterDelete;
-	jQuery('#{$this->grid->id}').yiiGridView('update', {
-		type: 'POST',
-		url: jQuery(this).attr('href'),$csrf
-		success: function(data) {
-			jQuery('#{$this->grid->id}').yiiGridView('update');
-			afterDelete(th, true, data);
-		},
-		error: function(XHR) {
-			return afterDelete(th, false, XHR);
-		}
-	});
-	return false;
-}
+// 			$this->buttons['delete']['click']=<<<EOD
+// function() {
+// 	$confirmation
+// 	var th = this,
+// 		afterDelete = $this->afterDelete;
+// 	jQuery('#{$this->grid->id}').yiiGridView('update', {
+// 		type: 'POST',
+// 		url: jQuery(this).attr('href'),$csrf
+// 		success: function(data) {
+// 			jQuery('#{$this->grid->id}').yiiGridView('update');
+// 			afterDelete(th, true, data);
+// 		},
+// 		error: function(XHR) {
+// 			return afterDelete(th, false, XHR);
+// 		}
+// 	});
+// 	return false;
+// }
+// EOD;
+
+//bootbox confirmation
+$this->buttons['delete']['click']=<<<EOD
+        	function() {
+            var th = this;
+            var href = $(this).attr('href');
+            afterDelete = $this->afterDelete;
+
+                bootbox.confirm("ต้องการจะลบข้อมูล?", function(result) {
+                        if(result){
+                            jQuery('#{$this->grid->id}').yiiGridView('update', {
+                                type: 'POST',
+                                url: href,$csrf
+                                success: function(data) {
+                                    jQuery('#{$this->grid->id}').yiiGridView('update');
+                                    afterDelete(th, true, data);
+                                },
+                                error: function(XHR) {
+                                    return afterDelete(th, false, XHR);
+                                }
+                            });
+
+
+                        }
+                    });
+
+
+            return false;
+        }
 EOD;
 		}
 	}

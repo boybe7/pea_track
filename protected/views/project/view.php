@@ -170,6 +170,8 @@ hr {
                                          echo "<tr><td>".$value["code"]."</td></tr>";
 
                                        }
+                                    }else{
+                                      echo "<tr><td></td></tr>";
                                     }
                             ?>
                             
@@ -255,6 +257,84 @@ hr {
                           echo $form->textFieldRow($modelPC,'pc_A_percent',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
                         echo '</div>';
+                        
+
+                         echo '<fieldset class="well the-fieldset">
+                        <legend class="the-legend">รายละเอียดการเพิ่ม-ลดวงเงิน</legend>
+                        <div class="row-fluid">'; 
+                  
+
+                            
+                      $this->widget('bootstrap.widgets.TbGridView',array(
+                    
+                      'type'=>'bordered condensed',
+                      'dataProvider'=>ContractChangeHistory::model()->searchByContractID($modelPC->pc_id,1),
+                      //'filter'=>$model,
+                      'selectableRows' => 2,
+                      'enableSorting' => false,
+                      'rowCssClassExpression'=>'"tr_white"',
+
+                      // 'template'=>"{summary}{items}{pager}",
+                      'htmlOptions'=>array('style'=>'padding-top:0px;'),
+                      'enablePagination' => false,
+                      'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
+                      'columns'=>array(
+                        'No.'=>array(
+                            'header'=>'ลำดับ',
+                            'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),                        
+                            'htmlOptions'=>array(
+                                    'style'=>'text-align:center'
+
+                              ),
+                            'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+                          ),
+                        'detail'=>array(
+                            'name' => 'detail',
+
+                            'headerHtmlOptions' => array('style' => 'width:35%;text-align:center;background-color: #eeeeee'),                       
+                              //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                              'htmlOptions'=>array(
+                                            'style'=>'text-align:left'
+
+                              )
+                          ),
+                          'ref_no'=>array(
+                          // 'header'=>'', 
+                        
+                              'header' => 'เลขที่หนังสืออ้างอิง',
+                              'name' => 'ref_no',
+                              'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
+                              //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                              'htmlOptions'=>array(
+                                                  'style'=>'text-align:center'
+
+                              )
+                          ),
+                          'cost'=>array(
+                            'header'=>'วงเงินเพิ่ม-ลด', 
+                        
+                            'name' => 'cost',
+                        // 'type'=>'raw', //to use html tag
+                            'value'=> function($data){
+                                    return number_format($data->cost, 2);
+                                },  
+                            'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
+                            'htmlOptions'=>array(
+                                                'style'=>'text-align:right'
+
+                              )
+                          )
+                        )  
+
+                    ));
+
+                     
+                    echo '</div></fieldset>';  
+
+
+
+
+
                         echo '<fieldset class="well the-fieldset">
                         <legend class="the-legend">รายละเอียดการอนุมัติ</legend>
                         <div class="row-fluid">'; 

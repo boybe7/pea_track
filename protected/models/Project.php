@@ -141,6 +141,7 @@ class Project extends CActiveRecord
 	     	$sum = 0;
 	     	foreach($this->getRelated('contract') as $projectCost)
    			{
+     			ProjectContract::model()->findByPk($projectCost->pc_id);
      			$sum += $projectCost->pc_cost;
    			}
     		return $sum;
@@ -155,7 +156,19 @@ class Project extends CActiveRecord
 
             foreach($this->getRelated('contract') as $projectCost)
    			{
-     			$this->sumcost += $projectCost->pc_cost;
+
+		 	    $costChange = 0;
+		 	    $modelTemps = Yii::app()->db->createCommand()
+						                    ->select('*')
+						                    ->from('contract_change_history')
+						                    ->where('contract_id=:id AND type=1', array(':id'=>$projectCost->pc_id))
+						                    ->queryAll();
+			    if(!empty($modelTemps))
+			    foreach ($modelTemps as $key => $mTemp) {
+			    	$costChange += $mTemp['cost'];
+			    }
+     			
+     			$this->sumcost += $projectCost->pc_cost + $costChange;
    			}
     }
     protected function afterSave(){
