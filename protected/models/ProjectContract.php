@@ -141,6 +141,12 @@ class ProjectContract extends CActiveRecord
             if(count($str_date)>1)
             	$this->pc_garantee_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
             
+            if($this->pc_sign_date == "00/00/0000")
+                $this->pc_sign_date = '';
+            if($this->pc_end_date == "00/00/0000")
+                $this->pc_end_date = '';
+            if($this->pc_garantee_date == "00/00/0000")
+                $this->pc_garantee_date = '';
             //$this->visit_date=date('Y/m/d', strtotime(str_replace("-", "", $this->visit_date)));       
     }
 

@@ -653,27 +653,29 @@ class ProjectController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		/*$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Project']))
-		{
-			$model->attributes=$_POST['Project'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->pj_id));
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));*/
-
+		
 
 		$modelOutsource = array();
 
 		$numContracts = 1;
 		array_push($modelOutsource, new OutsourceContract);
+		if(isset($_POST['Project']))
+		{
+						 //  header('Content-type: text/plain');
+       //                   foreach( $_POST['wk'] as $v ) {
+							//     print $v.",";
+							// }
+       //                   	exit;
+			 WorkCode::model()->deleteAll("pj_id ='" . $id . "'");
+			 foreach( $_POST['wk'] as $value ) {
+					$wk = new WorkCode;
+					$wk->code = $value;
+	 	        	$wk->pj_id = $id;
+		        		
+	 	        	$wk->save();	
+			 }
+
+		}
 
 
 		if(isset($_POST['OutsourceContract']))

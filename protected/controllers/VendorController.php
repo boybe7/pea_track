@@ -66,7 +66,7 @@ class VendorController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreateVendor($type)
+	public function actionCreateVendor()
 	{
 		$model=new Vendor;
 
@@ -153,21 +153,7 @@ class VendorController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
 		));
-		
-		// if(isset($_POST['Vendor']))
-		// {
-		// 	$model->attributes=$_POST['Vendor'];
-		// 	if($model->save()){
-		// 		//$this->actionAdmin();
-		// 		$this->redirect(array('admin'));
-		// 	}
-		// }
-  //       else{
-
-		//  	$this->render('create',array(
-		// 		'model'=>$model,
-		// 	));	
-  //       } 
+	
         
 			
 	}

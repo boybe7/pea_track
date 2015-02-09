@@ -36,11 +36,12 @@
 	<div class="row-fluid">
     	<div class="span12">	
 			<?php 
-			if($model->type=='Owner')	
+			//if($model->type=='Owner')	
 			    echo $form->textFieldRow($model,'v_BP',array('class'=>'span12','maxlength'=>25)); 
-            else{
-            	echo $form->textFieldRow( $model, 'v_BP', array( 'labelOptions' => array('label' => false)));
-            }
+            //else{
+            //	echo "<label class='control-label' for='Vendor_v_BP'>หมายเลข Vendor</label>";
+            //	echo $form->textFieldRow( $model, 'v_BP', array('class'=>'span12', 'labelOptions' => array('label' => false)));
+            //}
 			?>
 		</div>
 	</div>	

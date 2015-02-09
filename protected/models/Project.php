@@ -153,6 +153,8 @@ class Project extends CActiveRecord
             if(count($str_date)>1)
             	$this->pj_date_approved = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
             
+            if($this->pj_date_approved == "00/00/0000")
+                $this->pj_date_approved = '';
 
             foreach($this->getRelated('contract') as $projectCost)
    			{

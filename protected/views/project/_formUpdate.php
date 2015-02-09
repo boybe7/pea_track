@@ -36,10 +36,27 @@ hr {
             }).bind('focus', function () {
                 $(this).autocomplete("search");
       });
+
+      
  
   });
 
-    
+   function addWorkCode(){
+  
+        if($("#work_code").val()!="")
+        { 
+         $('#tgrid').find('tbody').append('<tr id='+$("#work_code").val()+'><td width="90%"><input name="wk[]" style="margin-bottom:0px;" class="span12" type="text" value="'+
+                 $("#work_code").val()+
+                 '"/></td><td style="text-align:center;width:10%;"><a href="#" onclick=deleteRow("'+$("#work_code").val()+'")><i class="icon-red icon-remove"></i></a></td></tr>');
+        
+         $("#work_code").val("");
+        } 
+    }
+    function deleteRow(id){
+     
+         $("#tgrid tr[id='"+id+"']").remove();
+        
+    }  
 	$('#tabs a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
@@ -57,8 +74,8 @@ hr {
 	<ul class="nav nav-tabs">
       <?php  
         
-        	echo '<li><a href="#projTab" data-toggle="tab">โครงการ</a></li>
-                 <li  class="active"><a href="#outTab" data-toggle="tab">สัญญาจ้างช่วง/ซื้อ</a></li>
+        	echo '<li  class="active"><a href="#projTab" data-toggle="tab">โครงการ</a></li>
+                 <li ><a href="#outTab" data-toggle="tab">สัญญาจ้างช่วง/ซื้อ</a></li>
                 ';	
        
       ?>
@@ -70,7 +87,7 @@ hr {
       <?php 
 
    
-          echo '<div class="tab-pane" id="projTab">';
+          echo '<div class="tab-pane  active" id="projTab">';
 
         	
         	$form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
@@ -91,75 +108,194 @@ hr {
       				<!-- <span style='display: block;margin-bottom: 5px;'>คู่สัญญา</span>  -->
       				
 				<div class="row-fluid">
-					<div class="span4">
-      					<?php echo $form->textFieldRow($model,'pj_fiscalyear',array('class'=>'span12','maxlength'=>4)); ?>
-    				</div>
-    				<div class="span8">
-      					<?php echo $form->textFieldRow($model,'pj_date_approved',array('class'=>'span6'));?>
-    				
-		      		</div>
+					  <div class="span4">
+                <?php echo $form->textFieldRow($model,'pj_fiscalyear',array('class'=>'span12','maxlength'=>4)); ?>
+            </div>
+            <div class="span8">
+                <?php echo $form->labelEx($model,'pj_date_approved',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
+              
+                 <?php 
+                    //if($model->pj_date_approved == "00/00/0000")
+                    //   $model->pj_date_approved = '';
+             
+                    echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
+                        $form->widget('zii.widgets.jui.CJuiDatePicker',
+
+                        array(
+                            'name'=>'pj_date_approved',
+                            'attribute'=>'pj_date_approved',
+                            'model'=>$model,
+                            'options' => array(
+                                              'mode'=>'focus',
+                                              //'language' => 'th',
+                                              'format'=>'dd/mm/yyyy', //กำหนด date Format
+                                              'showAnim' => 'slideDown',
+                                              ),
+                            'htmlOptions'=>array('class'=>'span12', 'value'=>$model->pj_date_approved),  // ใส่ค่าเดิม ในเหตุการ Update 
+                         )
+                    );
+                    echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
+
+                 ?>
+              </div>
 		      		
 		    		<?php 
-      				//echo $form->textFieldRow($model,'pj_work_cat',array('class'=>'span12')); 
-      				$workcat = Yii::app()->db->createCommand()
+      				
+              $workcat = Yii::app()->db->createCommand()
                     ->select('wc_id,wc_name as name')
                     ->from('work_category')
-                    ->where('wc_id=:id', array(':id'=>$model->pj_work_cat))
                     ->queryAll();
-              
-              $workcatName = "";
-              if(!empty($workcat))
-             	  $workcatName = $workcat[0]["name"];
-
-              echo $form->labelEx($model,'pj_work_cat',array('class'=>'span12','style'=>'text-align:left;margin-left:-1px;margin-bottom:-5px'));
-               
-              echo CHtml::textField('pj_work_cat',$workcatName,array('class'=>'span12'));
+     
+                $typelist = CHtml::listData($workcat,'wc_id','name');
+                echo $form->dropDownListRow($model, 'pj_work_cat', $typelist,array('class'=>'span12'), array('options' => array('pj_work_cat'=>array('selected'=>true)))); 
+             
             
 
       				?>
       				<!-- <input type="hidden" name="vendor_id" id="vendor_id"> -->
       				<?php 
   						echo $form->hiddenField($model,'pj_vendor_id');
-  						echo $form->labelEx($model,'pj_vendor_id',array('class'=>'span12','style'=>'text-align:left;margin-left:-1px;margin-bottom:-5px'));
-    					 
-  						$vendor = Yii::app()->db->createCommand()
-                    ->select('v_name as name')
-                    ->from('vendor')
-                    ->where('v_id=:id', array(':id'=>$model->pj_vendor_id))
-                    ->queryAll();
-              
-              $vendorName = "";
-              if(!empty($vendor))
-                $vendorName = $vendor[0]["name"];
+              echo $form->labelEx($model,'pj_vendor_id',array('class'=>'span12','style'=>'text-align:left;margin-left:-1px;margin-bottom:-5px'));
+               
+              $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+                            'name'=>'pj_vendor_id',
+                            'id'=>'pj_vendor_id',
+                            'value'=>$model->pj_name,
+                           // 'source'=>$this->createUrl('Ajax/GetDrug'),
+                           'source'=>'js: function(request, response) {
+                                $.ajax({
+                                    url: "'.$this->createUrl('Vendor/GetVendor').'",
+                                    dataType: "json",
+                                    data: {
+                                        term: request.term,
+                                       
+                                    },
+                                    success: function (data) {
+                                            response(data);
 
-              echo CHtml::textField('pj_vendor_id',$vendorName,array('class'=>'span12'));
+                                    }
+                                })
+                             }',
+                            // additional javascript options for the autocomplete plugin
+                            'options'=>array(
+                                     'showAnim'=>'fold',
+                                     'minLength'=>0,
+                                     'select'=>'js: function(event, ui) {
+                                        
+                                           //console.log(ui.item.id)
+                                            $("#Project_pj_vendor_id").val(ui.item.id);
+                                     }',
+                                     //'close'=>'js:function(){$(this).val("");}',
+                                     
+                            ),
+                           'htmlOptions'=>array(
+                                'class'=>'span10'
+                            ),
+                                  
+                        ));
             
-						
-				      ?>
-    			</div>
-    		</div>	
-			<div class="well span4">
+            $this->widget('bootstrap.widgets.TbButton', array(
+                'buttonType'=>'link',
+                
+                'type'=>'success',
+                'label'=>'เพิ่มคู่สัญญา',
+                'icon'=>'plus-sign',
+                //'url'=>array('vendor/create'),
+                'htmlOptions'=>array(
+                    //'data-toggle'=>'modal',
+                    //'data-target'=>'#myModal',
+                    'onclick'=>'js:bootbox.confirm($("#modal-body").html(),"ยกเลิก","ตกลง",
+                              function(confirmed){
+                                console.log($(".modal-body #vendor-form").serialize());    
+                                
+                                      if(confirmed)
+                                  {
+                                    $.ajax({
+                          type: "POST",
+                          url: "../../vendor/CreateVendor/",
+                          dataType:"json",
+                          data: $(".modal-body #vendor-form").serialize()
+                          })
+                          .done(function( msg ) {
+                            console.log(msg)
+                            if(msg.status=="failure")
+                            {
+                              $("#modal-body").html(msg.div);
+                              js:bootbox.confirm($("#modal-body").html(),"ยกเลิก","ตกลง",
+                                        function(confirmed){
+                                              
+                                          
+                                                if(confirmed)
+                                            {
+                                              $.ajax({
+                                    type: "POST",
+                                    url: "../vendor/createVendor/1",
+                                    dataType:"json",
+                                    data: $(".modal-body #vendor-form").serialize()
+                                    })
+                                    .done(function( msg ) {
+                                      if(msg.status=="failure")
+                                      {
+                                        js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+                                      }
+                                      else{
+                                        js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+                                      }
+                                    });
+                                            }
+                              })
+                            }
+                            else{
+                                        js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+                                      }
+                          });
+                                  }
+                    })',
+                        
+                    'class'=>'pull-right'
+                ),
+            ));
+            
+        ?>
+          </div>
+        </div>  
+      <div class="well span4">
       			<?php 
-      			//echo $form->textFieldRow($model,'pj_code',array('class'=>'span10','maxlength'=>100)); 
+      			
+           
       			echo "<span style='display: block;'>หมายเลขงาน</span>"; 
-            
+             echo CHtml::textField('work_code','',array('class'=>'span10'));
+            $this->widget('bootstrap.widgets.TbButton', array(
+                                    'buttonType'=>'link',
+                                    
+                                    'type'=>'success',
+                                    'label'=>'',
+                                    'icon'=>'plus-sign white',
+                                    //'url'=>array('vendor/create'),
+                                    'htmlOptions'=>array('class'=>'pull-right','onclick'=>'addWorkCode()')
+                                    )); 
       			?>
       			<table class="table table-bordered " style="background-color: #eeeeee" name="tgrid" id="tgrid" width="100%" cellpadding="0" cellspacing="0">                    
 	                <tbody>
                             <?php
+
+                                   
                                     $workCode = Yii::app()->db->createCommand()
                                                 ->select('code,id')
                                                 ->from('work_code')
                                                 ->where('pj_id=:id', array(':id'=>$model->pj_id))
                                                 ->queryAll();
+                                    $workcodes = '';
                                     if(!empty($workCode))
                                     {    
                                        foreach ($workCode as $key => $value) {
                                          //print_r($value["code"]);
-                                         echo "<tr><td>".$value["code"]."</td></tr>";
-
+                                         echo "<tr id='".$value["id"]."'><td><input name='wk[]' style='margin-bottom:0px;' class='span12' type='text' value='".$value["code"]."'/></td><td style='text-align:center;width:10%;'><a  onclick=deleteRow('".$value["id"]."')><i class='icon-red icon-remove'></i></a></td></tr>";
+                                         $workcodes .= $value["code"].",";
                                        }
                                     }
+
+                               
                             ?>
                             
                         </tbody>
@@ -232,26 +368,18 @@ hr {
             
         ?>   
            
-           
-
+     
 
 						
 		</div>
-        <?php $this->endWidget(); ?>
+        <?php //$this->endWidget(); ?>
 		
         <!-- tab@2  Outsource Contracts -->
 		<?php 
 			
-				echo '<div class="tab-pane active" id="outTab">';		    
+				echo '<div class="tab-pane" id="outTab">';		    
 		 
 
-		    $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
-				'id'=>'project-form2',
-				'enableAjaxValidation'=>false,
-				'type'=>'vertical',
-  				'htmlOptions'=>  array('class'=>'','style'=>''),
-			   ));
-     
         echo '<div class="row-fluid">';
          $this->widget('bootstrap.widgets.TbButton', array(
               'buttonType'=>'link',
@@ -310,18 +438,20 @@ hr {
 	        ?>
 	    </div>
 	  
-             <div class="form-actions">
-				<?php $this->widget('bootstrap.widgets.TbButton', array(
-					'buttonType'=>'submit',
-					'type'=>'primary',
-					'label'=>'บันทึก',
-				)); ?>
-			</div>
-			
 
 		   
-		  <?php $this->endWidget();//end form widget ?>
+		  <?php //$this->endWidget();//end form widget ?>
 		</div><!--  endtab2 -->
+
+
+       <div class="form-actions">
+        <?php $this->widget('bootstrap.widgets.TbButton', array(
+          'buttonType'=>'submit',
+          'type'=>'primary',
+          'label'=>'บันทึกแก้ไข',
+        )); ?>
+      </div>
+      <?php $this->endWidget();//end form widget ?>
 	</div>		
 </div>	
 
