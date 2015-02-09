@@ -666,14 +666,46 @@ class ProjectController extends Controller
 							//     print $v.",";
 							// }
        //                   	exit;
-			 WorkCode::model()->deleteAll("pj_id ='" . $id . "'");
-			 foreach( $_POST['wk'] as $value ) {
-					$wk = new WorkCode;
-					$wk->code = $value;
-	 	        	$wk->pj_id = $id;
-		        		
-	 	        	$wk->save();	
-			 }
+			 
+			$transaction=Yii::app()->db->beginTransaction();
+
+		    try {
+
+		    	$modelProj = $this->loadModel($id);
+		    	$modelProj->attributes = $_POST["Project"];
+		    	$modelProj->pj_CA = $_POST["Project"]["pj_CA"];
+		    	$modelProj->pj_name = $_POST["pj_vendor_id"];	
+		    	if($modelProj->save())
+		    		$msg = "successful";
+		    	else{
+		    					  header('Content-type: text/plain');
+                         print_r($modelProj);
+                         	exit;
+		    	}
+
+
+	               if(isset($_POST['wk']))
+	               {
+	               		WorkCode::model()->deleteAll("pj_id ='" . $id . "'");
+					 	foreach( $_POST['wk'] as $value ) {
+							$wk = new WorkCode;
+							$wk->code = $value;
+			 	        	$wk->pj_id = $id;
+				        		
+			 	        	$wk->save();	
+					 	}
+
+	               }	
+				
+			}
+			catch(Exception $e)
+	 		{
+	 			$transaction->rollBack();
+	 			Yii::trace(CVarDumper::dumpAsString($e->getMessage()));
+	 	        	//you should do sth with this exception (at least log it or show on page)
+	 	        	Yii::log( 'Exception when saving data: ' . $e->getMessage(), CLogger::LEVEL_ERROR );
+	 
+			}	 
 
 		}
 

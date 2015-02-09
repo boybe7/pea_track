@@ -290,7 +290,7 @@ hr {
                                     {    
                                        foreach ($workCode as $key => $value) {
                                          //print_r($value["code"]);
-                                         echo "<tr id='".$value["id"]."'><td><input name='wk[]' style='margin-bottom:0px;' class='span12' type='text' value='".$value["code"]."'/></td><td style='text-align:center;width:10%;'><a  onclick=deleteRow('".$value["id"]."')><i class='icon-red icon-remove'></i></a></td></tr>";
+                                         echo "<tr id='".$value["id"]."'><td><input name='wk[]' style='margin-bottom:0px;padding:0 2%;' class='span12' type='text' value='".$value["code"]."'/></td><td style='text-align:center;width:10%;'><a  onclick=deleteRow('".$value["id"]."')><i class='icon-red icon-remove'></i></a></td></tr>";
                                          $workcodes .= $value["code"].",";
                                        }
                                     }
