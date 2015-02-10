@@ -127,8 +127,8 @@ class OutsourceContract extends CActiveRecord
 
         }	
 
-        if($difference)
-            	$this->oc_user_update = "boybe";
+        //if($difference)
+        //    	$this->oc_user_update = "boybe";
 
 
         return parent::beforeSave();

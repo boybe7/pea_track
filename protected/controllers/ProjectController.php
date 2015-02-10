@@ -654,7 +654,17 @@ class ProjectController extends Controller
 	public function actionUpdate($id)
 	{
 		
+		$modelProj = $this->loadModel($id);
 
+		$modelContract = array();
+		$modelContractOld = array();
+		$numContracts = 1;
+		
+		
+
+		
+
+		
 		$modelOutsource = array();
 
 		$numContracts = 1;
@@ -671,17 +681,97 @@ class ProjectController extends Controller
 
 		    try {
 
-		    	$modelProj = $this->loadModel($id);
-		    	$modelProj->attributes = $_POST["Project"];
-		    	$modelProj->pj_CA = $_POST["Project"]["pj_CA"];
-		    	$modelProj->pj_name = $_POST["pj_vendor_id"];	
-		    	if($modelProj->save())
-		    		$msg = "successful";
-		    	else{
-		    					  header('Content-type: text/plain');
-                         print_r($modelProj);
-                         	exit;
-		    	}
+		    	
+			    	$modelProj->attributes = $_POST["Project"];
+			    	$modelProj->pj_CA = $_POST["Project"]["pj_CA"];
+			    	$modelProj->pj_name = $_POST["pj_vendor_id"];	
+			    	if($modelProj->save())
+			    		$msg = "successful";
+			    	else{
+			    			 //header('Content-type: text/plain');
+	                         //print_r($modelProj);
+	                         //	exit;
+			    	}
+
+			     if(isset($_POST['ProjectContract']))
+			    	foreach( $_POST['ProjectContract'] as $value ) {
+							
+							$modelPC = ProjectContract::model()->FindByPk($value["pc_id"]);
+							
+
+							if(empty($modelPC))
+							{
+								 //new contract
+								 $modelPC = new ProjectContract;
+								 $modelPC->attributes = $value;
+								 $modelPC->pc_last_update = (date("Y")+543).date("-m-d H:i:s");
+						    	 $modelPC->pc_user_update = Yii::app()->user->ID;
+						    	 $modelPC->save();	
+			 	        		 array_push($modelContract, $modelPC);
+
+			 	        		 //save contract change history
+
+
+			 	        		 //save approve change history
+
+
+								 
+							}
+							else
+							{
+									$modelPC->attributes = $value;
+									//check difference
+									//1.project contract
+									$difference = 0;
+									foreach ($value as $key => $new) {
+
+										if($new!=$modelPC[$key])
+											$difference = 1;
+										
+									}
+									//2.cost change
+									$modelCostHist = Yii::app()->db->createCommand()
+								                        ->select('*')
+								                        ->from('contract_change_history')
+								                        ->where('contract_id=:id', array(':id'=>$value["pc_id"]))
+								                        ->queryAll();
+
+								    if(!empty($modelCostHist))                    
+									  $totalItems = count($modelCostHist);//$modelCostHist->totalItems;
+
+									header('Content-type: text/plain');
+	                             	print_r($totalItems);
+	                         	 	exit;
+									//2.1 check number records
+
+									//2.2 check attributes
+
+
+									//3.approve detail
+									//3.1 check number records
+
+									//3.2 check attributes
+
+									//header('Content-type: text/plain');
+			                        //     print_r($difference);
+			                        // 	exit;
+
+									if($difference==1)
+									{
+										$modelPC->pc_last_update = (date("Y")+543).date("-m-d H:i:s");
+						    			$modelPC->pc_user_update = Yii::app()->user->ID;
+									}
+
+									$modelPC->save();	
+			 	        			array_push($modelContract, $modelPC);
+			 	        	
+							}
+			 	        	
+							
+
+				        		
+			 	        	
+					}
 
 
 	               if(isset($_POST['wk']))
@@ -696,7 +786,9 @@ class ProjectController extends Controller
 					 	}
 
 	               }	
-				
+
+
+				$transaction->commit();
 			}
 			catch(Exception $e)
 	 		{
@@ -707,6 +799,35 @@ class ProjectController extends Controller
 	 
 			}	 
 
+		}
+		else{
+			  $project_contract = Yii::app()->db->createCommand()
+                        ->select('*')
+                        ->from('project_contract')
+                        ->where('pc_proj_id=:id', array(':id'=>$id))
+                        ->queryAll();
+
+            if(!empty($project_contract))
+            {    
+               
+                foreach ($project_contract as $key => $value) {
+
+                    $modelPC =new ProjectContract;
+                    $modelPC->attributes = $value;
+                    $str_date = explode("-", $value["pc_sign_date"]);
+                    if(count($str_date)>1)
+                      $modelPC->pc_sign_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+                    $str_date = explode("-", $value["pc_end_date"]);
+                    if(count($str_date)>1)
+                      $modelPC->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+                    $modelPC->pc_details = $value["pc_details"];
+                     $modelPC->pc_id = $value["pc_id"];
+
+                    $modelPC->pc_cost = number_format($modelPC->pc_cost,2);
+                    array_push($modelContract, $modelPC);
+                 
+                }
+            }              
 		}
 
 
@@ -734,7 +855,7 @@ class ProjectController extends Controller
 		}
 
 		$this->render('update',array(
-			'model'=>$this->loadModel($id),'outsource'=>$modelOutsource,'numContracts'=>$numContracts
+			'model'=>$modelProj,'contracts'=>$modelContract,'outsource'=>$modelOutsource,'numContracts'=>$numContracts
 		));
 	}
 

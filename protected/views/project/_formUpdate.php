@@ -69,7 +69,7 @@ hr {
    
    
 </script>
-	<!-- <p class="help-block">Fields with <span class="required">*</span> are required.</p> -->
+
 <div class="well">
 	<ul class="nav nav-tabs">
       <?php  
@@ -100,7 +100,8 @@ hr {
       ?>
      <h4>รายละเอียดโครงการ</h4>
      <hr>
-
+    <div style="text-align:left">กรุณากรอกข้อมูลในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน</div>
+    <div style="text-align:left"><?php echo $form->errorSummary(array($model));?></div>
 		
 		<div class="row-fluid">
 			<div class="well span8">
@@ -309,67 +310,84 @@ hr {
   		</div>
       <h4>สัญญาหลัก</h4>
       <hr>
-      <?php 
-            $project_contract = Yii::app()->db->createCommand()
-                        ->select('*')
-                        ->from('project_contract')
-                        ->where('pc_proj_id=:id', array(':id'=>$model->pj_id))
-                        ->queryAll();
+      <div class="row-fluid">
+      <?php
+        echo '<input type="hidden" id="numContract" name="numContract" value="'.$numContracts.'">';
 
-            if(!empty($project_contract))
-            {    
-                $id = 1; 
-                foreach ($project_contract as $key => $value) {
-                    $modelPC =new ProjectContract;
-                    $modelPC->attributes = $value;
-                    $str_date = explode("-", $value["pc_sign_date"]);
-                    if(count($str_date)>1)
-                      $modelPC->pc_sign_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
-                    $str_date = explode("-", $value["pc_end_date"]);
-                    if(count($str_date)>1)
-                      $modelPC->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
-                    $modelPC->pc_details = $value["pc_details"];
-                    //print_r($value); 
-                    echo '<fieldset class="">';                  
-                    echo '<legend class="the-legend">สัญญาที่ '.$id.'</legend>';
-                        echo '<div class="row-fluid">';
-                          echo '<div class="span3">';
-                          echo $form->textFieldRow($modelPC,'pc_code',array('class'=>'span12'));
-                          echo '</div>';
-                          echo '<div class="span3">';
-                          echo $form->textFieldRow($modelPC,'pc_cost',array('class'=>'span12'));
-                          echo '</div>';
-                          echo '<div class="span3">';
-                          echo $form->textFieldRow($modelPC,'pc_sign_date',array('class'=>'span12'));
-                          echo '</div>';
-                          echo '<div class="span3">';
-                          echo $form->textFieldRow($modelPC,'pc_end_date',array('class'=>'span12'));
-                          echo '</div>';
-                        echo '</div>';
-                        echo '<div class="row-fluid">';
-                          echo '<div class="span6">';
-                          echo $form->textFieldRow($modelPC,'pc_details',array('rows'=>2, 'cols'=>50, 'class'=>'span12'));
-                          echo '</div>';
-                          echo '<div class="span4">';
-                          echo $form->textFieldRow($modelPC,'pc_guarantee',array('class'=>'span12'));
-                          echo '</div>';
-                          echo '<div class="span1">';
-                          echo $form->textFieldRow($modelPC,'pc_T_percent',array('class'=>'span12'));
-                          echo '</div>';
-                          echo '<div class="span1">';
-                          echo $form->textFieldRow($modelPC,'pc_A_percent',array('class'=>'span12'));
-                          echo '</div>';
-                        echo '</div>';
-                    echo '</fieldset">';   
-                    $id++;  
-                }
-            }              
+      $this->widget('bootstrap.widgets.TbButton', array(
+              'buttonType'=>'link',
+              
+              'type'=>'success',
+              'label'=>'เพิ่มสัญญา',
+              'icon'=>'plus-sign',
+              
+              'htmlOptions'=>array(
+                'class'=>'pull-right',
+                'style'=>'margin:0px 10px 0px 10px;',
+                'id'=>'loadContractByAjax'
+              ),
+          ));
+
+         ?>
+         </div>
+
+         <div id="pj_contract">
+      <?php 
+      
+
+
+            // $project_contract = Yii::app()->db->createCommand()
+            //             ->select('*')
+            //             ->from('project_contract')
+            //             ->where('pc_proj_id=:id', array(':id'=>$model->pj_id))
+            //             ->queryAll();
+
+            // if(!empty($project_contract))
+            // {    
+            //     $index = 1; 
+            //     foreach ($project_contract as $key => $value) {
+
+            //         $modelPC =new ProjectContract;
+            //         $modelPC->attributes = $value;
+            //         $str_date = explode("-", $value["pc_sign_date"]);
+            //         if(count($str_date)>1)
+            //           $modelPC->pc_sign_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+            //         $str_date = explode("-", $value["pc_end_date"]);
+            //         if(count($str_date)>1)
+            //           $modelPC->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+            //         $modelPC->pc_details = $value["pc_details"];
+
+            //         $modelPC->pc_cost = number_format($modelPC->pc_cost,2);
+
+            //         $this->renderPartial('//ProjectContract/_form', array(
+            //             'model' => $modelPC,
+            //             'index' => $index,
+            //             'display' => 'block'
+            //         ));
+            //         $index++;
+
+                    
+
+            //     }
+            // } 
+
+            
+            $index = 1; 
+            foreach ($contracts as $id => $con):
+
+              $this->renderPartial('//ProjectContract/_form', array(
+                  'model' => $con,
+                  'index' => $index,
+                  'display' => 'block'
+              ));
+              $index++;
+          endforeach;             
           
             
         ?>   
            
      
-
+        </div>
 						
 		</div>
         <?php //$this->endWidget(); ?>
@@ -504,7 +522,51 @@ hr {
 	    });
 	});
 </script>
- 
+<?php
+//Yii::app()->clientScript->registerCoreScript('jquery');
+Yii::app()->clientScript->registerScript('loadcontract', '
+var _index = ' . $index . ';
+var _index = $("#num").val();
+$("#loadContractByAjax").click(function(e){
+     var _index = $("#num").val();
+     _index++;
+    e.preventDefault();
+    var _url = "' . Yii::app()->controller->createUrl("loadContractByAjax", array("load_for" => $this->action->id)) . '&index="+_index;
+    $.ajax({
+        url: _url,
+        success:function(response){
+            $("#pj_contract").append(response);
+            $("#pj_contract .crow").last().animate({
+                opacity : 1,
+                left: "+0",
+                height: "toggle"
+            });
+
+            //_index++;
+            $("#num").val(_index);
+            //console.log("add num:"+$("#num").val());
+             _index = $("#num").val();
+            //console.log("add index:"+_index);
+             
+              
+              //rearrange no.
+              var collection = $(".contract_no");
+              for(var i=0; i<collection.length; i++){
+                  var element = collection.eq(i);
+                  element.html("สัญญาที่ "+(i+1));
+                  //console.log(element.html());
+              }                  
+              
+        }
+
+    });
+
+  
+    //_index++;
+});
+', CClientScript::POS_END);
+
+?> 
 <?php
 //Yii::app()->clientScript->registerCoreScript('jquery');
 Yii::app()->clientScript->registerScript('loadoutsource', '
