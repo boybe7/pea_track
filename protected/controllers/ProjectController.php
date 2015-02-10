@@ -736,15 +736,26 @@ class ProjectController extends Controller
 								                        ->where('contract_id=:id', array(':id'=>$value["pc_id"]))
 								                        ->queryAll();
 
-								    if(!empty($modelCostHist))                    
-									  $totalItems = count($modelCostHist);//$modelCostHist->totalItems;
+								    //$nOld = 0;
+								    //if(!empty($modelCostHist))                    
+									///  $nOld = count($modelCostHist);//$modelCostHist->totalItems;
 
-									header('Content-type: text/plain');
-	                             	print_r($totalItems);
-	                         	 	exit;
-									//2.1 check number records
+									//2.1 check have records in temp table 
+									$modelCostHistTemp = Yii::app()->db->createCommand()
+								                        ->select('*')
+								                        ->from('contract_change_history_temp')
+								                        ->where('u_id=:id', array(':id'=>Yii::app()->user->ID))
+								                        ->queryAll();
 
+								    if(!empty($modelCostHistTemp))
+								    {
+								    	$difference = 1;
+								    }
 									//2.2 check attributes
+								    
+								           
+
+
 
 
 									//3.approve detail
