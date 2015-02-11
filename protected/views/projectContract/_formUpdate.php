@@ -12,6 +12,9 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
   .tr_white {
   	background-color: white;
   }
+  .green{
+  	color: green;
+  }
 
 </style>
 <fieldset class="well the-fieldset">
@@ -159,9 +162,9 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 	  		$this->widget('bootstrap.widgets.TbButton', array(
 	              'buttonType'=>'link',
 	              
-	              'type'=>'success',
+	              'type'=>'',
 	              'label'=>'เพิ่มการรายการ',
-	              'icon'=>'plus-sign',
+	              'icon'=>'plus-sign green',
 	              
 	              'htmlOptions'=>array(
 	                'class'=>'pull-right',
@@ -393,9 +396,9 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 	  		$this->widget('bootstrap.widgets.TbButton', array(
 	              'buttonType'=>'link',
 	              
-	              'type'=>'success',
+	              'type'=>'',
 	              'label'=>'เพิ่มการอนุมัติ',
-	              'icon'=>'plus-sign',
+	              'icon'=>'plus-sign green',
 	              
 	              'htmlOptions'=>array(
 	                'class'=>'pull-right',
@@ -643,13 +646,11 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
         
        <?php   
           
-          if(!$model->isNewRecord) 
-          {
+          
             $user = User::model()->findByPk($model->pc_user_update);  
             echo '<div class="pull-right"><b>แก้ไขล่าสุดโดย : '.$user->title.$user->firstname.'  '.$user->lastname.'</b>';
             echo '<br><b>วันที่ : '.$model->pc_last_update.'</b></div>';
-          }
-
+          
        ?>  
 
 

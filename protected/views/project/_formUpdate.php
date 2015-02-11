@@ -324,7 +324,7 @@ hr {
               'htmlOptions'=>array(
                 'class'=>'pull-right',
                 'style'=>'margin:0px 10px 0px 10px;',
-                'id'=>'loadContractByAjax'
+                'id'=>'loadContractByAjaxTemp'
               ),
           ));
 
@@ -371,15 +371,35 @@ hr {
             //     }
             // } 
 
+          $project_contract = Yii::app()->db->createCommand()
+                        ->select('*')
+                        ->from('project_contract')
+                        ->where('pc_proj_id=:id', array(':id'=>$model->pj_id))
+                        ->queryAll();
+          //echo count($project_contract); 
+
             
             $index = 1; 
             foreach ($contracts as $id => $con):
-              //echo $con->pc_id;
-              $this->renderPartial('//ProjectContract/_formUpdate', array(
-                  'model' => $con,
-                  'index' => $index,
-                  'display' => 'block'
-              ));
+              if($index > count($project_contract))
+              {
+                  $this->renderPartial('//ProjectContract/_formUpdateTemp', array(
+                      'model' => $con,
+                      'index' => $index,
+                      'display' => 'block'
+                  ));
+                
+              } 
+              else
+              {
+                  $this->renderPartial('//ProjectContract/_formUpdate', array(
+                      'model' => $con,
+                      'index' => $index,
+                      'display' => 'block'
+                  ));
+
+              } 
+                
               $index++;
           endforeach;    
           $index1 = $index - 1;         
@@ -566,10 +586,33 @@ hr {
 
       
     </div>
+    <div id="modal-body5">
+<!-- put whatever you want to show up on bootbox here -->
+    
+      <?php 
+      //$model = Vendor::model()->findByPk(14);
+      $model3=new ContractApproveHistoryTemp;
+      
+      $this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
+
+
+      ?>
+
+      
+    </div>
     <div id="modal-body3">
 <!-- put whatever you want to show up on bootbox here -->
       <?php 
        $model4=new ContractChangeHistory;
+      
+      $this->renderPartial('/contractChangeHistory/_form',array('model'=>$model4),false); 
+
+      ?>
+    </div>
+    <div id="modal-body4">
+<!-- put whatever you want to show up on bootbox here -->
+      <?php 
+       $model4=new ContractChangeHistoryTemp;
       
       $this->renderPartial('/contractChangeHistory/_form',array('model'=>$model4),false); 
 
@@ -610,12 +653,12 @@ hr {
 Yii::app()->clientScript->registerScript('loadcontract', '
 var _index = ' . $index . ';
 //var _index = $("#num").val();
-$("#loadContractByAjax").click(function(e){
+$("#loadContractByAjaxTemp").click(function(e){
      var _index = $("#num1").val();
      _index++;
      console.log(_index);
     e.preventDefault();
-    var _url = "' . Yii::app()->controller->createUrl("loadContractByAjax", array("load_for" => $this->action->id)) . '&index="+_index;
+    var _url = "' . Yii::app()->controller->createUrl("loadContractByAjaxTemp", array("load_for" => $this->action->id)) . '&index="+_index;
     $.ajax({
         url: _url,
         success:function(response){

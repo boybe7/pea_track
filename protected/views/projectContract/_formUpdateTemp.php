@@ -159,9 +159,9 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 	  		$this->widget('bootstrap.widgets.TbButton', array(
 	              'buttonType'=>'link',
 	              
-	              'type'=>'success',
+	              'type'=>'',
 	              'label'=>'เพิ่มการรายการ',
-	              'icon'=>'plus-sign',
+	              'icon'=>'plus-sign green',
 	              
 	              'htmlOptions'=>array(
 	                'class'=>'pull-right',
@@ -170,7 +170,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 	             
 				     'onclick'=>'
 				           
-									js:bootbox.confirm($("#modal-body3").html(),"ยกเลิก","ตกลง",
+									js:bootbox.confirm($("#modal-body4").html(),"ยกเลิก","ตกลง",
 			                   			function(confirmed){
 			                   	 	     
                                 			if(confirmed)
@@ -189,8 +189,8 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 														
 														if(msg.status=="failure")
 														{
-															$("#modal-body3").html(msg.div);
-															js:bootbox.confirm($("#modal-body3").html(),"ยกเลิก","ตกลง",
+															$("#modal-body4").html(msg.div);
+															js:bootbox.confirm($("#modal-body4").html(),"ยกเลิก","ตกลง",
 								                   			function(confirmed){
 								                   	 	        
 								                   	 			
@@ -334,9 +334,9 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 	  		$this->widget('bootstrap.widgets.TbButton', array(
 	              'buttonType'=>'link',
 	              
-	              'type'=>'success',
+	              'type'=>'',
 	              'label'=>'เพิ่มการอนุมัติ',
-	              'icon'=>'plus-sign',
+	              'icon'=>'plus-sign green',
 	              
 	              'htmlOptions'=>array(
 	                'class'=>'pull-right',
@@ -345,10 +345,8 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 	             
 				     'onclick'=>'
 				                  
-							        //console.log($("#modal-body2"))
-							        //console.log($("#modal-body2").html())	
-							        //$("#modal-body2");
-									js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
+							       
+									js:bootbox.confirm($("#modal-body5").html(),"ยกเลิก","ตกลง",
 			                   			function(confirmed){
 			                   	 	        //console.log("con:"+confirmed)
 			                   	 						
@@ -369,8 +367,8 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 														
 														if(msg.status=="failure")
 														{
-															$("#modal-body2").html(msg.div);
-															js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
+															$("#modal-body5").html(msg.div);
+															js:bootbox.confirm($("#modal-body5").html(),"ยกเลิก","ตกลง",
 								                   			function(confirmed){
 								                   	 	        
 								                   	 			
@@ -667,7 +665,7 @@ Yii::app()->clientScript->registerScript('edit','
                  url:$(this).attr("href"),
                  success:function(data){
                  	        //console.log(data);
-                 	        //var $selector = $("#modal-body2");
+                 	        //var $selector = $("#modal-body5");
 
                  			//$("#contract-approve-history-form .d-picker").datepicker();
                  			$("#bodyApprove").html(data);

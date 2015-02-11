@@ -691,8 +691,9 @@ class ProjectController extends Controller
 			    			 //header('Content-type: text/plain');
 	                         //print_r($modelProj);
 	                         //	exit;
-			    	}
 
+			    	}
+			     $index = 1;	
 			     if(isset($_POST['ProjectContract']))
 			    	foreach( $_POST['ProjectContract'] as $value ) {
 							
@@ -706,7 +707,13 @@ class ProjectController extends Controller
 								 $modelPC->attributes = $value;
 								 $modelPC->pc_last_update = (date("Y")+543).date("-m-d H:i:s");
 						    	 $modelPC->pc_user_update = Yii::app()->user->ID;
-						    	 $modelPC->save();	
+						    	 if($modelPC->save())
+									{
+
+									}	
+									else{
+										$modelProj->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ '.$index.'" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+									}
 			 	        		 array_push($modelContract, $modelPC);
 
 			 	        		 //save contract change history
@@ -773,13 +780,19 @@ class ProjectController extends Controller
 						    			$modelPC->pc_user_update = Yii::app()->user->ID;
 									}
 
-									$modelPC->save();	
+									if($modelPC->save())
+									{
+
+									}	
+									else{
+										$modelProj->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ '.$index.'" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+									}
 			 	        			array_push($modelContract, $modelPC);
 			 	        	
 							}
 			 	        	
 							
-
+							$index++;
 				        		
 			 	        	
 					}
@@ -812,6 +825,14 @@ class ProjectController extends Controller
 
 		}
 		else{
+			 
+			if (!Yii::app()->request->isAjaxRequest)	
+		 	{
+		 		 Yii::app()->db->createCommand('DELETE FROM contract_approve_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
+		 	 	 Yii::app()->db->createCommand('DELETE FROM contract_change_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
+		
+		 	}		
+
 			  $project_contract = Yii::app()->db->createCommand()
                         ->select('*')
                         ->from('project_contract')
@@ -844,24 +865,24 @@ class ProjectController extends Controller
 
 		if(isset($_POST['OutsourceContract']))
 		{
-			$modelOutsource = array();
-            $numContracts = $_POST['num'];
-		    for($i=1;$i<$numContracts+1;$i++)
-		    {
-		        //if(isset($_POST['OutsourceContract'][$i]))
-		        //{
-		            $contracts = new OutsourceContract;
-		            $contracts->attributes = $_POST['OutsourceContract'][$i];
-		            //$contracts->oc_cost = Yii::app()->format->unformatNumber($_POST['OutsourceContract'][$i]['oc_cost']);
-		            $contracts->oc_proj_id = $id;
-		            $contracts->oc_sign_date = $_POST['OutsourceContract'][$i]["oc_sign_date"];//$_POST[$i."_oc_end_date"];
-		            $contracts->oc_end_date = $_POST['OutsourceContract'][$i]["oc_end_date"];
-		            $contracts->oc_approve_date = $_POST['OutsourceContract'][$i]["oc_approve_date"];
-		            array_push($modelOutsource, $contracts);
-		            //$contracts->validate();
-		            $contracts->save();
-		        //}
-		    }
+			// $modelOutsource = array();
+   //          $numContracts = $_POST['num'];
+		 //    for($i=1;$i<$numContracts+1;$i++)
+		 //    {
+		 //        //if(isset($_POST['OutsourceContract'][$i]))
+		 //        //{
+		 //            $contracts = new OutsourceContract;
+		 //            $contracts->attributes = $_POST['OutsourceContract'][$i];
+		 //            //$contracts->oc_cost = Yii::app()->format->unformatNumber($_POST['OutsourceContract'][$i]['oc_cost']);
+		 //            $contracts->oc_proj_id = $id;
+		 //            $contracts->oc_sign_date = $_POST['OutsourceContract'][$i]["oc_sign_date"];//$_POST[$i."_oc_end_date"];
+		 //            $contracts->oc_end_date = $_POST['OutsourceContract'][$i]["oc_end_date"];
+		 //            $contracts->oc_approve_date = $_POST['OutsourceContract'][$i]["oc_approve_date"];
+		 //            array_push($modelOutsource, $contracts);
+		 //            //$contracts->validate();
+		 //            $contracts->save();
+		 //        //}
+		 //    }
 
 		}
 
