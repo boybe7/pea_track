@@ -374,16 +374,17 @@ hr {
             
             $index = 1; 
             foreach ($contracts as $id => $con):
-
-              $this->renderPartial('//ProjectContract/_form', array(
+              //echo $con->pc_id;
+              $this->renderPartial('//ProjectContract/_formUpdate', array(
                   'model' => $con,
                   'index' => $index,
                   'display' => 'block'
               ));
               $index++;
-          endforeach;             
-          
-            
+          endforeach;    
+          $index1 = $index - 1;         
+            echo "<input type='hidden' name='num1' id='num1' value='$index1'>";
+            //echo "index:".$index;
         ?>   
            
      
@@ -435,7 +436,7 @@ hr {
 	        <?php
 
 	        echo  '<input type="hidden" id="num" name="num" value="'.$numContracts.'">';
-	        $index = 1;
+	        $indexO = 1;
 
 	        // 	$this->renderPartial('//outsourceContract/_form', array(
 	        //         'model' => $outsource,
@@ -448,12 +449,16 @@ hr {
 
 	            $this->renderPartial('//outsourceContract/_form', array(
 	                'model' => $child,
-	                'index' => $index,
+	                'index' => $indexO,
 	                'display' => 'block'
 	            ));
-	            $index++;
+	            $indexO++;
 	        endforeach;
-	        ?>
+	        
+         
+          ?>
+
+
 	    </div>
 	  
 
@@ -473,27 +478,105 @@ hr {
 	</div>		
 </div>	
 
+<?php echo'<div id="modalApproveCreate"  class="approveCreate modal hide fade">';?>
+<!-- <div id="modalApproveCreate"  class="approveCreate modal hide fade"> -->
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>เพิ่มข้อมูลการอนุมัติ</h3>
+    </div>
+    <div class="modal-body" id="bodyApproveCreate">
+      <?php 
+      //$model = Vendor::model()->findByPk(14);
+      //$model3=new ContractApproveHistoryTemp;
+      
+      //$this->renderPartial('/contractApproveHistory/_form2',array('model'=>$model3,'index'=>$index),false); 
+
+
+      ?>
+    <!-- Date here: <input type="text" id="datePicker2" > -->
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn btn-danger" id="modalCancel2">ยกเลิก</a>
+   <?php echo '<a href="#" class="btn btn-primary" id="modalSubmit2">บันทึก</a>'; ?>
+    </div>
+</div>
+
+<div id="modalApprove"  class="modal hide fade">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>แก้ไขข้อมูลการอนุมัติ</h3>
+    </div>
+    <div class="modal-body" id="bodyApprove">
+      <?php 
+      //$model = Vendor::model()->findByPk(14);
+      //$model3=new ContractApproveHistoryTemp;
+      
+      //$this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
+
+
+      ?>
+    <!-- Date here: <input type="text" id="datePicker2" > -->
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn btn-danger" id="modalCancel">ยกเลิก</a>
+    <a href="#" class="btn btn-primary" id="modalSubmit">บันทึก</a>
+    </div>
+</div>
+
+<div id="modalChange"  class="modal hide fade">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>แก้ไขข้อมูลรายการเพิ่ม-ลดวงเงิน</h3>
+    </div>
+    <div class="modal-body" id="bodyChange">
+     
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn btn-danger" id="modalChangeCancel">ยกเลิก</a>
+    <a href="#" class="btn btn-primary" id="modalChangeSubmit">บันทึก</a>
+    </div>
+</div>
+
+
+<input type="hidden" id="pre_index">
+
 <div id="modal-content" class="hide">
     <div id="modal-body">
 <!-- put whatever you want to show up on bootbox here -->
-    	<?php 
-    	//$model = Vendor::model()->findByPk(14);
-    	$model2=new Vendor;
-    	$this->renderPartial('/vendor/_form2',array('model'=>$model2),false); 
+      <?php 
+      //$model = Vendor::model()->findByPk(14);
+      $model2=new Vendor;
+      $model2->type = 'Owner';
+      $this->renderPartial('/vendor/_form2',array('model'=>$model2),false); 
 
-    	?>
+      ?>
     </div>
-
-    <div id="modal-body-contract">
+  
+    <div id="modal-body2">
 <!-- put whatever you want to show up on bootbox here -->
-    	<?php 
-    	//$model = Vendor::model()->findByPk(14);
-    	//$modelContract = new Vendor;
-    	//$this->renderPartial('/vendor/_form2',array('model'=>$model2)); 
+    
+      <?php 
+      //$model = Vendor::model()->findByPk(14);
+      $model3=new ContractApproveHistory;
+      
+      $this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
 
-    	?>
+
+      ?>
+
+      
+    </div>
+    <div id="modal-body3">
+<!-- put whatever you want to show up on bootbox here -->
+      <?php 
+       $model4=new ContractChangeHistory;
+      
+      $this->renderPartial('/contractChangeHistory/_form',array('model'=>$model4),false); 
+
+      ?>
     </div>
 </div>
+
 <script type="text/javascript">
 
 	var _index = $("#num").val();
@@ -526,10 +609,11 @@ hr {
 //Yii::app()->clientScript->registerCoreScript('jquery');
 Yii::app()->clientScript->registerScript('loadcontract', '
 var _index = ' . $index . ';
-var _index = $("#num").val();
+//var _index = $("#num").val();
 $("#loadContractByAjax").click(function(e){
-     var _index = $("#num").val();
+     var _index = $("#num1").val();
      _index++;
+     console.log(_index);
     e.preventDefault();
     var _url = "' . Yii::app()->controller->createUrl("loadContractByAjax", array("load_for" => $this->action->id)) . '&index="+_index;
     $.ajax({

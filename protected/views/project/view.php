@@ -41,13 +41,7 @@ hr {
 	
 	$(function(){
         //autocomplete search on focus    	
-	    $("#pj_vendor_id").autocomplete({
-       
-                minLength: 0
-            }).bind('focus', function () {
-                $(this).autocomplete("search");
-      });
- 
+	   
   });
 
     

@@ -32,7 +32,7 @@ class ProjectController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','createOutsource','update','loadOutsourceByAjax','loadContractByAjax','DeleteSelected'),
+				'actions'=>array('create','createOutsource','update','loadOutsourceByAjax','loadContractByAjax','loadContractByAjaxTemp','DeleteSelected'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -986,10 +986,25 @@ class ProjectController extends Controller
     public function actionLoadContractByAjax($index)
     {
         $model = new ProjectContract;
-        $model->pc_id = $index;
+        //$model->pc_id = $index;
         Yii::app()->clientscript->scriptMap['jquery.js'] = false;
         Yii::app()->clientscript->scriptMap['jquery-ui.min.js'] = false;
         $this->renderPartial('//ProjectContract/_form', array(
+            'model' => $model,
+            'index' => $index,
+            'display' => 'block',
+        ), false, true);
+
+        
+    }
+
+    public function actionLoadContractByAjaxTemp($index)
+    {
+        $model = new ProjectContract;
+        //$model->pc_id = $index;
+        Yii::app()->clientscript->scriptMap['jquery.js'] = false;
+        Yii::app()->clientscript->scriptMap['jquery-ui.min.js'] = false;
+        $this->renderPartial('//ProjectContract/_formUpdateTemp', array(
             'model' => $model,
             'index' => $index,
             'display' => 'block',

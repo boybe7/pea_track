@@ -59,24 +59,51 @@ class ContractApproveHistoryController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id)
 	{
 		$model=new ContractApproveHistory;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
+		$model= new ContractApproveHistory;
+
 		if(isset($_POST['ContractApproveHistory']))
 		{
 			$model->attributes=$_POST['ContractApproveHistory'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$model->dateApprove = $_POST['ContractApproveHistory']['dateApprove']; 
+			$model->contract_id = $id;
+			
+			$model->type = 1;
+			if (Yii::app()->request->isAjaxRequest)
+	        {
+	           
+	            if($model->save())
+	            	 echo CJSON::encode(array(
+	                'status'=>'success'
+	                ));
+	            else
+	                echo CJSON::encode(array(
+	                'status'=>'failure','div'=>$this->renderPartial('_form', array('model'=>$model,'index'=>$id), true)));
+	                
+	            exit;
+				        
+	        }		
+			else
+			  if($model->save())
+				$this->redirect(array('admin'));
+
 		}
 
-		// $this->render('create',array(
-		// 	'model'=>$model,
-		// ));
-		 $this->renderPartial('_form',array('model'=>$model)); 
+		if (Yii::app()->request->isAjaxRequest)
+        {
+            echo CJSON::encode(array(
+                'status'=>'failure', 
+                'div'=>$this->renderPartial('_form', array('model'=>$model,'index'=>$id), true)));
+            exit;               
+        }
+
+		$this->renderPartial('_form',array('model'=>$model,'index'=>$id));
 	}
 
 	public function actionCreateTemp($id)
@@ -184,13 +211,26 @@ class ContractApproveHistoryController extends Controller
 		if(isset($_POST['ContractApproveHistory']))
 		{
 			$model->attributes=$_POST['ContractApproveHistory'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+
+
+			if (Yii::app()->request->isAjaxRequest)
+	         {
+	           
+	            if($model->save())
+	            	 echo CJSON::encode(array(
+	                'status'=>'success'
+	                ));
+	            else
+	                echo CJSON::encode(array(
+	                'status'=>'failure','div'=>$this->renderPartial('_form', array('model'=>$model), true)));
+	                
+	            exit;
+			}	        
+	        	//$this->redirect(array('admin'));
+
 		}
 
-		$this->render('update',array(
-			'model'=>$model,
-		));
+		$this->renderPartial('_form',array('model'=>$model));
 	}
 
 	public function actionUpdateTemp($id)

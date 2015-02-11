@@ -37,7 +37,7 @@ class ContractApproveHistory extends CActiveRecord
 			array('approveBy, timeSpend', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, type,contract_id, detail, dateApprove, approveBy, cost, timeSpend', 'safe', 'on'=>'search'),
+			array('id, type,contract_id, detail, dateApprove, approveBy, cost, timeSpend', 'safe', 'on'=>'search,create,update'),
 		);
 	}
 
@@ -114,12 +114,31 @@ class ContractApproveHistory extends CActiveRecord
 
 	protected function afterFind(){
             parent::afterFind();
-            //$this->money = number_format($this->money,2);
-
             $str_date = explode("-", $this->dateApprove);
             if(count($str_date)>1)
             	$this->dateApprove = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+   
     }
+    protected function afterSave(){
+            parent::afterSave();
+            $str_date = explode("-", $this->dateApprove);
+            if(count($str_date)>1)
+            	$this->dateApprove = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+            
+    }
+    public function beforeSave()
+    {
+        if($this->dateApprove!="")
+        {
+
+            $str_date = explode("/", $this->dateApprove);
+            if(count($str_date)>1)
+            $this->dateApprove= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+
+        }	
+
+        return parent::beforeSave();
+   }
 
 	/**
 	 * Returns the static model of the specified AR class.
