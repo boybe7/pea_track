@@ -1,6 +1,7 @@
 <?php
 Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/bootstrap-datepicker/css/datepicker.css'); 
 ?>
+
 <style type="text/css">
   .error {
     font-size: 14px;
@@ -14,6 +15,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
   }
 
 </style>
+
 <fieldset class="well the-fieldset">
         <legend class="the-legend contract_no">สัญญาที่ <?php echo ($index);?></legend>
         <?php echo CHtml::activeHiddenField($model, '[' . $index . ']pc_id'); ?>
@@ -165,7 +167,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 	              
 	              'htmlOptions'=>array(
 	                'class'=>'pull-right',
-	                'style'=>'margin:0px 10px 10px 10px;',
+	                'style'=>'margin:-25px 10px 10px 10px;',
 	                //'onclick'=>'createApprove(' . $index . ')'
 	             
 				     'onclick'=>'
@@ -244,7 +246,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 					'rowCssClassExpression'=>'"tr_white"',
 
 				    // 'template'=>"{summary}{items}{pager}",
-				    'htmlOptions'=>array('style'=>'padding-top:40px;'),
+				    'htmlOptions'=>array('style'=>'padding-top:10px;'),
 				    'enablePagination' => false,
 				    'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
 					'columns'=>array(
@@ -309,7 +311,80 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 										'update'=>array(
 
 											'url'=>'Yii::app()->createUrl("ContractChangeHistory/updateTemp", array("id"=>$data->id))',
-											//'click'=>'updateApprove($data->id)'	
+											'options'=>array(
+						                        'class'=>'updatechange',
+						                    ),	
+						                    'click'=>'function(){
+
+						                    	
+															link = $(this).attr("href");
+
+															$.ajax({
+											                 type:"GET",
+											                 cache: false,
+											                 url:$(this).attr("href"),
+											                 success:function(data){
+											                 	    console.log(link)
+											                 			 $("#bodyChange").html(data);
+											                 		
+											                 			 $("#modalChange").modal("show");
+
+																	
+											                 },
+
+											                });
+
+
+															$("#modalChangeSubmit").click(function(e){
+     															e.preventDefault();
+														       $.ajax( {
+														      		type: "POST",
+														      		url: link,
+														      		cache: false,
+														      		dataType:"json",
+														      		data: $("#contract-change-history-form").serialize(),
+														      		success: function( msg ) {
+														        		
+														        		if(msg.status=="failure")									
+														        		{
+																	
+																			$("#contract-change-history-form").html(msg.div);
+																		}
+																		else{
+																			$("#modalChange").modal("hide");
+																		    $("#bodyChange").html();
+																		}
+
+																		//console.log($("#change-grid'.$index.'"))
+																		 ajaxRequest = $(this).serialize();
+																		$.fn.yiiGridView.update("change-grid'.$index.'",{data: ajaxRequest})
+
+																		//$("#change-grid'.$index.'").yiiGridView("update");
+														               
+														               localStorage.setItem("lastname", "boybe"); 
+														               localStorage.setItem("pc_details", $("#ProjectContract_2_pc_details").val());
+																		window.location.reload()														        
+																		//console.log($("#change-grid'.$index.'"))
+																		
+																		
+														      		}
+														    	} 
+														    	);
+																	
+														    });
+
+															$("#modalChangeCancel").click(function(e){
+														    	
+														    	
+																$("#modalChange").modal("hide");
+																$("#bodyChange").html();
+																		
+														    });
+														
+
+											         	return false;
+
+						                    }',	
 											
 										)
 
@@ -340,7 +415,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 	              
 	              'htmlOptions'=>array(
 	                'class'=>'pull-right',
-	                'style'=>'margin:0px 10px 10px 10px;',
+	                'style'=>'margin:-25px 10px 10px 10px;',
 	                //'onclick'=>'createApprove(' . $index . ')'
 	             
 				     'onclick'=>'
@@ -420,7 +495,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 					'rowCssClassExpression'=>'"tr_white"',
 
 				    // 'template'=>"{summary}{items}{pager}",
-				    'htmlOptions'=>array('style'=>'padding-top:40px;'),
+				    'htmlOptions'=>array('style'=>'padding-top:10px;'),
 				    'enablePagination' => false,
 				    'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
 					'columns'=>array(
@@ -497,7 +572,66 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 										'update'=>array(
 
 											'url'=>'Yii::app()->createUrl("ContractApproveHistory/updateTemp", array("id"=>$data->id))',
-											//'click'=>'updateApprove($data->id)'	
+											'options'=>array(
+						                        'class'=>'updateapprove',
+						                    ),	
+											'click'=>'function(){
+
+															link = $(this).attr("href");
+
+															$.ajax({
+											                 type:"GET",
+											                 cache: false,
+											                 url:$(this).attr("href"),
+											                 success:function(data){
+											                 	   //console.log(link)
+											                 		$("#bodyApprove").html(data);
+											                 		$("#dateApprove").datepicker();
+																	$("#dateApprove").datepicker("option", {dateFormat: "dd/mm/yyyy"});
+											                 		$("#modalApprove").modal("show");
+
+																	
+											                 },
+
+											                });
+
+
+															$("#modalSubmit").click(function(e){
+     
+														       $.ajax( {
+														      		type: "POST",
+														      		url: link,
+														      		dataType:"json",
+														      		data: $("#contract-approve-history-form").serialize(),
+														      		success: function( msg ) {
+														        	
+														        		if(msg.status=="failure")									
+														        		{
+																	
+																			$("#contract-approve-history-form").html(msg.div);
+																		}
+																		else{
+																			$("#modalApprove").modal("hide");
+																		    $("#bodyApprove").html();
+																		}
+														                jQuery.fn.yiiGridView.update("approve-grid'.$index.'");
+																		
+														      		}
+														    	} 
+														    	);
+
+														    });
+
+															$("#modalCancel").click(function(e){
+														    	
+														    	
+																$("#modalApprove").modal("hide");
+																$("#bodyApprove").html();
+																		
+														    });
+											         	return false;
+
+						                    }',	
 											
 										)
 
@@ -567,171 +701,6 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 
 
 Yii::app()->clientScript->registerCoreScript('jquery');
-Yii::app()->clientScript->registerScript('edit','
-    var link;
-    var myBackup2;
-    
-    $("#modalCancel").click(function(e){
-    	
-    	myBackup2 = $("#modalApprove").clone();
-						$("#modalApprove").modal("hide");
-						$("#bodyApprove").html();
-						//console.log("clear editmodal");
-    });
-
-	$("#modalChangeCancel").click(function(e){
-    	
-    	//myBackup2 = $("#modalApprove").clone();
-						$("#modalChange").modal("hide");
-						$("#bodyChange").html();
-						//console.log("clear editmodal");
-    });
-
-    $("#modalSubmit").click(function(e){
-       //console.log("submit"+$("#contract-approve-history-form").html());	
-      
-       //console.log("edit");
-       $.ajax( {
-      		type: "POST",
-      		url: link,
-      		dataType:"json",
-      		data: $("#contract-approve-history-form").serialize(),
-      		success: function( msg ) {
-        		//console.log(msg.status);
-
-        		//$("#modalApprove").modal("hide");
-
-        		if(msg.status=="failure")									
-        		{
-					//js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
-					$("#contract-approve-history-form").html(msg.div);
-				}
-				else{
-					
-					//js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
-					   myBackup2 = $("#modalApprove").clone();
-						$("#modalApprove").modal("hide");
-						$("#bodyApprove").html();
-						//$("#modalApprove").removeData("modal");
-						//$("#modalApprove").remove();
-						//console.log("clear editmodal");
-				}
-                jQuery.fn.yiiGridView.update("approve-grid'.$index.'");
-				//$("[id^=approve-grid]").yiiGridView("update",{});
-      		}
-    	} 
-    	);
-
-    });
-
-	$("#modalChangeSubmit").click(function(e){
-     
-       $.ajax( {
-      		type: "POST",
-      		url: link,
-      		dataType:"json",
-      		data: $("#contract-change-history-form").serialize(),
-      		success: function( msg ) {
-        	
-        		if(msg.status=="failure")									
-        		{
-			
-					$("#contract-change-history-form").html(msg.div);
-				}
-				else{
-					$("#modalChange").modal("hide");
-				    $("#bodyChange").html();
-				}
-                jQuery.fn.yiiGridView.update("change-grid'.$index.'");
-				
-      		}
-    	} 
-    	);
-
-    });
-
-
-    
-	$("body").on("click","#approve-grid'.$index.'update,#link",function(e){
-				link = $(this).attr("href");
-				//console.log(myBackup2)
-
-				//if(myBackup2!="")
-				//	 $("body").append(myBackup2);
-
-				$.ajax({
-                 type:"GET",
-                 cache: false,
-                 url:$(this).attr("href"),
-                 success:function(data){
-                 	        //console.log(data);
-                 	        //var $selector = $("#modal-body5");
-
-                 			//$("#contract-approve-history-form .d-picker").datepicker();
-                 			$("#bodyApprove").html(data);
-                 			//console.log($("#modalApprove").html());
-                 			$("#dateApprove").datepicker();
-							$("#dateApprove").datepicker("option", {dateFormat: "dd/mm/yyyy"});
-		
-
-                 			 $("#modalApprove").modal("show");
-
-						
-                 },
-
-                });
-         	return false;
-    });
-
-	$("body").on("click","#change-grid'.$index.' .update,#link",function(e){
-				link = $(this).attr("href");
-			
-				$.ajax({
-                 type:"GET",
-                 cache: false,
-                 url:$(this).attr("href"),
-                 success:function(data){
-                 	    
-                 			 $("#bodyChange").html(data);
-                 		
-                 			 $("#modalChange").modal("show");
-
-						
-                 },
-
-                });
-         	return false;
-    });
-		
-						
-// link = $(this).attr("href");
-// $("body").on("click",".update,#link",function(e){
-//         $.ajax({
-//                 type:"GET",
-//                 url:$(this).attr("href"),
-//                 success:function(data){
-//                 	$("#mydialog").dialog("open").html(data)
-
-//                    },
-//                 });
-//         return false;
-//         });
-
-// $("body").on("click",".butt",function(e){
-//         $.ajax({
-//                 type:"POST",
-//                 dataType:"json",
-//                 data:$("#contract-approve-history-form").serialize(),
-//                 url:"../contractapprovehistory/updateTemp/2",
-//                 success:function(data){
-//                 	$("#approve-grid").yiiGridView("update",{});
-//                 } 
-//                 });
-//         return false;
-//         });
-
-
-');
 
 Yii::app()->clientScript->registerScript('createApprove', '
 var myBackup;

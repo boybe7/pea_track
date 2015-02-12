@@ -38,7 +38,27 @@ hr {
       });
 
       
- 
+        // Check browser support
+      if (typeof(Storage) != "undefined") {
+          // Store
+          //localStorage.setItem("lastname", "Smith");
+          // Retrieve
+          //document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+      } else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+      }
+
+      
+
+      window.onload = function() {
+          //localStorage.setItem("lastname", "Smith");
+          // Retrieve
+          document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+          var pc_details = localStorage.getItem("pc_details");
+          console.log(pc_details);
+          if (pc_details !== null) $('#ProjectContract_2_pc_details').val(pc_details);
+
+      }
   });
 
    function addWorkCode(){
@@ -70,6 +90,14 @@ hr {
    
 </script>
 
+
+<script type="text/javascript">
+  
+
+
+  
+</script>
+<div id="result"></div>
 <div class="well">
 	<ul class="nav nav-tabs">
       <?php  
