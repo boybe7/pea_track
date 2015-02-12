@@ -363,7 +363,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 														               
 														               localStorage.setItem("lastname", "boybe"); 
 														               localStorage.setItem("pc_details", $("#ProjectContract_2_pc_details").val());
-																		window.location.reload()														        
+																		window.location.reload(false)														        
 																		//console.log($("#change-grid'.$index.'"))
 																		
 																		
