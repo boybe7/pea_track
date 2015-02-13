@@ -22,12 +22,12 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
         <div class="row-fluid">
         	<div class="span3">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_code'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_code', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_code', array('size' => 20, 'maxlength' => 255,'class'=>'span12 sessionStore')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']pc_code',array('class'=>'help-block error')); ?>
             </div>  
             <div class="span3">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_cost'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_cost', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_cost', array('size' => 20, 'maxlength' => 255,'class'=>'span12  sessionStore')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']pc_cost',array('class'=>'help-block error')); ?>
             </div>  
             <div class="span2">
@@ -49,7 +49,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
                                               'format'=>'dd/mm/yyyy', //กำหนด date Format
                                               'showAnim' => 'slideDown',
                                               ),
-                            'htmlOptions'=>array('class'=>'span8'),  // ใส่ค่าเดิม ในเหตุการ Update 
+                            'htmlOptions'=>array('class'=>'span8  sessionStore'),  // ใส่ค่าเดิม ในเหตุการ Update 
                          )
                     );
                     echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -75,7 +75,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
                                               'format'=>'dd/mm/yyyy', //กำหนด date Format
                                               'showAnim' => 'slideDown',
                                               ),
-                            'htmlOptions'=>array('class'=>'span8'),  // ใส่ค่าเดิม ในเหตุการ Update 
+                            'htmlOptions'=>array('class'=>'span8  sessionStore'),  // ใส่ค่าเดิม ในเหตุการ Update 
                          )
                     );
                     echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -104,19 +104,19 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
         <div class="row-fluid">
         	<div class="span3">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_PO'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_PO', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_PO', array('size' => 20, 'maxlength' => 255,'class'=>'span12  sessionStore')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']pc_PO',array('class'=>'help-block error')); ?>
             </div>
         	<div class="span9">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_details'); ?>
-              <?php echo CHtml::activeTextArea($model, '[' . $index . ']pc_details', array('rows'=>2, 'cols'=>50,'class'=>'span12')); ?>
+              <?php echo CHtml::activeTextArea($model, '[' . $index . ']pc_details', array('rows'=>2, 'cols'=>50,'class'=>'span12  sessionStore')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']pc_details',array('class'=>'help-block error')); ?>
             </div>
         </div> 
         <div class="row-fluid">
         	<div class="span3">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_guarantee'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_guarantee', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_guarantee', array('size' => 20, 'maxlength' => 255,'class'=>'span12  sessionStore')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']pc_guarantee',array('class'=>'help-block error')); ?>
             </div>
             <div class="span3">		  
@@ -136,7 +136,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
                                               'format'=>'dd/mm/yyyy', //กำหนด date Format
                                               'showAnim' => 'slideDown',
                                               ),
-                            'htmlOptions'=>array('class'=>'span12'),  // ใส่ค่าเดิม ในเหตุการ Update 
+                            'htmlOptions'=>array('class'=>'span12  sessionStore'),  // ใส่ค่าเดิม ในเหตุการ Update 
                          )
                     );
                     echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -144,12 +144,12 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
             </div>  
             <div class="span3">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_T_percent'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_T_percent', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_T_percent', array('size' => 20, 'maxlength' => 255,'class'=>'span12  sessionStore')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']pc_T_percent',array('class'=>'help-block error')); ?>
             </div>
 	  		<div class="span3">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_A_percent'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_A_percent', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_A_percent', array('size' => 20, 'maxlength' => 255,'class'=>'span12  sessionStore')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']pc_A_percent',array('class'=>'help-block error')); ?>
             </div>
 	  		
@@ -187,20 +187,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 													.done(function( msg ) {
 														
 														jQuery.fn.yiiGridView.update("change-grid'.$index.'");
-														$("form input").each(function(){
-																		             id = $(this).attr("id");
-																		             //console.log(id)
-																		             sessionStorage.setItem(id,$("#"+id).val());
-																		            
-																		        });
-																				$("form textarea").each(function(){
-																		             id = $(this).attr("id");
-																		             //console.log("area:"+id)
-																		             sessionStorage.setItem(id,$("#"+id).val());
-																		            
-																		        });
-																				window.location.reload()
-													
+												
 														
 														if(msg.status=="failure")
 														{
@@ -227,19 +214,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 																			else{
 																				
 																				jQuery.fn.yiiGridView.update("change-grid'.$index.'");
-																				$("form input").each(function(){
-																		             id = $(this).attr("id");
-																		             //console.log(id)
-																		             sessionStorage.setItem(id,$("#"+id).val());
-																		            
-																		        });
-																				$("form textarea").each(function(){
-																		             id = $(this).attr("id");
-																		             //console.log("area:"+id)
-																		             sessionStorage.setItem(id,$("#"+id).val());
-																		            
-																		        });
-																				window.location.reload()	
+																			
 																			}
 																		});
 								                   	 		    }
@@ -337,12 +312,13 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 
 											'url'=>'Yii::app()->createUrl("ContractChangeHistory/updateTemp", array("id"=>$data->id))',
 											'options'=>array(
-						                        'class'=>'updatechange',
+						                        'class'=>'updatechange3',
 						                    ),	
 						                    'click'=>'function(){
 
 						                    	
 															link = $(this).attr("href");
+															console.log(link)
 
 															$.ajax({
 											                 type:"GET",
@@ -384,20 +360,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 																		
 																		$.fn.yiiGridView.update("change-grid'.$index.'");
 
-														                
-																		$("form input").each(function(){
-																             id = $(this).attr("id");
-																             //console.log(id)
-																             sessionStorage.setItem(id,$("#"+id).val());
-																            
-																        });
-																		$("form textarea").each(function(){
-																             id = $(this).attr("id");
-																             //console.log("area:"+id)
-																             sessionStorage.setItem(id,$("#"+id).val());
-																            
-																        });
-																		window.location.reload()														        
+														               												        
 																		
 														      		}
 														    	} 
