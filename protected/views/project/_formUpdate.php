@@ -38,6 +38,7 @@ hr {
       });
 
       
+      
         // Check browser support
       if (typeof(Storage) != "undefined") {
           // Store
@@ -48,9 +49,33 @@ hr {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
       }
 
+      function init () {
+       
+          $("form input").each(function(){
+                 id = $(this).attr("id");
+                 if ( sessionStorage[id] )
+                    $(this).val( sessionStorage.getItem(id));
+      
+                                            
+         });
+
+         
+
+          $("form textarea").each(function(){
+                 id = $(this).attr("id");
+                 if ( sessionStorage[id] )
+                    $(this).val( sessionStorage.getItem(id));
+      
+                                            
+         });
+
+          console.log("init");
+      }
+
       
 
       window.onload = function() {
+<<<<<<< HEAD
           //localStorage.setItem("lastname", "Smith");
           // Retrieve
           document.getElementById("result").innerHTML = localStorage.getItem("lastname");
@@ -64,6 +89,12 @@ hr {
                       $(this).val(localStorage[input_name]);
                 }
           });
+=======
+          init();
+         // var pc_details = sessionStorage.getItem("pc_details");
+          //console.log(pc_details);
+         // if (pc_details !== null) $('#ProjectContract_2_pc_details').val(pc_details);
+>>>>>>> 5c82a7d474f4db85a2257ab7d8221461b0acb6d6
 
       }
   });
@@ -418,12 +449,54 @@ hr {
             foreach ($contracts as $id => $con):
               if($index > count($project_contract))
               {
-                  $this->renderPartial('//ProjectContract/_formUpdateTemp', array(
-                      'model' => $con,
-                      'index' => $index,
-                      'display' => 'block'
-                  ));
-                
+                 
+                  // $this->renderPartial('//ProjectContract/_formUpdateTemp2', array(
+                  //     'model' => $con,
+                  //     'index' => $index,
+                  //     'display' => 'block',
+                  // ));
+                  Yii::app()->clientScript->registerScript('loadcontract2', '
+                       
+   
+                           var _url = "' . Yii::app()->controller->createUrl("loadContractByAjaxTemp", array("load_for" => $this->action->id)) . '&index='.$index.'";
+                          $.ajax({
+                              url: _url,
+                              success:function(response){
+                                  $("#pj_contract").append(response);
+                                  $("#pj_contract .crow").last().animate({
+                                      opacity : 1,
+                                      left: "+0",
+                                      height: "toggle"
+                                  });
+
+                                  $(".sessionStore").keyup(function () {
+                                     
+                                      sessionStorage[$(this).attr("id")] = $(this).val();
+                                  });      
+
+
+                                   $("form input").each(function(){
+                                           id = $(this).attr("id");
+                                           if ( sessionStorage[id] )
+                                              $(this).val( sessionStorage.getItem(id));
+                                
+                                                                      
+                                   });
+
+                                    $("form textarea").each(function(){
+                                           id = $(this).attr("id");
+                                           if ( sessionStorage[id] )
+                                              $(this).val( sessionStorage.getItem(id));
+                                
+                                                                      
+                                   });
+                              }
+
+                          });
+
+  
+                      ', CClientScript::POS_END);
+                      
               } 
               else
               {
@@ -703,6 +776,12 @@ $("#loadContractByAjaxTemp").click(function(e){
                 left: "+0",
                 height: "toggle"
             });
+
+                                  $(".sessionStore").keyup(function () {
+                                     
+                                      sessionStorage[$(this).attr("id")] = $(this).val();
+                                  });      
+
 
             //_index++;
             $("#num").val(_index);

@@ -32,7 +32,7 @@ class ProjectController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','createOutsource','update','loadOutsourceByAjax','loadContractByAjax','loadContractByAjaxTemp','DeleteSelected'),
+				'actions'=>array('create','createOutsource','update','loadOutsourceByAjax','loadContractByAjax','loadContractByAjaxTemp','loadContractByAjaxTempModel','DeleteSelected'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -703,8 +703,9 @@ class ProjectController extends Controller
 							if(empty($modelPC))
 							{
 								 //new contract
-								 $modelPC = new ProjectContract;
-								 $modelPC->attributes = $value;
+								 $modelPC = new ProjectContract("search");
+								 //$modelPC->attributes = $value;
+								 $modelPC->setAttributes($value);
 								 $modelPC->pc_last_update = (date("Y")+543).date("-m-d H:i:s");
 						    	 $modelPC->pc_user_update = Yii::app()->user->ID;
 						    	 if($modelPC->save())
@@ -1025,7 +1026,22 @@ class ProjectController extends Controller
         //$model->pc_id = $index;
         Yii::app()->clientscript->scriptMap['jquery.js'] = false;
         Yii::app()->clientscript->scriptMap['jquery-ui.min.js'] = false;
-        $this->renderPartial('//ProjectContract/_formUpdateTemp', array(
+        $this->renderPartial('//ProjectContract/_formUpdateTemp2', array(
+            'model' => $model,
+            'index' => $index,
+            'display' => 'block',
+        ), false, true);
+
+        
+    }
+
+    public function actionLoadContractByAjaxTempModel($index,$model)
+    {
+        //$model = new ProjectContract;
+        //$model->pc_id = $index;
+        Yii::app()->clientscript->scriptMap['jquery.js'] = false;
+        Yii::app()->clientscript->scriptMap['jquery-ui.min.js'] = false;
+        $this->renderPartial('//ProjectContract/_formUpdateTemp2', array(
             'model' => $model,
             'index' => $index,
             'display' => 'block',
