@@ -74,29 +74,7 @@ hr {
 
       
 
-      window.onload = function() {
-<<<<<<< HEAD
-          //localStorage.setItem("lastname", "Smith");
-          // Retrieve
-          document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-          var pc_details = localStorage.getItem("pc_details");
-          //console.log(pc_details);
-          //if (pc_details !== null) $('#ProjectContract_2_pc_details').val(pc_details);
-
-          $.each( $("form input"), function() {
-                input_name = $(this).attr("id");
-                if (localStorage[input_name]) {
-                      $(this).val(localStorage[input_name]);
-                }
-          });
-=======
-          init();
-         // var pc_details = sessionStorage.getItem("pc_details");
-          //console.log(pc_details);
-         // if (pc_details !== null) $('#ProjectContract_2_pc_details').val(pc_details);
->>>>>>> 5c82a7d474f4db85a2257ab7d8221461b0acb6d6
-
-      }
+    
   });
 
    function addWorkCode(){
@@ -135,14 +113,21 @@ hr {
 
   
 </script>
-<div id="result"></div>
+
 <div class="well">
 	<ul class="nav nav-tabs">
       <?php  
-        
+        if($tab==1)
+        {
         	echo '<li  class="active"><a href="#projTab" data-toggle="tab">โครงการ</a></li>
                  <li ><a href="#outTab" data-toggle="tab">สัญญาจ้างช่วง/ซื้อ</a></li>
                 ';	
+        }
+        else{
+         echo '<li  ><a href="#projTab" data-toggle="tab">โครงการ</a></li>
+                 <li class="active"><a href="#outTab" data-toggle="tab">สัญญาจ้างช่วง/ซื้อ</a></li>
+                '; 
+        }
        
       ?>
         
@@ -152,9 +137,10 @@ hr {
         
       <?php 
 
-   
+        if($tab==1)
           echo '<div class="tab-pane  active" id="projTab">';
-
+        else
+          echo '<div class="tab-pane " id="projTab">';
         	
         	$form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
       			'id'=>'project-form',
@@ -517,15 +503,36 @@ hr {
            
      
         </div>
+        <div class="form-actions">
+        <?php 
+        $this->widget('bootstrap.widgets.TbButton', array(
+          'buttonType'=>'submit',
+          'type'=>'primary',
+          'label'=>'บันทึกแก้ไข',
+        )); 
+
+        ?>
+        </div>
+      <?php $this->endWidget();//end form widget ?>   
 						
 		</div>
-        <?php //$this->endWidget(); ?>
-		
+
+       
         <!-- tab@2  Outsource Contracts -->
 		<?php 
 			
+      if($tab==1)
 				echo '<div class="tab-pane" id="outTab">';		    
-		 
+		  else
+        echo '<div class="tab-pane active" id="outTab">';
+
+      $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+            'id'=>'outsource-form',
+            'enableAjaxValidation'=>false,
+            'type'=>'vertical',
+              'htmlOptions'=>  array('class'=>'','style'=>''),
+          )); 
+
 
         echo '<div class="row-fluid">';
          $this->widget('bootstrap.widgets.TbButton', array(
@@ -542,45 +549,88 @@ hr {
               ),
           )); 
 
-         $this->widget('bootstrap.widgets.TbButton', array(
-              'buttonType'=>'link',
-              
-              'type'=>'danger',
-              'label'=>'ลบสัญญา',
-              'icon'=>'minus-sign',
-              
-              'htmlOptions'=>array(
-                'class'=>'pull-right',
-                'style'=>'margin:0px 10px 0px 10px;',
-                'id'=>'delOutsourceByAjax'
-              ),
-          )); 
-         
         echo '</div>';    
     ?>  
 
 	    <div id="outsource">
-         
+          
+          <div style="text-align:left">กรุณากรอกข้อมูลในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน</div>
+          <div style="text-align:left"><?php echo $form->errorSummary(array($modelOC));?></div>
+    
 	        <?php
 
-	        echo  '<input type="hidden" id="num" name="num" value="'.$numContracts.'">';
-	        $indexO = 1;
 
-	        // 	$this->renderPartial('//outsourceContract/_form', array(
-	        //         'model' => $outsource,
-	        //         'index' => 1,
-	        //         'display' => 'block'
-	        //     ));
+
+	        echo  '<input type="hidden" id="num" name="num" value="'.$numContracts.'">';
+	        $index2 = 1;
 
 	        // $index++;
-	        foreach ($outsource as $id => $child):
 
-	            $this->renderPartial('//outsourceContract/_form', array(
-	                'model' => $child,
-	                'index' => $indexO,
-	                'display' => 'block'
-	            ));
-	            $indexO++;
+          $outsource_contract = Yii::app()->db->createCommand()
+                        ->select('*')
+                        ->from('outsource_contract')
+                        ->where('oc_proj_id=:id', array(':id'=>$model->pj_id))
+                        ->queryAll();
+
+         // echo count($outsource);              
+
+	        foreach ($outsource as $id => $child):
+              if($index2 > count($outsource_contract) )
+              {
+                 
+              
+                  Yii::app()->clientScript->registerScript('loadOutsourcecontract2', '
+                       
+   
+                          var _url = "' . Yii::app()->controller->createUrl("loadOutsourceByAjaxTemp", array("load_for" => $this->action->id)) . '&index='.$index2.'";
+                          $.ajax({
+                              url: _url,
+                              success:function(response){
+                                  $("#outsource").append(response);
+                                  $("#outsource .crow").last().animate({
+                                      opacity : 1,
+                                      left: "+0",
+                                      height: "toggle"
+                                  });
+
+                                  $(".sessionStore").keyup(function () {
+                                     
+                                      sessionStorage[$(this).attr("id")] = $(this).val();
+                                  });      
+
+
+                                   $("form input").each(function(){
+                                           id = $(this).attr("id");
+                                           if ( sessionStorage[id] )
+                                              $(this).val( sessionStorage.getItem(id));
+                                
+                                                                      
+                                   });
+
+                                    $("form textarea").each(function(){
+                                           id = $(this).attr("id");
+                                           if ( sessionStorage[id] )
+                                              $(this).val( sessionStorage.getItem(id));
+                                
+                                                                      
+                                   });
+                              }
+
+                          });
+
+  
+                      ', CClientScript::POS_END);
+                      
+              } 
+              else
+              {
+  	            $this->renderPartial('//outsourceContract/_formUpdate', array(
+  	                'model' => $child,
+  	                'index' => $index2,
+  	                'display' => 'block'
+  	            ));
+              }
+	            $index2++;
 	        endforeach;
 	        
          
@@ -588,14 +638,7 @@ hr {
 
 
 	    </div>
-	  
-
-		   
-		  <?php //$this->endWidget();//end form widget ?>
-		</div><!--  endtab2 -->
-
-
-       <div class="form-actions">
+	    <div class="form-actions">
         <?php $this->widget('bootstrap.widgets.TbButton', array(
           'buttonType'=>'submit',
           'type'=>'primary',
@@ -603,6 +646,10 @@ hr {
         )); ?>
       </div>
       <?php $this->endWidget();//end form widget ?>
+		</div><!--  endtab2 -->
+
+     
+
 	</div>		
 </div>	
 
@@ -629,27 +676,6 @@ hr {
     </div>
 </div>
 
-<div id="modalApprove"  class="modal hide fade">
-    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>แก้ไขข้อมูลการอนุมัติ</h3>
-    </div>
-    <div class="modal-body" id="bodyApprove">
-      <?php 
-      //$model = Vendor::model()->findByPk(14);
-      //$model3=new ContractApproveHistoryTemp;
-      
-      //$this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
-
-
-      ?>
-    <!-- Date here: <input type="text" id="datePicker2" > -->
-    </div>
-    <div class="modal-footer">
-    <a href="#" class="btn btn-danger" id="modalCancel">ยกเลิก</a>
-    <a href="#" class="btn btn-primary" id="modalSubmit">บันทึก</a>
-    </div>
-</div>
 
 <div id="modalChange"  class="modal hide fade">
     <div class="modal-header">
@@ -665,6 +691,19 @@ hr {
     </div>
 </div>
 
+<div id="modalApprove"  class="modal hide fade">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>แก้ไขข้อมูลอนุมัติ</h3>
+    </div>
+    <div class="modal-body" id="bodyApprove">
+     
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn btn-danger" id="modalCancel">ยกเลิก</a>
+    <a href="#" class="btn btn-primary" id="modalSubmit">บันทึก</a>
+    </div>
+</div
 
 <input type="hidden" id="pre_index">
 
@@ -809,6 +848,7 @@ $("#loadContractByAjaxTemp").click(function(e){
 
 ?> 
 <?php
+
 //Yii::app()->clientScript->registerCoreScript('jquery');
 Yii::app()->clientScript->registerScript('loadoutsource', '
 var _index = ' . $index . ';
@@ -840,28 +880,5 @@ $("#loadOutsourceByAjax").click(function(e){
 });
 ', CClientScript::POS_END);
 
-Yii::app()->clientScript->registerScript('delOutsource', '
-$("#delOutsourceByAjax").click(function(e){
-    var _index = $("#num").val();
-    //console.log("del index:"+_index);
-    elm = "#OutsourceContract_"+_index+"_oc_code";
-    //console.log($(elm));
-    element=$(elm).parent().parent().parent();
-    /* animate div */
 
-    $(element).animate(
-    {
-        opacity: 0.25,
-        left: "+=50",
-        height: "toggle"
-    }, 500,
-    function() {
-        /* remove div */
-        $(element).remove();
-    });
-    _index--;
-    $("#num").val(_index);
-    //console.log("del num:"+$("#num").val());
-});
-', CClientScript::POS_END);
 ?>

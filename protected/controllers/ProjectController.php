@@ -32,7 +32,7 @@ class ProjectController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','createOutsource','update','loadOutsourceByAjax','loadContractByAjax','loadContractByAjaxTemp','loadContractByAjaxTempModel','DeleteSelected'),
+				'actions'=>array('create','createOutsource','update','loadOutsourceByAjax','loadContractByAjax','loadContractByAjaxTemp','loadOutsourceByAjaxTemp','DeleteSelected'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -656,26 +656,20 @@ class ProjectController extends Controller
 		
 		$modelProj = $this->loadModel($id);
 
+		$modelOutsourceVal = new OutsourceContract;
+
 		$modelContract = array();
 		$modelContractOld = array();
 		$numContracts = 1;
-		
-		
-
-		
-
+		$tab = 1; //default at project contract, tab=2 is outsource contract
 		
 		$modelOutsource = array();
-
+		
 		$numContracts = 1;
-		array_push($modelOutsource, new OutsourceContract);
+		
 		if(isset($_POST['Project']))
 		{
-						 //  header('Content-type: text/plain');
-       //                   foreach( $_POST['wk'] as $v ) {
-							//     print $v.",";
-							// }
-       //                   	exit;
+				
 			 
 			$transaction=Yii::app()->db->beginTransaction();
 
@@ -693,9 +687,12 @@ class ProjectController extends Controller
 	                         //	exit;
 
 			    	}
+
 			     $index = 1;	
+			     $savePC = true;
 			     if(isset($_POST['ProjectContract']))
-			    	foreach( $_POST['ProjectContract'] as $value ) {
+			     {
+			     	foreach( $_POST['ProjectContract'] as $value ) {
 							
 							$modelPC = ProjectContract::model()->FindByPk($value["pc_id"]);
 							
@@ -708,24 +705,86 @@ class ProjectController extends Controller
 								 $modelPC->setAttributes($value);
 								 $modelPC->pc_last_update = (date("Y")+543).date("-m-d H:i:s");
 						    	 $modelPC->pc_user_update = Yii::app()->user->ID;
+						    	 $modelPC->pc_proj_id = $id;
+								        //header('Content-type: text/plain');
+		                          		//print_r($modelPC);                    
+		                          	    //exit;
+		                         
 						    	 if($modelPC->save())
-									{
+								{
 
-									}	
-									else{
+										 //save contract change history
+					 	        		 $modelTemps = Yii::app()->db->createCommand()
+								                    ->select('*')
+								                    ->from('contract_change_history_temp')
+								                    ->where('contract_id=:id AND type=1 AND u_id=:user', array(':id'=>$index,':user'=>Yii::app()->user->ID))
+								                    ->queryAll();
+								        foreach ($modelTemps as $key => $mTemp) {
+
+		                                        $modelChange = new ContractChangeHistory("search");
+		                                        $modelChange->attributes = $mTemp;
+		                                       
+		                                        $modelChange->contract_id = $modelPC->pc_id;
+		                                        $modelChange->type = 1;
+		                                        
+		                                        if($modelChange->save())
+		                                        {
+		                                            $msg =  "successful";
+		                                            $mt = ContractChangeHistoryTemp::model()->findByPk($mTemp['id']);
+		                                            $mt->delete();
+		                                        }	                                          
+		                                        else{
+		                                           $model->addError('contract', 'xxxกรุณากรอกข้อมูล "สัญญาที่ "'.$index.' ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+				 				            	   $savePC = false;
+
+		                                        }   	
+								        }            
+
+
+
+					 	        		 //save approve change history
+					 	        		 $modelTemps = Yii::app()->db->createCommand()
+								                    ->select('*')
+								                    ->from('contract_approve_history_temp')
+								                    ->where('contract_id=:id AND type=1 AND u_id=:user', array(':id'=>$index,':user'=>Yii::app()->user->ID))
+								                    ->queryAll();
+								        foreach ($modelTemps as $key => $mTemp) {
+
+								        // header('Content-type: text/plain');
+		              //             		print_r($modelC);                    
+		              //             	    exit;
+		                                        $modelApprove = new ContractApproveHistory("search");
+		                                        $modelApprove->attributes = $mTemp;
+		                                        $modelApprove->dateApprove = $mTemp['dateApprove'];
+		                                        //$modelApprove->id = "";
+		                                        $modelApprove->contract_id = $modelPC->pc_id;
+		                                        $modelApprove->type = 1;
+		                                        
+		                                        if($modelApprove->save())
+		                                           $msg =  "successful";
+		                                        else{
+		                                           $model->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ "'.$index.' ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+				 				            	   $savePC = false;
+		                                        }   	
+								        }            
+		 				     	
+
+								}	
+								else{
 										$modelProj->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ '.$index.'" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
-									}
-			 	        		 array_push($modelContract, $modelPC);
+										$savePC = false;
 
-			 	        		 //save contract change history
+										 //header('Content-type: text/plain');
+		                          		 //print_r($modelPC);                    
+		                          	     //exit;	
+								}
+			 	        		array_push($modelContract, $modelPC);
 
-
-			 	        		 //save approve change history
-
-
+			 	        		
+		 				     	
 								 
 							}
-							else
+							else //old contracts
 							{
 									$modelPC->attributes = $value;
 									//check difference
@@ -737,43 +796,41 @@ class ProjectController extends Controller
 											$difference = 1;
 										
 									}
-									//2.cost change
+									//2.get last_update in change
 									$modelCostHist = Yii::app()->db->createCommand()
-								                        ->select('*')
+								                        ->select('max(last_update) as max')
 								                        ->from('contract_change_history')
 								                        ->where('contract_id=:id', array(':id'=>$value["pc_id"]))
 								                        ->queryAll();
+								                        
+								    $change_lastUpdate = $modelCostHist[0]["max"];                    
 
-								    //$nOld = 0;
-								    //if(!empty($modelCostHist))                    
-									///  $nOld = count($modelCostHist);//$modelCostHist->totalItems;
-
-									//2.1 check have records in temp table 
-									$modelCostHistTemp = Yii::app()->db->createCommand()
-								                        ->select('*')
-								                        ->from('contract_change_history_temp')
-								                        ->where('u_id=:id', array(':id'=>Yii::app()->user->ID))
+								    
+									//3.get last_update in approve
+									$modelApproveHist = Yii::app()->db->createCommand()
+								                        ->select('max(last_update) as max')
+								                        ->from('contract_approve_history')
+								                        ->where('contract_id=:id', array(':id'=>$value["pc_id"]))
 								                        ->queryAll();
+								    $approve_lastUpdate = $modelApproveHist[0]["max"];  
 
-								    if(!empty($modelCostHistTemp))
+								    //4.compare last_update in change and approve 
+								    $last_update_relate = $approve_lastUpdate > $change_lastUpdate ? $approve_lastUpdate: $change_lastUpdate;
+
+								    //5.compare with contract last_update
+								    $datedif = "no";
+								    if($last_update_relate > $modelPC->pc_last_update)
 								    {
 								    	$difference = 1;
-								    }
-									//2.2 check attributes
-								    
-								           
+								    	$datedif = "yes";
+								    } 
 
 
-
-
-									//3.approve detail
-									//3.1 check number records
-
-									//3.2 check attributes
-
+										
 									//header('Content-type: text/plain');
-			                        //     print_r($difference);
-			                        // 	exit;
+			                        //print_r($modelPC);
+			                        
+			                        //exit;
 
 									if($difference==1)
 									{
@@ -787,6 +844,8 @@ class ProjectController extends Controller
 									}	
 									else{
 										$modelProj->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ '.$index.'" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+										$savePC = false;
+
 									}
 			 	        			array_push($modelContract, $modelPC);
 			 	        	
@@ -798,6 +857,10 @@ class ProjectController extends Controller
 			 	        	
 					}
 
+			     }
+			    
+			    if($savePC)
+			    	   $tab = 2;	
 
 	               if(isset($_POST['wk']))
 	               {
@@ -813,6 +876,8 @@ class ProjectController extends Controller
 	               }	
 
 
+	              
+
 				$transaction->commit();
 			}
 			catch(Exception $e)
@@ -825,16 +890,203 @@ class ProjectController extends Controller
 			}	 
 
 		}
+		else if(isset($_POST['OutsourceContract']))
+		{
+				 //------outsource-----------//
+	             	$transaction=Yii::app()->db->beginTransaction();
+
+				    try {
+  							$index = 1;
+							foreach( $_POST['OutsourceContract'] as $value ) {
+										
+										
+
+										if(empty($value["oc_id"]))
+										{
+											 //new contract
+											 $modelOC = new OutsourceContract("search");
+											 //$modelPC->attributes = $value;
+											 $modelOC->setAttributes($value);
+											 $modelOC->oc_last_update = (date("Y")+543).date("-m-d H:i:s");
+									    	 $modelOC->oc_user_update = Yii::app()->user->ID;
+									    	 $modelOC->oc_proj_id = $id;
+											        //header('Content-type: text/plain');
+					                          		//print_r($modelPC);                    
+					                          	    //exit;
+					                         
+									    	 if($modelOC->save())
+											{
+
+													 //save contract change history
+								 	        		 $modelTemps = Yii::app()->db->createCommand()
+											                    ->select('*')
+											                    ->from('contract_change_history_temp')
+											                    ->where('contract_id=:id AND type=2 AND u_id=:user', array(':id'=>$index,':user'=>Yii::app()->user->ID))
+											                    ->queryAll();
+											        foreach ($modelTemps as $key => $mTemp) {
+
+					                                        $modelChange = new ContractChangeHistory("search");
+					                                        $modelChange->attributes = $mTemp;
+					                                       
+					                                        $modelChange->contract_id = $modelOC->oc_id;
+					                                        $modelChange->type = 2;
+					                                        
+					                                        if($modelChange->save())
+					                                        {
+					                                            $msg =  "successful";
+					                                            $mt = ContractChangeHistoryTemp::model()->findByPk($mTemp['id']);
+					                                            $mt->delete();
+					                                        }	                                          
+					                                        else{
+					                                           $modelOutsourceVal->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ "'.$index.' ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+							 				            	   $saveOC = false;
+
+					                                        }   	
+											        }            
+
+
+
+								 	        		 //save approve change history
+								 	        		 $modelTemps = Yii::app()->db->createCommand()
+											                    ->select('*')
+											                    ->from('contract_approve_history_temp')
+											                    ->where('contract_id=:id AND type=2 AND u_id=:user', array(':id'=>$index,':user'=>Yii::app()->user->ID))
+											                    ->queryAll();
+											        foreach ($modelTemps as $key => $mTemp) {
+
+											        // header('Content-type: text/plain');
+					              //             		print_r($modelC);                    
+					              //             	    exit;
+					                                        $modelApprove = new ContractApproveHistory("search");
+					                                        $modelApprove->attributes = $mTemp;
+					                                        $modelApprove->dateApprove = $mTemp['dateApprove'];
+					                                        //$modelApprove->id = "";
+					                                        $modelApprove->contract_id = $modelOC->oc_id;
+					                                        $modelApprove->type = 2;
+					                                        
+					                                        if($modelApprove->save())
+					                                           $msg =  "successful";
+					                                        else{
+					                                           $modelOutsourceVal->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ "'.$index.' ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+							 				            	   $saveOC = false;
+					                                        }   	
+											        }            
+					 				     	
+
+											}	
+											else{
+													$modelOutsourceVal->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ '.$index.'" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+													$saveOC = false;
+
+													 //header('Content-type: text/plain');
+					                          		 //print_r($modelPC);                    
+					                          	     //exit;	
+											}
+						 	        		array_push($modelOutsource, $modelOC);
+
+						 	        		
+					 				     	
+											 
+										}
+										else //old contracts
+										{
+												$modelOC = OutsourceContract::model()->FindByPk($value["oc_id"]);
+										
+												$modelOC->attributes = $value;
+												//check difference
+												//1.project contract
+												$difference = 0;
+												foreach ($value as $key => $new) {
+
+													if($new!=$modelPC[$key])
+														$difference = 1;
+													
+												}
+												//2.get last_update in change
+												$modelCostHist = Yii::app()->db->createCommand()
+											                        ->select('max(last_update) as max')
+											                        ->from('contract_change_history')
+											                        ->where('contract_id=:id', array(':id'=>$value["pc_id"]))
+											                        ->queryAll();
+											                        
+											    $change_lastUpdate = $modelCostHist[0]["max"];                    
+
+											    
+												//3.get last_update in approve
+												$modelApproveHist = Yii::app()->db->createCommand()
+											                        ->select('max(last_update) as max')
+											                        ->from('contract_approve_history')
+											                        ->where('contract_id=:id', array(':id'=>$value["pc_id"]))
+											                        ->queryAll();
+											    $approve_lastUpdate = $modelApproveHist[0]["max"];  
+
+											    //4.compare last_update in change and approve 
+											    $last_update_relate = $approve_lastUpdate > $change_lastUpdate ? $approve_lastUpdate: $change_lastUpdate;
+
+											    //5.compare with contract last_update
+											    $datedif = "no";
+											    if($last_update_relate > $modelPC->pc_last_update)
+											    {
+											    	$difference = 1;
+											    	$datedif = "yes";
+											    } 
+
+
+													
+												//header('Content-type: text/plain');
+						                        //print_r($modelPC);
+						                        
+						                        //exit;
+
+												if($difference==1)
+												{
+													$modelOC->pc_last_update = (date("Y")+543).date("-m-d H:i:s");
+									    			$modelOC->pc_user_update = Yii::app()->user->ID;
+												}
+
+												if($modelOC->save())
+												{
+
+												}	
+												else{
+													$modelOutsourceVal->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ '.$index.'" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+													$savePC = false;
+
+												}
+						 	        			array_push($modelContract, $modelPC);
+						 	        	
+										}
+						 	        	
+										
+										$index++;
+							        		
+						 	        	
+								}
+
+
+							$transaction->commit();
+						}
+						catch(Exception $e)
+				 		{
+				 			$transaction->rollBack();
+				 			Yii::trace(CVarDumper::dumpAsString($e->getMessage()));
+				 	        	//you should do sth with this exception (at least log it or show on page)
+				 	        	Yii::log( 'Exception when saving data: ' . $e->getMessage(), CLogger::LEVEL_ERROR );
+				 
+						}	 
+				
+					
+		}
 		else{
 			 
 			if (!Yii::app()->request->isAjaxRequest)	
 		 	{
 		 		 Yii::app()->db->createCommand('DELETE FROM contract_approve_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
 		 	 	 Yii::app()->db->createCommand('DELETE FROM contract_change_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
-		
+		         
 		 	}		
 
-			  $project_contract = Yii::app()->db->createCommand()
+			$project_contract = Yii::app()->db->createCommand()
                         ->select('*')
                         ->from('project_contract')
                         ->where('pc_proj_id=:id', array(':id'=>$id))
@@ -853,6 +1105,8 @@ class ProjectController extends Controller
                     $str_date = explode("-", $value["pc_end_date"]);
                     if(count($str_date)>1)
                       $modelPC->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+
+                    $modelPC->pc_last_update = $value["pc_last_update"];
                     $modelPC->pc_details = $value["pc_details"];
                      $modelPC->pc_id = $value["pc_id"];
 
@@ -860,36 +1114,48 @@ class ProjectController extends Controller
                     array_push($modelContract, $modelPC);
                  
                 }
-            }              
+            }
+
+            $outsource_contract = Yii::app()->db->createCommand()
+                        ->select('*')
+                        ->from('outsource_contract')
+                        ->where('oc_proj_id=:id', array(':id'=>$id))
+                        ->queryAll();
+
+            if(!empty($outsource_contract))
+            {    
+               
+                foreach ($outsource_contract as $key => $value) {
+
+                    $modelOC =new OutsourceContract;
+                    $modelOC->attributes = $value;
+                    $str_date = explode("-", $value["oc_sign_date"]);
+                    if(count($str_date)>1)
+                      $modelOC->oc_sign_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+                    $str_date = explode("-", $value["oc_end_date"]);
+                    if(count($str_date)>1)
+                      $modelOC->oc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+
+                    $modelOC->oc_last_update = $value["oc_last_update"];
+                    $modelOC->oc_details = $value["oc_details"];
+                    $modelOC->oc_id = $value["oc_id"];
+
+                    $modelOC->oc_cost = number_format($modelOC->oc_cost,2);
+                    array_push($modelOutsource, $modelOC);
+                 
+                }
+            }
+            else{
+            	array_push($modelOutsource, new OutsourceContract);
+            }
+              
 		}
 
-
-		if(isset($_POST['OutsourceContract']))
-		{
-			// $modelOutsource = array();
-   //          $numContracts = $_POST['num'];
-		 //    for($i=1;$i<$numContracts+1;$i++)
-		 //    {
-		 //        //if(isset($_POST['OutsourceContract'][$i]))
-		 //        //{
-		 //            $contracts = new OutsourceContract;
-		 //            $contracts->attributes = $_POST['OutsourceContract'][$i];
-		 //            //$contracts->oc_cost = Yii::app()->format->unformatNumber($_POST['OutsourceContract'][$i]['oc_cost']);
-		 //            $contracts->oc_proj_id = $id;
-		 //            $contracts->oc_sign_date = $_POST['OutsourceContract'][$i]["oc_sign_date"];//$_POST[$i."_oc_end_date"];
-		 //            $contracts->oc_end_date = $_POST['OutsourceContract'][$i]["oc_end_date"];
-		 //            $contracts->oc_approve_date = $_POST['OutsourceContract'][$i]["oc_approve_date"];
-		 //            array_push($modelOutsource, $contracts);
-		 //            //$contracts->validate();
-		 //            $contracts->save();
-		 //        //}
-		 //    }
-
-		}
 
 		$this->render('update',array(
-			'model'=>$modelProj,'contracts'=>$modelContract,'outsource'=>$modelOutsource,'numContracts'=>$numContracts
+			'model'=>$modelProj,'modelOC'=>$modelOutsourceVal,'contracts'=>$modelContract,'outsource'=>$modelOutsource,'tab'=>$tab,'numContracts'=>$numContracts
 		));
+            
 	}
 
 	/**
@@ -1035,13 +1301,13 @@ class ProjectController extends Controller
         
     }
 
-    public function actionLoadContractByAjaxTempModel($index,$model)
+    public function actionLoadOutsourceByAjaxTemp($index)
     {
-        //$model = new ProjectContract;
+        $model = new OutsourceContract;
         //$model->pc_id = $index;
         Yii::app()->clientscript->scriptMap['jquery.js'] = false;
         Yii::app()->clientscript->scriptMap['jquery-ui.min.js'] = false;
-        $this->renderPartial('//ProjectContract/_formUpdateTemp2', array(
+        $this->renderPartial('//OutsourceContract/_formUpdateTemp', array(
             'model' => $model,
             'index' => $index,
             'display' => 'block',
@@ -1049,5 +1315,7 @@ class ProjectController extends Controller
 
         
     }
+
+  
   
 }

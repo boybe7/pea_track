@@ -343,6 +343,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 
 						                    	
 															link = $(this).attr("href");
+															//console.log("changeTemp")
 
 															$.ajax({
 											                 type:"GET",
@@ -380,7 +381,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 																		    $("#bodyChange").html();
 																		}
 
-<<<<<<< HEAD
+
 																		//console.log($("#change-grid'.$index.'"))
 																		 ajaxRequest = $(this).serialize();
 																		$.fn.yiiGridView.update("change-grid'.$index.'",{data: ajaxRequest})
@@ -391,8 +392,6 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 														               localStorage.setItem("pc_details", $("#ProjectContract_2_pc_details").val());
 																		window.location.reload(false)														        
 																		//console.log($("#change-grid'.$index.'"))
-=======
->>>>>>> 5c82a7d474f4db85a2257ab7d8221461b0acb6d6
 																		
 																		
 																		$.fn.yiiGridView.update("change-grid'.$index.'");
