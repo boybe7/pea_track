@@ -187,7 +187,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 													})									
 													.done(function( msg ) {
 														
-														jQuery.fn.yiiGridView.update("change-grid'.$index.'");
+														jQuery.fn.yiiGridView.update("pc-change-grid'.$index.'");
 														
 														if(msg.status=="failure")
 														{
@@ -213,7 +213,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 																			}
 																			else{
 																				//js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
-																				jQuery.fn.yiiGridView.update("change-grid'.$index.'");
+																				jQuery.fn.yiiGridView.update("pc-change-grid'.$index.'");
 														
 																			}
 																		});
@@ -236,7 +236,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 
                   
 				$this->widget('bootstrap.widgets.TbGridView',array(
-					'id'=>'change-grid'.$index,
+					'id'=>'pc-change-grid'.$index,
 					
 				    'type'=>'bordered condensed',
 					'dataProvider'=>ContractChangeHistory::model()->searchByContractID($model->pc_id,1),
@@ -301,7 +301,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 					  	    array(
 								'class'=>'bootstrap.widgets.TbButtonColumn',
 								'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),
-								'template' => '{update}   {delete}',
+								'template' => '{update2}   {delete}',
 								// 'deleteConfirmation'=>'js:bootbox.confirm("Are you sure to want to delete")',
 								'buttons'=>array(
 										'delete'=>array(
@@ -310,22 +310,23 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 						                        'class'=>'delchange',
 						                    ),	
 										),
-										'update'=>array(
+										'update2'=>array(
 
 											'url'=>'Yii::app()->createUrl("ContractChangeHistory/update", array("id"=>$data->id))',
 											'options'=>array(
-						                        'class'=>'updatechange',
+						                        //'class'=>'updatechange',
 						                    ),	
+						                    'icon' => 'icon-pencil',
 						                    'click'=>'function(){
-
+						                    	
 															link = $(this).attr("href");
-
+																	
 															$.ajax({
 											                 type:"GET",
 											                 cache: false,
 											                 url:$(this).attr("href"),
 											                 success:function(data){
-											                 	    //console.log(link)
+											                 	    
 											                 			 $("#bodyChange").html(data);
 											                 		
 											                 			 $("#modalChange").modal("show");
@@ -354,7 +355,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 																			$("#modalChange").modal("hide");
 																		    $("#bodyChange").html();
 																		}
-														                jQuery.fn.yiiGridView.update("change-grid'.$index.'");
+														                jQuery.fn.yiiGridView.update("pc-change-grid'.$index.'");
 																		
 														      		}
 														    	} 
@@ -410,8 +411,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 							      
 									js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
 			                   			function(confirmed){
-			                   	 	        console.log("con:"+confirmed)
-			                   	 						
+			                   	 	       			
                                 			if(confirmed)
 			                   	 		    {
 
@@ -422,10 +422,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 													data: $(".modal-body #contract-approve-history-form").serialize()
 													})									
 													.done(function( msg ) {
-														//console.log($("#approve-grid2"));
-														//console.log($("#approve-grid1"));
-														jQuery.fn.yiiGridView.update("approve-grid'.$index.'");
-														//($("#approve-grid' . $index . '").yiiGridView("update",{}));
+														jQuery.fn.yiiGridView.update("pc-approve-grid'.$index.'");
 														
 														if(msg.status=="failure")
 														{
@@ -449,7 +446,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 																			}
 																			else{
 																				//js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
-																				jQuery.fn.yiiGridView.update("approve-grid'.$index.'");
+																				jQuery.fn.yiiGridView.update("pc-approve-grid'.$index.'");
 																			}
 																		});
 								                   	 		    }
@@ -472,7 +469,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 
                   
 				$this->widget('bootstrap.widgets.TbGridView',array(
-					'id'=>'approve-grid'.$index,
+					'id'=>'pc-approve-grid'.$index,
 					
 				    'type'=>'bordered condensed',
 					'dataProvider'=>ContractApproveHistory::model()->searchByContractID($model->pc_id,1),
@@ -549,19 +546,20 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 					  	    array(
 								'class'=>'bootstrap.widgets.TbButtonColumn',
 								'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),
-								'template' => '{update}   {delete}',
+								'template' => '{update3}   {delete}',
 								// 'deleteConfirmation'=>'js:bootbox.confirm("Are you sure to want to delete")',
 								'buttons'=>array(
 										'delete'=>array(
 											'url'=>'Yii::app()->createUrl("ContractApproveHistory/delete", array("id"=>$data->id))',	
 											
 										),
-										'update'=>array(
+										'update3'=>array(
 
 											'url'=>'Yii::app()->createUrl("ContractApproveHistory/update", array("id"=>$data->id))',
 											'options'=>array(
-						                        'class'=>'updateapprove',
-						                    ),	
+						                        //'class'=>'updateapprove',
+						                    ),
+						                    'icon' => 'icon-pencil',	
 											'click'=>'function(){
 
 															link = $(this).attr("href");
@@ -571,7 +569,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 											                 cache: false,
 											                 url:$(this).attr("href"),
 											                 success:function(data){
-											                 	   //console.log(link)
+											                 	   console.log(link)
 											                 		$("#bodyApprove").html(data);
 											                 		$("#dateApprove").datepicker();
 																	$("#dateApprove").datepicker("option", {dateFormat: "dd/mm/yyyy"});
@@ -601,7 +599,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 																			$("#modalApprove").modal("hide");
 																		    $("#bodyApprove").html();
 																		}
-														                jQuery.fn.yiiGridView.update("approve-grid'.$index.'");
+														                jQuery.fn.yiiGridView.update("pc-approve-grid'.$index.'");
 																		
 														      		}
 														    	} 
@@ -646,7 +644,6 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
         
        <?php   
           
-          
             $user = User::model()->findByPk($model->pc_user_update);  
             echo '<div class="pull-right"><b>แก้ไขล่าสุดโดย : '.$user->title.$user->firstname.'  '.$user->lastname.'</b>';
             echo '<br><b>วันที่ : '.$model->pc_last_update.'</b></div>';
@@ -686,6 +683,137 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 
 
 Yii::app()->clientScript->registerCoreScript('jquery');
+Yii::app()->clientScript->registerScript('edit'.$index,'
+    
+    $("#modalCancel").click(function(e){
+      
+    
+            $("#modalApprove").modal("hide");
+            $("#bodyApprove").html();
+            //console.log("clear editmodal");
+    });
+
+  $("#modalChangeCancel").click(function(e){
+      
+      
+            $("#modalChange").modal("hide");
+            $("#bodyChange").html();
+            //console.log("clear editmodal");
+    });
+
+    $("#modalSubmit").click(function(e){
+       //console.log("submit"+$("#contract-approve-history-form").html());  
+      
+       //console.log("edit");
+       $.ajax( {
+          type: "POST",
+          url: link,
+          dataType:"json",
+          data: $("#contract-approve-history-form").serialize(),
+          success: function( msg ) {
+            //console.log(msg.status);
+
+            //$("#modalApprove").modal("hide");
+
+            if(msg.status=="failure")                 
+            {
+          //js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+          $("#contract-approve-history-form").html(msg.div);
+        }
+        else{
+          
+          //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+             myBackup2 = $("#modalApprove").clone();
+            $("#modalApprove").modal("hide");
+            $("#bodyApprove").html();
+            //$("#modalApprove").removeData("modal");
+            //$("#modalApprove").remove();
+            //console.log("clear editmodal");
+        }
+                jQuery.fn.yiiGridView.update("pc-approve-grid'.$index.'");
+        
+          }
+      } 
+      );
+
+    });
+
+  $("#modalChangeSubmit").click(function(e){
+     
+       $.ajax( {
+          type: "POST",
+          url: link,
+          dataType:"json",
+          data: $("#contract-change-history-form").serialize(),
+          success: function( msg ) {
+          
+            if(msg.status=="failure")                 
+            {
+      
+    	      	$("#contract-change-history-form").html(msg.div);
+        	}
+        	else{
+          		$("#modalChange").modal("hide");
+            	$("#bodyChange").html();
+        	}
+            
+            jQuery.fn.yiiGridView.update("pc-change-grid'.$index.'");
+            console.log("ccc")
+          }
+      } 
+      );
+
+    });
+
+
+
+  $("body").on("click","#pc-change-grid'.$index.' .update,#link",function(e){
+        link = $(this).attr("href");
+        console.log(link)
+      
+        $.ajax({
+                 type:"GET",
+                 cache: false,
+                 url:$(this).attr("href"),
+                 success:function(data){
+                      
+                       $("#bodyChange").html(data);
+                    
+                       $("#modalChange").modal("show");
+
+            
+                 },
+
+                });
+          return false;
+    });
+
+	$("body").on("click","#pc-appprove-grid'.$index.' .update,#link",function(e){
+        link = $(this).attr("href");
+        console.log(link)
+      
+        $.ajax({
+                 type:"GET",
+                 cache: false,
+                 url:$(this).attr("href"),
+                 success:function(data){
+                      
+                       $("#bodyApprove").html(data);
+                    
+                       $("#modalApprove").modal("show");
+
+            
+                 },
+
+                });
+          return false;
+    });
+    
+            
+
+
+');
+
 
 Yii::app()->clientScript->registerScript('createApprove', '
 var myBackup;

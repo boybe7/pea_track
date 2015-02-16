@@ -73,6 +73,7 @@ class ContractApproveHistoryController extends Controller
 			$model->attributes=$_POST['ContractApproveHistory'];
 			$model->dateApprove = $_POST['ContractApproveHistory']['dateApprove']; 
 			$model->contract_id = $id;
+			$model->last_update =  (date("Y")+543).date("-m-d H:i:s");
 			
 			$model->type = 1;
 			if (Yii::app()->request->isAjaxRequest)
@@ -211,6 +212,7 @@ class ContractApproveHistoryController extends Controller
 		if(isset($_POST['ContractApproveHistory']))
 		{
 			$model->attributes=$_POST['ContractApproveHistory'];
+			$model->last_update =  (date("Y")+543).date("-m-d H:i:s");
 
 
 			if (Yii::app()->request->isAjaxRequest)

@@ -37,7 +37,7 @@ class ContractApproveHistory extends CActiveRecord
 			array('approveBy, timeSpend', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, type,contract_id, detail, dateApprove, approveBy, cost, timeSpend', 'safe', 'on'=>'search,create,update'),
+			array('id, type,contract_id, detail, dateApprove, approveBy, cost, timeSpend,last_update', 'safe', 'on'=>'search,create,update'),
 		);
 	}
 

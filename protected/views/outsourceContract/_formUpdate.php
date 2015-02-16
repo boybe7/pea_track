@@ -320,7 +320,7 @@
                
              'onclick'=>'
                    
-                  js:bootbox.confirm($("#modal-body3").html(),"ยกเลิก","ตกลง",
+                  js:bootbox.confirm($("#modal-body4").html(),"ยกเลิก","ตกลง",
                       function(confirmed){
                                  
                           if(confirmed)
@@ -328,7 +328,7 @@
 
                               $.ajax({
                                 type: "POST",
-                                url: "../../contractChangeHistory/createTemp/' . $index . '",
+                                url: "../../contractChangeHistory/createOutsourceTemp/' . $index . '",
                                 dataType:"json",
                                 data: $(".modal-body #contract-change-history-form").serialize()
                               })                  
@@ -338,28 +338,29 @@
                             
                                 if(msg.status=="failure")
                                {
-                                  $("#modal-body2").html(msg.div);
-                                  js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
-                                        function(confirmed){
+                                  $("#modal-body4").html(msg.div);
+                                  js:bootbox.confirm($("#modal-body4").html(),"ยกเลิก","ตกลง",
+                                  function(confirmed){
                                               
                                           
                                             if(confirmed)
                                             {
                                               $.ajax({
-                                    type: "POST",
-                                    url: "../../contractChangeHistory/createTemp",
-                                    dataType:"json",
-                                    data: $(".modal-body #contract-change-history-form").serialize()
-                                    })
-                                    .done(function( msg ) {
-                                      if(msg.status=="failure")
-                                      {
-                                        js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
-                                      }
-                                      else{
-                                        //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
-                                      }
-                                    });
+                                                type: "POST",
+                                                url: "../../contractChangeHistory/createOutsourceTemp' . $index . '",
+                                                dataType:"json",
+                                                data: $(".modal-body #contract-change-history-form").serialize()
+                                            })
+                                            .done(function( msg ) {
+                                              if(msg.status=="failure")
+                                              {
+                                                js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+                                              }
+                                              else{
+                                                //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+                                                 jQuery.fn.yiiGridView.update("change-grid'.$index.'");
+                                              }
+                                            });
                                             }
                               })
                             }
@@ -382,7 +383,7 @@
           'id'=>'change-grid'.$index,
           
             'type'=>'bordered condensed',
-          'dataProvider'=>ContractChangeHistoryTemp::model()->searchByUser($index,1,Yii::app()->user->ID),
+          'dataProvider'=>ContractChangeHistoryTemp::model()->searchByUser($index,2,Yii::app()->user->ID),
           //'filter'=>$model,
           'selectableRows' => 2,
           'enableSorting' => false,

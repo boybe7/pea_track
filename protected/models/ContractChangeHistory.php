@@ -35,7 +35,7 @@ class ContractChangeHistory extends CActiveRecord
 			array('detail', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id,contract_id, ref_no, detail, cost, type', 'safe', 'on'=>'search'),
+			array('id,contract_id, ref_no, detail, cost, type,last_update', 'safe', 'on'=>'search,create,update'),
 		);
 	}
 
