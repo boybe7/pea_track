@@ -80,7 +80,10 @@
                                      'minLength'=>0,
                                      'select'=>'js: function(event, ui) {
                                         
-                                           //console.log(ui.item.id)
+                                            sessionStorage["'.$index . 'oc_vendor_id"] = ui.item.label;
+                                            sessionStorage["OutsourceContract_'.$index . '_oc_vendor_id"] = ui.item.id;
+                                            
+                                          // console.log(ui.item.id);
                                            $("#OutsourceContract_'. $index . '_oc_vendor_id").val(ui.item.id);
                                            //console.log($("#OutsourceContract_'. $index . '_oc_vendor_id").val());
                                      }'

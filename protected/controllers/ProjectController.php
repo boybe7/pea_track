@@ -892,6 +892,8 @@ class ProjectController extends Controller
 		}
 		else if(isset($_POST['OutsourceContract']))
 		{
+				
+				$tab = 2;
 				 //------outsource-----------//
 	             	$transaction=Yii::app()->db->beginTransaction();
 

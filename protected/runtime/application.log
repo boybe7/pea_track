@@ -3480,3 +3480,33 @@ in C:\xampp\htdocs\pea_track\protected\views\project\update.php (12)
 in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1157)
 in C:\xampp\htdocs\pea_track\index.php (13)
 >>>>>>> ea40ad153575436070234795fabea18e8a707c7f
+2015/02/16 15:47:37 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1101)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/16 15:47:37 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1101)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/16 15:47:37 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1101)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/16 15:47:37 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1101)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/16 15:47:37 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1101)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/16 15:49:09 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1101)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/16 15:49:09 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1101)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/16 15:49:09 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1101)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/16 15:49:09 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1101)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/16 15:49:09 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1101)
+in C:\xampp\htdocs\pea_track\index.php (13)

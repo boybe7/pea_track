@@ -71,6 +71,9 @@
                                     success: function (data) {
                                             response(data);
 
+                                          
+
+
                                     }
                                 })
                              }',
@@ -80,7 +83,8 @@
                                      'minLength'=>0,
                                      'select'=>'js: function(event, ui) {
                                         
-                                           //console.log(ui.item.id)
+                                           sessionStorage["'.$index . 'oc_vendor_id"] = ui.item.id;
+                                           //console.log(ui.item.id);
                                            $("#OutsourceContract_'. $index . '_oc_vendor_id").val(ui.item.id);
                                            //console.log($("#OutsourceContract_'. $index . '_oc_vendor_id").val());
                                      }'
@@ -89,7 +93,7 @@
                             ),
                            'htmlOptions'=>array(
 
-                                'class'=>$model->hasErrors('oc_vendor_id')?'span12 error':'span12'
+                                'class'=>$model->hasErrors('oc_vendor_id')?'span12 error sessionStore':'span12 sessionStore'
                             ),
                                   
                         ));
