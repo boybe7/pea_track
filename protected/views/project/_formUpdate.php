@@ -563,6 +563,7 @@ hr {
 
 
 	        echo  '<input type="hidden" id="num" name="num" value="'.$numContracts.'">';
+          echo  '<input type="hidden" id="clearSessionStorage" name="clearSessionStorage" value="'.$clearSession.'">';
 	        $index2 = 1;
 
 	        // $index++;
@@ -573,7 +574,7 @@ hr {
                         ->where('oc_proj_id=:id', array(':id'=>$model->pj_id))
                         ->queryAll();
 
-         // echo count($outsource);              
+          //echo count($outsource);              
 
 	        foreach ($outsource as $id => $child):
               if($index2 > count($outsource_contract) )
@@ -597,9 +598,13 @@ hr {
                                   $(".sessionStore").keyup(function () {
                                      
                                       sessionStorage[$(this).attr("id")] = $(this).val();
-                                  });      
+                                  });
 
+                                  if($("#clearSessionStorage").val()==1)
+                                      sessionStorage.clear();
 
+                                  
+                                  
                                    $("form input").each(function(){
                                            id = $(this).attr("id");
                                            if ( sessionStorage[id] )
@@ -607,6 +612,8 @@ hr {
                                 
                                                                       
                                    });
+
+                                   
 
                                     $("form textarea").each(function(){
                                            id = $(this).attr("id");
@@ -625,7 +632,8 @@ hr {
               } 
               else
               {
-  	            $this->renderPartial('//outsourceContract/_formUpdate', array(
+  	           
+                $this->renderPartial('//outsourceContract/_formUpdate', array(
   	                'model' => $child,
   	                'index' => $index2,
   	                'display' => 'block'
@@ -880,6 +888,7 @@ $("#loadOutsourceByAjax").click(function(e){
     //_index++;
 });
 ', CClientScript::POS_END);
+
 
 
 ?>

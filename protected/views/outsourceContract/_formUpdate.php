@@ -387,7 +387,7 @@
           'id'=>'change-grid'.$index,
           
             'type'=>'bordered condensed',
-          'dataProvider'=>ContractChangeHistoryTemp::model()->searchByUser($index,2,Yii::app()->user->ID),
+          'dataProvider'=>ContractChangeHistory::model()->searchByContractID($model->oc_id,2),
           //'filter'=>$model,
           'selectableRows' => 2,
           'enableSorting' => false,
@@ -453,12 +453,12 @@
                 // 'deleteConfirmation'=>'js:bootbox.confirm("Are you sure to want to delete")',
                 'buttons'=>array(
                     'delete'=>array(
-                      'url'=>'Yii::app()->createUrl("ContractChangeHistory/deleteTemp", array("id"=>$data->id))', 
+                      'url'=>'Yii::app()->createUrl("ContractChangeHistory/delete", array("id"=>$data->id))', 
 
                     ),
                     'update'=>array(
 
-                      'url'=>'Yii::app()->createUrl("ContractChangeHistory/updateTemp", array("id"=>$data->id))',
+                      'url'=>'Yii::app()->createUrl("ContractChangeHistory/update", array("id"=>$data->id))',
                       //'click'=>'updateApprove($data->id)' 
                       
                     )
@@ -566,7 +566,7 @@
           'id'=>'approve-gridOutsource'.$index,
           
           'type'=>'bordered condensed',
-          'dataProvider'=>ContractApproveHistoryTemp::model()->searchByUser($index,2,Yii::app()->user->ID),
+          'dataProvider'=>ContractApproveHistory::model()->searchByContractID($model->oc_id,2),
           //'filter'=>$model,
           'selectableRows' => 2,
           'enableSorting' => false,

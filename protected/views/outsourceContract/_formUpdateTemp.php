@@ -281,6 +281,7 @@
                                               //'language' => 'th',
                                               'format'=>'dd/mm/yyyy', //กำหนด date Format
                                               'showAnim' => 'slideDown',
+                                              
                                               ),
                             'htmlOptions'=>array('class'=>'span8  sessionStore'),  // ใส่ค่าเดิม ในเหตุการ Update 
                          )
@@ -821,7 +822,6 @@
   
   $(function(){
       
-
       $( "input[name*='oc_vendor_id']" ).autocomplete({
        
                 minLength: 0

@@ -666,11 +666,11 @@ class ProjectController extends Controller
 		$modelOutsource = array();
 		
 		$numContracts = 1;
-		
+		$clearSession = true;
 		if(isset($_POST['Project']))
 		{
 				
-			 
+			$clearSession = false; 
 			$transaction=Yii::app()->db->beginTransaction();
 
 		    try {
@@ -692,6 +692,7 @@ class ProjectController extends Controller
 			     $savePC = true;
 			     if(isset($_POST['ProjectContract']))
 			     {
+			        
 			     	foreach( $_POST['ProjectContract'] as $value ) {
 							
 							$modelPC = ProjectContract::model()->FindByPk($value["pc_id"]);
@@ -894,6 +895,7 @@ class ProjectController extends Controller
 		{
 				
 				$tab = 2;
+					$clearSession = false;
 				 //------outsource-----------//
 	             	$transaction=Yii::app()->db->beginTransaction();
 
@@ -901,8 +903,7 @@ class ProjectController extends Controller
   							$index = 1;
 							foreach( $_POST['OutsourceContract'] as $value ) {
 										
-										
-
+									
 										if(empty($value["oc_id"]))
 										{
 											 //new contract
@@ -910,10 +911,11 @@ class ProjectController extends Controller
 											 //$modelPC->attributes = $value;
 											 $modelOC->setAttributes($value);
 											 $modelOC->oc_last_update = (date("Y")+543).date("-m-d H:i:s");
+									    	 $modelOC->oc_user_create = Yii::app()->user->ID;
 									    	 $modelOC->oc_user_update = Yii::app()->user->ID;
 									    	 $modelOC->oc_proj_id = $id;
 											        //header('Content-type: text/plain');
-					                          		//print_r($modelPC);                    
+					                          		//print_r($modelOC);                    
 					                          	    //exit;
 					                         
 									    	 if($modelOC->save())
@@ -945,8 +947,7 @@ class ProjectController extends Controller
 
 					                                        }   	
 											        }            
-
-
+											        array_push($modelOutsource, $modelOC);
 
 								 	        		 //save approve change history
 								 	        		 $modelTemps = Yii::app()->db->createCommand()
@@ -981,14 +982,16 @@ class ProjectController extends Controller
 													$saveOC = false;
 
 													 //header('Content-type: text/plain');
-					                          		 //print_r($modelPC);                    
+					                          		 //print_r($modelOC);                    
 					                          	     //exit;	
 											}
-						 	        		array_push($modelOutsource, $modelOC);
-
 						 	        		
-					 				     	
-											 
+						 	        		
+					 				     	header('Content-type: text/plain');
+					                          		 print_r($modelOC);                    
+					                          	     exit;
+											
+ 
 										}
 										else //old contracts
 										{
@@ -1055,7 +1058,7 @@ class ProjectController extends Controller
 													$savePC = false;
 
 												}
-						 	        			array_push($modelContract, $modelPC);
+						 	        			array_push($modelOutsource, $modelOC);
 						 	        	
 										}
 						 	        	
@@ -1134,12 +1137,15 @@ class ProjectController extends Controller
                     $str_date = explode("-", $value["oc_sign_date"]);
                     if(count($str_date)>1)
                       $modelOC->oc_sign_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+                  	if($value["oc_sign_date"]=="0000-00-00")
+                  	  $modelOC->oc_sign_date = "";		
                     $str_date = explode("-", $value["oc_end_date"]);
                     if(count($str_date)>1)
                       $modelOC->oc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
-
+                  	if($value["oc_end_date"]=="0000-00-00")
+                  	  $modelOC->oc_end_date = "";
                     $modelOC->oc_last_update = $value["oc_last_update"];
-                    $modelOC->oc_details = $value["oc_details"];
+                   
                     $modelOC->oc_id = $value["oc_id"];
 
                     $modelOC->oc_cost = number_format($modelOC->oc_cost,2);
@@ -1155,7 +1161,7 @@ class ProjectController extends Controller
 
 
 		$this->render('update',array(
-			'model'=>$modelProj,'modelOC'=>$modelOutsourceVal,'contracts'=>$modelContract,'outsource'=>$modelOutsource,'tab'=>$tab,'numContracts'=>$numContracts
+			'model'=>$modelProj,'clearSession'=>$clearSession,'modelOC'=>$modelOutsourceVal,'contracts'=>$modelContract,'outsource'=>$modelOutsource,'tab'=>$tab,'numContracts'=>$numContracts
 		));
             
 	}
