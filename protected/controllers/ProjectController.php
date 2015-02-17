@@ -987,9 +987,9 @@ class ProjectController extends Controller
 											}
 						 	        		
 						 	        		
-					 				     	header('Content-type: text/plain');
-					                          		 print_r($modelOC);                    
-					                          	     exit;
+					 				     	//header('Content-type: text/plain');
+					                        //  		 print_r($modelOC);                    
+					                        //  	     exit;
 											
  
 										}
