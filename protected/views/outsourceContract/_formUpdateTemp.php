@@ -14,7 +14,7 @@
 
 </style>
 <fieldset class="well the-fieldset">
-        <legend class="the-legend contract-no">สัญญาที่ <?php echo ($index);?></legend>
+        <legend class="the-legend contract_no_oc">สัญญาที่ <?php echo ($index);?></legend>
        
           <div class="row-fluid"> 
             <div class="span12">
@@ -860,9 +860,9 @@ function deleteOutsourceContract(elm, index)
             num--;
             $('#num').val(num);
             
-            console.log('del num:'+$('#num').val());
+           // console.log('del num:'+$('#num').val());
             //rearrange no.
-                  var collection = $('.contract_no');
+                  var collection = $('.contract_no_oc');
                   //console.log(collection);
                   for(var k=0; k<collection.length; k++){
                       var element = collection.eq(k);

@@ -14,7 +14,7 @@
 
 </style>
 <fieldset class="well the-fieldset">
-        <legend class="the-legend contract-no">สัญญาที่ <?php echo ($index);?></legend>
+        <legend class="the-legend contract_no_oc">สัญญาที่ <?php echo ($index);?></legend>
        
           <div class="row-fluid"> 
             <div class="span12">
@@ -324,7 +324,7 @@
                
              'onclick'=>'
                    
-                  js:bootbox.confirm($("#modal-body4").html(),"ยกเลิก","ตกลง",
+                  js:bootbox.confirm($("#modal-body3").html(),"ยกเลิก","ตกลง",
                       function(confirmed){
                                  
                           if(confirmed)
@@ -332,18 +332,18 @@
 
                               $.ajax({
                                 type: "POST",
-                                url: "../../contractChangeHistory/createOutsourceTemp/' . $index . '",
+                                url: "../../contractChangeHistory/createOutsource/' . $model->oc_id . '",
                                 dataType:"json",
                                 data: $(".modal-body #contract-change-history-form").serialize()
                               })                  
                               .done(function( msg ) {
                             
-                                jQuery.fn.yiiGridView.update("change-grid'.$index.'");
+                                jQuery.fn.yiiGridView.update("oc-change-grid-main'.$index.'");
                             
                                 if(msg.status=="failure")
                                {
-                                  $("#modal-body4").html(msg.div);
-                                  js:bootbox.confirm($("#modal-body4").html(),"ยกเลิก","ตกลง",
+                                  $("#modal-body3").html(msg.div);
+                                  js:bootbox.confirm($("#modal-body3").html(),"ยกเลิก","ตกลง",
                                   function(confirmed){
                                               
                                           
@@ -351,7 +351,7 @@
                                             {
                                               $.ajax({
                                                 type: "POST",
-                                                url: "../../contractChangeHistory/createOutsourceTemp' . $index . '",
+                                                url: "../../contractChangeHistory/createOutsource/' . $model->oc_id . '",
                                                 dataType:"json",
                                                 data: $(".modal-body #contract-change-history-form").serialize()
                                             })
@@ -362,7 +362,7 @@
                                               }
                                               else{
                                                 //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
-                                                 jQuery.fn.yiiGridView.update("change-grid'.$index.'");
+                                                 jQuery.fn.yiiGridView.update("oc-change-grid-main'.$index.'");
                                               }
                                             });
                                             }
@@ -384,7 +384,7 @@
 
                   
         $this->widget('bootstrap.widgets.TbGridView',array(
-          'id'=>'change-grid'.$index,
+          'id'=>'oc-change-grid-main'.$index,
           
             'type'=>'bordered condensed',
           'dataProvider'=>ContractChangeHistory::model()->searchByContractID($model->oc_id,2),
@@ -449,19 +449,78 @@
                   array(
                 'class'=>'bootstrap.widgets.TbButtonColumn',
                 'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),
-                'template' => '{update}   {delete}',
+                'template' => '{update2}   {delete}',
                 // 'deleteConfirmation'=>'js:bootbox.confirm("Are you sure to want to delete")',
                 'buttons'=>array(
                     'delete'=>array(
                       'url'=>'Yii::app()->createUrl("ContractChangeHistory/delete", array("id"=>$data->id))', 
 
                     ),
-                    'update'=>array(
+                    'update2'=>array(
 
                       'url'=>'Yii::app()->createUrl("ContractChangeHistory/update", array("id"=>$data->id))',
-                      //'click'=>'updateApprove($data->id)' 
-                      
-                    )
+                      'options'=>array(
+                                    //'class'=>'updatechange',
+                                ),  
+                                'icon' => 'icon-pencil',
+                                'click'=>'function(){
+                                  
+                              link = $(this).attr("href");
+                             // console.log("but:"+link)
+                                  
+                              $.ajax({
+                                       type:"GET",
+                                       cache: false,
+                                       url:$(this).attr("href"),
+                                       success:function(data){
+                                            
+                                             $("#bodyChangeOc").html(data);
+                                          
+                                             $("#modalChangeOc").modal("show");
+
+                                  
+                                       },
+
+                                      });
+
+
+                              $("#modalChangeOcSubmit").click(function(e){
+     
+                                   $.ajax( {
+                                      type: "POST",
+                                      url: link,
+                                      dataType:"json",
+                                      data: $("#contract-change-history-form").serialize(),
+                                      success: function( msg ) {
+                                      
+                                        if(msg.status=="failure")                 
+                                        {
+                                  
+                                      $("#contract-change-history-form").html(msg.div);
+                                    }
+                                    else{
+                                      $("#modalChangeOc").modal("hide");
+                                        $("#bodyChangeOc").html();
+                                    }
+                                            jQuery.fn.yiiGridView.update("oc-change-grid-main'.$index.'");
+                                    
+                                      }
+                                  } 
+                                  );
+
+                                });
+
+                              $("#modalChangeOcCancel").click(function(e){
+                                  
+                                  
+                                $("#modalChangeOc").modal("hide");
+                                $("#bodyChangeOc").html();
+                                    
+                                });
+                                return false;
+
+                                }',
+                      )
 
                   )
 
@@ -495,63 +554,58 @@
                
              'onclick'=>'
                           
-                      //console.log($("#modal-body2"))
-                      //console.log($("#modal-body2").html()) 
-                      //$("#modal-body2");
-                  js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
+                   
+                        js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
                               function(confirmed){
-                                    //console.log("con:"+confirmed)
                                       
                                       if(confirmed)
                                   {
 
                                     $.ajax({
-                          type: "POST",
-                          url: "../../contractapprovehistory/createOutsourceTemp/' . $index . '",
-                          dataType:"json",
-                          data: $(".modal-body #contract-approve-history-form").serialize()
-                          })                  
-                          .done(function( msg ) {
-                            //console.log($("#approve-grid2"));
-                            //console.log($("#approve-grid1"));
-                            jQuery.fn.yiiGridView.update("approve-gridOutsource'.$index.'");
-
-                            //location.reload(); //temporary fix problem ???? 
-                            //console.log($("approve-gridOutsource'.$index.'"));
+                                      type: "POST",
+                                      url: "../../contractapprovehistory/createOutsource/' . $model->oc_id . '",
+                                      dataType:"json",
+                                      data: $(".modal-body #contract-approve-history-form").serialize()
+                                      })                  
+                                      .done(function( msg ) {
                             
-                            if(msg.status=="failure")
-                            {
-                              $("#modal-body2").html(msg.div);
-                              js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
-                                        function(confirmed){
-                                              
-                                          
-                                                if(confirmed)
-                                            {
-                                              $.ajax({
-                                    type: "POST",
-                                    url: "../../contractapprovehistory/createTemp",
-                                    dataType:"json",
-                                    data: $(".modal-body #contract-approve-history-form").serialize()
-                                    })
-                                    .done(function( msg ) {
-                                      if(msg.status=="failure")
-                                      {
-                                        js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
-                                      }
-                                      else{
-                                        //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
-                                      }
-                                    });
-                                            }
-                              })
-                            }
-                            else{
-                              //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+                                          jQuery.fn.yiiGridView.update("approve-gridOutsource-main'.$index.'");
 
-                            }
-                          });
-                       
+                                          
+                                          if(msg.status=="failure")
+                                          {
+                                            $("#modal-body2").html(msg.div);
+                                            js:bootbox.confirm($("#modal-body2").html(),"ยกเลิก","ตกลง",
+                                            
+                                            function(confirmed){
+                                                            
+                                                        
+                                                          if(confirmed)
+                                                          {
+                                                            $.ajax({
+                                                              type: "POST",
+                                                              url: "../../contractapprovehistory/createOutsource/' . $model->oc_id . '",
+                                                              dataType:"json",
+                                                              data: $(".modal-body #contract-approve-history-form").serialize()
+                                                              })
+                                                              .done(function( msg ) {
+                                                                if(msg.status=="failure")
+                                                                {
+                                                                  js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+                                                                }
+                                                                else{
+                                                                  //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+                                                                }
+                                                              });
+                                                          }
+                                            })
+                                          }
+                                          else{
+                                            //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+
+                                          }
+                                        });
+                                     
                       
                                   }
                     })
@@ -563,7 +617,7 @@
 
                   
         $this->widget('bootstrap.widgets.TbGridView',array(
-          'id'=>'approve-gridOutsource'.$index,
+          'id'=>'approve-gridOutsource-main'.$index,
           
           'type'=>'bordered condensed',
           'dataProvider'=>ContractApproveHistory::model()->searchByContractID($model->oc_id,2),
@@ -640,31 +694,77 @@
                   array(
                 'class'=>'bootstrap.widgets.TbButtonColumn',
                 'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),
-                'template' => '{update}   {delete}',
+                'template' => '{update2}   {delete}',
                 // 'deleteConfirmation'=>'js:bootbox.confirm("Are you sure to want to delete")',
                 'buttons'=>array(
                     'delete'=>array(
-                      'url'=>'Yii::app()->createUrl("ContractApproveHistory/deleteTemp", array("id"=>$data->id))',  
-                      'click'=>"function(){
-                                    $.fn.yiiGridView.update('approve-gridOutsource".$index."', {
-                                        type:'POST',
-                                        url:$(this).attr('href'),
-                                        success:function(data) {
-                                            
-                                              $.fn.yiiGridView.update('approve-gridOutsource".$index."');
-                                              location.reload();
-                                        }
-                                    })
-                                    return false;
-                              }
-                     ",
-                    ),
-                    'update'=>array(
+                      'url'=>'Yii::app()->createUrl("ContractApproveHistory/delete", array("id"=>$data->id))', 
 
-                      'url'=>'Yii::app()->createUrl("ContractApproveHistory/updateTemp", array("id"=>$data->id))',
-                      //'click'=>'updateApprove($data->id)' 
-                      
-                    )
+                    ),
+                    'update2'=>array(
+
+                      'url'=>'Yii::app()->createUrl("ContractApproveHistory/update", array("id"=>$data->id))',
+                      'options'=>array(
+                                    //'class'=>'updatechange',
+                                ),  
+                                'icon' => 'icon-pencil',
+                                'click'=>'function(){
+                                  
+                              link = $(this).attr("href");
+                                  
+                              $.ajax({
+                                       type:"GET",
+                                       cache: false,
+                                       url:$(this).attr("href"),
+                                       success:function(data){
+                                            
+                                             $("#bodyApproveOc").html(data);
+                                          
+                                             $("#modalApproveOc").modal("show");
+
+                                  
+                                       },
+
+                                      });
+
+
+                              $("#modalSubmitOc").click(function(e){
+                                    
+                                   $.ajax( {
+                                      type: "POST",
+                                      url: link,
+                                      dataType:"json",
+                                      data: $("#contract-approve-history-form").serialize(),
+                                      success: function( msg ) {
+                                      
+                                        if(msg.status=="failure")                 
+                                        {
+                                  
+                                      $("#contract-approve-history-form").html(msg.div);
+                                    }
+                                    else{
+                                      $("#modalApproveOc").modal("hide");
+                                        $("#bodyApproveOc").html();
+                                    }
+                                            jQuery.fn.yiiGridView.update("approve-gridOutsource-main'.$index.'");
+                                    
+                                      }
+                                  } 
+                                  );
+
+                                });
+
+                              $("#modalCancelOc").click(function(e){
+                                  
+                                  
+                                $("#modalApproveOc").modal("hide");
+                                $("#bodyApproveOc").html();
+                                    
+                                });
+                                return false;
+
+                                }',
+                      )
 
                   )
 
@@ -682,13 +782,11 @@
 
        <?php   
           
-          if(!$model->isNewRecord) 
-          {
+          
             $user = User::model()->findByPk($model->oc_user_create);  
             echo '<div class="pull-right"><b>แก้ไขล่าสุดโดย : '.$user->title.$user->firstname.'  '.$user->lastname.'</b>';
             echo '<br><b>วันที่ : '.$model->oc_last_update.'</b></div>';
-          }
-
+          
        ?>  
 </fieldset>
  <?php //$this->endWidget(); ?>
@@ -724,96 +822,7 @@
 <?php  
 
 
-Yii::app()->clientScript->registerCoreScript('jquery');
-Yii::app()->clientScript->registerScript('edit','
-    var link;
-    var myBackup2;
-    
-    $("#modalCancel").click(function(e){
-      
-      myBackup2 = $("#modalApprove").clone();
-            $("#modalApprove").modal("hide");
-            $("#bodyApprove").html();
-            //console.log("clear editmodal");
-    });
 
-    $("#modalSubmit").click(function(e){
-       //console.log("submit"+$("#contract-approve-history-form").html());  
-      
-       //console.log("edit");
-       $.ajax( {
-          type: "POST",
-          url: link,
-          dataType:"json",
-          data: $("#contract-approve-history-form").serialize(),
-          success: function( msg ) {
-            //console.log(msg.status);
-
-            //$("#modalApprove").modal("hide");
-
-            if(msg.status=="failure")                 
-            {
-          //js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
-          $("#contract-approve-history-form").html(msg.div);
-        }
-        else{
-          
-          //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
-             myBackup2 = $("#modalApprove").clone();
-            $("#modalApprove").modal("hide");
-            $("#bodyApprove").html();
-            //$("#modalApprove").removeData("modal");
-            //$("#modalApprove").remove();
-            //console.log("clear editmodal");
-        }
-                jQuery.fn.yiiGridView.update("approve-grid'.$index.'");
-        //$("[id^=approve-grid]").yiiGridView("update",{});
-          }
-      } 
-      );
-
-    });
-
-
-    
-  $("body").on("click",".update,#link",function(e){
-        link = $(this).attr("href");
-        //console.log(myBackup2)
-
-        //if(myBackup2!="")
-        //   $("body").append(myBackup2);
-
-        $.ajax({
-                 type:"GET",
-                 cache: false,
-                 url:$(this).attr("href"),
-                 success:function(data){
-                          //console.log(data);
-                          //var $selector = $("#modal-body2");
-
-                      //$("#contract-approve-history-form .d-picker").datepicker();
-                      $("#bodyApprove").html(data);
-                      //console.log($("#modalApprove").html());
-                      $("#dateApprove").datepicker();
-              $("#dateApprove").datepicker("option", {dateFormat: "dd/mm/yyyy"});
-    
-
-                       $("#modalApprove").modal("show");
-
-            
-                 },
-
-                });
-          return false;
-    });
-            
-');
-Yii::app()->clientScript->registerScript('createSubOutsourceTemp','
-    function getSubcontract()
-    {
-    }
-            
-');
 
 
 Yii::app()->clientScript->registerScript('deleteOutsourceContract', "
@@ -839,9 +848,9 @@ function deleteOutsourceContract(elm, index)
             num--;
             $('#num').val(num);
             
-            console.log('del num:'+$('#num').val());
+            //console.log('del num:'+$('#num').val());
             //rearrange no.
-                  var collection = $('.contract_no');
+                  var collection = $('.contract_no_oc');
                   //console.log(collection);
                   for(var k=0; k<collection.length; k++){
                       var element = collection.eq(k);

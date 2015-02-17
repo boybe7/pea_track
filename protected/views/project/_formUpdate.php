@@ -712,6 +712,35 @@ hr {
     <a href="#" class="btn btn-danger" id="modalCancel">ยกเลิก</a>
     <a href="#" class="btn btn-primary" id="modalSubmit">บันทึก</a>
     </div>
+</div>
+
+
+<div id="modalChangeOc"  class="modal hide fade">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>แก้ไขข้อมูลรายการเพิ่ม-ลดวงเงิน</h3>
+    </div>
+    <div class="modal-body" id="bodyChangeOc">
+     
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn btn-danger" id="modalChangeOcCancel">ยกเลิก</a>
+    <a href="#" class="btn btn-primary" id="modalChangeOcSubmit">บันทึก</a>
+    </div>
+</div>
+
+<div id="modalApproveOc"  class="modal hide fade">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>แก้ไขข้อมูลอนุมัติ</h3>
+    </div>
+    <div class="modal-body" id="bodyApproveOc">
+     
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn btn-danger" id="modalCancelOc">ยกเลิก</a>
+    <a href="#" class="btn btn-primary" id="modalSubmitOc">บันทึก</a>
+    </div>
 </div
 
 <input type="hidden" id="pre_index">
@@ -860,35 +889,62 @@ $("#loadContractByAjaxTemp").click(function(e){
 
 //Yii::app()->clientScript->registerCoreScript('jquery');
 Yii::app()->clientScript->registerScript('loadoutsource', '
-var _index = ' . $index . ';
-var _index = $("#num").val();
+var _index = ' . $index2 . ';
 $("#loadOutsourceByAjax").click(function(e){
      var _index = $("#num").val();
      _index++;
     e.preventDefault();
-    var _url = "' . Yii::app()->controller->createUrl("loadOutsourceByAjax", array("load_for" => $this->action->id)) . '&index="+_index;
+    var _url = "' . Yii::app()->controller->createUrl("loadOutsourceByAjaxTemp", array("load_for" => $this->action->id)) . '&index="+_index;
     $.ajax({
-        url: _url,
-        success:function(response){
-            $("#outsource").append(response);
-            $("#outsource .crow").last().animate({
-                opacity : 1,
-                left: "+0",
-                height: "toggle"
-            });
+                              url: _url,
+                              success:function(response){
+                                  $("#outsource").append(response);
+                                  $("#outsource .crow").last().animate({
+                                      opacity : 1,
+                                      left: "+0",
+                                      height: "toggle"
+                                  });
 
-            //_index++;
-            $("#num").val(_index);
-            //console.log("add num:"+$("#num").val());
-             _index = $("#num").val();
-            //console.log("add index:"+_index);
-        }
+                                  $(".sessionStore").keyup(function () {
+                                     
+                                      sessionStorage[$(this).attr("id")] = $(this).val();
+                                  });
 
+                                  if($("#clearSessionStorage").val()==1)
+                                      sessionStorage.clear();
+
+                                  
+                                  
+                                   $("form input").each(function(){
+                                           id = $(this).attr("id");
+                                           if ( sessionStorage[id] )
+                                              $(this).val( sessionStorage.getItem(id));
+                                
+                                                                      
+                                   });
+
+                                   
+
+                                    $("form textarea").each(function(){
+                                           id = $(this).attr("id");
+                                           if ( sessionStorage[id] )
+                                              $(this).val( sessionStorage.getItem(id));
+                                
+                                                                      
+                                   });
+
+                                    //rearrange no.
+                                    var collection = $(".contract_no_oc");
+                                    for(var i=0; i<collection.length; i++){
+                                        var element = collection.eq(i);
+                                        element.html("สัญญาที่ "+(i+1));
+                                        //console.log(element.html());
+                                    }         
+                              }//success
+       
     });
-    //_index++;
+
 });
 ', CClientScript::POS_END);
-
-
 
 ?>

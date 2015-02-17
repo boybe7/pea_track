@@ -31,7 +31,7 @@ class ContractApproveHistoryController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','createTemp','createOutsourceTemp','update','updateTemp','delete','deleteTemp'),
+				'actions'=>array('create','createOutsource','createTemp','createOutsourceTemp','update','updateTemp','delete','deleteTemp'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -76,6 +76,54 @@ class ContractApproveHistoryController extends Controller
 			$model->last_update =  (date("Y")+543).date("-m-d H:i:s");
 			
 			$model->type = 1;
+			if (Yii::app()->request->isAjaxRequest)
+	        {
+	           
+	            if($model->save())
+	            	 echo CJSON::encode(array(
+	                'status'=>'success'
+	                ));
+	            else
+	                echo CJSON::encode(array(
+	                'status'=>'failure','div'=>$this->renderPartial('_form', array('model'=>$model,'index'=>$id), true)));
+	                
+	            exit;
+				        
+	        }		
+			else
+			  if($model->save())
+				$this->redirect(array('admin'));
+
+		}
+
+		if (Yii::app()->request->isAjaxRequest)
+        {
+            echo CJSON::encode(array(
+                'status'=>'failure', 
+                'div'=>$this->renderPartial('_form', array('model'=>$model,'index'=>$id), true)));
+            exit;               
+        }
+
+		$this->renderPartial('_form',array('model'=>$model,'index'=>$id));
+	}
+
+	public function actionCreateOutsource($id)
+	{
+		$model=new ContractApproveHistory;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		$model= new ContractApproveHistory;
+
+		if(isset($_POST['ContractApproveHistory']))
+		{
+			$model->attributes=$_POST['ContractApproveHistory'];
+			$model->dateApprove = $_POST['ContractApproveHistory']['dateApprove']; 
+			$model->contract_id = $id;
+			$model->last_update =  (date("Y")+543).date("-m-d H:i:s");
+			
+			$model->type = 2;
 			if (Yii::app()->request->isAjaxRequest)
 	        {
 	           

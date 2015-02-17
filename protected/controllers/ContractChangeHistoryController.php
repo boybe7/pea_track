@@ -27,7 +27,7 @@ class ContractChangeHistoryController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','createTemp','createOutsourceTemp','update','updateTemp','delete','deleteTemp'),
+				'actions'=>array('create','createOutsource','createTemp','createOutsourceTemp','update','updateTemp','delete','deleteTemp'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -95,6 +95,48 @@ class ContractChangeHistoryController extends Controller
 
 		$this->renderPartial('_form',array('model'=>$model,'index'=>$id));
 	}
+
+	public function actionCreateOutsource($id)
+	{
+		 $model=new ContractChangeHistory;
+
+		// Uncomment the following line if AJAX validation is needed
+		//$this->performAjaxValidation($model);
+		if(isset($_POST['ContractChangeHistory']))
+		{
+			$model->attributes=$_POST['ContractChangeHistory'];
+			$model->contract_id = $id;			
+			$model->type = 2;
+			$model->last_update =  (date("Y")+543).date("-m-d H:i:s");
+			if (Yii::app()->request->isAjaxRequest)
+	        {
+	           
+	            if($model->save())
+	            	 echo CJSON::encode(array(
+	                'status'=>'success'
+	                ));
+	            else
+	                echo CJSON::encode(array(
+	                'status'=>'failure','div'=>$this->renderPartial('_form', array('model'=>$model,'index'=>$id), true)));
+	                
+	            exit;
+				        
+	        }		
+			
+
+		}
+
+		if (Yii::app()->request->isAjaxRequest)
+        {
+            echo CJSON::encode(array(
+                'status'=>'failure', 
+                'div'=>$this->renderPartial('_form', array('model'=>$model,'index'=>$id), true)));
+            exit;               
+        }
+
+		$this->renderPartial('_form',array('model'=>$model,'index'=>$id));
+	}
+
 
 	public function actionCreateTemp($id)
 	{
