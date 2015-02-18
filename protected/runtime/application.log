@@ -5551,3 +5551,1509 @@ in C:\xampp\htdocs\pea_track\index.php (13)
 2015/02/17 23:27:57 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
 in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1136)
 in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:49:08 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:49:08 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:49:08 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:49:08 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:49:08 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:49:08 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:49:08 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:49:08 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:49:08 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:49:08 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:31 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:31 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:31 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:31 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:31 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:31 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:31 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:31 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:31 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:31 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:32 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:32 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:32 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:32 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:32 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:32 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:32 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:32 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:32 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 13:51:32 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:55:53 [warning] [application] Failed to set unsafe attribute "u_id" of "ContractChangeHistory".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (933)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:55:53 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '1' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `contract_change_history` (`id`, `ref_no`, `detail`, `cost`, `type`, `contract_id`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5).
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (938)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:55:54 [error] [application] Exception when saving data: CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '1' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `contract_change_history` (`id`, `ref_no`, `detail`, `cost`, `type`, `contract_id`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1079)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:56:10 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:56:10 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:56:10 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:56:10 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:56:10 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:56:10 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:56:10 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:56:10 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:56:10 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:56:10 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:57:58 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:57:58 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:57:58 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:57:58 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:57:58 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:57:58 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:57:58 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:57:58 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:57:58 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:57:58 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:03 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:03 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:03 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:03 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:03 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:03 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1136)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:03 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1136)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:03 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1136)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:03 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1136)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:03 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1136)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:50 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:50 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:50 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:50 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:50 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:50 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:50 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:50 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:50 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:58:50 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:59:30 [warning] [application] Failed to set unsafe attribute "u_id" of "ContractChangeHistory".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (933)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 15:59:30 [warning] [application] Failed to set unsafe attribute "u_id" of "ContractApproveHistory".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (964)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1136)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1136)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1136)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1136)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:01:37 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1136)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:12:07 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:07 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:23 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:23 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:23 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:23 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:23 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:23 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:23 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:23 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:23 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:13:23 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:15:12 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:13 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:16:47 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:23:05 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:34:03 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:37:53 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:40:16 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:41:53 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:42:48 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:43:08 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:04 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:44:12 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in C:\xampp\htdocs\pea_track\protected\controllers\ContractChangeHistoryController.php:316
+Stack trace:
+#0 [internal function]: ContractChangeHistoryController->actionDelete('43')
+#1 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(ContractChangeHistoryController), Array)
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(ContractChangeHistoryController), Object(ReflectionMethod), Array)
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('delete')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('ContractChangeH...')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/ContractChangeHistory/delete/43
+HTTP_REFERER=http://localhost:8080/pea_track/project/update/25
+---
+2015/02/18 16:44:36 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Invalid request. Please do not repeat this request again.' in C:\xampp\htdocs\pea_track\protected\controllers\ContractChangeHistoryController.php:316
+Stack trace:
+#0 [internal function]: ContractChangeHistoryController->actionDelete('43')
+#1 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(ContractChangeHistoryController), Array)
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(ContractChangeHistoryController), Object(ReflectionMethod), Array)
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('delete')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('ContractChangeH...')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/ContractChangeHistory/delete/43
+HTTP_REFERER=http://localhost:8080/pea_track/project/update/25
+---
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:45:21 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:46:46 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:18 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:25 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\xampp\htdocs\pea_track\framework\web\CController.php:336
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('update')
+#9 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/update/...')
+#10 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/pea_track/project/update/OutsourceContract/delete/42
+HTTP_REFERER=http://localhost:8080/pea_track/project/update/25
+---
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:47 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:50:54 [error] [exception.CException] exception 'CException' with message 'OutsourceContractController ไม่สามารถค้นหา "admin" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:878
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#1 C:\xampp\htdocs\pea_track\protected\controllers\OutsourceContractController.php(176): CController->render('admin', Array)
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): OutsourceContractController->actionAdmin()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('admin')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('outsourceContra...')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/outsourceContract/admin
+HTTP_REFERER=http://localhost:8080/pea_track/project/update/25
+---
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:51:09 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:56:36 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:13 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:31 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:31 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:31 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:31 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:31 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1107)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:31 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:31 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:31 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:31 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/02/18 16:57:31 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1137)
+in C:\xampp\htdocs\pea_track\index.php (13)

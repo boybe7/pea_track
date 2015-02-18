@@ -15,7 +15,7 @@
 </style>
 <fieldset class="well the-fieldset">
         <legend class="the-legend contract_no_oc">สัญญาที่ <?php echo ($index);?></legend>
-       
+         <?php echo CHtml::activeHiddenField($model, '[' . $index . ']oc_id'); ?>
           <div class="row-fluid"> 
             <div class="span12">
             <?php
@@ -25,9 +25,10 @@
                   'type'=>'danger',
                   'label'=>'ลบสัญญา',
                   'icon'=>'minus-sign',
-                  
+                  //'url'=>Yii::app()->createUrl("ContractChangeHistory/delete", array("id"=>$model->oc_id)),
                   'htmlOptions'=>array(
                     'class'=>'pull-right',
+                    'id'=>'delOC_'.$index,
                     'style'=>'margin:0px 10px 0px 10px;',
                     'onclick' => 'deleteOutsourceContract(this, ' . $index . ');'
                   ),
@@ -832,7 +833,21 @@ function deleteOutsourceContract(elm, index)
     function(confirmed){
             if(confirmed)
             { 
-          element=$(elm).parent().parent().parent();
+
+            id = $('#OutsourceContract_'+index+'_oc_id').val();
+            url = 'OutsourceContract/delete/'+id;
+            console.log(url); 
+             $.ajax( {
+                type: 'POST',
+                url: '../../OutsourceContract/delete/'+id,
+                dataType:'json',
+                
+                success: function( msg ) {
+
+                }
+            });    
+
+            element=$(elm).parent().parent().parent();
             /* animate div */
             $(element).animate(
             {

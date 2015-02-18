@@ -1051,7 +1051,7 @@ class ProjectController extends Controller
 
 												if($modelOC->save())
 												{
-
+													$this->redirect(array('index'));
 												}	
 												else{
 													$modelOutsourceVal->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ '.$index.'" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
@@ -1070,6 +1070,7 @@ class ProjectController extends Controller
 
 
 							$transaction->commit();
+							
 						}
 						catch(Exception $e)
 				 		{

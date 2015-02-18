@@ -31,11 +31,11 @@ class OutsourceContractController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','GetContract'),
+				'actions'=>array('create','update','GetContract','delete'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -137,6 +137,21 @@ class OutsourceContractController extends Controller
 	 */
 	public function actionDelete($id)
 	{
+		if (Yii::app()->request->isAjaxRequest)
+	    {
+	           
+	            if($this->loadModel($id)->delete())
+	            	 echo CJSON::encode(array(
+	                'status'=>'success'
+	                ));
+	            else
+	                echo CJSON::encode(array(
+	                'status'=>'failure'));
+	                
+	            exit;
+				        
+	   }		
+
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
