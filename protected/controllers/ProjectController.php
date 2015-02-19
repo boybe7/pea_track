@@ -102,7 +102,7 @@ class ProjectController extends Controller
 		 				     //print_r($contract);
 		 					
 		 					 
-		 				     $modelC = new OutsourceContract;
+		 				     $modelC = new OutsourceContract("search");
 		 				     $modelC->attributes = $outsource;
 		 				     $modelC->oc_sign_date = $outsource["oc_sign_date"];
 		 				     $modelC->oc_approve_date = $outsource["oc_approve_date"];
@@ -125,6 +125,32 @@ class ProjectController extends Controller
 		 				    
 		 				     if($modelC->save())
 		 				     {
+		 				     	
+		 				     	$modelTemps = Yii::app()->db->createCommand()
+						                    ->select('*')
+						                    ->from('contract_change_history_temp')
+						                    ->where('contract_id=:id AND type=2 AND u_id=:user', array(':id'=>$index,':user'=>Yii::app()->user->ID))
+						                    ->queryAll();
+						        foreach ($modelTemps as $key => $mTemp) {
+
+						        // header('Content-type: text/plain');
+              //             		print_r($modelC);                    
+              //             	    exit;
+                                        $modelApprove = new ContractChangeHistory("search");
+                                        $modelApprove->attributes = $mTemp;
+                                        
+                                        $modelApprove->id = "";
+                                        $modelApprove->contract_id = $modelC->oc_id;
+                                        $modelApprove->type = 2;
+                                        
+                                        if($modelApprove->save())
+                                           $msg =  "successful";
+                                        else{
+                                           $model->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ "'.$index.' ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+		 				            	   $saveOK = 0;
+                                        }   	
+						        }
+
 		 				     	//$saveOK = true;
 		 				     	$modelTemps = Yii::app()->db->createCommand()
 						                    ->select('*')
@@ -136,10 +162,10 @@ class ProjectController extends Controller
 						        // header('Content-type: text/plain');
               //             		print_r($modelC);                    
               //             	    exit;
-                                        $modelApprove = new ContractApproveHistory;
+                                        $modelApprove = new ContractApproveHistory("search");
                                         $modelApprove->attributes = $mTemp;
                                         $modelApprove->dateApprove = $mTemp['dateApprove'];
-                                        //$modelApprove->id = "";
+                                        $modelApprove->id = "";
                                         $modelApprove->contract_id = $modelC->oc_id;
                                         $modelApprove->type = 2;
                                         
@@ -173,6 +199,8 @@ class ProjectController extends Controller
 		 				if($saveOK==1)
 		 				{
 		 					$transaction->commit();
+		 					$this->redirect(array('index'));	
+
 		 					//$this->redirect(array('createOutsource', 'id' => $model->pj_id));
 		 					// header('Content-type: text/plain');
         //                 		//print_r($modelC);
@@ -208,8 +236,10 @@ class ProjectController extends Controller
 		else
         {
         	if (!Yii::app()->request->isAjaxRequest)	
+			{
 			  Yii::app()->db->createCommand('DELETE FROM contract_approve_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
-		
+			  Yii::app()->db->createCommand('DELETE FROM contract_change_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
+			}
 			  // Yii::app()->db->createCommand('TRUNCATE contract_approve_history_temp')->execute();
 			
         }
@@ -1291,7 +1321,7 @@ class ProjectController extends Controller
 
         Yii::app()->clientscript->scriptMap['jquery.js'] = false;
         Yii::app()->clientscript->scriptMap['jquery-ui.min.js'] = false;
-        $this->renderPartial('//outsourceContract/_form', array(
+        $this->renderPartial('//outsourceContract/_formUpdateTemp', array(
             'model' => $model,
             'index' => $index,
             'display' => 'block',

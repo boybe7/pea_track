@@ -232,7 +232,7 @@ class OutsourceContract extends CActiveRecord
 
 	public function beforeDelete()
 	{
-	 $this->idCache = $this->pc_id;
+	 $this->idCache = $this->oc_id;
 	 
 	 return parent::beforeDelete();
 	}
@@ -240,6 +240,7 @@ class OutsourceContract extends CActiveRecord
 	public function afterDelete()
 	{
 		  
+		 
 		 ContractApproveHistory::model()->deleteAll("contract_id ='" . $this->idCache . "' and type=2");
 		 ContractChangeHistory::model()->deleteAll("contract_id ='" . $this->idCache . "'  and type=2");
 		 parent::afterDelete();

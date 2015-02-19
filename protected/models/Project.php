@@ -228,6 +228,19 @@ class Project extends CActiveRecord
 		 }
 		  
 		 //ProjectContract::model()->deleteAll("pc_proj_id ='" . $this->idCache . "'");
+		 $criteria = new CDbCriteria(array(
+		   'condition' => 'oc_proj_id=:projectId',
+		   'params' => array(
+		    ':projectId' => $this->idCache),
+		  ));
+		 
+		 $contracts_associated_with_project = OutsourceContract::model()->findAll($criteria);
+		 
+		 foreach ($contracts_associated_with_project as $contract)
+		 {
+		    $contract->delete();
+		 }
+
 		 WorkCode::model()->deleteAll("pj_id ='" . $this->idCache . "'");
 		  
 		 // $filename=$this->getImagePath($this->idCache);

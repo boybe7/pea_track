@@ -199,6 +199,10 @@ h1,h2,h3,h4{
         font-weight: normal;
 }
 
+table tr .tr_white {
+  background-color: #ffffff;
+}
+
 </style>     
      
 <body class="body">

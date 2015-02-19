@@ -401,7 +401,7 @@ hr {
   
 	        foreach ($outsource as $id => $child):
 
-	            $this->renderPartial('//outsourceContract/_form', array(
+	            $this->renderPartial('//outsourceContract/_formUpdateTemp', array(
 	                'model' => $child,
 	                'index' => $index,
                   //'form' => $form,
@@ -427,48 +427,61 @@ hr {
 	</div>		
 </div>	
 
-<?php echo'<div id="modalApproveCreate"  class="approveCreate modal hide fade">';?>
-<!-- <div id="modalApproveCreate"  class="approveCreate modal hide fade"> -->
+
+<div id="modalChange"  class="modal hide fade">
     <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>เพิ่มข้อมูลการอนุมัติ</h3>
+    <h3>แก้ไขข้อมูลรายการเพิ่ม-ลดวงเงิน</h3>
     </div>
-    <div class="modal-body" id="bodyApproveCreate">
-      <?php 
-      //$model = Vendor::model()->findByPk(14);
-      $model3=new ContractApproveHistoryTemp;
-      
-      $this->renderPartial('/contractApproveHistory/_form2',array('model'=>$model3,'index'=>$index),false); 
-
-
-      ?>
-    <!-- Date here: <input type="text" id="datePicker2" > -->
+    <div class="modal-body" id="bodyChange">
+     
     </div>
     <div class="modal-footer">
-    <a href="#" class="btn btn-danger" id="modalCancel2">ยกเลิก</a>
-   <?php echo '<a href="#" class="btn btn-primary" id="modalSubmit2">บันทึก</a>'; ?>
+    <a href="#" class="btn btn-danger" id="modalChangeCancel">ยกเลิก</a>
+    <a href="#" class="btn btn-primary" id="modalChangeSubmit">บันทึก</a>
     </div>
 </div>
 
 <div id="modalApprove"  class="modal hide fade">
     <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>แก้ไขข้อมูลการอนุมัติ</h3>
+    <h3>แก้ไขข้อมูลอนุมัติ</h3>
     </div>
     <div class="modal-body" id="bodyApprove">
-      <?php 
-      //$model = Vendor::model()->findByPk(14);
-      //$model3=new ContractApproveHistoryTemp;
-      
-      //$this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
-
-
-      ?>
-    <!-- Date here: <input type="text" id="datePicker2" > -->
+     
     </div>
     <div class="modal-footer">
     <a href="#" class="btn btn-danger" id="modalCancel">ยกเลิก</a>
     <a href="#" class="btn btn-primary" id="modalSubmit">บันทึก</a>
+    </div>
+</div>
+
+
+<div id="modalChangeOc"  class="modal hide fade">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>แก้ไขข้อมูลรายการเพิ่ม-ลดวงเงิน</h3>
+    </div>
+    <div class="modal-body" id="bodyChangeOc">
+     
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn btn-danger" id="modalChangeOcCancel">ยกเลิก</a>
+    <a href="#" class="btn btn-primary" id="modalChangeOcSubmit">บันทึก</a>
+    </div>
+</div>
+
+<div id="modalApproveOc"  class="modal hide fade">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>แก้ไขข้อมูลอนุมัติ</h3>
+    </div>
+    <div class="modal-body" id="bodyApproveOc">
+     
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn btn-danger" id="modalCancelOc">ยกเลิก</a>
+    <a href="#" class="btn btn-primary" id="modalSubmitOc">บันทึก</a>
     </div>
 </div>
 
@@ -493,7 +506,21 @@ hr {
 
     	?>
     </div>
-    <div id="modal-body2" class="modal-body">
+    <div id="modal-body2">
+<!-- put whatever you want to show up on bootbox here -->
+    
+      <?php 
+      //$model = Vendor::model()->findByPk(14);
+      $model3=new ContractApproveHistory;
+      
+      $this->renderPartial('/contractApproveHistory/_form',array('model'=>$model3),false); 
+
+
+      ?>
+
+      
+    </div>
+    <div id="modal-body5">
 <!-- put whatever you want to show up on bootbox here -->
     
       <?php 
@@ -507,15 +534,24 @@ hr {
 
       
     </div>
-    <div id="modal-body4" class="modal-body">
+    <div id="modal-body3">
+<!-- put whatever you want to show up on bootbox here -->
       <?php 
+       $model4=new ContractChangeHistory;
       
-      $model4 = new OutsourceSubcontractTemp;
-      $this->renderPartial('/outsourceContract/_formTemp',array('model'=>$model4),false); 
+      $this->renderPartial('/contractChangeHistory/_form',array('model'=>$model4),false); 
 
-  
       ?>
+    </div>
+    <div id="modal-body4">
+<!-- put whatever you want to show up on bootbox here -->
+      <?php 
+       $model4=new ContractChangeHistoryTemp;
+      
+      $this->renderPartial('/contractChangeHistory/_form',array('model'=>$model4),false); 
 
+      ?>
+    </div>
       
     </div>
 </div>

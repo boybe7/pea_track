@@ -11,7 +11,9 @@
   .error {
     font-size: 14px;
   }
-
+  .tr_white {
+      background-color: white;
+   }
 </style>
 <fieldset class="well the-fieldset">
         <legend class="the-legend contract_no_oc">สัญญาที่ <?php echo ($index);?></legend>
