@@ -29,6 +29,7 @@ class OutsourceContract extends CActiveRecord
 	/**
 	 * @return string the associated database table name
 	 */
+	private $idCache;
 
 	private $_oldattributes = array();
 
@@ -227,6 +228,21 @@ class OutsourceContract extends CActiveRecord
 			'oc_user_update' => 'ผู้บันทึก',
 			'oc_last_update' => 'แก้ไขล่าสุดเมื่อ',
 		);
+	}
+
+	public function beforeDelete()
+	{
+	 $this->idCache = $this->pc_id;
+	 
+	 return parent::beforeDelete();
+	}
+
+	public function afterDelete()
+	{
+		  
+		 ContractApproveHistory::model()->deleteAll("contract_id ='" . $this->idCache . "' and type=2");
+		 ContractChangeHistory::model()->deleteAll("contract_id ='" . $this->idCache . "'  and type=2");
+		 parent::afterDelete();
 	}
 
 	/**

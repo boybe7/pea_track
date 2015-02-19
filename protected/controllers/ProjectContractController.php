@@ -7,6 +7,32 @@ class ProjectContractController extends Controller
 		$this->render('index');
 	}
 
+	public function loadModel($id)
+	{
+		$model=ProjectContract::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+
+	public function actionDelete($id)
+	{
+		if (Yii::app()->request->isAjaxRequest)
+	    {
+	           
+	            if($this->loadModel($id)->delete())
+	            	 echo CJSON::encode(array(
+	                'status'=>'success'
+	                ));
+	            else
+	                echo CJSON::encode(array(
+	                'status'=>'failure'));
+	                
+	            exit;
+				        
+	   }		
+	}   
+
 	public function actionGetProjectContract(){
             $request=trim($_GET['term']);
                     

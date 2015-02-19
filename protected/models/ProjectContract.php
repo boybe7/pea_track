@@ -160,8 +160,8 @@ class ProjectContract extends CActiveRecord
 	public function afterDelete()
 	{
 		  
-		 ContractApproveHistory::model()->deleteAll("contract_id ='" . $this->idCache . "'");
-		 
+		 ContractApproveHistory::model()->deleteAll("contract_id ='" . $this->idCache . "' and type=1");
+		 ContractChangeHistory::model()->deleteAll("contract_id ='" . $this->idCache . "'  and type=1");
 		 parent::afterDelete();
 	}
 

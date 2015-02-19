@@ -895,6 +895,19 @@ function deleteContract(elm, index)
 		function(confirmed){
            	if(confirmed)
            	{	
+					
+           			id = $('#ProjectContract_'+index+'_pc_id').val();
+			            
+			           
+			             $.ajax( {
+			                type: 'POST',
+			                url: '../../ProjectContract/delete/'+id,
+			                dataType:'json',
+			                
+			                success: function( msg ) {
+
+			                }
+			            });    
 					element=$(elm).parent().parent().parent();
 				    /* animate div */
 				    $(element).animate(

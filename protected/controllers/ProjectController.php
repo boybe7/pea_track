@@ -330,7 +330,7 @@ class ProjectController extends Controller
                                         $modelApprove = new ContractApproveHistory;
                                         $modelApprove->attributes = $mTemp;
                                         $modelApprove->dateApprove = $mTemp['dateApprove'];
-                                        //$modelApprove->id = "";
+                                        $modelApprove->id = "";
                                         $modelApprove->contract_id = $modelC->pc_id;
                                         $modelApprove->type = 1;
                                         
@@ -352,7 +352,7 @@ class ProjectController extends Controller
 
                                         $modelApprove = new ContractChangeHistory;
                                         $modelApprove->attributes = $mTemp;
-                                       
+                                        $modelApprove->id = '';
                                         $modelApprove->contract_id = $modelC->pc_id;
                                         $modelApprove->type = 1;
                                         
@@ -724,7 +724,7 @@ class ProjectController extends Controller
 
 		                                        $modelChange = new ContractChangeHistory("search");
 		                                        $modelChange->attributes = $mTemp;
-		                                       
+		                                        $modelChange->id = '';
 		                                        $modelChange->contract_id = $modelPC->pc_id;
 		                                        $modelChange->type = 1;
 		                                        
@@ -757,7 +757,7 @@ class ProjectController extends Controller
 		                                        $modelApprove = new ContractApproveHistory("search");
 		                                        $modelApprove->attributes = $mTemp;
 		                                        $modelApprove->dateApprove = $mTemp['dateApprove'];
-		                                        //$modelApprove->id = "";
+		                                        $modelApprove->id = "";
 		                                        $modelApprove->contract_id = $modelPC->pc_id;
 		                                        $modelApprove->type = 1;
 		                                        
@@ -891,11 +891,15 @@ class ProjectController extends Controller
 			}	 
 
 		}
-		else if(isset($_POST['OutsourceContract']))
+		
+
+		if(isset($_POST['OutsourceContract']))
 		{
 				
-				$tab = 2;
+					$tab = 2;
 					$clearSession = false;
+					$saveOC = true;
+
 				 //------outsource-----------//
 	             	$transaction=Yii::app()->db->beginTransaction();
 
@@ -917,7 +921,7 @@ class ProjectController extends Controller
 											        //header('Content-type: text/plain');
 					                          		//print_r($modelOC);                    
 					                          	    //exit;
-					                         
+					                         array_push($modelOutsource, $modelOC);
 									    	 if($modelOC->save())
 											{
 
@@ -931,7 +935,7 @@ class ProjectController extends Controller
 
 					                                        $modelChange = new ContractChangeHistory("search");
 					                                        $modelChange->attributes = $mTemp;
-					                                       
+					                                        $modelChange->id = '';
 					                                        $modelChange->contract_id = $modelOC->oc_id;
 					                                        $modelChange->type = 2;
 					                                        
@@ -947,7 +951,7 @@ class ProjectController extends Controller
 
 					                                        }   	
 											        }            
-											        array_push($modelOutsource, $modelOC);
+											        
 
 								 	        		 //save approve change history
 								 	        		 $modelTemps = Yii::app()->db->createCommand()
@@ -962,6 +966,7 @@ class ProjectController extends Controller
 					              //             	    exit;
 					                                        $modelApprove = new ContractApproveHistory("search");
 					                                        $modelApprove->attributes = $mTemp;
+					                                        $modelApprove->id = '';
 					                                        $modelApprove->dateApprove = $mTemp['dateApprove'];
 					                                        //$modelApprove->id = "";
 					                                        $modelApprove->contract_id = $modelOC->oc_id;
@@ -1003,7 +1008,7 @@ class ProjectController extends Controller
 												$difference = 0;
 												foreach ($value as $key => $new) {
 
-													if($new!=$modelPC[$key])
+													if($new!=$modelOC[$key])
 														$difference = 1;
 													
 												}
@@ -1011,7 +1016,7 @@ class ProjectController extends Controller
 												$modelCostHist = Yii::app()->db->createCommand()
 											                        ->select('max(last_update) as max')
 											                        ->from('contract_change_history')
-											                        ->where('contract_id=:id', array(':id'=>$value["pc_id"]))
+											                        ->where('contract_id=:id', array(':id'=>$value["oc_id"]))
 											                        ->queryAll();
 											                        
 											    $change_lastUpdate = $modelCostHist[0]["max"];                    
@@ -1021,7 +1026,7 @@ class ProjectController extends Controller
 												$modelApproveHist = Yii::app()->db->createCommand()
 											                        ->select('max(last_update) as max')
 											                        ->from('contract_approve_history')
-											                        ->where('contract_id=:id', array(':id'=>$value["pc_id"]))
+											                        ->where('contract_id=:id', array(':id'=>$value["oc_id"]))
 											                        ->queryAll();
 											    $approve_lastUpdate = $modelApproveHist[0]["max"];  
 
@@ -1030,7 +1035,7 @@ class ProjectController extends Controller
 
 											    //5.compare with contract last_update
 											    $datedif = "no";
-											    if($last_update_relate > $modelPC->pc_last_update)
+											    if($last_update_relate > $modelOC->oc_last_update)
 											    {
 											    	$difference = 1;
 											    	$datedif = "yes";
@@ -1045,20 +1050,21 @@ class ProjectController extends Controller
 
 												if($difference==1)
 												{
-													$modelOC->pc_last_update = (date("Y")+543).date("-m-d H:i:s");
-									    			$modelOC->pc_user_update = Yii::app()->user->ID;
+													$modelOC->oc_last_update = (date("Y")+543).date("-m-d H:i:s");
+									    			$modelOC->oc_user_update = Yii::app()->user->ID;
 												}
+												array_push($modelOutsource, $modelOC);
 
 												if($modelOC->save())
 												{
-													$this->redirect(array('index'));
+													
 												}	
 												else{
 													$modelOutsourceVal->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ '.$index.'" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
-													$savePC = false;
+													$saveOC = false;
 
 												}
-						 	        			array_push($modelOutsource, $modelOC);
+						 	        			
 						 	        	
 										}
 						 	        	
@@ -1069,7 +1075,11 @@ class ProjectController extends Controller
 								}
 
 
-							$transaction->commit();
+							  if($saveOC){
+
+						        $transaction->commit();
+								$this->redirect(array('index'));
+							  }
 							
 						}
 						catch(Exception $e)
@@ -1103,7 +1113,7 @@ class ProjectController extends Controller
                
                 foreach ($project_contract as $key => $value) {
 
-                    $modelPC =new ProjectContract;
+                    $modelPC =new ProjectContract("search");
                     $modelPC->attributes = $value;
                     $str_date = explode("-", $value["pc_sign_date"]);
                     if(count($str_date)>1)
@@ -1111,6 +1121,8 @@ class ProjectController extends Controller
                     $str_date = explode("-", $value["pc_end_date"]);
                     if(count($str_date)>1)
                       $modelPC->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+
+
 
                     $modelPC->pc_last_update = $value["pc_last_update"];
                     $modelPC->pc_details = $value["pc_details"];
@@ -1133,7 +1145,7 @@ class ProjectController extends Controller
                
                 foreach ($outsource_contract as $key => $value) {
 
-                    $modelOC =new OutsourceContract;
+                    $modelOC =new OutsourceContract("search");
                     $modelOC->attributes = $value;
                     $str_date = explode("-", $value["oc_sign_date"]);
                     if(count($str_date)>1)
@@ -1146,6 +1158,13 @@ class ProjectController extends Controller
                   	if($value["oc_end_date"]=="0000-00-00")
                   	  $modelOC->oc_end_date = "";
                     $modelOC->oc_last_update = $value["oc_last_update"];
+
+                    if($value["oc_insurance_end"]=="0000-00-00")
+                  	  $modelOC->oc_insurance_end = "";	
+                  	if($value["oc_insurance_start"]=="0000-00-00")
+                  	  $modelOC->oc_insurance_start = "";	
+                  	if($value["oc_approve_date"]=="0000-00-00")
+                  	  $modelOC->oc_approve_date = "";	
                    
                     $modelOC->oc_id = $value["oc_id"];
 

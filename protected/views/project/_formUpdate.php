@@ -509,7 +509,16 @@ hr {
         $this->widget('bootstrap.widgets.TbButton', array(
           'buttonType'=>'submit',
           'type'=>'primary',
-          'label'=>'บันทึกแก้ไข',
+          'htmlOptions'=>array('class'=>'','style'=>'margin:0px 10px 0px 10px;'),    
+          'label'=>'บันทึกแก้ไข สัญญาหลัก',
+        )); 
+
+        $this->widget('bootstrap.widgets.TbButton', array(
+           'buttonType'=>'link',
+           'type'=>'danger',
+           'label'=>'ยกเลิก',
+           //'htmlOptions'=>array('class'=>'pull-right'),               
+            'url'=>array("admin"), 
         )); 
 
         ?>
@@ -650,9 +659,22 @@ hr {
 	    <div class="form-actions">
         <?php $this->widget('bootstrap.widgets.TbButton', array(
           'buttonType'=>'submit',
-          'type'=>'primary',
-          'label'=>'บันทึกแก้ไข',
-        )); ?>
+          'type'=>'warning',
+          'htmlOptions'=>array('class'=>'','style'=>'margin:0px 10px 0px 10px;'),  
+          'label'=>'บันทึกแก้ไข สัญญาจ้างช่วง',
+        )); 
+
+
+
+        $this->widget('bootstrap.widgets.TbButton', array(
+           'buttonType'=>'link',
+           'type'=>'danger',
+           'label'=>'ยกเลิก',
+           //'htmlOptions'=>array('class'=>'pull-right'),               
+            'url'=>array("admin"), 
+        )); 
+
+        ?>
       </div>
       <?php $this->endWidget();//end form widget ?>
 		</div><!--  endtab2 -->

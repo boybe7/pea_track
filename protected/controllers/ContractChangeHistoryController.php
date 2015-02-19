@@ -303,6 +303,8 @@ class ContractChangeHistoryController extends Controller
 	 */
 	public function actionDelete($id)
 	{
+		
+		
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
