@@ -122,9 +122,10 @@
 
 	<div class="row-fluid">       
        <div class="span8">
-          <?php echo $form->textAreaRow($model,'detail',array('rows'=>2, 'cols'=>50, 'class'=>'span12')); ?> 
+          <?php echo $form->textAreaRow($model,'detail',array('rows'=>5, 'cols'=>50, 'class'=>'span12')); ?> 
        </div>
        <div class="span4"> 
+        <div class="row-fluid">    
           <?php echo $form->textFieldRow($model,'money',array('class'=>'span10','style'=>'text-align:right','onChange'=>'javascript:getAlert()'));
 
                 
@@ -140,88 +141,108 @@
 
                 // ));
            ?>
+
+           <?php 
+           echo $form->labelEx($model,'approve_date',array('class'=>'span12','style'=>'text-align:left;'));
+             
+                    echo '<div class="input-append span11" style="margin-top:-10px;margin-left:0px;">'; //ใส่ icon ลงไป
+                        $form->widget('zii.widgets.jui.CJuiDatePicker',
+
+                        array(
+                            'name'=>'approve_date',
+                            'attribute'=>'approve_date',
+                            'model'=>$model,
+                            'options' => array(
+                                              'mode'=>'focus',
+                                              //'language' => 'th',
+                                              'format'=>'dd/mm/yyyy', //กำหนด date Format
+                                              'showAnim' => 'slideDown',
+                                              ),
+                            'htmlOptions'=>array('class'=>'span10', 'value'=>$model->approve_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+                         )
+                    );
+                    echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
+
+         
+          ?>
+
+          </div>
        </div>
     </div>   
 	
     <div class="row-fluid">       
-       <div class="span4">
+       <div class="span8">
           <?php echo $form->textFieldRow($model,'invoice_no',array('class'=>'span12','maxlength'=>200)); ?>
        </div>
-       <div class="span4"> 
-          <?php echo $form->labelEx($model,'invoice_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
-    					
-          <?php 
-
-      			 
-		                echo '<div class="input-append span11" style="margin-top:-10px;margin-left:0px;">'; //ใส่ icon ลงไป
-		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
-
-		                    array(
-		                        'name'=>'invoice_date',
-		                        'attribute'=>'invoice_date',
-		                        'model'=>$model,
-		                        'options' => array(
-		                                          'mode'=>'focus',
-		                                          //'language' => 'th',
-		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
-		                                          'showAnim' => 'slideDown',
-		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$model->invoice_date),  // ใส่ค่าเดิม ในเหตุการ Update 
-		                     )
-		                );
-		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-		     ?>
-       </div>
+       
        <div class="span3">
-          <?php
-            echo $form->textFieldRow($model,'T',array('class'=>'span5','maxlength'=>3));
+           <?php
+            echo $form->textFieldRow($model,'T',array('class'=>'span9','maxlength'=>3));
             //echo CHtml::label('%ความก้าวหน้าด้านเทคนิค','t_percent');        
             //echo "<input type='text' id='t_percent' name='t_percent' value='$T_percent' class='span12' >";
         ?> 
        </div>
-       <!--  <div class="span4"> 
-          <?php 
-
-
-          // echo CHtml::label('คงเหลือจ่ายเงิน','remain_cost');        
-          // echo "<input type='text' id='remain_cost' class='span10' style='text-align:right' disabled>"?>
-          
-       </div> -->
+       
     </div>   
 	
 	<div class="row-fluid">       
        <div class="span4">
+          <?php echo $form->labelEx($model,'invoice_send_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
+              
           <?php 
-           echo $form->labelEx($model,'approve_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));
-      			 
-		                echo '<div class="input-append span11" style="margin-top:-10px;margin-left:0px;">'; //ใส่ icon ลงไป
-		                    $form->widget('zii.widgets.jui.CJuiDatePicker',
 
-		                    array(
-		                        'name'=>'approve_date',
-		                        'attribute'=>'approve_date',
-		                        'model'=>$model,
-		                        'options' => array(
-		                                          'mode'=>'focus',
-		                                          //'language' => 'th',
-		                                          'format'=>'dd/mm/yyyy', //กำหนด date Format
-		                                          'showAnim' => 'slideDown',
-		                                          ),
-		                        'htmlOptions'=>array('class'=>'span12', 'value'=>$model->invoice_date),  // ใส่ค่าเดิม ในเหตุการ Update 
-		                     )
-		                );
-		                echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
+             
+                    echo '<div class="input-append span11" style="margin-top:-10px;margin-left:0px;">'; //ใส่ icon ลงไป
+                        $form->widget('zii.widgets.jui.CJuiDatePicker',
 
-		     
-          ?>
+                        array(
+                            'name'=>'invoice_send_date',
+                            'attribute'=>'invoice_send_date',
+                            'model'=>$model,
+                            'options' => array(
+                                              'mode'=>'focus',
+                                              //'language' => 'th',
+                                              'format'=>'dd/mm/yyyy', //กำหนด date Format
+                                              'showAnim' => 'slideDown',
+                                              ),
+                            'htmlOptions'=>array('class'=>'span12', 'value'=>$model->invoice_send_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+                         )
+                    );
+                    echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
+
+         ?>
        </div>
        <div class="span4"> 
+          <?php 
+           echo $form->labelEx($model,'invoice_receive_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));
+             
+                    echo '<div class="input-append span11" style="margin-top:-10px;margin-left:0px;">'; //ใส่ icon ลงไป
+                        $form->widget('zii.widgets.jui.CJuiDatePicker',
+
+                        array(
+                            'name'=>'invoice_receive_date',
+                            'attribute'=>'invoice_receive_date',
+                            'model'=>$model,
+                            'options' => array(
+                                              'mode'=>'focus',
+                                              //'language' => 'th',
+                                              'format'=>'dd/mm/yyyy', //กำหนด date Format
+                                              'showAnim' => 'slideDown',
+                                              ),
+                            'htmlOptions'=>array('class'=>'span12', 'value'=>$model->invoice_receive_date),  // ใส่ค่าเดิม ในเหตุการ Update 
+                         )
+                    );
+                    echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
+
+         
+          ?>
+        
+       
        </div>
 
        <div class="span3"> 
           <?php
-            echo $form->textFieldRow($model,'B',array('class'=>'span5','maxlength'=>3));
+            echo $form->textFieldRow($model,'B',array('class'=>'span9','maxlength'=>3));
             //echo CHtml::label('%ความก้าวหน้าการเรียกเก็บเงิน','a_percent');        
 	          //echo "<input type='text' id='a_percent' name='a_percent' value='$A_percent' class='span12' >";
 	      ?> 

@@ -286,10 +286,10 @@ $('#search-form form').submit(function(){
 	  	),
 	  	'invoice_no/date'=>array(
 			    'header' => '<a class="sort-link">เลขที่ใบแจ้งหนี้/วันที่ได้รับ</a>',
-			    //'name'=>'cost',
+			    'name'=>'invoice_no/date',
 			    'headerHtmlOptions'=>array(),
 			    'type'=> 'raw',
-			    'value' => '$data->invoice_no."<br>".$data->invoice_date',
+			    'value' => '$data->invoice_no."<br>".$data->invoice_receive_date',
 			    //'filter'=>CHtml::activeTextField($model, 'sumcost',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
 				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:center')
