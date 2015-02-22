@@ -61,7 +61,7 @@ class PaymentOutsourceContractController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new PaymentOutsourceContract;
+		$model=new PaymentOutsourceContract("search");
 		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -70,6 +70,7 @@ class PaymentOutsourceContractController extends Controller
 		{
 			$model->attributes = $_POST['PaymentOutsourceContract'];
 			$model->detail = $_POST['PaymentOutsourceContract']["detail"];
+			$model->invoice_send_date = $_POST['PaymentOutsourceContract']["invoice_send_date"];
 			$model->money = str_replace(",", "", $_POST['PaymentOutsourceContract']["money"]);
 			$model->T = $_POST['PaymentOutsourceContract']["T"];
 			$model->B = $_POST['PaymentOutsourceContract']["B"];

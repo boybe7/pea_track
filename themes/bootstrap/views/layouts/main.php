@@ -93,7 +93,7 @@ height: 35px;
 
 .navbar .nav > li > a >  i{
 float: none;
-margin-top: 0px;
+margin-top: 5px;
 }
 
 .navbar .btn, .navbar .btn-group {
@@ -159,6 +159,42 @@ margin-top: 0px;
   border-color: #428bca;
 }
 
+nav .badge {
+  background: #67c1ef;
+  border-color: #30aae9;
+  background-image: -webkit-linear-gradient(top, #acddf6, #67c1ef);
+  background-image: -moz-linear-gradient(top, #acddf6, #67c1ef);
+  background-image: -o-linear-gradient(top, #acddf6, #67c1ef);
+  background-image: linear-gradient(to bottom, #acddf6, #67c1ef);
+}
+
+nav .badge.green {
+  background: #77cc51;
+  border-color: #59ad33;
+  background-image: -webkit-linear-gradient(top, #a5dd8c, #77cc51);
+  background-image: -moz-linear-gradient(top, #a5dd8c, #77cc51);
+  background-image: -o-linear-gradient(top, #a5dd8c, #77cc51);
+  background-image: linear-gradient(to bottom, #a5dd8c, #77cc51);
+}
+
+nav .badge.yellow {
+  background: #faba3e;
+  border-color: #f4a306;
+  background-image: -webkit-linear-gradient(top, #fcd589, #faba3e);
+  background-image: -moz-linear-gradient(top, #fcd589, #faba3e);
+  background-image: -o-linear-gradient(top, #fcd589, #faba3e);
+  background-image: linear-gradient(to bottom, #fcd589, #faba3e);
+}
+
+nav .badge.red {
+  background: #fa623f;
+  border-color: #fa5a35;
+  background-image: -webkit-linear-gradient(top, #fc9f8a, #fa623f);
+  background-image: -moz-linear-gradient(top, #fc9f8a, #fa623f);
+  background-image: -o-linear-gradient(top, #fc9f8a, #fa623f);
+  background-image: linear-gradient(to bottom, #fc9f8a, #fa623f);
+}
+
 
 @font-face {
     font-family: 'Boon400';
@@ -212,6 +248,10 @@ table tr .tr_white {
 
 if(!Yii::app()->user->isGuest)
 {
+  $badge=$this->widget('bootstrap.widgets.TbBadge', array(
+    'type'=>'warning',
+    'label'=>'2',
+), true);
 
    $this->widget('bootstrap.widgets.TbNavbar',array(
     'fixed'=>'top',
@@ -221,17 +261,18 @@ if(!Yii::app()->user->isGuest)
     'items'=>array(
         array(
             'class'=>'bootstrap.widgets.TbMenu',
+            'encodeLabel'=>false,
             'items'=>array(
                 array('label'=>'หน้าแรก','icon'=>'home', 'url'=>array('/site/index')),
                 // array('label'=>'โครงการ','icon'=>'flag', 'url'=>array('/project/index')),
-                array('label'=>'โครงการ','icon'=>'flag', 'url'=>'#','items'=>array(
+                array('label'=>'โครงการ ','icon'=>'flag', 'url'=>'#','items'=>array(
                      array('label'=>'ข้อมูลโครงการ', 'url'=>array('/project/index')),
                      array('label'=>'บันทึกความก้าวหน้าสัญญาหลัก', 'url'=>array('/paymentProjectContract/index')),
                      array('label'=>'บันทึกความก้าวหน้าสัญญาจ้างช่วง/ซื้อ', 'url'=>array('/paymentOutsourceContract/index')),
                      
                     ),
                 ),
-               
+                array('label'=>'แจ้งเตือน '.$badge,'icon'=>'comment', 'url'=>array('/notify/index')),
                 array('label'=>'คู่สัญญา','icon'=>'briefcase', 'url'=>array('/vendor/admin'), 'visible'=>Yii::app()->user->isAdmin()),
                 array('label'=>'ประเภทงาน','icon'=>'briefcase', 'url'=>array('/workcategory/admin'), 'visible'=>Yii::app()->user->isAdmin()),
                 array('label'=>'ผู้ใช้งาน','icon'=>'user', 'url'=>array('/user/index'), 'visible'=>Yii::app()->user->isAdmin()),

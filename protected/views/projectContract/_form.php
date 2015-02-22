@@ -152,6 +152,16 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
             </div>
 	  		
 	  	</div>
+
+	  	<div class="row-fluid">
+        	<div class="span6">		  
+        	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_garantee_end'); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_garantee_end', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
+              <?php echo CHtml::error($model, '[' . $index . ']pc_garantee_end',array('class'=>'help-block error')); ?>
+            </div>
+        </div>    
+
+
 	  	<fieldset class="well the-fieldset">
         	<legend class="the-legend">รายละเอียดการเพิ่ม-ลดวงเงิน</legend>
         	<div class="row-fluid"> 

@@ -285,8 +285,9 @@ $('#search-form form').submit(function(){
 				'htmlOptions'=>array('style'=>'text-align:right')
 	  	),
 	  	'invoice_no/date'=>array(
-			    'header' => '<a class="sort-link">เลขที่ใบแจ้งหนี้/วันที่ได้รับ</a>',
-			    'name'=>'invoice_no/date',
+			    //'header' => '<a class="sort-link">เลขที่ใบแจ้งหนี้/วันที่ได้รับ</a>',
+			    'header'=>$model->getAttributeLabel('invoice_no/date'),
+			    'name'=>'invoice_receive_date',
 			    'headerHtmlOptions'=>array(),
 			    'type'=> 'raw',
 			    'value' => '$data->invoice_no."<br>".$data->invoice_receive_date',
@@ -295,28 +296,30 @@ $('#search-form form').submit(function(){
 				'htmlOptions'=>array('style'=>'text-align:center')
 	  	),
 	  	'approve_date'=>array(
-			    'header' => '<a class="sort-link">วันที่อนุมัติ</a>',
-			    //'name'=>'cost',
+			    //'header' => '<a class="sort-link">วันที่อนุมัติ</a>',
+			    'name'=>'approve_date',
 			    'headerHtmlOptions'=>array(),
-			    'type'=> 'raw',
+			    //'type'=> 'raw',
 			    'value' => '$data->approve_date',
 			    //'filter'=>CHtml::activeTextField($model, 'sumcost',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
 				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:center')
 	  	),
 	  	'T%'=>array(
-			    'header' => '<a class="sort-link">T%</a>',
-			    //'name'=>'cost',
+			    //'header' => '<a class="sort-link" href="/pea_track/paymentOutsourceContract/index?ajax=payment-outsource-contract-grid&sort=T">T%</a>',
+			    'header'=>$model->getAttributeLabel('T%'),
+			    'name'=>'T',
 			    'headerHtmlOptions'=>array(),
 			    //'type'=> 'raw',
-			    'value' => '$data->T',//'ProjectContract::model()->FindByPk($data->proj_id)->pc_T_percent',
+			    //'value' => '$data->T',//'ProjectContract::model()->FindByPk($data->proj_id)->pc_T_percent',
 			    //'filter'=>CHtml::activeTextField($model, 'sumcost',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
 				'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:center')
 	  	),
 	  	'B%'=>array(
-			    'header' => '<a class="sort-link">B%</a>',
-			    //'name'=>'cost',
+			    //'header' => '<a class="sort-link">B%</a>',
+			    'header'=>$model->getAttributeLabel('B%'),
+			    'name'=>'B',
 			    'headerHtmlOptions'=>array(),
 			    //'type'=> 'raw',
 			    'value' => '$data->B',//'ProjectContract::model()->FindByPk($data->proj_id)->pc_A_percent',

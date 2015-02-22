@@ -247,6 +247,7 @@ $('#search-form form').submit(function(){
 	'selectableRows' =>2,
 	'htmlOptions'=>array('style'=>'padding-top:40px;width:100%'),
     'enablePagination' => true,
+    'enableSorting'=>true,
     'summaryText'=>'แสดงผล {start} ถึง {end} จากทั้งหมด {count} ข้อมูล',
     'template'=>"{items}<div class='row-fluid'><div class='span6'>{pager}</div><div class='span6'>{summary}</div></div>",
 	'columns'=>array(
@@ -281,8 +282,9 @@ $('#search-form form').submit(function(){
 				'htmlOptions'=>array('style'=>'text-align:right')
 	  	),
 	  	'invoice_no/date'=>array(
-			    'header' => '<a class="sort-link">เลขที่ใบแจ้งหนี้/วันที่ได้รับ</a>',
-			    //'name'=>'cost',
+			    //'header' => '<a class="sort-link">เลขที่ใบแจ้งหนี้/วันที่ได้รับ</a>',
+			    'header'=>$model->getAttributeLabel('invoice_no/date'),
+			    'name'=>'invoice_date',
 			    'headerHtmlOptions'=>array(),
 			    'type'=> 'raw',
 			    'value' => '$data->invoice_no."<br>".$data->invoice_date',
@@ -291,8 +293,9 @@ $('#search-form form').submit(function(){
 				'htmlOptions'=>array('style'=>'text-align:center')
 	  	),
 	  	'bill_no/date'=>array(
-			    'header' => '<a class="sort-link">เลขที่ใบเสร็จรับเงิน/วันที่ได้รับ</a>',
-			    //'name'=>'cost',
+			    //'header' => '<a class="sort-link">เลขที่ใบเสร็จรับเงิน/วันที่ได้รับ</a>',
+			    'header'=>$model->getAttributeLabel('bill_no/date'),
+			    'name'=>'bill_date',
 			    'headerHtmlOptions'=>array(),
 			    'type'=> 'raw',
 			    'value' => '$data->bill_no."<br>".$data->bill_date',
@@ -301,8 +304,9 @@ $('#search-form form').submit(function(){
 				'htmlOptions'=>array('style'=>'text-align:center')
 	  	),
 	  	'T%'=>array(
-			    'header' => '<a class="sort-link">T%</a>',
-			    //'name'=>'cost',
+			    //'header' => '<a class="sort-link"  href="/pea_track/paymentProjectContract/index?ajax=payment-project-contract-grid&sort=T">T%</a>',
+			    'header'=>$model->getAttributeLabel('T%'),
+			    'name'=>'T',
 			    'headerHtmlOptions'=>array(),
 			    //'type'=> 'raw',
 			    'value' => '$data->T',//'ProjectContract::model()->FindByPk($data->proj_id)->pc_T_percent',
@@ -311,8 +315,9 @@ $('#search-form form').submit(function(){
 				'htmlOptions'=>array('style'=>'text-align:center')
 	  	),
 	  	'A%'=>array(
-			    'header' => '<a class="sort-link">A%</a>',
-			    //'name'=>'cost',
+			    //'header' => '<a class="sort-link">A%</a>',
+			    'name'=>'A',
+			     'header'=>$model->getAttributeLabel('A%'),
 			    'headerHtmlOptions'=>array(),
 			    //'type'=> 'raw',
 			    'value' => '$data->A',//'ProjectContract::model()->FindByPk($data->proj_id)->pc_A_percent',

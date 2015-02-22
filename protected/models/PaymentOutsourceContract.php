@@ -73,6 +73,10 @@ class PaymentOutsourceContract extends CActiveRecord
 			'last_update' => 'Last Update',
 			'T'=>'%ความก้าวหน้าด้านเทคนิค (T)',
 			'B'=>'%ความก้าวหน้าการจ่ายเงิน (B)',
+			'T%'=>'T%',
+			'B%'=>'B%',
+			'bill_no/date'=>'เลขที่ใบเสร็จรับเงิน/วันที่ได้รับ',
+			'invoice_no/date'=>'เลขที่ใบแจ้งหนี้/วันที่ได้รับ'
 		);
 	}
 
@@ -108,12 +112,11 @@ class PaymentOutsourceContract extends CActiveRecord
 
 		$sort = new CSort();
         $sort->attributes = array(
-            'invoice_no/date'=>array(
-                'asc'=>'invoice_receive_date ASC',
-                'desc'=>'invoice_receive_date DESC',
-            ),
+            
             '*', // this adds all of the other columns as sortable
         );
+        $sort->defaultOrder = 'invoice_receive_date asc';
+
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -139,6 +142,23 @@ class PaymentOutsourceContract extends CActiveRecord
 		     $this->money = str_replace(",", "", $this->money); 
 		 }
 		  
+
+        $str_date = explode("/", $this->invoice_send_date);
+        if(count($str_date)>1)
+        	$this->invoice_send_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+        $str_date = explode("/", $this->invoice_receive_date);
+        if(count($str_date)>1)
+        	$this->invoice_receive_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+
+        $str_date = explode("/", $this->approve_date);
+        if(count($str_date)>1)
+        	$this->approve_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+        return parent::beforeSave();
+   }
+
+   public function beforeFind()
+    {
+          
 
         $str_date = explode("/", $this->invoice_send_date);
         if(count($str_date)>1)

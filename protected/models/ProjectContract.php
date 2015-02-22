@@ -42,13 +42,13 @@ class ProjectContract extends CActiveRecord
 			array('pc_code, pc_proj_id, pc_end_date,pc_garantee_date', 'required'),
 			array('pc_proj_id, pc_vendor_id, pc_T_percent, pc_A_percent, pc_user_update', 'numerical', 'integerOnly'=>true),
 			array('pc_cost', 'numerical'),
-			array('pc_code', 'length', 'max'=>30),
+			array('pc_code,pc_garantee_end', 'length', 'max'=>30),
 			array('pc_guarantee', 'length', 'max'=>100),
 			array('pc_T_percent', 'application.extensions.numericRangeValidator', 'min'=>0, 'max'=>100),
 			array('pc_A_percent', 'application.extensions.numericRangeValidator', 'min'=>0, 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('pc_id,pc_garantee_date, pc_code, pc_proj_id, pc_vendor_id,pc_PO, pc_details, pc_sign_date, pc_end_date, pc_cost, pc_T_percent, pc_A_percent, pc_guarantee, pc_last_update, pc_user_update', 'safe', 'on'=>'search,create,update'),
+			array('pc_id,pc_garantee_end,pc_garantee_date, pc_code, pc_proj_id, pc_vendor_id,pc_PO, pc_details, pc_sign_date, pc_end_date, pc_cost, pc_T_percent, pc_A_percent, pc_guarantee, pc_last_update, pc_user_update', 'safe', 'on'=>'search,create,update'),
 		);
 	}
 
@@ -84,7 +84,8 @@ class ProjectContract extends CActiveRecord
 			'pc_garantee_date' => 'วันที่ครบกำหนดประกันสัญญา',
 			'pc_user_create' => 'ผู้สร้างสัญญา',
 			'pc_user_update' => 'ผู้บันทึก',
-			'pc_PO'=>'เลข PO'
+			'pc_PO'=>'เลข PO',
+			'pc_garantee_end'=>'เลขที่บันทึกส่งกองการเงิน/วันที่'
 		);
 	}
 
@@ -194,6 +195,8 @@ class ProjectContract extends CActiveRecord
 		$criteria->compare('pc_T_percent',$this->pc_T_percent);
 		$criteria->compare('pc_A_percent',$this->pc_A_percent);
 		$criteria->compare('pc_guarantee',$this->pc_guarantee,true);
+		$criteria->compare('pc_garantee_end',$this->pc_garantee_end,true);
+		$criteria->compare('pc_garantee_date',$this->pc_garantee_date,true);
 		$criteria->compare('pc_last_update',$this->pc_user_create);
 		$criteria->compare('pc_user_update',$this->pc_user_update);
 		$criteria->compare('pc_PO',$this->pc_PO);

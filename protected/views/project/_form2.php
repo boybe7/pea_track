@@ -241,6 +241,14 @@ hr {
                           echo $form->textFieldRow($modelPC,'pc_A_percent',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
                         echo '</div>';
+                        echo '<div class="row-fluid">';
+                          
+                          
+                          echo '<div class="span6">';
+                          echo $form->textFieldRow($modelPC,'pc_garantee_end',array('class'=>'span12','readonly'=>true));
+                          echo '</div>';
+                          
+                        echo '</div>';
                         echo '<fieldset class="well the-fieldset">
                         <legend class="the-legend">รายละเอียดการอนุมัติ</legend>
                         <div class="row-fluid">'; 
