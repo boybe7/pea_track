@@ -30,148 +30,99 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>ข้อมูลคู่สัญญา</h1>
+<h1>ข้อมูลแจ้งเตือน</h1>
 
 
 <?php
 
-$this->widget('bootstrap.widgets.TbButton', array(
-    'buttonType'=>'link',
-    
-    'type'=>'success',
-    'label'=>'เพิ่ม คู่สัญญา',
-    'icon'=>'plus-sign',
-    'url'=>array('create'),
-    'htmlOptions'=>array('class'=>'pull-right','style'=>'margin:0px 10px 0px 10px;'),
-)); 
-
-$this->widget('bootstrap.widgets.TbButton', array(
-    'buttonType'=>'link',
-    
-    'type'=>'danger',
-    'label'=>'ลบ คู่สัญญา',
-    'icon'=>'minus-sign',
-    //'url'=>array('delAll'),
-    //'htmlOptions'=>array('id'=>"buttonDel2",'class'=>'pull-right'),
-    'htmlOptions'=>array(
-        //'data-toggle'=>'modal',
-        //'data-target'=>'#myModal',
-        'onclick'=>'      
-                       //console.log($.fn.yiiGridView.getSelection("vendor-grid").length);
-                       if($.fn.yiiGridView.getSelection("vendor-grid").length==0)
-                       		js:bootbox.alert("กรุณาเลือกแถวข้อมูลที่ต้องการลบ?","ตกลง");
-                       else  
-                          js:bootbox.confirm("คุณต้องการจะลบข้อมูล?","ยกเลิก","ตกลง",
-			                   function(confirmed){
-			                   	 	
-			                   	 //console.log("Confirmed: "+confirmed);
-			                   	 //console.log($.fn.yiiGridView.getSelection("user-grid"));
-                                if(confirmed)
-			                   	 $.ajax({
-										type: "POST",
-										url: "deleteSelected",
-										data: { selectedID: $.fn.yiiGridView.getSelection("vendor-grid")}
-										})
-										.done(function( msg ) {
-											$("#vendor-grid").yiiGridView("update",{});
-										});
-			                  })',
-        'class'=>'pull-right'
-    ),
-)); 
 
 $current_date = (date("Y")+543).date("-m-d");
-$d_start    = new DateTime("2558-02-25");
-$d_end      = new DateTime($current_date);
-$diff = $d_start->diff($d_end); 
-$intervalo = date_diff(date_create($current_date), date_create("2558-02-25"));
-$out = $intervalo->format("Years:%Y,Months:%M,Days:%d");
-//print_r($out);
 
-$rawData=Yii::app()->db->createCommand("SELECT * FROM payment_outsource_contract WHERE DATEDIFF(invoice_receive_date,'".$current_date."')<10  AND (approve_date='' OR approve_date='0000-00-00')")->queryAll(); 
-print_r($rawData);
+//print_r("SELECT * FROM payment_project_contract WHERE DATEDIFF(DATE_ADD( invoice_date, INTERVAL invoice_alarm
+//DAY ),'".$current_date."')<7  AND (bill_date='' OR bill_date='0000-00-00')");
+$projectContractData=Yii::app()->db->createCommand("SELECT pj_name as project,pc_code as contract,'แจ้งเตือนครบกำหนดค้ำประกันสัญญา' as alarm_detail,pc_garantee_date as date_end, CONCAT('project/update/',pj_id) as url,'1' as type, pc_id as update_id FROM project_contract pc LEFT JOIN project p ON pc.pc_proj_id=p.pj_id WHERE DATEDIFF(pc_garantee_date,'".$current_date."')<=7  AND (pc_garantee_end='')")->queryAll(); 
+
+
+$paymentProjectData=Yii::app()->db->createCommand("SELECT pj_name as project,pc_code as contract, 'แจ้งเตือนครบกำหนดชำระเงินของ vendor' as alarm_detail,DATE_ADD( invoice_date, INTERVAL invoice_alarm
+DAY ) as date_end, CONCAT('paymentProjectContract/update/',id) as url,'2' as type, id as update_id FROM payment_project_contract pay_p LEFT JOIN project_contract ON pay_p.proj_id=pc_id LEFT JOIN project ON pc_proj_id=pj_id  WHERE DATEDIFF(DATE_ADD( invoice_date, INTERVAL invoice_alarm
+DAY ),'".$current_date."')<=7  AND (bill_date='' OR bill_date='0000-00-00')")->queryAll(); 
+
+$paymentOutsourceData=Yii::app()->db->createCommand("SELECT pj_name as project,oc_code as contract, 'แจ้งเตือนครบกำหนดจ่ายเงินให้ supplier' as alarm_detail,DATE_ADD( invoice_receive_date, INTERVAL 10
+DAY ) as date_end, CONCAT('paymentOutsourceContract/update',id) as url,'3' as type, id as update_id FROM payment_outsource_contract pay_p LEFT JOIN outsource_contract ON pay_p.contract_id=oc_id LEFT JOIN project ON oc_proj_id=pj_id WHERE DATEDIFF(invoice_receive_date,'".$current_date."')<10  AND (approve_date='' OR approve_date='0000-00-00')")->queryAll(); 
+
+$records=array_merge($projectContractData , $paymentProjectData, $paymentOutsourceData);
+//echo count($records);
+$provAll = new CArrayDataProvider($records,
+    array(
+    	'keyField'=>false,  //don't have 'id' column
+        'sort' => array( //optional and sortring
+            'attributes' => array(
+                'project', 
+                'contract'
+            ),
+        ),
+        'pagination' => array('pageSize' => 10) //optional add a pagination
+    )
+);
+
 
  $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'vendor-grid',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$provAll,
 	'type'=>'bordered condensed',
 	
-	'filter'=>$model,
+	//'filter'=>$model,
 	'selectableRows' =>2,
 	'htmlOptions'=>array('style'=>'padding-top:40px'),
     'enablePagination' => true,
     'summaryText'=>'แสดงผล {start} ถึง {end} จากทั้งหมด {count} ข้อมูล',
     'template'=>"{items}<div class='row-fluid'><div class='span6'>{pager}</div><div class='span6'>{summary}</div></div>",
 	'columns'=>array(
-		'checkbox'=> array(
-        	    'id'=>'selectedID',
-            	'class'=>'CCheckBoxColumn',
-            	//'selectableRows' => 2, 
-        		 'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),
-	  	         'htmlOptions'=>array(
-	  	            	  			'style'=>'text-align:center'
-
-	  	            	  		)   	  		
-        ),
-		'v_name'=>array(
-			    'name' => 'v_name',
-			    'filter'=>CHtml::activeTextField($model, 'v_name',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_name"))),
+		
+		'proj'=>array(
+			    'name' => 'project',
+			    'header'=>$model->getAttributeLabel('project'),
+			    //'filter'=>CHtml::activeTextField($model, 'v_name',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_name"))),
 				'headerHtmlOptions' => array('style' => 'width:30%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:left;padding-left:10px;')
 	  	),
-
-		//'v_address',
-		'v_tax_id'=>array(
-			    'name' => 'v_tax_id',
-			    'filter'=>CHtml::activeTextField($model, 'v_tax_id',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_tax_id"))),
-				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
-				'htmlOptions'=>array('style'=>'text-align:center')
-	  	),
-		'v_tel'=>array(
-			    'name' => 'v_tel',
-			    'filter'=>CHtml::activeTextField($model, 'v_tel',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_tel"))),
-				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
-				'htmlOptions'=>array('style'=>'text-align:center')
-	  	),
-		'v_contractor'=>array(
-			    'name' => 'v_contractor',
-			    'filter'=>CHtml::activeTextField($model, 'v_contractor',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_contractor"))),
+		'con'=>array(
+			    'name' => 'contract',
+			    'header'=>$model->getAttributeLabel('contract'),
+			    //'filter'=>CHtml::activeTextField($model, 'v_name',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_name"))),
 				'headerHtmlOptions' => array('style' => 'width:10%;text-align:center;background-color: #f5f5f5'),  	            	  	
-				'htmlOptions'=>array('style'=>'text-align:center')
+				'htmlOptions'=>array('style'=>'text-align:left;padding-left:10px;')
+	  	),	
+	  	'details'=>array(
+			    'name' => 'alarm_detail',
+			    'header'=>$model->getAttributeLabel('detail'),
+			    //'filter'=>CHtml::activeTextField($model, 'v_name',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_name"))),
+				'headerHtmlOptions' => array('style' => 'width:30%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				'htmlOptions'=>array('style'=>'text-align:left;padding-left:10px;')
 	  	),
-	  	'type'=>array(
-			    'name' => 'type',
-			    'filter'=>CHtml::activeTextField($model, 'type',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("type"))),
+	  	'end'=>array(
+			    'name' => 'date_end',
+			    'header'=>$model->getAttributeLabel('date_end'),
+			    //'filter'=>CHtml::activeTextField($model, 'v_name',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_name"))),
 				'headerHtmlOptions' => array('style' => 'width:10%;text-align:center;background-color: #f5f5f5'),  	            	  	
-				'htmlOptions'=>array('style'=>'text-align:center')
-	  	),
-		array(
-			'class'=>'bootstrap.widgets.TbButtonColumn',
-			'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),
-			'template' => '{view}  {update}',
-			// 'buttons' => array(
-			// 	'deleteC' => array
-			// 	(
-			// 		'label' => 'Delete',
-		 //     		'icon' => 'icon-trash',
-		 //     		'options'=>array(
-			// 			'onclick'=>'      
-                       
-   //                        js:bootbox.confirm("คุณต้องการจะลบข้อมูล?"'.$model->v_id.',"ยกเลิก","ตกลง",
-			//                    function(confirmed){
-			                   	
-   //                              if(confirmed)
-			//                    	 $.ajax({
-			// 							type: "POST",
-			// 							url: "delete/"'.$model->v_id.'
-			// 							})
-			// 							.done(function( msg ) {
-			// 								$("#vendor-grid").yiiGridView("update",{});
-			// 							});
-			//                   })',
-   //      			)
-			// 	),
-			//  )
-		),
+				'htmlOptions'=>array('style'=>'text-align:center;')
+	  	), 
+	     array(
+								'class'=>'bootstrap.widgets.TbButtonColumn',
+								'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),
+								'template' => '{update}',
+								'buttons'=>array(
+										'update' => array
+					                    (
+					                        
+					                        'icon'=>'icon-pencil',
+					                        'url'=>'Yii::app()->createUrl($data["url"])',
+					                        'options'=>array(
+					                            //'id'=>'$data["id"]',
+					                            //'new_attribute'=> '$data["your_key"]',
+					                        ),
+					                    ),
+								)
+		)	
 	),
 )); ?>

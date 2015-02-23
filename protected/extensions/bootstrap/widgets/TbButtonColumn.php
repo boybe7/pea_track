@@ -51,31 +51,69 @@ class TbButtonColumn extends CButtonColumn
 	 * @param integer $row the row number (zero-based)
 	 * @param mixed $data the data object associated with the row
 	 */
-	protected function renderButton($id, $button, $row, $data)
-	{
-		if (isset($button['visible']) && !$this->evaluateExpression($button['visible'], array('row'=>$row, 'data'=>$data)))
-			return;
+	// protected function renderButton($id, $button, $row, $data)
+	// {
+	// 	if (isset($button['visible']) && !$this->evaluateExpression($button['visible'], array('row'=>$row, 'data'=>$data)))
+	// 		return;
 
-		$label = isset($button['label']) ? $button['label'] : $id;
-		$url = isset($button['url']) ? $this->evaluateExpression($button['url'], array('data'=>$data, 'row'=>$row)) : '#';
-		$options = isset($button['options']) ? $button['options'] : array();
+	// 	$label = isset($button['label']) ? $button['label'] : $id;
+	// 	$url = isset($button['url']) ? $this->evaluateExpression($button['url'], array('data'=>$data, 'row'=>$row)) : '#';
+	// 	$options = isset($button['options']) ? $button['options'] : array();
 
-		if (!isset($options['title']))
-			$options['title'] = $label;
+	// 	if (!isset($options['title']))
+	// 		$options['title'] = $label;
 
-		if (!isset($options['rel']))
-			$options['rel'] = 'tooltip';
+	// 	if (!isset($options['rel']))
+	// 		$options['rel'] = 'tooltip';
 
-		if (isset($button['icon']))
-		{
-			if (strpos($button['icon'], 'icon') === false)
-				$button['icon'] = 'icon-'.implode(' icon-', explode(' ', $button['icon']));
+	// 	if (isset($button['icon']))
+	// 	{
+	// 		if (strpos($button['icon'], 'icon') === false)
+	// 			$button['icon'] = 'icon-'.implode(' icon-', explode(' ', $button['icon']));
 
-			echo CHtml::link('<i class="'.$button['icon'].'"></i>', $url, $options);
-		}
-		else if (isset($button['imageUrl']) && is_string($button['imageUrl']))
-			echo CHtml::link(CHtml::image($button['imageUrl'], $label), $url, $options);
-		else
-			echo CHtml::link($label, $url, $options);
-	}
+	// 		echo CHtml::link('<i class="'.$button['icon'].'"></i>', $url, $options);
+	// 	}
+	// 	else if (isset($button['imageUrl']) && is_string($button['imageUrl']))
+	// 		echo CHtml::link(CHtml::image($button['imageUrl'], $label), $url, $options);
+	// 	else
+	// 		echo CHtml::link($label, $url, $options);
+	// }
+	protected function renderButton($id, $button, $row, $data) {
+        if (isset($button['visible']) && !$this->evaluateExpression($button['visible'], array('row' => $row, 'data' => $data)))
+            return;
+        
+        $label = isset($button['label']) ? $button['label'] : $id;
+        $url = isset($button['url']) ? $this->evaluateExpression($button['url'], array('data' => $data, 'row' => $row)) : '#';
+        $options = isset($button['options']) ? $button['options'] : array();
+
+        /* added to render additional html attribute */
+        if (isset($button['options']) AND !(empty($button['options']))) {
+            foreach ($button['options'] as $key => $value) {
+                if (preg_match('#\$(data|row)#', $value)) {
+                    $options["$key"] = $this->evaluateExpression($button['options'][$key], array('data' => $data, 'row' => $row));
+                } else {
+                    $options["$key"] = $value;
+                }
+            }
+        }
+
+        /* end */
+
+        if (!isset($options['title']))
+            $options['title'] = $label;
+
+        if (!isset($options['rel']))
+            $options['rel'] = 'tooltip';
+
+        if (isset($button['icon'])) {
+            if (strpos($button['icon'], 'icon') === false)
+                $button['icon'] = 'icon-' . implode(' icon-', explode(' ', $button['icon']));
+
+            echo CHtml::link('<i class="' . $button['icon'] . '"></i>', $url, $options);
+        }
+        else if (isset($button['imageUrl']) && is_string($button['imageUrl']))
+            echo CHtml::link(CHtml::image($button['imageUrl'], $label), $url, $options);
+        else
+            echo CHtml::link($label, $url, $options);
+    }
 }
