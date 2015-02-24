@@ -11,7 +11,7 @@
 
 <?php
 $this->breadcrumbs=array(
-	'Vendors'=>array('index'),
+	'แจ้งเตือน'=>array('index'),
 	//'Manage',
 );
 
@@ -58,7 +58,9 @@ $provAll = new CArrayDataProvider($records,
         'sort' => array( //optional and sortring
             'attributes' => array(
                 'project', 
-                'contract'
+                'contract',
+                'date_end',
+                'alarm_detail',
             ),
         ),
         'pagination' => array('pageSize' => 10) //optional add a pagination
@@ -104,6 +106,8 @@ $provAll = new CArrayDataProvider($records,
 			    'name' => 'date_end',
 			    'header'=>$model->getAttributeLabel('date_end'),
 			    //'filter'=>CHtml::activeTextField($model, 'v_name',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_name"))),
+				//call the method 'gridDataColumn' from the controller
+                'value'=>array($this,'gridDateRender'),
 				'headerHtmlOptions' => array('style' => 'width:10%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:center;')
 	  	), 

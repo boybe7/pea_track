@@ -27,7 +27,7 @@ class NotifyController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','update','view','getNotify'),
+				'actions'=>array('index','update','view','getNotify','content'),
 				'users'=>array('*'),
 			),
 			
@@ -42,10 +42,6 @@ class NotifyController extends Controller
 	public function actionIndex()
 	{
 		
-
-
-
-
 		$model=new Notify('search');
 		$model->unsetAttributes();  // clear any default values
 	
@@ -53,6 +49,34 @@ class NotifyController extends Controller
 			'model'=>$model,
 		));
 	}
+
+	public function actionContent()
+	{
+		
+		$model=new Notify('search');
+		$model->unsetAttributes();  // clear any default values
+	
+		$this->render('_content',array(
+			'model'=>$model,
+		));
+	}
+
+	 protected function gridDateRender($data,$row)
+     {
+          // ... generate the output for the column
+ 
+          // Params:
+          // $data ... the current row data   
+         // $row ... the row index
+         //print_r($data);
+
+         $date = '';
+         $str_date = explode("-", $data["date_end"]);
+         if(count($str_date)>1)
+            $date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+
+         return $date;    
+    }       
 
 	
 	public function actionGetNotify()

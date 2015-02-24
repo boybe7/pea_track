@@ -61,7 +61,7 @@ class PaymentProjectContractController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new PaymentProjectContract;
+		$model=new PaymentProjectContract("search");
 		$t = 0;
 		$a = 0;
 
@@ -72,6 +72,7 @@ class PaymentProjectContractController extends Controller
 		{
 			$model->attributes = $_POST['PaymentProjectContract'];
 			$model->detail = $_POST['PaymentProjectContract']["detail"];
+			$model->bill_date = $_POST['PaymentProjectContract']["bill_date"];
 			$model->money = str_replace(",", "", $_POST['PaymentProjectContract']["money"]);
 
 			$model->user_create = Yii::app()->user->ID;
@@ -156,7 +157,9 @@ class PaymentProjectContractController extends Controller
 				
 				if($model->save())
 				{
-					
+					//header('Content-type: text/plain');
+                    //          print_r($model);                    
+                    //       	  exit;
 					$modelPC = ProjectContract::model()->FindByPk($model->proj_id);
 					// $modelPC->pc_T_percent = $t;
 					// $modelPC->pc_A_percent = $a;

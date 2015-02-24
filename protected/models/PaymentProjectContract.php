@@ -40,7 +40,7 @@ class PaymentProjectContract extends CActiveRecord
 			array('invoice_no, bill_no', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, proj_id,T,A, detail,invoice_alarm, money, invoice_no, invoice_date, bill_no, bill_date, user_create, user_update, last_update', 'safe', 'on'=>'search'),
+			array('id, proj_id,T,A, detail,invoice_alarm, money, invoice_no, invoice_date, bill_no, bill_date, user_create, user_update, last_update', 'safe', 'on'=>'search,update,delete'),
 		);
 	}
 
