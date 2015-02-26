@@ -44,11 +44,56 @@ Yii::app()->clientScript->registerScript('loadcontract', '
 
 ?>
 
+<h1>ภาพรวมโครงการ</h1>
 
+ <?php
 
-<?php $this->beginWidget('bootstrap.widgets.TbHeroUnit',array(
-    'heading'=>'ยินดีต้อนรับเข้าสู่ '.CHtml::encode(Yii::app()->name),
-)); ?>
+        $year = date("Y")+543;
+        //echo $year;
+        $sql = "SELECT wc_name,wc_id FROM project LEFT JOIN work_category ON wc_id= pj_work_cat WHERE pj_fiscalyear='$year' GROUP BY pj_work_cat";
+		$command = Yii::app()->db->createCommand($sql);
+		$workcats = $command->queryAll();	
+		//echo $sql;
+		//print_r($results);
 
-<?php $this->endWidget(); ?>
+		$collapse = $this->beginWidget('bootstrap.widgets.TbCollapse'); 
+		$alert = array("success","info","warning","danger");
+		$id = 0;
+        foreach ($workcats as $key => $workcat):
+        	  $wid = $workcat['wc_id'];	
+	          
+			  $Criteria = new CDbCriteria();
+			  $Criteria->condition = "pj_work_cat='$wid' AND pj_fiscalyear='$year'";
+			  $projects = Project::model()->findAll($Criteria);//$command->queryAll();	
 
+			 // print_r($sql);
+              echo '';
+              echo '<div class="panel-group" id="accordion'.$wid.'">
+					<div class="panel panel-default">
+					<div class="panel-heading">
+					<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapse'.$wid.'">
+					  <div class="alert alert-'.$alert[$id].'" role="alert">'.$workcat['wc_name'].'</div>
+					</a>
+					</h4>
+					</div>
+					<div id="collapse'.$wid.'" class="panel-collapse collapse in">
+					<div class="panel-body">';
+	          foreach ($projects as $key => $project):
+                 // print_r($project);     
+	              $this->renderPartial('application.views.project._track', array(
+	                  'model' => $project,
+	                  'display' => 'block'
+	              ));
+	              
+	          endforeach;
+
+	          echo '</div>
+   			 </div>
+ 		 </div>';
+
+ 		 $id++;
+        endforeach;  
+$this->endWidget();
+        
+?>
