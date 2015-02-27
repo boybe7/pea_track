@@ -258,6 +258,9 @@ hr {
                           echo '<div class="span6">';
                           echo $form->textFieldRow($modelPC,'pc_garantee_end',array('class'=>'span12','readonly'=>true));
                           echo '</div>';
+                          echo '<div class="span3">';
+                          echo $form->textFieldRow($modelPC,'pc_num_payment',array('class'=>'span12','readonly'=>true));
+                          echo '</div>';
                           
                         echo '</div>';
                          echo '<fieldset class="well the-fieldset">
