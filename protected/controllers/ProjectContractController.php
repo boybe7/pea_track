@@ -44,7 +44,7 @@ class ProjectContractController extends Controller
                 $modelVendor = Vendor::model()->FindByPk($model['pc_vendor_id']);
                 $data[] = array(
                         'id'=>$model['pc_id'],
-                        'label'=>$model['pc_code']." ".$modelVendor->v_name,
+                        'label'=>$model['pc_code'],//." ".$modelVendor->v_name,
                         'cost'=>number_format($model['pc_cost'],2)
                 );
 

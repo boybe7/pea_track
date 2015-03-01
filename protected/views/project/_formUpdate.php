@@ -190,8 +190,9 @@ hr {
                     echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
 
                  ?>
-              </div>
-		      		
+            </div>
+		    <div class="row-fluid">
+            <div class="span9">  		
 		    		<?php 
       				
               $workcat = Yii::app()->db->createCommand()
@@ -205,6 +206,13 @@ hr {
             
 
       				?>
+           </div>
+           <div class="span3">
+           <?php
+             echo $form->checkBoxRow($model,'pj_status',  array('value'=>0, 'uncheckValue'=>1)); 
+           ?>
+           </div>
+        </div>   
       				<!-- <input type="hidden" name="vendor_id" id="vendor_id"> -->
       				<?php 
   						echo $form->hiddenField($model,'pj_vendor_id');

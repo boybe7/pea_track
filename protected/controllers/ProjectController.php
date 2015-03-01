@@ -32,7 +32,7 @@ class ProjectController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','createOutsource','update','loadOutsourceByAjax','loadContractByAjax','loadContractByAjaxTemp','loadOutsourceByAjaxTemp','DeleteSelected'),
+				'actions'=>array('create','getProject','createOutsource','update','loadOutsourceByAjax','loadContractByAjax','loadContractByAjaxTemp','loadOutsourceByAjaxTemp','DeleteSelected','closeSelected'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -44,6 +44,36 @@ class ProjectController extends Controller
 			),
 		);
 	}
+
+	public function actionGetProject(){
+            $request=trim($_GET['term']);
+                    
+            $models=Project::model()->findAll(array("condition"=>"pj_name like '$request%' AND pj_status=1"));
+            $data=array();
+            foreach($models as $model){
+                
+               	$workcat = WorkCategory::model()->FindByPk($model->pj_work_cat);
+
+
+               	$sql = "SELECT SUM(pc_cost) as sum FROM Project_Contract WHERE pc_proj_id='$model->pj_id'";
+          		$command = Yii::app()->db->createCommand($sql);
+          		$result = $command->queryAll();
+
+          		$cost_total = 0;
+          		if(count($result))
+                    $cost_total = $result[0]["sum"]; 
+
+                $data[] = array(
+                        'id'=>$model['pj_id'],
+                        'label'=>$workcat->wc_name." ปี ".$model->pj_fiscalyear.":".$model['pj_name'],//." ".$modelVendor->v_name,
+                        'cost'=>number_format($cost_total,2)
+                );
+
+            }
+            $this->layout='empty';
+            echo json_encode($data);
+        
+    }
 
 	/**
 	 * Displays a particular model.
@@ -305,6 +335,8 @@ class ProjectController extends Controller
 				    $model->pj_user_update = Yii::app()->user->ID;
 				
 				    $model->pj_name = $_POST["pj_vendor_id"];
+
+				    $model->pj_status = 1;
 
                 //header('Content-type: text/plain');
 				    $workcodes = $_POST['workCode'];
@@ -1315,6 +1347,21 @@ class ProjectController extends Controller
             }
         }    
     }
+
+    public function actionCloseSelected()
+    {
+    	$autoIdAll = $_POST['selectedID'];
+        if(count($autoIdAll)>0)
+        {
+            foreach($autoIdAll as $autoId)
+            {
+                $pjModel = $this->loadModel($autoId);
+                $pjModel->pj_status = 0;
+                $pjModel->save();
+            }
+        }    
+    }
+
 	public function actionLoadOutsourceByAjax($index)
     {
         $model = new OutsourceContract;

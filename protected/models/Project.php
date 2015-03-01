@@ -39,14 +39,14 @@ class Project extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pj_name, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_user_create, pj_user_update', 'required'),
+			array('pj_name,pj_status, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_user_create, pj_user_update', 'required'),
 			array('pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_user_create, pj_user_update', 'numerical', 'integerOnly'=>true),
 			array('pj_name', 'length', 'max'=>400),
 			array('pj_date_approved', 'safe'),
 
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('pj_id,cost, pj_name,pj_CA, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_date_approved, pj_user_create, pj_user_update,workcat_search', 'safe', 'on'=>'search,create,update'),
+			array('pj_id,pj_status,cost, pj_name,pj_CA, pj_vendor_id, pj_work_cat, pj_fiscalyear, pj_date_approved, pj_user_create, pj_user_update,workcat_search', 'safe', 'on'=>'search,create,update'),
 		);
 	}
 
@@ -87,7 +87,8 @@ class Project extends CActiveRecord
 			'pj_user_create' => 'ผู้สร้างโครงการ',
 			'pj_user_update' => 'ผู้บันทึก',
 			'pj_CA' => 'หมายเลข CA',
-			'cost'=> 'วงเงินรวม'
+			'cost'=> 'วงเงินรวม',
+			'pj_status'=>'สถานะโครงการ (ปิดโครงการ)'
 		);
 	}
 
@@ -119,6 +120,7 @@ class Project extends CActiveRecord
 		$criteria->compare('pj_user_create',$this->pj_user_create);
 		$criteria->compare('pj_user_update',$this->pj_user_update);
 		$criteria->compare('pj_CA',$this->pj_CA,true);
+		$criteria->compare('pj_status',$this->pj_status,true);
 		$criteria->compare('workcat.wc_name',$this->workcat_search);
 
 		$sort=new CSort;
@@ -155,6 +157,9 @@ class Project extends CActiveRecord
             
             if($this->pj_date_approved == "00/00/0000")
                 $this->pj_date_approved = '';
+
+            $this->pj_status =  $this->pj_status==1 ? "ปกติ" : "ปิดโครงการ";
+            	
 
             foreach($this->getRelated('contract') as $projectCost)
    			{

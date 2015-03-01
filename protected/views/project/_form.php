@@ -265,6 +265,7 @@ hr {
 						
 				?>
     			</div>
+          
     		</div>	
 			<div class="well span4">
       			<?php 

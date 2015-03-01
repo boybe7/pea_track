@@ -3,10 +3,10 @@
 
 $this->pageTitle=Yii::app()->name;
 
-//notify here
- 
-
-//end notify
+$theme = Yii::app()->theme;
+$cs = Yii::app()->clientScript;
+$cs->registerScriptFile( $theme->getBaseUrl() . '/js/highcharts.js' );
+//$cs->registerCssFile($theme->getBaseUrl() . '/css/ProgressTracker.css');
 
 ?>
 
@@ -79,13 +79,16 @@ Yii::app()->clientScript->registerScript('loadcontract', '
 					</div>
 					<div id="collapse'.$wid.'" class="panel-collapse collapse in">
 					<div class="panel-body">';
+			  $index = 1;			
 	          foreach ($projects as $key => $project):
                  // print_r($project);     
 	              $this->renderPartial('application.views.project._track', array(
 	                  'model' => $project,
+	                  'root'=>$id,
+	                  'index'=>$index,
 	                  'display' => 'block'
 	              ));
-	              
+	              $index++;
 	          endforeach;
 
 	          echo '</div>

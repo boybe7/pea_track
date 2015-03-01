@@ -275,6 +275,7 @@ if(!Yii::app()->user->isGuest)
                 // array('label'=>'โครงการ','icon'=>'flag', 'url'=>array('/project/index')),
                 array('label'=>'โครงการ ','icon'=>'flag', 'url'=>'#','items'=>array(
                      array('label'=>'ข้อมูลโครงการ', 'url'=>array('/project/index')),
+                     array('label'=>'บันทึกค่าบริหารโครงการ', 'url'=>array('/managementCost/index')),
                      array('label'=>'บันทึกความก้าวหน้าสัญญาหลัก', 'url'=>array('/paymentProjectContract/index')),
                      array('label'=>'บันทึกความก้าวหน้าสัญญาจ้างช่วง/ซื้อ', 'url'=>array('/paymentOutsourceContract/index')),
                      

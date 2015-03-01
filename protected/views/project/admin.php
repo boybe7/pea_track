@@ -55,6 +55,37 @@ $this->widget('bootstrap.widgets.TbButton', array(
     'htmlOptions'=>array('class'=>'pull-right','style'=>'margin:0px 10px 0px 10px;'),
 )); 
 
+
+$this->widget('bootstrap.widgets.TbButton', array(
+    'buttonType'=>'link',
+    
+    'type'=>'warning',
+    'label'=>'ปิดโครงการ',
+    'icon'=>'bookmark',
+    //'url'=>array('close'),
+    'htmlOptions'=>array('class'=>'pull-right','style'=>'margin:0px 10px 0px 10px;',
+
+
+				'onclick'=>'      
+                       if($.fn.yiiGridView.getSelection("vendor-grid").length==0)
+                       	  js:bootbox.alert("กรุณาเลือกโครงการที่ต้องการปิด?","ตกลง");	
+                       else 
+                       {  
+                               	 $.ajax({
+										type: "POST",
+										url: "closeSelected",
+										data: { selectedID: $.fn.yiiGridView.getSelection("vendor-grid")}
+										})
+										.done(function( msg ) {
+											$("#vendor-grid").yiiGridView("update",{});
+										});
+			            }',
+
+
+    	),
+)); 
+
+
 $this->widget('bootstrap.widgets.TbButton', array(
     'buttonType'=>'link',
     
@@ -142,6 +173,16 @@ $this->widget('bootstrap.widgets.TbButton', array(
 				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:center')
 	  	),
+		'pj_status'=>array(
+			    'header' => '<a class="sort-link">สถานะโครงการ</a>',
+			    'name'=>'pj_status',
+			    'headerHtmlOptions'=>array(),
+			    //'value' => '$data->pj_staus',
+			    'filter'=>CHtml::activeDropDownList($model, 'pj_status', array('0' => 'ปกติ', '1' => 'ปิดโครงการ')),//CHtml::dropDownList('Project[pj_status]',$model,array('0' => 'ปกติ', '1' => 'ปิดโครงการ')),
+				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				'htmlOptions'=>array('style'=>'text-align:center')
+	  	),
+
 		// 'v_contractor'=>array(
 		// 	    'name' => 'v_contractor',
 		// 	    'filter'=>CHtml::activeTextField($model, 'v_contractor',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_contractor"))),
