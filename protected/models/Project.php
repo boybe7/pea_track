@@ -247,6 +247,8 @@ class Project extends CActiveRecord
 		 }
 
 		 WorkCode::model()->deleteAll("pj_id ='" . $this->idCache . "'");
+
+		 ManagementCost::model()->deleteAll("mc_proj_id ='" . $this->idCache . "'");
 		  
 		 // $filename=$this->getImagePath($this->idCache);
 		 // if(file_exists($filename))
