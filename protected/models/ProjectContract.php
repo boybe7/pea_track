@@ -164,6 +164,7 @@ class ProjectContract extends CActiveRecord
 		  
 		 ContractApproveHistory::model()->deleteAll("contract_id ='" . $this->idCache . "' and type=1");
 		 ContractChangeHistory::model()->deleteAll("contract_id ='" . $this->idCache . "'  and type=1");
+		 PaymentProjectContract::model()->deleteAll("proj_id ='" . $this->idCache . "' ");
 		 parent::afterDelete();
 	}
 

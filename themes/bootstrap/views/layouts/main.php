@@ -253,13 +253,15 @@ if(!Yii::app()->user->isGuest)
   
   Yii::import('application.controllers.NotifyController');
   $num = notify::model()->getNotify();
-  echo $num;
+  
   //$obj =new NotifyController(); // preparing object
   //$obj->getNotify();
+ $badge= '';
+ if($num>0) 
   $badge=$this->widget('bootstrap.widgets.TbBadge', array(
     'type'=>'warning',
     'label'=>$num,
-), true);
+  ), true);
 
    $this->widget('bootstrap.widgets.TbNavbar',array(
     'fixed'=>'top',

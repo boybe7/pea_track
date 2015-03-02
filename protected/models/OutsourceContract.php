@@ -244,6 +244,7 @@ class OutsourceContract extends CActiveRecord
 		 
 		 ContractApproveHistory::model()->deleteAll("contract_id ='" . $this->idCache . "' and type=2");
 		 ContractChangeHistory::model()->deleteAll("contract_id ='" . $this->idCache . "'  and type=2");
+		 PaymentOutsourceContract::model()->deleteAll("contract_id ='" . $this->idCache . "' ");
 		 parent::afterDelete();
 	}
 
