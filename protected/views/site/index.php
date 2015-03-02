@@ -16,10 +16,9 @@ $cs->registerScriptFile( $theme->getBaseUrl() . '/js/highcharts.js' );
     <div id="modal-body">
 <!-- put whatever you want to show up on bootbox here -->
     	<?php 
-    	//$model = Vendor::model()->findByPk(14);
-    	$model=new Notify('search');
+    	
       
-        $this->renderPartial('/notify/_content',array('model'=>$model),false); 
+        $this->renderPartial('/notify/_content',array(),false); 
 
     	?>
     </div>
@@ -28,12 +27,13 @@ $cs->registerScriptFile( $theme->getBaseUrl() . '/js/highcharts.js' );
 
 <?php
 Yii::app()->clientScript->registerScript('loadcontract', '
-    var _url = "'. Yii::app()->controller->createUrl("notify/content").'";
+    var _url = "'. Yii::app()->controller->createUrl("notify/getnotify").'";
+    var _url2 = "'. Yii::app()->controller->createUrl("notify/content").'";
     $.ajax({
         url: _url,
         success:function(msg){
 
-                
+            if(msg>0)    
     			js:bootbox.alert($("#modal-body").html(),"close");
     	}
     });			
@@ -44,7 +44,7 @@ Yii::app()->clientScript->registerScript('loadcontract', '
 
 ?>
 
-<h1>ภาพรวมโครงการ</h1>
+<h1>ภาพรวมโครงการ ปี <?php echo date("Y")+543;?></h1>
 
  <?php
 

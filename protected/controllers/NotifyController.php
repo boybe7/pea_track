@@ -41,10 +41,9 @@ class NotifyController extends Controller
 	
 	public function actionIndex()
 	{
-		
-		$model=new Notify('search');
+		$model=new Notify;
 		$model->unsetAttributes();  // clear any default values
-	
+		
 		$this->render('index',array(
 			'model'=>$model,
 		));
@@ -53,11 +52,9 @@ class NotifyController extends Controller
 	public function actionContent()
 	{
 		
-		$model=new Notify('search');
-		$model->unsetAttributes();  // clear any default values
-	
+		
 		$this->render('_content',array(
-			'model'=>$model,
+			
 		));
 	}
 
@@ -97,7 +94,16 @@ class NotifyController extends Controller
 
 		$records=array_merge($projectContractData , $paymentProjectData, $paymentOutsourceData);
 		
-		return count($records);
+		
+
+		if (Yii::app()->request->isAjaxRequest)
+	    {    
+	    	//echo CJSON::encode(1);
+	    	echo CJSON::encode(count($records));
+	    }
+	    else{
+	    	return count($records);
+	    }
 
 	}
 

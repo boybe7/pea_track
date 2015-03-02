@@ -133,11 +133,11 @@ ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
 
           echo '<ol class="progtrckr" data-progtrckr-steps="'.$num_payment.'">';
 
-          for ($i=0; $i < $num_payment; $i++) { 
+          for ($i=1; $i < $num_payment+1; $i++) { 
               if($i<=$num_pay_real && $num_pay_real!=0)
-               echo '<li class="progtrckr-done">งวดที่ '.($i+1).'</li>';
+               echo '<li class="progtrckr-done">งวดที่ '.($i).'</li>';
               else 
-                echo '<li class="progtrckr-todo">งวดที่ '.($i+1).'</li>';
+                echo '<li class="progtrckr-todo">งวดที่ '.($i).'</li>';
           }
           echo '</ol>';
         
@@ -191,8 +191,19 @@ ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
 
           $cost_total = ($projectCon->pc_cost);
 
-          $remain = $cost_total - $pay_total;
-          $cost_total = number_format($cost_total);
+          
+
+          $sql = "SELECT SUM(cost) as sum FROM contract_change_history WHERE contract_id='$projectCon->pc_id' AND type=1";
+          $command = Yii::app()->db->createCommand($sql);
+          $result = $command->queryAll();
+
+          $change_cost = 0;
+          if(count($result))
+             $change_cost = $result[0]["sum"];
+
+          $cost_total +=  $change_cost;
+
+          $remain = $cost_total  - $pay_total;
 
           if($pay_total=='')
               $pay_total = 0;
@@ -216,6 +227,9 @@ ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
                 
                 $('#container_pc".$root."_".$index."_".$id."').highcharts({
                     chart:{type:'pie',
+                                style: {
+                                    fontFamily: 'Boon400'
+                                },
                                 events: {
                                   load: function(event) {
                                      
@@ -259,7 +273,7 @@ ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
                                   return '<div><span>' + this.name + '</span><span>  ' + format(this.y) + '  บาท</span></div>';
                               },
                           title: {
-                            text: 'วงเงินตามสัญญา ".$cost_total." บาท',
+                            text: 'วงเงินตามสัญญา ".number_format($cost_total)." บาท',
                             style: {
                               fontWeight: 'bold'
                             }
@@ -312,18 +326,18 @@ ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
           $payments = PaymentOutsourceContract::model()->findAll($Criteria);
 
           $num_pay_real = count($payments);
-          //echo $num_pay_real;
+          //echo "cc:".$num_pay_real;
 
           $num_payment = $num_pay_real > $outsourceCon->oc_num_payment ? $num_pay_real : $outsourceCon->oc_num_payment ;
 
 
           echo '<ol class="progtrckr" data-progtrckr-steps="'.$num_payment.'">';
 
-          for ($i=0; $i < $num_payment; $i++) { 
+          for ($i=1; $i < $num_payment+1; $i++) { 
               if($i<=$num_pay_real && $num_pay_real!=0)
-               echo '<li class="progtrckr-done">งวดที่ '.($i+1).'</li>';
+               echo '<li class="progtrckr-done">งวดที่ '.($i).'</li>';
               else 
-                echo '<li class="progtrckr-todo">งวดที่ '.($i+1).'</li>';
+                echo '<li class="progtrckr-todo">งวดที่ '.($i).'</li>';
           }
           echo '</ol>';
         
@@ -377,7 +391,15 @@ ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
 
           $cost_total = str_replace(",", "", $outsourceCon->oc_cost);
 
-          $remain = $cost_total - $pay_total;
+          $sql = "SELECT SUM(cost) as sum FROM contract_change_history WHERE contract_id='$outsourceCon->oc_id' AND type=2";
+          $command = Yii::app()->db->createCommand($sql);
+          $result = $command->queryAll();
+
+          $change_cost = 0;
+          if(count($result))
+             $change_cost = $result[0]["sum"];
+           $cost_total +=  $change_cost;
+          $remain = $cost_total  - $pay_total;
           //echo $outsourceCon->oc_cost;
           $cost_total = number_format($cost_total);
 
@@ -403,6 +425,10 @@ ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
                 
                 $('#container_oc".$root."_".$index."_".$id."').highcharts({
                     chart:{type:'pie',
+                                style: {
+                                    fontFamily: 'Boon400',
+                                    fontWeight: 'bold'
+                                },
                                 events: {
                                   load: function(event) {
                                      

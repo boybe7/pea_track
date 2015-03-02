@@ -14420,3 +14420,652 @@ Stack trace:
 REQUEST_URI=/pea_track/paymentProjectContract/update/10
 in C:\xampp\htdocs\pea_track\protected\controllers\PaymentProjectContractController.php (132)
 in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:03:15 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:03:15 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:05:27 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:05:27 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:05:29 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:05:29 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:05:30 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:05:30 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:05:31 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:05:31 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:05:32 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:05:32 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:06:37 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:06:37 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:06:38 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:06:38 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:06:38 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:06:38 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:06:39 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:06:39 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:06:40 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:06:40 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:06:40 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:06:40 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:06:41 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:06:41 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:06:42 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:06:42 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:06:42 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:06:42 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:06:43 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:06:43 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:06:44 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:06:44 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:06:44 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:06:44 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:06:45 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\views\site\index.php (20)
+in C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php (37)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:06:45 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\views\site\index.php(20): CActiveRecord->__construct('search')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#7 C:\xampp\htdocs\pea_track\protected\controllers\SiteController.php(37): CController->render('index')
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/site/index
+HTTP_REFERER=http://localhost/pea_track/site/login
+---
+2015/03/02 22:12:09 [error] [exception.CException] exception 'CException' with message 'NotifyController and its behaviors do not have a method or closure named "getNotify".' in C:\xampp\htdocs\pea_track\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php(50): CComponent->__call('getNotify', Array)
+#1 C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php(50): NotifyController->getNotify()
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): NotifyController->actionContent()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('content')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('notify/content')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/notify/content
+HTTP_REFERER=http://localhost/pea_track/site/index
+---
+2015/03/02 22:23:28 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'pea_proj_tracking.notify' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `notify`.
+in C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php (44)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 22:23:28 [error] [exception.CDbException] exception 'CDbException' with message 'ตาราง "notify" สำหรับบันทึกข้อมูลของ "Notify" ไม่พบในฐานข้อมูล' in C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Notify))
+#1 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(79): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php(44): CActiveRecord->__construct()
+#3 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): NotifyController->actionIndex()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('notify/index')
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/pea_track/notify/index
+HTTP_REFERER=http://localhost/pea_track/site/index
+---
+2015/03/02 22:25:02 [error] [exception.CException] exception 'CException' with message 'NotifyController ไม่สามารถค้นหา "admin" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:878
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#1 C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php(49): CController->render('admin', Array)
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): NotifyController->actionIndex()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('notify/index')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/notify/index
+HTTP_REFERER=http://localhost/pea_track/site/index
+---
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "pj_CA" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (325)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (363)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (363)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (363)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (363)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "id" of "ContractApproveHistory".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (393)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "dateApprove" of "ContractApproveHistory".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (393)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "type" of "ContractApproveHistory".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (393)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "u_id" of "ContractApproveHistory".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (393)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "id" of "ContractChangeHistory".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (416)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "u_id" of "ContractChangeHistory".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (416)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "id" of "ContractChangeHistory".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (416)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "u_id" of "ContractChangeHistory".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (416)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (191)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (279)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (191)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (279)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (191)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (279)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (191)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (279)
+2015/03/02 23:12:40 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (191)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (279)
+2015/03/02 23:13:39 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (198)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (86)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:13:39 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (198)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (86)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:13:39 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (198)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (86)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:13:39 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (198)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (86)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/02 23:13:39 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (198)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (86)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/03 01:13:36 [warning] [application] Failed to set unsafe attribute "u_id" of "ContractChangeHistory".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (999)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/03 01:13:36 [warning] [application] Failed to set unsafe attribute "u_id" of "ContractChangeHistory".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (999)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/03 01:13:36 [warning] [application] Failed to set unsafe attribute "u_id" of "ContractApproveHistory".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1030)
+in C:\xampp\htdocs\pea_track\index.php (13)

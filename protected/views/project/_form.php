@@ -59,7 +59,7 @@ hr {
                // console.log(key+":"+$(this).text())
          });
          $("#workCode").val(code.substring(0,code.length-1));
-         console.log($("#workCode").val());
+         //console.log($("#workCode").val());
          $("#work_code").val("");
         } 
     }
@@ -78,7 +78,7 @@ hr {
               //  console.log(key+":"+$(this).text())
          });
          $("#workCode").val(code.substring(0,code.length-1));
-         console.log($("#workCode").val());
+         //console.log($("#workCode").val());
     }
 </script>
 	<!-- <p class="help-block">Fields with <span class="required">*</span> are required.</p> -->
@@ -265,7 +265,7 @@ hr {
 						
 				?>
     			</div>
-          
+
     		</div>	
 			<div class="well span4">
       			<?php 
