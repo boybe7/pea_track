@@ -23,27 +23,27 @@ $('.search-form form').submit(function(){
 
 <?php
 
-$this->widget('bootstrap.widgets.TbButton', array(
-    'buttonType'=>'link',
+// $this->widget('bootstrap.widgets.TbButton', array(
+//     'buttonType'=>'link',
     
-    'type'=>'info',
-    'label'=>'บันทึกสัญญาจ้างช่วง/ซื้อ',
-    'icon'=>'plus-sign',
-    //'url'=>array('delAll'),
-    //'htmlOptions'=>array('id'=>"buttonDel2",'class'=>'pull-right'),
-    'htmlOptions'=>array(
-        //'data-toggle'=>'modal',
-        //'data-target'=>'#myModal',
-        'onclick'=>'      
-                       console.log($.fn.yiiGridView.getSelection("vendor-grid")[0]);
-                       if($.fn.yiiGridView.getSelection("vendor-grid").length==0 )
-                       		js:bootbox.alert("กรุณาเลือกโครงการ?","ตกลง");
-                       else  
-                       	   window.location.href = "../project/createOutsource/"+$.fn.yiiGridView.getSelection("vendor-grid")[0];
-                          ',
-        'class'=>'pull-right'
-    ),
-)); 
+//     'type'=>'info',
+//     'label'=>'บันทึกสัญญาจ้างช่วง/ซื้อ',
+//     'icon'=>'plus-sign',
+//     //'url'=>array('delAll'),
+//     //'htmlOptions'=>array('id'=>"buttonDel2",'class'=>'pull-right'),
+//     'htmlOptions'=>array(
+//         //'data-toggle'=>'modal',
+//         //'data-target'=>'#myModal',
+//         'onclick'=>'      
+//                        console.log($.fn.yiiGridView.getSelection("vendor-grid")[0]);
+//                        if($.fn.yiiGridView.getSelection("vendor-grid").length==0 )
+//                        		js:bootbox.alert("กรุณาเลือกโครงการ?","ตกลง");
+//                        else  
+//                        	   window.location.href = "../project/createOutsource/"+$.fn.yiiGridView.getSelection("vendor-grid")[0];
+//                           ',
+//         'class'=>'pull-right'
+//     ),
+// )); 
 
 $this->widget('bootstrap.widgets.TbButton', array(
     'buttonType'=>'link',

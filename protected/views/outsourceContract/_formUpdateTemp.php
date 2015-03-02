@@ -238,6 +238,12 @@
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_letter', array( 'maxlength' => 255,'class'=>'span12  sessionStore')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_letter',array('class'=>'help-block error')); ?>          
           </div> 
+           <div class="span2">     
+              <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_num_payment'); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_num_payment', array( 'maxlength' => 2,'class'=>'span12')); ?>
+              <?php echo CHtml::error($model, '[' . $index . ']oc_num_payment',array('class'=>'help-block error')); ?>          
+          </div>   
+           
         </div>
         <div class="row-fluid">
           <div class="span2">
@@ -303,8 +309,7 @@
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_A_percent', array( 'maxlength' => 3,'class'=>'span6  sessionStore')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_A_percent',array('class'=>'help-block error')); ?>          
           </div> 
-           
-           
+          
            
         </div>
 

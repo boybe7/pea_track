@@ -214,6 +214,12 @@
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_letter', array( 'maxlength' => 255,'class'=>'span12','readonly'=>true)); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_letter',array('class'=>'help-block error')); ?>          
           </div> 
+           <div class="span2">     
+              <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_num_payment'); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_num_payment', array( 'maxlength' => 2,'class'=>'span9','readonly'=>true)); ?>
+              <?php echo CHtml::error($model, '[' . $index . ']oc_num_payment',array('class'=>'help-block error')); ?>          
+          </div>   
+           
         </div>
         <div class="row-fluid">
           <div class="span2">

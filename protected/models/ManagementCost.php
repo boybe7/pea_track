@@ -30,7 +30,7 @@ class ManagementCost extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('mc_proj_id, mc_type, mc_detail, mc_cost, mc_date, mc_user_update', 'required'),
+			array('mc_proj_id, mc_type, mc_cost, mc_date, mc_user_update', 'required'),
 			array('mc_proj_id, mc_type, mc_user_update', 'numerical', 'integerOnly'=>true),
 			array('mc_cost', 'numerical'),
 			array('mc_detail', 'length', 'max'=>400),
@@ -58,7 +58,7 @@ class ManagementCost extends CActiveRecord
 	{
 		return array(
 			'mc_id' => 'id ',
-			'mc_proj_id' => 'หมายเลขงานโครงการ',
+			'mc_proj_id' => 'โครงการ',
 			'mc_type' => 'ประเภท',//' [1 ประมาณการ, 2 ค่ารับรอง, 3 ใช้จริง]',
 			'mc_detail' => 'รายการ',
 			'mc_cost' => 'ค่าใช้จ่าย(บาท)',
@@ -97,6 +97,26 @@ class ManagementCost extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	protected function afterFind(){
+            parent::afterFind();
+
+            switch ($this->mc_type) {
+            	case 0:
+            		$this->mc_type = "ประมาณการ";
+            		break;
+            	case 1:
+            		$this->mc_type = "ค่ารับรอง";
+            		break;
+            	case 2:
+            		$this->mc_type = "ใช้จริง";
+            		break;	
+            	default:
+            		# code...
+            		break;
+            }
+
+    }
 
 	/**
 	 * Returns the static model of the specified AR class.

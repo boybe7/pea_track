@@ -48,7 +48,7 @@ $('.search-form form').submit(function(){
 
     <div class="row-fluid">
         
-       <div class="span4"> 
+       <div class="span6"> 
         <?php 
         	
         			$pname = '';
@@ -129,8 +129,8 @@ $('.search-form form').submit(function(){
         	$pc = Yii::app()->db->createCommand()
                         ->select('SUM(money) as sum')
                         ->from('payment_project_contract')
-                        //->join('vendor vd', 'pj.pc_vendor_id = vd.v_id')
-                        ->where('proj_id=:id', array(':id'=>$pid))
+                        ->join('project_contract pc', 'proj_id = pc_id')
+                        ->where('pc_proj_id=:id', array(':id'=>$pid))
                         ->queryAll();
             //echo ($pc[0]["sum"]);
 
@@ -142,38 +142,7 @@ $('.search-form form').submit(function(){
 
         echo "<input type='text' class='span12' id='rm_cost' style='text-align:right' name='rm_cost' value='$rm_cost' disabled>";?>
        </div>
-        <div class="span1"> 
-        <?php
-        echo CHtml::label('T%','pj_T');
-        $pid = isset($_GET["pid"])?$_GET["pid"]:'';
-		$pc_T = '';
-		$pc_A = ''; 
-
-		if(isset($_GET["pid"]))
-		{       
-	        $modelPC = ProjectContract::model()->FindByPk($pid);
-
-	        $pc_T = $modelPC->pc_T_percent;
-	        $pc_A = $modelPC->pc_A_percent;
-        }
-        echo "<input type='text' class='span12'  style='text-align:center' value='$pc_T' disabled>";
-        echo "</div>";
-        echo "<div class='span1'>";
-        echo CHtml::label('A%','pj_T');
-        echo "<input type='text' class='span12'  style='text-align:center' value='$pc_A' disabled>";
         
-        // $this->widget('bootstrap.widgets.TbButton', array(
-        //     'buttonType'=>'submit',
-        //     'type'=>'inverse',
-        //     'label'=>'ค้นหา',
-        //     'icon'=>'search white',
-        // // 'url'=>array('update'),
-        //     'htmlOptions'=>array('class'=>'search-button','style'=>'margin:24px 10px 0px 0px;'),
-        // ));
-         
- 
-        ?>
-       </div>
     </div>
     
 <?php $this->endWidget(); ?>
@@ -256,13 +225,14 @@ $('.search-form form').submit(function(){
 	  	),
 		'money'=>array(
 			    'name' => 'mc_cost',
+          'value'=>'number_format($data->mc_cost,2)',
 			    //'filter'=>CHtml::activeTextField($model, 'pj_fiscalyear',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
 				'headerHtmlOptions' => array('style' => 'width:10%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:right')
 	  	),
 		'type'=>array(
 			    'name' => 'mc_type',
-			    //'filter'=>CHtml::activeTextField($model, 'pj_fiscalyear',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
+			    'filter'=>CHtml::activeDropDownList($model,'mc_type',array(0=>'ประมาณการ',1=>'ค่ารับรอง',2=>'ใช้จริง')),
 				'headerHtmlOptions' => array('style' => 'width:10%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:right')
 	  	),

@@ -225,7 +225,7 @@ ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
                                 },
                     credits:{enabled: false},
                           colors:[
-                              '#5485BC', '#E8E854', '#5C9384', '#981A37', '#FCB319',     '#86A033', '#614931', '#00526F', '#594266', '#cb6828', '#aaaaab', '#a89375'
+                              '#5485BC', '#EDD447', '#5C9384', '#981A37', '#FCB319',     '#86A033', '#614931', '#00526F', '#594266', '#cb6828', '#aaaaab', '#a89375'
                               ],
                           title:{text: null},
                     tooltip:{
@@ -412,7 +412,7 @@ ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
                                 },
                     credits:{enabled: false},
                           colors:[
-                              '#5485BC', '#E8E854', '#5C9384', '#981A37', '#FCB319',     '#86A033', '#614931', '#00526F', '#594266', '#cb6828', '#aaaaab', '#a89375'
+                              '#5485BC', '#EDD447', '#5C9384', '#981A37', '#FCB319',     '#86A033', '#614931', '#00526F', '#594266', '#cb6828', '#aaaaab', '#a89375'
                               ],
                           title:{text: null},
                     tooltip:{

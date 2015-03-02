@@ -31,7 +31,7 @@ class ManagementCostController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','DeleteSelected'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -61,7 +61,7 @@ class ManagementCostController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new ManagementCost;
+		$model=new ManagementCost("search");
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -69,8 +69,12 @@ class ManagementCostController extends Controller
 		if(isset($_POST['ManagementCost']))
 		{
 			$model->attributes=$_POST['ManagementCost'];
+
+			$model->mc_date = (date("Y")+543).date("-m-d");
+			$model->mc_user_update = Yii::app()->user->ID;
+
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->mc_id));
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('create',array(
@@ -94,7 +98,7 @@ class ManagementCostController extends Controller
 		{
 			$model->attributes=$_POST['ManagementCost'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->mc_id));
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('update',array(
@@ -151,6 +155,19 @@ class ManagementCostController extends Controller
 			'model'=>$model,
 		));
 	}
+
+
+	public function actionDeleteSelected()
+    {
+    	$autoIdAll = $_POST['selectedID'];
+        if(count($autoIdAll)>0)
+        {
+            foreach($autoIdAll as $autoId)
+            {
+                $this->loadModel($autoId)->delete();
+            }
+        }    
+    }
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
