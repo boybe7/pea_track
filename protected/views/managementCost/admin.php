@@ -236,17 +236,13 @@ $('.search-form form').submit(function(){
 				'headerHtmlOptions' => array('style' => 'width:10%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:right')
 	  	),
-	  	'date'=>array(
-			    //'header' => '<a class="sort-link">เลขที่ใบแจ้งหนี้/วันที่ได้รับ</a>',
-			    //'header'=>$model->getAttributeLabel('invoice_no/date'),
-			    'name'=>'mc_date',
-			    'headerHtmlOptions'=>array(),
-			    //'type'=> 'raw',
-			    //'value' => '$data->invoice_no."<br>".$data->invoice_date',
-			    //'filter'=>CHtml::activeTextField($model, 'sumcost',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
-				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
-				'htmlOptions'=>array('style'=>'text-align:center')
-	  	),
+	  	// 'date'=>array(
+			    
+			 //    'name'=>'mc_date',
+			 //    'headerHtmlOptions'=>array(),
+			 //   'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				// 'htmlOptions'=>array('style'=>'text-align:center')
+	  	// ),
 		array(
 			'header' => '<a class="sort-link">ดู/แก้ไข</a>',
 			'class'=>'bootstrap.widgets.TbButtonColumn',

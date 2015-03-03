@@ -15069,3 +15069,38 @@ in C:\xampp\htdocs\pea_track\index.php (13)
 2015/03/03 01:13:36 [warning] [application] Failed to set unsafe attribute "u_id" of "ContractApproveHistory".
 in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1030)
 in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/03 13:44:31 [warning] [application] Failed to set unsafe attribute "pj_CA" of "Project".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (325)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/03 13:44:31 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (363)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/03 13:44:31 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (363)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/03 13:44:31 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (363)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/03 13:44:31 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (363)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/03 13:44:31 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (191)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (279)
+2015/03/03 13:44:31 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (191)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (279)
+2015/03/03 13:44:31 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (191)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (279)
+2015/03/03 13:44:31 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (191)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (279)
+2015/03/03 13:44:31 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (191)
+in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (279)

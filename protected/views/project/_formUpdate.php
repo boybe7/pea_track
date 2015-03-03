@@ -209,7 +209,16 @@ hr {
            </div>
            <div class="span3">
            <?php
-             echo $form->checkBoxRow($model,'pj_status',  array('value'=>0, 'uncheckValue'=>1)); 
+             
+            if($model->pj_status=="ปกติ")
+              $model->pj_status = 1;
+            else
+              $model->pj_status = 0;
+            
+             echo "สถานะโครงการ";
+            
+             echo $form->checkBoxRow($model,'pj_status',  array('value'=>0, 'uncheckValue'=>1));
+           
            ?>
            </div>
         </div>   

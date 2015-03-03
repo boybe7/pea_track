@@ -88,7 +88,7 @@ class Project extends CActiveRecord
 			'pj_user_update' => 'ผู้บันทึก',
 			'pj_CA' => 'หมายเลข CA',
 			'cost'=> 'วงเงินรวม',
-			'pj_status'=>'สถานะโครงการ (ปิดโครงการ)'
+			'pj_status'=>'ปิดโครงการ'
 		);
 	}
 
