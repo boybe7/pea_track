@@ -257,6 +257,7 @@ if(!Yii::app()->user->isGuest)
   //$obj =new NotifyController(); // preparing object
   //$obj->getNotify();
  $badge= '';
+ ///$num = 0;
  if($num>0) 
   $badge=$this->widget('bootstrap.widgets.TbBadge', array(
     'type'=>'warning',

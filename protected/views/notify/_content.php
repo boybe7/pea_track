@@ -28,7 +28,7 @@ DAY ) as date_end, CONCAT('paymentProjectContract/update/',id) as url,'2' as typ
 DAY ),'".$current_date."')<=7  AND (bill_date='' OR bill_date='0000-00-00')")->queryAll(); 
 
 $paymentOutsourceData=Yii::app()->db->createCommand("SELECT pj_id,pj_name as project,oc_code as contract, 'แจ้งเตือนครบกำหนดจ่ายเงินให้ supplier' as alarm_detail,DATE_ADD( invoice_receive_date, INTERVAL 10
-DAY ) as date_end, CONCAT('paymentOutsourceContract/update',id) as url,'3' as type, id as update_id FROM payment_outsource_contract pay_p LEFT JOIN outsource_contract ON pay_p.contract_id=oc_id LEFT JOIN project ON oc_proj_id=pj_id WHERE DATEDIFF(invoice_receive_date,'".$current_date."')<10  AND (approve_date='' OR approve_date='0000-00-00')")->queryAll(); 
+DAY ) as date_end, CONCAT('paymentOutsourceContract/update/',id) as url,'3' as type, id as update_id FROM payment_outsource_contract pay_p LEFT JOIN outsource_contract ON pay_p.contract_id=oc_id LEFT JOIN project ON oc_proj_id=pj_id WHERE DATEDIFF('".$current_date."',invoice_receive_date)>=10  AND (approve_date='' OR approve_date='0000-00-00')")->queryAll(); 
 
 $records=array_merge($projectContractData , $paymentProjectData, $paymentOutsourceData);
 $projData = array();

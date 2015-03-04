@@ -449,6 +449,7 @@ class ProjectController extends Controller
 		 				if($saveOK==1)
 		 				{
 		 					$transaction->commit();
+		 					//$this->redirect(array('index'));
 		 					$this->redirect(array('createOutsource', 'id' => $model->pj_id));
 		 					// header('Content-type: text/plain');
         //                 		//print_r($modelC);
@@ -726,6 +727,11 @@ class ProjectController extends Controller
 		$tab = 1; //default at project contract, tab=2 is outsource contract
 		
 		$modelOutsource = array();
+
+		//header('Content-type: text/plain');
+		//	                        print_r($modelProj);
+			                        
+		//	                        exit;
 		
 		$numContracts = 1;
 		$clearSession = true;
@@ -890,10 +896,10 @@ class ProjectController extends Controller
 
 
 										
-									//header('Content-type: text/plain');
-			                        //print_r($modelPC);
+									// header('Content-type: text/plain');
+			      //                   print_r($modelProj);
 			                        
-			                        //exit;
+			      //                   exit;
 
 									if($difference==1)
 									{
@@ -942,6 +948,8 @@ class ProjectController extends Controller
 	              
 
 				$transaction->commit();
+				$this->redirect(array('index'));
+
 			}
 			catch(Exception $e)
 	 		{
@@ -1183,8 +1191,14 @@ class ProjectController extends Controller
                     $str_date = explode("-", $value["pc_end_date"]);
                     if(count($str_date)>1)
                       $modelPC->pc_end_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+                  $str_date = explode("-", $value["pc_garantee_date"]);
+                    if(count($str_date)>1)
+                      $modelPC->pc_garantee_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
 
-
+						//header('Content-type: text/plain');
+					    //                      		 print_r($modelPC);                    
+					    //                      	     exit;
+											
 
                     $modelPC->pc_last_update = $value["pc_last_update"];
                     $modelPC->pc_details = $value["pc_details"];

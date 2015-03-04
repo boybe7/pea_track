@@ -180,6 +180,8 @@ class Project extends CActiveRecord
     }
     protected function afterSave(){
             parent::afterSave();
+            $this->pj_status =  $this->pj_status==1 ? "ปกติ" : "ปิดโครงการ";
+            
             $str_date = explode("-", $this->pj_date_approved);
             if(count($str_date)>1)
             	$this->pj_date_approved = $str_date[2]."/".$str_date[1]."/".($str_date[0]);

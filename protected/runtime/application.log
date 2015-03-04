@@ -15104,3 +15104,69 @@ in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (279)
 in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (191)
 in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
 in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (279)
+2015/03/04 22:57:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "update9" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('update9')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('update9')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('paymentOutsourc...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/paymentOutsourceContract/update9
+HTTP_REFERER=http://localhost/pea_track/notify/index
+---
+2015/03/04 22:57:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "update9" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('update9')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('update9')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('paymentOutsourc...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/paymentOutsourceContract/update9
+HTTP_REFERER=http://localhost/pea_track/notify/index
+---
+2015/03/04 22:57:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "update9" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('update9')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('update9')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('paymentOutsourc...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/paymentOutsourceContract/update9
+HTTP_REFERER=http://localhost/pea_track/notify/index
+---
+2015/03/04 22:57:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "update9" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('update9')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('update9')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('paymentOutsourc...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/paymentOutsourceContract/update9
+HTTP_REFERER=http://localhost/pea_track/notify/index
+---
+2015/03/04 22:58:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "update9" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('update9')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('update9')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('paymentOutsourc...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/paymentOutsourceContract/update9
+HTTP_REFERER=http://localhost/pea_track/notify/index
+---
+2015/03/04 22:58:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "update9" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('update9')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('update9')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('paymentOutsourc...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/paymentOutsourceContract/update9
+HTTP_REFERER=http://localhost/pea_track/notify/index
+---

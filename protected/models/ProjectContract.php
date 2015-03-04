@@ -129,6 +129,7 @@ class ProjectContract extends CActiveRecord
              $str_date = explode("-", $this->pc_garantee_date);
             if(count($str_date)>1)
             	$this->pc_garantee_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+           
             //$this->visit_date=date('Y/m/d', strtotime(str_replace("-", "", $this->visit_date)));       
     }
     protected function afterFind(){
@@ -142,7 +143,8 @@ class ProjectContract extends CActiveRecord
             $str_date = explode("-", $this->pc_garantee_date);
             if(count($str_date)>1)
             	$this->pc_garantee_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
-            
+
+
             if($this->pc_sign_date == "00/00/0000")
                 $this->pc_sign_date = '';
             if($this->pc_end_date == "00/00/0000")

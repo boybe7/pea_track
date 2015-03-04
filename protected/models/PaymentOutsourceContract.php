@@ -33,7 +33,7 @@ class PaymentOutsourceContract extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('contract_id, money, invoice_receive_date, invoice_no, approve_date', 'required'),
+			array('contract_id, money, invoice_receive_date, invoice_no', 'required'),
 			array('contract_id, user_create, user_update', 'numerical', 'integerOnly'=>true),
 			array('money', 'numerical'),
 			array('invoice_no', 'length', 'max'=>200),
