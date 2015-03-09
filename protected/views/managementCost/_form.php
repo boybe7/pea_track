@@ -27,7 +27,7 @@
 
 	<?php echo $form->errorSummary($model); ?>
 	<div class="row-fluid">       
-       <div class="span12"> 
+       <div class="span8"> 
      	<?php 
      				 $vendor = Yii::app()->db->createCommand()
                         ->select('pj_name,pj_fiscalyear,wc_name')
@@ -47,7 +47,7 @@
                            'value'=>empty($vendor[0])? '' : $vendor[0]['wc_name']." ปี ".$vendor[0]['pj_fiscalyear'].":".$vendor[0]['pj_name'],
                            'source'=>'js: function(request, response) {
                                 $.ajax({
-                                    url: "'.$this->createUrl('Project/GetProject').'",
+                                    url: "'.$this->createUrl('Project/GetMProject').'",
                                     dataType: "json",
                                     data: {
                                         term: request.term,
@@ -55,7 +55,7 @@
                                     },
                                     success: function (data) {
                                             response(data);
-
+                                           
                                     }
                                 })
                              }',
@@ -65,7 +65,7 @@
                                      'minLength'=>0,
                                      'select'=>'js: function(event, ui) {
                                				$("#ManagementCost_mc_proj_id").val(ui.item.id);
-
+                               				$("#rm_cost").val(ui.item.remain);
                                             
                                      }',
                                      
@@ -78,6 +78,15 @@
                                   
                         ));	
      	?>
+       </div>
+       <div class="span4">
+        <?php 
+
+
+
+		        echo CHtml::label('คงเหลือค่าบริหารโครงการ','rm_cost');        
+		        echo "<input type='text' id='rm_cost' class='span12' style='text-align:right' disabled >"?>
+          
        </div>
     </div>  
     <div class="row-fluid">       

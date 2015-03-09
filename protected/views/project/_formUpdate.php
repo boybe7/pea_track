@@ -210,7 +210,7 @@ hr {
            <div class="span3">
            <?php
              
-            if($model->pj_status=="ปกติ")
+            if($model->pj_status=="อยู่ระหว่างดำเนินการ")
               $model->pj_status = 1;
             else
               $model->pj_status = 0;

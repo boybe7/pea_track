@@ -88,7 +88,7 @@ class Project extends CActiveRecord
 			'pj_user_update' => 'ผู้บันทึก',
 			'pj_CA' => 'หมายเลข CA',
 			'cost'=> 'วงเงินรวม',
-			'pj_status'=>'ปิดโครงการ'
+			'pj_status'=>'แล้วเสร็จ'
 		);
 	}
 
@@ -158,7 +158,7 @@ class Project extends CActiveRecord
             if($this->pj_date_approved == "00/00/0000")
                 $this->pj_date_approved = '';
 
-            $this->pj_status =  $this->pj_status==1 ? "ปกติ" : "ปิดโครงการ";
+            $this->pj_status =  $this->pj_status==1 ? "อยู่ระหว่างดำเนินการ" : "แล้วเสร็จ";
             	
 
             foreach($this->getRelated('contract') as $projectCost)
@@ -180,7 +180,7 @@ class Project extends CActiveRecord
     }
     protected function afterSave(){
             parent::afterSave();
-            $this->pj_status =  $this->pj_status==1 ? "ปกติ" : "ปิดโครงการ";
+            $this->pj_status =  $this->pj_status==1 ? "อยู่ระหว่างดำเนินการ" : "แล้วเสร็จ";
             
             $str_date = explode("-", $this->pj_date_approved);
             if(count($str_date)>1)
@@ -251,6 +251,8 @@ class Project extends CActiveRecord
 		 WorkCode::model()->deleteAll("pj_id ='" . $this->idCache . "'");
 
 		 ManagementCost::model()->deleteAll("mc_proj_id ='" . $this->idCache . "'");
+
+		 
 		  
 		 // $filename=$this->getImagePath($this->idCache);
 		 // if(file_exists($filename))

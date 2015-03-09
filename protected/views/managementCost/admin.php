@@ -69,7 +69,7 @@ $('.search-form form').submit(function(){
                             'value'=>$pname,
                            'source'=>'js: function(request, response) {
                                 $.ajax({
-                                    url: "'.$this->createUrl('Project/GetProject').'",
+                                    url: "'.$this->createUrl('Project/GetMProject').'",
                                     dataType: "json",
                                     data: {
                                         term: request.term,
@@ -111,14 +111,14 @@ $('.search-form form').submit(function(){
        </div>
         <div class="span3"> 
         <?php 
-        echo CHtml::label('วงเงินตามสัญญา','pj_cost');
+        echo CHtml::label('วงเงินประมาณการ','pj_cost');
         $cost = isset($_GET["cost"])?$_GET["cost"]:'';       
 
         echo "<input type='text' class='span12' id='pj_cost' style='text-align:right' name='pj_cost' value='$cost' disabled>"?>
        </div>
         <div class="span3"> 
         <?php 
-        echo CHtml::label('คงเหลือจ่ายเงิน','rm_cost');
+        echo CHtml::label('คงเหลือค่าบริหารโครงการ','rm_cost');
 
         $rm_cost = "";
         $pid = isset($_GET["pid"])?$_GET["pid"]:'';
@@ -127,10 +127,9 @@ $('.search-form form').submit(function(){
         if($pid !="")
         {
         	$pc = Yii::app()->db->createCommand()
-                        ->select('SUM(money) as sum')
-                        ->from('payment_project_contract')
-                        ->join('project_contract pc', 'proj_id = pc_id')
-                        ->where('pc_proj_id=:id', array(':id'=>$pid))
+                        ->select('SUM(mc_cost) as sum')
+                        ->from('management_cost')
+                        ->where('mc_proj_id=:id AND mc_type!=0', array(':id'=>$pid))
                         ->queryAll();
             //echo ($pc[0]["sum"]);
 

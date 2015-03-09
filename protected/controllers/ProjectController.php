@@ -32,7 +32,7 @@ class ProjectController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','getProject','createOutsource','update','loadOutsourceByAjax','loadContractByAjax','loadContractByAjaxTemp','loadOutsourceByAjaxTemp','DeleteSelected','closeSelected'),
+				'actions'=>array('create','getProject','getMProject','createOutsource','update','loadOutsourceByAjax','loadContractByAjax','loadContractByAjaxTemp','loadOutsourceByAjaxTemp','DeleteSelected','closeSelected'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -67,6 +67,48 @@ class ProjectController extends Controller
                         'id'=>$model['pj_id'],
                         'label'=>$workcat->wc_name." ปี ".$model->pj_fiscalyear.":".$model['pj_name'],//." ".$modelVendor->v_name,
                         'cost'=>number_format($cost_total,2)
+                );
+
+            }
+            $this->layout='empty';
+            echo json_encode($data);
+        
+    }
+
+    public function actionGetMProject(){
+            $request=trim($_GET['term']);
+                    
+            $models=Project::model()->findAll(array("condition"=>"pj_name like '$request%' AND pj_status=1"));
+            $data=array();
+            foreach($models as $model){
+                
+               	$workcat = WorkCategory::model()->FindByPk($model->pj_work_cat);
+
+
+               	$sql = "SELECT SUM(mc_cost) as sum FROM management_cost WHERE mc_proj_id='$model->pj_id' AND mc_type=0";
+          		$command = Yii::app()->db->createCommand($sql);
+          		$result = $command->queryAll();
+
+          		$cost_total = 0;
+          		if(count($result))
+                    $cost_total = $result[0]["sum"]; 
+
+                $result = Yii::app()->db->createCommand()
+                        ->select('SUM(mc_cost) as sum')
+                        ->from('management_cost')
+                        ->where('mc_proj_id=:id AND mc_type!=0', array(':id'=>$model->pj_id))
+                        ->queryAll();
+                $pay_total = 0;
+          		if(count($result))
+                    $pay_total = $result[0]["sum"];         
+
+                $remain = $cost_total - $pay_total;
+                $data[] = array(
+                        'id'=>$model['pj_id'],
+                        'label'=>$workcat->wc_name." ปี ".$model->pj_fiscalyear.":".$model['pj_name'],//." ".$modelVendor->v_name,
+                        'cost'=>number_format($cost_total,2),
+                        'pay'=>number_format($pay_total,2),
+                        'remain'=>number_format($remain,2),
                 );
 
             }

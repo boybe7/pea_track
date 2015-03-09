@@ -54,7 +54,7 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	 <div class="row-fluid">       
-       <div class="span8"> 
+       <div class="span7"> 
        		<?php 
         	    echo CHtml::activeHiddenField($model, 'contract_id'); 
         			echo CHtml::activeLabelEx($model, 'contract_id'); 
@@ -107,7 +107,7 @@
 
          ?>
        </div>
-        <div class="span4"> 
+        <div class="span5"> 
 	        <?php 
           $pc = OutsourceContract::model()->findByPk($model->contract_id);
           $cost = "";
@@ -121,31 +121,22 @@
     </div>   
 
 	<div class="row-fluid">       
-       <div class="span8">
+       <div class="span7">
           <?php echo $form->textAreaRow($model,'detail',array('rows'=>5, 'cols'=>50, 'class'=>'span12')); ?> 
        </div>
-       <div class="span4"> 
-        <div class="row-fluid">    
-          <?php echo $form->textFieldRow($model,'money',array('class'=>'span10','style'=>'text-align:right','onChange'=>'javascript:getAlert()'));
+       <div class="span5"> 
+        <?php 
+          echo $form->textFieldRow($model,'money',array('class'=>'span10','style'=>'text-align:right','onChange'=>'javascript:getAlert()'));
 
-                
-                // $this->widget('application.extensions.moneymask.MMask',array(
-                //     'element'=>'#PaymentOutsourceContract_money',
-                //     'currency'=>'บาท',
-                //     'config'=>array(
-                //         'symbolStay'=>true,
-                //         'thousands'=>',',
-                //         'decimal'=>'.',
-                //         'precision'=>2,
-                //     ),
-
-                // ));
            ?>
-
+        <div class="row-fluid">    
+         
+           <div class="span5"> 
            <?php 
+
            echo $form->labelEx($model,'approve_date',array('class'=>'span12','style'=>'text-align:left;'));
-             
-                    echo '<div class="input-append span11" style="margin-top:-10px;margin-left:0px;">'; //ใส่ icon ลงไป
+          
+                    echo '<div class="input-append span12" style="margin-top:-10px;margin-left:0px;">'; //ใส่ icon ลงไป
                         $form->widget('zii.widgets.jui.CJuiDatePicker',
 
                         array(
@@ -165,13 +156,23 @@
 
          
           ?>
+          </div>
+           <div class="span6"> 
+           <?php 
+
+           echo $form->textFieldRow($model,'approve_by',array('class'=>'span10','maxlength'=>200));
+          
+                  
+         
+          ?>
+          </div>
 
           </div>
        </div>
     </div>   
 	
     <div class="row-fluid">       
-       <div class="span8">
+       <div class="span7">
           <?php echo $form->textFieldRow($model,'invoice_no',array('class'=>'span12','maxlength'=>200)); ?>
        </div>
        
@@ -186,7 +187,7 @@
     </div>   
 	
 	<div class="row-fluid">       
-       <div class="span4">
+       <div class="span3">
           <?php echo $form->labelEx($model,'invoice_send_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));?>
               
           <?php 
@@ -212,7 +213,7 @@
 
          ?>
        </div>
-       <div class="span4"> 
+       <div class="span3  offset1"> 
           <?php 
            echo $form->labelEx($model,'invoice_receive_date',array('class'=>'span12','style'=>'text-align:left;padding-right:10px;'));
              
