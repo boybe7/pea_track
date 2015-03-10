@@ -36,7 +36,7 @@ class ManagementCost extends CActiveRecord
 			array('mc_detail', 'length', 'max'=>400),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('mc_id, mc_proj_id, mc_type, mc_detail, mc_cost, mc_date, mc_user_update', 'safe', 'on'=>'search'),
+			array('mc_id,mc_in_project, mc_proj_id, mc_type, mc_detail, mc_cost, mc_date, mc_user_update', 'safe', 'on'=>'search'),
 		);
 	}
 

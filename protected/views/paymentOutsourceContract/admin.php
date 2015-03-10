@@ -22,7 +22,7 @@ $('.search-form form').submit(function(){
 Yii::app()->clientScript->registerScript('search', "
 $('#search-form form').submit(function(){
     //console.log($('#patient-grid input[name=firstname]','#patient-grid select[name=firstname]').val('x'));
-    console.log('ff');
+    //console.log('ff');
     $.fn.yiiGridView.update('payment-project-contract-grid', {
         data: $(this).serialize()
     });

@@ -16,6 +16,17 @@ $('.search-form form').submit(function(){
 	return false;
 });
 ");
+
+Yii::app()->clientScript->registerScript('search', "
+$('#search-form form').submit(function(){
+    //console.log($('#patient-grid input[name=firstname]','#patient-grid select[name=firstname]').val('x'));
+    console.log('ff');
+    $.fn.yiiGridView.update('management-cost-grid', {
+        data: $(this).serialize()
+    });
+    return false;
+});
+");
 ?>
 <script type="text/javascript">
   
@@ -91,7 +102,7 @@ $('.search-form form').submit(function(){
                                            $("#pid").val(ui.item.id);
                                            $("#pj_cost").val(ui.item.cost);
                                            $("#cost").val(ui.item.cost);
-                                           $("#PaymentProjectContract_proj_id").val(ui.item.id);
+                                           $("#ManagementCost_mc_proj_id").val(ui.item.id);
                                            $("#search-form").submit();
 
                                             
@@ -195,7 +206,7 @@ $('.search-form form').submit(function(){
 			)); 
 
  $this->widget('bootstrap.widgets.TbGridView',array(
-	'id'=>'payment-project-contract-grid',
+	'id'=>'management-cost-grid',
 	'type'=>'bordered condensed',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,

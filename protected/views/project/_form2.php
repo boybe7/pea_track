@@ -137,7 +137,23 @@ hr {
 						
 				      ?>
     			</div>
-    		</div>	
+
+          <div class="row-fluid">
+          <div class="span6">
+           <?php 
+             echo CHtml::label('เงินประมาณการใช้ได้จริง (บาท)','expect_cost1');        
+             echo "<input type='text' id='expect_cost1' name='expect_cost1' class='span12' style='text-align:right' >"; 
+          ?>
+          </div>
+          <div class="span6">
+           <?php 
+             echo CHtml::label('เงินประมาณการบุคลากร (บาท)','expect_cost2');        
+             echo "<input type='text' id='expect_cost2' name='expect_cost2' class='span12' style='text-align:right' >";
+
+          ?>
+          </div>
+          </div>
+    	</div>	
 			<div class="well span4">
       			<?php 
       			//echo $form->textFieldRow($model,'pj_code',array('class'=>'span10','maxlength'=>100)); 
