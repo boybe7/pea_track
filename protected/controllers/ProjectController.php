@@ -813,6 +813,8 @@ class ProjectController extends Controller
 		    try {
 
 		    		//save expect management cost
+		    		if(isset($_POST["expect_cost1"]) && $_POST["expect_cost1"]!='')
+		    		{
 		    			$Criteria = new CDbCriteria();
              			$Criteria->condition = "mc_proj_id='$id' AND mc_type=0 AND mc_in_project=1";
              			$modelMCost = ManagementCost::model()->findAll($Criteria);                       
@@ -821,11 +823,12 @@ class ProjectController extends Controller
                         $modelMCost[0]->mc_type = 0;
 				        $modelMCost[0]->mc_user_update = Yii::app()->user->ID; 				        
                         $modelMCost[0]->save();
-
+                    }
                         // header('Content-type: text/plain');
 		                //          		print_r($modelMCost[0]);                    
 		                //          	    exit;
-                        
+                    if(isset($_POST["expect_cost2"])&& $_POST["expect_cost2"]!='')
+		    		{    
                         $Criteria = new CDbCriteria();
              			$Criteria->condition = "mc_proj_id='$id' AND mc_type=0 AND mc_in_project=2";
              			$modelMCost = ManagementCost::model()->findAll($Criteria);                       
@@ -834,7 +837,7 @@ class ProjectController extends Controller
 				        $modelMCost[0]->mc_user_update = Yii::app()->user->ID; 				        
                         $modelMCost[0]->mc_type = 0;
                         $modelMCost[0]->save();
-                        
+                    }    
 				    	//end
 
 

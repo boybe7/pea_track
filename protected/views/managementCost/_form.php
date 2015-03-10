@@ -82,10 +82,28 @@
        <div class="span4">
         <?php 
 
+            $sql = "SELECT SUM(mc_cost) as sum FROM management_cost WHERE mc_proj_id='$model->mc_proj_id' AND mc_type=0";
+              $command = Yii::app()->db->createCommand($sql);
+              $result = $command->queryAll();
+
+              $cost_total = 0;
+              if(count($result))
+                    $cost_total = $result[0]["sum"]; 
+
+                $result = Yii::app()->db->createCommand()
+                        ->select('SUM(mc_cost) as sum')
+                        ->from('management_cost')
+                        ->where('mc_proj_id=:id AND mc_type!=0', array(':id'=>$model->mc_proj_id))
+                        ->queryAll();
+                $pay_total = 0;
+              if(count($result))
+                    $pay_total = $result[0]["sum"];         
+
+                $remain = $cost_total - $pay_total;
 
 
 		        echo CHtml::label('คงเหลือค่าบริหารโครงการ','rm_cost');        
-		        echo "<input type='text' id='rm_cost' class='span12' style='text-align:right' disabled >"?>
+		        echo "<input type='text' id='rm_cost' class='span12' style='text-align:right' disabled value='$remain'>"?>
           
        </div>
     </div>  
@@ -116,7 +134,7 @@
        	<?php echo $form->textFieldRow($model,'mc_detail',array('class'=>'span12','maxlength'=>400)); ?>
        </div>
        <div class="span4"> 
-       	<?php echo $form->textFieldRow($model,'mc_cost',array('class'=>'span12')); ?>
+       	<?php echo $form->textFieldRow($model,'mc_cost',array('class'=>'span12','style'=>'text-align:right')); ?>
        </div>
     </div>    	
 	

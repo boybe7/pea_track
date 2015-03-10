@@ -338,7 +338,9 @@ hr {
                     ->where('mc_proj_id=:id AND mc_in_project=1 AND mc_type=0', array(':id'=>$model->pj_id))
                     ->queryAll();
 
-             $value = $mc[0]["mc_cost"];       
+             $value = '';
+             if(!empty($mc))
+               $value = $mc[0]["mc_cost"];       
      
              echo CHtml::label('เงินประมาณการใช้ได้จริง (บาท)','expect_cost1');        
              echo "<input type='text' id='expect_cost1' name='expect_cost1' class='span12' style='text-align:right' value='$value' >"; 
@@ -352,7 +354,10 @@ hr {
                     ->where('mc_proj_id=:id AND mc_in_project=2 AND mc_type=0', array(':id'=>$model->pj_id))
                     ->queryAll();
 
-             $value = $mc[0]["mc_cost"]; 
+              $value = '';
+             if(!empty($mc))
+               $value = $mc[0]["mc_cost"];       
+      
              echo CHtml::label('เงินประมาณการบุคลากร (บาท)','expect_cost2');        
              echo "<input type='text' id='expect_cost2' name='expect_cost2' class='span12' style='text-align:right' value='$value'>";
 

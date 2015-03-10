@@ -166,6 +166,11 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
               <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_num_payment', array('size' => 5, 'maxlength' => 5,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']pc_num_payment',array('class'=>'help-block error')); ?>
             </div>
+            <div class="span3">		  
+        	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_name_request'); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_name_request', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
+              <?php echo CHtml::error($model, '[' . $index . ']pc_name_request',array('class'=>'help-block error')); ?>
+            </div>
 	  	</div>
 	  	<fieldset class="well the-fieldset">
         	<legend class="the-legend">รายละเอียดการเพิ่ม-ลดวงเงิน</legend>
