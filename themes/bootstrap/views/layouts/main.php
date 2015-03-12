@@ -268,7 +268,7 @@ if(!Yii::app()->user->isGuest)
     'fixed'=>'top',
     'collapse'=>true,    
     'htmlOptions'=>array('class'=>'noPrint'),
-    'brand' =>  CHtml::image(Yii::app()->getBaseUrl() . '../images/pea_logo.png', 'Logo', array('width' => '260', 'height' => '30')),
+    'brand' =>  CHtml::image(Yii::app()->getBaseUrl() . '../images/pea_logo.png', 'Logo', array('width' => '220', 'height' => '30')),
     'items'=>array(
         array(
             'class'=>'bootstrap.widgets.TbMenu',
@@ -284,6 +284,13 @@ if(!Yii::app()->user->isGuest)
                      
                     ),
                 ),
+                array('label'=>'รายงาน ','icon'=>'list-alt', 'url'=>'#','items'=>array(
+                     array('label'=>'project progress report', 'url'=>array('/report/progress')),
+                     array('label'=>'project summary report', 'url'=>array('/report/summary')),
+                     
+
+                    ),
+                ),
                 array('label'=>'แจ้งเตือน '.$badge,'icon'=>'comment', 'url'=>array('/notify/index')),
                 array('label'=>'คู่สัญญา','icon'=>'briefcase', 'url'=>array('/vendor/admin'), 'visible'=>Yii::app()->user->isAdmin()),
                 array('label'=>'ประเภทงาน','icon'=>'briefcase', 'url'=>array('/workcategory/admin'), 'visible'=>Yii::app()->user->isAdmin()),
@@ -295,7 +302,7 @@ if(!Yii::app()->user->isGuest)
             'htmlOptions'=>array('class'=>'pull-right'),
             'type'=>'success', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
             'buttons'=>array(
-                    array('label'=>Yii::app()->user->title.Yii::app()->user->firstname."   ".Yii::app()->user->lastname,'icon'=>Yii::app()->user->usertype, 'url'=>'#'),
+                    array('label'=>Yii::app()->user->title.Yii::app()->user->firstname." ".Yii::app()->user->lastname,'icon'=>Yii::app()->user->usertype, 'url'=>'#'),
                     //array('label'=>Yii::app()->user->username,'icon'=>Yii::app()->user->usertype, 'url'=>'#'),
                     array('items'=>array(
                         array('label'=>'เปลี่ยนรหัสผ่าน','icon'=>'cog', 'url'=>array('/user/password/'.Yii::app()->user->ID), 'visible'=>!Yii::app()->user->isGuest),

@@ -15927,3 +15927,28 @@ Stack trace:
 REQUEST_URI=/pea_track/notify/getnotify
 HTTP_REFERER=http://localhost/pea_track/site/index
 ---
+2015/03/13 00:18:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "report/progress".' in C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/progress')
+#1 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/pea_track/report/progress
+HTTP_REFERER=http://localhost/pea_track/site/index
+---
+2015/03/13 00:41:21 [error] [exception.CException] exception 'CException' with message 'ReportController ไม่สามารถค้นหา "login" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:878
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('login', Array, true)
+#1 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(107): CController->render('login', Array)
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionProgress()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('progress')
+#7 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/progress')
+#8 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/pea_track/report/progress
+HTTP_REFERER=http://localhost/pea_track/site/index
+---
