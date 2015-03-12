@@ -50,8 +50,58 @@ DAY ),'".$current_date."')<=7  AND (bill_date='' OR bill_date='0000-00-00')")->q
 $paymentOutsourceData=Yii::app()->db->createCommand("SELECT pj_name as project,oc_code as contract, 'แจ้งเตือนครบกำหนดจ่ายเงินให้ supplier' as alarm_detail,DATE_ADD( invoice_receive_date, INTERVAL 10
 DAY ) as date_end, CONCAT('paymentOutsourceContract/update/',id) as url,'3' as type, id as update_id FROM payment_outsource_contract pay_p LEFT JOIN outsource_contract ON pay_p.contract_id=oc_id LEFT JOIN project ON oc_proj_id=pj_id WHERE DATEDIFF('".$current_date."',invoice_receive_date)>=10  AND (approve_date='' OR approve_date='0000-00-00')")->queryAll(); 
 
-$records=array_merge($projectContractData , $paymentProjectData, $paymentOutsourceData);
-//echo count($records);
+if(date('d')>=20){
+
+            $month = date("n");
+            $number = cal_days_in_month(CAL_GREGORIAN, $month, date("Y"));
+
+            $lastDay = (date("Y")+543)."-".date("m")."-".$number;
+
+
+            $projects = Project::model()->findAll();
+            $mangementCostData1 = array();
+            $mangementCostData2 = array();
+            //echo count($projects);
+            foreach ($projects as $key => $project) {
+                $pid = $project->pj_id;
+                $sql = "SELECT * FROM management_cost  WHERE '$month'=MONTH(mc_date)  AND mc_type=1 AND mc_proj_id='$pid'";
+                
+                $records = Yii::app()->db->createCommand($sql)->queryAll(); 
+                if(count($records)==0)
+                {
+                    //$mProj = Project::model()->findbyPk($);
+                    $mangement["project"] = $project->pj_name;
+                    $mangement["contract"] = "ค่าบริหารโครงการ";
+                    $mangement["date_end"] = $lastDay;
+                    $mangement["url"] = "managementCost/create";
+                    $mangement["alarm_detail"] =  "แจ้งเตือนบันทึกค่ารับรองประจำเดือน";
+                    $mangementCostData1[] = $mangement;
+                }
+
+                $sql = "SELECT * FROM management_cost  WHERE '$month'=MONTH(mc_date)  AND mc_type=2 AND mc_proj_id='$pid'";
+                
+                $records = Yii::app()->db->createCommand($sql)->queryAll(); 
+                if(count($records)==0)
+                {
+                    //$mProj = Project::model()->findbyPk($);
+                    $mangement["project"] = $project->pj_name;
+                    $mangement["contract"] = "ค่าบริหารโครงการ";
+                    $mangement["date_end"] = $lastDay;
+                    $mangement["url"] = "managementCost/create";
+                    $mangement["alarm_detail"] =  "แจ้งเตือนบันทึกค่าใช้จริงประจำเดือน";
+                    $mangementCostData2[] = $mangement;
+                }   
+                
+            }
+                      
+                
+
+            $records=array_merge($projectContractData , $paymentProjectData, $paymentOutsourceData,$mangementCostData1,$mangementCostData2);
+        
+        }  
+        else
+           $records=array_merge($projectContractData , $paymentProjectData, $paymentOutsourceData);
+ //echo count($records);
 $provAll = new CArrayDataProvider($records,
     array(
     	'keyField'=>false,  //don't have 'id' column

@@ -15759,3 +15759,171 @@ Stack trace:
 REQUEST_URI=/pea_track/project/update/29
 in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (821)
 in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/12 00:35:44 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty. The SQL statement executed was: .
+in C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php (105)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/12 00:35:44 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty. The SQL statement executed was: ' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php(105): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): NotifyController->actionGetNotify()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('getnotify')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('notify/getnotif...')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/notify/getnotify
+HTTP_REFERER=http://localhost/pea_track/site/index
+---
+2015/03/12 00:37:00 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty. The SQL statement executed was: .
+in C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php (105)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/12 00:37:00 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty. The SQL statement executed was: ' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php(105): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): NotifyController->actionGetNotify()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('getnotify')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('notify/getnotif...')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/notify/getnotify
+HTTP_REFERER=http://localhost/pea_track/site/index
+---
+2015/03/12 00:37:53 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty. The SQL statement executed was: .
+in C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php (105)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/12 00:37:53 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty. The SQL statement executed was: ' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php(105): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): NotifyController->actionGetNotify()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('getnotify')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('notify/getnotif...')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/notify/getnotify
+HTTP_REFERER=http://localhost/pea_track/site/index
+---
+2015/03/12 00:38:24 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty. The SQL statement executed was: .
+in C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php (106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/12 00:38:24 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty. The SQL statement executed was: ' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php(106): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): NotifyController->actionGetNotify()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('getnotify')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('notify/getnotif...')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/notify/getnotify
+HTTP_REFERER=http://localhost/pea_track/site/index
+---
+2015/03/12 00:39:06 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty. The SQL statement executed was: .
+in C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php (106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/12 00:39:06 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty. The SQL statement executed was: ' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php(106): CDbCommand->queryAll('SELECT pj_name ...')
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): NotifyController->actionGetNotify()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('getnotify')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('notify/getnotif...')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/notify/getnotify
+HTTP_REFERER=http://localhost/pea_track/site/index
+---
+2015/03/12 00:41:41 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty. The SQL statement executed was: .
+in C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php (106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/12 00:41:41 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty. The SQL statement executed was: ' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php(106): CDbCommand->queryAll('SELECT pj_name ...')
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): NotifyController->actionGetNotify()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('getnotify')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('notify/getnotif...')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/notify/getnotify
+HTTP_REFERER=http://localhost/pea_track/site/index
+---
+2015/03/12 00:53:30 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '==MONTH(mc_date)  AND mc_type==1' at line 1. The SQL statement executed was: SELECT pj_name as project,'' as contract, 'แจ้งเตือนบันทึกค่าบริหารโครงการ ส่วนค่ารับรองประจำเดือน' as alarm_detail,'31/3/2558' as date_end, CONCAT('managementCost/update/',mc_id) as url FROM management_cost LEFT JOIN project ON mc_proj_id=pj_id WHERE '3'==MONTH(mc_date)  AND mc_type==1.
+in C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php (106)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/12 00:53:30 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '==MONTH(mc_date)  AND mc_type==1' at line 1. The SQL statement executed was: SELECT pj_name as project,'' as contract, 'แจ้งเตือนบันทึกค่าบริหารโครงการ ส่วนค่ารับรองประจำเดือน' as alarm_detail,'31/3/2558' as date_end, CONCAT('managementCost/update/',mc_id) as url FROM management_cost LEFT JOIN project ON mc_proj_id=pj_id WHERE '3'==MONTH(mc_date)  AND mc_type==1' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\controllers\NotifyController.php(106): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): NotifyController->actionGetNotify()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('getnotify')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('notify/getnotif...')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/notify/getnotify
+HTTP_REFERER=http://localhost/pea_track/site/index
+---
