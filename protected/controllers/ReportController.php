@@ -36,7 +36,7 @@ class ReportController extends Controller
 	}
 
 	
-	 public function actionGenerateProgress()
+	 public function actionGenProgress()
     {
         
     	

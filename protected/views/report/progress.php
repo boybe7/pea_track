@@ -149,7 +149,7 @@ Yii::app()->clientScript->registerScript('gentReport', '
 $("#gentReport").click(function(e){
     e.preventDefault();
     $.ajax({
-        url: "generateProgress",
+        url: "genProgress",
         data: {project: $("#project").val()},
         success:function(response){
             

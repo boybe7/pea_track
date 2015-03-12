@@ -55,7 +55,7 @@ function renderDate($value)
         
             <thead>
               <tr> 
-                <th rowspan="2">ลำดับ</th>
+                <th rowspan="2">ลำดับccc</th>
                 <th rowspan="2">โครงการ</th>
                 <th rowspan="2">รายละเอียดงาน</th>
                 <th rowspan="2">เลขที่สัญญา</th>
