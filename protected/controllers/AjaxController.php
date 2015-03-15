@@ -23,6 +23,31 @@ class AjaxController extends Controller {
             echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
         }
     }
+
+     public function actionGetProjectList() {        
+    
+        
+       if( $_POST['workcat_id']!='' && $_POST['year']!='') 
+        $data = Project::model()->findAll('pj_work_cat=:id AND pj_fiscalyear=:year', array(':id' => (int) $_POST['workcat_id'],':year'=>(int)$_POST['year']));        
+       else if( $_POST['workcat_id']!='' && $_POST['year']=='') 
+        $data = Project::model()->findAll('pj_work_cat=:id', array(':id' => (int) $_POST['workcat_id']));        
+       else if($_POST['workcat_id']=='' && $_POST['year']!='') 
+        $data = Project::model()->findAll('pj_fiscalyear=:year', array(':year'=>(int)$_POST['year']));        
+       else    
+        $data = Project::model()->findAll();        
+         // header('Content-type: text/plain');
+         //   if(isset($_POST["workcat_id"]))
+         //     echo "work";
+         //   if(isset($_POST["year"]) && $_POST["year"]!='')
+         //     echo "year";
+                                                 
+         // exit;
+        
+        $data = CHtml::listData($data, 'pj_id', 'pj_name');
+        foreach ($data as $value => $name) {            
+            echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
+        }
+    }
  
     
     public function actionGetUnit() {        

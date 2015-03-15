@@ -2278,7 +2278,7 @@ table th[class*="span"],
   display: inline-block;
   width: 14px;
   height: 14px;
-  margin-top: 1px;
+  margin-top: 5px;
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
@@ -2453,6 +2453,11 @@ table th[class*="span"],
     background-position: center center;
 }
 
+.icon-excel {
+    background-image: url("../img/excel.png");
+    background-position: center center;
+}
+
 .icon-temp {
     background-image: url("../img/temp.png");
     background-position: center center;
@@ -2521,6 +2526,7 @@ table th[class*="span"],
 .icon-list-alt {
   background-position: -264px -24px;
 }
+
 
 .icon-lock {
   background-position: -287px -24px;
