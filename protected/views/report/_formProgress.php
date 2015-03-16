@@ -20,6 +20,35 @@ $this->breadcrumbs=array(
 	
 }
 
+<?php
+function renderDate($value)
+{
+    $th_month = array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+    $dates = explode("/", $value);
+    $d=0;
+    $mi = 0;
+    $yi = 0;
+    foreach ($dates as $key => $value) {
+         $d++;
+         if($d==2)
+            $mi = $value;
+         if($d==3)
+            $yi = $value;
+    }
+    if(substr($mi, 0,1)==0)
+        $mi = substr($mi, 1);
+    if(substr($dates[0], 0,1)==0)
+        $d = substr($dates[0], 1);
+
+
+    $renderDate = $d." ".$th_month[$mi]." ".substr($yi,2);
+    if($renderDate==0)
+        $renderDate = "";   
+
+    return $renderDate;             
+}
+?>
+
 </style>
 
         <table class="table table-bordered reportTable">
@@ -179,9 +208,53 @@ $this->breadcrumbs=array(
                                 	echo "-หนังสือค้ำประกัน ".$pc->pc_guarantee."<br>";
                                 if(!empty($pc->pc_garantee_end))
                                 	echo "-เลขที่บันทึกส่งกองการเงิน ".$pc->pc_garantee_end."<br>";
-                                if(!empty($pc->pc_po))
-                                	echo "-PO ".$pc->pc_po."<br>";
+                                if(!empty($pc->pc_PO))
+                                {
+                                    $pc->pc_PO = str_replace("PO", "", $pc->pc_PO);
+                                    echo "-PO ".$pc->pc_PO."<br>";
+                                }	
 		                	  	echo "</td>";
+
+                                echo "<td style='text-align:center'>".$pc->pc_code."</td>";
+                                
+                                echo "<td style='text-align:center'>".renderDate($pc->pc_sign_date)."<br><br>";
+                                echo "<u>ครบกำหนด</u><br>";
+                                echo renderDate($pc->pc_end_date);
+                                echo "</td>";
+
+                                echo "<td style='text-align:right'>".number_format($pc->pc_cost,2)."</td>";
+
+                                //project payment
+                                $Criteria = new CDbCriteria();
+                                $Criteria->condition = "proj_id='$pc->pc_id'";
+                                $paymentProjs = PaymentProjectContract::model()->findAll($Criteria);
+                                echo "<td>";
+                                foreach ($paymentProjs as $key => $pay) {
+                                    echo $pay->detail."<br><br><br><br>";
+                                }
+                                echo "</td>";
+                                echo "<td style='text-align:right'>";
+                                foreach ($paymentProjs as $key => $pay) {
+                                    echo $pay->money."<br><br><br><br>";
+                                }
+                                echo "</td>";
+
+                                echo "</td>";
+                                echo "<td style='text-align:right'>";
+                                foreach ($paymentProjs as $key => $pay) {
+                                    $pay->money = str_replace(",", "", $pay->money);
+                                    echo number_format($pc->pc_cost - $pay->money,2)."<br><br><br><br>";
+                                }
+                                echo "</td>";
+
+                                echo "</td>";
+                                echo "<td >";
+                                foreach ($paymentProjs as $key => $pay) {
+                                   
+                                    echo $pay->invoice_no." ".renderDate($pay->invoice_date)."<br><br><br><br>";
+                                }
+                                echo "</td>";
+
 		                	  	//$pcs = array_shift($pcs);
 	                			
 

@@ -93,7 +93,7 @@ height: 35px;
 
 .navbar .nav > li > a >  i{
 float: none;
-margin-top: 5px;
+/*margin-top: 5px;*/
 }
 
 .navbar .btn, .navbar .btn-group {

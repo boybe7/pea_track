@@ -111,7 +111,7 @@ $this->breadcrumbs=array(
               
               'htmlOptions'=>array(
                 'class'=>'span12',
-                'style'=>'margin:25px 0px 0px 0px; padding:2px 0px 0px 0px',
+                'style'=>'margin:25px 0px 0px 0px;',
                 'id'=>'gentReport'
               ),
           ));
@@ -128,7 +128,7 @@ $this->breadcrumbs=array(
               
               'htmlOptions'=>array(
                 'class'=>'span12',
-                'style'=>'margin:25px 0px 0px 0px; padding:2px 0px 0px 0px',
+                'style'=>'margin:25px 0px 0px 0px;padding-left:0px;padding-right:0px',
                 'id'=>'exportExcel'
               ),
           ));
