@@ -45,7 +45,7 @@ class ReportController extends Controller
     	else
     	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
 
-        $this->renderPartial('_formProgress', array(
+        $this->renderPartial('_formProgress2', array(
             'model' => $model,
             'display' => 'block',
         ), false, true);

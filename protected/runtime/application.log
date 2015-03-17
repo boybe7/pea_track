@@ -17041,3 +17041,75 @@ Stack trace:
 #14 {main}
 REQUEST_URI=/pea_track/report/generateProgress?project=
 ---
+2015/03/17 16:19:01 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>invoice_date' at line 3. The SQL statement executed was: SELECT SUM(money)
+FROM `payment_project_contract`
+WHERE invoice_date < $pay->invoice_date.
+in C:\xampp\htdocs\pea_track\protected\views\report\_formProgress2.php (280)
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (51)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/17 16:19:01 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>invoice_date' at line 3. The SQL statement executed was: SELECT SUM(money)
+FROM `payment_project_contract`
+WHERE invoice_date < $pay->invoice_date' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\views\report\_formProgress2.php(280): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(51): CController->renderPartial('_formProgress2', Array, false, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionGenerateProgress()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('generateProgres...')
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/generate...')
+#12 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/pea_track/report/generateProgress?project=
+HTTP_REFERER=http://localhost:8080/pea_track/report/progress
+---
+2015/03/17 16:19:04 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>invoice_date' at line 3. The SQL statement executed was: SELECT SUM(money)
+FROM `payment_project_contract`
+WHERE invoice_date < $pay->invoice_date.
+in C:\xampp\htdocs\pea_track\protected\views\report\_formProgress2.php (280)
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (51)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/03/17 16:19:04 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>invoice_date' at line 3. The SQL statement executed was: SELECT SUM(money)
+FROM `payment_project_contract`
+WHERE invoice_date < $pay->invoice_date' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\views\report\_formProgress2.php(280): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(51): CController->renderPartial('_formProgress2', Array, false, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionGenerateProgress()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('generateProgres...')
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/generate...')
+#12 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/pea_track/report/generateProgress?project=
+HTTP_REFERER=http://localhost:8080/pea_track/report/progress
+---
+2015/03/17 16:25:16 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\pea_track\protected\views\report\_formProgress2.php:285)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ReportController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(51): ReportController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionGenerateProgress()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#6 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#7 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#8 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/generateProgress?project=
+in C:\xampp\htdocs\pea_track\protected\views\report\_formProgress2.php (285)
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (51)
+in C:\xampp\htdocs\pea_track\index.php (13)
