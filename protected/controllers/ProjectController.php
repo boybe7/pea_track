@@ -1171,6 +1171,11 @@ class ProjectController extends Controller
 												$modelOC = OutsourceContract::model()->FindByPk($value["oc_id"]);
 										
 												$modelOC->attributes = $value;
+												$modelOC->oc_sign_date = $value["oc_sign_date"];
+												$modelOC->oc_approve_date = $value["oc_approve_date"];
+												$modelOC->oc_insurance_start = $value["oc_insurance_start"];
+												$modelOC->oc_insurance_end = $value["oc_insurance_end"];
+
 												//check difference
 												//1.project contract
 												$difference = 0;
@@ -1333,6 +1338,17 @@ class ProjectController extends Controller
                   	  $modelOC->oc_end_date = "";
                     $modelOC->oc_last_update = $value["oc_last_update"];
 
+                    
+                    $str_date = explode("-", $value["oc_approve_date"]);
+                    if(count($str_date)>1)
+                      $modelOC->oc_approve_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+                  	$str_date = explode("-", $value["oc_insurance_start"]);
+                    if(count($str_date)>1)
+                      $modelOC->oc_insurance_start = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+                  	$str_date = explode("-", $value["oc_insurance_end"]);
+                    if(count($str_date)>1)
+                      $modelOC->oc_insurance_end = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
+                  	
                     if($value["oc_insurance_end"]=="0000-00-00")
                   	  $modelOC->oc_insurance_end = "";	
                   	if($value["oc_insurance_start"]=="0000-00-00")

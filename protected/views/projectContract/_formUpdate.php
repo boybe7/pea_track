@@ -105,7 +105,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
         <div class="row-fluid">
         	<div class="span3">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_PO'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_PO', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_PO', array('size' => 20, 'maxlength' => 255,'class'=>'span12','placeholder'=>'กรุณาระบุว่าเป็น PO หรือ หนังสือสั่งจ้าง')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']pc_PO',array('class'=>'help-block error')); ?>
             </div>
         	<div class="span9">		  

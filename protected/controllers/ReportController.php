@@ -28,20 +28,24 @@ class ReportController extends Controller
 	 */
 	public function actionProgress()
 	{
-            
-
-		
+            		
 		// display the progress form
 		$this->render('progress');
 	}
 
-	
+	public function actionSummary()
+	{
+    	
+		// display the progress form
+		$this->render('summary');
+	}
+
 	 public function actionGenProgress()
     {
         
     	
-    	if(isset($_POST["project"]) && !empty($_POST["project"])) 
-    	   $model = Project::model()->findByPk($_POST["project"]);
+    	if(isset($_GET["project"]) && !empty($_GET["project"])) 
+    	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_id='.$_GET["project"], 'params'=>array()));	
     	else
     	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
 

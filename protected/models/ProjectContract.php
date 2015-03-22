@@ -84,7 +84,7 @@ class ProjectContract extends CActiveRecord
 			'pc_garantee_date' => 'วันที่ครบกำหนดประกันสัญญา',
 			'pc_user_create' => 'ผู้สร้างสัญญา',
 			'pc_user_update' => 'ผู้บันทึก',
-			'pc_PO'=>'เลข PO',
+			'pc_PO'=>'เลข PO/หนังสือสั่งจ้าง',
 			'pc_num_payment'=>'จำนวนงวดเงิน',
 			'pc_garantee_end'=>'เลขที่บันทึกส่งกองการเงิน/วันที่',
 			'pc_name_request'=>'แจ้งจัดสรรงบ'
