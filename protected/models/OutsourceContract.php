@@ -206,7 +206,7 @@ class OutsourceContract extends CActiveRecord
 		return array(
 			'oc_id' => 'id สัญญา',
 			'oc_code' => 'เลขที่สัญญา',
-			'oc_PO' => 'เลขที่ PO',
+			'oc_PO' => 'หมายเลข WMS',
 			'oc_proj_id' => 'id project',
 			'oc_vendor_id' => 'บริษัท',
 			'oc_detail' => 'รายละเอียดสัญญา',

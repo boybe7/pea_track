@@ -804,6 +804,21 @@ hr {
     </div>
 </div>
 
+<div id="modalPO"  class="modal hide fade">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>แก้ไขข้อมูลรายการ PO</h3>
+    </div>
+    <div class="modal-body" id="bodyPO">
+     
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn btn-danger" id="modalPOCancel">ยกเลิก</a>
+    <a href="#" class="btn btn-primary" id="modalPOSubmit">บันทึก</a>
+    </div>
+</div>
+
+
 <div id="modalApproveOc"  class="modal hide fade">
     <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -866,6 +881,16 @@ hr {
        $model4=new ContractChangeHistory;
       
       $this->renderPartial('/contractChangeHistory/_form',array('model'=>$model4),false); 
+
+      ?>
+    </div>
+
+    <div id="modal-body-po">
+<!-- put whatever you want to show up on bootbox here -->
+      <?php 
+       $model4=new WorkcodeOutsource;
+      
+      $this->renderPartial('/workCodeOutsource/_form',array('model'=>$model4),false); 
 
       ?>
     </div>

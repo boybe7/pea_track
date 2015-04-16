@@ -162,4 +162,23 @@ $("#gentReport").click(function(e){
 });
 ', CClientScript::POS_END);
 
+
+Yii::app()->clientScript->registerScript('exportExcel', '
+$("#exportExcel").click(function(e){
+    e.preventDefault();
+
+     window.location.href = "genProgressExcel?project="+$("#project").val();
+    // $.ajax({
+    //     url: "genExcel",
+    //     data: {project: $("#project").val()},
+    //     success:function(response){
+            
+    //         //$("#reportContent").html(response);
+            
+    //     }
+
+    // });
+
+});
+', CClientScript::POS_END);
 ?>

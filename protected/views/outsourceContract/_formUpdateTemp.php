@@ -314,6 +314,245 @@
         </div>
 
 
+        <!-- PO -->
+        <fieldset class="well the-fieldset">
+          <legend class="the-legend">รายละเอียด PO</legend>
+          <div class="row-fluid"> 
+          <?php 
+        $this->widget('bootstrap.widgets.TbButton', array(
+                'buttonType'=>'link',
+                
+                'type'=>'',
+                'label'=>'เพิ่ม PO',
+                'icon'=>'plus-sign green',
+                
+                'htmlOptions'=>array(
+                  'class'=>'pull-right',
+                  'style'=>'margin:-25px 10px 10px 10px;',
+                  //'onclick'=>'createApprove(' . $index . ')'
+               
+             'onclick'=>'
+                   
+                  js:bootbox.confirm($("#modal-body-po").html(),"ยกเลิก","ตกลง",
+                      function(confirmed){
+                                 
+                          if(confirmed)
+                          {
+
+                              $.ajax({
+                                type: "POST",
+                                url: "../../workCodeOutsource/createPOTemp/' . $index . '",
+                                dataType:"json",
+                                data: $(".modal-body #po-form").serialize()
+                              })                  
+                              .done(function( msg ) {
+                            
+                                jQuery.fn.yiiGridView.update("po-grid'.$index.'");
+                            
+                                if(msg.status=="failure")
+                               {
+                                  $("#modal-body-po").html(msg.div);
+                                  js:bootbox.confirm($("#modal-body-po").html(),"ยกเลิก","ตกลง",
+                                  function(confirmed){
+                                              
+                                          
+                                            if(confirmed)
+                                            {
+                                              $.ajax({
+                                                type: "POST",
+                                                url: "../../workCodeOutsource/createPOTemp/' . $index . '",
+                                                dataType:"json",
+                                                data: $(".modal-body #po-form").serialize()
+                                            })
+                                            .done(function( msg ) {
+                                              if(msg.status=="failure")
+                                              {
+                                                js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+                                              }
+                                              else{
+                                                //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+                                                 jQuery.fn.yiiGridView.update("po-grid'.$index.'");
+                                              }
+                                            });
+                                            }
+                              })
+                            }
+                            else{
+                              //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+
+                            }
+                          });
+                      
+                                  }
+                    })
+                      
+                    ',
+                      
+                ),
+            ));
+
+                  
+        $this->widget('bootstrap.widgets.TbGridView',array(
+          'id'=>'po-grid'.$index,
+          
+            'type'=>'bordered condensed',
+          'dataProvider'=>WorkCodeOutsourceTemp::model()->searchByUser($index,Yii::app()->user->ID),
+          //'filter'=>$model,
+          'selectableRows' => 2,
+          'enableSorting' => false,
+          'rowCssClassExpression'=>'"tr_white"',
+
+            // 'template'=>"{summary}{items}{pager}",
+            'htmlOptions'=>array('style'=>'padding-top:10px;'),
+            'enablePagination' => false,
+            'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
+          'columns'=>array(
+                'No.'=>array(
+                    'header'=>'ลำดับ',
+                    'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),                        
+                'htmlOptions'=>array(
+                            'style'=>'text-align:center'
+
+                      ),
+                    'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+                  ),
+              'detail'=>array(
+                  // 'header'=>'', 
+                
+                'name' => 'PO',
+
+                'headerHtmlOptions' => array('style' => 'width:35%;text-align:center;background-color: #eeeeee'),                       
+                //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:left'
+
+                      )
+                  ),
+                'ref_no'=>array(
+                'name' => 'letter',
+                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
+                //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:center'
+
+                      )
+                  ),
+                'cost'=>array(
+                  
+                  'name' => 'money',
+                  // 'type'=>'raw', //to use html tag
+                  'value'=> function($data){
+                        return number_format($data->money, 2);
+                    },  
+                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:right'
+
+                      )
+                  ),
+                 
+                  array(
+                'class'=>'bootstrap.widgets.TbButtonColumn',
+                'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),
+                'template' => '{update}   {delete}',
+                // 'deleteConfirmation'=>'js:bootbox.confirm("Are you sure to want to delete")',
+                'buttons'=>array(
+                    'delete'=>array(
+                      'url'=>'Yii::app()->createUrl("WorkCodeOutsource/deleteTemp", array("id"=>$data->id))', 
+
+                    ),
+                    'update'=>array(
+
+                      'url'=>'Yii::app()->createUrl("WorkCodeOutsource/updateTemp", array("id"=>$data->id))',
+                      'options'=>array(
+                                    'class'=>'updatechange3',
+                                ),  
+                                'click'=>'function(){
+
+                                  
+                              link = $(this).attr("href");
+                              
+                              $.ajax({
+                                       type:"GET",
+                                       cache: false,
+                                       url:$(this).attr("href"),
+                                       success:function(data){
+                                           
+                                             $("#bodyPO").html(data);
+                                          
+                                             $("#modalPO").modal("show");
+
+                                  
+                                       },
+
+                                      });
+
+
+                              $("#modalPOSubmit").click(function(e){
+                                  e.preventDefault();
+                                   $.ajax( {
+                                      type: "POST",
+                                      url: link,
+                                      cache: false,
+                                      dataType:"json",
+                                      data: $("#po-form").serialize(),
+                                      success: function( msg ) {
+                                        
+                                        if(msg.status=="failure")                 
+                                        {
+                                      
+                                            $("#po-form").html(msg.div);
+                                        }
+                                        else{
+                                            $("#modalPO").modal("hide");
+                                            $("#bodyPO").html();
+                                        }
+
+                                    
+                                    
+                                        jQuery.fn.yiiGridView.update("po-grid'.$index.'");
+
+                                                                          
+                                    
+                                      }
+                                  } 
+                                  );
+                                  
+                                });
+
+                              $("#modalPOCancel").click(function(e){
+                                  
+                                  
+                                $("#modalPO").modal("hide");
+                                $("#bodyPO").html();
+                                    
+                                });
+                            
+
+                                return false;
+
+                                }', 
+                      
+                    )
+
+                  )
+
+                
+              ),
+            )
+
+          ));
+
+           ?>
+          </div>
+        
+    </fieldset>
+
+
+
+        <!-- End PO -->
+
+
         <fieldset class="well the-fieldset">
           <legend class="the-legend">รายละเอียดการเพิ่ม-ลดวงเงิน</legend>
           <div class="row-fluid"> 
@@ -322,7 +561,7 @@
                 'buttonType'=>'link',
                 
                 'type'=>'',
-                'label'=>'เพิ่มการรายการ',
+                'label'=>'เพิ่มรายการ',
                 'icon'=>'plus-sign green',
                 
                 'htmlOptions'=>array(
@@ -359,7 +598,7 @@
                                             {
                                               $.ajax({
                                                 type: "POST",
-                                                url: "../../contractChangeHistory/createOutsourceTemp' . $index . '",
+                                                url: "../../contractChangeHistory/createOutsourceTemp/' . $index . '",
                                                 dataType:"json",
                                                 data: $(".modal-body #contract-change-history-form").serialize()
                                             })

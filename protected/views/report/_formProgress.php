@@ -39,7 +39,8 @@ function renderDate($value)
         $mi = substr($mi, 1);
     if(substr($dates[0], 0,1)==0)
         $d = substr($dates[0], 1);
-
+    else
+        $d = $dates[0];
 
     $renderDate = $d." ".$th_month[$mi]." ".substr($yi,2);
     if($renderDate==0)

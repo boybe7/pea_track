@@ -39,7 +39,8 @@ function renderDate($value)
         $mi = substr($mi, 1);
     if(substr($dates[0], 0,1)==0)
         $d = substr($dates[0], 1);
-
+    else
+        $d = $dates[0];
 
     $renderDate = $d." ".$th_month[$mi]." ".substr($yi,2);
     if($renderDate==0)
@@ -197,7 +198,7 @@ function renderDate($value)
                 	  {	
                 		
                 	  	
-                			//project contract
+                		//project contract
 	                	 $Criteria = new CDbCriteria();
 	                     $Criteria->condition = "pc_proj_id='$pj->pj_id'";
 	                	 $pcs = ProjectContract::model()->findAll($Criteria);
@@ -454,7 +455,7 @@ function renderDate($value)
 		                                if(!empty($oc->oc_PO))
 		                                {
 		                                    $oc->oc_PO = str_replace("PO", "", $oc->oc_PO);
-		                                    echo "-PO ".$oc->oc_PO."<br>";
+		                                    echo "-WMS ".$oc->oc_PO."<br>";
 		                                }
 		                                if(!empty($oc->oc_letter))
 		                                	echo "-หนังสือสั่งจ้าง ".$oc->oc_letter."<br>";
@@ -638,8 +639,10 @@ function renderDate($value)
                 		echo "<td style='text-align:right;background-color:#F0B2FF;'>".number_format($sum_pc_cost - $sum_pc_receive,2)."</td>";
                 		echo "<td style='text-align:center;background-color:#F0B2FF;'></td>";
                 		echo "<td style='text-align:center;background-color:#F0B2FF;'></td>";
-                		echo "<td style='text-align:center;background-color:#F0B2FF;'>".$sum_pc_T."%</td>";
-                		echo "<td style='text-align:center;background-color:#F0B2FF;'>".$sum_pc_A."%</td>";
+                        echo "<td style='text-align:center;background-color:#F0B2FF;'></td>";
+                        echo "<td style='text-align:center;background-color:#F0B2FF;'></td>";
+                		//echo "<td style='text-align:center;background-color:#F0B2FF;'>".$sum_pc_T."%</td>";
+                		//echo "<td style='text-align:center;background-color:#F0B2FF;'>".$sum_pc_A."%</td>";
                 	
                 		echo "<td style='text-align:center;background-color:#F0B2FF;'></td>";
                 		echo "<td style='text-align:center;background-color:#F0B2FF;'></td>";
@@ -652,8 +655,8 @@ function renderDate($value)
                 		echo "<td style='text-align:right;background-color:#F0B2FF;'>".number_format($sum_oc_receive,2)."</td>";
                 		echo "<td style='text-align:right;background-color:#F0B2FF;'></td>";      		
                 		echo "<td style='text-align:right;background-color:#F0B2FF;'>".number_format($sum_oc_cost - $sum_oc_receive,2)."</td>";
-                		echo "<td style='text-align:center;background-color:#F0B2FF;'>".$sum_oc_T."%</td>";
-                		echo "<td style='text-align:center;background-color:#F0B2FF;'>".$sum_oc_A."%</td>";	
+                		echo "<td style='text-align:center;background-color:#F0B2FF;'></td>";
+                		echo "<td style='text-align:center;background-color:#F0B2FF;'></td>";	
                 		echo "<td style='text-align:right;background-color:#F0B2FF;'>".number_format($sum_m_expect,2)."</td>";  
                 		echo "<td style='text-align:right;background-color:#F0B2FF;'>".number_format($sum_m_type1,2)."</td>";  
                 		echo "<td style='text-align:right;background-color:#F0B2FF;'>".number_format($sum_m_real,2)."</td>";  

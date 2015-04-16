@@ -313,6 +313,233 @@
            
         </div>
 
+         <fieldset class="well the-fieldset">
+          <legend class="the-legend">รายละเอียด PO</legend>
+          <div class="row-fluid"> 
+          <?php 
+        $this->widget('bootstrap.widgets.TbButton', array(
+                'buttonType'=>'link',
+                
+                'type'=>'',
+                'label'=>'เพิ่ม PO',
+                'icon'=>'plus-sign green',
+                
+                'htmlOptions'=>array(
+                  'class'=>'pull-right',
+                  'style'=>'margin:-25px 10px 10px 10px;',
+                  //'onclick'=>'createApprove(' . $index . ')'
+               
+             'onclick'=>'
+                   
+                  js:bootbox.confirm($("#modal-body-po").html(),"ยกเลิก","ตกลง",
+                      function(confirmed){
+                                 
+                          if(confirmed)
+                          {
+
+                              $.ajax({
+                                type: "POST",
+                                url: "../../WorkcodeOutsource/createPO/' . $model->oc_id . '",
+                                dataType:"json",
+                                data: $(".modal-body #po-form").serialize()
+                              })                  
+                              .done(function( msg ) {
+                            
+                                jQuery.fn.yiiGridView.update("po-grid'.$index.'");
+                            
+                                if(msg.status=="failure")
+                               {
+                                  $("#modal-body-po").html(msg.div);
+                                  js:bootbox.confirm($("#modal-body-po").html(),"ยกเลิก","ตกลง",
+                                        function(confirmed){
+                                              
+                                          
+                                    if(confirmed)
+                                    {
+                                              $.ajax({
+                                                  type: "POST",
+                                                  url: "../../WorkcodeOutsource/createPO/' . $model->oc_id . '",
+                                                  dataType:"json",
+                                                  data: $(".modal-body #po-form").serialize()
+                                                })
+                                                .done(function( msg ) {
+                                                  if(msg.status=="failure")
+                                                  {
+                                                    js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+                                                  }
+                                                  else{
+                                                    //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+                                                  }
+                                                });
+                                  }
+                              })
+                            }
+                            else{
+                              //js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+
+                            }
+                          });
+                      
+                                  }
+                    })
+                      
+                    ',
+                      
+                ),
+            ));
+
+                  
+        $this->widget('bootstrap.widgets.TbGridView',array(
+          'id'=>'po-grid'.$index,
+          
+          'type'=>'bordered condensed',
+          'dataProvider'=>WorkcodeOutsource::model()->searchByContractID($model->oc_id),
+          //'filter'=>$model,
+          'selectableRows' => 2,
+          'enableSorting' => false,
+          'rowCssClassExpression'=>'"tr_white"',
+
+            // 'template'=>"{summary}{items}{pager}",
+            'htmlOptions'=>array('style'=>'padding-top:10px;'),
+            'enablePagination' => false,
+            'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
+          'columns'=>array(
+                'No.'=>array(
+                    'header'=>'ลำดับ',
+                    'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),                        
+                'htmlOptions'=>array(
+                            'style'=>'text-align:center'
+
+                      ),
+                    'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+                  ),
+              'detail'=>array(
+                  // 'header'=>'', 
+                
+                'name' => 'PO',
+
+                'headerHtmlOptions' => array('style' => 'width:35%;text-align:center;background-color: #eeeeee'),                       
+                //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:left'
+
+                      )
+                  ),
+                  'ref_no'=>array(
+                  // 'header'=>'', 
+                
+                'header' => 'เลขที่หนังสือส่งแจ้งรับรองงบ',
+                'name' => 'letter',
+                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
+                //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:center'
+
+                      )
+                  ),
+                  'cost'=>array(
+                  'header'=>'วงเงิน', 
+                
+                'name' => 'money',
+                // 'type'=>'raw', //to use html tag
+                'value'=> function($data){
+                        return number_format($data->money, 2);
+                    },  
+                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:right'
+
+                      )
+                  ),
+                 
+                  array(
+                'class'=>'bootstrap.widgets.TbButtonColumn',
+                'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),
+                'template' => '{update2}   {delete}',
+                // 'deleteConfirmation'=>'js:bootbox.confirm("Are you sure to want to delete")',
+                'buttons'=>array(
+                    'delete'=>array(
+                      'url'=>'Yii::app()->createUrl("WorkcodeOutsource/delete", array("id"=>$data->id))', 
+
+                    ),
+                    'update2'=>array(
+
+                      'url'=>'Yii::app()->createUrl("WorkcodeOutsource/update", array("id"=>$data->id))',
+                      'options'=>array(
+                                    //'class'=>'updatechange',
+                                ),  
+                                'icon' => 'icon-pencil',
+                                'click'=>'function(){
+                                  
+                              link = $(this).attr("href");
+                             // console.log("but:"+link)
+                                  
+                              $.ajax({
+                                       type:"GET",
+                                       cache: false,
+                                       url:$(this).attr("href"),
+                                       success:function(data){
+                                            
+                                             $("#bodyPO").html(data);
+                                          
+                                             $("#modalPO").modal("show");
+
+                                  
+                                       },
+
+                                      });
+
+
+                              $("#modalPOSubmit").click(function(e){
+     
+                                   $.ajax( {
+                                      type: "POST",
+                                      url: link,
+                                      dataType:"json",
+                                      data: $("#po-form").serialize(),
+                                      success: function( msg ) {
+                                      
+                                        if(msg.status=="failure")                 
+                                        {
+                                  
+                                      $("#po-form").html(msg.div);
+                                    }
+                                    else{
+                                      $("#modalPO").modal("hide");
+                                        $("#bodyPO").html();
+                                    }
+                                            jQuery.fn.yiiGridView.update("po-grid'.$index.'");
+                                    
+                                      }
+                                  } 
+                                  );
+
+                                });
+
+                              $("#modalPOCancel").click(function(e){
+                                  
+                                  
+                                $("#modalPO").modal("hide");
+                                $("#bodyPO").html();
+                                    
+                                });
+                                return false;
+
+                                }',
+                      )
+
+                  )
+
+                
+              ),
+            )
+
+          ));
+
+           ?>
+          </div>
+        
+    </fieldset>
 
         <fieldset class="well the-fieldset">
           <legend class="the-legend">รายละเอียดการเพิ่ม-ลดวงเงิน</legend>
@@ -322,7 +549,7 @@
                 'buttonType'=>'link',
                 
                 'type'=>'',
-                'label'=>'เพิ่มการรายการ',
+                'label'=>'เพิ่มรายการ',
                 'icon'=>'plus-sign green',
                 
                 'htmlOptions'=>array(

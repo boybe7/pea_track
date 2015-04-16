@@ -289,6 +289,84 @@
            
         </div>
 
+         <fieldset class="well the-fieldset">
+          <legend class="the-legend">รายละเอียด PO</legend>
+          <div class="row-fluid"> 
+          <?php 
+        
+                  
+        $this->widget('bootstrap.widgets.TbGridView',array(
+          'id'=>'po-grid'.$index,
+          
+          'type'=>'bordered condensed',
+          'dataProvider'=>WorkCodeOutsource::model()->searchByContractID($model->oc_id),
+          //'filter'=>$model,
+          'selectableRows' => 2,
+          'enableSorting' => false,
+          'rowCssClassExpression'=>'"tr_white"',
+
+            // 'template'=>"{summary}{items}{pager}",
+            'htmlOptions'=>array('style'=>'padding-top:0px;'),
+            'enablePagination' => false,
+            'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
+          'columns'=>array(
+                'No.'=>array(
+                    'header'=>'ลำดับ',
+                    'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #eeeeee'),                        
+                'htmlOptions'=>array(
+                            'style'=>'text-align:center'
+
+                      ),
+                    'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+                  ),
+              'detail'=>array(
+                  // 'header'=>'', 
+                
+                'name' => 'PO',
+
+                'headerHtmlOptions' => array('style' => 'width:35%;text-align:center;background-color: #eeeeee'),                       
+                //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:left'
+
+                      )
+                  ),
+                  'ref_no'=>array(
+                  // 'header'=>'', 
+                
+                'header' => 'เลขที่หนังสือส่งแจ้งรับรองงบ',
+                'name' => 'letter',
+                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
+                //'headerHtmlOptions' => array('style' => 'width: 110px'),
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:center'
+
+                      )
+                  ),
+                  'cost'=>array(
+                  'header'=>'วงเงิน', 
+                
+                'name' => 'money',
+                // 'type'=>'raw', //to use html tag
+                'value'=> function($data){
+                        return number_format($data->money, 2);
+                    },  
+                'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
+                'htmlOptions'=>array(
+                                    'style'=>'text-align:right'
+
+                      )
+                  )
+              ,  
+                  
+            )
+
+          ));
+
+           ?>
+          </div>
+        
+    </fieldset>
 
         <fieldset class="well the-fieldset">
           <legend class="the-legend">รายละเอียดการเพิ่ม-ลดวงเงิน</legend>
@@ -297,17 +375,17 @@
         
                   
         $this->widget('bootstrap.widgets.TbGridView',array(
-          'id'=>'approve-gridOutsource'.$index,
+          'id'=>'oc-change-grid-main'.$index,
           
-          'type'=>'bordered condensed',
-          'dataProvider'=>ContractApproveHistoryTemp::model()->searchByUser($index,2,Yii::app()->user->ID),
+            'type'=>'bordered condensed',
+          'dataProvider'=>ContractChangeHistory::model()->searchByContractID($model->oc_id,2),
           //'filter'=>$model,
           'selectableRows' => 2,
           'enableSorting' => false,
           'rowCssClassExpression'=>'"tr_white"',
 
             // 'template'=>"{summary}{items}{pager}",
-            'htmlOptions'=>array('style'=>'padding-top:0px;'),
+            'htmlOptions'=>array('style'=>'padding-top:10px;'),
             'enablePagination' => false,
             'summaryText'=>'',//'Displaying {start}-{end} of {count} results.',
           'columns'=>array(
@@ -332,12 +410,11 @@
 
                       )
                   ),
-                  'approve by'=>array(
+                  'ref_no'=>array(
                   // 'header'=>'', 
                 
-                'header' => 'อนุมัติโดย/<br>ลงวันที่',
-                'type'=>'raw', //to use html tag
-                'value'=> '$data->approveBy."<br>".$data->dateApprove', 
+                'header' => 'เลขที่หนังสืออ้างอิง',
+                'name' => 'ref_no',
                 'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #eeeeee'),                       
                 //'headerHtmlOptions' => array('style' => 'width: 110px'),
                 'htmlOptions'=>array(
@@ -346,7 +423,7 @@
                       )
                   ),
                   'cost'=>array(
-                  'header'=>'วงเงิน/<br>เป็นเงินเพิ่ม', 
+                  'header'=>'วงเงินเพิ่ม-ลด', 
                 
                 'name' => 'cost',
                 // 'type'=>'raw', //to use html tag
@@ -359,23 +436,11 @@
 
                       )
                   ),
-                  'time'=>array(
-                  'header'=>'ระยะเวลาแล้วเสร็จ/<br>ระยะเลาขอขยาย', 
-                
-                'name' => 'timeSpend',
-                // 'type'=>'raw', //to use html tag
-                  
-                'headerHtmlOptions' => array('style' => 'width:20%;text-align:center;background-color: #eeeeee'),                       
-                'htmlOptions'=>array(
-                                    'style'=>'text-align:left'
-
-                      )
-                  ),  
-                  
+                 
+          
             )
 
           ));
-
            ?>
           </div>
         
@@ -392,7 +457,7 @@
           'id'=>'approve-gridOutsource'.$index,
           
           'type'=>'bordered condensed',
-          'dataProvider'=>ContractApproveHistoryTemp::model()->searchByUser($index,2,Yii::app()->user->ID),
+          'dataProvider'=>ContractApproveHistory::model()->searchByContractID($model->oc_id,2),
           //'filter'=>$model,
           'selectableRows' => 2,
           'enableSorting' => false,

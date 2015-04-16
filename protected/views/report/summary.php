@@ -21,24 +21,17 @@ $this->breadcrumbs=array(
 }
 
 </style>
-<script type="text/javascript" src="/pea_track/themes/bootstrap/js/pdfobject.js"></script>
+<!-- <script type="text/javascript" src="/pea_track/themes/bootstrap/js/pdfobject.js"></script> -->
 <!-- <script type="text/javascript" src="/pea_track/themes/bootstrap/js/pdf.js"></script> -->
 <!-- <script type="text/javascript" src="/pea_track/themes/bootstrap/js/compatibility.js"></script> -->
 <script type="text/javascript">
 
-  //
-  // If absolute URL from the remote server is provided, configure the CORS
-  // header on that server.
-  //
-  var url = '../sample.pdf';
-
-
 
 window.onload = function (){
 
-        var success = new PDFObject({ url: "../sample.pdf",height: "800px" }).embed("pdf");
+         //var success = new PDFObject({ url: "../test.pdf",height: "800px" }).embed("pdf");
 
-   console.log("loaded");
+   
      
    }; 
 </script>
@@ -115,7 +108,7 @@ window.onload = function (){
     
             echo CHtml::label('โครงการ','project');  
             echo CHtml::dropDownList('project', '', 
-                            $list,array('empty' => 'ทั้งหมด','class'=>'span12'
+                            $list,array('empty' => 'กรุณาเลือกโครงการ','class'=>'span12'
                             	));
              	
 		?>
@@ -159,7 +152,7 @@ window.onload = function (){
 </div>
 
 
-<div id="pdf">It appears you don't have Adobe Reader or PDF support in this web browser. <a href="/pdf/sample.pdf">Click here to download the PDF</a></div>
+<div id="pdf" style=""></div>
 
 
 <?php
@@ -167,18 +160,47 @@ window.onload = function (){
 Yii::app()->clientScript->registerScript('gentReport', '
 $("#gentReport").click(function(e){
     e.preventDefault();
-    $.ajax({
-        url: "genProgress",
-        data: {project: $("#project").val()},
-        success:function(response){
-            
-            $("#reportContent").html(response);
-            
-        }
 
-    });
+    if($("#project").val()!="")
+    {    
+        $.ajax({
+            url: "genSummary",
+            cache:false,
+            data: {project: $("#project").val()},
+            success:function(response){
+               // var success = new PDFObject({ url: "../summaryReport.pdf",height: "800px" }).embed("pdf");
+                
+               $("#pdf").html(response);                 
+            }
+
+        });
+    }
+    else
+    {
+        js:bootbox.alert("<font color=red>!!!!กรุณาเลือกโครงการ</font>","ตกลง");
+                                                                            
+    }
+});
+', CClientScript::POS_END);
+
+
+Yii::app()->clientScript->registerScript('exportExcel', '
+$("#exportExcel").click(function(e){
+    e.preventDefault();
+    window.location.href = "genSummaryExcel?project="+$("#project").val();
+    // $.ajax({
+    //     url: "genExcel",
+    //     data: {project: $("#project").val()},
+    //     success:function(response){
+            
+    //         //$("#reportContent").html(response);
+            
+    //     }
+
+    // });
 
 });
 ', CClientScript::POS_END);
+
 
 ?>

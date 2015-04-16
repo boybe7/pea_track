@@ -20,6 +20,25 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 <fieldset class="well the-fieldset">
         <legend class="the-legend contract_no">สัญญาที่ <?php echo ($index);?></legend>
         <?php echo CHtml::activeHiddenField($model, '[' . $index . ']pc_id'); ?>
+        
+        <div class="row-fluid">
+            <?php
+            		$this->widget('bootstrap.widgets.TbButton', array(
+		              'buttonType'=>'link',
+		              
+		              'type'=>'danger',
+		              'label'=>'ลบสัญญา',
+		              'icon'=>'minus-sign',
+		              
+		              'htmlOptions'=>array(
+		                'class'=>'pull-right',
+		                'style'=>'margin:0px 10px 0px 10px;',
+		                'onclick' => 'deleteContract(this, ' . $index . ')'
+		              ),
+		          ));
+
+            ?>  
+        </div>
         <div class="row-fluid">
         	<div class="span3">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_code'); ?>
@@ -31,6 +50,11 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
               <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_cost', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']pc_cost',array('class'=>'help-block error')); ?>
             </div>  
+             <div class="span2">		  
+        	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_num_payment'); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_num_payment', array('size' => 5, 'maxlength' => 5,'class'=>'span12')); ?>
+              <?php echo CHtml::error($model, '[' . $index . ']pc_num_payment',array('class'=>'help-block error')); ?>
+            </div>
             <div class="span2">
 
                <?php 
@@ -50,7 +74,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
                                               'format'=>'dd/mm/yyyy', //กำหนด date Format
                                               'showAnim' => 'slideDown',
                                               ),
-                            'htmlOptions'=>array('class'=>'span8'),  // ใส่ค่าเดิม ในเหตุการ Update 
+                            'htmlOptions'=>array('class'=>'span9'),  // ใส่ค่าเดิม ในเหตุการ Update 
                          )
                     );
                     echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
@@ -76,31 +100,14 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
                                               'format'=>'dd/mm/yyyy', //กำหนด date Format
                                               'showAnim' => 'slideDown',
                                               ),
-                            'htmlOptions'=>array('class'=>'span8'),  // ใส่ค่าเดิม ในเหตุการ Update 
+                            'htmlOptions'=>array('class'=>'span10'),  // ใส่ค่าเดิม ในเหตุการ Update 
                          )
                     );
                     echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
 
                ?> 
             </div>
-            <div class="span2">
-            <?php
-            		$this->widget('bootstrap.widgets.TbButton', array(
-		              'buttonType'=>'link',
-		              
-		              'type'=>'danger',
-		              'label'=>'ลบสัญญา',
-		              'icon'=>'minus-sign',
-		              
-		              'htmlOptions'=>array(
-		                'class'=>'pull-right',
-		                'style'=>'margin:0px 10px 0px 10px;',
-		                'onclick' => 'deleteContract(this, ' . $index . ')'
-		              ),
-		          ));
-
-            ?>  
-            </div>
+            
         </div>
         <div class="row-fluid">
         	<div class="span3">		  
@@ -162,15 +169,17 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
               <?php echo CHtml::error($model, '[' . $index . ']pc_garantee_end',array('class'=>'help-block error')); ?>
             </div>
 
-             <div class="span3">		  
-        	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_num_payment'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_num_payment', array('size' => 5, 'maxlength' => 5,'class'=>'span12')); ?>
-              <?php echo CHtml::error($model, '[' . $index . ']pc_num_payment',array('class'=>'help-block error')); ?>
-            </div>
+            
             <div class="span3">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_name_request'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_name_request', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']pc_name_request',array('class'=>'help-block error')); ?>
+            </div>
+
+            <div class="span3">		  
+        	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_code_request'); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_code_request', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
+              <?php echo CHtml::error($model, '[' . $index . ']pc_code_request',array('class'=>'help-block error')); ?>
             </div>
 	  	</div>
 	  	<fieldset class="well the-fieldset">

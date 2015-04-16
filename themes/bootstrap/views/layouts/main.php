@@ -214,6 +214,15 @@ nav .badge.red {
          url('/pea_track/fonts/boon-700.svg#Boon700') format('svg');
 }
 
+@font-face {
+    font-family: 'THSarabunPSK';
+    src: url('/pea_track/fonts/thsarabunnew-webfont.eot');
+    src: url('/pea_track/fonts/thsarabunnew-webfont.eot') format('embedded-opentype'),
+         url('/pea_track/fonts/thsarabunnew-webfont.woff') format('woff'),
+         url('/pea_track/fonts/thsarabunnew-webfont.ttf') format('truetype');
+       
+}
+
 body{
     
     

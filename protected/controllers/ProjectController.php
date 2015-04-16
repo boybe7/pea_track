@@ -311,6 +311,8 @@ class ProjectController extends Controller
 			{
 			  Yii::app()->db->createCommand('DELETE FROM contract_approve_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
 			  Yii::app()->db->createCommand('DELETE FROM contract_change_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
+			  Yii::app()->db->createCommand('DELETE FROM work_code_outsource_temp WHERE u_id='.Yii::app()->user->ID)->execute();
+			 	
 			}
 			  // Yii::app()->db->createCommand('TRUNCATE contract_approve_history_temp')->execute();
 			
@@ -1272,6 +1274,7 @@ class ProjectController extends Controller
 		 	{
 		 		 Yii::app()->db->createCommand('DELETE FROM contract_approve_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
 		 	 	 Yii::app()->db->createCommand('DELETE FROM contract_change_history_temp WHERE u_id='.Yii::app()->user->ID)->execute();
+		         Yii::app()->db->createCommand('DELETE FROM work_code_outsource_temp WHERE u_id='.Yii::app()->user->ID)->execute();
 		         
 		 	}		
 
