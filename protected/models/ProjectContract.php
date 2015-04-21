@@ -146,6 +146,7 @@ class ProjectContract extends CActiveRecord
             if(count($str_date)>1)
             	$this->pc_garantee_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
 
+            //$this->pc_A_percent = 10;
 
             if($this->pc_sign_date == "00/00/0000")
                 $this->pc_sign_date = '';

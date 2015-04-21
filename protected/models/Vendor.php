@@ -33,9 +33,9 @@ class Vendor extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('v_name, v_address, v_tax_id,type', 'required'),
+			array('v_name,type', 'required'),
 			array('v_tax_id', 'numerical', 'integerOnly'=>true),
-			array('v_tax_id', 'length', 'min'=>13,'max'=>13,'tooLong'=>"{attribute} ต้องมี 13 ตัวเลข.",'tooShort'=>"{attribute} ต้องมี 13 ตัวเลข"),
+			//array('v_tax_id', 'length', 'min'=>13,'max'=>13,'tooLong'=>"{attribute} ต้องมี 13 ตัวเลข.",'tooShort'=>"{attribute} ต้องมี 13 ตัวเลข"),
 		
 			array('v_name', 'length', 'max'=>200),
 			array('v_tel', 'length', 'max'=>25),
