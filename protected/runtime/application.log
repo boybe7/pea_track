@@ -19596,6 +19596,7 @@ HTTP_REFERER=http://localhost/pea_track/report/summary
 2015/04/07 22:26:43 [warning] [application] Failed to set unsafe attribute "dateApprove" of "ContractApproveHistory".
 in C:\xampp\htdocs\pea_track\protected\controllers\ContractApproveHistoryController.php (73)
 in C:\xampp\htdocs\pea_track\index.php (13)
+<<<<<<< HEAD
 2015/04/16 20:54:07 [error] [php] Creating default object from empty value (C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php:823)
 Stack trace:
 #0 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
@@ -19794,3 +19795,716 @@ in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (323)
 in C:\xampp\htdocs\pea_track\protected\views\project\_form2.php (207)
 in C:\xampp\htdocs\pea_track\protected\views\project\create2.php (12)
 in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (323)
+=======
+2015/04/17 18:30:07 [error] [php] include(Vendor.php): failed to open stream: No such file or directory (C:\xampp\htdocs\pea_track\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\views\project\_formUpdate.php(843): spl_autoload_call()
+#1 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#4 C:\xampp\htdocs\pea_track\protected\views\project\update.php(12): ProjectController->renderPartial()
+#5 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#6 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ProjectController->renderInternal()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ProjectController->renderFile()
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ProjectController->renderPartial()
+#9 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(1378): ProjectController->render()
+#10 unknown(0): ProjectController->actionUpdate()
+#11 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#12 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ProjectController->runAction()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#17 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ProjectController->filterAccessControl()
+#18 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#19 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#20 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ProjectController->runActionWithFilters()
+#21 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ProjectController->run()
+#22 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#23 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#24 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/project/update/29
+in C:\xampp\htdocs\pea_track\protected\views\project\_formUpdate.php (843)
+in C:\xampp\htdocs\pea_track\protected\views\project\update.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1378)
+>>>>>>> 1f1086ce6d6f3ff3a87f5e70ca192007ad017757
+2015/04/24 00:54:54 [error] [exception.CException] exception 'CException' with message 'คุณสมบัติ "PaymentOutsourceContract.proj_id" ยังไม่ถูกกำหนด' in C:\xampp\htdocs\pea_track\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(145): CComponent->__get('proj_id')
+#1 C:\xampp\htdocs\pea_track\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('proj_id')
+#2 C:\xampp\htdocs\pea_track\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(PaymentOutsourceContract), 'proj_id')
+#3 C:\xampp\htdocs\pea_track\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(PaymentOutsourceContract), 'proj_id', Array)
+#4 C:\xampp\htdocs\pea_track\protected\views\paymentOutsourceContract\admin.php(298): CHtml::activeTextField(Object(PaymentOutsourceContract), 'proj_id', Array)
+#5 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#6 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#9 C:\xampp\htdocs\pea_track\protected\controllers\PaymentOutsourceContractController.php(229): CController->render('admin', Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): PaymentOutsourceContractController->actionIndex()
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#13 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#14 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#16 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#18 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#20 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('paymentOutsourc...')
+#21 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#22 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/pea_track/paymentOutsourceContract/index
+HTTP_REFERER=http://localhost/pea_track/paymentProjectContract/index?pname=%E0%B8%A3%E0%B8%88.2%2F2557&cost=55%2C000%2C000.00&PaymentProjectContract%5Bproj_id%5D=30&pj_vendor_id=&pid=30
+---
+2015/04/24 00:55:26 [error] [exception.CException] exception 'CException' with message 'คุณสมบัติ "OutsourceContract.oc_details" ยังไม่ถูกกำหนด' in C:\xampp\htdocs\pea_track\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(145): CComponent->__get('oc_details')
+#1 C:\xampp\htdocs\pea_track\framework\base\CComponent.php(612) : eval()'d code(1): CActiveRecord->__get('oc_details')
+#2 C:\xampp\htdocs\pea_track\framework\base\CComponent.php(612): eval()
+#3 C:\xampp\htdocs\pea_track\framework\zii\widgets\grid\CDataColumn.php(137): CComponent->evaluateExpression('OutsourceContra...', Array)
+#4 C:\xampp\htdocs\pea_track\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent(0, Object(PaymentOutsourceContract))
+#5 C:\xampp\htdocs\pea_track\framework\zii\widgets\grid\CGridView.php(616): CGridColumn->renderDataCell(0)
+#6 C:\xampp\htdocs\pea_track\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow(0)
+#7 C:\xampp\htdocs\pea_track\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#8 C:\xampp\htdocs\pea_track\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#9 [internal function]: CBaseListView->renderSection(Array)
+#10 C:\xampp\htdocs\pea_track\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{items}<div cla...')
+#11 C:\xampp\htdocs\pea_track\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#12 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(173): CBaseListView->run()
+#13 C:\xampp\htdocs\pea_track\protected\views\paymentOutsourceContract\admin.php(370): CBaseController->widget('bootstrap.widge...', Array)
+#14 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#15 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#18 C:\xampp\htdocs\pea_track\protected\controllers\PaymentOutsourceContractController.php(229): CController->render('admin', Array)
+#19 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): PaymentOutsourceContractController->actionIndex()
+#20 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#21 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#23 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#27 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#29 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('paymentOutsourc...')
+#30 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#31 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/pea_track/paymentOutsourceContract/index
+HTTP_REFERER=http://localhost/pea_track/paymentProjectContract/index?pname=%E0%B8%A3%E0%B8%88.2%2F2557&cost=55%2C000%2C000.00&PaymentProjectContract%5Bproj_id%5D=30&pj_vendor_id=&pid=30
+---
+2015/04/24 00:55:28 [error] [exception.CException] exception 'CException' with message 'คุณสมบัติ "OutsourceContract.oc_details" ยังไม่ถูกกำหนด' in C:\xampp\htdocs\pea_track\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(145): CComponent->__get('oc_details')
+#1 C:\xampp\htdocs\pea_track\framework\base\CComponent.php(612) : eval()'d code(1): CActiveRecord->__get('oc_details')
+#2 C:\xampp\htdocs\pea_track\framework\base\CComponent.php(612): eval()
+#3 C:\xampp\htdocs\pea_track\framework\zii\widgets\grid\CDataColumn.php(137): CComponent->evaluateExpression('OutsourceContra...', Array)
+#4 C:\xampp\htdocs\pea_track\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent(0, Object(PaymentOutsourceContract))
+#5 C:\xampp\htdocs\pea_track\framework\zii\widgets\grid\CGridView.php(616): CGridColumn->renderDataCell(0)
+#6 C:\xampp\htdocs\pea_track\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow(0)
+#7 C:\xampp\htdocs\pea_track\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#8 C:\xampp\htdocs\pea_track\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#9 [internal function]: CBaseListView->renderSection(Array)
+#10 C:\xampp\htdocs\pea_track\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{items}<div cla...')
+#11 C:\xampp\htdocs\pea_track\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#12 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(173): CBaseListView->run()
+#13 C:\xampp\htdocs\pea_track\protected\views\paymentOutsourceContract\admin.php(370): CBaseController->widget('bootstrap.widge...', Array)
+#14 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#15 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#18 C:\xampp\htdocs\pea_track\protected\controllers\PaymentOutsourceContractController.php(229): CController->render('admin', Array)
+#19 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): PaymentOutsourceContractController->actionIndex()
+#20 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#21 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#23 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#27 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#29 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('paymentOutsourc...')
+#30 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#31 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/pea_track/paymentOutsourceContract/index
+HTTP_REFERER=http://localhost/pea_track/paymentProjectContract/index?pname=%E0%B8%A3%E0%B8%88.2%2F2557&cost=55%2C000%2C000.00&PaymentProjectContract%5Bproj_id%5D=30&pj_vendor_id=&pid=30
+---
+2015/04/24 00:55:49 [error] [exception.CException] exception 'CException' with message 'คุณสมบัติ "OutsourceContract.pc_cost" ยังไม่ถูกกำหนด' in C:\xampp\htdocs\pea_track\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(145): CComponent->__get('pc_cost')
+#1 C:\xampp\htdocs\pea_track\protected\views\paymentOutsourceContract\admin.php(199): CActiveRecord->__get('pc_cost')
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#6 C:\xampp\htdocs\pea_track\protected\controllers\PaymentOutsourceContractController.php(229): CController->render('admin', Array)
+#7 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): PaymentOutsourceContractController->actionIndex()
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#15 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('index')
+#17 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('paymentOutsourc...')
+#18 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#19 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/pea_track/paymentOutsourceContract/index?pname=%E0%B8%9A.22%2F2557+%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%A9%E0%B8%B1%E0%B8%97+%E0%B8%8B%E0%B8%B5%E0%B9%80%E0%B8%A1%E0%B8%99%E0%B8%AA%E0%B9%8C+%E0%B8%88%E0%B8%B3%E0%B8%81%E0%B8%B1%E0%B8%94&cost=9%2C200%2C000.00&PaymentOutsourceContract%5Bcontract_id%5D=57&pj_vendor_id=&pid=57
+HTTP_REFERER=http://localhost/pea_track/paymentOutsourceContract/index
+---
+2015/04/24 01:08:39 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\pea_track\protected\views\paymentOutsourceContract\admin.php:173)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): PaymentOutsourceContractController->renderFile()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): PaymentOutsourceContractController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\protected\controllers\PaymentOutsourceContractController.php(229): PaymentOutsourceContractController->render()
+#3 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): PaymentOutsourceContractController->actionIndex()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): PaymentOutsourceContractController->runAction()
+#6 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#8 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): PaymentOutsourceContractController->filterAccessControl()
+#9 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): PaymentOutsourceContractController->runActionWithFilters()
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): PaymentOutsourceContractController->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/paymentOutsourceContract/index?pname=&cost=&PaymentOutsourceContract%5Bcontract_id%5D=&pj_vendor_id=&pid=
+in C:\xampp\htdocs\pea_track\protected\views\paymentOutsourceContract\admin.php (173)
+in C:\xampp\htdocs\pea_track\protected\controllers\PaymentOutsourceContractController.php (229)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:27:26 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:27:26 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:27:26 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:27:26 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:27:26 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:27:26 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:27:26 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:27:26 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:27:26 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:27:26 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:27:26 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:27:26 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:27:26 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:27:26 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:31:45 [error] [exception.CException] exception 'CException' with message 'คุณสมบัติ "OutsourceContract.pc_id" ยังไม่ถูกกำหนด' in C:\xampp\htdocs\pea_track\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(145): CComponent->__get('pc_id')
+#1 C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php(1444): CActiveRecord->__get('pc_id')
+#2 [internal function]: ProjectController->actionUpdate('29')
+#3 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(ProjectController), Array)
+#4 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(ProjectController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('update')
+#14 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('project/update')
+#15 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/pea_track/project/update/29
+HTTP_REFERER=http://localhost/pea_track/project/index
+---
+2015/04/24 01:37:19 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:37:19 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:37:19 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:37:19 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:37:19 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:37:19 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:37:19 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:37:19 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:37:19 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:37:19 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:37:19 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:37:19 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:37:19 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:37:19 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:18 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:18 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:18 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:18 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:18 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:18 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:18 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:18 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:18 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:18 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:18 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:18 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:18 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:18 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:22 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:22 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:22 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:22 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:22 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:22 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:22 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:22 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:22 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:22 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:22 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:22 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:22 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:22 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:24 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:24 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:24 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:24 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:24 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:24 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:24 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:24 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:24 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:24 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:24 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:24 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:24 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:24 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:26 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:26 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:26 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:26 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:26 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:26 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:26 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:27 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:27 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:27 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:27 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:27 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:27 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:39:27 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:40:18 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:40:18 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:40:18 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:40:18 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:40:18 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:40:18 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:40:18 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:40:18 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:40:18 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:40:18 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:40:18 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:40:18 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:40:18 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:40:18 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:41:07 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:41:07 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:41:07 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:41:07 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:41:07 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:41:07 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:41:07 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:41:07 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:41:07 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:41:07 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:41:07 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:41:07 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:41:07 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:41:07 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:45:03 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:45:03 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:45:03 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:45:03 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:45:03 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:45:03 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:45:03 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:45:03 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:45:03 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:45:03 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:45:03 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:45:03 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:45:03 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 01:45:03 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)

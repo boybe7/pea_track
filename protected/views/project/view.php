@@ -246,6 +246,38 @@ hr {
                     $modelPC->pc_id = $value["pc_id"];
                     $modelPC->pc_last_update = $value["pc_last_update"];
                     $modelPC->pc_cost = number_format($value["pc_cost"],2);
+
+
+                         //cal %A
+                      //sum income;
+                                $data = Yii::app()->db->createCommand()
+                                ->select('sum(money) as sum')
+                                ->from('payment_project_contract')
+                                ->where('proj_id=:id AND (bill_date!="" AND bill_date!="0000-00-00")', array(':id'=>$modelPC->pc_id))
+                                ->queryAll();
+                                                          
+                      $sum_income = $data[0]["sum"];
+
+                       $data = Yii::app()->db->createCommand()
+                                ->select('sum(cost) as sum')
+                                ->from('contract_change_history')
+                                ->where('contract_id=:id  AND type=1', array(':id'=>$modelPC->pc_id))
+                                ->queryAll();
+                                                          
+                      $change = $data[0]["sum"];      
+
+                      // $data = Yii::app()->db->createCommand()
+                      //          ->select('sum(money) as sum')
+                      //          ->from('payment_outsource_contract')
+                      //          ->where('contract_id=:id AND (approve_date!="" AND approve_date!="0000-00-00")', array(':id'=>$modelPC->pc_id))
+                      //          ->queryAll();
+                                                          
+                      // $sum_payment = $data[0]["sum"];  
+                      $cost = str_replace(",", "", $modelPC->pc_cost) + $change;
+                     // echo($cost);
+                      $modelPC->pc_A_percent =number_format((1 - ($cost - $sum_income)/$cost)*100,2);//number_format(($cost - $sum_income)*100/$cost,2);
+
+
                     //print_r($modelPC->pc_id);
                     echo'<fieldset class="well the-fieldset">';
                     echo'  <legend class="the-legend contract_no">สัญญาที่ '.$id.'</legend>';
@@ -515,6 +547,33 @@ hr {
                 	//$modelOS =new OutsourceContract;
                   //$modelOS->attributes = $value;
                   $modelOS = OutsourceContract::model()->findByPk($value["oc_id"]);
+
+
+
+                         //cal %A
+                      //sum income;
+                                
+                       $data = Yii::app()->db->createCommand()
+                                ->select('sum(cost) as sum')
+                                ->from('contract_change_history')
+                                ->where('contract_id=:id  AND type=2', array(':id'=>$modelOS->oc_id))
+                                ->queryAll();
+                                                          
+                      $change = $data[0]["sum"];      
+
+                      $data = Yii::app()->db->createCommand()
+                               ->select('sum(money) as sum')
+                               ->from('payment_outsource_contract')
+                               ->where('contract_id=:id AND (approve_date!="" AND approve_date!="0000-00-00")', array(':id'=>$modelOS->oc_id))
+                               ->queryAll();
+                                                          
+                       $sum_payment = $data[0]["sum"];  
+                      $cost = str_replace(",", "", $modelOS->oc_cost) + $change;
+                     // echo($cost);
+                      $modelOS->oc_A_percent =number_format((1 - ($cost - $sum_payment)/$cost)*100,2);//number_format(($cost - $sum_income)*100/$cost,2);
+
+
+
                 	$this->renderPartial('//outsourceContract/_formView', array(
 		                'model' => $modelOS,
 		                'index' => $index,

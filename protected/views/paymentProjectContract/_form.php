@@ -174,7 +174,9 @@
        </div>
        <div class="span3">
           <?php
-            echo $form->textFieldRow($model,'T',array('class'=>'span5','maxlength'=>3));
+            //echo $form->textFieldRow($model,'T',array('class'=>'span5','maxlength'=>3));
+            
+
             //echo CHtml::label('%ความก้าวหน้าด้านเทคนิค','t_percent');        
             //echo "<input type='text' id='t_percent' name='t_percent' value='$T_percent' class='span12' >";
         ?> 
@@ -226,7 +228,9 @@
 
        <div class="span3"> 
           <?php
-            echo $form->textFieldRow($model,'A',array('class'=>'span5','maxlength'=>3));
+            //echo $form->textFieldRow($model,'A',array('class'=>'span5','maxlength'=>3));
+            
+
             //echo CHtml::label('%ความก้าวหน้าการเรียกเก็บเงิน','a_percent');        
 	          //echo "<input type='text' id='a_percent' name='a_percent' value='$A_percent' class='span12' >";
 	      ?> 

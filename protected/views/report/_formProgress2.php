@@ -412,9 +412,39 @@ function renderDate($value)
 
                                         echo "<td>".$pay->invoice_no."<br>".renderDate($pay->invoice_date)."</td>";
                                         echo "<td>".$pay->bill_no."<br>".renderDate($pay->bill_date)."</td>";
+
+                                        
                                 
                                         if($i%$maxPayment==0)
                                         {
+                                           //cal %A
+                                        //sum income;
+                                        $data = Yii::app()->db->createCommand()
+                                                            ->select('sum(money) as sum')
+                                                            ->from('payment_project_contract')
+                                                            ->where('proj_id=:id AND (bill_date!="" AND bill_date!="0000-00-00")', array(':id'=>$pc->pc_id))
+                                                            ->queryAll();
+                                                                                        
+                                        $sum_income = $data[0]["sum"];
+
+                                         $data = Yii::app()->db->createCommand()
+                                                            ->select('sum(cost) as sum')
+                                                            ->from('contract_change_history')
+                                                            ->where('contract_id=:id  AND type=1', array(':id'=>$pc->pc_id))
+                                                            ->queryAll();
+                                                                                        
+                                        $change = $data[0]["sum"];      
+
+                                        // $data = Yii::app()->db->createCommand()
+                                        //                  ->select('sum(money) as sum')
+                                        //                  ->from('payment_outsource_contract')
+                                        //                  ->where('contract_id=:id AND (approve_date!="" AND approve_date!="0000-00-00")', array(':id'=>$modelPC->pc_id))
+                                        //                  ->queryAll();
+                                                                                        
+                                        // $sum_payment = $data[0]["sum"];  
+                                        $cost = str_replace(",", "", $pc->pc_cost) + $change;
+                                        $pc->pc_A_percent =number_format((1 - ($cost - $sum_income)/$cost)*100,2);//number_format(($cost - $sum_income)*100/$cost,2);
+
                                             echo "<td style='text-align:center'>".$pc->pc_T_percent."</td>";
                                             echo "<td style='text-align:center'>".$pc->pc_A_percent."</td>";     
                                             $sum_pc_T += $pc->pc_T_percent;
@@ -431,6 +461,34 @@ function renderDate($value)
 
                                 	if($i%$maxPayment==0 && $iPC!=0 && $iPC<=$nPC)
                                         {
+                                            //cal %A
+                                        //sum income;
+                                        $data = Yii::app()->db->createCommand()
+                                                            ->select('sum(money) as sum')
+                                                            ->from('payment_project_contract')
+                                                            ->where('proj_id=:id AND (bill_date!="" AND bill_date!="0000-00-00")', array(':id'=>$pc->pc_id))
+                                                            ->queryAll();
+                                                                                        
+                                        $sum_income = $data[0]["sum"];
+
+                                         $data = Yii::app()->db->createCommand()
+                                                            ->select('sum(cost) as sum')
+                                                            ->from('contract_change_history')
+                                                            ->where('contract_id=:id  AND type=1', array(':id'=>$pc->pc_id))
+                                                            ->queryAll();
+                                                                                        
+                                        $change = $data[0]["sum"];      
+
+                                        // $data = Yii::app()->db->createCommand()
+                                        //                  ->select('sum(money) as sum')
+                                        //                  ->from('payment_outsource_contract')
+                                        //                  ->where('contract_id=:id AND (approve_date!="" AND approve_date!="0000-00-00")', array(':id'=>$modelPC->pc_id))
+                                        //                  ->queryAll();
+                                                                                        
+                                        // $sum_payment = $data[0]["sum"];  
+                                        $cost = str_replace(",", "", $pc->pc_cost) + $change;
+                                        $pc->pc_A_percent =number_format((1 - ($cost - $sum_income)/$cost)*100,2);//number_format(($cost - $sum_income)*100/$cost,2);
+
                                             echo "<td style='text-align:center'>".$pc->pc_T_percent."</td>";
                                             echo "<td style='text-align:center'>".$pc->pc_A_percent."</td>";     
                                             $sum_pc_T += $pc->pc_T_percent;
@@ -552,6 +610,30 @@ function renderDate($value)
                                         
                                         if($i%$maxPayment==0)
                                         {
+                                           
+                                                          //cal %A
+                                                        //sum income;
+                                                        
+
+                                                         $data = Yii::app()->db->createCommand()
+                                                                            ->select('sum(cost) as sum')
+                                                                            ->from('contract_change_history')
+                                                                            ->where('contract_id=:id  AND type=2', array(':id'=>$oc->oc_id))
+                                                                            ->queryAll();
+                                                                                                        
+                                                        $change = $data[0]["sum"];      
+
+                                                        $data = Yii::app()->db->createCommand()
+                                                                         ->select('sum(money) as sum')
+                                                                         ->from('payment_outsource_contract')
+                                                                         ->where('contract_id=:id AND (approve_date!="" AND approve_date!="0000-00-00")', array(':id'=>$oc->oc_id))
+                                                                         ->queryAll();
+                                                                                                        
+                                                        $sum_payment = $data[0]["sum"];  
+                                                        $cost = str_replace(",", "", $oc->oc_cost) + $change;
+                                                        $oc->oc_A_percent =number_format((1 - ($cost - $sum_payment)/$cost)*100,2);//number_format(($cost - $sum_income)*100/$cost,2);
+
+
                                             echo "<td style='text-align:center'>".$oc->oc_T_percent."</td>";
                                             echo "<td style='text-align:center'>".$oc->oc_A_percent."</td>";     
                                             $sum_oc_T += $oc->oc_T_percent;
@@ -569,6 +651,29 @@ function renderDate($value)
 
                                 	   if($i%$maxPayment==0 && $iOC!=0 && $iOC<=$nOC)
                                         {
+                                                 //cal %A
+                                                        //sum income;
+                                                        
+
+                                                         $data = Yii::app()->db->createCommand()
+                                                                            ->select('sum(cost) as sum')
+                                                                            ->from('contract_change_history')
+                                                                            ->where('contract_id=:id  AND type=2', array(':id'=>$oc->oc_id))
+                                                                            ->queryAll();
+                                                                                                        
+                                                        $change = $data[0]["sum"];      
+
+                                                        $data = Yii::app()->db->createCommand()
+                                                                         ->select('sum(money) as sum')
+                                                                         ->from('payment_outsource_contract')
+                                                                         ->where('contract_id=:id AND (approve_date!="" AND approve_date!="0000-00-00")', array(':id'=>$oc->oc_id))
+                                                                         ->queryAll();
+                                                                                                        
+                                                        $sum_payment = $data[0]["sum"];  
+                                                        $cost = str_replace(",", "", $oc->oc_cost) + $change;
+                                                        $oc->oc_A_percent =number_format((1 - ($cost - $sum_payment)/$cost)*100,2);//number_format(($cost - $sum_income)*100/$cost,2);
+
+
                                             echo "<td style='text-align:center'>".$oc->oc_T_percent."</td>";
                                             echo "<td style='text-align:center'>".$oc->oc_A_percent."</td>";     
                                             $sum_oc_T += $oc->oc_T_percent;

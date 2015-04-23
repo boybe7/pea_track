@@ -989,6 +989,9 @@ class ProjectController extends Controller
 							else //old contracts
 							{
 									$modelPC->attributes = $value;
+
+
+
 									//check difference
 									//1.project contract
 									$difference = 0;
@@ -1343,8 +1346,36 @@ class ProjectController extends Controller
 
                     $modelPC->pc_last_update = $value["pc_last_update"];
                     $modelPC->pc_details = $value["pc_details"];
-                     $modelPC->pc_id = $value["pc_id"];
+                    $modelPC->pc_id = $value["pc_id"];
+                    //cal %A
+					//sum income;
+                    $data = Yii::app()->db->createCommand()
+										->select('sum(money) as sum')
+										->from('payment_project_contract')
+										->where('proj_id=:id AND (bill_date!="" AND bill_date!="0000-00-00")', array(':id'=>$modelPC->pc_id))
+										->queryAll();
+											                        
+					$sum_income = $data[0]["sum"];
 
+					 $data = Yii::app()->db->createCommand()
+										->select('sum(cost) as sum')
+										->from('contract_change_history')
+										->where('contract_id=:id  AND type=1', array(':id'=>$modelPC->pc_id))
+										->queryAll();
+											                        
+					$change = $data[0]["sum"];      
+
+					// $data = Yii::app()->db->createCommand()
+					// 					->select('sum(money) as sum')
+					// 					->from('payment_outsource_contract')
+					// 					->where('contract_id=:id AND (approve_date!="" AND approve_date!="0000-00-00")', array(':id'=>$modelPC->pc_id))
+					// 					->queryAll();
+											                        
+					// $sum_payment = $data[0]["sum"];  
+					$cost = $modelPC->pc_cost + $change;
+					$modelPC->pc_A_percent =number_format((1 - ($cost - $sum_income)/$cost)*100,2);//number_format(($cost - $sum_income)*100/$cost,2);
+
+					//end cal 
                     $modelPC->pc_cost = number_format($modelPC->pc_cost,2);
                     array_push($modelContract, $modelPC);
                  
@@ -1395,6 +1426,29 @@ class ProjectController extends Controller
                   	  $modelOC->oc_approve_date = "";	
                    
                     $modelOC->oc_id = $value["oc_id"];
+
+                    //cal %A
+					//sum income;
+
+					 $data = Yii::app()->db->createCommand()
+										->select('sum(cost) as sum')
+										->from('contract_change_history')
+										->where('contract_id=:id  AND type=2', array(':id'=>$modelOC->oc_id))
+										->queryAll();
+											                        
+					$change = $data[0]["sum"];      
+
+					$data = Yii::app()->db->createCommand()
+										->select('sum(money) as sum')
+										->from('payment_outsource_contract')
+										->where('contract_id=:id AND (approve_date!="" AND approve_date!="0000-00-00")', array(':id'=>$modelOC->oc_id))
+										->queryAll();
+											                        
+					$sum_payment = $data[0]["sum"];  
+					$cost = $modelOC->oc_cost + $change;
+					$modelOC->oc_A_percent =number_format((1 - ($cost - $sum_payment)/$cost)*100,2);//number_format(($cost - $sum_income)*100/$cost,2);
+
+					//end cal 
 
                     $modelOC->oc_cost = number_format($modelOC->oc_cost,2);
                     array_push($modelOutsource, $modelOC);

@@ -293,7 +293,7 @@
           </div> 
           <div class="span3">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_A_percent'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_A_percent', array( 'maxlength' => 3,'class'=>'span6')); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_A_percent', array( 'maxlength' => 3,'class'=>'span6','disabled'=>true)); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_A_percent',array('class'=>'help-block error')); ?>          
           </div> 
            
