@@ -900,21 +900,15 @@ class ReportController extends Controller
 		            			
 		                			}
 
-		                			//อากร
-		                			foreach ($m_tax as $key => $t) {
-		                				$row_i++;
-		                				$objPHPExcel->setActiveSheetIndex(0)
-		            						->setCellValue('B'.$row_i, $t->mc_detail." ".number_format($t->mc_cost,2)." บาท");	
-		            			
-		                			}
+		                			
 
-		                			if(!empty($pj->pj_CA))
-		                			{
-		                				$row_i++;
-		                				$objPHPExcel->setActiveSheetIndex(0)
-		            						->setCellValue('B'.$row_i, $pj->pj_CA);	
+		                		// 	if(!empty($pj->pj_CA))
+		                		// 	{
+		                		// 		$row_i++;
+		                		// 		$objPHPExcel->setActiveSheetIndex(0)
+		            						// ->setCellValue('B'.$row_i, $pj->pj_CA);	
 		            					
-		                			}
+		                		// 	}
 		            			
 		            			//draw PC
 		                			
@@ -938,6 +932,13 @@ class ReportController extends Controller
 		                                    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.$row_pc++, "-".$pc->pc_PO);
 		                               
 		                                }	
+		                                //อากร
+			                			foreach ($m_tax as $key => $t) {
+			                				
+			                				$objPHPExcel->setActiveSheetIndex(0)
+			            						->setCellValue('C'.$row_pc++, "-".$t->mc_detail." ".number_format($t->mc_cost,2)." บาท");	
+			            			
+			                			}
 										$objPHPExcel->setActiveSheetIndex(0)->setCellValue('D'.$row_max, $pc->pc_code);
 										$objPHPExcel->setActiveSheetIndex(0)->setCellValue('E'.$row_max, $this->renderDate($pc->pc_sign_date));
 										

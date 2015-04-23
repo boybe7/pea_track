@@ -103,6 +103,7 @@ class ProjectController extends Controller
                     $pay_total = $result[0]["sum"];         
 
                 $remain = $cost_total - $pay_total;
+                //$remain = 22;
                 $data[] = array(
                         'id'=>$model['pj_id'],
                         'label'=>$workcat->wc_name." ปี ".$model->pj_fiscalyear.":".$model['pj_name'],//." ".$modelVendor->v_name,
@@ -819,12 +820,31 @@ class ProjectController extends Controller
 		    		{
 		    			$Criteria = new CDbCriteria();
              			$Criteria->condition = "mc_proj_id='$id' AND mc_type=0 AND mc_in_project=1";
-             			$modelMCost = ManagementCost::model()->findAll($Criteria);                       
-                        $modelMCost[0]->mc_cost = $_POST["expect_cost1"];                        
-                        $modelMCost[0]->mc_date = (date("Y")+543).date("-m-d");
-                        $modelMCost[0]->mc_type = 0;
-				        $modelMCost[0]->mc_user_update = Yii::app()->user->ID; 				        
-                        $modelMCost[0]->save();
+             			$modelMCost = ManagementCost::model()->findAll($Criteria);
+             			if(!empty($modelMCost))
+             			{
+             				$modelMCost[0]->mc_cost = $_POST["expect_cost1"];                        
+	                        $modelMCost[0]->mc_date = (date("Y")+543).date("-m-d");
+
+	                        $modelMCost[0]->mc_type = 0;
+					        $modelMCost[0]->mc_user_update = Yii::app()->user->ID; 				        
+	                        $modelMCost[0]->save();	
+             			}
+             			else{
+             				$modelMCost = new ManagementCost("search");
+             				$modelMCost->mc_cost = $_POST["expect_cost1"];                        
+	                        $modelMCost->mc_date = (date("Y")+543).date("-m-d");
+	                        $modelMCost->mc_type = 0;
+	                        $modelMCost->mc_proj_id = $id;
+	                        $modelMCost->mc_in_project = 1;
+					        $modelMCost->mc_user_update = Yii::app()->user->ID; 				        
+	                        $modelMCost->save();
+	                        // header('Content-type: text/plain');
+	                        // print_r($modelMCost);
+	                        // exit;
+
+             			}                       
+                        
                     }
                         // header('Content-type: text/plain');
 		                //          		print_r($modelMCost[0]);                    
@@ -834,11 +854,24 @@ class ProjectController extends Controller
                         $Criteria = new CDbCriteria();
              			$Criteria->condition = "mc_proj_id='$id' AND mc_type=0 AND mc_in_project=2";
              			$modelMCost = ManagementCost::model()->findAll($Criteria);                       
-                        $modelMCost[0]->mc_cost = $_POST["expect_cost2"];                        
-                        $modelMCost[0]->mc_date = (date("Y")+543).date("-m-d");
-				        $modelMCost[0]->mc_user_update = Yii::app()->user->ID; 				        
-                        $modelMCost[0]->mc_type = 0;
-                        $modelMCost[0]->save();
+                        if(!empty($modelMCost))
+             			{
+             				$modelMCost[0]->mc_cost = $_POST["expect_cost2"];                        
+	                        $modelMCost[0]->mc_date = (date("Y")+543).date("-m-d");
+	                        $modelMCost[0]->mc_type = 0;
+					        $modelMCost[0]->mc_user_update = Yii::app()->user->ID; 				        
+	                        $modelMCost[0]->save();	
+             			}
+             			else{
+             				$modelMCost = new ManagementCost("search");
+             				$modelMCost->mc_cost = $_POST["expect_cost2"];                        
+	                        $modelMCost->mc_date = (date("Y")+543).date("-m-d");
+	                        $modelMCost->mc_type = 0;
+	                        $modelMCost->mc_proj_id = $id;
+	                        $modelMCost->mc_in_project = 2;
+					        $modelMCost->mc_user_update = Yii::app()->user->ID; 				        
+	                        $modelMCost->save();
+             			}
                     }    
 				    	//end
 
@@ -1009,7 +1042,9 @@ class ProjectController extends Controller
 
 									if($modelPC->save())
 									{
-
+									// header('Content-type: text/plain');
+	                        		// print_r($modelPC);
+	                         		//exit;
 									}	
 									else{
 										$modelProj->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ '.$index.'" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		

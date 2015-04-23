@@ -102,6 +102,7 @@ $('#search-form form').submit(function(){
                                            $("#pid").val(ui.item.id);
                                            $("#pj_cost").val(ui.item.cost);
                                            $("#cost").val(ui.item.cost);
+                                          //  $("#rm_cost").val(ui.item.remain);
                                            $("#ManagementCost_mc_proj_id").val(ui.item.id);
                                            $("#search-form").submit();
 
@@ -150,7 +151,7 @@ $('#search-form form').submit(function(){
                        
         }    
 
-        echo "<input type='text' class='span12' id='rm_cost' style='text-align:right' name='rm_cost' value='$rm_cost' disabled>";?>
+        echo "<input type='text' class='span12' id='rm_cost' style='text-align:right' name='rm_cost' value='$rm_cost'  disabled>";?>
        </div>
         
     </div>
@@ -184,7 +185,7 @@ $('#search-form form').submit(function(){
 			        //'data-toggle'=>'modal',
 			        //'data-target'=>'#myModal',
 			        'onclick'=>'      
-			                       if($.fn.yiiGridView.getSelection("payment-project-contract-grid").length==0)
+			                       if($.fn.yiiGridView.getSelection("management-cost-grid").length==0)
 			                       		js:bootbox.alert("กรุณาเลือกแถวข้อมูลที่ต้องการลบ?","ตกลง");
 			                       else  
 			                          js:bootbox.confirm("คุณต้องการจะลบข้อมูล?","ยกเลิก","ตกลง",
@@ -194,10 +195,10 @@ $('#search-form form').submit(function(){
 						                   	 $.ajax({
 													type: "POST",
 													url: "deleteSelected",
-													data: { selectedID: $.fn.yiiGridView.getSelection("payment-project-contract-grid")}
+													data: { selectedID: $.fn.yiiGridView.getSelection("management-cost-grid")}
 													})
 													.done(function( msg ) {
-														$("#payment-project-contract-grid").yiiGridView("update",{});
+														$("#management-cost-grid").yiiGridView("update",{});
 													});
 						                  })',
 			        'class'=>'pull-right',

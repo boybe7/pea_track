@@ -310,12 +310,10 @@ function renderDate($value)
 		                			foreach ($workcodes as $key => $wc) {
 		                				echo $wc->code."<br>";
 		                			}
-		                			foreach ($m_tax as $key => $t) {
-		                				echo $t->mc_detail." ".number_format($t->mc_cost,2)." บาท<br>";
-		                			}
+		                			
 
-		                			if(!empty($pj->pj_CA))
-		                				echo $pj->pj_CA."<br>";
+		                			//if(!empty($pj->pj_CA))
+		                			//	echo $pj->pj_CA."<br>";
 		                			echo "</td>";
                             	}
 
@@ -337,7 +335,10 @@ function renderDate($value)
 		                                    //$pc->pc_PO = str_replace("PO", "", $pc->pc_PO);
 		                                    //echo "-PO ".$pc->pc_PO."<br>";
 		                                    echo "-".$pc->pc_PO."<br>";
-		                                }	
+		                                }
+                                        foreach ($m_tax as $key => $t) {
+                                            echo "-".$t->mc_detail." ".number_format($t->mc_cost,2)." บาท<br>";
+                                        }	
 				                	  	echo "</td>";
 
 				                	  	echo "<td rowspan='".$maxPayment."' style='text-align:center'>".$pc->pc_code."</td>";
