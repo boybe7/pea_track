@@ -33,6 +33,13 @@ class ReportController extends Controller
 		$this->render('progress');
 	}
 
+	public function actionCashflow()
+	{
+            		
+		// display the progress form
+		$this->render('cashflow');
+	}
+
 	public function actionSummary()
 	{
     	

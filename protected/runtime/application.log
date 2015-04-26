@@ -20508,3 +20508,31 @@ in C:\xampp\htdocs\pea_track\index.php (13)
 in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
 in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
 in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/24 22:18:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "cashflow" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('cashflow')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('cashflow')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/cashflow')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/report/cashflow
+HTTP_REFERER=http://localhost/pea_track/report/progress
+---
+2015/04/24 22:44:59 [error] [php] Undefined variable: form (C:\xampp\htdocs\pea_track\protected\views\report\cashflow.php:160)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ReportController->renderFile()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ReportController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(40): ReportController->render()
+#3 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionCashflow()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#7 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#8 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/cashflow
+in C:\xampp\htdocs\pea_track\protected\views\report\cashflow.php (160)
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (40)
+in C:\xampp\htdocs\pea_track\index.php (13)
