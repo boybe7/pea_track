@@ -54,11 +54,19 @@ class OutsourceContractController extends Controller
                 //$data[]["id"]=$get->v_id;
                 
                 $modelVendor = Vendor::model()->FindByPk($model['oc_vendor_id']);
+
+                $data2 = Yii::app()->db->createCommand()
+										->select('sum(cost) as sum')
+										->from('contract_change_history')
+										->where('contract_id=:id AND type=2', array(':id'=>$model['oc_id']))
+										->queryAll();
+											                        
+				$change = $data2[0]["sum"]; 
                 
                 // header('Content-type: text/plain');
                 //              print_r($model["oc_cost"]);                    
                 //  exit;
-                $oc_cost = str_replace(",", "", $model['oc_cost']);
+                $oc_cost = str_replace(",", "", $model['oc_cost']) + $change;
                 $data[] = array(
                         'id'=>$model['oc_id'],
                         'label'=>$model['oc_code'].' '.$modelVendor->v_name,

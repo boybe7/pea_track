@@ -33,6 +33,13 @@ class ReportController extends Controller
 		$this->render('progress');
 	}
 
+	public function actionCashflow()
+	{
+            		
+		// display the progress form
+		$this->render('cashflow');
+	}
+
 	public function actionSummary()
 	{
     	
@@ -900,21 +907,15 @@ class ReportController extends Controller
 		            			
 		                			}
 
-		                			//อากร
-		                			foreach ($m_tax as $key => $t) {
-		                				$row_i++;
-		                				$objPHPExcel->setActiveSheetIndex(0)
-		            						->setCellValue('B'.$row_i, $t->mc_detail." ".number_format($t->mc_cost,2)." บาท");	
-		            			
-		                			}
+		                			
 
-		                			if(!empty($pj->pj_CA))
-		                			{
-		                				$row_i++;
-		                				$objPHPExcel->setActiveSheetIndex(0)
-		            						->setCellValue('B'.$row_i, $pj->pj_CA);	
+		                		// 	if(!empty($pj->pj_CA))
+		                		// 	{
+		                		// 		$row_i++;
+		                		// 		$objPHPExcel->setActiveSheetIndex(0)
+		            						// ->setCellValue('B'.$row_i, $pj->pj_CA);	
 		            					
-		                			}
+		                		// 	}
 		            			
 		            			//draw PC
 		                			
@@ -938,6 +939,13 @@ class ReportController extends Controller
 		                                    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.$row_pc++, "-".$pc->pc_PO);
 		                               
 		                                }	
+		                                //อากร
+			                			foreach ($m_tax as $key => $t) {
+			                				
+			                				$objPHPExcel->setActiveSheetIndex(0)
+			            						->setCellValue('C'.$row_pc++, "-".$t->mc_detail." ".number_format($t->mc_cost,2)." บาท");	
+			            			
+			                			}
 										$objPHPExcel->setActiveSheetIndex(0)->setCellValue('D'.$row_max, $pc->pc_code);
 										$objPHPExcel->setActiveSheetIndex(0)->setCellValue('E'.$row_max, $this->renderDate($pc->pc_sign_date));
 										
@@ -1005,6 +1013,35 @@ class ReportController extends Controller
 			                                        
 			                                        $row_pay_pc++; 
 			                                }
+
+			                                      //cal %A
+                                        //sum income;
+                                        $data = Yii::app()->db->createCommand()
+                                                            ->select('sum(money) as sum')
+                                                            ->from('payment_project_contract')
+                                                            ->where('proj_id=:id AND (bill_date!="" AND bill_date!="0000-00-00")', array(':id'=>$pc->pc_id))
+                                                            ->queryAll();
+                                                                                        
+                                        $sum_income = $data[0]["sum"];
+
+                                         $data = Yii::app()->db->createCommand()
+                                                            ->select('sum(cost) as sum')
+                                                            ->from('contract_change_history')
+                                                            ->where('contract_id=:id  AND type=1', array(':id'=>$pc->pc_id))
+                                                            ->queryAll();
+                                                                                        
+                                        $change = $data[0]["sum"];      
+
+                                        // $data = Yii::app()->db->createCommand()
+                                        //                  ->select('sum(money) as sum')
+                                        //                  ->from('payment_outsource_contract')
+                                        //                  ->where('contract_id=:id AND (approve_date!="" AND approve_date!="0000-00-00")', array(':id'=>$modelPC->pc_id))
+                                        //                  ->queryAll();
+                                                                                        
+                                        // $sum_payment = $data[0]["sum"];  
+                                        $cost = str_replace(",", "", $pc->pc_cost) + $change;
+                                        $pc->pc_A_percent =number_format((1 - ($cost - $sum_income)/$cost)*100,2);//number_format(($cost - $sum_income)*100/$cost,2);
+
 
 			                                            $objPHPExcel->setActiveSheetIndex(0)->setCellValue('L'.($row_max), $pc->pc_T_percent);
 			                                        	$objPHPExcel->setActiveSheetIndex(0)->setCellValue('M'.($row_max), $pc->pc_A_percent);
@@ -1121,6 +1158,29 @@ class ReportController extends Controller
 			                                        	$objPHPExcel->setActiveSheetIndex(0)->setCellValue('X'.($row_pay_oc), "-");
 
 		                                } 
+
+		                                   //cal %A
+                                                        //sum income;
+                                                        
+
+                                                         $data = Yii::app()->db->createCommand()
+                                                                            ->select('sum(cost) as sum')
+                                                                            ->from('contract_change_history')
+                                                                            ->where('contract_id=:id  AND type=2', array(':id'=>$oc->oc_id))
+                                                                            ->queryAll();
+                                                                                                        
+                                                        $change = $data[0]["sum"];      
+
+                                                        $data = Yii::app()->db->createCommand()
+                                                                         ->select('sum(money) as sum')
+                                                                         ->from('payment_outsource_contract')
+                                                                         ->where('contract_id=:id AND (approve_date!="" AND approve_date!="0000-00-00")', array(':id'=>$oc->oc_id))
+                                                                         ->queryAll();
+                                                                                                        
+                                                        $sum_payment = $data[0]["sum"];  
+                                                        $cost = str_replace(",", "", $oc->oc_cost) + $change;
+                                                        $oc->oc_A_percent =number_format((1 - ($cost - $sum_payment)/$cost)*100,2);//number_format(($cost - $sum_income)*100/$cost,2);
+
 		                                 $objPHPExcel->setActiveSheetIndex(0)->setCellValue('Y'.($row_max), $oc->oc_T_percent);
 			                             $objPHPExcel->setActiveSheetIndex(0)->setCellValue('Z'.($row_max), $oc->oc_A_percent);
 			                             $sum_oc_T += $oc->oc_T_percent;

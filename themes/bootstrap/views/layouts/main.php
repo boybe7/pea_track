@@ -296,7 +296,11 @@ if(!Yii::app()->user->isGuest)
                 array('label'=>'รายงาน ','icon'=>'list-alt', 'url'=>'#','items'=>array(
                      array('label'=>'project progress report', 'url'=>array('/report/progress')),
                      array('label'=>'project summary report', 'url'=>array('/report/summary')),
-                     
+                     array('label'=>'รายงานสรุปรายได้/ค่าใช้จ่าย', 'url'=>array('/report/cashflow')),
+                     array('label'=>'รายงานสรุปรายได้/ค่าใช้จ่าย', 'url'=>array('/report/cashflow')),
+                     array('label'=>'รายงานสรุปรายได้/ค่าใช้จ่าย', 'url'=>array('/report/cashflow')),
+                     array('label'=>'รายงานสรุปรายได้/ค่าใช้จ่าย', 'url'=>array('/report/cashflow')),
+                                                                 
 
                     ),
                 ),

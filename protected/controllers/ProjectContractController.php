@@ -42,10 +42,19 @@ class ProjectContractController extends Controller
                 //$data[]["label"]=$get->v_name;
                 //$data[]["id"]=$get->v_id;
                 $modelVendor = Vendor::model()->FindByPk($model['pc_vendor_id']);
+
+                $data2 = Yii::app()->db->createCommand()
+										->select('sum(cost) as sum')
+										->from('contract_change_history')
+										->where('contract_id=:id AND type=1', array(':id'=>$model['pc_id']))
+										->queryAll();
+											                        
+				$change = $data2[0]["sum"]; 
+
                 $data[] = array(
                         'id'=>$model['pc_id'],
                         'label'=>$model['pc_code'],//." ".$modelVendor->v_name,
-                        'cost'=>number_format($model['pc_cost'],2)
+                        'cost'=>number_format($model['pc_cost']+$change,2)
                 );
 
             }

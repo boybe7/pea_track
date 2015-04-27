@@ -103,6 +103,7 @@ class ProjectController extends Controller
                     $pay_total = $result[0]["sum"];         
 
                 $remain = $cost_total - $pay_total;
+                //$remain = 22;
                 $data[] = array(
                         'id'=>$model['pj_id'],
                         'label'=>$workcat->wc_name." ปี ".$model->pj_fiscalyear.":".$model['pj_name'],//." ".$modelVendor->v_name,
@@ -222,6 +223,34 @@ class ProjectController extends Controller
 		 				            	   $saveOK = 0;
                                         }   	
 						        }
+								
+								//save contract PO
+								 	        		 $modelTemps = Yii::app()->db->createCommand()
+											                    ->select('*')
+											                    ->from('work_code_outsource_temp')
+											                    ->where('contract_id=:id AND  u_id=:user', array(':id'=>$index,':user'=>Yii::app()->user->ID))
+											                    ->queryAll();
+											        foreach ($modelTemps as $key => $mTemp) {
+
+					                                        $modelChange = new WorkCodeOutsource("search");
+					                                        $modelChange->attributes = $mTemp;
+					                                        $modelChange->id = '';
+					                                        $modelChange->contract_id = $modelC->oc_id;
+					                                        
+					                                        
+					                                        if($modelChange->save())
+					                                        {
+					                                            $msg =  "successful";
+					                                            $mt = WorkCodeOutsourceTemp::model()->findByPk($mTemp['id']);
+					                                            $mt->delete();
+					                                        }	                                          
+					                                        else{
+					                                           $modelOutsourceVal->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ "'.$index.' ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+							 				            	   $saveOK = 0;
+
+					                                        }   	
+											        }         
+
 
 		 				     	//$saveOK = true;
 		 				     	$modelTemps = Yii::app()->db->createCommand()
@@ -819,12 +848,31 @@ class ProjectController extends Controller
 		    		{
 		    			$Criteria = new CDbCriteria();
              			$Criteria->condition = "mc_proj_id='$id' AND mc_type=0 AND mc_in_project=1";
-             			$modelMCost = ManagementCost::model()->findAll($Criteria);                       
-                        $modelMCost[0]->mc_cost = $_POST["expect_cost1"];                        
-                        $modelMCost[0]->mc_date = (date("Y")+543).date("-m-d");
-                        $modelMCost[0]->mc_type = 0;
-				        $modelMCost[0]->mc_user_update = Yii::app()->user->ID; 				        
-                        $modelMCost[0]->save();
+             			$modelMCost = ManagementCost::model()->findAll($Criteria);
+             			if(!empty($modelMCost))
+             			{
+             				$modelMCost[0]->mc_cost = $_POST["expect_cost1"];                        
+	                        $modelMCost[0]->mc_date = (date("Y")+543).date("-m-d");
+
+	                        $modelMCost[0]->mc_type = 0;
+					        $modelMCost[0]->mc_user_update = Yii::app()->user->ID; 				        
+	                        $modelMCost[0]->save();	
+             			}
+             			else{
+             				$modelMCost = new ManagementCost("search");
+             				$modelMCost->mc_cost = $_POST["expect_cost1"];                        
+	                        $modelMCost->mc_date = (date("Y")+543).date("-m-d");
+	                        $modelMCost->mc_type = 0;
+	                        $modelMCost->mc_proj_id = $id;
+	                        $modelMCost->mc_in_project = 1;
+					        $modelMCost->mc_user_update = Yii::app()->user->ID; 				        
+	                        $modelMCost->save();
+	                        // header('Content-type: text/plain');
+	                        // print_r($modelMCost);
+	                        // exit;
+
+             			}                       
+                        
                     }
                         // header('Content-type: text/plain');
 		                //          		print_r($modelMCost[0]);                    
@@ -834,11 +882,24 @@ class ProjectController extends Controller
                         $Criteria = new CDbCriteria();
              			$Criteria->condition = "mc_proj_id='$id' AND mc_type=0 AND mc_in_project=2";
              			$modelMCost = ManagementCost::model()->findAll($Criteria);                       
-                        $modelMCost[0]->mc_cost = $_POST["expect_cost2"];                        
-                        $modelMCost[0]->mc_date = (date("Y")+543).date("-m-d");
-				        $modelMCost[0]->mc_user_update = Yii::app()->user->ID; 				        
-                        $modelMCost[0]->mc_type = 0;
-                        $modelMCost[0]->save();
+                        if(!empty($modelMCost))
+             			{
+             				$modelMCost[0]->mc_cost = $_POST["expect_cost2"];                        
+	                        $modelMCost[0]->mc_date = (date("Y")+543).date("-m-d");
+	                        $modelMCost[0]->mc_type = 0;
+					        $modelMCost[0]->mc_user_update = Yii::app()->user->ID; 				        
+	                        $modelMCost[0]->save();	
+             			}
+             			else{
+             				$modelMCost = new ManagementCost("search");
+             				$modelMCost->mc_cost = $_POST["expect_cost2"];                        
+	                        $modelMCost->mc_date = (date("Y")+543).date("-m-d");
+	                        $modelMCost->mc_type = 0;
+	                        $modelMCost->mc_proj_id = $id;
+	                        $modelMCost->mc_in_project = 2;
+					        $modelMCost->mc_user_update = Yii::app()->user->ID; 				        
+	                        $modelMCost->save();
+             			}
                     }    
 				    	//end
 
@@ -1012,7 +1073,9 @@ class ProjectController extends Controller
 
 									if($modelPC->save())
 									{
-
+									// header('Content-type: text/plain');
+	                        		// print_r($modelPC);
+	                         		//exit;
 									}	
 									else{
 										$modelProj->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ '.$index.'" ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
@@ -1124,7 +1187,32 @@ class ProjectController extends Controller
 
 					                                        }   	
 											        }            
-											        
+											        //save contract PO
+								 	        		 $modelTemps = Yii::app()->db->createCommand()
+											                    ->select('*')
+											                    ->from('work_code_outsource_temp')
+											                    ->where('contract_id=:id AND  u_id=:user', array(':id'=>$index,':user'=>Yii::app()->user->ID))
+											                    ->queryAll();
+											        foreach ($modelTemps as $key => $mTemp) {
+
+					                                        $modelChange = new WorkCodeOutsource("search");
+					                                        $modelChange->attributes = $mTemp;
+					                                        $modelChange->id = '';
+					                                        $modelChange->contract_id = $modelOC->oc_id;
+					                                        
+					                                        
+					                                        if($modelChange->save())
+					                                        {
+					                                            $msg =  "successful";
+					                                            $mt = WorkCodeOutsourceTemp::model()->findByPk($mTemp['id']);
+					                                            $mt->delete();
+					                                        }	                                          
+					                                        else{
+					                                           $modelOutsourceVal->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ "'.$index.' ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+							 				            	   $saveOC = false;
+
+					                                        }   	
+											        }         
 
 								 	        		 //save approve change history
 								 	        		 $modelTemps = Yii::app()->db->createCommand()
@@ -1325,7 +1413,7 @@ class ProjectController extends Controller
 					 $data = Yii::app()->db->createCommand()
 										->select('sum(cost) as sum')
 										->from('contract_change_history')
-										->where('contract_id=:id', array(':id'=>$modelPC->pc_id))
+										->where('contract_id=:id  AND type=1', array(':id'=>$modelPC->pc_id))
 										->queryAll();
 											                        
 					$change = $data[0]["sum"];      
@@ -1338,7 +1426,7 @@ class ProjectController extends Controller
 											                        
 					// $sum_payment = $data[0]["sum"];  
 					$cost = $modelPC->pc_cost + $change;
-					$modelPC->pc_A_percent = number_format(($cost - $sum_income)*100/$cost,2);
+					$modelPC->pc_A_percent =number_format((1 - ($cost - $sum_income)/$cost)*100,2);//number_format(($cost - $sum_income)*100/$cost,2);
 
 					//end cal 
                     $modelPC->pc_cost = number_format($modelPC->pc_cost,2);
@@ -1391,6 +1479,29 @@ class ProjectController extends Controller
                   	  $modelOC->oc_approve_date = "";	
                    
                     $modelOC->oc_id = $value["oc_id"];
+
+                    //cal %A
+					//sum income;
+
+					 $data = Yii::app()->db->createCommand()
+										->select('sum(cost) as sum')
+										->from('contract_change_history')
+										->where('contract_id=:id  AND type=2', array(':id'=>$modelOC->oc_id))
+										->queryAll();
+											                        
+					$change = $data[0]["sum"];      
+
+					$data = Yii::app()->db->createCommand()
+										->select('sum(money) as sum')
+										->from('payment_outsource_contract')
+										->where('contract_id=:id AND (approve_date!="" AND approve_date!="0000-00-00")', array(':id'=>$modelOC->oc_id))
+										->queryAll();
+											                        
+					$sum_payment = $data[0]["sum"];  
+					$cost = $modelOC->oc_cost + $change;
+					$modelOC->oc_A_percent =number_format((1 - ($cost - $sum_payment)/$cost)*100,2);//number_format(($cost - $sum_income)*100/$cost,2);
+
+					//end cal 
 
                     $modelOC->oc_cost = number_format($modelOC->oc_cost,2);
                     array_push($modelOutsource, $modelOC);

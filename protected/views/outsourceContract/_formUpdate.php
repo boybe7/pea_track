@@ -45,7 +45,7 @@
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_code', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_code',array('class'=>'help-block error')); ?>
             </div>  
-            <div class="span5">
+            <div class="span7">
         		  <?php
                     echo CHtml::activeHiddenField($model, '[' . $index . ']oc_vendor_id'); 
                     echo CHtml::activeLabelEx($model, '[' . $index . ']oc_vendor_id'); 
@@ -96,15 +96,78 @@
                             ),
                            'htmlOptions'=>array(
 
-                                'class'=>$model->hasErrors('oc_vendor_id')?'span12 error sessionStore':'span12 sessionStore'
+                                'class'=>$model->hasErrors('oc_vendor_id')?'span9 error sessionStore':'span9 sessionStore'
                             ),
                                   
                         ));
 
-                         echo CHtml::error($model, '[' . $index . ']oc_vendor_id',array('class'=>'help-block error'));
+                         //echo CHtml::error($model, '[' . $index . ']oc_vendor_id',array('class'=>'help-block error'));
+               
+                         $this->widget('bootstrap.widgets.TbButton', array(
+                'buttonType'=>'link',
+                
+                'type'=>'success',
+                'label'=>'เพิ่มคู่สัญญา',
+                'icon'=>'plus-sign',
+                //'url'=>array('vendor/create'),
+                'htmlOptions'=>array(
+                    //'data-toggle'=>'modal',
+                    //'data-target'=>'#myModal',
+                    'onclick'=>'js:bootbox.confirm($("#modal-body").html(),"ยกเลิก","ตกลง",
+                              function(confirmed){
+                                console.log($(".modal-body #vendor-form").serialize());    
+                                
+                                      if(confirmed)
+                                  {
+                                    $.ajax({
+                          type: "POST",
+                          url: "../../vendor/createSupplier",
+                          dataType:"json",
+                          data: $(".modal-body #vendor-form").serialize()
+                          })
+                          .done(function( msg ) {
+                            console.log(msg)
+                            if(msg.status=="failure")
+                            {
+                              $("#modal-body").html(msg.div);
+                              js:bootbox.confirm($("#modal-body").html(),"ยกเลิก","ตกลง",
+                                        function(confirmed){
+                                              
+                                          
+                                                if(confirmed)
+                                            {
+                                              $.ajax({
+                                    type: "POST",
+                                    url: "../vendor/create",
+                                    dataType:"json",
+                                    data: $(".modal-body #vendor-form").serialize()
+                                    })
+                                    .done(function( msg ) {
+                                      if(msg.status=="failure")
+                                      {
+                                        js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+                                      }
+                                      else{
+                                        js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+                                      }
+                                    });
+                                            }
+                              })
+                            }
+                            else{
+                                        js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+                                      }
+                          });
+                                  }
+                    })',
+                        
+                    'class'=>'pull-right'
+                ),
+            ));
                ?>
             </div>
-            <div class="span4">     
+         
+            <div class="span2">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_cost'); ?>
               <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_cost', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_cost',array('class'=>'help-block error')); ?>          
@@ -305,7 +368,7 @@
           </div> 
           <div class="span3">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_A_percent'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_A_percent', array( 'maxlength' => 3,'class'=>'span6')); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_A_percent', array( 'maxlength' => 3,'class'=>'span6','disabled'=>true)); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_A_percent',array('class'=>'help-block error')); ?>          
           </div> 
            

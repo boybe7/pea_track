@@ -172,6 +172,35 @@ $('#search-form form').submit(function(){
 
 	        $pc_T = $modelPC->oc_T_percent;
 	        $pc_A = $modelPC->oc_A_percent;
+
+	        $data = Yii::app()->db->createCommand()
+										->select('sum(money) as sum')
+										->from('payment_outsource_contract')
+										->where('contract_id=:id AND (approve_date!="" AND approve_date!="0000-00-00")', array(':id'=>$pid))
+										->queryAll();
+											                        
+					$sum_income = $data[0]["sum"];
+
+					 $data = Yii::app()->db->createCommand()
+										->select('sum(cost) as sum')
+										->from('contract_change_history')
+										->where('contract_id=:id AND type=2', array(':id'=>$pid))
+										->queryAll();
+											                        
+					$change = $data[0]["sum"];      
+
+					// $data = Yii::app()->db->createCommand()
+					// 					->select('sum(money) as sum')
+					// 					->from('payment_outsource_contract')
+					// 					->where('contract_id=:id AND (approve_date!="" AND approve_date!="0000-00-00")', array(':id'=>$modelPC->pc_id))
+					// 					->queryAll();
+											                        
+					// $sum_payment = $data[0]["sum"]; 
+					//echo $sum_income; 
+					$cost = str_replace(",", "", $modelPC->oc_cost) + $change;
+					//echo $cost;
+					$pc_A =number_format((1 - ($cost - $sum_income)/$cost)*100,2);//number_format(($cost - $sum_income)*100/$cost,2);
+
         }
         echo "<input type='text' class='span12'  style='text-align:center' value='$pc_T' disabled>";
         echo "</div>";
@@ -264,14 +293,14 @@ $('#search-form form').submit(function(){
 
 	  	            	  		)   	  		
         ),
-		// 'proj_id'=>array(
-		// 	    'header' => '<a class="sort-link">รายละเอียดโครงการ</a>',
-		// 	    //'name' =>'proj_id',
-		// 	    'value' => 'ProjectContract::model()->FindByPk($data->proj_id)->pc_details',
-		// 	    'filter'=>CHtml::activeTextField($model, 'proj_id',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("proj_id"))),
-		// 		'headerHtmlOptions' => array('style' => 'width:20%;text-align:center;background-color: #f5f5f5'),  	            	  	
-		// 		'htmlOptions'=>array('style'=>'text-align:left;padding-left:10px;')
-	 //  	),
+		'proj_id'=>array(
+			    'header' => '<a class="sort-link">รายละเอียดโครงการ</a>',
+			    //'name' =>'proj_id',
+			    'value' => 'OutsourceContract::model()->FindByPk($data->contract_id)->oc_detail',
+			    'filter'=>CHtml::activeTextField($model, 'contract_id',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("proj_id"))),
+				'headerHtmlOptions' => array('style' => 'width:20%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				'htmlOptions'=>array('style'=>'text-align:left;padding-left:10px;')
+	  	),
 		//'v_address',
 		'detail'=>array(
 			    'name' => 'detail',
@@ -305,28 +334,28 @@ $('#search-form form').submit(function(){
 				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:center')
 	  	),
-	  	'T%'=>array(
-			    //'header' => '<a class="sort-link" href="/pea_track/paymentOutsourceContract/index?ajax=payment-outsource-contract-grid&sort=T">T%</a>',
-			    'header'=>$model->getAttributeLabel('T%'),
-			    'name'=>'T',
-			    'headerHtmlOptions'=>array(),
-			    //'type'=> 'raw',
-			    //'value' => '$data->T',//'ProjectContract::model()->FindByPk($data->proj_id)->pc_T_percent',
-			    //'filter'=>CHtml::activeTextField($model, 'sumcost',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
-				'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),  	            	  	
-				'htmlOptions'=>array('style'=>'text-align:center')
-	  	),
-	  	'B%'=>array(
-			    //'header' => '<a class="sort-link">B%</a>',
-			    'header'=>$model->getAttributeLabel('B%'),
-			    'name'=>'B',
-			    'headerHtmlOptions'=>array(),
-			    //'type'=> 'raw',
-			    'value' => '$data->B',//'ProjectContract::model()->FindByPk($data->proj_id)->pc_A_percent',
-			    //'filter'=>CHtml::activeTextField($model, 'sumcost',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
-				'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),  	            	  	
-				'htmlOptions'=>array('style'=>'text-align:center')
-	  	),
+	  	// 'T%'=>array(
+			 //    //'header' => '<a class="sort-link" href="/pea_track/paymentOutsourceContract/index?ajax=payment-outsource-contract-grid&sort=T">T%</a>',
+			 //    'header'=>$model->getAttributeLabel('T%'),
+			 //    'name'=>'T',
+			 //    'headerHtmlOptions'=>array(),
+			 //    //'type'=> 'raw',
+			 //    //'value' => '$data->T',//'ProjectContract::model()->FindByPk($data->proj_id)->pc_T_percent',
+			 //    //'filter'=>CHtml::activeTextField($model, 'sumcost',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
+				// 'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				// 'htmlOptions'=>array('style'=>'text-align:center')
+	  	// ),
+	  	// 'B%'=>array(
+			 //    //'header' => '<a class="sort-link">B%</a>',
+			 //    'header'=>$model->getAttributeLabel('B%'),
+			 //    'name'=>'B',
+			 //    'headerHtmlOptions'=>array(),
+			 //    //'type'=> 'raw',
+			 //    'value' => '$data->B',//'ProjectContract::model()->FindByPk($data->proj_id)->pc_A_percent',
+			 //    //'filter'=>CHtml::activeTextField($model, 'sumcost',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
+				// 'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				// 'htmlOptions'=>array('style'=>'text-align:center')
+	  	// ),
 		// 'v_contractor'=>array(
 		// 	    'name' => 'v_contractor',
 		// 	    'filter'=>CHtml::activeTextField($model, 'v_contractor',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_contractor"))),
