@@ -624,7 +624,7 @@ hr {
 
 
 
-	        echo  '<input type="hidden" id="num" name="num" value="'.$numContracts.'">';
+	        
           echo  '<input type="hidden" id="clearSessionStorage" name="clearSessionStorage" value="'.$clearSession.'">';
 	        $index2 = 1;
 
@@ -635,7 +635,7 @@ hr {
                         ->from('outsource_contract')
                         ->where('oc_proj_id=:id', array(':id'=>$model->pj_id))
                         ->queryAll();
-
+          echo  '<input type="hidden" id="num" name="num" value="'.count($outsource).'">';              
           //echo count($outsource);              
 
 	        foreach ($outsource as $id => $child):
@@ -993,6 +993,7 @@ var _index = ' . $index2 . ';
 $("#loadOutsourceByAjax").click(function(e){
      var _index = $("#num").val();
      _index++;
+     console.log(_index);
     e.preventDefault();
     var _url = "' . Yii::app()->controller->createUrl("loadOutsourceByAjaxTemp", array("load_for" => $this->action->id)) . '&index="+_index;
     $.ajax({

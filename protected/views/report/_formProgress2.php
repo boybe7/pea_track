@@ -378,6 +378,7 @@ function renderDate($value)
                             	}
 
                             	//draw Payment PC
+
                             	$Criteria = new CDbCriteria();
                                 $Criteria->condition = "proj_id='$pc->pc_id'";
                                 $paymentProjs = PaymentProjectContract::model()->findAll($Criteria);
@@ -516,67 +517,87 @@ function renderDate($value)
 
 
                             	//draw Payment OC
-                            	$Criteria = new CDbCriteria();
-                                $Criteria->condition = "contract_id='$oc->oc_id'";
-                                $paymentProjs = PaymentOutsourceContract::model()->findAll($Criteria);
+                                if(!empty($ocs[$iOC]))
+                                {   
+                                	$Criteria = new CDbCriteria();
+                                    $Criteria->condition = "contract_id='$oc->oc_id'";
+                                    $paymentProjs = PaymentOutsourceContract::model()->findAll($Criteria);
 
-                                if(!empty($paymentProjs[$i]))
-                                {
-                                		$pay = $paymentProjs[$i];
-                                		echo "<td>".$pay->detail."</td>";
-                                    	echo "<td style='text-align:right'>".$pay->money."</td>";
-                                    	echo "<td style='text-align:center'>".renderDate($pay->approve_date)."</td>";
+                                    if(!empty($paymentProjs[$i]))
+                                    {
+                                    		$pay = $paymentProjs[$i];
+                                    		echo "<td>".$pay->detail."</td>";
+                                        	echo "<td style='text-align:right'>".$pay->money."</td>";
+                                        	echo "<td style='text-align:center'>".renderDate($pay->approve_date)."</td>";
 
 
-                                    	//find pay before
-                                    	$str_date = explode("/", $pay->invoice_receive_date);
-                                        $invoice_date= "";
-                                        if(count($str_date)>1)
-                                            $invoice_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
-                                        $pp = Yii::app()->db->createCommand()
-                                            ->select('SUM(money) as sum')
-                                            ->from('payment_outsource_contract')
-                                            ->where('invoice_receive_date < "'.$invoice_date.'" AND contract_id='.$oc->oc_id)
-                                            ->queryAll();
+                                        	//find pay before
+                                        	$str_date = explode("/", $pay->invoice_receive_date);
+                                            $invoice_date= "";
+                                            if(count($str_date)>1)
+                                                $invoice_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+                                            $pp = Yii::app()->db->createCommand()
+                                                ->select('SUM(money) as sum')
+                                                ->from('payment_outsource_contract')
+                                                ->where('invoice_receive_date < "'.$invoice_date.'" AND contract_id='.$oc->oc_id)
+                                                ->queryAll();
+                                                
+                                            //print_r($pp);    
+                                            $pay->money = str_replace(",", "", $pay->money);
+                                            $sum_oc_receive += $pay->money;
+                                            $oc_remain = $ocCost - $pay->money - $pp[0]["sum"];
                                             
-                                        //print_r($pp);    
-                                        $pay->money = str_replace(",", "", $pay->money);
-                                        $sum_oc_receive += $pay->money;
-                                        $oc_remain = $ocCost - $pay->money - $pp[0]["sum"];
-                                        
-                                        if($oc_remain!=0)
-                                           echo "<td style='text-align:right'>".number_format($oc_remain,2)."</td>";
-                                        else
-                                        	echo "<td style='text-align:right'>-</td>";
-                                        
-                                        if($i%$maxPayment==0)
-                                        {
-                                            echo "<td style='text-align:center'>".$oc->oc_T_percent."</td>";
-                                            echo "<td style='text-align:center'>".$oc->oc_A_percent."</td>";     
-                                            $sum_oc_T += $oc->oc_T_percent;
-                                            $sum_oc_A += $oc->oc_A_percent;
-                                        } 
-                                        else{
-                                            echo "<td></td><td></td>";
-                                        }
+                                            if($oc_remain!=0)
+                                               echo "<td style='text-align:right'>".number_format($oc_remain,2)."</td>";
+                                            else
+                                            	echo "<td style='text-align:right'>-</td>";
+                                            
+                                            if($i%$maxPayment==0)
+                                            {
+                                                echo "<td style='text-align:center'>".$oc->oc_T_percent."</td>";
+                                                echo "<td style='text-align:center'>".$oc->oc_A_percent."</td>";     
+                                                $sum_oc_T += $oc->oc_T_percent;
+                                                $sum_oc_A += $oc->oc_A_percent;
+                                            } 
+                                            else{
+                                                echo "<td></td><td></td>";
+                                            }
+                                    }
+                                    else{
+
+                                    	echo "<td>&nbsp;</td><td>&nbsp;</td>";
+                                    	echo "<td>&nbsp;</td><td>&nbsp;</td>";
+                                    	//echo "<td>&nbsp;</td><td>&nbsp;</td>";
+
+                                    	   if($i%$maxPayment==0 && $iOC!=0 && $iOC<=$nOC)
+                                            {
+                                                echo "<td style='text-align:center'>".$oc->oc_T_percent."</td>";
+                                                echo "<td style='text-align:center'>".$oc->oc_A_percent."</td>";     
+                                                $sum_oc_T += $oc->oc_T_percent;
+                                                $sum_oc_A += $oc->oc_A_percent;
+                                            } 
+                                            else{
+                                                echo "<td></td><td></td>";
+                                            }
+                                    }	
+                                }else{
+
+                                    echo "<td>&nbsp;</td><td>&nbsp;</td>";
+                                        echo "<td>&nbsp;</td><td>&nbsp;</td>";
+                                        //echo "<td>&nbsp;</td><td>&nbsp;</td>";
+
+                                           if($i%$maxPayment==0 && $iOC!=0 && $iOC<=$nOC)
+                                            {
+                                                echo "<td style='text-align:center'>".$oc->oc_T_percent."</td>";
+                                                echo "<td style='text-align:center'>".$oc->oc_A_percent."</td>";     
+                                                $sum_oc_T += $oc->oc_T_percent;
+                                                $sum_oc_A += $oc->oc_A_percent;
+                                            } 
+                                            else{
+                                                echo "<td></td><td></td>";
+                                            }
                                 }
-                                else{
-
-                                	echo "<td>&nbsp;</td><td>&nbsp;</td>";
-                                	echo "<td>&nbsp;</td><td>&nbsp;</td>";
-                                	//echo "<td>&nbsp;</td><td>&nbsp;</td>";
-
-                                	   if($i%$maxPayment==0 && $iOC!=0 && $iOC<=$nOC)
-                                        {
-                                            echo "<td style='text-align:center'>".$oc->oc_T_percent."</td>";
-                                            echo "<td style='text-align:center'>".$oc->oc_A_percent."</td>";     
-                                            $sum_oc_T += $oc->oc_T_percent;
-                                            $sum_oc_A += $oc->oc_A_percent;
-                                        } 
-                                        else{
-                                            echo "<td></td><td></td>";
-                                        }
-                                }	
+                                
 
                                 //draw management cost
                                
