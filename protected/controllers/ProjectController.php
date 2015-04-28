@@ -223,6 +223,34 @@ class ProjectController extends Controller
 		 				            	   $saveOK = 0;
                                         }   	
 						        }
+								
+								//save contract PO
+								 	        		 $modelTemps = Yii::app()->db->createCommand()
+											                    ->select('*')
+											                    ->from('work_code_outsource_temp')
+											                    ->where('contract_id=:id AND  u_id=:user', array(':id'=>$index,':user'=>Yii::app()->user->ID))
+											                    ->queryAll();
+											        foreach ($modelTemps as $key => $mTemp) {
+
+					                                        $modelChange = new WorkCodeOutsource("search");
+					                                        $modelChange->attributes = $mTemp;
+					                                        $modelChange->id = '';
+					                                        $modelChange->contract_id = $modelC->oc_id;
+					                                        
+					                                        
+					                                        if($modelChange->save())
+					                                        {
+					                                            $msg =  "successful";
+					                                            $mt = WorkCodeOutsourceTemp::model()->findByPk($mTemp['id']);
+					                                            $mt->delete();
+					                                        }	                                          
+					                                        else{
+					                                           $modelOutsourceVal->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ "'.$index.' ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+							 				            	   $saveOK = 0;
+
+					                                        }   	
+											        }         
+
 
 		 				     	//$saveOK = true;
 		 				     	$modelTemps = Yii::app()->db->createCommand()
@@ -1159,7 +1187,32 @@ class ProjectController extends Controller
 
 					                                        }   	
 											        }            
-											        
+											        //save contract PO
+								 	        		 $modelTemps = Yii::app()->db->createCommand()
+											                    ->select('*')
+											                    ->from('work_code_outsource_temp')
+											                    ->where('contract_id=:id AND  u_id=:user', array(':id'=>$index,':user'=>Yii::app()->user->ID))
+											                    ->queryAll();
+											        foreach ($modelTemps as $key => $mTemp) {
+
+					                                        $modelChange = new WorkCodeOutsource("search");
+					                                        $modelChange->attributes = $mTemp;
+					                                        $modelChange->id = '';
+					                                        $modelChange->contract_id = $modelOC->oc_id;
+					                                        
+					                                        
+					                                        if($modelChange->save())
+					                                        {
+					                                            $msg =  "successful";
+					                                            $mt = WorkCodeOutsourceTemp::model()->findByPk($mTemp['id']);
+					                                            $mt->delete();
+					                                        }	                                          
+					                                        else{
+					                                           $modelOutsourceVal->addError('contract', 'กรุณากรอกข้อมูล "สัญญาที่ "'.$index.' ในช่องที่มีเครื่องหมาย (*) ให้ครบถ้วน.');		
+							 				            	   $saveOC = false;
+
+					                                        }   	
+											        }         
 
 								 	        		 //save approve change history
 								 	        		 $modelTemps = Yii::app()->db->createCommand()

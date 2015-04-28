@@ -158,6 +158,53 @@ class VendorController extends Controller
 			
 	}
 
+	public function actionCreateSupplier()
+	{
+		$model=new Vendor;
+
+		// Uncomment the following line if AJAX validation is needed
+		//$this->performAjaxValidation($model);
+		if(isset($_POST['Vendor']))
+		{
+			$model->attributes=$_POST['Vendor'];
+			$model->v_BP = $_POST['Vendor']["v_BP"];
+			$model->type = "Supplier";
+			if (Yii::app()->request->isAjaxRequest)
+	        {
+	           
+	            if($model->save())
+	            	 echo CJSON::encode(array(
+	                'status'=>'success'
+	                ));
+	            else
+	                echo CJSON::encode(array(
+	                'status'=>'failure','div'=>$this->renderPartial('_form2', array('model'=>$model), true)));
+	                
+	            exit;
+				        
+	        }		
+			else
+			  if($model->save())
+				$this->redirect(array('admin'));
+
+		}
+
+		if (Yii::app()->request->isAjaxRequest)
+        {
+            echo CJSON::encode(array(
+                'status'=>'failure', 
+                'div'=>$this->renderPartial('_form2', array('model'=>$model), true)));
+            exit;               
+        }
+
+		$this->render('create',array(
+			'model'=>$model,
+		));
+	
+        
+			
+	}
+
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.

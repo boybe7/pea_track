@@ -39,7 +39,7 @@ class ProjectContract extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pc_code,pc_cost,pc_num_payment, pc_proj_id, pc_end_date,pc_garantee_date', 'required'),
+			array('pc_code,pc_cost,pc_num_payment, pc_proj_id', 'required'),
 			array('pc_proj_id, pc_vendor_id, pc_T_percent, pc_A_percent, pc_user_update', 'numerical', 'integerOnly'=>true),
 			array('pc_cost', 'numerical'),
 			array('pc_code,pc_garantee_end', 'length', 'max'=>30),

@@ -95,6 +95,67 @@
                         ));
 
                          echo CHtml::error($model, '[' . $index . ']oc_vendor_id',array('class'=>'help-block error'));
+                      $this->widget('bootstrap.widgets.TbButton', array(
+                'buttonType'=>'link',
+                
+                'type'=>'success',
+                'label'=>'เพิ่มคู่สัญญา',
+                'icon'=>'plus-sign',
+                //'url'=>array('vendor/create'),
+                'htmlOptions'=>array(
+                    //'data-toggle'=>'modal',
+                    //'data-target'=>'#myModal',
+                    'onclick'=>'js:bootbox.confirm($("#modal-body").html(),"ยกเลิก","ตกลง",
+                              function(confirmed){
+                                console.log($(".modal-body #vendor-form").serialize());    
+                                
+                                      if(confirmed)
+                                  {
+                                    $.ajax({
+                          type: "POST",
+                          url: "../vendor/create",
+                          dataType:"json",
+                          data: $(".modal-body #vendor-form").serialize()
+                          })
+                          .done(function( msg ) {
+                            console.log(msg)
+                            if(msg.status=="failure")
+                            {
+                              $("#modal-body").html(msg.div);
+                              js:bootbox.confirm($("#modal-body").html(),"ยกเลิก","ตกลง",
+                                        function(confirmed){
+                                              
+                                          
+                                                if(confirmed)
+                                            {
+                                              $.ajax({
+                                    type: "POST",
+                                    url: "../vendor/create",
+                                    dataType:"json",
+                                    data: $(".modal-body #vendor-form").serialize()
+                                    })
+                                    .done(function( msg ) {
+                                      if(msg.status=="failure")
+                                      {
+                                        js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+                                      }
+                                      else{
+                                        js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+                                      }
+                                    });
+                                            }
+                              })
+                            }
+                            else{
+                                        js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+                                      }
+                          });
+                                  }
+                    })',
+                        
+                    'class'=>'pull-right'
+                ),
+            ));
                ?>
             </div>
             <div class="span4">     
