@@ -31,7 +31,7 @@ class ManagementCostController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','DeleteSelected'),
+				'actions'=>array('create','createPayReal','update','DeleteSelected'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -79,6 +79,31 @@ class ManagementCostController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
+		));
+	}
+
+	public function actionCreatePayReal($id)
+	{
+		$model=new ManagementCost("search");
+		$model->mc_type = 2;
+		$model->mc_proj_id = $id;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['ManagementCost']))
+		{
+			$model->attributes=$_POST['ManagementCost'];
+
+			$model->mc_date = (date("Y")+543).date("-m-d");
+			$model->mc_user_update = Yii::app()->user->ID;
+
+			if($model->save())
+				$this->redirect(array('admin'));
+		}
+
+		$this->render('create',array(
+			'model'=>$model
 		));
 	}
 

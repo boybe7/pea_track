@@ -64,7 +64,7 @@ if(date('d')>=20){
             //echo count($projects);
             foreach ($projects as $key => $project) {
                 $pid = $project->pj_id;
-                $sql = "SELECT * FROM management_cost  WHERE '$month'=MONTH(mc_date)  AND mc_type=1 AND mc_proj_id='$pid'";
+                $sql = "SELECT * FROM management_cost  WHERE '$month'=MONTH(mc_date)  AND mc_type=1 AND mc_proj_id='$pid' limit 1";
                 
                 $records = Yii::app()->db->createCommand($sql)->queryAll(); 
                 if(count($records)==0)
@@ -78,7 +78,7 @@ if(date('d')>=20){
                     $mangementCostData1[] = $mangement;
                 }
 
-                $sql = "SELECT * FROM management_cost  WHERE '$month'=MONTH(mc_date)  AND mc_type=2 AND mc_proj_id='$pid'";
+                $sql = "SELECT * FROM management_cost  WHERE '$month'=MONTH(mc_date)  AND mc_type=2 AND mc_proj_id='$pid' limit 1";
                 
                 $records = Yii::app()->db->createCommand($sql)->queryAll(); 
                 if(count($records)==0)
@@ -87,7 +87,7 @@ if(date('d')>=20){
                     $mangement["project"] = $project->pj_name;
                     $mangement["contract"] = "ค่าบริหารโครงการ";
                     $mangement["date_end"] = $lastDay;
-                    $mangement["url"] = "managementCost/create";
+                    $mangement["url"] = "managementCost/createPayReal/".$pid;
                     $mangement["alarm_detail"] =  "แจ้งเตือนบันทึกค่าใช้จริงประจำเดือน";
                     $mangementCostData2[] = $mangement;
                 }   
@@ -102,17 +102,21 @@ if(date('d')>=20){
         else
            $records=array_merge($projectContractData , $paymentProjectData, $paymentOutsourceData);
  //echo count($records);
+        $sort = new CSort;
+        $sort->defaultOrder = 'project DESC';
+        $sort->attributes = array('project,contract,date_end,alarm_detail');
 $provAll = new CArrayDataProvider($records,
     array(
     	'keyField'=>false,  //don't have 'id' column
-        'sort' => array( //optional and sortring
-            'attributes' => array(
-                'project', 
-                'contract',
-                'date_end',
-                'alarm_detail',
-            ),
-        ),
+    	'sort'=>$sort,
+        // 'sort' => array( //optional and sortring
+        //     'attributes' => array(
+        //         'project', 
+        //         'contract',
+        //         'date_end',
+        //         'alarm_detail',
+        //     ),
+        // ),
         'pagination' => array('pageSize' => 10) //optional add a pagination
     )
 );
