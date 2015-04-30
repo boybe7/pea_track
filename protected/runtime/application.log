@@ -737,3 +737,9 @@ in C:\xampp\htdocs\pea_track\index.php (13)
 2015/05/02 00:20:44 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
 in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (423)
 in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/30 15:51:53 [warning] [application] Failed to set unsafe attribute "v_address" of "Vendor".
+in C:\xampp\htdocs\pea_track\protected\controllers\VendorController.php (169)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/04/30 15:51:53 [warning] [application] Failed to set unsafe attribute "v_BP" of "Vendor".
+in C:\xampp\htdocs\pea_track\protected\controllers\VendorController.php (169)
+in C:\xampp\htdocs\pea_track\index.php (13)

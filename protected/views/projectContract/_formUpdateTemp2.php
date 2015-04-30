@@ -45,7 +45,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
             </div>  
             <div class="span3">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_cost'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_cost', array('size' => 20, 'maxlength' => 255,'class'=>'span12  sessionStore')); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']pc_cost', array('size' => 20, 'maxlength' => 255,'class'=>'span12  sessionStore','style'=>'text-align:right')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']pc_cost',array('class'=>'help-block error')); ?>
             </div>
 

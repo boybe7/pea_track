@@ -114,24 +114,24 @@ window.onload = function (){
 		?>
 
 	</div>
-	<div class="span2">
+	<div class="span3">
 	  <?php
 		$this->widget('bootstrap.widgets.TbButton', array(
               'buttonType'=>'link',
               
               'type'=>'inverse',
-              'label'=>'ออกรายงาน',
+              'label'=>'view',
               'icon'=>'list-alt white',
               
               'htmlOptions'=>array(
-                'class'=>'span12',
-                'style'=>'margin:25px 0px 0px 0px;',
+                'class'=>'span4',
+                'style'=>'margin:25px 10px 0px 0px;',
                 'id'=>'gentReport'
               ),
           ));
       ?>
-	</div>
-	<div class="span1">
+	<!-- </div> -->
+	<!-- <div class="span1"> -->
 	  <?php
 		$this->widget('bootstrap.widgets.TbButton', array(
               'buttonType'=>'link',
@@ -141,9 +141,23 @@ window.onload = function (){
               'icon'=>'excel',
               
               'htmlOptions'=>array(
-                'class'=>'span12',
-                'style'=>'margin:25px 0px 0px 0px;padding-left:0px;padding-right:0px',
+                'class'=>'span4',
+                'style'=>'margin:25px 10px 0px 0px;padding-left:0px;padding-right:0px',
                 'id'=>'exportExcel'
+              ),
+          ));
+
+    $this->widget('bootstrap.widgets.TbButton', array(
+              'buttonType'=>'link',
+              
+              'type'=>'info',
+              'label'=>'',
+              'icon'=>'print white',
+              
+              'htmlOptions'=>array(
+                'class'=>'span3',
+                'style'=>'margin:25px 0px 0px 0px;',
+                'id'=>'printReport'
               ),
           ));
       ?>

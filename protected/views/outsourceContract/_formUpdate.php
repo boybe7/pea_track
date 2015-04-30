@@ -169,7 +169,7 @@
          
             <div class="span2">     
               <?php echo CHtml::activeLabelEx($model, '[' . $index . ']oc_cost'); ?>
-              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_cost', array('size' => 20, 'maxlength' => 255,'class'=>'span12')); ?>
+              <?php echo CHtml::activeTextField($model, '[' . $index . ']oc_cost', array('size' => 20, 'maxlength' => 255,'class'=>'span12','style'=>'text-align:right')); ?>
               <?php echo CHtml::error($model, '[' . $index . ']oc_cost',array('class'=>'help-block error')); ?>          
           </div>  
         </div>
