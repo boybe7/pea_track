@@ -365,9 +365,9 @@ hr {
 
           echo  '<input type="hidden" id="num" name="num" value="'.$numContracts.'">';
           $index = 1;
-
+          
           foreach ($contract as $id => $con):
-
+              //print_r($con);
               $this->renderPartial('//ProjectContract/_form', array(
                   'model' => $con,
                   'index' => $index,

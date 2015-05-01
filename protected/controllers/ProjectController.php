@@ -414,6 +414,20 @@ class ProjectController extends Controller
                 //header('Content-type: text/plain');
 				    $workcodes = $_POST['workCode'];
 	    	        $workCodeArray = explode(",", $_POST['workCode']);
+
+	    	        foreach ($model->contract as $contracts => $contract) 
+		 			{
+		 				     //print_r($contract);
+		 					 
+		 				     $modelC = new ProjectContract;
+		 				     $modelC->attributes = $contract;
+		 				     $modelC->pc_details = $contract["pc_details"];
+		 				     $modelC->pc_sign_date = $contract["pc_sign_date"];
+		 				     $modelC->pc_PO = $contract["pc_PO"];
+		 				     $modelC->pc_vendor_id = $model->pj_vendor_id;
+
+		 				     array_push($modelContractOld, $modelC);
+		 			}	
  				
  				//print_r($model->contract); 
 				    if ($model->save()) {
@@ -567,6 +581,7 @@ class ProjectController extends Controller
 		 			else
 		 			{	
 		 				$transaction->rollBack();
+		 				$modelContract = $modelContractOld;
 		 				//$model->addError('contract', 'Error occured while saving contracts.');
 		 			}	 
 	 			}
