@@ -1,0 +1,44 @@
+2015/05/06 10:53:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "summarycategory" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('summarycategory')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('summarycategory')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/summaryc...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/report/summarycategory
+HTTP_REFERER=http://localhost:8080/pea_track/report/cashflow
+---
+2015/05/06 10:53:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "summarycategory" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('summarycategory')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('summarycategory')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/summaryc...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/report/summarycategory
+HTTP_REFERER=http://localhost:8080/pea_track/report/cashflow
+---
+2015/05/06 13:43:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "summaryCategory" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('summaryCategory')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('summaryCategory')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/summaryC...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/report/summaryCategory
+HTTP_REFERER=http://localhost:8080/pea_track/report/summaryCategory
+---
+2015/05/06 13:43:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "summaryCategory" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('summaryCategory')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('summaryCategory')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/summaryC...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/report/summaryCategory
+HTTP_REFERER=http://localhost:8080/pea_track/report/summaryCategory
+---

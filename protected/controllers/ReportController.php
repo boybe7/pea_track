@@ -26,6 +26,11 @@ class ReportController extends Controller
 	/**
 	 * Displays the progress page
 	 */
+	public function actionSummaryCashflow()
+	{
+		$this->render('summaryCashflow');
+	}
+
 	public function actionProgress()
 	{
             		
@@ -57,6 +62,23 @@ class ReportController extends Controller
     	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
 
         $this->renderPartial('_formProgress2', array(
+            'model' => $model,
+            'display' => 'block',
+        ), false, true);
+
+        
+    }
+
+    public function actionGenSummaryCashflow()
+    {
+        
+    	
+    	if(isset($_GET["project"]) && !empty($_GET["project"])) 
+    	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_id='.$_GET["project"], 'params'=>array()));	
+    	else
+    	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
+
+        $this->renderPartial('_formSummaryCashflow', array(
             'model' => $model,
             'display' => 'block',
         ), false, true);

@@ -297,9 +297,9 @@ if(!Yii::app()->user->isGuest)
                      array('label'=>'project progress report', 'url'=>array('/report/progress')),
                      array('label'=>'project summary report', 'url'=>array('/report/summary')),
                      array('label'=>'รายงานสรุปรายได้/ค่าใช้จ่าย', 'url'=>array('/report/cashflow')),
-                     array('label'=>'รายงานสรุปรายได้/ค่าใช้จ่าย', 'url'=>array('/report/cashflow')),
-                     array('label'=>'รายงานสรุปรายได้/ค่าใช้จ่าย', 'url'=>array('/report/cashflow')),
-                     array('label'=>'รายงานสรุปรายได้/ค่าใช้จ่าย', 'url'=>array('/report/cashflow')),
+                     array('label'=>'รายงานสรุปรายได้ ค่าใช้จ่ายงานบริการวิศวกรรม', 'url'=>array('/report/service')),
+                     array('label'=>'สรุปงานรายรับ-รายจ่ายงานโครงการ', 'url'=>array('/report/summaryCashflow')),
+                
                                                                  
 
                     ),
