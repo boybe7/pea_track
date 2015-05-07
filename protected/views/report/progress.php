@@ -158,8 +158,9 @@ body * { visibility: hidden; }
 </div>
 
 <!-- <div class="row"> -->
-    <div id="reportContent" class="" style="overflow: auto;">
+    <!-- <div id="reportContent" class="" style="overflow: auto;"> -->
 
+    <div id="reportContent" class="" style="overflow:scroll; height:600px;">
         
     </div>
 <!-- </div> -->
