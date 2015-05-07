@@ -25,6 +25,10 @@ $this->breadcrumbs=array(
 body * { visibility: hidden; }
 #printcontent * { visibility: visible; }
 #printcontent { position: absolute; top: 40px; left: 30px; }
+a[href]:after {
+     content:"" !important;
+}
+
 }
 
 </style>
