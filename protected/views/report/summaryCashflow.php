@@ -22,8 +22,10 @@ $this->breadcrumbs=array(
 @media print
 {
 body * { visibility: hidden; }
-#reportContent * { visibility: visible; }
-#reportContent { position: absolute; top: 40px; left: 30px; }
+#print * { visibility: visible; }
+
+
+#print { position: absolute; top: 40px; left: 30px; }
 }
 
 </style>
@@ -159,10 +161,12 @@ body * { visibility: hidden; }
 
 <!-- <div class="row"> -->
     <!-- <div id="reportContent" class="" style="overflow: auto;"> -->
-
+  <div id="print">
     <div id="reportContent" class="" style="overflow:scroll; height:600px;">
-        
+      
     </div>
+    <div class="pull-right" id="dateprint"></div>
+  </div>    
 <!-- </div> -->
 <?php
 //Yii::app()->clientScript->registerCoreScript('jquery');
@@ -173,7 +177,9 @@ $("#gentReport").click(function(e){
         url: "genSummaryCashflow",
         data: {project: $("#project").val()},
         success:function(response){
-            
+             var now = new Date();
+          
+            $("#dateprint").html(now.getDate()+"/"+now.getMonth()+"/"+now.getFullYear());
             $("#reportContent").html(response);
             
         }
@@ -186,6 +192,11 @@ $("#gentReport").click(function(e){
 Yii::app()->clientScript->registerScript('printReport', '
 $("#printReport").click(function(e){
     e.preventDefault();
+      
+   var now = new Date();
+          
+    $("#dateprint").html("วันที่พิมพ์ "+now.getDate()+"/"+now.getMonth()+"/"+now.getFullYear());
+          
     window.print();
 
 });

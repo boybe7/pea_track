@@ -60,3 +60,37 @@ in C:\xampp\htdocs\pea_track\index.php (13)
 2015/05/08 23:21:35 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
 in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1281)
 in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/07 12:06:32 [error] [php] Division by zero (C:\xampp\htdocs\pea_track\protected\views\report\summaryCashflow.php:192)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ReportController->renderFile()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ReportController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(31): ReportController->render()
+#3 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionSummaryCashflow()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#7 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#8 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/summaryCashflow
+in C:\xampp\htdocs\pea_track\protected\views\report\summaryCashflow.php (192)
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (31)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/07 12:58:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "sit".' in C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('sit')
+#1 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/pea_track/sit
+---
+2015/05/07 14:48:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "summaryReport.pdf".' in C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('summaryReport.p...')
+#1 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/pea_track/summaryReport.pdf
+HTTP_REFERER=http://localhost:8080/pea_track/report/progress
+---

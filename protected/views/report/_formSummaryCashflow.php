@@ -271,8 +271,10 @@ function renderDate($value)
                                     //draw PC
                                     echo "<td style='text-align:right' >".number_format($pcCostAll,2)."</td>";
                                     $sum_pc_cost += $pcCostAll;
-                                    echo "<td style='text-align:right' >".number_format($income,2)."</td>";
                                     $sum_pc_receive += $income;
+                                    $income1 = $income==0 ? '-' : number_format($income,2);
+                                    echo "<td style='text-align:right' >".$income1."</td>";
+                                    
                                     echo "<td style='text-align:right' >".number_format($pcCostAll-$income,2)."</td>";
                             	}
                                 else{
@@ -306,7 +308,8 @@ function renderDate($value)
                                             ->queryAll();                    
                                     $outcomeOC = $pp[0]["sum"];   
                                     $sum_oc_receive += $outcome; 
-                                    echo "<td style='text-align:right'>".number_format($outcomeOC,2)."</td>";
+                                    $outcomeOC1 = $outcomeOC==0 ? '-' : number_format($outcomeOC,2);
+                                    echo "<td style='text-align:right'>".$outcomeOC1."</td>";
                                     echo "<td style='text-align:right'>".number_format($ocCostAll-$outcomeOC,2)."</td>";
                                     
 
@@ -320,10 +323,15 @@ function renderDate($value)
 
                                 if($i==0)
                                 {
-                                    echo "<td style='text-align:right' >".number_format($m_expect_sum,2)."</td>";
-                                    echo "<td style='text-align:right' >".number_format($m_real_sum,2)."</td>";
-                                    echo "<td style='text-align:right' >".number_format($m_type1_sum,2)."</td>";
-                                    echo "<td style='text-align:right' >".number_format($m_expect_sum - $m_type1_sum - $m_real_sum,2)."</td>";
+                                    
+                                    $expect = $m_expect_sum==0 ? "-" : number_format($m_expect_sum,2);
+                                    $real = $m_real_sum==0 ? "-" : number_format($m_real_sum,2);
+                                    $type1 = $m_type1_sum==0 ? "-" : number_format($m_type1_sum,2);
+                                    echo "<td style='text-align:right' >".$expect."</td>";
+                                    echo "<td style='text-align:right' >".$real."</td>";
+                                    echo "<td style='text-align:right' >".$type1."</td>";
+                                    $rm =($m_expect_sum - $m_type1_sum - $m_real_sum)==0 ? "-" : number_format($m_expect_sum - $m_type1_sum - $m_real_sum,2);
+                                    echo "<td style='text-align:right' >".$rm."</td>";
                                 }
                                 else{
                                     echo "<td></td>";
@@ -352,20 +360,40 @@ function renderDate($value)
                 	echo "<tr>";
                 	//summary
                                     echo "<td colspan=2 style='text-align:center'>รวม</td>";
-                                    
-                                    echo "<td style='text-align:right' >".number_format($sum_pc_cost,2)."</td>";
-                                    echo "<td style='text-align:right' >".number_format($sum_pc_receive,2)."</td>";
-                                    echo "<td style='text-align:right' >".number_format($sum_pc_cost-$sum_pc_receive,2)."</td>";
-                                    
+                                    if($sum_pc_cost!=0)
+                                     echo "<td style='text-align:right' >".number_format($sum_pc_cost,2)."</td>";
+                                    else
+                                     echo "<td style='text-align:right' >-</td>";   
+                                    if($sum_pc_receive!=0)
+                                     echo "<td style='text-align:right' >".number_format($sum_pc_receive,2)."</td>";
+                                    else
+                                     echo "<td style='text-align:right' >-</td>";  
+                                    if($sum_pc_cost-$sum_pc_receive!=0)
+                                     echo "<td style='text-align:right' >".number_format($sum_pc_cost-$sum_pc_receive,2)."</td>";
+                                    else
+                                      echo "<td style='text-align:right' >-</td>";    
                                     echo "<td></td>";
+                                    if($sum_oc_cost!=0)
                                     echo "<td style='text-align:right' >".number_format($sum_oc_cost,2)."</td>";
+                                    else
+                                     echo "<td style='text-align:right' >-</td>";  
+                                    if($sum_oc_receive!=0)
                                     echo "<td style='text-align:right' >".number_format($sum_oc_receive,2)."</td>";
-                                    echo "<td style='text-align:right' >".number_format($sum_oc_cost-$sum_oc_receive,2)."</td>";
-                                    
-                                    echo "<td style='text-align:right' >".number_format($sum_m_expect,2)."</td>";
-                                    echo "<td style='text-align:right' >".number_format($sum_m_real,2)."</td>";
-                                    echo "<td style='text-align:right' >".number_format($sum_m_type1,2)."</td>";
-                                    echo "<td style='text-align:right' >".number_format($sum_m_expect - $sum_m_real - $sum_m_type1,2)."</td>";
+                                    else
+                                     echo "<td style='text-align:right' >-</td>";  
+                                   
+                                    if($sum_oc_cost-$sum_oc_receive!=0)
+                                     echo "<td style='text-align:right' >".number_format($sum_oc_cost-$sum_oc_receive,2)."</td>";
+                                    else
+                                      echo "<td style='text-align:right' >-</td>"; 
+                                    $sum_expect = $sum_m_expect==0 ? "-": number_format($sum_m_expect,2);
+                                    echo "<td style='text-align:right' >".$sum_expect."</td>";
+                                    $sum_real = $sum_m_real==0 ? "-": number_format($sum_m_real,2);
+                                    echo "<td style='text-align:right' >".$sum_real."</td>";
+                                    $sum_type1 = $sum_m_type1==0 ? "-": number_format($sum_m_type1,2);
+                                    echo "<td style='text-align:right' >".$sum_type1."</td>";
+                                    $sum_rm = $sum_m_expect - $sum_m_real - $sum_m_type1==0 ? "-": number_format($sum_m_expect - $sum_m_real - $sum_m_type1,2);
+                                    echo "<td style='text-align:right' >".$sum_rm."</td>";
                                    
 
                 	echo "</tr>";

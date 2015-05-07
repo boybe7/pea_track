@@ -213,18 +213,18 @@ Yii::app()->clientScript->registerScript('printReport', '
 $("#printReport").click(function(e){
     e.preventDefault();
     //window.location.href = "printSummary?project="+$("#project").val();
-    window.print();
-    // $.ajax({
-    //     url: "printSummary",
-    //     data: {project: $("#project").val()},
-    //     success:function(response){
+    //window.print();
+    $.ajax({
+        url: "printSummary",
+        data: {project: $("#project").val()},
+        success:function(response){
             
-    //         //var success = new PDFObject({ url: "../summaryReport.pdf",height: "800px" }).embed("pdf");
-                
+            //var success = new PDFObject({ url: "../summaryReport.pdf",height: "800px" }).embed("pdf");
+             window.open("../summaryReport.pdf", "_blank", "fullscreen=yes");              
             
-    //     }
+        }
 
-    // });
+    });
 
 });
 ', CClientScript::POS_END);

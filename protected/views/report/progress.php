@@ -21,9 +21,12 @@ $this->breadcrumbs=array(
 }
 @media print
 {
-body * { visibility: hidden; }
+body * { visibility: hidden;}
 #reportContent * { visibility: visible; }
 #reportContent { position: absolute; top: 40px; left: 30px; }
+
+/*#print * { visibility: visible;height:100%;}
+#print { position: absolute; top: 40px; left: 30px; }*/
 }
 
 </style>
@@ -163,6 +166,13 @@ body * { visibility: hidden; }
     <div id="reportContent" class="" style="overflow:scroll; height:600px;">
         
     </div>
+
+    <!--  <div id="print">
+    <div id="reportContent" class="" style="overflow:scroll;">
+      
+    </div>
+    <div class="pull-right" id="dateprint"></div>
+  </div>  -->
 <!-- </div> -->
 <?php
 //Yii::app()->clientScript->registerCoreScript('jquery');
@@ -186,7 +196,11 @@ $("#gentReport").click(function(e){
 Yii::app()->clientScript->registerScript('printReport', '
 $("#printReport").click(function(e){
     e.preventDefault();
-    window.print();
+    var now = new Date();
+          
+    $("#dateprint").html("วันที่พิมพ์ "+now.getDate()+"/"+now.getMonth()+"/"+now.getFullYear());
+     
+    //window.print();
 
 });
 ', CClientScript::POS_END);
