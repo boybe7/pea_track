@@ -1,7 +1,6 @@
-
 <?php
-include("/../MPDF56/mpdf.php");
-//include("/../mpdf60/mpdf.php");
+
+
 function renderDate($value)
 {
     $th_month = array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
@@ -30,104 +29,33 @@ function renderDate($value)
 }
 
 
-$mpdf = new mPDF('', 'A4', '0');
-//$mpdf->SetAutoFont();
+function renderDate2($value)
+{
+    $th_month = array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+    $dates = explode("-", $value);
+    $d=0;
+    $mi = 0;
+    $yi = 0;
+    foreach ($dates as $key => $value) {
+         $d++;
+         if($d==2)
+            $mi = $value;
+         if($d==1)
+            $yi = $value;
+    }
+    if(substr($mi, 0,1)==0)
+        $mi = substr($mi, 1);
+    if(substr($dates[2], 0,1)==0)
+        $d = substr($dates[2], 1);
+    else
+        $d = $dates[2];
 
-$stylesheet = "<style>
-	
+    $renderDate = $d." ".$th_month[$mi]." ".$yi;
+    if($renderDate==0)
+        $renderDate = "";   
 
-   	html, body{
-	    text-align:center;
-		font-size:10px;
-		font-family: 'THSarabun';
-	}
-  
-    .header{
-        //font-family: 'TH SarabunPSK';
-        font-family: 'THSarabun';
-        font-size:13px;
-    }
-    #sty1{
-        font-size:13px;
-        margin-left: 0px;
-    }
-    #sty2{
-        font-size:13px; 
-        margin-left:61px;
-    }
-    #sty3{
-        text-align: center;
-        font-size:14px;
-        font-weight:bold;
-    }
-    table
-    {
-        border-collapse:collapse;
-        font-size:11px;
-        width: 900px;
-    } 
-    
-    td {
-        height:25px;
-    }
-
-    #border3{
-        border-bottom:thin solid #ccc;
-        border-left:thin solid #ccc; 
-        border-right: thin solid #ccc;
-        
-    }
-    #border1 {
-        border:thin solid #ccc; 
-      
-    }
-    #border2 {
-        border-top:thin solid #ccc; 
-        border-left:thin solid #ccc; 
-        border-right: thin solid #ccc; 
-    
-    }
-    #border4 {
-        border-right: thin solid #ccc; 
-    }
-    #border5 {
-        border-left:thin solid #ccc; 
-        border-right: thin solid #ccc; 
-    }
-    .hl1{
-        background-color: white;
-    }
-    th{
-        background-color: whitesmoke;
-        height:30px;
-    }
-</style>";
-$mpdf->WriteHTML($stylesheet);
-
-$nPj = count($model);
-$i = 0;
-foreach ($model as $key => $pj) {
-
-	//project contract
-	$Criteria = new CDbCriteria();
-	$Criteria->condition = "pc_proj_id='$pj->pj_id'";
-	$pcs = ProjectContract::model()->findAll($Criteria);
-    $nPC = count($pcs);
-
-	$html = "<center><div class='header'><b>โครงการ".$pcs[0]->pc_details."<br>ให้ ".$pj->pj_name."</b></div></center>";
-	$html .= "<br><table border='0'>";
-	$html .=   "<tr><td colspan='3' style='background-color:#eeeeee;text-align:center'>ส่วนผู้ว่าจ้าง : ".$pj->pj_name."</td></tr>";
-	$html .=   "<tr><td width='35%'>ใบสั่งจ้างเลขที่ : ".$pcs[0]->pc_code."</td><td width='25%'>วันที่เริ่มในสัญญา : ".renderDate($pcs[0]->pc_sign_date)."</td><td width='40%'></td></tr>";
-	$html .= "</table>";
-	
-	$mpdf->WriteHTML($html);
-	if($i!=$nPj-1)
-	   $mpdf->addPage();
-	$i++;
+    return $renderDate;             
 }
-
-
-//$mpdf->Output('summaryReport.pdf','F');
 
 
 
@@ -135,7 +63,7 @@ foreach ($model as $key => $pj) {
 require_once('/../tcpdf/tcpdf.php');
 
 // create new PDF document
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$pdf = new TCPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -145,7 +73,8 @@ $pdf->SetSubject('TCPDF Tutorial');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
 // set default header data
-$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
+//$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
+$pdf->setPrintHeader(false);
 $pdf->setFooterData(array(0,64,0), array(0,64,128));
 
 // set header and footer fonts
@@ -156,8 +85,8 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+$pdf->SetMargins(PDF_MARGIN_LEFT, 10, PDF_MARGIN_RIGHT);
+//$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
 // set auto page breaks
@@ -188,26 +117,324 @@ $pdf->SetFont('thsarabun', '', 14, '', true);
 $pdf->AddPage();
 
 // set text shadow effect
-$pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
+//$pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
 
 // Set some content to print
-$html = <<<EOD
-<h1>Welcome to <a href="http://www.tcpdf.org" style="text-decoration:none;background-color:#CC0000;color:black;">&nbsp;<span style="color:black;">TC</span><span style="color:white;">PDF</span>&nbsp;</a>!</h1>
-<i>This is the first example of TCPDF library.</i>
-<p>This text is printed using the <i>writeHTMLCell()</i> method but you can also use: <i>Multicell(), writeHTML(), Write(), Cell() and Text()</i>.</p>
-<p>Please check the source code documentation and other examples for further information.</p>
-<p style="color:#CC0000;">TO IMPROVE AND EXPAND TCPDF I NEED YOUR SUPPORT, PLEASE <a href="http://sourceforge.net/donate/index.php?group_id=128076">MAKE A DONATION!</a></p>
-EOD;
+$html = "";
+
+
+    $pj = $model;
+    //project contract
+    $Criteria = new CDbCriteria();
+    $Criteria->condition = "pc_proj_id='$pj->pj_id'";
+    $pcs = ProjectContract::model()->findAll($Criteria);
+
+    ///$html .= "<table border='0' class='span12' style='margin-left:0px;'><tr><td>DDDDD</td></tr></table>";
+
+    $html .= '<div style="text-align:center;font-size:18px;"><b>โครงการ'.$pcs[0]->pc_details.'<br>ให้ '.$pj->pj_name.'</b></div>';
+    $html .= '<br><table style="" border="0" cellpadding="0">';
+    $html .=   '<tr><td colspan="4" style="background-color:#eeeeee;text-align:center">ส่วนผู้ว่าจ้าง : '.$pj->pj_name.'</td></tr>';
+    foreach ($pcs as $key => $pc) {
+        $html .=   "<tr><td width='30%'>ใบสั่งจ้างเลขที่ : ".$pc->pc_code."</td><td width='30%'>วันที่เริ่มในสัญญา : ".renderDate($pc->pc_sign_date)."</td><td width='50%' colspan=2>วันที่สิ้นสุดในสัญญา : ".renderDate($pc->pc_end_date)."</td></tr>";
+    
+    }
+    //workcode
+    $Criteria = new CDbCriteria();
+    $Criteria->condition = "pj_id='$pj->pj_id'";
+    $wcs = WorkCode::model()->findAll($Criteria);
+    // print_r($wcs);
+    $html .=   "<tr style='vertical-align:top'><td >หมายเลขงาน : ";
+
+    $i=0;
+    foreach ($wcs as $key => $wc) {
+        if($i==0)  
+          $html .= $wc->code."<br>";
+        else
+          $html .= "<span style='padding-left:82px;'>".$wc->code."</span><br>"; 
+        $i++;
+    }
+    $html .= "</td>";
+    $html .= "<td width='30%'>แจ้งจัดสรรงบ กปง./กซข./กฟจ. : ";
+    $i=0;
+    foreach ($pcs as $key => $pc) {
+        if($i==0)  
+          $html .= $pc->pc_name_request."<br>";
+        else
+          $html .= "<span style='padding-left:182px;'>".$pc->pc_name_request."</span><br>"; 
+        $i++;   
+    }   
+    $html .= "</td>";
+    $html .= "<td width='25%'>เลขที่ส่ง / ลว. : ";
+    $i=0;
+    $sum_pc_cost = 0;
+    foreach ($pcs as $key => $pc) {
+        
+        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(cost) as sum')
+                                            ->from('contract_change_history')
+                                            ->where("contract_id='$pc->pc_id' AND type=1")
+                                            ->queryAll();
+                                        ///print_r($changeHists);
+                                        //$html .= $pp[0]["sum"];    
+
+        $pcCost =$pc->pc_cost + $pp[0]["sum"];
+
+        $sum_pc_cost += $pcCost;
+
+        if($i==0)  
+          $html .= $pc->pc_code_request."<br>";
+        else
+          $html .= "<span style='padding-left:182px;'>".$pc->pc_code_request."</span><br>"; 
+        $i++;   
+    }   
+    $html .= "</td>";
+    $html .= "<td width='15%'>วงเงิน : ".number_format($sum_pc_cost,2)."</td>";
+    $html .= "</tr>";
+
+
+    $html .= "</table>";
+
+    // $html .= "<table border='1' class='span12' style='margin-left:0px;'>";
+    //     $html .= "<tr>";
+    //      $html .= "<td rowspan=2 style='text-align:center;width:5%'>ที่</td>";
+    //      $html .= "<td colspan=4 style='text-align:center;width:55%'>ด้านการดำเนินการโครงการ</td>";
+    //      $html .= "<td colspan=4 style='text-align:center;width:40%'>ด้านการเงิน</td>";
+    //     $html .= "</tr>";
+    //     $html .= "<tr>";
+    //      $html .= "<td style='text-align:center;width:25%'>รายละเอียด</td>";
+    //      $html .= "<td style='text-align:center;width:10%'>อนุมัติโดย/<br>ลงวันที่</td>";
+    //      $html .= "<td style='text-align:center;width:10%'>วงเงิน/<br>เป็นเงินเพิ่ม</td>";
+    //      $html .= "<td style='text-align:center;width:10%'>ระยะเวลาแล้วเสร็จ/<br>ระยะเวลาขอขยาย</td>";
+         
+    //      $html .= "<td style='text-align:center;width:10%'>ชำระเงินงวดที่</td>";
+    //      $html .= "<td style='text-align:center;width:10%'>ใบแจ้งหนี้/<br>ลงวันที่</td>";
+    //      $html .= "<td style='text-align:center;width:10%'>ใบเสร็จเลขที่/<br>ลงวันที่</td>";
+    //      $html .= "<td style='text-align:center;width:10%'>วงเงิน</td>";
+            
+    //     $html .= "</tr>";
+
+        
+    //     $data_approve = array();
+    //     $data_payment = array();
+    //     $i =0;
+    //     foreach ($pcs as $key => $pc) {
+    //         $approve = Yii::app()->db->createCommand()
+    //                         ->select('detail,approveBy,dateApprove,cost,timeSpend')
+    //                         ->from('contract_approve_history')
+    //                         ->where("contract_id='$pc->pc_id' AND type=1")
+    //                         ->queryAll();
+    //         //print_r($data_approve);                
+    //         if($i==0)
+    //           $data_approve = $approve;
+    //         else    
+    //           array_merge($data_approve,$approve);    
+    //         //print_r($data_approve);            
+
+    //         $payment = Yii::app()->db->createCommand()
+    //                         ->select('*')
+    //                         ->from('payment_project_contract')
+    //                         ->where("proj_id='$pc->pc_id'")
+    //                         ->queryAll();                
+    //         if($i==0)
+    //           $data_payment = $payment;
+    //         else    
+    //           array_merge($data_payment,$payment);               
+    //         $i++;
+    //     }
+
+
+
+    //     $sum_pay = 0;
+    //     for ($i=0; $i < 5; $i++) { 
+    //         $html .= "<tr>";
+    //             if(!empty($data_approve[$i])) 
+    //             {
+    //                 $html .= "<td style='text-align:center'>".($i+1)."</td>";
+    //                 $html .= "<td >".$data_approve[$i]["detail"]."</td>";
+    //                 $html .= "<td style='text-align:center'>".$data_approve[$i]["approveBy"]."<br>".renderDate2($data_approve[$i]["dateApprove"])."</td>";
+    //                 $html .= "<td style='text-align:right'>".number_format($data_approve[$i]["cost"],2)."</td>";
+    //                 $html .= "<td >".$data_approve[$i]["timeSpend"]."</td>";
+    //             }
+    //             else
+    //             {
+    //                 $html .= "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>";
+    //             }   
+
+
+    //              if(!empty($data_payment[$i])) 
+    //             {
+                    
+    //                 $html .= "<td >".$data_payment[$i]["detail"]."</td>";
+    //                 $html .= "<td style='text-align:center'>".$data_payment[$i]["invoice_no"]."<br>".renderDate2($data_payment[$i]["invoice_date"])."</td>";
+    //                 $html .= "<td style='text-align:center'>".$data_payment[$i]["bill_no"]."<br>".renderDate2($data_payment[$i]["bill_date"])."</td>";
+    //                 $html .= "<td style='text-align:right'>".number_format($data_payment[$i]["money"],2)."</td>";
+
+    //                 if($data_payment[$i]["bill_no"]!=""){
+    //                     $sum_pay += $data_payment[$i]["money"];
+    //                 }
+    //             }
+    //             else
+    //             {
+    //                 if($i!=4)
+    //                    $html .= "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>";
+    //                 else
+    //                 {
+    //                     $remain = $sum_pc_cost - $sum_pay;
+    //                     $html .= "<td colspan=3 style='text-align:center'>คงเหลือ</td><td style='text-align:right'>".number_format($remain,2)."</td>";
+    //                 }
+    //             }   
+    //         $html .= "</tr>";
+    //     }
+
+    // $html .= "</table>";
+
+    //----------outsource---------------------//
+
+    // $Criteria = new CDbCriteria();
+    // $Criteria->condition = "oc_proj_id='$pj->pj_id'";
+    // $ocs = OutsourceContract::model()->findAll($Criteria);
+
+
+    // $index = 0;
+    // foreach ($ocs as $key => $oc) {
+    //         $index++;
+    //         $vendor = Vendor::model()->findByPk($oc->oc_vendor_id); 
+            
+    //         $sum_oc_cost = 0;
+    //         $pp = Yii::app()->db->createCommand()
+    //                                                 ->select('SUM(cost) as sum')
+    //                                                 ->from('contract_change_history')
+    //                                                 ->where("contract_id='$oc->oc_id' AND type=2")
+    //                                                 ->queryAll();
+    //                                             ///print_r($changeHists);
+    //         $oc->oc_cost = str_replace(",", "", $oc->oc_cost);    
+
+    //         $sum_oc_cost =$oc->oc_cost + $pp[0]["sum"];
+
+    //         $html .= "<br><table border='0' class='span12' style='margin-left:0px;margin-top:15px;'>";
+    //         $html .=   "<tr><td colspan='4' style='background-color:#eeeeee;text-align:center'>ส่วนผู้รับจ้าง รายที่ ".$index." : ".$vendor->v_name."</td></tr>";
+    //         $html .=   "<tr><td width='30%'>สัญญาจ้างเลขที่ : ".$oc->oc_code."</td><td width='25%'>วันที่เริ่มในสัญญา : ".renderDate($oc->oc_sign_date)."</td><td width='25%'>วันที่สิ้นสุดในสัญญา : ".renderDate($oc->oc_end_date)."</td><td width='30%' style='text-align:right'>วงเงิน : ".number_format($sum_oc_cost,2)."</td></tr>";
+            
+    //         //po
+    //         $Criteria = new CDbCriteria();
+    //         $Criteria->condition = "contract_id='$oc->oc_id'";
+    //         $pos = WorkCodeOutsource::model()->findAll($Criteria);
+            
+    //         //print_r($pos);
+            
+    //         $index2 = 1;
+    //         foreach ($pos as $key => $po) {
+    //         $html .= "<tr>";    
+    //             $html .= "<td>".$index2." PO เลขที่ : ".$po->PO."</td>";
+    //             $html .= "<td colspan=2> เลขที่ส่งแจ้งรับรองงบ กปง. : ".$po->letter."</td>";
+    //             $html .= "<td style='text-align:right'> เป็นเงิน : ".number_format($po->money,2)."</td>";
+    //         $html .= "</tr>";
+    //            $index2++;
+    //         }
+            
+
+    //         // print_r($wcs);
+                    
+        
+    //         $html .= "</tr>";
+
+
+    //         $html .= "</table>";
+
+    //         $html .= "<table border='1' class='span12' style='margin-left:0px;'>";
+    //             $html .= "<tr>";
+    //              $html .= "<td rowspan=2 style='text-align:center;width:5%'>ที่</td>";
+    //              $html .= "<td colspan=4 style='text-align:center;width:55%'>ด้านการดำเนินการโครงการ</td>";
+    //              $html .= "<td colspan=4 style='text-align:center;width:40%'>ด้านการเงิน</td>";
+    //             $html .= "</tr>";
+    //             $html .= "<tr>";
+    //              $html .= "<td style='text-align:center;width:25%'>รายละเอียด</td>";
+    //              $html .= "<td style='text-align:center;width:10%'>อนุมัติโดย/<br>ลงวันที่</td>";
+    //              $html .= "<td style='text-align:center;width:10%'>วงเงิน/<br>เป็นเงินเพิ่ม</td>";
+    //              $html .= "<td style='text-align:center;width:10%'>ระยะเวลาแล้วเสร็จ/<br>ระยะเวลาขอขยาย</td>";
+                 
+    //              $html .= "<td style='text-align:center;width:10%'>ชำระเงินงวดที่</td>";
+    //              $html .= "<td style='text-align:center;width:10%'>อนุมัติโดย</td>";
+    //              $html .= "<td style='text-align:center;width:10%'>วัน/เดือน/ปี</td>";
+    //              $html .= "<td style='text-align:center;width:10%'>วงเงิน</td>";
+                    
+    //             $html .= "</tr>";
+
+                
+    //             $data_approve = Yii::app()->db->createCommand()
+    //                                 ->select('detail,approveBy,dateApprove,cost,timeSpend')
+    //                                 ->from('contract_approve_history')
+    //                                 ->where("contract_id='$oc->oc_id' AND type=2")
+    //                                 ->queryAll();
+                
+    //             $data_payment = Yii::app()->db->createCommand()
+    //                                 ->select('*')
+    //                                 ->from('payment_outsource_contract')
+    //                                 ->where("contract_id='$oc->oc_id'")
+    //                                 ->queryAll();                
+    //             //print_r($data_payment);
+
+    //             $sum_pay = 0;
+    //             for ($i=0; $i < 5; $i++) { 
+    //                 $html .= "<tr>";
+    //                     if(!empty($data_approve[$i])) 
+    //                     {
+    //                         $html .= "<td style='text-align:center'>".($i+1)."</td>";
+    //                         $html .= "<td >".$data_approve[$i]["detail"]."</td>";
+    //                         $html .= "<td style='text-align:center'>".$data_approve[$i]["approveBy"]."<br>".renderDate2($data_approve[$i]["dateApprove"])."</td>";
+    //                         $html .= "<td style='text-align:right'>".number_format($data_approve[$i]["cost"],2)."</td>";
+    //                         $html .= "<td >".$data_approve[$i]["timeSpend"]."</td>";
+    //                     }
+    //                     else
+    //                     {
+    //                         $html .= "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>";
+    //                     }   
+
+
+    //                      if(!empty($data_payment[$i])) 
+    //                     {
+                            
+    //                         $html .= "<td >".$data_payment[$i]["detail"]."</td>";
+
+    //                         $html .= "<td style='text-align:center'>".$data_payment[$i]["approve_by"]."</td>";
+    //                         $html .= "<td style='text-align:center'>".renderDate2($data_payment[$i]["approve_date"])."</td>";
+    //                         $html .= "<td style='text-align:right'>".number_format($data_payment[$i]["money"],2)."</td>";
+
+    //                         if($data_payment[$i]["approve_date"]!=""){
+    //                             $sum_pay += $data_payment[$i]["money"];
+    //                         }
+    //                     }
+    //                     else
+    //                     {
+    //                         if($i!=4)
+    //                            $html .= "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>";
+    //                         else
+    //                         {
+    //                             //$html .= $sum_oc_cost;
+    //                             $remain = $sum_oc_cost - $sum_pay;
+    //                             $html .= "<td colspan=3 style='text-align:center'>คงเหลือ</td><td style='text-align:right'>".number_format($remain,2)."</td>";
+    //                         }
+    //                     }   
+    //                 $html .= "</tr>";
+    //             }
+
+    //         $html .= "</table><br>";
+    // }
+
 
 // Print text using writeHTMLCell()
 $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+$pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'summaryReport.pdf','F');
 
 // ---------------------------------------------------------
 
 // Close and output PDF document
-// This method has several options, check the source code documentation for more information.
-
-$pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'summaryReport.pdf','F');
+// // This method has several options, check the source code documentation for more information.
+// if(file_exists($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'summaryReport2.pdf'))
+// {    
+//     if(unlink($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'summaryReport2.pdf'))
+//         $pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'summaryReport2.pdf','F');
+// }
 ob_end_clean() ;
 
 exit;

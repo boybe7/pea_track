@@ -20,10 +20,17 @@ $this->breadcrumbs=array(
 	
 }
 
+@media print
+{
+body * { visibility: hidden; }
+#printcontent * { visibility: visible; }
+#printcontent { position: absolute; top: 40px; left: 30px; }
+}
+
 </style>
-<!-- <script type="text/javascript" src="/pea_track/themes/bootstrap/js/pdfobject.js"></script> -->
+<script type="text/javascript" src="/pea_track/themes/bootstrap/js/pdfobject.js"></script>
 <!-- <script type="text/javascript" src="/pea_track/themes/bootstrap/js/pdf.js"></script> -->
-<!-- <script type="text/javascript" src="/pea_track/themes/bootstrap/js/compatibility.js"></script> -->
+<script type="text/javascript" src="/pea_track/themes/bootstrap/js/compatibility.js"></script>
 <script type="text/javascript">
 
 
@@ -166,7 +173,7 @@ window.onload = function (){
 </div>
 
 
-<div id="pdf" style=""></div>
+<div id="printcontent" style="" ></div>
 
 
 <?php
@@ -182,9 +189,10 @@ $("#gentReport").click(function(e){
             cache:false,
             data: {project: $("#project").val()},
             success:function(response){
-               // var success = new PDFObject({ url: "../summaryReport.pdf",height: "800px" }).embed("pdf");
+                $("#printcontent").html("");
+                //var success = new PDFObject({ url: "../summaryReport.pdf",height: "800px" }).embed("printcontent");
                 
-               $("#pdf").html(response);                 
+               $("#printcontent").html(response);                 
             }
 
         });
@@ -197,6 +205,25 @@ $("#gentReport").click(function(e){
 });
 ', CClientScript::POS_END);
 
+Yii::app()->clientScript->registerScript('printReport', '
+$("#printReport").click(function(e){
+    e.preventDefault();
+    //window.location.href = "printSummary?project="+$("#project").val();
+    window.print();
+    // $.ajax({
+    //     url: "printSummary",
+    //     data: {project: $("#project").val()},
+    //     success:function(response){
+            
+    //         //var success = new PDFObject({ url: "../summaryReport.pdf",height: "800px" }).embed("pdf");
+                
+            
+    //     }
+
+    // });
+
+});
+', CClientScript::POS_END);
 
 Yii::app()->clientScript->registerScript('exportExcel', '
 $("#exportExcel").click(function(e){

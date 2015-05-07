@@ -1329,4 +1329,21 @@ class ReportController extends Controller
 
         
     }
+
+    public function actionPrintSummary()
+    {
+        
+    	
+    	// if(isset($_GET["project"]) && !empty($_GET["project"])) 
+    	//    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_id='.$_GET["project"], 'params'=>array()));	
+    	// else
+    	//    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
+    	$model = Project::model()->findByPk($_GET["project"]);
+        $this->render('_formSummaryPDF', array(
+            'model' => $model,
+            
+        ));
+
+        
+    }
 }

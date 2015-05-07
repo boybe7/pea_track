@@ -19,6 +19,12 @@ $this->breadcrumbs=array(
 .reportTable td {
 	
 }
+@media print
+{
+body * { visibility: hidden; }
+#reportContent * { visibility: visible; }
+#reportContent { position: absolute; top: 40px; left: 30px; }
+}
 
 </style>
 
@@ -176,6 +182,13 @@ $("#gentReport").click(function(e){
 });
 ', CClientScript::POS_END);
 
+Yii::app()->clientScript->registerScript('printReport', '
+$("#printReport").click(function(e){
+    e.preventDefault();
+    window.print();
+
+});
+', CClientScript::POS_END);
 
 Yii::app()->clientScript->registerScript('exportExcel', '
 $("#exportExcel").click(function(e){
