@@ -42,3 +42,21 @@ Stack trace:
 REQUEST_URI=/pea_track/report/summaryCategory
 HTTP_REFERER=http://localhost:8080/pea_track/report/summaryCategory
 ---
+2015/05/08 23:21:35 [warning] [application] Failed to set unsafe attribute "oc_id" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1281)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/08 23:21:35 [warning] [application] Failed to set unsafe attribute "oc_sign_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1281)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/08 23:21:35 [warning] [application] Failed to set unsafe attribute "oc_end_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1281)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/08 23:21:35 [warning] [application] Failed to set unsafe attribute "oc_approve_date" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1281)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/08 23:21:35 [warning] [application] Failed to set unsafe attribute "oc_insurance_start" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1281)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/08 23:21:35 [warning] [application] Failed to set unsafe attribute "oc_insurance_end" of "OutsourceContract".
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (1281)
+in C:\xampp\htdocs\pea_track\index.php (13)

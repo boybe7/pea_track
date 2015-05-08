@@ -77,7 +77,23 @@ function renderDate($value)
               </tr>  
             </thead>
             <tbody>
-               
+               <tr style="line-height: 0px">
+                    <td style="padding-top:0px;padding-bottom:0px;"></td>
+                    <!-- Project-->
+                    <td style="padding-left:150px;padding-right:150px;padding-top:0px;padding-bottom:0px;"></td>
+                    <td style="padding-left:50px;padding-right:50px;padding-top:0px;padding-bottom:0px;"></td>
+                    <td style="padding-left:50px;padding-right:50px;padding-top:0px;padding-bottom:0px;"></td>
+                    <td style="padding-left:50px;padding-right:50px;padding-top:0px;padding-bottom:0px;"></td>
+                    <td style="padding-left:150px;padding-right:150px;padding-top:0px;padding-bottom:0px;"></td>
+                    <td style="padding-left:50px;padding-right:50px;padding-top:0px;padding-bottom:0px;"></td>
+                    <td style="padding-left:50px;padding-right:50px;padding-top:0px;padding-bottom:0px;"></td>
+                    <td style="padding-left:50px;padding-right:50px;padding-top:0px;padding-bottom:0px;"></td>
+                    <td style="padding-left:50px;padding-right:50px;padding-top:0px;padding-bottom:0px;"></td>
+                    <td style="padding-left:50px;padding-right:50px;padding-top:0px;padding-bottom:0px;"></td>
+                    <td style="padding-left:50px;padding-right:50px;padding-top:0px;padding-bottom:0px;"></td>
+                    <td style="padding-left:50px;padding-right:50px;padding-top:0px;padding-bottom:0px;"></td>
+                 
+                </tr>
                 <?php
                 //fiscalyear
                 $fiscalyear = array();
@@ -126,10 +142,14 @@ function renderDate($value)
                        
 
                 	foreach ($model as $key => $pj) {
-                	  if($pj->pj_fiscalyear==$year && $pj->pj_work_cat==$cat)
+                	  
+                      //echo $cat.",".$pj->pj_work_cat."<br>";
+                        
+                      if($pj->pj_fiscalyear==$year && $pj->pj_work_cat==$cat)
                 	  {	
                 		
-                	  	
+                	  	//if($cat==2)
+                        //    echo $pj->pj_name;
                 		//project contract
 	                	 $Criteria = new CDbCriteria();
 	                     $Criteria->condition = "pc_proj_id='$pj->pj_id'";
@@ -183,6 +203,7 @@ function renderDate($value)
                                             ->where("mc_proj_id='$pj->pj_id' AND mc_type=0")
                                             ->queryAll();
                         $sum_m_expect += $pp[0]["sum"];
+                        $m_expect_sum = $pp[0]["sum"];
 
 
                         $pp = Yii::app()->db->createCommand()
@@ -208,7 +229,7 @@ function renderDate($value)
                                             ->select('SUM(money) as sum')
                                             ->from('payment_project_contract')
                                             ->join('project_contract','proj_id=pc_id')
-                                            ->where("pc_proj_id='$pj->pj_id'")
+                                            ->where("pc_proj_id='$pj->pj_id' AND bill_no!=''")
                                             ->queryAll();
                         //echo $pp[0]["sum"];
                         $income = $pp[0]["sum"];
@@ -226,7 +247,7 @@ function renderDate($value)
 
 
 
-                         $maxContract = $nPC < $nOC ? $nOC : $nPC ;
+                         $maxContract = $nOC==0? 1:$nOC;
 
                          $pj_rowspan = $maxContract ;
 
@@ -245,13 +266,73 @@ function renderDate($value)
                             	//draw project detail
                             	if($i==0)
                             	{
-                            		echo "<td rowspan='".$pj_rowspan."'>".$index."</td>";
-		                			echo "<td rowspan='".$pj_rowspan."'>".$pj->pj_name."</td>";
+                            		echo "<td >".$index."</td>";
+		                			echo "<td >".$pj->pj_name."</td>";
                                     //draw PC
-                                    echo "<td rowspan='".$pj_rowspan."'>".$pcCostAll."</td>";
+                                    echo "<td style='text-align:right' >".number_format($pcCostAll,2)."</td>";
+                                    $sum_pc_cost += $pcCostAll;
+                                    echo "<td style='text-align:right' >".number_format($income,2)."</td>";
+                                    $sum_pc_receive += $income;
+                                    echo "<td style='text-align:right' >".number_format($pcCostAll-$income,2)."</td>";
                             	}
+                                else{
+                                    echo "<td></td>";
+                                    echo "<td></td>";
+                                    echo "<td></td>";
+                                    echo "<td></td>";
+                                    echo "<td></td>";
+                                }
 
-                           echo "<tr"; 
+                                //draw OC
+                                if(!empty($ocs[$i]))
+                                {
+                                    $oc = $ocs[$i];
+                                    $vendor = Vendor::model()->findByPk($oc->oc_vendor_id);
+                                    echo "<td>".$vendor->v_name."</td>";
+
+                                    $pp2 = Yii::app()->db->createCommand()
+                                            ->select('SUM(cost) as sum')
+                                            ->from('contract_change_history')
+                                            ->where("contract_id='$oc->oc_id' AND type=2")
+                                            ->queryAll(); 
+                                    $ocCostAll =str_replace(",", "", $oc->oc_cost) + $pp2[0]["sum"];                 
+                                    echo "<td style='text-align:right'>".number_format($ocCostAll,2)."</td>";
+                                    $sum_oc_cost += $ocCostAll;
+
+                                    $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_outsource_contract')
+                                            ->where("contract_id='$oc->oc_id' AND approve_date!=''")
+                                            ->queryAll();                    
+                                    $outcomeOC = $pp[0]["sum"];   
+                                    $sum_oc_receive += $outcome; 
+                                    echo "<td style='text-align:right'>".number_format($outcomeOC,2)."</td>";
+                                    echo "<td style='text-align:right'>".number_format($ocCostAll-$outcomeOC,2)."</td>";
+                                    
+
+                                }else{
+                                    echo "<td></td>";
+                                    echo "<td></td>";
+                                    echo "<td></td>";
+                                    echo "<td></td>";
+
+                                }
+
+                                if($i==0)
+                                {
+                                    echo "<td style='text-align:right' >".number_format($m_expect_sum,2)."</td>";
+                                    echo "<td style='text-align:right' >".number_format($m_real_sum,2)."</td>";
+                                    echo "<td style='text-align:right' >".number_format($m_type1_sum,2)."</td>";
+                                    echo "<td style='text-align:right' >".number_format($m_expect_sum - $m_type1_sum - $m_real_sum,2)."</td>";
+                                }
+                                else{
+                                    echo "<td></td>";
+                                    echo "<td></td>";
+                                    echo "<td></td>";
+                                    echo "<td></td>";
+                                 
+                                }    
+                           echo "<tr>"; 
 
 
 	                	 
@@ -260,13 +341,32 @@ function renderDate($value)
 
                 		$index++;
                 	  } 	
-                		
+                                
+                            
+                                    
+                                	
                 	}//end project   
                 	
                 	//summary
         			 
                 	echo "<tr>";
-                	
+                	//summary
+                                    echo "<td colspan=2 style='text-align:center'>รวม</td>";
+                                    
+                                    echo "<td style='text-align:right' >".number_format($sum_pc_cost,2)."</td>";
+                                    echo "<td style='text-align:right' >".number_format($sum_pc_receive,2)."</td>";
+                                    echo "<td style='text-align:right' >".number_format($sum_pc_cost-$sum_pc_receive,2)."</td>";
+                                    
+                                    echo "<td></td>";
+                                    echo "<td style='text-align:right' >".number_format($sum_oc_cost,2)."</td>";
+                                    echo "<td style='text-align:right' >".number_format($sum_oc_receive,2)."</td>";
+                                    echo "<td style='text-align:right' >".number_format($sum_oc_cost-$sum_oc_receive,2)."</td>";
+                                    
+                                    echo "<td style='text-align:right' >".number_format($sum_m_expect,2)."</td>";
+                                    echo "<td style='text-align:right' >".number_format($sum_m_real,2)."</td>";
+                                    echo "<td style='text-align:right' >".number_format($sum_m_type1,2)."</td>";
+                                    echo "<td style='text-align:right' >".number_format($sum_m_expect - $sum_m_real - $sum_m_type1,2)."</td>";
+                                   
 
                 	echo "</tr>";
 
