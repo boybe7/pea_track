@@ -85,7 +85,8 @@ class MYPDF extends TCPDF {
         //$image_file = 'bank/image/mwa2.jpg';
         //$this->Image($image_file, 170, 270, 25, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         $this->Cell(0, 5, date("d/m/Y"), 0, false, 'R', 0, '', 0, false, 'T', 'M');
-        //$this->writeHTMLCell(145, 550, 40, 280, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, 1, false, true, '', false);
+
+        $this->writeHTMLCell(145, 550, 70, 200, '-'.$this->getAliasNumPage().'/'.$this->getAliasNbPages().'-', 0, 1, false, true, 'C', false);
         //writeHTMLCell ($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=false, $reseth=true, $align='', $autopadding=true)
     }
 }
@@ -96,7 +97,7 @@ $pdf = new MYPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nicola Asuni');
+$pdf->SetAuthor('Boybe');
 $pdf->SetTitle('TCPDF Example 001');
 $pdf->SetSubject('TCPDF Tutorial');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
@@ -450,11 +451,18 @@ $html = "";
                 }
 
             $html .= "</table><br>";
+
+            if($index%2==0)
+            {
+                $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+                $html = "";
+                $pdf->AddPage();
+            }
     }
 
-
+    $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
 // Print text using writeHTMLCell()
-$pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+
 $pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'summaryReport.pdf','F');
 
 // ---------------------------------------------------------
