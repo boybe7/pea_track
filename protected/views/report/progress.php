@@ -41,6 +41,7 @@ body * { visibility: hidden;}
 
             $projects =Project::model()->findAll(array(
     				'select'=>'pj_fiscalyear',
+            'order'=>'pj_fiscalyear ASC',
     				//'group'=>'t.Category',
     				'distinct'=>true,
 				));   
@@ -94,6 +95,7 @@ body * { visibility: hidden;}
 
 		    $projects =Project::model()->findAll(array(
     				'select'=>'pj_id,pj_name',
+            'order'=>'pj_name ASC',
     				'distinct'=>true,
 				));   
 
@@ -181,7 +183,7 @@ $("#gentReport").click(function(e){
     e.preventDefault();
     $.ajax({
         url: "genProgress",
-        data: {project: $("#project").val()},
+        data: {project: $("#project").val(),fiscalyear: $("#fiscalyear").val(),workcat: $("#workcat").val()},
         success:function(response){
             
             $("#reportContent").html(response);
@@ -209,7 +211,7 @@ Yii::app()->clientScript->registerScript('exportExcel', '
 $("#exportExcel").click(function(e){
     e.preventDefault();
 
-     window.location.href = "genProgressExcel?project="+$("#project").val();
+     window.location.href = "genProgressExcel?project="+$("#project").val()+"&fiscalyear="+$("#fiscalyear").val()+"&workcat="+$("#workcat").val();
     // $.ajax({
     //     url: "genExcel",
     //     data: {project: $("#project").val()},

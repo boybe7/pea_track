@@ -57,6 +57,7 @@ window.onload = function (){
 
             $projects =Project::model()->findAll(array(
     				'select'=>'pj_fiscalyear',
+            'order'=>'pj_fiscalyear ASC', 
     				//'group'=>'t.Category',
     				'distinct'=>true,
 				));   
@@ -110,6 +111,7 @@ window.onload = function (){
 
 		    $projects =Project::model()->findAll(array(
     				'select'=>'pj_id,pj_name',
+            'order'=>'pj_name ASC', 
     				'distinct'=>true,
 				));   
 
@@ -220,7 +222,7 @@ $("#printReport").click(function(e){
         success:function(response){
             
             //var success = new PDFObject({ url: "../summaryReport.pdf",height: "800px" }).embed("pdf");
-             window.open("../summaryReport.pdf", "_blank", "fullscreen=yes");              
+             window.open("../tempReport.pdf", "_blank", "fullscreen=yes");              
             
         }
 

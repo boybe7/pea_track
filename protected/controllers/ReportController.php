@@ -55,11 +55,17 @@ class ReportController extends Controller
 	 public function actionGenProgress()
     {
         
-    	
-    	if(isset($_GET["project"]) && !empty($_GET["project"])) 
+
+    	if(isset($_GET["project"]) && !empty($_GET["project"]))    		
     	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_id='.$_GET["project"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && empty($_GET["fiscalyear"]))   
+    		$model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"].' AND pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
+    	else if(isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
     	else
-    	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
 
         $this->renderPartial('_formProgress2', array(
             'model' => $model,
@@ -73,10 +79,16 @@ class ReportController extends Controller
     {
         
     	
-    	if(isset($_GET["project"]) && !empty($_GET["project"])) 
+    	if(isset($_GET["project"]) && !empty($_GET["project"]))    		
     	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_id='.$_GET["project"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && empty($_GET["fiscalyear"]))   
+    		$model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"].' AND pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
+    	else if(isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
     	else
-    	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
 
         $this->renderPartial('_formSummaryCashflow', array(
             'model' => $model,
@@ -620,10 +632,21 @@ class ReportController extends Controller
     {
 			
 
-    	   if(isset($_GET["project"]) && !empty($_GET["project"])) 
-    	   		$model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_id='.$_GET["project"], 'params'=>array()));	
-	       else
-    	  	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
+    	   // if(isset($_GET["project"]) && !empty($_GET["project"])) 
+    	   // 		$model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_id='.$_GET["project"], 'params'=>array()));	
+	       // else
+    	  	//     $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
+    	  	
+    	if(isset($_GET["project"]) && !empty($_GET["project"]))    		
+    	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_id='.$_GET["project"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && empty($_GET["fiscalyear"]))   
+    		$model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"].' AND pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
+    	else if(isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
+    	else
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
 
 	
 		   Yii::import('ext.phpexcel.XPHPExcel');    
@@ -1362,6 +1385,29 @@ class ReportController extends Controller
     	//    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
     	$model = Project::model()->findByPk($_GET["project"]);
         $this->render('_formSummaryPDF', array(
+            'model' => $model,
+            
+        ));
+
+        
+    }
+
+    public function actionPrintSummaryCashflow()
+    {
+        
+    	
+    	 if(isset($_GET["project"]) && !empty($_GET["project"]))    		
+    	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_id='.$_GET["project"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && empty($_GET["fiscalyear"]))   
+    		$model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"].' AND pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
+    	else if(isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
+    	else
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
+
+        $this->render('_formSummaryCashflowPDF', array(
             'model' => $model,
             
         ));

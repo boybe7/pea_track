@@ -40,6 +40,7 @@ body * { visibility: hidden; }
 
             $projects =Project::model()->findAll(array(
     				'select'=>'pj_fiscalyear',
+            'order'=>'pj_fiscalyear ASC', 
     				//'group'=>'t.Category',
     				'distinct'=>true,
 				));   
@@ -50,11 +51,12 @@ body * { visibility: hidden; }
 
             echo CHtml::label('ปีงบประมาณ','fiscalyear');  
             echo CHtml::dropDownList('fiscalyear', '', 
-                            $list,array('empty' => 'ทั้งหมด','class'=>'span12'
+                            $list,
+                            array('empty' => '--------','class'=>'span12'
                             	,
                             	'ajax' => array(
 							                'type' => 'POST', //request type
-							                'url' => CController::createUrl('ajax/getProjectList'), //url to call.                
+							                'url' => CController::createUrl('ajax/getProjectList2'), //url to call.                
 							                'update' => '#project', //selector to update   
 							                'data' => array('year' => 'js:this.value','workcat_id' => 'js:$("#workcat").val()'),
 							        )
@@ -79,7 +81,7 @@ body * { visibility: hidden; }
                             	,
                             	'ajax' => array(
 							                'type' => 'POST', //request type
-							                'url' => CController::createUrl('ajax/getProjectList'), //url to call.                
+							                'url' => CController::createUrl('ajax/getProjectList2'), //url to call.                
 							                'update' => '#project', //selector to update   
 							                'data' => array('workcat_id' => 'js:this.value','year' => 'js:$("#fiscalyear").val()'),
 							        )	
@@ -93,6 +95,7 @@ body * { visibility: hidden; }
 
 		    $projects =Project::model()->findAll(array(
     				'select'=>'pj_id,pj_name',
+            'order'=>'pj_name ASC',
     				'distinct'=>true,
 				));   
 
@@ -173,14 +176,41 @@ body * { visibility: hidden; }
 Yii::app()->clientScript->registerScript('gentReport', '
 $("#gentReport").click(function(e){
     e.preventDefault();
-    $.ajax({
-        url: "genSummaryCashflow",
+    if($("#fiscalyear").val()!="")
+    { 
+        $.ajax({
+            url: "genSummaryCashflow",
+            data: {project: $("#project").val(),fiscalyear: $("#fiscalyear").val(),workcat: $("#workcat").val()},
+        
+            success:function(response){
+                 var now = new Date();
+              
+                //$("#dateprint").html(now.getDate()+"/"+now.getMonth()+"/"+now.getFullYear());
+                $("#reportContent").html(response);
+                
+            }
+
+        });
+   }
+    else
+    {
+        js:bootbox.alert("<font color=red>!!!!กรุณาเลือกปีงบประมาณ</font>","ตกลง");
+                                                                            
+    }
+});
+', CClientScript::POS_END);
+
+Yii::app()->clientScript->registerScript('printReport', '
+$("#printReport").click(function(e){
+    e.preventDefault();
+      
+   $.ajax({
+        url: "printSummaryCashflow",
         data: {project: $("#project").val()},
         success:function(response){
-             var now = new Date();
-          
-            $("#dateprint").html(now.getDate()+"/"+now.getMonth()+"/"+now.getFullYear());
-            $("#reportContent").html(response);
+            
+            //var success = new PDFObject({ url: "../tempReport.pdf",height: "800px" }).embed("pdf");
+             window.open("../summaryReport.pdf", "_blank", "fullscreen=yes");              
             
         }
 
@@ -189,24 +219,11 @@ $("#gentReport").click(function(e){
 });
 ', CClientScript::POS_END);
 
-Yii::app()->clientScript->registerScript('printReport', '
-$("#printReport").click(function(e){
-    e.preventDefault();
-      
-   var now = new Date();
-          
-    $("#dateprint").html("วันที่พิมพ์ "+now.getDate()+"/"+now.getMonth()+"/"+now.getFullYear());
-          
-    window.print();
-
-});
-', CClientScript::POS_END);
-
 Yii::app()->clientScript->registerScript('exportExcel', '
 $("#exportExcel").click(function(e){
     e.preventDefault();
 
-     window.location.href = "genProgressExcel?project="+$("#project").val();
+     window.location.href = "genSummaryCashflowExcel?project="+$("#project").val()+"&fiscalyear="+$("#fiscalyear").val()+"&workcat="+$("#workcat").val();
     // $.ajax({
     //     url: "genExcel",
     //     data: {project: $("#project").val()},

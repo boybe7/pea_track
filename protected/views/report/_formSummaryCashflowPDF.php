@@ -318,16 +318,15 @@ $html = "";
 
     $html .= '</table>';
     $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
-
+    $html = "";
+    $pdf->AddPage();
 
     //----------outsource---------------------//
 
     $Criteria = new CDbCriteria();
     $Criteria->condition = "oc_proj_id='$pj->pj_id'";
     $ocs = OutsourceContract::model()->findAll($Criteria);
-    $html = "";
-    if(count($ocs)!=0)
-        $pdf->AddPage();
+
 
     $index = 0;
     foreach ($ocs as $key => $oc) {
@@ -460,23 +459,24 @@ $html = "";
                 $pdf->AddPage();
             }
     }
-    if($index!=0)
+
     $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
 // Print text using writeHTMLCell()
 
-//$pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'summaryReport.pdf','F');
+$pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'tempReport.pdf','F');
 
 // ---------------------------------------------------------
 
 // Close and output PDF document
 // // This method has several options, check the source code documentation for more information.
-if(file_exists($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'tempReport.pdf'))
-{    
-    if(unlink($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'tempReport.pdf'))
-        $pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'tempReport.pdf','F');
-}else{
-   $pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'tempReport.pdf','F');
-}
+// if(file_exists($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'summaryReport2.pdf'))
+// {    
+//     if(unlink($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'summaryReport2.pdf'))
+//         $pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'summaryReport2.pdf','F');
+// }
+// else{
+//    $pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'tempReport.pdf','F');
+// }
 ob_end_clean() ;
 
 exit;
