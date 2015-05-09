@@ -256,7 +256,7 @@ function renderDate2($value)
 			$index2 = 1;
 			foreach ($pos as $key => $po) {
 			echo "<tr>";	
-				echo "<td>".$index2." PO เลขที่ : ".$po->PO."</td>";
+				echo "<td>".$index2.". PO เลขที่ : ".$po->PO."</td>";
 				echo "<td colspan=2> เลขที่ส่งแจ้งรับรองงบ กปง. : ".$po->letter."</td>";
 				echo "<td style='text-align:right'> เป็นเงิน : ".number_format($po->money,2)."</td>";
 			echo "</tr>";
@@ -267,7 +267,7 @@ function renderDate2($value)
 			// print_r($wcs);
 					
 		
-			echo "</tr>";
+			//echo "</tr>";
 
 
 			echo "</table>";
