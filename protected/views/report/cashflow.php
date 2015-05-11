@@ -29,7 +29,47 @@ $this->breadcrumbs=array(
 $(document).ready(function(){
  
   
+  $('#fiscalyear').change(function() {
+         //console.log($(this).val());
+         var yy =  parseInt($(this).val());
+         
+         yy1 = yy-2;
+         yy2 = yy-1;
+         yy3 = yy+1;
+         yy4 = yy+2;
+         
+         var newOptions =  {yy1:yy1,yy2:yy2,yy:yy,yy3:yy3,yy4:yy4};
+        var selectedOption = yy;
 
+        var select = $('#yearBegin');
+        if(select.prop) {
+          var options = select.prop('options');
+        }
+        else {
+          var options = select.attr('options');
+        }
+        $('option', select).remove();
+
+        $.each(newOptions, function(val, text) {
+            options[options.length] = new Option(text, text);
+        });
+        select.val(selectedOption);
+
+        var select = $('#yearEnd');
+        if(select.prop) {
+          var options = select.prop('options');
+        }
+        else {
+          var options = select.attr('options');
+        }
+        $('option', select).remove();
+
+        $.each(newOptions, function(val, text) {
+            options[options.length] = new Option(text, text);
+        });
+        select.val(selectedOption);
+
+  });
     
 });   
 </script>
@@ -164,7 +204,7 @@ $(document).ready(function(){
 
 
   <div class="row-fluid">
-    <div class="offset2 span2">
+    <div class="offset1 span2">
                
               <?php
                 echo CHtml::label('ระหว่างเดือน','monthBegin');  
@@ -176,14 +216,14 @@ $(document).ready(function(){
 
               ?>
     </div>
-    <div class="span1">
+    <div class="span2">
             <?php
                 
                 echo CHtml::label('ปี','yearBegin');  
                 $yy = date("Y")+543;
                 $list = array($yy-2=>$yy-2,$yy-1=>$yy-1,$yy=>$yy,$yy+1=>$yy+1,$yy+2=>$yy+2);
                 echo CHtml::dropDownList('yearBegin', '', 
-                        $list,array('class'=>'span12'
+                        $list,array('class'=>'span8'
                     ));
 
               ?>
@@ -200,14 +240,14 @@ $(document).ready(function(){
 
               ?>
     </div>
-    <div class="span1">
+    <div class="span2">
             <?php
                 
                 echo CHtml::label('ปี','yearEnd');  
                 $yy = date("Y")+543;
                 $list = array($yy-2=>$yy-2,$yy-1=>$yy-1,$yy=>$yy,$yy+1=>$yy+1,$yy+2=>$yy+2);
                 echo CHtml::dropDownList('yearEnd', '', 
-                        $list,array('class'=>'span12'
+                        $list,array('class'=>'span8'
                     ));
 
               ?>
