@@ -154,7 +154,7 @@ $(document).ready(function(){
     
             echo CHtml::label('โครงการ','project');  
             echo CHtml::dropDownList('project', '', 
-                            $list,array('empty' => 'กรุณาเลือกโครงการ','class'=>'span12'
+                            $list,array('empty' => 'ทั้งหมด','class'=>'span12'
                             	));
              	
 		?>
@@ -264,7 +264,7 @@ $(document).ready(function(){
 </div>
 
 
-<div id="pdf" style=""></div>
+<div id="printcontent" style=""></div>
 
 
 <?php
@@ -273,25 +273,19 @@ Yii::app()->clientScript->registerScript('gentReport', '
 $("#gentReport").click(function(e){
     e.preventDefault();
 
-    if($("#project").val()!="")
-    {    
+       
         $.ajax({
-            url: "genSummary",
+            url: "genCashflow",
             cache:false,
-            data: {project: $("#project").val()},
+            data: {project: $("#project").val(),monthBegin:$("#monthBegin").val(),monthEnd:$("#monthEnd").val(),yearBegin:$("#yearBegin").val(),yearEnd:$("#yearEnd").val(),workcat:$("#workcat").val()
+              },
             success:function(response){
-               // var success = new PDFObject({ url: "../summaryReport.pdf",height: "800px" }).embed("pdf");
-                
-               $("#pdf").html(response);                 
+               
+               $("#printcontent").html(response);                 
             }
 
         });
-    }
-    else
-    {
-        js:bootbox.alert("<font color=red>!!!!กรุณาเลือกโครงการ</font>","ตกลง");
-                                                                            
-    }
+    
 });
 ', CClientScript::POS_END);
 
