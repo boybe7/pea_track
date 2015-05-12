@@ -115,7 +115,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(PDF_MARGIN_LEFT, 10, PDF_MARGIN_RIGHT);
+$pdf->SetMargins(2, 10, 2);
 //$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -140,7 +140,7 @@ $pdf->setFontSubsetting(true);
 // dejavusans is a UTF-8 Unicode font, if you only need to
 // print standard ASCII chars, you can use core fonts like
 // helvetica or times to reduce file size.
-$pdf->SetFont('thsarabun', '', 14, '', true);
+$pdf->SetFont('thsarabun', '', 11, '', true);
 
 // Add a page
 // This method has several options, check the source code documentation for more information.
@@ -153,330 +153,421 @@ $pdf->AddPage();
 $html = "";
 
 
-    $pj = $model;
-    //project contract
-    $Criteria = new CDbCriteria();
-    $Criteria->condition = "pc_proj_id='$pj->pj_id'";
-    $pcs = ProjectContract::model()->findAll($Criteria);
-
+    
     ///$html .= "<table border='0' class='span12' style='margin-left:0px;'><tr><td>DDDDD</td></tr></table>";
 
-    $html .= '<div style="text-align:center;font-size:18px;"><b>โครงการ'.$pcs[0]->pc_details.'<br>ให้ '.$pj->pj_name.'</b></div>';
-    $html .= '<br><table style="" border="0" cellpadding="0">';
-    $html .=   '<tr><td colspan="4" style="background-color:#eeeeee;text-align:center">ส่วนผู้ว่าจ้าง : '.$pj->pj_name.'</td></tr>';
-    foreach ($pcs as $key => $pc) {
-        $html .=   "<tr><td width='30%'>ใบสั่งจ้างเลขที่ : ".$pc->pc_code."</td><td width='30%'>วันที่เริ่มในสัญญา : ".renderDate($pc->pc_sign_date)."</td><td width='50%' colspan=2>วันที่สิ้นสุดในสัญญา : ".renderDate($pc->pc_end_date)."</td></tr>";
-    
-    }
-    //workcode
-    $Criteria = new CDbCriteria();
-    $Criteria->condition = "pj_id='$pj->pj_id'";
-    $wcs = WorkCode::model()->findAll($Criteria);
-    // print_r($wcs);
-    $html .=   "<tr style='vertical-align:top'><td >หมายเลขงาน : ";
+    $html .= '<div style="text-align:center;font-size:18px;"><b>สรุปงานรายรับ-รายจ่ายงานโครงการ ปี '.$fiscalyear.'</b></div>';
+   
+    $html .= '<table border="1" class="span12" style="margin-left:0px;">';
+        $html .= '<tr align="center">';
+         $html .= '<td rowspan="2" style="vertical-align:middle;text-align:center;width:4%"><span style="font-size: 5px;">'.str_repeat('&nbsp;<br/>', 2).'</span>ลำดับ</td>';
+         $html .= '<td rowspan="2" style="vertical-align:middle;text-align:center;width:15%"><span style="font-size: 5px;">'.str_repeat('&nbsp;<br/>', 2).'</span>ชื่อโครงการ</td>';
+         $html .= '<td rowspan="2" style="vertical-align:middle;text-align:center;width:7%"><span style="font-size: 5px;">'.str_repeat('&nbsp;<br/>', 2).'</span>วงเงินตามสัญญา</td>';
+         $html .= '<td rowspan="2" style="vertical-align:middle;text-align:center;width:7%"><span style="font-size: 5px;">'.str_repeat('&nbsp;<br/>', 2).'</span>รายรับ</td>';
+         $html .= '<td rowspan="2" style="vertical-align:middle;text-align:center;width:7%"><span style="font-size: 5px;">'.str_repeat('&nbsp;<br/>', 2).'</span>ยอดรับคงเหลือ</td>';
+         $html .= '<td rowspan="2" style="vertical-align:middle;text-align:center;width:13%"><span style="font-size: 5px;">'.str_repeat('&nbsp;<br/>', 2).'</span>ชื่อผู้รับจ้าง</td>';
+         $html .= '<td rowspan="2" style="vertical-align:middle;text-align:center;width:7%"><span style="font-size: 5px;">'.str_repeat('&nbsp;<br/>', 1).'</span>วงเงินตามสัญญา<br>จ้างช่วง</td>';
+         $html .= '<td rowspan="2" style="vertical-align:middle;text-align:center;width:7%"><span style="font-size: 5px;">'.str_repeat('&nbsp;<br/>', 2).'</span>รายจ่าย</td>';
 
-    $i=0;
-    foreach ($wcs as $key => $wc) {
-        if($i==0)  
-          $html .= $wc->code."<br>";
-        else
-          $html .= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : '.$wc->code.'<br>'; 
-        $i++;
-    }
-    $html .= "</td>";
-    $html .= "<td width='30%'>แจ้งจัดสรรงบ กปง./กซข./กฟจ. : ";
-    $i=0;
-    foreach ($pcs as $key => $pc) {
-        if($i==0)  
-          $html .= $pc->pc_name_request."<br>";
-        else
-          $html .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : ".$pc->pc_name_request."<br>"; 
-        $i++;   
-    }   
-    $html .= "</td>";
-    $html .= "<td width='25%'>เลขที่ส่ง / ลว. : ";
-    $i=0;
-    $sum_pc_cost = 0;
-    foreach ($pcs as $key => $pc) {
-        
-        $pp = Yii::app()->db->createCommand()
+         $html .= '<td rowspan="2" style="text-align:center;width:7%"><span style="font-size: 5px;">'.str_repeat('&nbsp;<br/>', 2).'</span>ยอดจ่ายคงเหลือ</td>';
+         $html .= '<td rowspan="2" style="text-align:center;width:7%"><span style="font-size: 5px;">'.str_repeat('&nbsp;<br/>', 1).'</span>ประมาณการค่า<br>บริหารโครงการ</td>';
+         $html .= '<td colspan="3" style="text-align:center;width:19%">รายจ่ายที่เกิดขึ้นจริง</td>';
+        $html .= '</tr>';
+
+        $html .= '<tr align="center">';
+         $html .= '<td style="text-align:center;">ค่าบริหาร<br>โครงการ</td>';
+         $html .= '<td style="text-align:center;">ค่ารับรอง</td>';
+         $html .= '<td style="text-align:center;">คงเหลือ</td>';
+    
+        $html .= '</tr>';
+
+
+                //fiscalyear
+                $fiscalyear = array();
+
+                foreach ($model as $key => $value) {
+                    
+                    //print_r($value);
+                    if(!in_array($value->pj_fiscalyear."/".$value->pj_work_cat, $fiscalyear))
+                       $fiscalyear[] = $value->pj_fiscalyear."/".$value->pj_work_cat;
+                
+
+                }
+
+                //print_r($model);
+                //summary all
+                $sumall_pc_cost = 0;
+                $sumall_pc_receive = 0;
+                         
+                $sumall_oc_cost = 0;
+                $sumall_oc_receive = 0;
+                       
+                $sumall_m_real = 0;
+                $sumall_m_type1 = 0;
+                $sumall_m_expect = 0;
+
+                asort($fiscalyear);
+                foreach ($fiscalyear as $key => $value) {
+                    $data = explode("/", $value);
+                    $year = $data[0];
+                    $cat = $data[1];
+
+                    $mWorkCat = WorkCategory::model()->findByPk($cat);
+
+                    //$html .= $mWorkCat->wc_name;
+                    $html .= "<tr>";
+                    
+                    $html .= '<td colspan="13"> '.$mWorkCat->wc_name.'</td>';
+                    
+                    $html .= "</tr>";
+
+                    $index = 1;
+
+                     //summary
+                         $sum_pc_cost = 0;
+                         $sum_pc_receive = 0;
+                         
+                         $sum_oc_cost = 0;
+                         $sum_oc_receive = 0;
+                       
+                         $sum_m_real = 0;
+                         $sum_m_type1 = 0;
+                         $sum_m_expect = 0;
+                       
+
+                    foreach ($model as $key => $pj) {
+                      
+                      //$html .= $cat.",".$pj->pj_work_cat."<br>";
+                        
+                      if($pj->pj_fiscalyear==$year && $pj->pj_work_cat==$cat)
+                      { 
+                        
+                        //if($cat==2)
+                        //    $html .= $pj->pj_name;
+                        //project contract
+                         $Criteria = new CDbCriteria();
+                         $Criteria->condition = "pc_proj_id='$pj->pj_id'";
+                         $pcs = ProjectContract::model()->findAll($Criteria);
+                         $nPC = count($pcs);
+
+                         $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(pc_cost) as sum')
+                                            ->from('project_contract')
+                                            ->where("pc_proj_id='$pj->pj_id'")
+                                            ->queryAll();  
+                        $pcCostAll = $pp[0]["sum"];                     
+                        foreach ($pcs as $key => $pc) {
+                            $pp2 = Yii::app()->db->createCommand()
                                             ->select('SUM(cost) as sum')
                                             ->from('contract_change_history')
                                             ->where("contract_id='$pc->pc_id' AND type=1")
+                                            ->queryAll(); 
+                            $pcCostAll += $pp2[0]["sum"];                 
+                         } 
+                         
+                                                                                
+                            
+
+                         //2.outsource contract
+                         $Criteria = new CDbCriteria();
+                         $Criteria->condition = "oc_proj_id='$pj->pj_id'";
+                         $ocs = OutsourceContract::model()->findAll($Criteria);
+                         $nOC = count($ocs);
+
+                         //management cost
+                        $Criteria = new CDbCriteria();
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=0";
+                        $m_plan = ManagementCost::model()->findAll($Criteria);
+
+                        $Criteria = new CDbCriteria();
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=2";
+                        $m_real = ManagementCost::model()->findAll($Criteria);
+
+                        $Criteria = new CDbCriteria();
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=1";
+                        $m_type1 = ManagementCost::model()->findAll($Criteria);
+
+                        
+
+                        //end
+
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=0")
                                             ->queryAll();
-                                        ///print_r($changeHists);
-                                        //$html .= $pp[0]["sum"];    
-
-        $pcCost =$pc->pc_cost + $pp[0]["sum"];
-
-        $sum_pc_cost += $pcCost;
-
-        if($i==0)  
-          $html .= $pc->pc_code_request."<br>";
-        else
-          $html .= "<span style='padding-left:182px;'>".$pc->pc_code_request."</span><br>"; 
-        $i++;   
-    }   
-    $html .= "</td>";
-    $html .= "<td width='15%'>วงเงิน : ".number_format($sum_pc_cost,2)."</td>";
-    $html .= "</tr>";
+                        $sum_m_expect += $pp[0]["sum"];
+                        $m_expect_sum = $pp[0]["sum"];
 
 
-    $html .= "</table>";
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=1")
+                                            ->queryAll();
+                        $m_type1_sum = $pp[0]["sum"];                    
 
-    $html .= '<table border="1" class="span12" style="margin-left:0px;">';
-        $html .= '<tr align="center">';
-         $html .= '<td rowspan="2" style="width:5%">ที่</td>';
-         $html .= '<td colspan="4" style="text-align:center;width:55%">ด้านการดำเนินการโครงการ</td>';
-         $html .= '<td colspan="4" style="text-align:center;width:40%">ด้านการเงิน</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-         $html .= '<td style="text-align:center;width:23%">รายละเอียด</td>';
-         $html .= '<td style="text-align:center;width:10%">อนุมัติโดย/<br>ลงวันที่</td>';
-         $html .= '<td style="text-align:center;width:10%">วงเงิน/<br>เป็นเงินเพิ่ม</td>';
-         $html .= '<td style="text-align:center;width:12%">ระยะเวลาแล้วเสร็จ/<br>ระยะเวลาขอขยาย</td>';
-         
-         $html .= '<td style="text-align:center;width:10%">ชำระเงินงวดที่</td>';
-         $html .= '<td style="text-align:center;width:10%">ใบแจ้งหนี้/<br>ลงวันที่</td>';
-         $html .= '<td style="text-align:center;width:10%">ใบเสร็จเลขที่/<br>ลงวันที่</td>';
-         $html .= '<td style="text-align:center;width:10%">วงเงิน</td>';
-            
-        $html .= '</tr>';
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=2")
+                                            ->queryAll();
+                        $m_real_sum = $pp[0]["sum"];
 
-        
-        $data_approve = array();
-        $data_payment = array();
-        $i =0;
-        foreach ($pcs as $key => $pc) {
-            $approve = Yii::app()->db->createCommand()
-                            ->select('detail,approveBy,dateApprove,cost,timeSpend')
-                            ->from('contract_approve_history')
-                            ->where("contract_id='$pc->pc_id' AND type=1")
-                            ->queryAll();
-            //print_r($data_approve);                
-            if($i==0)
-              $data_approve = $approve;
-            else    
-              array_merge($data_approve,$approve);    
-            //print_r($data_approve);            
-
-            $payment = Yii::app()->db->createCommand()
-                            ->select('*')
-                            ->from('payment_project_contract')
-                            ->where("proj_id='$pc->pc_id'")
-                            ->queryAll();                
-            if($i==0)
-              $data_payment = $payment;
-            else    
-              array_merge($data_payment,$payment);               
-            $i++;
-        }
+                        $sum_m_real += $m_real_sum;
+                        $sum_m_type1 += $m_type1_sum;
+                        //profit
+                        //1.income
+                        
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_project_contract')
+                                            ->join('project_contract','proj_id=pc_id')
+                                            ->where("pc_proj_id='$pj->pj_id' AND bill_no!=''")
+                                            ->queryAll();
+                        //$html .= $pp[0]["sum"];
+                        $income = $pp[0]["sum"];
+                        
+                        //1.outcome
+                        
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_outsource_contract')
+                                            ->join('outsource_contract','contract_id=oc_id')
+                                            ->where("oc_proj_id='$pj->pj_id'")
+                                            ->queryAll();                    
+                        $outcome = $pp[0]["sum"];                    
+                      
 
 
 
-        $sum_pay = 0;
-        for ($i=0; $i < 5; $i++) { 
-            $html .= "<tr>";
-                if(!empty($data_approve[$i])) 
-                {
-                    $html .= '<td style="text-align:center">'.($i+1).'</td>';
-                    $html .= '<td >'.$data_approve[$i]['detail'].'</td>';
-                    $html .= '<td style="text-align:center">'.$data_approve[$i]['approveBy'].'<br>'.renderDate2($data_approve[$i]['dateApprove']).'</td>';
-                    $html .= '<td style="text-align:right">'.number_format($data_approve[$i]['cost'],2).'</td>';
-                    $html .= '<td >'.$data_approve[$i]['timeSpend'].'</td>';
-                }
-                else
-                {
-                    $html .= '<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>';
-                }   
+                         $maxContract = $nOC==0? 1:$nOC;
+
+                         $pj_rowspan = $maxContract ;
+
+                        
+                        
+
+                         //end
+
+                         $iPC = 0;
+                         $iOC = 0;
+                         $pcCost = 0;
+                         $ocCost = 0;
+                        for ($i=0; $i <$pj_rowspan ; $i++) { 
+                            
+                            $html .= "<tr>";
+                                //draw project detail
+                                if($i==0)
+                                {
+                                    $html .= '<td style="text-align:center">'.$index."</td>";
+                                    $html .= "<td >".$pj->pj_name."</td>";
+                                    //draw PC
+                                    $html .= '<td style="text-align:right" >'.number_format($pcCostAll,2).'</td>';
+                                    $sum_pc_cost += $pcCostAll;
+                                    $sum_pc_receive += $income;
+                                    $income1 = $income==0 ? '-' : number_format($income,2);
+                                    $html .= '<td style="text-align:right" >'.$income1.'</td>';
+                                    
+                                    $html .= '<td style="text-align:right" >'.number_format($pcCostAll-$income,2).'</td>';
+                                }
+                                else{
+                                    $html .= '<td></td>';
+                                    $html .= '<td></td>';
+                                    $html .= '<td></td>';
+                                    $html .= '<td></td>';
+                                    $html .= '<td></td>';
+                                }
+                                // for ($i=0; $i <8 ; $i++) { 
+                                //     $html .= '<td></td>';
+                                // }
+                                    
+                                    
+                                //draw OC
+                                if(!empty($ocs[$i]))
+                                {
+                                    $oc = $ocs[$i];
+                                    $vendor = Vendor::model()->findByPk($oc->oc_vendor_id);
+                                    $html .= '<td>'.$vendor->v_name.'</td>';
+
+                                    $pp2 = Yii::app()->db->createCommand()
+                                            ->select('SUM(cost) as sum')
+                                            ->from('contract_change_history')
+                                            ->where('contract_id='.$oc->oc_id.' AND type=2')
+                                            ->queryAll(); 
+                                    $ocCostAll =str_replace(',', '', $oc->oc_cost) + $pp2[0]['sum'];                 
+                                    $html .= '<td style="text-align:right">'.number_format($ocCostAll,2).'</td>';
+                                    $sum_oc_cost += $ocCostAll;
+
+                                    $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_outsource_contract')
+                                            ->where('contract_id='.$oc->oc_id.' AND approve_date!=""')
+                                            ->queryAll();                    
+                                    $outcomeOC = $pp[0]['sum'];   
+                                    $sum_oc_receive += $outcome; 
+                                    $outcomeOC1 = $outcomeOC==0 ? '-' : number_format($outcomeOC,2);
+                                    $html .= '<td style="text-align:right">'.$outcomeOC1.'</td>';
+                                    $html .= '<td style="text-align:right">'.number_format($ocCostAll-$outcomeOC,2).'</td>';
+                                    
+
+                                }else{
+                                    $html .= '<td></td>';
+                                    $html .= '<td></td>';
+                                    $html .= '<td></td>';
+                                    $html .= '<td></td>';
+
+                                }
+
+                                if($i==0)
+                                {
+                                    
+                                    $expect = $m_expect_sum==0 ? '-' : number_format($m_expect_sum,2);
+                                    $real = $m_real_sum==0 ? '-' : number_format($m_real_sum,2);
+                                    $type1 = $m_type1_sum==0 ? '-' : number_format($m_type1_sum,2);
+                                    $html .= '<td style="text-align:right" >'.$expect.'</td>';
+                                    $html .= '<td style="text-align:right" >'.$real.'</td>';
+                                    $html .= '<td style="text-align:right" >'.$type1.'</td>';
+                                    $rm =($m_expect_sum - $m_type1_sum - $m_real_sum)==0 ? '-' : number_format($m_expect_sum - $m_type1_sum - $m_real_sum,2);
+                                    $html .= '<td style="text-align:right" >'.$rm.'</td>';
+                                }
+                                else{
+                                    $html .= '<td></td>';
+                                    $html .= '<td></td>';
+                                    $html .= '<td></td>';
+                                    $html .= '<td></td>';
+                                 
+                                }    
+                           $html .= '</tr>'; 
 
 
-                 if(!empty($data_payment[$i])) 
-                {
+                         
+                         
+                        }//end rowspan   
+
+                        $index++;
+                      }//end if     
+                                
+                            
+                                    
+                                    
+                    }//end project   
                     
-                    $html .= '<td >'.$data_payment[$i]['detail'].'</td>';
-                    $html .= '<td style="text-align:center">'.$data_payment[$i]['invoice_no'].'<br>'.renderDate2($data_payment[$i]['invoice_date']).'</td>';
-                    $html .= '<td style="text-align:center">'.$data_payment[$i]['bill_no'].'<br>'.renderDate2($data_payment[$i]['bill_date']).'</td>';
-                    $html .= '<td style="text-align:right">'.number_format($data_payment[$i]['money'],2).'</td>';
+                    //summary
+                     
+                    $html .= "<tr>";
+                    //summary
+                                    $html .= '<td colspan="2" style="text-align:center">รวม</td>';
+                                    if($sum_pc_cost!=0)
+                                     $html .= '<td style="text-align:right" >'.number_format($sum_pc_cost,2).'</td>';
+                                    else
+                                     $html .= '<td style="text-align:right" >-</td>';   
+                                    if($sum_pc_receive!=0)
+                                     $html .= '<td style="text-align:right" >'.number_format($sum_pc_receive,2).'</td>';
+                                    else
+                                     $html .= '<td style="text-align:right" >-</td>';  
+                                    if($sum_pc_cost-$sum_pc_receive!=0)
+                                     $html .= '<td style="text-align:right" >'.number_format($sum_pc_cost-$sum_pc_receive,2).'</td>';
+                                    else
+                                      $html .= '<td style="text-align:right" >-</td>';    
+                                    $html .= '<td></td>';
+                                    if($sum_oc_cost!=0)
+                                    $html .= '<td style="text-align:right" >'.number_format($sum_oc_cost,2).'</td>';
+                                    else
+                                     $html .= '<td style="text-align:right" >-</td>';  
+                                    if($sum_oc_receive!=0)
+                                    $html .= '<td style="text-align:right" >'.number_format($sum_oc_receive,2).'</td>';
+                                    else
+                                     $html .= '<td style="text-align:right" >-</td>';  
+                                   
+                                    if($sum_oc_cost-$sum_oc_receive!=0)
+                                     $html .= '<td style="text-align:right" >'.number_format($sum_oc_cost-$sum_oc_receive,2).'</td>';
+                                    else
+                                      $html .= '<td style="text-align:right" >-</td>'; 
+                                    $sum_expect = $sum_m_expect==0 ? '-': number_format($sum_m_expect,2);
+                                    $html .= '<td style="text-align:right" >'.$sum_expect.'</td>';
+                                    $sum_real = $sum_m_real==0 ? '-': number_format($sum_m_real,2);
+                                    $html .= '<td style="text-align:right" >'.$sum_real.'</td>';
+                                    $sum_type1 = $sum_m_type1==0 ? '-': number_format($sum_m_type1,2);
+                                    $html .= '<td style="text-align:right" >'.$sum_type1.'</td>';
+                                    $sum_rm = $sum_m_expect - $sum_m_real - $sum_m_type1==0 ? '-': number_format($sum_m_expect - $sum_m_real - $sum_m_type1,2);
+                                    $html .= '<td style="text-align:right" >'.$sum_rm.'</td>';
+                                   
+                                $sumall_pc_cost += $sum_pc_cost;
+                                $sumall_pc_receive += $sum_pc_receive;
+                                         
+                                $sumall_oc_cost += $sum_oc_cost;
+                                $sumall_oc_receive += $sum_oc_receive;
+                                       
+                                $sumall_m_real += $sum_m_real;
+                                $sumall_m_type1 += $sum_m_type1;
+                                $sumall_m_expect += $sum_m_expect; 
+                    $html .= "</tr>";
 
-                    if($data_payment[$i]['bill_no']!=''){
-                        $sum_pay += $data_payment[$i]['money'];
-                    }
+                    
+
                 }
-                else
-                {
-                    if($i!=4)
-                       $html .= '<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>';
-                    else
-                    {
-                        $remain = $sum_pc_cost - $sum_pay;
-                        $html .= '<td colspan="3" style="text-align:center">คงเหลือ</td><td style="text-align:right">'.number_format($remain,2).'</td>';
-                    }
-                }   
-            $html .= '</tr>';
-        }
+
+                $html .= "<tr>";
+                    //summary
+                                    $html .= '<td colspan="2" style="text-align:center">รวมทั้งหมด</td>';
+                                    if($sumall_pc_cost!=0)
+                                     $html .= '<td style="text-align:right" >'.number_format($sumall_pc_cost,2).'</td>';
+                                    else
+                                     $html .= '<td style="text-align:right" >-</td>';   
+                                    if($sumall_pc_receive!=0)
+                                     $html .= '<td style="text-align:right" >'.number_format($sumall_pc_receive,2).'</td>';
+                                    else
+                                     $html .= '<td style="text-align:right" >-</td>';  
+                                    if($sumall_pc_cost-$sumall_pc_receive!=0)
+                                     $html .= '<td style="text-align:right" >'.number_format($sumall_pc_cost-$sumall_pc_receive,2).'</td>';
+                                    else
+                                      $html .= '<td style="text-align:right" >-</td>';    
+                                    $html .= '<td></td>';
+                                    if($sumall_oc_cost!=0)
+                                    $html .= '<td style="text-align:right" >'.number_format($sumall_oc_cost,2).'</td>';
+                                    else
+                                     $html .= '<td style="text-align:right" >-</td>';  
+                                    if($sumall_oc_receive!=0)
+                                    $html .= '<td style="text-align:right" >'.number_format($sumall_oc_receive,2).'</td>';
+                                    else
+                                     $html .= '<td style="text-align:right" >-</td>';  
+                                   
+                                    if($sumall_oc_cost-$sumall_oc_receive!=0)
+                                     $html .= '<td style="text-align:right" >'.number_format($sumall_oc_cost-$sumall_oc_receive,2).'</td>';
+                                    else
+                                      $html .= '<td style="text-align:right" >-</td>'; 
+                                    $sum_expect = $sumall_m_expect==0 ? '-': number_format($sumall_m_expect,2);
+                                    $html .= '<td style="text-align:right" >'.$sum_expect.'</td>';
+                                    $sum_real = $sumall_m_real==0 ? '-': number_format($sumall_m_real,2);
+                                    $html .= '<td style="text-align:right" >'.$sum_real.'</td>';
+                                    $sum_type1 = $sumall_m_type1==0 ? '-': number_format($sumall_m_type1,2);
+                                    $html .= '<td style="text-align:right" >'.$sum_type1.'</td>';
+                                    $sum_rm = $sumall_m_expect - $sumall_m_real - $sumall_m_type1==0 ? '-': number_format($sumall_m_expect - $sumall_m_real - $sumall_m_type1,2);
+                                    $html .= '<td style="text-align:right" >'.$sum_rm.'</td>';
+                                    
+                    $html .= "</tr>";
 
     $html .= '</table>';
-    $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
-    $html = "";
-    $pdf->AddPage();
 
-    //----------outsource---------------------//
-
-    $Criteria = new CDbCriteria();
-    $Criteria->condition = "oc_proj_id='$pj->pj_id'";
-    $ocs = OutsourceContract::model()->findAll($Criteria);
-
-
-    $index = 0;
-    foreach ($ocs as $key => $oc) {
-            $index++;
-            $vendor = Vendor::model()->findByPk($oc->oc_vendor_id); 
-            
-            $sum_oc_cost = 0;
-            $pp = Yii::app()->db->createCommand()
-                                                    ->select('SUM(cost) as sum')
-                                                    ->from('contract_change_history')
-                                                    ->where("contract_id='$oc->oc_id' AND type=2")
-                                                    ->queryAll();
-                                                ///print_r($changeHists);
-            $oc->oc_cost = str_replace(",", "", $oc->oc_cost);    
-
-            $sum_oc_cost =$oc->oc_cost + $pp[0]["sum"];
-
-            $html .= '<br><br><table border="0"  style="margin-left:0px;margin-top:15px;">';
-            $html .=   '<tr><td colspan="4" style="background-color:#eeeeee;text-align:center">ส่วนผู้รับจ้าง รายที่ '.$index." : ".$vendor->v_name."</td></tr>";
-            $html .=   "<tr><td width='30%'>สัญญาจ้างเลขที่ : ".$oc->oc_code."</td><td width='25%'>วันที่เริ่มในสัญญา : ".renderDate($oc->oc_sign_date).
-                            "</td><td width='25%'>วันที่สิ้นสุดในสัญญา : ".renderDate($oc->oc_end_date)."</td><td width='30%' style='text-align:right'>วงเงิน : ".number_format($sum_oc_cost,2)."</td></tr>";
-            
-            //po
-            $Criteria = new CDbCriteria();
-            $Criteria->condition = "contract_id='$oc->oc_id'";
-            $pos = WorkCodeOutsource::model()->findAll($Criteria);
-            
-            //print_r($pos);
-            
-            $index2 = 1;
-            foreach ($pos as $key => $po) {
-            $html .= "<tr>";    
-                $html .= "<td>".$index2.". PO เลขที่ : ".$po->PO."</td>";
-                $html .= "<td colspan='2'> เลขที่ส่งแจ้งรับรองงบ กปง. : ".$po->letter."</td>";
-                $html .= "<td style='text-align:right'> เป็นเงิน : ".number_format($po->money,2)."</td>";
-            $html .= "</tr>";
-               $index2++;
-            }
-            
-
-            // print_r($wcs);
-         
-
-
-            $html .= "</table>";
-
-            $html .= '<table border="1" class="span12" style="margin-left:0px;">';
-                $html .= "<tr>";
-                 $html .= '<td rowspan="2" style="text-align:center;width:5%">ที่</td>';
-                 $html .= '<td colspan="4" style="text-align:center;width:55%">ด้านการดำเนินการโครงการ</td>';
-                 $html .= '<td colspan="4" style="text-align:center;width:40%">ด้านการเงิน</td>';
-                $html .= '</tr>';
-                $html .= '<tr>';
-                 $html .= '<td style="text-align:center;width:23%">รายละเอียด</td>';
-                 $html .= '<td style="text-align:center;width:10%">อนุมัติโดย/<br>ลงวันที่</td>';
-                 $html .= '<td style="text-align:center;width:10%">วงเงิน/<br>เป็นเงินเพิ่ม</td>';
-                 $html .= '<td style="text-align:center;width:12%">ระยะเวลาแล้วเสร็จ/<br>ระยะเวลาขอขยาย</td>';
-                 
-                 $html .= '<td style="text-align:center;width:10%">ชำระเงินงวดที่</td>';
-                 $html .= '<td style="text-align:center;width:10%">อนุมัติโดย</td>';
-                 $html .= '<td style="text-align:center;width:10%">วัน/เดือน/ปี</td>';
-                 $html .= '<td style="text-align:center;width:10%">วงเงิน</td>';
-                    
-                $html .= '</tr>';
-
-                
-                $data_approve = Yii::app()->db->createCommand()
-                                    ->select('detail,approveBy,dateApprove,cost,timeSpend')
-                                    ->from('contract_approve_history')
-                                    ->where("contract_id='$oc->oc_id' AND type=2")
-                                    ->queryAll();
-                
-                $data_payment = Yii::app()->db->createCommand()
-                                    ->select('*')
-                                    ->from('payment_outsource_contract')
-                                    ->where("contract_id='$oc->oc_id'")
-                                    ->queryAll();                
-                //print_r($data_payment);
-
-                $sum_pay = 0;
-                for ($i=0; $i < 5; $i++) { 
-                    $html .= "<tr>";
-                        if(!empty($data_approve[$i])) 
-                        {
-                            $html .= "<td style='text-align:center'>".($i+1)."</td>";
-                            $html .= "<td >".$data_approve[$i]["detail"]."</td>";
-                            $html .= "<td style='text-align:center'>".$data_approve[$i]["approveBy"]."<br>".renderDate2($data_approve[$i]["dateApprove"])."</td>";
-                            $html .= "<td style='text-align:right'>".number_format($data_approve[$i]["cost"],2)."</td>";
-                            $html .= "<td >".$data_approve[$i]["timeSpend"]."</td>";
-                        }
-                        else
-                        {
-                            $html .= "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>";
-                        }   
-
-
-                         if(!empty($data_payment[$i])) 
-                        {
-                            
-                            $html .= "<td >".$data_payment[$i]["detail"]."</td>";
-
-                            $html .= "<td style='text-align:center'>".$data_payment[$i]["approve_by"]."</td>";
-                            $html .= "<td style='text-align:center'>".renderDate2($data_payment[$i]["approve_date"])."</td>";
-                            $html .= "<td style='text-align:right'>".number_format($data_payment[$i]["money"],2)."</td>";
-
-                            if($data_payment[$i]["approve_date"]!=""){
-                                $sum_pay += $data_payment[$i]["money"];
-                            }
-                        }
-                        else
-                        {
-                            if($i!=4)
-                               $html .= "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>";
-                            else
-                            {
-                                //$html .= $sum_oc_cost;
-                                $remain = $sum_oc_cost - $sum_pay;
-                                $html .= "<td colspan='3' style='text-align:center'>คงเหลือ</td><td style='text-align:right'>".number_format($remain,2)."</td>";
-                            }
-                        }   
-                    $html .= "</tr>";
-                }
-
-            $html .= "</table><br>";
-
-            if($index%2==0)
-            {
-                $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
-                $html = "";
-                $pdf->AddPage();
-            }
-    }
 
     $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
 // Print text using writeHTMLCell()
 
-$pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'tempReport.pdf','F');
+//$pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'tempReport.pdf','F');
 
 // ---------------------------------------------------------
 
 // Close and output PDF document
 // // This method has several options, check the source code documentation for more information.
-// if(file_exists($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'summaryReport2.pdf'))
-// {    
-//     if(unlink($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'summaryReport2.pdf'))
-//         $pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'summaryReport2.pdf','F');
-// }
-// else{
-//    $pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'tempReport.pdf','F');
-// }
+if(file_exists($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'tempReport.pdf'))
+{    
+    if(unlink($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'tempReport.pdf'))
+        $pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'tempReport.pdf','F');
+}
+else{
+   $pdf->Output($_SERVER['DOCUMENT_ROOT'].'/pea_track/'.'tempReport.pdf','F');
+}
 ob_end_clean() ;
 
 exit;

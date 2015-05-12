@@ -891,6 +891,8 @@
 				month = new_date.getUTCMonth(),
 				mag = Math.abs(dir),
 				new_month, test;
+
+				//console.log("dsdsd:"+new_date);
 			dir = dir > 0 ? 1 : -1;
 			if (mag == 1){
 				test = dir == -1

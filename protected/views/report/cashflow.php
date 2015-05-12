@@ -26,14 +26,12 @@ $this->breadcrumbs=array(
 <!-- <script type="text/javascript" src="/pea_track/themes/bootstrap/js/compatibility.js"></script> -->
 <script type="text/javascript">
 
+$(document).ready(function(){
+ 
+  
 
-window.onload = function (){
-
-         //var success = new PDFObject({ url: "../test.pdf",height: "800px" }).embed("pdf");
-
-   
-     
-   }; 
+    
+});   
 </script>
 
 
@@ -114,26 +112,26 @@ window.onload = function (){
 		?>
 
 	</div>
-	<div class="span2">
-	  <?php
-		$this->widget('bootstrap.widgets.TbButton', array(
+	<div class="span3">
+      <?php
+        $this->widget('bootstrap.widgets.TbButton', array(
               'buttonType'=>'link',
               
               'type'=>'inverse',
-              'label'=>'ออกรายงาน',
+              'label'=>'view',
               'icon'=>'list-alt white',
               
               'htmlOptions'=>array(
-                'class'=>'span12',
-                'style'=>'margin:25px 0px 0px 0px;',
+                'class'=>'span4',
+                'style'=>'margin:25px 10px 0px 0px;',
                 'id'=>'gentReport'
               ),
           ));
       ?>
-	</div>
-	<div class="span1">
-	  <?php
-		$this->widget('bootstrap.widgets.TbButton', array(
+    <!-- </div> -->
+    <!-- <div class="span1"> -->
+      <?php
+        $this->widget('bootstrap.widgets.TbButton', array(
               'buttonType'=>'link',
               
               'type'=>'success',
@@ -141,42 +139,78 @@ window.onload = function (){
               'icon'=>'excel',
               
               'htmlOptions'=>array(
-                'class'=>'span12',
-                'style'=>'margin:25px 0px 0px 0px;padding-left:0px;padding-right:0px',
+                'class'=>'span4',
+                'style'=>'margin:25px 10px 0px 0px;padding-left:0px;padding-right:0px',
                 'id'=>'exportExcel'
               ),
           ));
+
+    $this->widget('bootstrap.widgets.TbButton', array(
+              'buttonType'=>'link',
+              
+              'type'=>'info',
+              'label'=>'',
+              'icon'=>'print white',
+              
+              'htmlOptions'=>array(
+                'class'=>'span3',
+                'style'=>'margin:25px 0px 0px 0px;',
+                'id'=>'printReport'
+              ),
+          ));
       ?>
-	</div>
+    </div>
   </div>
 
 
   <div class="row-fluid">
-    <div class="span2">
-                        <?php 
+    <div class="offset2 span2">
+               
+              <?php
+                echo CHtml::label('ระหว่างเดือน','monthBegin');  
+                $list = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม","4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน","7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน","10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
+                echo CHtml::dropDownList('monthBegin', '', 
+                        $list,array('class'=>'span12'
+                    ));
+               
 
-                 
-                        echo '<div class="input-append" style="margin-top:-10px;">'; //ใส่ icon ลงไป
-                            $this->widget('zii.widgets.jui.CJuiDatePicker',
-
-                            array(
-                                'name'=>'pj_date_approved',
-                                'options' => array(
-                                                  'mode'=>'focus',
-                                                  //'language' => 'th',
-                                                  'changeMonth'=>true,
-                                                  'changeYear'=>true,
-                                                  'format'=>'dd/mm/yyyy', //กำหนด date Format
-                                                  'showAnim' => 'slideDown',
-                                                  ),
-                                'htmlOptions'=>array('class'=>'span12', 'value'=>''),  // ใส่ค่าเดิม ในเหตุการ Update 
-                             )
-                        );
-                        echo '<span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-                         ?>
+              ?>
     </div>
-    <div class="span2">
+    <div class="span1">
+            <?php
+                
+                echo CHtml::label('ปี','yearBegin');  
+                $yy = date("Y")+543;
+                $list = array($yy-2=>$yy-2,$yy-1=>$yy-1,$yy=>$yy,$yy+1=>$yy+1,$yy+2=>$yy+2);
+                echo CHtml::dropDownList('yearBegin', '', 
+                        $list,array('class'=>'span12'
+                    ));
+
+              ?>
+    </div>
+     <div class="span2">
+               
+              <?php
+                echo CHtml::label('ถึงเดือน','monthEnd');  
+                $list = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม","4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน","7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน","10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
+                echo CHtml::dropDownList('monthEnd', '', 
+                        $list,array('class'=>'span12'
+                    ));
+               
+
+              ?>
+    </div>
+    <div class="span1">
+            <?php
+                
+                echo CHtml::label('ปี','yearEnd');  
+                $yy = date("Y")+543;
+                $list = array($yy-2=>$yy-2,$yy-1=>$yy-1,$yy=>$yy,$yy+1=>$yy+1,$yy+2=>$yy+2);
+                echo CHtml::dropDownList('yearEnd', '', 
+                        $list,array('class'=>'span12'
+                    ));
+
+              ?>
     </div>
   </div>  
 </div>

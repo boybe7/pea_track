@@ -31,7 +31,7 @@ body * { visibility: hidden; }
 </style>
 
 
-<h4>สรุปงานรายรับ-รายจ่ายงานโครงการ </h4>
+
 
 <div class="well">
   <div class="row-fluid">
@@ -165,6 +165,7 @@ body * { visibility: hidden; }
 <!-- <div class="row"> -->
     <!-- <div id="reportContent" class="" style="overflow: auto;"> -->
   <div id="print">
+    <div id='title' style="text-align:center" ><h4>สรุปงานรายรับ-รายจ่ายงานโครงการ ปี </h4></div> 
     <div id="reportContent" class="" style="overflow:scroll; height:600px;">
       
     </div>
@@ -191,6 +192,8 @@ $("#gentReport").click(function(e){
             }
 
         });
+
+        $("#title").html("<h4>สรุปงานรายรับ-รายจ่ายงานโครงการ ปี "+$("#fiscalyear").val()+"</h4>");
    }
     else
     {
@@ -206,11 +209,12 @@ $("#printReport").click(function(e){
       
    $.ajax({
         url: "printSummaryCashflow",
-        data: {project: $("#project").val()},
+        data: {project: $("#project").val(),fiscalyear: $("#fiscalyear").val(),workcat: $("#workcat").val()},
+        
         success:function(response){
             
             //var success = new PDFObject({ url: "../tempReport.pdf",height: "800px" }).embed("pdf");
-             window.open("../summaryReport.pdf", "_blank", "fullscreen=yes");              
+             window.open("../tempReport.pdf", "_blank", "fullscreen=yes");              
             
         }
 

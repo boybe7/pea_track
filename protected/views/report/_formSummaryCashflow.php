@@ -108,7 +108,16 @@ function renderDate($value)
                 }
 
                 //print_r($model);
-
+                //summary all
+                $sumall_pc_cost = 0;
+                $sumall_pc_receive = 0;
+                         
+                $sumall_oc_cost = 0;
+                $sumall_oc_receive = 0;
+                       
+                $sumall_m_real = 0;
+                $sumall_m_type1 = 0;
+                $sumall_m_expect = 0;
                 asort($fiscalyear);
                 foreach ($fiscalyear as $key => $value) {
                 	$data = explode("/", $value);
@@ -120,7 +129,7 @@ function renderDate($value)
                 	//echo $mWorkCat->wc_name;
                 	echo "<tr>";
                 	
-                	echo "<td style='background-color:#EBF8A4' colspan='13'>ปี ".$year." ".$mWorkCat->wc_name."</td>";
+                	echo "<td style='background-color:#EBF8A4' colspan='13'> ".$mWorkCat->wc_name."</td>";
                 	
                 	echo "</tr>";
                 	
@@ -340,7 +349,7 @@ function renderDate($value)
                                     echo "<td></td>";
                                  
                                 }    
-                           echo "<tr>"; 
+                           echo "</tr>"; 
 
 
 	                	 
@@ -394,14 +403,60 @@ function renderDate($value)
                                     echo "<td style='text-align:right' >".$sum_type1."</td>";
                                     $sum_rm = $sum_m_expect - $sum_m_real - $sum_m_type1==0 ? "-": number_format($sum_m_expect - $sum_m_real - $sum_m_type1,2);
                                     echo "<td style='text-align:right' >".$sum_rm."</td>";
-                                   
+                                   //summary all
+                                $sumall_pc_cost += $sum_pc_cost;
+                                $sumall_pc_receive += $sum_pc_receive;
+                                         
+                                $sumall_oc_cost += $sum_oc_cost;
+                                $sumall_oc_receive += $sum_oc_receive;
+                                       
+                                $sumall_m_real += $sum_m_real;
+                                $sumall_m_type1 += $sum_m_type1;
+                                $sumall_m_expect += $sum_m_expect;
 
                 	echo "</tr>";
 
 
                 }
                 //workcat	
-
+                echo "<tr style='background-color:#FAB237'>";
+                    //summary
+                                    echo "<td colspan=2 style='text-align:center'>รวมทั้งหมด</td>";
+                                    if($sumall_pc_cost!=0)
+                                     echo "<td style='text-align:right' >".number_format($sumall_pc_cost,2)."</td>";
+                                    else
+                                     echo "<td style='text-align:right' >-</td>";   
+                                    if($sumall_pc_receive!=0)
+                                     echo "<td style='text-align:right' >".number_format($sumall_pc_receive,2)."</td>";
+                                    else
+                                     echo "<td style='text-align:right' >-</td>";  
+                                    if($sumall_pc_cost-$sumall_pc_receive!=0)
+                                     echo "<td style='text-align:right' >".number_format($sumall_pc_cost-$sumall_pc_receive,2)."</td>";
+                                    else
+                                      echo "<td style='text-align:right' >-</td>";    
+                                    echo "<td></td>";
+                                    if($sumall_oc_cost!=0)
+                                    echo "<td style='text-align:right' >".number_format($sumall_oc_cost,2)."</td>";
+                                    else
+                                     echo "<td style='text-align:right' >-</td>";  
+                                    if($sumall_oc_receive!=0)
+                                    echo "<td style='text-align:right' >".number_format($sumall_oc_receive,2)."</td>";
+                                    else
+                                     echo "<td style='text-align:right' >-</td>";  
+                                   
+                                    if($sumall_oc_cost-$sumall_oc_receive!=0)
+                                     echo "<td style='text-align:right' >".number_format($sumall_oc_cost-$sumall_oc_receive,2)."</td>";
+                                    else
+                                      echo "<td style='text-align:right' >-</td>"; 
+                                    $sum_expect = $sumall_m_expect==0 ? "-": number_format($sumall_m_expect,2);
+                                    echo "<td style='text-align:right' >".$sum_expect."</td>";
+                                    $sum_real = $sumall_m_real==0 ? "-": number_format($sumall_m_real,2);
+                                    echo "<td style='text-align:right' >".$sum_real."</td>";
+                                    $sum_type1 = $sumall_m_type1==0 ? "-": number_format($sumall_m_type1,2);
+                                    echo "<td style='text-align:right' >".$sum_type1."</td>";
+                                    $sum_rm = $sumall_m_expect - $sumall_m_real - $sumall_m_type1==0 ? "-": number_format($sumall_m_expect - $sumall_m_real - $sumall_m_type1,2);
+                                    echo "<td style='text-align:right' >".$sum_rm."</td>";
+                    echo "</tr>";
 
                 ?>
             </tbody>

@@ -1406,12 +1406,663 @@ class ReportController extends Controller
     	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
     	else
     	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
-
+    	
         $this->render('_formSummaryCashflowPDF', array(
-            'model' => $model,
+            'model' => $model,'fiscalyear'=>$_GET["fiscalyear"]
             
         ));
 
         
     }
+
+    public function actionGenSummaryCashflowExcel()
+    {
+			
+
+    	if(isset($_GET["project"]) && !empty($_GET["project"]))    		
+    	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_id='.$_GET["project"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && empty($_GET["fiscalyear"]))   
+    		$model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"].' AND pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
+    	else if(isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
+    	else
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
+
+	
+		   Yii::import('ext.phpexcel.XPHPExcel');    
+		   $objPHPExcel= XPHPExcel::createPHPExcel();
+		   $objReader = PHPExcel_IOFactory::createReader('Excel5');
+           $objPHPExcel = $objReader->load("report/templateSummaryCashflow.xls");
+
+
+           		//fiscalyear
+                $fiscalyear = array();
+
+                foreach ($model as $key => $value) {
+                	
+                	//print_r($value);
+                	if(!in_array($value->pj_fiscalyear."/".$value->pj_work_cat, $fiscalyear))
+                	   $fiscalyear[] = $value->pj_fiscalyear."/".$value->pj_work_cat;
+                
+
+                }
+
+                //print_r($model);
+                $row =1;
+
+                $filapar = new PHPExcel_Style();
+			    $filapar->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 15,              
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			            'fill'  => array(
+			            'type'  => PHPExcel_Style_Fill::FILL_SOLID,
+			            //'color' => array('rgb' =>'FA9D8E')
+			        ),
+			            'borders' => array(
+				            'bottom'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'left'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'right'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	)             
+			        	)
+			    ));
+
+				$sum = new PHPExcel_Style();
+			    $sum->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 15,              
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			            'fill'  => array(
+			            'type'  => PHPExcel_Style_Fill::FILL_SOLID,
+			            //'color' => array('rgb' =>'E070F4')
+			        ),
+			            'borders' => array(
+				            'bottom'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'left'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'right'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	)             
+			        	)
+			    ));
+
+			    $normal = new PHPExcel_Style();
+			    $normal->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 15,              
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			           
+			            'borders' => array(
+				            'left'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'right'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	)             
+			        	)
+			    ));
+
+			    $right = new PHPExcel_Style();
+			    $right->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 15,              
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			           
+			            'borders' => array(
+				            
+				           	'right'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	)             
+			        	)
+			    ));
+
+			    $left = new PHPExcel_Style();
+			    $left->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 15,              
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			           
+			            'borders' => array(
+				            'left'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				                        
+			        	)
+			    ));
+
+			    $bottom_right = new PHPExcel_Style();
+			    $bottom_right->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 15,              
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			           
+			            'borders' => array(
+				            'bottom'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'right'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	)             
+			        	)
+			    ));
+
+
+			    $bottom_left = new PHPExcel_Style();
+			    $bottom_left->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 15,              
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			           
+			            'borders' => array(
+				            'bottom'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'left'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	)             
+			        	)
+			    ));
+			    $bottom = new PHPExcel_Style();
+			    $bottom->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 15,              
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			           
+			            'borders' => array(
+				            'bottom'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	)             
+			        	)
+			    ));
+
+			    $end_project = new PHPExcel_Style();
+			    $end_project->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 15,              
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			           
+			            'borders' => array(
+				            'left'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'right'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'bottom'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	)             
+			        	)
+			    ));
+
+
+
+			    $cell_underline = array();
+			    $cell_pc_end = array();
+			    $cell_oc_end = array();
+			    $row = 4;
+                asort($fiscalyear);
+
+                //summary all
+                $sumall_pc_cost = 0;
+                $sumall_pc_receive = 0;
+                         
+                $sumall_oc_cost = 0;
+                $sumall_oc_receive = 0;
+                       
+                $sumall_m_real = 0;
+                $sumall_m_type1 = 0;
+                $sumall_m_expect = 0;
+
+
+                foreach ($fiscalyear as $key => $value) {
+                	$data = explode("/", $value);
+                	$year = $data[0];
+                	$cat = $data[1];
+
+                	$mWorkCat = WorkCategory::model()->findByPk($cat);
+
+		   			// Rename sheet
+		      		$objPHPExcel->getActiveSheet()->setTitle('ปี '.$year);
+		      		
+		      		//title 
+		      		$objPHPExcel->setActiveSheetIndex(0)
+		             			->setCellValue('A1', "สรุปงานรายรับ-รายจ่ายงานโครงการปี  ".$year);
+                	
+                	//workcategory
+                	
+                	$objPHPExcel->setActiveSheetIndex(0)->mergeCells('A'.$row.':P'.$row);
+                	$objPHPExcel->setActiveSheetIndex(0)
+		             			->setCellValue('A'.$row, $mWorkCat->wc_name);
+                	$objPHPExcel->getActiveSheet()->setSharedStyle($filapar, "A".$row.":P".$row);
+                	
+                	$index = 1;
+
+                	//summary
+                    $sum_pc_cost = 0;
+                    $sum_pc_receive = 0;
+                         
+                    $sum_oc_cost = 0;
+                    $sum_oc_receive = 0;
+                       
+                    $sum_m_real = 0;
+                    $sum_m_type1 = 0;
+                    $sum_m_expect = 0;
+
+                    $row++;     
+                	foreach ($model as $key => $pj) {
+                	  if($pj->pj_fiscalyear==$year && $pj->pj_work_cat==$cat)
+                	  {
+                	  	 
+                	  	
+
+                	  	 //project contract
+	                	 $Criteria = new CDbCriteria();
+	                     $Criteria->condition = "pc_proj_id='$pj->pj_id'";
+	                	 $pcs = ProjectContract::model()->findAll($Criteria);
+                         $nPC = count($pcs);
+
+                         $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(pc_cost) as sum')
+                                            ->from('project_contract')
+                                            ->where("pc_proj_id='$pj->pj_id'")
+                                            ->queryAll();  
+                        $pcCostAll = $pp[0]["sum"];                     
+                        foreach ($pcs as $key => $pc) {
+                            $pp2 = Yii::app()->db->createCommand()
+                                            ->select('SUM(cost) as sum')
+                                            ->from('contract_change_history')
+                                            ->where("contract_id='$pc->pc_id' AND type=1")
+                                            ->queryAll(); 
+                            $pcCostAll += $pp2[0]["sum"];                 
+                         } 
+                         
+                                                                                
+                            
+
+                         //2.outsource contract
+                         $Criteria = new CDbCriteria();
+                         $Criteria->condition = "oc_proj_id='$pj->pj_id'";
+                         $ocs = OutsourceContract::model()->findAll($Criteria);
+                         $nOC = count($ocs);
+
+                         //management cost
+                        $Criteria = new CDbCriteria();
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=0";
+                        $m_plan = ManagementCost::model()->findAll($Criteria);
+
+                        $Criteria = new CDbCriteria();
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=2";
+                        $m_real = ManagementCost::model()->findAll($Criteria);
+
+                        $Criteria = new CDbCriteria();
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=1";
+                        $m_type1 = ManagementCost::model()->findAll($Criteria);
+
+                        
+
+                        //end
+
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=0")
+                                            ->queryAll();
+                        $sum_m_expect += $pp[0]["sum"];
+                        $m_expect_sum = $pp[0]["sum"];
+
+
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=1")
+                                            ->queryAll();
+                        $m_type1_sum = $pp[0]["sum"];                    
+
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=2")
+                                            ->queryAll();
+                        $m_real_sum = $pp[0]["sum"];
+
+                        $sum_m_real += $m_real_sum;
+                        $sum_m_type1 += $m_type1_sum;
+                        //profit
+                        //1.income
+                        
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_project_contract')
+                                            ->join('project_contract','proj_id=pc_id')
+                                            ->where("pc_proj_id='$pj->pj_id' AND bill_no!=''")
+                                            ->queryAll();
+                        //echo $pp[0]["sum"];
+                        $income = $pp[0]["sum"];
+                        
+                        //1.outcome
+                        
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_outsource_contract')
+                                            ->join('outsource_contract','contract_id=oc_id')
+                                            ->where("oc_proj_id='$pj->pj_id'")
+                                            ->queryAll();                    
+                        $outcome = $pp[0]["sum"];                    
+                      
+
+
+
+                         $maxContract = $nOC==0? 1:$nOC;
+
+                         $pj_rowspan = $maxContract ;
+
+                        
+                        //draw project
+                        $objPHPExcel->setActiveSheetIndex(0)->mergeCells('A'.$row.':A'.($row+$pj_rowspan-1));
+                        $objPHPExcel->setActiveSheetIndex(0)->mergeCells('B'.$row.':B'.($row+$pj_rowspan-1));
+                        $objPHPExcel->setActiveSheetIndex(0)->mergeCells('C'.$row.':C'.($row+$pj_rowspan-1));
+                        $objPHPExcel->setActiveSheetIndex(0)->mergeCells('D'.$row.':D'.($row+$pj_rowspan-1));
+                        $objPHPExcel->setActiveSheetIndex(0)->mergeCells('F'.$row.':F'.($row+$pj_rowspan-1));
+                		$objPHPExcel->setActiveSheetIndex(0)->setCellValue('A'.$row, $index);
+                	  	$objPHPExcel->setActiveSheetIndex(0)->setCellValue('B'.$row, $pj->pj_name);
+                	  	$objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.$row, number_format($pcCostAll,2));
+                	  	
+                	  	$sum_pc_cost += $pcCostAll;
+                        $sum_pc_receive += $income;
+                        $income1 = $income==0 ? '-' : number_format($income,2);
+                        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('D'.$row, $income1);
+                	  	$objPHPExcel->setActiveSheetIndex(0)->setCellValue('F'.$row, number_format($pcCostAll-$income,2));                	  	
+                	  	
+                	  	//draw management cost
+                	  	$objPHPExcel->setActiveSheetIndex(0)->mergeCells('M'.$row.':M'.($row+$pj_rowspan-1));
+                        $objPHPExcel->setActiveSheetIndex(0)->mergeCells('N'.$row.':N'.($row+$pj_rowspan-1));
+                        $objPHPExcel->setActiveSheetIndex(0)->mergeCells('O'.$row.':O'.($row+$pj_rowspan-1));
+                        $objPHPExcel->setActiveSheetIndex(0)->mergeCells('P'.$row.':P'.($row+$pj_rowspan-1));
+                	  	$expect = $m_expect_sum==0 ? "-" : number_format($m_expect_sum,2);
+                        $real = $m_real_sum==0 ? "-" : number_format($m_real_sum,2);
+                        $type1 = $m_type1_sum==0 ? "-" : number_format($m_type1_sum,2);
+                	  	$objPHPExcel->setActiveSheetIndex(0)->setCellValue('M'.$row, $expect);
+                	  	$objPHPExcel->setActiveSheetIndex(0)->setCellValue('N'.$row, $real);
+                	  	$objPHPExcel->setActiveSheetIndex(0)->setCellValue('O'.$row, $type1);
+                	  	$rm =($m_expect_sum - $m_type1_sum - $m_real_sum)==0 ? "-" : number_format($m_expect_sum - $m_type1_sum - $m_real_sum,2);                                    
+                	  	$objPHPExcel->setActiveSheetIndex(0)->setCellValue('P'.$row, $rm);
+
+                	  	//draw pc
+                	  	$row_pc = $row;
+                	  	foreach ($ocs as $key => $oc) {
+                	  		$vendor = Vendor::model()->findByPk($oc->oc_vendor_id);
+                	  		$objPHPExcel->setActiveSheetIndex(0)->setCellValue('G'.$row_pc, $vendor->v_name);
+                	  		
+                	  		 $pp2 = Yii::app()->db->createCommand()
+                                            ->select('SUM(cost) as sum')
+                                            ->from('contract_change_history')
+                                            ->where("contract_id='$oc->oc_id' AND type=2")
+                                            ->queryAll(); 
+                                    $ocCostAll =str_replace(",", "", $oc->oc_cost) + $pp2[0]["sum"];  
+
+                	  		$objPHPExcel->setActiveSheetIndex(0)->setCellValue('H'.$row_pc, number_format($ocCostAll,2));
+                	  		$sum_oc_cost += $ocCostAll;
+
+                	  		 $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_outsource_contract')
+                                            ->where("contract_id='$oc->oc_id' AND approve_date!=''")
+                                            ->queryAll();                    
+                                    $outcomeOC = $pp[0]["sum"];   
+                                    $sum_oc_receive += $outcome; 
+                                    $outcomeOC1 = $outcomeOC==0 ? '-' : number_format($outcomeOC,2);
+                	  		$objPHPExcel->setActiveSheetIndex(0)->setCellValue('I'.$row_pc, $outcomeOC1);
+
+
+                	  		$objPHPExcel->setActiveSheetIndex(0)->setCellValue('K'.$row_pc, number_format($ocCostAll-$outcomeOC,2));
+
+                	  		$row_pc++;
+                	  	}
+
+                	  	if(count($ocs)==0)
+                	  		$row_pc++;
+
+                	  	$objPHPExcel->getActiveSheet()->setSharedStyle($filapar, "A".$row.":P".($row_pc-1));
+                	  	$objPHPExcel->getActiveSheet()->getStyle("A".$row.":F".($row_pc-1))->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
+                	  	$objPHPExcel->getActiveSheet()->getStyle("M".$row.":P".($row_pc-1))->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
+		            	$objPHPExcel->getActiveSheet()->getStyle("A".$row.":A".($row_pc-1))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		            	$objPHPExcel->getActiveSheet()->getStyle("C".$row.":F".($row_pc-1))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+		            	$objPHPExcel->getActiveSheet()->getStyle("H".$row.":P".($row_pc-1))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                	  	
+                        //end
+
+                         //       $row_i = $objPHPExcel->getActiveSheet()->getHighestRow()+2;
+						///	    $row = $row_i;
+						$row = $row_pc;
+						//$row++;   
+						$index++;
+                	  }
+                	}  
+                	//summary
+                	$sumall_pc_cost += $sum_pc_cost;
+                	$objPHPExcel->setActiveSheetIndex(0)->mergeCells('A'.$row.':B'.$row);
+                    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A'.$row, "รวม");
+                    $sum_cost = $sum_pc_cost==0 ? "-" : number_format($sum_pc_cost,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.$row, $sum_cost);
+
+    				$sumall_pc_receive += $sum_pc_receive;
+
+                    $sum_receive = $sum_pc_receive==0 ? "-" : number_format($sum_pc_receive,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('D'.$row, $sum_receive);
+
+                    $rm = $sum_pc_cost-$sum_pc_receive==0 ? "-" : number_format($sum_pc_cost-$sum_pc_receive,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('F'.$row, $rm);	
+
+    				$sumall_oc_cost += $sum_oc_cost;
+    				$sum_cost = $sum_oc_cost==0 ? "-" : number_format($sum_oc_cost,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('H'.$row, $sum_cost);	
+    				$sumall_oc_receive += $sum_oc_receive;
+    				$sum_receive = $sum_oc_receive==0 ? "-" : number_format($sum_oc_receive,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('I'.$row, $sum_receive);	
+
+    				$rm = $sum_oc_cost-$sum_oc_receive==0 ? "-" : number_format($sum_oc_cost-$sum_oc_receive,2);    				
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('K'.$row, $rm);	
+
+    				$sumall_m_expect += $sum_m_expect;
+    				$sum_expect = $sum_m_expect==0 ? "-": number_format($sum_m_expect,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('M'.$row, $sum_expect);	
+    				$sumall_m_real += $sum_m_real;
+    				$sum_real = $sum_m_real==0 ? "-": number_format($sum_m_real,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('N'.$row, $sum_real);	
+    				$sumall_m_type1 += $sum_m_type1;
+    				$sum_type1 = $sum_m_type1==0 ? "-": number_format($sum_m_type1,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('O'.$row, $sum_type1);	
+
+    				$sum_rm = $sum_m_expect - $sum_m_real - $sum_m_type1==0 ? "-": number_format($sum_m_expect - $sum_m_real - $sum_m_type1,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('P'.$row, $sum_rm);	
+
+    				$objPHPExcel->getActiveSheet()->setSharedStyle($filapar, "A".$row.":P".$row);
+                	$objPHPExcel->getActiveSheet()->getStyle("A".$row.":F".($row))->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
+                	$objPHPExcel->getActiveSheet()->getStyle("M".$row.":P".($row))->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
+		            $objPHPExcel->getActiveSheet()->getStyle("A".$row.":A".($row))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		            $objPHPExcel->getActiveSheet()->getStyle("C".$row.":F".($row))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+		            $objPHPExcel->getActiveSheet()->getStyle("H".$row.":P".($row))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                	  		  	
+   					$row++;                         	
+		      	}	
+		   
+		    //summary
+                	$objPHPExcel->setActiveSheetIndex(0)->mergeCells('A'.$row.':B'.$row);
+                    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A'.$row, "รวมทั้งหมด");
+                    $sum_cost = $sumall_pc_cost==0 ? "-" : number_format($sumall_pc_cost,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.$row, $sum_cost);
+
+                    $sum_receive = $sumall_pc_receive==0 ? "-" : number_format($sumall_pc_receive,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('D'.$row, $sum_receive);
+
+                    $rm = $sumall_pc_cost-$sumall_pc_receive==0 ? "-" : number_format($sumall_pc_cost-$sumall_pc_receive,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('F'.$row, $rm);	
+
+    				$sum_cost = $sumall_oc_cost==0 ? "-" : number_format($sumall_oc_cost,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('H'.$row, $sum_cost);	
+
+    				$sum_receive = $sumall_oc_receive==0 ? "-" : number_format($sumall_oc_receive,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('I'.$row, $sum_receive);	
+
+    				$rm = $sumall_oc_cost-$sumall_oc_receive==0 ? "-" : number_format($sumall_oc_cost-$sumall_oc_receive,2);    				
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('K'.$row, $rm);	
+
+    				$sum_expect = $sumall_m_expect==0 ? "-": number_format($sumall_m_expect,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('M'.$row, $sum_expect);	
+
+    				$sum_real = $sumall_m_real==0 ? "-": number_format($sumall_m_real,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('N'.$row, $sum_real);	
+
+    				$sum_type1 = $sumall_m_type1==0 ? "-": number_format($sumall_m_type1,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('O'.$row, $sum_type1);	
+
+    				$sum_rm = $sumall_m_expect - $sumall_m_real - $sumall_m_type1==0 ? "-": number_format($sumall_m_expect - $sumall_m_real - $sumall_m_type1,2);
+    				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('P'.$row, $sum_rm);	
+
+    				$objPHPExcel->getActiveSheet()->setSharedStyle($filapar, "A".$row.":P".$row);
+                	$objPHPExcel->getActiveSheet()->getStyle("A".$row.":F".($row))->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
+                	$objPHPExcel->getActiveSheet()->getStyle("M".$row.":P".($row))->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
+		            $objPHPExcel->getActiveSheet()->getStyle("A".$row.":A".($row))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		            $objPHPExcel->getActiveSheet()->getStyle("C".$row.":F".($row))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+		            $objPHPExcel->getActiveSheet()->getStyle("H".$row.":P".($row))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+		      	                      	
+		      // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+		    $objPHPExcel->setActiveSheetIndex(0);
+		  	 
+			$objPHPExcel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
+
+
+		  //?????important clear cabage
+		ob_end_clean();
+		ob_start();
+
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="01simple.xls"');
+		header('Cache-Control: max-age=0');
+		// If you're serving to IE 9, then the following may be needed
+		header('Cache-Control: max-age=1');
+
+		// If you're serving to IE over SSL, then the following may be needed
+		header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+		header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+		header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+		header ('Pragma: public'); // HTTP/1.0
+
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+		$objWriter->save('php://output');  //
+		 Yii::app()->end(); 
+        
+    }
+
+    
+
 }
