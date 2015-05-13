@@ -31,6 +31,10 @@ $(document).ready(function(){
   
   $('#fiscalyear').change(function() {
          //console.log($(this).val());
+      if($(this).val()!="")
+      {
+
+
          var yy =  parseInt($(this).val());
          
          yy1 = yy-2;
@@ -68,7 +72,7 @@ $(document).ready(function(){
             options[options.length] = new Option(text, text);
         });
         select.val(selectedOption);
-
+      }  
   });
     
 });   
@@ -91,10 +95,12 @@ $(document).ready(function(){
 			//print_r($projects);	     
      
             $list = CHtml::listData($projects,'pj_fiscalyear','pj_fiscalyear');
+            $fiscalyear = $projects[0]->pj_fiscalyear;
+            //echo $fiscalyear;
 
             echo CHtml::label('ปีงบประมาณ','fiscalyear');  
             echo CHtml::dropDownList('fiscalyear', '', 
-                            $list,array('empty' => 'ทั้งหมด','class'=>'span12'
+                            $list,array('class'=>'span12'
                             	,
                             	'ajax' => array(
 							                'type' => 'POST', //request type
@@ -137,10 +143,12 @@ $(document).ready(function(){
 
 		    $projects =Project::model()->findAll(array(
     				'select'=>'pj_id,pj_name',
+                    'condition'=>'pj_fiscalyear='.$fiscalyear,
     				'distinct'=>true,
 				));   
 
-			//print_r($projects);	     
+			//print_r($projects);	 
+            //$projects = new Project();    
      
             $list = CHtml::listData($projects,'pj_id','pj_name');
     
