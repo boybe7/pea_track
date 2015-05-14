@@ -78,13 +78,13 @@ class ReportController extends Controller
      public function actionGenCashflow()
     {
         
-    	/*$condition = "";
-    	if(isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"])) 
-    		$condition = " pj_fiscalyear=".$_GET["fiscalyear"];
-    	if(isset($_GET["workcat"]) && !empty($_GET["workcat"]))
-    		$condition .= " AND pj_work_cat=".$_GET["workcat"];
-    	if(isset($_GET["project"]) && !empty($_GET["project"])) 
-    		$condition .= " AND pj_id=".$_GET["project"];*/
+    	// $condition = "";
+    	// if(isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"])) 
+    	// 	$condition = " pj_fiscalyear=".$_GET["fiscalyear"];
+    	// if(isset($_GET["workcat"]) && !empty($_GET["workcat"]))
+    	// 	$condition .= " AND pj_work_cat=".$_GET["workcat"];
+    	// if(isset($_GET["project"]) && !empty($_GET["project"])) 
+    	// 	$condition .= " AND pj_id=".$_GET["project"];
 
 
     	if(isset($_GET["project"]) && !empty($_GET["project"]))    		
@@ -104,7 +104,7 @@ class ReportController extends Controller
     	$yearEnd = $_GET["yearEnd"];
 
     	// header('Content-type: text/plain');
-     //       print_r($model);                    
+     //       echo($_GET["fiscalyear"]);                    
      //    exit;
 
         $this->renderPartial('_formCashflow', array(
@@ -1427,6 +1427,38 @@ class ReportController extends Controller
         $this->render('_formSummaryPDF', array(
             'model' => $model,
             
+        ));
+
+        
+    }
+
+    public function actionPrintCashflow()
+    {
+        
+    	
+        if(isset($_GET["project"]) && !empty($_GET["project"]))    		
+    	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_id='.$_GET["project"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && empty($_GET["fiscalyear"]))   
+    		$model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"].' AND pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
+    	else if(isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
+    	else
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
+
+    	$monthBegin = $_GET["monthBegin"];
+    	$monthEnd = $_GET["monthEnd"];
+    	$yearBegin = $_GET["yearBegin"];
+    	$yearEnd = $_GET["yearEnd"];
+
+    	// header('Content-type: text/plain');
+     //       echo($_GET["fiscalyear"]);                    
+     //    exit;
+
+        $this->renderPartial('_formCashflowPDF', array(
+            'model' => $model,'monthBegin'=>$monthBegin,'monthEnd'=>$monthEnd,'yearBegin'=>$yearBegin,'yearEnd'=>$yearEnd,
+            'display' => 'block',
         ));
 
         

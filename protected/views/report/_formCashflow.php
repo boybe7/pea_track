@@ -121,7 +121,8 @@ foreach ($model as $key => $pj) {
         $iPC = 0;
         $iOC = 0;
         
-        
+        $iPayOC = 0;
+        $iPayPC = 0;
         //echo count($pcs);
         for ($i=0; $i < $pj_rowspan; $i++) 
         { 

@@ -277,7 +277,7 @@ $("#gentReport").click(function(e){
         $.ajax({
             url: "genCashflow",
             cache:false,
-            data: {project: $("#project").val(),monthBegin:$("#monthBegin").val(),monthEnd:$("#monthEnd").val(),yearBegin:$("#yearBegin").val(),yearEnd:$("#yearEnd").val(),workcat:$("#workcat").val()
+            data: {fiscalyear:$("#fiscalyear").val(),project: $("#project").val(),monthBegin:$("#monthBegin").val(),monthEnd:$("#monthEnd").val(),yearBegin:$("#yearBegin").val(),yearEnd:$("#yearEnd").val(),workcat:$("#workcat").val()
               },
             success:function(response){
                
@@ -289,6 +289,23 @@ $("#gentReport").click(function(e){
 });
 ', CClientScript::POS_END);
 
+Yii::app()->clientScript->registerScript('printReport', '
+$("#printReport").click(function(e){
+    e.preventDefault();
+
+    $.ajax({
+        url: "printCashflow",
+        data: {fiscalyear:$("#fiscalyear").val(),project: $("#project").val(),monthBegin:$("#monthBegin").val(),monthEnd:$("#monthEnd").val(),yearBegin:$("#yearBegin").val(),yearEnd:$("#yearEnd").val(),workcat:$("#workcat").val()
+              },
+        success:function(response){
+            window.open("../tempReport.pdf", "_blank", "fullscreen=yes");              
+            
+        }
+
+    });
+
+});
+', CClientScript::POS_END);
 
 Yii::app()->clientScript->registerScript('exportExcel', '
 $("#exportExcel").click(function(e){
