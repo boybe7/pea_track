@@ -1487,6 +1487,161 @@ class ReportController extends Controller
         
     }
 
+    public function actionGenCashflowExcel()
+    {
+			
+
+    	if(isset($_GET["project"]) && !empty($_GET["project"]))    		
+    	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_id='.$_GET["project"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && empty($_GET["fiscalyear"]))   
+    		$model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"].' AND pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
+    	else if(isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
+    	else
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
+
+    	$monthBegin = $_GET["monthBegin"];
+    	$monthEnd = $_GET["monthEnd"];
+    	$yearBegin = $_GET["yearBegin"];
+    	$yearEnd = $_GET["yearEnd"];
+	
+		Yii::import('ext.phpexcel.XPHPExcel');    
+		$objPHPExcel= XPHPExcel::createPHPExcel();
+		//$objReader = PHPExcel_IOFactory::createReader('Excel5');
+        //$objPHPExcel = $objReader->load("report/templateSummaryCashflow.xls");
+
+        $header = new PHPExcel_Style();
+		$header->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 18,   
+			            'bold'  => true,           
+			            'color' => array(
+			            	'rgb'   => '000000'
+			            	)
+			       		)
+			    	)  
+			  ); 
+		$tableHead = new PHPExcel_Style();
+			    $tableHead->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 16,   
+			             'bold'  => true,              
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			            'fill'  => array(
+			            'type'  => PHPExcel_Style_Fill::FILL_SOLID,
+			            //'color' => array('rgb' =>'FA9D8E')
+			        ),
+			            'borders' => array(
+			            	'top'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				            'bottom'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'left'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'right'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	)             
+			        	)
+			    ));
+
+		
+		$month_th = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม","4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน","7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน","10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
+
+		if($monthBegin==$monthEnd && $yearBegin==$yearEnd)
+		    $monthBetween = $month_th[$monthBegin]." ".$yearBegin;
+		else if($yearBegin==$yearEnd)
+			$monthBetween = $month_th[$monthBegin]."-".$month_th[$monthEnd]." ".$yearEnd;
+		else
+		    $monthBetween = $month_th[$monthBegin]." ".$yearBegin."-".$month_th[$monthEnd]." ".$yearEnd;
+
+		$number = cal_days_in_month(CAL_GREGORIAN, $monthEnd, $yearEnd-543);
+		$monthBegin2 = $monthBegin<10 ? "0".$monthBegin : $monthBegin;
+		$monthEnd2 = $monthEnd<10 ? "0".$monthEnd : $monthEnd;
+		$dayBegin = $yearBegin."-".$monthBegin2."-"."01";
+
+		$number = $number<10 ? "0".$number : $number;
+		$dayEnd = $yearEnd."-".$monthEnd2."-".$number;
+		$monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
+
+		$sheet = 0;
+		foreach ($model as $key => $pj) {
+			    $objPHPExcel->setActiveSheetIndex($sheet)->setTitle("PJ".($sheet+1));
+				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('A')->setWidth(15);
+				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('B')->setWidth(20);	
+				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('C')->setWidth(25);	
+				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('D')->setWidth(15);	
+				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('E')->setWidth(20);	
+				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('F')->setWidth(25);		   	      
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->mergeCells("A1:F1");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A1', "สรุปรายได้/ค่าใช้จ่าย");
+				$objPHPExcel->setActiveSheetIndex($sheet)->mergeCells('A2:F2');
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A2', $pj->pj_name);
+				$objPHPExcel->setActiveSheetIndex($sheet)->mergeCells('A3:F3');
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A3', "ประจำเดือน ".$monthBetween);
+				$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($header, 'A1:F3');
+				$objPHPExcel->setActiveSheetIndex($sheet)->getStyle('A1:F3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+				//table header
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A4', "วดป.\nใบเสร็จรับเงิน");
+				$objPHPExcel->getActiveSheet()->getStyle('A4')->getAlignment()->setWrapText(true);
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B4', "รายการ");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C4', "จำนวนเงิน");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D4', "วดป.\nอนุมัติรับเงิน");
+				$objPHPExcel->getActiveSheet()->getStyle('D4')->getAlignment()->setWrapText(true);
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E4', "รายการ");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F4', "รายจ่าย");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($tableHead, 'A4:F4');
+				$objPHPExcel->setActiveSheetIndex($sheet)->getStyle('A4:F4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+			$sheet++;	
+		}	
+
+
+		ob_end_clean();
+		ob_start();
+
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="01simple.xls"');
+		header('Cache-Control: max-age=0');
+		// If you're serving to IE 9, then the following may be needed
+		header('Cache-Control: max-age=1');
+
+		// If you're serving to IE over SSL, then the following may be needed
+		header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+		header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+		header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+		header ('Pragma: public'); // HTTP/1.0
+
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+		$objWriter->save('php://output');  //
+		Yii::app()->end(); 
+    }       
+
     public function actionGenSummaryCashflowExcel()
     {
 			

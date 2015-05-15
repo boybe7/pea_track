@@ -310,17 +310,9 @@ $("#printReport").click(function(e){
 Yii::app()->clientScript->registerScript('exportExcel', '
 $("#exportExcel").click(function(e){
     e.preventDefault();
-    window.location.href = "genSummaryExcel?project="+$("#project").val();
-    // $.ajax({
-    //     url: "genExcel",
-    //     data: {project: $("#project").val()},
-    //     success:function(response){
-            
-    //         //$("#reportContent").html(response);
-            
-    //     }
+    window.location.href = "genCashflowExcel?fiscalyear="+$("#fiscalyear").val()+"&project="+$("#project").val()+"&monthBegin="+$("#monthBegin").val()+"&monthEnd="+$("#monthEnd").val()+"&yearBegin="+$("#yearBegin").val()+"&yearEnd="+$("#yearEnd").val()+"&workcat="+$("#workcat").val();
+              
 
-    // });
 
 });
 ', CClientScript::POS_END);
