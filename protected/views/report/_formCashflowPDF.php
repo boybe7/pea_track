@@ -86,7 +86,7 @@ class MYPDF extends TCPDF {
         //$this->Image($image_file, 170, 270, 25, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         $this->Cell(0, 5, date("d/m/Y"), 0, false, 'R', 0, '', 0, false, 'T', 'M');
 
-        $this->writeHTMLCell(145, 550, 70, 200, '-'.$this->getAliasNumPage().'/'.$this->getAliasNbPages().'-', 0, 1, false, true, 'C', false);
+        $this->writeHTMLCell(145, 550, 40, 287, '-'.$this->getAliasNumPage().'/'.$this->getAliasNbPages().'-', 0, 1, false, true, 'C', false);
         //writeHTMLCell ($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=false, $reseth=true, $align='', $autopadding=true)
     }
 }
@@ -144,7 +144,7 @@ $pdf->SetFont('thsarabun', '', 12, '', true);
 
 // Add a page
 // This method has several options, check the source code documentation for more information.
-$pdf->AddPage();
+//$pdf->AddPage();
 
 // set text shadow effect
 //$pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
@@ -172,7 +172,7 @@ $number = $number<10 ? "0".$number : $number;
 $dayEnd = $yearEnd."-".$monthEnd2."-".$number;
 $monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
 
-//echo $monthCondition;
+//$html .= $monthCondition;
 
 $maxPayment = 6;
 $sumPayPCAll = 0;
@@ -180,7 +180,7 @@ $sumPayOCAll = 0;
 foreach ($model as $key => $pj) {
         
     
-    $html .='<div style="text-align:center;"> <font size="16"><b>สรุปรายได้/ค่าใช้จ่าย <br>'.$pj->pj_name."<br>ประจำเดือน ".$monthBetween.'</b></font></div>';
+    $html .='<div style="text-align:center;"> <font size="13"><b>สรุปรายได้/ค่าใช้จ่าย <br>'.$pj->pj_name."<br>ประจำเดือน ".$monthBetween.'</b></font></div>';
     
     $html .='<table border="1" width="100%" style="margin-left:0px;margin-bottom:20px;">';
         $html .= '<thead>';
@@ -194,7 +194,7 @@ foreach ($model as $key => $pj) {
         $html .='</tr>';
         $html .= '</thead>';
         $html .= '<tbody>';
-        $html .='<tr height="0" >';
+        $html .='<tr style="line-height:0" >';
          $html .='<td style="text-align:center;width:15%"></td>';
          $html .='<td style="text-align:center;width:20%"></td>';
          $html .='<td style="text-align:center;width:20%"></td>';
@@ -224,7 +224,7 @@ foreach ($model as $key => $pj) {
                                             ->where("mc_proj_id='$pj->pj_id' AND mc_type!=0 AND mc_date ".$monthCondition)
                                             ->queryAll();
                         $m_sum = $pp[0]["sum"];
-                        //echo $m_sum;   
+                        //$html .= $m_sum;   
 
         $iPC = 0;
         $iOC = 0;
@@ -291,7 +291,7 @@ foreach ($model as $key => $pj) {
                             $html .='<td align="right" style="color:red"><u>'.$rm.'</u></td>';
                         }
                         else
-                             $html .='<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>'; 
+                             $html .='<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>'; 
                         
         
                     }
@@ -418,28 +418,34 @@ foreach ($model as $key => $pj) {
                         
         }                 
         //summary project
-        echo '<tr style="background-color:#D7A8F7">';
-            echo '<td colspan="2">รวมรายรับ ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
-            echo '<td align="right">'.number_format($sumPayPCAll,2).'</td>';
-            echo '<td colspan="2">รวมรายจ่าย ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
-            echo '<td align="right">'.number_format($sumPayOCAll,2).'</td>';
-        echo '</tr>';
-         echo '<tr style="background-color:#D7A8F7">';
-            echo '<td>&nbsp;</td>';echo '<td>&nbsp;</td>';echo '<td>&nbsp;</td>';
+        $html .= '<tr style="background-color:#D7A8F7">';
+            $html .= '<td colspan="2">รวมรายรับ ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
+            $html .= '<td align="right">'.number_format($sumPayPCAll,2).'</td>';
+            $html .= '<td colspan="2">รวมรายจ่าย ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
+            $html .= '<td align="right">'.number_format($sumPayOCAll,2).'</td>';
+        $html .= '</tr>';
+         $html .= '<tr style="background-color:#D7A8F7">';
+            $html .= '<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>';
             
-            echo '<td colspan="2">ค่าบริหารโครงการ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
-            echo '<td align="right">'.number_format($m_sum,2).'</td>';
-        echo '</tr>';
-         echo '<tr style="background-color:#D7A8F7">';
-            echo '<td>&nbsp;</td>';echo '<td>&nbsp;</td>';echo '<td>&nbsp;</td>';
-            echo '<td colspan="2"><b>กำไร/ขาดทุน</b></td>';
-            echo '<td align="right"><b>'.number_format($sumPayPCAll-$sumPayOCAll-$m_sum,2).'<b></td>';
-        echo '</tr>';
+          $html .= '<td colspan="2">ค่าบริหารโครงการ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
+          $html .= '<td align="right">'.number_format($m_sum,2).'</td>';
+        $html .= '</tr>';
+          $html .= '<tr style="background-color:#D7A8F7">';
+             $html .= '<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>';
+            
+             $html .= '<td colspan="2"><b>กำไร/ขาดทุน</b></td>';
+             $html .= '<td align="right"><b>'.number_format($sumPayPCAll-$sumPayOCAll-$m_sum,2).'</b></td>';
+         $html .= '</tr>';
         $html .= '</tbody>';
     $html .="</table>";
+
+    $pdf->AddPage();
+    $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+    $html = "";
+    
 }
 
-    $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+    
 
 
 
