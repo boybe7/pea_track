@@ -76,7 +76,7 @@ class ProjectContract extends CActiveRecord
 			'pc_id' => 'id สัญญา',
 			'pc_code' => 'เลขที่สัญญา',
 			'pc_proj_id' => 'id project',
-			'pc_vendor_id' => 'id คู่สัญญา',
+			'pc_vendor_id' => 'บริษัท',
 			'pc_details' => 'รายละเอียดสัญญา',
 			'pc_sign_date' => 'วันที่ลงนาม',
 			'pc_end_date' => 'วันที่ครบกำหนด',

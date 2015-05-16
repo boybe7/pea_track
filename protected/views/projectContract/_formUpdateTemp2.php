@@ -16,11 +16,145 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 
 </style>
 
+<script type="text/javascript">
+  
+  $(function(){
+      
+
+      $( "input[name*='pc_vendor_id']" ).autocomplete({
+       
+                minLength: 0
+      }).bind('focus', function () {
+             //console.log("focus");
+                $(this).autocomplete("search");
+      });
+  });
+ </script> 
+
 <fieldset class="well the-fieldset">
         <legend class="the-legend contract_no">สัญญาที่ <?php echo ($index);?></legend>
         <?php echo CHtml::activeHiddenField($model, '[' . $index . ']pc_id'); ?>
         <div class="row-fluid">
-            <?php
+        	<div class="span6">
+           <?php 
+  						echo CHtml::activeHiddenField($model, '[' . $index . ']pc_vendor_id'); 
+                    	echo CHtml::activeLabelEx($model, '[' . $index . ']pc_vendor_id'); 
+
+    					 $vendor = Yii::app()->db->createCommand()
+                        ->select('v_name')
+                        ->from('vendor')
+                        ->where('v_id=:id AND type="Owner"', array(':id'=>$model->pc_vendor_id))
+                        ->queryAll();
+
+  						$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+                             'name'=>'[' . $index . ']pc_vendor_id',
+                            'id'=>$index.'pc_vendor_id',
+                            'value'=>empty($vendor[0])? '' : $vendor[0]['v_name'],
+                           // 'source'=>$this->createUrl('Ajax/GetDrug'),
+                           'source'=>'js: function(request, response) {
+                                $.ajax({
+                                    url: "'.$this->createUrl('Vendor/GetVendor').'",
+                                    dataType: "json",
+                                    data: {
+                                        term: request.term,
+                                       
+                                    },
+                                    success: function (data) {
+                                            response(data);
+
+                                    }
+                                })
+                             }',
+                            // additional javascript options for the autocomplete plugin
+                            'options'=>array(
+                                     'showAnim'=>'fold',
+                                     'minLength'=>0,
+                                     'select'=>'js: function(event, ui) {
+                                        
+                                           //console.log(ui.item.id)
+                                             $("#ProjectContract_'. $index . '_pc_vendor_id").val(ui.item.id);
+                                     }',
+                                     //'close'=>'js:function(){$(this).val("");}',
+                                     
+                            ),
+                           'htmlOptions'=>array(
+                                'class'=>$model->hasErrors('pc_vendor_id')?'span12 error':'span12'
+                            ),
+                                  
+                        ));
+			?>
+			</div>
+        
+           	<div class="span3">
+           	<?php 		
+											
+						$this->widget('bootstrap.widgets.TbButton', array(
+						    'buttonType'=>'link',
+						    
+						    'type'=>'success',
+						    'label'=>'เพิ่มคู่สัญญา',
+						    'icon'=>'plus-sign',
+						    //'url'=>array('vendor/create'),
+						    'htmlOptions'=>array(
+						        //'data-toggle'=>'modal',
+						        //'data-target'=>'#myModal',
+						        'onclick'=>'js:bootbox.confirm($("#modal-body").html(),"ยกเลิก","ตกลง",
+			                   			function(confirmed){
+			                   	 	    console.log($(".modal-body #vendor-form").serialize());    
+			                   	 			
+                                			if(confirmed)
+			                   	 		    {
+			                   	 		    	$.ajax({
+													type: "POST",
+													url: "../vendor/create",
+													dataType:"json",
+													data: $(".modal-body #vendor-form").serialize()
+													})
+													.done(function( msg ) {
+                            console.log(msg)
+														if(msg.status=="failure")
+														{
+															$("#modal-body").html(msg.div);
+															js:bootbox.confirm($("#modal-body").html(),"ยกเลิก","ตกลง",
+								                   			function(confirmed){
+								                   	 	        
+								                   	 			
+					                                			if(confirmed)
+								                   	 		    {
+								                   	 		    	$.ajax({
+																		type: "POST",
+																		url: "../vendor/create",
+																		dataType:"json",
+																		data: $(".modal-body #vendor-form").serialize()
+																		})
+																		.done(function( msg ) {
+																			if(msg.status=="failure")
+																			{
+																				js:bootbox.alert("<font color=red>!!!!บันทึกไม่สำเร็จ</font>","ตกลง");
+																			}
+																			else{
+																				js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+																			}
+																		});
+								                   	 		    }
+															})
+														}
+														else{
+																				js:bootbox.alert("บันทึกสำเร็จ","ตกลง");
+																			}
+													});
+			                   	 		    }
+										})',
+			                  
+						        'class'=>'span7',
+						        'style'=>'margin-top:23px;'
+						    ),
+						));
+						
+				?>
+           </div>
+                   	<div class="span3">
+            	<?php
             		$this->widget('bootstrap.widgets.TbButton', array(
 		              'buttonType'=>'link',
 		              
@@ -35,8 +169,10 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/assets/7d883f12/
 		              ),
 		          ));
 
-            ?>  
-            </div>
+            	?>  
+        	</div>
+
+        </div>
         <div class="row-fluid">
         	<div class="span3">		  
         	  <?php echo CHtml::activeLabelEx($model, '[' . $index . ']pc_code'); ?>

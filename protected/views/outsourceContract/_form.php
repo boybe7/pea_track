@@ -50,7 +50,7 @@
                     $vendor = Yii::app()->db->createCommand()
                         ->select('v_name')
                         ->from('vendor')
-                        ->where('v_id=:id', array(':id'=>$model->oc_vendor_id))
+                        ->where('v_id=:id AND type="Supplier"', array(':id'=>$model->oc_vendor_id))
                         ->queryAll();
                     //print_r($model->hasErrors('oc_vendor_id'));  
                     //if($model->hasErrors('oc_vendor_id')) echo "error";  

@@ -424,7 +424,7 @@ class ProjectController extends Controller
 		 				     $modelC->pc_details = $contract["pc_details"];
 		 				     $modelC->pc_sign_date = $contract["pc_sign_date"];
 		 				     $modelC->pc_PO = $contract["pc_PO"];
-		 				     $modelC->pc_vendor_id = $model->pj_vendor_id;
+		 				     //$modelC->pc_vendor_id = $model->pj_vendor_id;
 
 		 				     array_push($modelContractOld, $modelC);
 		 			}	
@@ -478,7 +478,7 @@ class ProjectController extends Controller
 		 				     $modelC->pc_details = $contract["pc_details"];
 		 				     $modelC->pc_sign_date = $contract["pc_sign_date"];
 		 				     $modelC->pc_PO = $contract["pc_PO"];
-		 				     $modelC->pc_vendor_id = $model->pj_vendor_id;
+		 				     //$modelC->pc_vendor_id = $model->pj_vendor_id;
 
 		 				     array_push($modelContractOld, $modelC);
 		 				     //$modelC->pc_id = "";

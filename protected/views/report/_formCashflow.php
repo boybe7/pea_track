@@ -66,302 +66,268 @@ else if($yearBegin==$yearEnd)
 else
     $monthBetween = $month_th[$monthBegin]." ".$yearBegin."-".$month_th[$monthEnd]." ".$yearEnd;
 
+$number = cal_days_in_month(CAL_GREGORIAN, $monthEnd, $yearEnd-543);
+$monthBegin2 = $monthBegin<10 ? "0".$monthBegin : $monthBegin;
+$monthEnd2 = $monthEnd<10 ? "0".$monthEnd : $monthEnd;
+$dayBegin = $yearBegin."-".$monthBegin2."-"."01";
 
+$number = $number<10 ? "0".$number : $number;
+$dayEnd = $yearEnd."-".$monthEnd2."-".$number;
+$monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
+
+//echo $monthCondition;
+
+$maxPayment = 6;
+$sumPayPCAll = 0;
+$sumPayOCAll = 0;
 foreach ($model as $key => $pj) {
 		
-	//project contract
-	$Criteria = new CDbCriteria();
-	$Criteria->condition = "pc_proj_id='$pj->pj_id'";
-	$pcs = ProjectContract::model()->findAll($Criteria);
-
-	echo "<center><div class='header'><b>สรุปรายได้/ค่าใช้จ่าย <br>".$pj->pj_name."<br>ประจำเดือน ".$monthBetween."</b></div></center>";
-	echo "<br><table border='0' class='span12' style='margin-left:0px;'>";
-	echo   "<tr><td colspan='4' style='background-color:#eeeeee;text-align:center'>ส่วนผู้ว่าจ้าง : ".$pj->pj_name."</td></tr>";
-	foreach ($pcs as $key => $pc) {
-		echo   "<tr><td width='30%'>ใบสั่งจ้างเลขที่ : ".$pc->pc_code."</td><td width='30%'>วันที่เริ่มในสัญญา : ".renderDate($pc->pc_sign_date)."</td><td width='50%' colspan=2>วันที่สิ้นสุดในสัญญา : ".renderDate($pc->pc_end_date)."</td></tr>";
 	
-	}
-	//workcode
-	$Criteria = new CDbCriteria();
-	$Criteria->condition = "pj_id='$pj->pj_id'";
-	$wcs = WorkCode::model()->findAll($Criteria);
-	// print_r($wcs);
-	echo   "<tr style='vertical-align:top'><td >หมายเลขงาน : ";
+	echo "<center><div class='header'><b>สรุปรายได้/ค่าใช้จ่าย <br>".$pj->pj_name."<br>ประจำเดือน ".$monthBetween."</b></div></center>";
+	
+	echo "<table border='1' class='span12' style='margin-left:0px;margin-bottom:20px;'>";
+		echo "<tr style='background-color:#F5C27F'>";
+		 echo "<td style='text-align:center;width:15%'>วดป.<br>ใบเสร็จรับเงิน</td>";
+		 echo "<td style='text-align:center;width:20%'>รายการ</td>";
+		 echo "<td style='text-align:center;width:20%'>จำนวนเงิน</td>";
+		 echo "<td style='text-align:center;width:15%'>วดป.<br>อนุมัติรับเงิน</td>";
+		 echo "<td style='text-align:center;width:20%'>รายการ</td>";
+		 echo "<td style='text-align:center;width:20%'>รายจ่าย</td>";
+		echo "</tr>";
 
-	$i=0;
-	foreach ($wcs as $key => $wc) {
-		if($i==0)  
-		  echo $wc->code."<br>";
-		else
-		  echo "<span style='padding-left:82px;'>".$wc->code."</span><br>";	
-		$i++;
-	}
-	echo "</td>";
-	echo "<td width='30%'>แจ้งจัดสรรงบ กปง./กซข./กฟจ. : ";
-	$i=0;
-	foreach ($pcs as $key => $pc) {
-	    if($i==0)  
-		  echo $pc->pc_name_request."<br>";
-		else
-		  echo "<span style='padding-left:182px;'>".$pc->pc_name_request."</span><br>";	
-		$i++;	
-	}	
-	echo "</td>";
-	echo "<td width='25%'>เลขที่ส่ง / ลว. : ";
-	$i=0;
-	$sum_pc_cost = 0;
-	foreach ($pcs as $key => $pc) {
-	    
-		$pp = Yii::app()->db->createCommand()
+						//project contract
+	    				$Criteria = new CDbCriteria();
+	                     $Criteria->condition = "pc_proj_id='$pj->pj_id'";
+	                	 $pcs = ProjectContract::model()->findAll($Criteria);
+                         $nPC = count($pcs);
+
+                         //2.outsource contract
+                         $Criteria = new CDbCriteria();
+                         $Criteria->condition = "oc_proj_id='$pj->pj_id'";
+                         $ocs = OutsourceContract::model()->findAll($Criteria);
+                         $nOC = count($ocs);
+                         $maxContract = $nPC < $nOC ? $nOC : $nPC ;
+                         $pj_rowspan = $maxContract * $maxPayment;
+
+                         //management
+                         $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type!=0 AND mc_date ".$monthCondition)
+                                            ->queryAll();
+                        $m_sum = $pp[0]["sum"];
+                        //echo $m_sum;   
+
+        $iPC = 0;
+        $iOC = 0;
+        
+        
+        //echo count($pcs);
+        for ($i=0; $i < $pj_rowspan; $i++) 
+        { 
+        	echo '<tr>';
+			
+        	//draw PC
+        	if(!empty($pcs[$iPC]))
+        	{
+        		$pc = $pcs[$iPC];
+        		
+        		$vendor = Vendor::model()->findByPk($pc->pc_vendor_id);
+        		//print_r($vendor);
+        		//echo "<br>";
+				if($i%$maxPayment==0)
+	        	{
+	        		$sumPayPC = 0;	
+	        		$iPC++;
+	        		if($nPC==1)
+						echo '<td>วงเงินสัญญา'.$iPC.'</td><td></td>';
+					else if(!empty($vendor))
+						echo '<td colspan="2">'.$vendor->v_name.'</td>';
+					$pp = Yii::app()->db->createCommand()
                                             ->select('SUM(cost) as sum')
                                             ->from('contract_change_history')
                                             ->where("contract_id='$pc->pc_id' AND type=1")
                                             ->queryAll();
-		                				///print_r($changeHists);
-                                        //echo $pp[0]["sum"];    
+                    $costPC = $pp[0]["sum"] + $pc->pc_cost;                        
+					echo '<td align="right">'.number_format($costPC,2).'</td>';
 
-		$pcCost =$pc->pc_cost + $pp[0]["sum"];
+					$Criteria = new CDbCriteria();
+                	$Criteria->condition = "proj_id='$pc->pc_id' AND bill_date!='' AND bill_date ".$monthCondition;
+                	$payment = PaymentProjectContract::model()->findAll($Criteria);
 
-		$sum_pc_cost += $pcCost;
+                	$iPayPC = 0;
+	        	}
+	        	else{
 
-	    if($i==0)  
-		  echo $pc->pc_code_request."<br>";
-		else
-		  echo "<span style='padding-left:182px;'>".$pc->pc_code_request."</span><br>";	
-		$i++;	
-	}	
-	echo "</td>";
-	echo "<td width='15%'>วงเงิน : ".number_format($sum_pc_cost,2)."</td>";
-	echo "</tr>";
+		        		//draw payment
+		        	if(!empty($payment[$iPayPC]))
+		        	{
 
-
-	echo "</table>";
-
-	echo "<table border='1' class='span12' style='margin-left:0px;margin-bottom:20px;'>";
-		echo "<tr>";
-		 echo "<td rowspan=2 style='text-align:center;width:5%'>ที่</td>";
-		 echo "<td colspan=4 style='text-align:center;width:55%'>ด้านการดำเนินการโครงการ</td>";
-		 echo "<td colspan=4 style='text-align:center;width:40%'>ด้านการเงิน</td>";
-		echo "</tr>";
-		echo "<tr>";
-		 echo "<td style='text-align:center;width:25%'>รายละเอียด</td>";
-		 echo "<td style='text-align:center;width:10%'>อนุมัติโดย/<br>ลงวันที่</td>";
-		 echo "<td style='text-align:center;width:10%'>วงเงิน/<br>เป็นเงินเพิ่ม</td>";
-		 echo "<td style='text-align:center;width:10%'>ระยะเวลาแล้วเสร็จ/<br>ระยะเวลาขอขยาย</td>";
-		 
-		 echo "<td style='text-align:center;width:10%'>ชำระเงินงวดที่</td>";
-		 echo "<td style='text-align:center;width:10%'>ใบแจ้งหนี้/<br>ลงวันที่</td>";
-		 echo "<td style='text-align:center;width:10%'>ใบเสร็จเลขที่/<br>ลงวันที่</td>";
-		 echo "<td style='text-align:center;width:10%'>วงเงิน</td>";
-			
-		echo "</tr>";
-
+		        		echo '<td align="center">'.renderDate($payment[$iPayPC]->bill_date).'</td>';
+		        		echo '<td >'.$payment[$iPayPC]->detail.'</td>';
+		        		$money = str_replace(",", "", $payment[$iPayPC]->money);
+		        		$sumPayPC += $money;
+		        		echo '<td align="right">'.number_format($money,2).'</td>';
+		        		 $iPayPC++;
+		        	}
+	                else{
+		        		
+	                	if($i%$maxPayment==$maxPayment-1 && $i<=$iPC*$maxPayment)
+		        		{	
+		        			echo '<td>&nbsp;</td><td align="center" style="color:red"><u>คงเหลือค้างรับ</u></td>';
+		        		    ///echo '<td align="right" style="color:red"><u>'.$costPC.'</u></td>';
+		        		
+		        		    $rm = $costPC-$sumPayPC==0 ? "-": number_format($costPC-$sumPayPC,2);
+		        		    $sumPayPCAll += $sumPayPC;
+		        		    echo '<td align="right" style="color:red"><u>'.$rm.'</u></td>';
+		        		}
+		        		else
+		        		     echo '<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>';	
+		        		
 		
-		$data_approve = array();
-		$data_payment = array();
-		$i =0;
-		foreach ($pcs as $key => $pc) {
-			$approve = Yii::app()->db->createCommand()
-                            ->select('detail,approveBy,dateApprove,cost,timeSpend')
-                            ->from('contract_approve_history')
-                            ->where("contract_id='$pc->pc_id' AND type=1")
-                            ->queryAll();
-            //print_r($data_approve);                
-            if($i==0)
-              $data_approve = $approve;
-            else	
-              array_merge($data_approve,$approve);    
-            //print_r($data_approve);            
+		        	}
+	        	}
+               
+        	}
+        	else
+        	{
+	        			//draw payment
+		        	if(!empty($payment[$iPayPC]))
+		        	{
 
-            $payment = Yii::app()->db->createCommand()
-                            ->select('*')
-                            ->from('payment_project_contract')
-                            ->where("proj_id='$pc->pc_id'")
-                            ->queryAll();                
-            if($i==0)
-              $data_payment = $payment;
-            else	
-              array_merge($data_payment,$payment);               
-            $i++;
-		}
-
-
-
-		$sum_pay = 0;
-		for ($i=0; $i < 5; $i++) { 
-			echo "<tr>";
-                if(!empty($data_approve[$i])) 
-               	{
-               		echo "<td style='text-align:center'>".($i+1)."</td>";
-               		echo "<td >".$data_approve[$i]["detail"]."</td>";
-               		echo "<td style='text-align:center'>".$data_approve[$i]["approveBy"]."<br>".renderDate2($data_approve[$i]["dateApprove"])."</td>";
-               		echo "<td style='text-align:right'>".number_format($data_approve[$i]["cost"],2)."</td>";
-               		echo "<td >".$data_approve[$i]["timeSpend"]."</td>";
-               	}
-               	else
-               	{
-               		echo "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>";
-               	}	
+		        		echo '<td align="center">'.renderDate($payment[$iPayPC]->bill_date).'</td>';
+		        		echo '<td >'.$payment[$iPayPC]->detail.'</td>';
+		        		$money = str_replace(",", "", $payment[$iPayPC]->money);
+		        		$sumPayPC += $money;
+		        		echo '<td align="right">'.number_format($money,2).'</td>';
+		        		$iPayPC++;
+		        	}
+		        	else{
+		        		
+		        		if($i%$maxPayment==$maxPayment-1 && $i<=$iPC*$maxPayment)
+		        		{	
+		        			echo '<td>&nbsp;</td><td align="center" style="color:red"><u>คงเหลือค้างรับ</u></td>';
+		        		    //echo '<td align="right" style="color:red"><u>'.$costPC.'</u></td>';
+		        			$rm = $costPC-$sumPayPC==0 ? "-": number_format($costPC-$sumPayPC,2);
+		        			$sumPayPCAll += $sumPayPC;
+		        		    echo '<td align="right" style="color:red"><u>'.$rm.'</u></td>';
+		        		}
+		        		else	
+		        		   echo '<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>';
+		        	}
+	                
+	        }
 
 
-               	 if(!empty($data_payment[$i])) 
-               	{
-               		
-               		echo "<td >".$data_payment[$i]["detail"]."</td>";
-               		echo "<td style='text-align:center'>".$data_payment[$i]["invoice_no"]."<br>".renderDate2($data_payment[$i]["invoice_date"])."</td>";
-               		echo "<td style='text-align:center'>".$data_payment[$i]["bill_no"]."<br>".renderDate2($data_payment[$i]["bill_date"])."</td>";
-               		echo "<td style='text-align:right'>".number_format($data_payment[$i]["money"],2)."</td>";
 
-               		if($data_payment[$i]["bill_no"]!=""){
-               			$sum_pay += $data_payment[$i]["money"];
-               		}
-               	}
-               	else
-               	{
-               		if($i!=4)
-               		   echo "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>";
-               		else
-               		{
-               			$remain = $sum_pc_cost - $sum_pay;
-               			echo "<td colspan=3 style='text-align:center'>คงเหลือ</td><td style='text-align:right'>".number_format($remain,2)."</td>";
-               		}
-               	}	
-			echo "</tr>";
-		}
-
-	echo "</table>";
-
-	//----------outsource---------------------//
-
-	$Criteria = new CDbCriteria();
-	$Criteria->condition = "oc_proj_id='$pj->pj_id'";
-	$ocs = OutsourceContract::model()->findAll($Criteria);
+        	//draw OC
+			if(!empty($ocs[$iOC]))
+        	{
+        		$oc = $ocs[$iOC];
+        		$vendor = Vendor::model()->findByPk($oc->oc_vendor_id);
 
 
-	$index = 0;
-	foreach ($ocs as $key => $oc) {
-	        $index++;
-	        $vendor = Vendor::model()->findByPk($oc->oc_vendor_id);	
-			
-	        $sum_oc_cost = 0;
-			$pp = Yii::app()->db->createCommand()
-		                                            ->select('SUM(cost) as sum')
-		                                            ->from('contract_change_history')
-		                                            ->where("contract_id='$oc->oc_id' AND type=2")
-		                                            ->queryAll();
-				                				///print_r($changeHists);
-		    $oc->oc_cost = str_replace(",", "", $oc->oc_cost);    
+				if($i%$maxPayment==0)
+	        	{
+	        		$iOC++;
+	        		$sumPayOC = 0;
+					echo '<td colspan="2">&nbsp;'.$vendor->v_name.'</td>';
+					$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(cost) as sum')
+                                            ->from('contract_change_history')
+                                            ->where("contract_id='$oc->oc_id' AND type=2")
+                                            ->queryAll();
+                    $costOC = $pp[0]["sum"] + str_replace(",", "", $oc->oc_cost);                        
+					echo '<td align="right">'.number_format($costOC,2).'</td>';
 
-			$sum_oc_cost =$oc->oc_cost + $pp[0]["sum"];
+					$Criteria = new CDbCriteria();
+                	$Criteria->condition = "contract_id='$oc->oc_id' AND approve_date!='' AND approve_date ".$monthCondition;
+                	$paymentOC = PaymentOutsourceContract::model()->findAll($Criteria);
+                	//echo(count($paymentOC));
+                	$iPayOC = 0;
+	        	}
+	        	else{
 
-			echo "<br><table border='0' class='span12' style='margin-left:0px;margin-top:15px;'>";
-			echo   "<tr><td colspan='4' style='background-color:#eeeeee;text-align:center'>ส่วนผู้รับจ้าง รายที่ ".$index." : ".$vendor->v_name."</td></tr>";
-			echo   "<tr><td width='30%'>สัญญาจ้างเลขที่ : ".$oc->oc_code."</td><td width='25%'>วันที่เริ่มในสัญญา : ".renderDate($oc->oc_sign_date)."</td><td width='25%'>วันที่สิ้นสุดในสัญญา : ".renderDate($oc->oc_end_date)."</td><td width='30%' style='text-align:right'>วงเงิน : ".number_format($sum_oc_cost,2)."</td></tr>";
-			
-			//po
-			$Criteria = new CDbCriteria();
-			$Criteria->condition = "contract_id='$oc->oc_id'";
-			$pos = WorkCodeOutsource::model()->findAll($Criteria);
-			
-			//print_r($pos);
-			
-			$index2 = 1;
-			foreach ($pos as $key => $po) {
-			echo "<tr>";	
-				echo "<td>".$index2.". PO เลขที่ : ".$po->PO."</td>";
-				echo "<td colspan=2> เลขที่ส่งแจ้งรับรองงบ กปง. : ".$po->letter."</td>";
-				echo "<td style='text-align:right'> เป็นเงิน : ".number_format($po->money,2)."</td>";
-			echo "</tr>";
-			   $index2++;
-			}
-			
+		        		//draw payment
+		        	if(!empty($paymentOC[$iPayOC]))
+		        	{
 
-			// print_r($wcs);
-					
+		        		echo '<td align="center">'.renderDate($paymentOC[$iPayOC]->approve_date).'</td>';
+		        		echo '<td >'.$paymentOC[$iPayOC]->detail.'</td>';
+		        		$money = str_replace(",", "", $paymentOC[$iPayOC]->money);
+		        		$sumPayOC += $money;
+		        		echo '<td align="right">'.number_format($money,2).'</td>';
+		        		$iPayOC++;
+		        	}
+		        	else{
+		        		if($i%$maxPayment==$maxPayment-1 && $i<=$iOC*$maxPayment)
+		        		{	
+		        			echo '<td>&nbsp;</td><td align="center" style="color:red"><u>ค้างจ่าย</u></td>';
+		        		    //echo '<td align="right" style="color:red"><u>'.$costPC.'</u></td>';
+		        			$rm = $costOC-$sumPayOC==0 ? "-": number_format($costOC-$sumPayOC,2);
+		        			$sumPayOCAll += $sumPayOC;
+		        		    echo '<td align="right" style="color:red"><u>'.$rm.'</u></td>';
+		        		}
+		        		else	
+		        		   echo '<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>';	
+		        		
 		
-			//echo "</tr>";
+		        	}
+	                
+	        	}
+		    
+        	}
+        	else{
+        			if(!empty($paymentOC[$iPayOC]))
+		        	{
 
-
-			echo "</table>";
-
-			echo "<table border='1' class='span12' style='margin-left:0px;margin-bottom:20px;'>";
-				echo "<tr>";
-				 echo "<td rowspan=2 style='text-align:center;width:5%'>ที่</td>";
-				 echo "<td colspan=4 style='text-align:center;width:55%'>ด้านการดำเนินการโครงการ</td>";
-				 echo "<td colspan=4 style='text-align:center;width:40%'>ด้านการเงิน</td>";
-				echo "</tr>";
-				echo "<tr>";
-				 echo "<td style='text-align:center;width:25%'>รายละเอียด</td>";
-				 echo "<td style='text-align:center;width:10%'>อนุมัติโดย/<br>ลงวันที่</td>";
-				 echo "<td style='text-align:center;width:10%'>วงเงิน/<br>เป็นเงินเพิ่ม</td>";
-				 echo "<td style='text-align:center;width:10%'>ระยะเวลาแล้วเสร็จ/<br>ระยะเวลาขอขยาย</td>";
-				 
-				 echo "<td style='text-align:center;width:10%'>ชำระเงินงวดที่</td>";
-				 echo "<td style='text-align:center;width:10%'>อนุมัติโดย</td>";
-				 echo "<td style='text-align:center;width:10%'>วัน/เดือน/ปี</td>";
-				 echo "<td style='text-align:center;width:10%'>วงเงิน</td>";
-					
-				echo "</tr>";
-
+		        		echo '<td align="center">'.renderDate($paymentOC[$iPayOC]->approve_date).'</td>';
+		        		echo '<td >'.$paymentOC[$iPayOC]->detail.'</td>';
+		        		$money = str_replace(",", "", $paymentOC[$iPayOC]->money);
+		        		$sumPayOC += $money;
+		        		echo '<td align="right">'.number_format($money,2).'</td>';
+		        		$iPayOC++;
+		        	}
+		        	else{
+		        		if($i%$maxPayment==$maxPayment-1 && $i<=$iOC*$maxPayment)
+		        		{	
+		        			echo '<td>&nbsp;</td><td align="center" style="color:red"><u>ค้างจ่าย</u></td>';
+		        		    //echo '<td align="right" style="color:red"><u>'.$costPC.'</u></td>';
+		        			$rm = $costOC-$sumPayOC==0 ? "-": number_format($costOC-$sumPayOC,2);
+		        			$sumPayOCAll += $sumPayOC;
+		        		    echo '<td align="right" style="color:red"><u>'.$rm.'</u></td>';
+		        		}
+		        		else	
+		        		   echo '<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>';
+		        	}
+	                
 				
-				$data_approve = Yii::app()->db->createCommand()
-		                            ->select('detail,approveBy,dateApprove,cost,timeSpend')
-		                            ->from('contract_approve_history')
-		                            ->where("contract_id='$oc->oc_id' AND type=2")
-		                            ->queryAll();
-		        
-		        $data_payment = Yii::app()->db->createCommand()
-		                            ->select('*')
-		                            ->from('payment_outsource_contract')
-		                            ->where("contract_id='$oc->oc_id'")
-		                            ->queryAll();                
-		        //print_r($data_payment);
+			    	
+        	}        	
+        		
+			echo '</tr>';
+	                 	
+        }                 
+        //summary project
+        echo '<tr style="background-color:#D7A8F7">';
+        	echo '<td colspan="2">รวมรายรับ ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
+         	echo '<td align="right">'.number_format($sumPayPCAll,2).'</td>';
+         	echo '<td colspan="2">รวมรายจ่าย ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
+         	echo '<td align="right">'.number_format($sumPayOCAll,2).'</td>';
+        echo '</tr>';
+         echo '<tr style="background-color:#D7A8F7">';
+        	echo '<td>&nbsp;</td>';echo '<td>&nbsp;</td>';echo '<td>&nbsp;</td>';
+         	
+         	echo '<td colspan="2">ค่าบริหารโครงการ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
+         	echo '<td align="right">'.number_format($m_sum,2).'</td>';
+        echo '</tr>';
+         echo '<tr style="background-color:#D7A8F7">';
+        	echo '<td>&nbsp;</td>';echo '<td>&nbsp;</td>';echo '<td>&nbsp;</td>';
+         	echo '<td colspan="2"><b>กำไร/ขาดทุน</b></td>';
+         	echo '<td align="right"><b>'.number_format($sumPayPCAll-$sumPayOCAll-$m_sum,2).'<b></td>';
+        echo '</tr>';
+	echo "</table>";
+}
 
-				$sum_pay = 0;
-				for ($i=0; $i < 5; $i++) { 
-					echo "<tr>";
-		                if(!empty($data_approve[$i])) 
-		               	{
-		               		echo "<td style='text-align:center'>".($i+1)."</td>";
-		               		echo "<td >".$data_approve[$i]["detail"]."</td>";
-		               		echo "<td style='text-align:center'>".$data_approve[$i]["approveBy"]."<br>".renderDate2($data_approve[$i]["dateApprove"])."</td>";
-		               		echo "<td style='text-align:right'>".number_format($data_approve[$i]["cost"],2)."</td>";
-		               		echo "<td >".$data_approve[$i]["timeSpend"]."</td>";
-		               	}
-		               	else
-		               	{
-		               		echo "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>";
-		               	}	
-
-
-		               	 if(!empty($data_payment[$i])) 
-		               	{
-		               		
-		               		echo "<td >".$data_payment[$i]["detail"]."</td>";
-
-		               		echo "<td style='text-align:center'>".$data_payment[$i]["approve_by"]."</td>";
-		               		echo "<td style='text-align:center'>".renderDate2($data_payment[$i]["approve_date"])."</td>";
-		               		echo "<td style='text-align:right'>".number_format($data_payment[$i]["money"],2)."</td>";
-
-		               		if($data_payment[$i]["approve_date"]!=""){
-		               			$sum_pay += $data_payment[$i]["money"];
-		               		}
-		               	}
-		               	else
-		               	{
-		               		if($i!=4)
-		               		   echo "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>";
-		               		else
-		               		{
-		               			//echo $sum_oc_cost;
-		               			$remain = $sum_oc_cost - $sum_pay;
-		               			echo "<td colspan=3 style='text-align:center'>คงเหลือ</td><td style='text-align:right'>".number_format($remain,2)."</td>";
-		               		}
-		               	}	
-					echo "</tr>";
-				}
-
-			echo "</table>";
-	}
-}			
+			
 ?>
