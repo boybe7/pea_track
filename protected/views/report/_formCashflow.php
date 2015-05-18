@@ -141,7 +141,7 @@ foreach ($model as $key => $pj) {
 	        		$sumPayPC = 0;	
 	        		$iPC++;
 	        		if($nPC==1)
-						echo '<td>วงเงินสัญญา'.$iPC.'</td><td></td>';
+						echo '<td>วงเงินสัญญา</td><td></td>';
 					else if(!empty($vendor))
 						echo '<td colspan="2">'.$vendor->v_name.'</td>';
 					$pp = Yii::app()->db->createCommand()

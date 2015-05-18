@@ -1526,7 +1526,7 @@ class ReportController extends Controller
 			    	)  
 			  ); 
 		$tableHead = new PHPExcel_Style();
-			    $tableHead->applyFromArray(
+	    $tableHead->applyFromArray(
 			        array(
 			            'font'  => array(
 			            'name'  => 'TH SarabunPSK', 
@@ -1568,6 +1568,161 @@ class ReportController extends Controller
 			        	)
 			    ));
 
+		$tableHeadOne = new PHPExcel_Style();
+	    $tableHeadOne->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 16,   
+			             'bold'  => true,              
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			            'fill'  => array(
+			            'type'  => PHPExcel_Style_Fill::FILL_SOLID,
+			            //'color' => array('rgb' =>'FA9D8E')
+			        ),
+			         'borders' => array(
+			            	'bottom'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_DOTTED ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'left'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'right'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	)             
+			        	)
+			    ));
+
+		$cashsum = new PHPExcel_Style();
+	    $cashsum->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 16,   
+			                          
+			            'color' => array(
+			            'rgb'   => 'ff0000'
+			            )
+			        ),
+			            'fill'  => array(
+			            'type'  => PHPExcel_Style_Fill::FILL_SOLID,
+			            //'color' => array('rgb' =>'FA9D8E')
+			        ),
+			            'borders' => array(
+			            	'top'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				            'bottom'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_DOUBLE ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'left'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'right'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	)             
+			        	)
+			    ));
+
+		$normal = new PHPExcel_Style();
+	    $normal->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 16,   
+			                          
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			            'fill'  => array(
+			            'type'  => PHPExcel_Style_Fill::FILL_SOLID,
+			            //'color' => array('rgb' =>'FA9D8E')
+			        ),
+			            'borders' => array(
+			            	'bottom'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_DOTTED ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'left'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'right'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	)             
+			        	)
+			    ));
+
+		$end = new PHPExcel_Style();
+	    $end->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 16,   
+			                          
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			            'fill'  => array(
+			            'type'  => PHPExcel_Style_Fill::FILL_SOLID,
+			            //'color' => array('rgb' =>'FA9D8E')
+			        ),
+			            'borders' => array(
+			            	'bottom'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'left'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'right'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	)             
+			        	)
+			    ));
+		
+
 		
 		$month_th = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม","4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน","7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน","10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
 
@@ -1588,7 +1743,10 @@ class ReportController extends Controller
 		$monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
 
 		$sheet = 0;
+		$sumPayPCAll = 0;
+		$sumPayOCAll = 0;
 		foreach ($model as $key => $pj) {
+			    $objPHPExcel->createSheet($sheet);
 			    $objPHPExcel->setActiveSheetIndex($sheet)->setTitle("PJ".($sheet+1));
 				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('A')->setWidth(15);
 				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('B')->setWidth(20);	
@@ -1617,6 +1775,229 @@ class ReportController extends Controller
 				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F4', "รายจ่าย");
 				$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($tableHead, 'A4:F4');
 				$objPHPExcel->setActiveSheetIndex($sheet)->getStyle('A4:F4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+			
+				$row = 5;
+				//project contract
+	    		$Criteria = new CDbCriteria();
+	            $Criteria->condition = "pc_proj_id='$pj->pj_id'";
+	            $pcs = ProjectContract::model()->findAll($Criteria);
+	            $rowPCname = array();
+	            $rowPCnameOC = array();
+	            $rowPCnameOne = array();
+	            $rowRemain = array();
+	            $rowRemainOC = array();
+	            $rowMaxPC = 0;
+	            if(count($pcs)==1)
+	            {
+	            	$rowPCnameOne[] = $row;
+	            	$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A'.$row, "วงเงินสัญญา");
+	            	$pc = $pcs[0];
+	            	$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(cost) as sum')
+                                            ->from('contract_change_history')
+                                            ->where("contract_id='$pc->pc_id' AND type=1")
+                                            ->queryAll();
+                    $costPC = $pp[0]["sum"] + $pc->pc_cost;                      
+
+	            	$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row, number_format($costPC,2));	
+	           		$rowPC = $row;
+	           		$rowPC++;
+		            	//pc payment
+		            	$Criteria = new CDbCriteria();
+                		$Criteria->condition = "proj_id='$pc->pc_id' AND bill_date!='' AND bill_date ".$monthCondition;
+                		$payment = PaymentProjectContract::model()->findAll($Criteria);
+
+                		foreach ($payment as $key => $pay) {
+                			$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A'.$rowPC,$this->renderDate($pay->bill_date));
+                			$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$rowPC,$pay->detail);
+	            			$money = str_replace(",", "", $pay->money);
+		        			$sumPayPC += $money;
+		        			$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$rowPC,number_format($money,2));
+	            			$rowPC++;
+                		}
+
+                		
+ 						$rowPC++;
+ 						$rowPC += 2;
+                	$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$rowPC,"คงเหลือค้างรับ");
+
+                	$rowRemain[] = $rowPC;
+                	$rm = $costPC-$sumPayPC==0 ? "-": number_format($costPC-$sumPayPC,2);
+		        	$sumPayPCAll += $sumPayPC;
+		        	$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$rowPC,$rm);
+		        	$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($normal, 'A'.$row.":C".$rowPC);
+		        	$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($cashsum, 'C'.$rowPC);
+ 						    
+	            }
+	            else{
+	            	$rowPC = $row;
+	            	
+	            	$iPC = 0;
+	            	foreach ($pcs as $key => $pc) {
+	            		$rowPCname[] = $rowPC;
+	            		$sumPayPC = 0;
+	            		$objPHPExcel->setActiveSheetIndex($sheet)->mergeCells("A".$rowPC.":B".$rowPC);
+	            		$vendor = Vendor::model()->findByPk($pc->pc_vendor_id);
+	            		$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A'.$rowPC,$vendor->v_name);
+		            
+		            	$pp = Yii::app()->db->createCommand()
+	                                            ->select('SUM(cost) as sum')
+	                                            ->from('contract_change_history')
+	                                            ->where("contract_id='$pc->pc_id' AND type=1")
+	                                            ->queryAll();
+	                    $costPC = $pp[0]["sum"] + $pc->pc_cost;                      
+
+		            	$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$rowPC, number_format($costPC,2));	
+	            		$rowPC++;
+		            	//pc payment
+		            	$Criteria = new CDbCriteria();
+                		$Criteria->condition = "proj_id='$pc->pc_id' AND bill_date!='' AND bill_date ".$monthCondition;
+                		$payment = PaymentProjectContract::model()->findAll($Criteria);
+
+                		foreach ($payment as $key => $pay) {
+                			$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A'.$rowPC,$this->renderDate($pay->bill_date));
+                			$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$rowPC,$pay->detail);
+	            			$money = str_replace(",", "", $pay->money);
+		        			$sumPayPC += $money;
+		        			$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$rowPC,number_format($money,2));
+	            			$rowPC++;
+                		}
+                		$iPC ++;
+
+                		$rowPC += 2;
+                		$rowRemain[] = $rowPC;
+                	$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$rowPC,"คงเหลือค้างรับ");
+                	$rm = $costPC-$sumPayPC==0 ? "-": number_format($costPC-$sumPayPC,2);
+		        	$sumPayPCAll += $sumPayPC;
+		        	$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$rowPC,$rm);
+		        	$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($normal, 'A'.$row.":C".$rowPC);
+		        	$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($cashsum, 'C'.$rowPC);
+	
+ 						$rowPC += 2;	               			
+                		
+	            	}
+
+	            	
+
+		        	$rowPC += 2;
+ 						
+	            }
+
+	            
+
+
+	            //outsource
+	            $rowOC = 5;
+	            $Criteria = new CDbCriteria();
+                $Criteria->condition = "oc_proj_id='$pj->pj_id'";
+                $ocs = OutsourceContract::model()->findAll($Criteria);
+                
+                foreach ($ocs as $key => $oc) {
+                	$sumPayOC = 0;
+                	$vendor = Vendor::model()->findByPk($oc->oc_vendor_id);
+                	$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(cost) as sum')
+                                            ->from('contract_change_history')
+                                            ->where("contract_id='$oc->oc_id' AND type=2")
+                                            ->queryAll();
+                    $costOC = $pp[0]["sum"] + str_replace(",", "", $oc->oc_cost); 
+
+                	$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$rowOC,$vendor->v_name);
+                	$rowPCnameOC[] = $rowOC;
+                	$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F'.$rowOC,number_format($costOC,2));
+                	$rowOC++;
+
+                	//payment
+                	$Criteria = new CDbCriteria();
+                	$Criteria->condition = "contract_id='$oc->oc_id' AND approve_date!='' AND approve_date ".$monthCondition;
+                	$paymentOC = PaymentOutsourceContract::model()->findAll($Criteria);
+                	foreach ($paymentOC as $key => $pay) {
+                		$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$rowOC,$this->renderDate($pay->approve_date));
+                		$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$rowOC,$pay->detail);
+                		$money = str_replace(",", "", $pay->money);
+		        		$sumPayOC += $money;
+		        		$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F'.$rowOC,number_format($money,2));
+                		
+                		$rowOC++;
+
+
+                	}
+
+                	
+                	$rowOC += 2;
+	                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$rowOC,"ค้างจ่าย");
+	                $rowRemainOC[] = $rowOC;
+	                	$rm = $costOC-$sumPayOC==0 ? "-": number_format($costOC-$sumPayOC,2);
+			        	$sumPayOCAll += $sumPayOC;
+			        	$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F'.$rowOC,$rm);
+			        	$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($normal, 'D'.$row.":F".$rowOC);
+			        	$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($cashsum, 'F'.$rowOC);
+
+
+                	$rowOC+=2;
+                }
+                $row = $objPHPExcel->getActiveSheet()->getHighestRow()+2;
+
+                $row_max = $objPHPExcel->getActiveSheet()->getHighestRow()+5;
+                $rowMaxPC = $rowRemain[count($rowRemain)-1];
+                $rowMaxOC = $rowRemainOC[count($rowRemainOC)-1];
+
+                //summary
+                $rowSum = $row;
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A'.$row,'รวมรายรับ ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd);
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($sumPayPCAll,2));
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,'รวมรายจ่าย ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd);
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F'.$row,number_format($sumPayOCAll,2));
+                $row++;
+                //management
+                         $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type!=0 AND mc_date ".$monthCondition)
+                                            ->queryAll();
+                        $m_sum = $pp[0]["sum"];
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,'ค่าบริหารโครงการ เดือน '.$month_th[$monthEnd].' '.$yearEnd);
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F'.$row,number_format($m_sum,2));
+                $row++;
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,'กำไร/ขาดทุน');
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F'.$row,number_format($sumPayPCAll-$sumPayOCAll-$m_sum,2));
+
+
+                
+                $objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($normal, 'A'.$rowMaxPC.":C".$row_max);                
+			    $objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($normal, 'D'.$rowMaxOC.":F".$row_max); 	
+			    $objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($end, 'A'.$row_max.":F".$row_max);
+
+
+			    $objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($tableHeadOne, 'A'.$rowSum.':F'.$row);
+ 				$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($cashsum, 'F'.$row);
+
+                foreach ($rowPCname as $key => $r) {
+	            	//set style projectname
+					$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($tableHeadOne, 'A'.$r.':C'.$r);
+
+	            }
+	            foreach ($rowPCnameOne as $key => $r) {
+	            	//set style projectname
+					$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($tableHeadOne, 'A'.$r.':C'.$r);
+
+	            }
+                foreach ($rowRemain as $key => $row) {
+                	$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($cashsum, 'C'.$row);
+                }
+                foreach ($rowRemainOC as $key => $row) {
+                	$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($cashsum, 'F'.$row);
+                }
+                foreach ($rowPCnameOC as $key => $r) {
+	            	//set style projectname
+					$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($tableHeadOne, 'D'.$r.':F'.$r);
+
+	            }
+
+
+	            $objPHPExcel->setActiveSheetIndex($sheet)->getStyle('C5:C256')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+	            $objPHPExcel->setActiveSheetIndex($sheet)->getStyle('F5:F256')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 
 			$sheet++;	
 		}	

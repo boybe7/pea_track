@@ -3627,3 +3627,52 @@ REQUEST_URI=/pea_track/report/genCashflowExcel?fiscalyear=2558&project=&monthBeg
 in C:\xampp\htdocs\pea_track\protected\extensions\phpexcel\vendor\PHPExcel\Shared\String.php (496)
 in C:\xampp\htdocs\pea_track\protected\extensions\phpexcel\vendor\PHPExcel\Shared\String.php (444)
 in C:\xampp\htdocs\pea_track\protected\extensions\phpexcel\vendor\PHPExcel\Writer\Excel5\Workbook.php (490)
+2015/05/17 22:54:01 [error] [exception.PHPExcel_Exception] exception 'PHPExcel_Exception' with message 'You tried to set a sheet active by the out of bounds index: 1. The actual number of sheets is 1.' in C:\xampp\htdocs\pea_track\protected\extensions\phpexcel\vendor\PHPExcel.php:688
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(1592): PHPExcel->setActiveSheetIndex(1)
+#1 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionGenCashflowExcel()
+#2 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('genCashflowExce...')
+#6 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/genCashf...')
+#7 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#8 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/pea_track/report/genCashflowExcel?fiscalyear=2558&project=&monthBegin=1&monthEnd=1&yearBegin=2556&yearEnd=2556&workcat=
+HTTP_REFERER=http://localhost/pea_track/report/cashflow
+---
+2015/05/17 23:55:17 [error] [php] Undefined variable: sumPayPCAll (C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php:1678)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#3 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/genCashflowExcel?fiscalyear=2558&project=&monthBegin=1&monthEnd=1&yearBegin=2556&yearEnd=2556&workcat=
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (1678)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/17 23:55:48 [error] [php] A non well formed numeric value encountered (C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php:1681)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#2 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#3 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#4 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/genCashflowExcel?fiscalyear=2558&project=&monthBegin=1&monthEnd=1&yearBegin=2556&yearEnd=2556&workcat=
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (1681)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/19 00:43:08 [error] [php] Undefined variable: sumPayOC (C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php:1880)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#3 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/genCashflowExcel?fiscalyear=2558&project=&monthBegin=1&monthEnd=1&yearBegin=2556&yearEnd=2559&workcat=
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (1880)
+in C:\xampp\htdocs\pea_track\index.php (13)
