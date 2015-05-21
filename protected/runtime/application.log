@@ -3676,3 +3676,39 @@ Stack trace:
 REQUEST_URI=/pea_track/report/genCashflowExcel?fiscalyear=2558&project=&monthBegin=1&monthEnd=1&yearBegin=2556&yearEnd=2559&workcat=
 in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (1880)
 in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/20 14:41:13 [warning] [application] Failed to set unsafe attribute "pc_id" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/20 14:41:13 [warning] [application] Failed to set unsafe attribute "pc_details" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/20 14:41:13 [warning] [application] Failed to set unsafe attribute "pc_sign_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/20 14:41:13 [warning] [application] Failed to set unsafe attribute "pc_end_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/20 14:41:13 [warning] [application] Failed to set unsafe attribute "pc_garantee_date" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/20 14:41:13 [warning] [application] Failed to set unsafe attribute "pc_last_update" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/20 14:41:13 [warning] [application] Failed to set unsafe attribute "pc_PO" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/20 14:41:13 [warning] [application] Failed to set unsafe attribute "pc_name_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/05/20 14:41:13 [warning] [application] Failed to set unsafe attribute "pc_code_request" of "ProjectContract".
+in C:\xampp\htdocs\pea_track\protected\views\project\view.php (234)
+in C:\xampp\htdocs\pea_track\protected\controllers\ProjectController.php (129)
+in C:\xampp\htdocs\pea_track\index.php (13)

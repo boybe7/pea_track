@@ -66,6 +66,10 @@ function isUser(){
     $user = $this->loadUser(Yii::app()->user->id);
     return $user->u_group == "3";
 }
+function isExecutive(){
+    $user = $this->loadUser(Yii::app()->user->id);
+    return $user->u_group == "4";
+}
 
 // Load user model.
 protected function loadUser($id=null)

@@ -48,7 +48,7 @@
       <?php //echo $form->textFieldRow($model,'type_id',array('class'=>'span12','maxlength'=>1)); ?>
        <?php 
 
-        $data = array(array("value"=>"1","text"=>"Admin"),array("value"=>"3","text"=>"User")); 
+        $data = array(array("value"=>"1","text"=>"Admin"),array("value"=>"2","text"=>"SuperUser"),array("value"=>"3","text"=>"User"),array("value"=>"4","text"=>"Executive")); 
         $typelist = CHtml::listData($data,'value','text');
         echo $form->dropDownListRow($model, 'u_group', $typelist,array('class'=>'span12','prompt'=>'--กรุณาเลือก--')); 
        ?>   

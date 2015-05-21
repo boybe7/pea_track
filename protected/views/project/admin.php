@@ -44,7 +44,8 @@ $('.search-form form').submit(function(){
 //         'class'=>'pull-right'
 //     ),
 // )); 
-
+if(!Yii::app()->user->isExecutive())
+{
 $this->widget('bootstrap.widgets.TbButton', array(
     'buttonType'=>'link',
     
@@ -118,7 +119,8 @@ $this->widget('bootstrap.widgets.TbButton', array(
 			                  })',
         'class'=>'pull-right'
     ),
-)); 
+));
+
 
  $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'vendor-grid',
@@ -196,6 +198,89 @@ $this->widget('bootstrap.widgets.TbButton', array(
 		),
 	),
 ));
+}
+else
+{
+
+ $this->widget('bootstrap.widgets.TbGridView',array(
+	'id'=>'vendor-grid',
+	'dataProvider'=>$model->search(),
+	'type'=>'bordered condensed',
+	'dataProvider'=>$model->search(),
+	'filter'=>$model,
+	'selectableRows' =>2,
+	'htmlOptions'=>array('style'=>'padding-top:40px'),
+    'enablePagination' => true,
+    'summaryText'=>'แสดงผล {start} ถึง {end} จากทั้งหมด {count} ข้อมูล',
+    'template'=>"{items}<div class='row-fluid'><div class='span6'>{pager}</div><div class='span6'>{summary}</div></div>",
+	'columns'=>array(
+		'checkbox'=> array(
+        	    'id'=>'selectedID',
+            	'class'=>'CCheckBoxColumn',
+            	//'selectableRows' => 2, 
+        		 'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),
+	  	         'htmlOptions'=>array(
+	  	            	  			'style'=>'text-align:center'
+
+	  	            	  		)   	  		
+        ),
+		'pj_name'=>array(
+			    'name' => 'pj_name',
+			    'filter'=>CHtml::activeTextField($model, 'pj_name',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_name"))),
+				'headerHtmlOptions' => array('style' => 'width:30%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				'htmlOptions'=>array('style'=>'text-align:left;padding-left:10px;')
+	  	),
+		//'v_address',
+		'pj_work_cat'=>array(
+			    'name' => 'pj_work_cat',
+			    'value'=> 'WorkCategory::model()->FindByPk($data->pj_work_cat)->wc_name',
+			    //'filter'=>CHtml::activeTextField($model, 'pj_work_cat',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_work_cat"))),
+				'filter'=>CHtml::listData(WorkCategory::model()->findAll(), 'wc_id', 'wc_name'),
+				//'filter'=>CHtml::dropDownList('pj_work_cat','wc_id',CHtml::listData(WorkCategory::model()->findAll(), 'wc_id', 'wc_name')),
+				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				'htmlOptions'=>array('style'=>'text-align:center')
+	  	),
+		'pj_fiscalyear'=>array(
+			    'name' => 'pj_fiscalyear',
+			    'filter'=>CHtml::activeTextField($model, 'pj_fiscalyear',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
+				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				'htmlOptions'=>array('style'=>'text-align:center')
+	  	),
+	  	'pj_cost'=>array(
+			    'header' => '<a class="sort-link">วงเงินรวม</a>',
+			    //'name'=>'cost',
+			    'headerHtmlOptions'=>array(),
+			    'value' => 'number_format($data->sumcost,2)',
+			    //'filter'=>CHtml::activeTextField($model, 'sumcost',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("pj_fiscalyear"))),
+				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				'htmlOptions'=>array('style'=>'text-align:center')
+	  	),
+		'pj_status'=>array(
+			    'header' => '<a class="sort-link">สถานะโครงการ</a>',
+			    'name'=>'pj_status',
+			    'headerHtmlOptions'=>array(),
+			    //'value' => '$data->pj_staus',
+			    'filter'=>CHtml::activeDropDownList($model, 'pj_status', array('1' => 'อยู่ระหว่างดำเนินการ', '0' => 'แล้วเสร็จ')),//CHtml::dropDownList('Project[pj_status]',$model,array('0' => 'ปกติ', '1' => 'ปิดโครงการ')),
+				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
+				'htmlOptions'=>array('style'=>'text-align:center')
+	  	),
+
+		// 'v_contractor'=>array(
+		// 	    'name' => 'v_contractor',
+		// 	    'filter'=>CHtml::activeTextField($model, 'v_contractor',array("placeholder"=>"ค้นหาตาม".$model->getAttributeLabel("v_contractor"))),
+		// 		'headerHtmlOptions' => array('style' => 'width:20%;text-align:center;background-color: #f5f5f5'),  	            	  	
+		// 		'htmlOptions'=>array('style'=>'text-align:center')
+	 //  	),
+		array(
+			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'headerHtmlOptions' => array('style' => 'width:5%;text-align:center;background-color: #f5f5f5'),
+			'template' => '{view}'
+		),
+	),
+));
+
+
+}
  /*$this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'project-grid',
 	'dataProvider'=>$model->search(),

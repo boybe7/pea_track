@@ -224,7 +224,7 @@ class UserController extends Controller
 
     public function actionGetUserGroup()
     {
-    	$data = array(array("value"=>"1","text"=>"Admin"),array("value"=>"2","text"=>"SuperUser"),array("value"=>"3","text"=>"User"));
+    	$data = array(array("value"=>"1","text"=>"Admin"),array("value"=>"2","text"=>"SuperUser"),array("value"=>"3","text"=>"User"),array("value"=>"4","text"=>"Executive"));
         echo CJSON::encode($data);
     }
 
