@@ -66,6 +66,7 @@ Yii::app()->clientScript->registerScript('loadcontract', '
 			  $Criteria->condition = "pj_work_cat='$wid' AND pj_fiscalyear='$year'";
 			  $projects = Project::model()->findAll($Criteria);//$command->queryAll();	
 
+
 			 // print_r($sql);
               echo '';
               echo '<div class="panel-group" id="accordion'.$wid.'">
@@ -73,7 +74,7 @@ Yii::app()->clientScript->registerScript('loadcontract', '
 					<div class="panel-heading">
 					<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#collapse'.$wid.'">
-					  <div class="alert alert-'.$alert[$id].'" role="alert">'.$workcat['wc_name'].'</div>
+					  <div class="alert alert-'.$alert[$id%4].'" role="alert">'.$workcat['wc_name'].'</div>
 					</a>
 					</h4>
 					</div>
