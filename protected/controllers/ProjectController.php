@@ -78,7 +78,7 @@ class ProjectController extends Controller
     public function actionGetMProject(){
             $request=trim($_GET['term']);
                     
-            $models=Project::model()->findAll(array("condition"=>"pj_name like '$request%' AND pj_status=1"));
+            $models=Project::model()->findAll(array("condition"=>"pj_name like '%$request%' AND pj_status=1"));
             $data=array();
             foreach($models as $model){
                 
