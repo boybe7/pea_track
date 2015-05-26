@@ -3910,3 +3910,64 @@ Stack trace:
 REQUEST_URI=/pea_track/Project/GetMProject?term=%27
 HTTP_REFERER=http://localhost/pea_track/managementCost/index
 ---
+2015/05/26 01:00:42 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\pea_track\protected\views\managementCost\_form2.php:41)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ManagementCostController->renderFile()
+#1 C:\xampp\htdocs\pea_track\protected\views\managementCost\createByNotify.php(12): ManagementCostController->renderPartial()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ManagementCostController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ManagementCostController->renderFile()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): ManagementCostController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ManagementCostController.php(107): ManagementCostController->render()
+#7 unknown(0): ManagementCostController->actionCreatePayReal()
+#8 C:\xampp\htdocs\pea_track\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): ManagementCostController->runAction()
+#12 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): ManagementCostController->filterAccessControl()
+#15 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ManagementCostController->runActionWithFilters()
+#18 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ManagementCostController->run()
+#19 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/managementCost/createPayReal/42
+in C:\xampp\htdocs\pea_track\protected\views\managementCost\_form2.php (41)
+in C:\xampp\htdocs\pea_track\protected\views\managementCost\createByNotify.php (12)
+in C:\xampp\htdocs\pea_track\protected\controllers\ManagementCostController.php (107)
+2015/05/26 01:10:39 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'คุณไม่ได้รับอนุญาตให้ดำเนินการดังกล่าว' in C:\xampp\htdocs\pea_track\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), '???????????????...')
+#1 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('managementCost/...')
+#9 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/pea_track/managementCost/admin
+HTTP_REFERER=http://localhost/pea_track/managementCost/create
+---
+2015/05/26 10:22:18 [error] [php] Undefined index: T (C:\xampp\htdocs\pea_track\protected\controllers\PaymentOutsourceContractController.php:75)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(133): PaymentOutsourceContractController->runAction()
+#1 C:\xampp\htdocs\pea_track\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\xampp\htdocs\pea_track\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\xampp\htdocs\pea_track\framework\web\filters\CInlineFilter.php(58): PaymentOutsourceContractController->filterAccessControl()
+#4 C:\xampp\htdocs\pea_track\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): PaymentOutsourceContractController->runActionWithFilters()
+#7 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): PaymentOutsourceContractController->run()
+#8 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/paymentOutsourceContract/create
+in C:\xampp\htdocs\pea_track\protected\controllers\PaymentOutsourceContractController.php (75)
+in C:\xampp\htdocs\pea_track\index.php (13)

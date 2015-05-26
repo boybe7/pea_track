@@ -174,7 +174,7 @@
        </div>
        <div class="span3">
           <?php
-            //echo $form->textFieldRow($model,'T',array('class'=>'span5','maxlength'=>3));
+            echo $form->textFieldRow($model,'T',array('class'=>'span5','maxlength'=>3));
             
 
             //echo CHtml::label('%ความก้าวหน้าด้านเทคนิค','t_percent');        

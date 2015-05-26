@@ -31,7 +31,7 @@ class PaymentOutsourceContractController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','DeleteSelected'),
+				'actions'=>array('admin','delete','create','update','DeleteSelected'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -72,8 +72,8 @@ class PaymentOutsourceContractController extends Controller
 			$model->detail = $_POST['PaymentOutsourceContract']["detail"];
 			$model->invoice_send_date = $_POST['PaymentOutsourceContract']["invoice_send_date"];
 			$model->money = str_replace(",", "", $_POST['PaymentOutsourceContract']["money"]);
-			$model->T = $_POST['PaymentOutsourceContract']["T"];
-			$model->B = $_POST['PaymentOutsourceContract']["B"];
+			//$model->T = $_POST['PaymentOutsourceContract']["T"];
+			//$model->B = $_POST['PaymentOutsourceContract']["B"];
 			$model->user_create = Yii::app()->user->ID;
 			$model->user_update = Yii::app()->user->ID;
 			//$model->user_create = Yii::app()->user->ID;
@@ -136,8 +136,8 @@ class PaymentOutsourceContractController extends Controller
 		{
 			    $model->attributes=$_POST['PaymentOutsourceContract'];
 			    $model->money = str_replace(",", "", $_POST['PaymentOutsourceContract']["money"]);
-			    $model->T = $_POST['PaymentOutsourceContract']["T"];
-			    $model->B = $_POST['PaymentOutsourceContract']["B"];
+			    //$model->T = $_POST['PaymentOutsourceContract']["T"];
+			    //$model->B = $_POST['PaymentOutsourceContract']["B"];
 				$model->user_create = Yii::app()->user->ID;
 				$model->user_update = Yii::app()->user->ID;
 				//$model->user_create = Yii::app()->user->ID;

@@ -193,13 +193,19 @@ class PaymentOutsourceContract extends CActiveRecord
             parent::afterFind();
             $this->money = number_format($this->money,2);
             $str_date = explode("-", $this->invoice_send_date);
-            if(count($str_date)>1)
+            if($this->invoice_send_date=='0000-00-00')
+            	$this->invoice_send_date = '';
+            else if(count($str_date)>1)
             	$this->invoice_send_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
             $str_date = explode("-", $this->invoice_receive_date);
-            if(count($str_date)>1)
+            if($this->invoice_receive_date=='0000-00-00')
+            	$this->invoice_receive_date = '';
+            else if(count($str_date)>1)
             	$this->invoice_receive_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
             $str_date = explode("-", $this->approve_date);
-            if(count($str_date)>1)
+            if($this->approve_date=='0000-00-00')
+            	$this->approve_date = '';
+            else if(count($str_date)>1)
             	$this->approve_date = $str_date[2]."/".$str_date[1]."/".($str_date[0]);
      }
 }

@@ -73,7 +73,7 @@ if(date('d')>=20){
                     $mangement["project"] = $project->pj_name;
                     $mangement["contract"] = "ค่าบริหารโครงการ";
                     $mangement["date_end"] = $lastDay;
-                    $mangement["url"] = "managementCost/create";
+                    $mangement["url"] = "managementCost/createPayCon/".$pid;
                     $mangement["alarm_detail"] =  "แจ้งเตือนบันทึกค่ารับรองประจำเดือน";
                     $mangementCostData1[] = $mangement;
                 }
