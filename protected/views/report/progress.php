@@ -198,11 +198,15 @@ $("#gentReport").click(function(e){
 Yii::app()->clientScript->registerScript('printReport', '
 $("#printReport").click(function(e){
     e.preventDefault();
-    var now = new Date();
-          
-    $("#dateprint").html("วันที่พิมพ์ "+now.getDate()+"/"+now.getMonth()+"/"+now.getFullYear());
-     
-    //window.print();
+     $.ajax({
+        url: "printProgress",
+        data: {project: $("#project").val(),fiscalyear: $("#fiscalyear").val(),workcat: $("#workcat").val()},
+        success:function(response){
+             window.open("../tempReport.pdf", "_blank", "fullscreen=yes");              
+            
+        }
+
+    });
 
 });
 ', CClientScript::POS_END);

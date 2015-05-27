@@ -1487,6 +1487,29 @@ class ReportController extends Controller
         
     }
 
+    public function actionPrintProgress()
+    {
+        
+    	
+    	 if(isset($_GET["project"]) && !empty($_GET["project"]))    		
+    	   $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_id='.$_GET["project"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && empty($_GET["fiscalyear"]))   
+    		$model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"], 'params'=>array()));	
+    	else if(isset($_GET["workcat"]) && !empty($_GET["workcat"]) && isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_work_cat='.$_GET["workcat"].' AND pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
+    	else if(isset($_GET["fiscalyear"]) && !empty($_GET["fiscalyear"]))  
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'pj_fiscalyear='.$_GET["fiscalyear"], 'params'=>array()));	 	
+    	else
+    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
+    	
+        $this->render('_formProgressPDF', array(
+            'model' => $model
+            
+        ));
+
+        
+    }
+
     public function actionGenCashflowExcel()
     {
 			
