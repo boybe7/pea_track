@@ -16,7 +16,7 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1>แสดงข้อมูลคู่สัญญา</h1>
+<h1>ข้อมูลคู่สัญญา</h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,

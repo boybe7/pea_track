@@ -5160,3 +5160,14 @@ REQUEST_URI=/pea_track/report/printProgress?project=&fiscalyear=&workcat=
 in C:\xampp\htdocs\pea_track\protected\tcpdf\tcpdf.php (19449)
 in C:\xampp\htdocs\pea_track\protected\tcpdf\tcpdf.php (18283)
 in C:\xampp\htdocs\pea_track\protected\tcpdf\tcpdf.php (5828)
+2015/05/27 13:29:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "service" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('service')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('service')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/service')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/report/service
+HTTP_REFERER=http://localhost:8080/pea_track/site/index
+---
