@@ -161,8 +161,8 @@ $pdf->AddPage('L', 'A3');
 
     $html .= '<table border="1" class="span12" style="margin-left:0px;border-collapse: collapse;">';
        
-         $html .= '<thead>';
-              $html .= '<tr> ';
+         $html .= '<thead >';
+              $html .= '<tr style="background-color:#EEEEEE;font-weight:bold"> ';
                 $html .= '<td rowspan="2" style="text-align:center;width:2%">ลำดับ</td>';
                 $html .= '<td rowspan="2" style="text-align:center;width:6%">โครงการ</td>';
                 $html .= '<td rowspan="2" style="text-align:center;width:5%">รายละเอียดงาน</td>';
@@ -179,7 +179,7 @@ $pdf->AddPage('L', 'A3');
                 $html .= '<td colspan="3" style="text-align:center;width:9%">ค่าบริหารโครงการ</td>';
                 $html .= '<td rowspan="2" style="text-align:center;width:4%">วงเงินที่คาด<br>ว่าจะได้รับ</td>';
               $html .= '</tr>';
-              $html .= '<tr>';
+              $html .= '<tr style="background-color:#EEEEEE;font-weight:bold">';
                 $html .= '<td style="text-align:center;width:4%">วงเงินตาม<br>สัญญา</td>';
                 $html .= '<td style="text-align:center;width:4%">รายการ</td>';
                 $html .= '<td style="text-align:center;width:3%">ได้รับเงิน</td>';
@@ -197,9 +197,9 @@ $pdf->AddPage('L', 'A3');
                 $html .= '<td style="text-align:center;width:2%">T%</td>';
                 $html .= '<td style="text-align:center;width:2%">B%</td>';
 
-                $html .= '<td style="text-align:center;width:4%">ประมาณการ</td>';
+                $html .= '<td style="text-align:center;width:3%">ประมาณการ</td>';
                 $html .= '<td style="text-align:center;width:3%">ค่ารับรอง</td>';
-                $html .= '<td style="text-align:center;width:2%">ใช้จริง</td>';
+                $html .= '<td style="text-align:center;width:3%">ใช้จริง</td>';
 
                $html .= '</tr>';  
             $html .= '</thead>';
@@ -224,7 +224,7 @@ $pdf->AddPage('L', 'A3');
                     $mWorkCat = WorkCategory::model()->findByPk($cat);
 
                     //echo $mWorkCat->wc_name;
-                    $html .=  "<tr>";                    
+                    $html .=  '<tr style="background-color:#EBF8A4;font-weight:bold">';                    
                     $html .=  '<td style="width:100%" colspan="30">ปี '.$year.' '.$mWorkCat->wc_name.'</td>';                   
                     $html .= "</tr>";
 
@@ -393,7 +393,7 @@ $pdf->AddPage('L', 'A3');
                                 
                                         $html .='<td rowspan="'.$maxPayment.'" style="text-align:center;width:3%">'.renderDate($pc->pc_sign_date).'<br><br>';
                                         $html .= '<u>ครบกำหนด</u><br>';
-                                        echo renderDate($pc->pc_end_date);
+                                        $html .=  renderDate($pc->pc_end_date);
                                         $html .="</td>";
 
 
@@ -464,8 +464,8 @@ $pdf->AddPage('L', 'A3');
                                 
                                         if($i%$maxPayment==0)
                                         {
-                                            $html .='<td style="text-align:right;width:2%">'.$pc->pc_T_percent."</td>";
-                                            $html .='<td style="text-align:right;width:2%">'.$pc->pc_A_percent."</td>";     
+                                            $html .='<td style="text-align:center;width:2%">'.$pc->pc_T_percent."</td>";
+                                            $html .='<td style="text-align:center;width:2%">'.$pc->pc_A_percent."</td>";     
                                             $sum_pc_T += $pc->pc_T_percent;
                                             $sum_pc_A += $pc->pc_A_percent;
                                         } 
@@ -480,8 +480,8 @@ $pdf->AddPage('L', 'A3');
 
                                     if($i%$maxPayment==0 && $iPC!=0 && $iPC<=$nPC)
                                         {
-                                            $html .='<td style="text-align:right;width:2%">'.$pc->pc_T_percent."</td>";
-                                            $html .='<td style="text-align:right;width:2%">'.$pc->pc_A_percent."</td>";     
+                                            $html .='<td style="text-align:center;width:2%">'.$pc->pc_T_percent."</td>";
+                                            $html .='<td style="text-align:center;width:2%">'.$pc->pc_A_percent."</td>";     
                                             $sum_pc_T += $pc->pc_T_percent;
                                             $sum_pc_A += $pc->pc_A_percent;
                                         } 
@@ -564,36 +564,157 @@ $pdf->AddPage('L', 'A3');
                                     $iOC++; 
                                 }
 
+                                //draw Payment OC
+                                if(!empty($ocs[$iOC]))
+                                {   
+                                    $Criteria = new CDbCriteria();
+                                    $Criteria->condition = "contract_id='$oc->oc_id'";
+                                    $paymentProjs = PaymentOutsourceContract::model()->findAll($Criteria);
+
+                                    if(!empty($paymentProjs[$i]))
+                                    {
+                                            $pay = $paymentProjs[$i];
+                                            $html .= '<td width="3%">'.$pay->detail."</td>";
+                                            $html .= '<td style="text-align:right;width:3%">'.$pay->money."</td>";
+                                            $html .= '<td style="text-align:right;width:3%">'.renderDate($pay->approve_date)."</td>";
+
+
+                                            //find pay before
+                                            $str_date = explode("/", $pay->invoice_receive_date);
+                                            $invoice_date= "";
+                                            if(count($str_date)>1)
+                                                $invoice_date= $str_date[2]."-".$str_date[1]."-".$str_date[0];
+                                            $pp = Yii::app()->db->createCommand()
+                                                ->select('SUM(money) as sum')
+                                                ->from('payment_outsource_contract')
+                                                ->where('invoice_receive_date < "'.$invoice_date.'" AND contract_id='.$oc->oc_id)
+                                                ->queryAll();
+                                                
+                                            //print_r($pp);    
+                                            $pay->money = str_replace(",", "", $pay->money);
+                                            $sum_oc_receive += $pay->money;
+                                            $oc_remain = $ocCost - $pay->money - $pp[0]["sum"];
+                                            
+                                            if($oc_remain!=0)
+                                               $html .= '<td style="text-align:right;width:4%">'.number_format($oc_remain,2)."</td>";
+                                            else
+                                                $html .= '<td style="text-align:right;width:4%">-</td>';
+                                            
+                                            if($i%$maxPayment==0)
+                                            {
+                                                $html .= '<td style="text-align:center;width:2%">'.$oc->oc_T_percent."</td>";
+                                                $html .= '<td style="text-align:center;width:2%">'.$oc->oc_A_percent."</td>";     
+                                                $sum_oc_T += $oc->oc_T_percent;
+                                                $sum_oc_A += $oc->oc_A_percent;
+                                            } 
+                                            else{
+                                                $html .= '<td style="text-align:center;width:2%"></td><td style="text-align:center;width:2%"></td>';
+                                            }
+                                    }
+                                    else{
+
+                                        $html .= '<td style="text-align:right;width:3%">&nbsp;</td><td style="text-align:right;width:3%">&nbsp;</td>';
+                                        $html .= '<td style="text-align:right;width:3%">&nbsp;</td><td style="text-align:right;width:4%">&nbsp;</td>';
+                                        
+                                           if($i%$maxPayment==0 && $iOC!=0 && $iOC<=$nOC)
+                                            {
+                                                $html .= '<td style="text-align:center;width:2%">'.$oc->oc_T_percent."</td>";
+                                                $html .= '<td style="text-align:center;width:2%">'.$oc->oc_A_percent."</td>";     
+                                                $sum_oc_T += $oc->oc_T_percent;
+                                                $sum_oc_A += $oc->oc_A_percent;
+                                            } 
+                                            else{
+                                                $html .= '<td style="text-align:center;width:2%"></td><td style="text-align:center;width:2%"></td>';
+                                            }
+                                    }   
+                                }else{
+
+                                      $html .= '<td style="text-align:center;width:3%">&nbsp;</td><td style="text-align:center;width:3%">&nbsp;</td>';
+                                        $html .= '<td style="text-align:center;width:3%">&nbsp;</td><td style="text-align:center;width:4%">&nbsp;</td>';
+                                        //$html .= '<td>&nbsp;</td><td>&nbsp;</td>";
+
+                                           if($i%$maxPayment==0 && $iOC!=0 && $iOC<=$nOC)
+                                            {
+                                                $html .= '<td style="text-align:center;width:2%">'.$oc->oc_T_percent."</td>";
+                                                $html .= '<td style="text-align:center;width:2%">'.$oc->oc_A_percent."</td>";     
+                                                $sum_oc_T += $oc->oc_T_percent;
+                                                $sum_oc_A += $oc->oc_A_percent;
+                                            } 
+                                            else{
+                                                $html .= '<td  style="text-align:center;width:2%"></td><td  style="text-align:center;width:2%"></td>';
+                                            }
+                                }
+                                
+
 
                                 //draw management cost
                                
                                 if(!empty($m_plan[$i])) 
-                                 $html .='<td style="text-align:right;">'.number_format($m_plan[$i]->mc_cost,2)."</td>";
+                                 $html .='<td style="text-align:right;width:3%">'.number_format($m_plan[$i]->mc_cost,2)."</td>";
                                 else     
-                                 $html .='<td></td>'; 
+                                 $html .='<td width="3%"></td>'; 
 
                                 if($i==0)
                                 {
                                     if($m_type1_sum!=0)
-                                        $html .='<td style="text-align:right;">'.number_format($m_type1_sum,2)."</td>";
+                                        $html .='<td style="text-align:right;width:3%">'.number_format($m_type1_sum,2)."</td>";
                                     else
-                                        $html .='<td style="text-align:right;"></td>'; 
+                                        $html .='<td style="text-align:right;width:3%"></td>'; 
                                     if($m_real_sum!=0)
-                                        $html .='<td style="text-align:right;">'.number_format($m_real_sum,2)."</td>";
+                                        $html .='<td style="text-align:right;width:3%">'.number_format($m_real_sum,2)."</td>";
                                     else
-                                        $html .='<td style="text-align:right;"></td>'; 
+                                        $html .='<td style="text-align:right;width:3%"></td>'; 
                                     if($m_profit!=0)    
-                                        $html .='<td style="text-align:right;">'.number_format($m_profit,2)."</td>";
+                                        $html .='<td style="text-align:right;width:4%">'.number_format($m_profit,2)."</td>";
                                     else
-                                        $html .='<td style="text-align:right;"></td>'; 
+                                        $html .='<td style="text-align:right;width:4%"></td>'; 
                                 }
                                 else
-                                    $html .="<td></td><td></td><td></td>";
+                                    $html .='<td width="3%"></td><td width="3%"></td><td width="4%"></td>';
                             $html .="</tr>";    
                         }        
                         $index++;
                       }
-                    }       
+                    } 
+
+                    //summary
+                     
+                    $html .= '<tr style="background-color:#F0B2FF;font-weight:bold">';
+                        $html .= '<td colspan="2" style="text-align:center;background-color:#F0B2FF;">รวมเป็นจำนวนเงิน</td>';
+                        $html .= '<td ></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="background-color:#F0B2FF;" align="right">'.number_format($sum_pc_cost,2)."</td>";
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td align="right">'.number_format($sum_pc_receive,2)."</td>";
+                        $html .= '<td align="right">'.number_format($sum_pc_cost - $sum_pc_receive,2)."</td>";
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        //$html .= '<td sytle="text-align:center;background-color:#F0B2FF;'>".$sum_pc_T."%</td>";
+                        //$html .= '<td sytle="text-align:center;background-color:#F0B2FF;'>".$sum_pc_A."%</td>";
+                    
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td align="right">'.number_format($sum_oc_cost,2)."</td>";
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td align="right">'.number_format($sum_oc_receive,2)."</td>";
+                        $html .= '<td sytle="text-align:right;background-color:#F0B2FF;"></td>';            
+                        $html .= '<td align="right">'.number_format($sum_oc_cost - $sum_oc_receive,2)."</td>";
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';   
+                        $html .= '<td align="right">'.number_format($sum_m_expect,2)."</td>";  
+                        $html .= '<td align="right">'.number_format($sum_m_type1,2)."</td>";  
+                        $html .= '<td align="right">'.number_format($sum_m_real,2)."</td>";  
+                        $html .= '<td align="right">'.number_format($sum_profit,2)."</td>";  
+
+
+                    $html .= '</tr>';      
 
                 }    
             $html .= '<tbody>';    
