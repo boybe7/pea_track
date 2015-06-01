@@ -216,6 +216,17 @@ $pdf->AddPage('L', 'A3');
 
 
                 asort($fiscalyear);
+                 //summary all
+                    $sumall_pc_cost = 0;
+                    $sumall_pc_receive = 0;
+                     
+                    $sumall_oc_cost = 0;
+                    $sumall_oc_receive = 0;
+
+                    $sumall_m_real = 0;
+                    $sumall_m_type1 = 0;
+                    $sumall_m_expect = 0;
+                    $sumall_profit = 0;
                 foreach ($fiscalyear as $key => $value) {
                     $data = explode("/", $value);
                     $year = $data[0];
@@ -678,7 +689,15 @@ $pdf->AddPage('L', 'A3');
                     } 
 
                     //summary
-                     
+                      $sumall_pc_cost += $sum_pc_cost;
+                     $sumall_pc_receive += $sum_pc_receive;
+                     $sumall_oc_cost += $sum_oc_cost;
+                     $sumall_oc_receive += $sum_oc_receive;
+
+                     $sumall_m_real += $sum_m_real;
+                     $sumall_m_type1 += $sum_m_type1;
+                     $sumall_m_expect += $sum_m_expect;
+                     $sumall_profit += $sum_profit;
                     $html .= '<tr style="background-color:#F0B2FF;font-weight:bold">';
                         $html .= '<td colspan="2" style="text-align:center;background-color:#F0B2FF;">รวมเป็นจำนวนเงิน</td>';
                         $html .= '<td ></td>';
@@ -716,7 +735,44 @@ $pdf->AddPage('L', 'A3');
 
                     $html .= '</tr>';      
 
-                }    
+                }
+
+                $html .= '<tr style="background-color:#F0B2FF;font-weight:bold">';
+                        $html .= '<td colspan="2" style="text-align:center;background-color:#F0B2FF;">รวมเป็นจำนวนเงินทั้งหมด</td>';
+                        $html .= '<td ></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="background-color:#F0B2FF;" align="right">'.number_format($sumall_pc_cost,2)."</td>";
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td align="right">'.number_format($sumall_pc_receive,2)."</td>";
+                        $html .= '<td align="right">'.number_format($sumall_pc_cost - $sumall_pc_receive,2)."</td>";
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        //$html .= '<td sytle="text-align:center;background-color:#F0B2FF;'>".$sum_pc_T."%</td>";
+                        //$html .= '<td sytle="text-align:center;background-color:#F0B2FF;'>".$sum_pc_A."%</td>";
+                    
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td align="right">'.number_format($sumall_oc_cost,2)."</td>";
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td align="right">'.number_format($sumall_oc_receive,2)."</td>";
+                        $html .= '<td sytle="text-align:right;background-color:#F0B2FF;"></td>';            
+                        $html .= '<td align="right">'.number_format($sumall_oc_cost - $sumall_oc_receive,2)."</td>";
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';
+                        $html .= '<td sytle="text-align:center;background-color:#F0B2FF;"></td>';   
+                        $html .= '<td align="right">'.number_format($sumall_m_expect,2)."</td>";  
+                        $html .= '<td align="right">'.number_format($sumall_m_type1,2)."</td>";  
+                        $html .= '<td align="right">'.number_format($sumall_m_real,2)."</td>";  
+                        $html .= '<td align="right">'.number_format($sumall_profit,2)."</td>";  
+
+
+                    $html .= '</tr>';          
             $html .= '<tbody>';    
     $html .= '</table>';     
     $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
