@@ -5182,3 +5182,25 @@ Stack trace:
 REQUEST_URI=/pea_track/report/genProgressExcel?project=&fiscalyear=&workcat=
 in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (1241)
 in C:\xampp\htdocs\pea_track\index.php (13)
+2015/06/01 22:44:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "service" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('service')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('service')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/service')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/report/service
+HTTP_REFERER=http://localhost/pea_track/site/index
+---
+2015/06/02 12:06:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "service" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('service')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('service')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/service')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/report/service
+HTTP_REFERER=http://localhost/pea_track/report/progress
+---
