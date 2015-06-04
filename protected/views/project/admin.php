@@ -180,7 +180,7 @@ $this->widget('bootstrap.widgets.TbButton', array(
 			    'name'=>'pj_status',
 			    'headerHtmlOptions'=>array(),
 			    //'value' => '$data->pj_staus',
-			    'filter'=>CHtml::activeDropDownList($model, 'pj_status', array('1' => 'อยู่ระหว่างดำเนินการ', '0' => 'แล้วเสร็จ')),//CHtml::dropDownList('Project[pj_status]',$model,array('0' => 'ปกติ', '1' => 'ปิดโครงการ')),
+			    'filter'=>CHtml::activeDropDownList($model, 'pj_status', array('1' => 'อยู่ระหว่างดำเนินการ', '0' => 'แล้วเสร็จ'),array('empty'=>'')),//CHtml::dropDownList('Project[pj_status]',$model,array('0' => 'ปกติ', '1' => 'ปิดโครงการ')),
 				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:center')
 	  	),
@@ -260,7 +260,7 @@ else
 			    'name'=>'pj_status',
 			    'headerHtmlOptions'=>array(),
 			    //'value' => '$data->pj_staus',
-			    'filter'=>CHtml::activeDropDownList($model, 'pj_status', array('1' => 'อยู่ระหว่างดำเนินการ', '0' => 'แล้วเสร็จ')),//CHtml::dropDownList('Project[pj_status]',$model,array('0' => 'ปกติ', '1' => 'ปิดโครงการ')),
+			    'filter'=>CHtml::dropDownList($model, 'pj_status', array('1' => 'อยู่ระหว่างดำเนินการ', '0' => 'แล้วเสร็จ'),array('empty'=>'')),//CHtml::dropDownList('Project[pj_status]',$model,array('0' => 'ปกติ', '1' => 'ปิดโครงการ')),
 				'headerHtmlOptions' => array('style' => 'width:15%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:center')
 	  	),
