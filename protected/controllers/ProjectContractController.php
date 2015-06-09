@@ -53,7 +53,7 @@ class ProjectContractController extends Controller
 
                 $data[] = array(
                         'id'=>$model['pc_id'],
-                        'label'=>$model['pc_code'],//." ".$modelVendor->v_name,
+                        'label'=>$model['pc_code']." ".$modelVendor->v_name,
                         'cost'=>number_format($model['pc_cost']+$change,2)
                 );
 

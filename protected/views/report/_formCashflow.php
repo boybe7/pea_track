@@ -124,10 +124,17 @@ foreach ($model as $key => $pj) {
         $iPayOC = 0;
         $iPayPC = 0;
         //echo count($pcs);
+        $sumPayPCAll = 0;
         for ($i=0; $i < $pj_rowspan; $i++) 
         { 
         	echo '<tr>';
-			
+			if($i%$maxPayment==0)
+        	{
+        		$paymentOC = array();
+        		//$paymentPC = array();
+        		$sumPayOCAll = 0;
+        		
+        	}
         	//draw PC
         	if(!empty($pcs[$iPC]))
         	{
@@ -222,6 +229,8 @@ foreach ($model as $key => $pj) {
 
 
         	//draw OC
+
+
 			if(!empty($ocs[$iOC]))
         	{
         		$oc = $ocs[$iOC];
@@ -232,6 +241,7 @@ foreach ($model as $key => $pj) {
 	        	{
 	        		$iOC++;
 	        		$sumPayOC = 0;
+
 					echo '<td colspan="2">&nbsp;'.$vendor->v_name.'</td>';
 					$pp = Yii::app()->db->createCommand()
                                             ->select('SUM(cost) as sum')
@@ -245,6 +255,8 @@ foreach ($model as $key => $pj) {
                 	$Criteria->condition = "contract_id='$oc->oc_id' AND approve_date!='' AND approve_date ".$monthCondition;
                 	$paymentOC = PaymentOutsourceContract::model()->findAll($Criteria);
                 	//echo(count($paymentOC));
+                	//echo "contract_id='$oc->oc_id' AND approve_date!='' AND approve_date ".$monthCondition;
+                	//print_r($paymentOC);
                 	$iPayOC = 0;
 	        	}
 	        	else{
@@ -252,7 +264,7 @@ foreach ($model as $key => $pj) {
 		        		//draw payment
 		        	if(!empty($paymentOC[$iPayOC]))
 		        	{
-
+		        		
 		        		echo '<td align="center">'.renderDate($paymentOC[$iPayOC]->approve_date).'</td>';
 		        		echo '<td >'.$paymentOC[$iPayOC]->detail.'</td>';
 		        		$money = str_replace(",", "", $paymentOC[$iPayOC]->money);
@@ -281,7 +293,7 @@ foreach ($model as $key => $pj) {
         	else{
         			if(!empty($paymentOC[$iPayOC]))
 		        	{
-
+		        		///print_r($paymentOC);
 		        		echo '<td align="center">'.renderDate($paymentOC[$iPayOC]->approve_date).'</td>';
 		        		echo '<td >'.$paymentOC[$iPayOC]->detail.'</td>';
 		        		$money = str_replace(",", "", $paymentOC[$iPayOC]->money);
@@ -304,7 +316,9 @@ foreach ($model as $key => $pj) {
 	                
 				
 			    	
-        	}        	
+        	}   
+
+
         		
 			echo '</tr>';
 	                 	

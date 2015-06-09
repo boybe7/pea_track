@@ -143,7 +143,7 @@ $('#search-form form').submit(function(){
                         ->select('SUM(money) as sum')
                         ->from('payment_project_contract')
                         //->join('vendor vd', 'pj.pc_vendor_id = vd.v_id')
-                        ->where('proj_id=:id', array(':id'=>$pid))
+                        ->where('proj_id=:id AND (bill_date!="" AND bill_date!="0000-00-00")', array(':id'=>$pid))
                         ->queryAll();
             //echo ($pc[0]["sum"]);
 

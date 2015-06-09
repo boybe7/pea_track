@@ -29,7 +29,7 @@ class WorkCategory extends CActiveRecord
 			array('wc_name', 'length', 'max'=>400),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('wc_id, wc_name', 'safe', 'on'=>'search'),
+			array('wc_id, wc_name,department_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,7 +75,8 @@ class WorkCategory extends CActiveRecord
 
 		$criteria->compare('wc_id',$this->wc_id);
 		$criteria->compare('wc_name',$this->wc_name,true);
-
+		$user_dept = Yii::app()->user->userdept;
+		$criteria->addCondition('department_id='.$user_dept);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

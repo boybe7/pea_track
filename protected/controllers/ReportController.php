@@ -1817,7 +1817,16 @@ class ReportController extends Controller
 		$sumPayOCAll = 0;
 		foreach ($model as $key => $pj) {
 			    $objPHPExcel->createSheet($sheet);
-			    $objPHPExcel->setActiveSheetIndex($sheet)->setTitle("PJ".($sheet+1));
+			    //$objPHPExcel->setActiveSheetIndex($sheet)->setTitle("PJ".($sheet+1));
+				$pjname = str_replace("บริษัท", "", $pj->pj_name);
+				//$pjname = explode(" ", $pjname);
+
+				$pj_sheetname = iconv_substr($pjname, 0,30, "UTF-8");;
+				//echo $pj_sheetname."<br>"; 
+					 ///header('Content-type: text/plain');
+            //echo($pj_sheetname);                    
+         //exit;
+				$objPHPExcel->setActiveSheetIndex($sheet)->setTitle($pj_sheetname);
 				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('A')->setWidth(15);
 				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('B')->setWidth(20);	
 				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('C')->setWidth(25);	
@@ -1858,8 +1867,10 @@ class ReportController extends Controller
 	            $rowRemain = array();
 	            $rowRemainOC = array();
 	            $rowMaxPC = 0;
+	            $sumPayPCAll = 0;
 	            if(count($pcs)==1)
 	            {
+	            	$sumPayPC = 0;
 	            	$rowPCnameOne[] = $row;
 	            	$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A'.$row, "วงเงินสัญญา");
 	            	$pc = $pcs[0];
@@ -1962,7 +1973,7 @@ class ReportController extends Controller
 	            $Criteria = new CDbCriteria();
                 $Criteria->condition = "oc_proj_id='$pj->pj_id'";
                 $ocs = OutsourceContract::model()->findAll($Criteria);
-                
+                $sumPayOCAll = 0;
                 foreach ($ocs as $key => $oc) {
                 	$sumPayOC = 0;
                 	$vendor = Vendor::model()->findByPk($oc->oc_vendor_id);
@@ -2010,8 +2021,11 @@ class ReportController extends Controller
                 $row = $objPHPExcel->getActiveSheet()->getHighestRow()+2;
 
                 $row_max = $objPHPExcel->getActiveSheet()->getHighestRow()+5;
-                $rowMaxPC = $rowRemain[count($rowRemain)-1];
-                $rowMaxOC = $rowRemainOC[count($rowRemainOC)-1];
+                $rowN = count($rowRemain)>0 ? count($rowRemain)-1:count($rowRemain);
+                $rowNOC = count($rowRemainOC)>0 ? count($rowRemainOC)-1:count($rowRemainOC);
+                $rowMaxPC = count($rowRemain)<0 ? 5 : $rowRemain[$rowN];
+                
+                $rowMaxOC = empty($rowRemainOC) ? 5 :  $rowRemainOC[$rowNOC];
 
                 //summary
                 $rowSum = $row;
@@ -2072,7 +2086,9 @@ class ReportController extends Controller
 			$sheet++;	
 		}	
 
-
+		///header('Content-type: text/plain');
+         //   echo($pj_sheetname);                    
+         //exit;
 		ob_end_clean();
 		ob_start();
 
@@ -2087,7 +2103,7 @@ class ReportController extends Controller
 		header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
 		header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
 		header ('Pragma: public'); // HTTP/1.0
-
+        
 		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
 		$objWriter->save('php://output');  //
 		Yii::app()->end(); 

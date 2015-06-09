@@ -36,7 +36,7 @@ class WorkCategoryController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete','DeleteSelected'),
-				'users'=>array('admin'),
+				'expression'=>'Yii::app()->user->isAdmin()',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -69,6 +69,8 @@ class WorkCategoryController extends Controller
 		if(isset($_POST['name']) && $_POST['name']!="")
 		{
 			$model->wc_name=$_POST['name'];
+			$model->department_id = Yii::app()->user->userdept;
+		
 			if($model->save())
 				echo "OK";//$this->redirect(array('admin'));
 			else

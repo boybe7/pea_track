@@ -79,7 +79,7 @@ class ProjectContract extends CActiveRecord
 			'pc_vendor_id' => 'บริษัท',
 			'pc_details' => 'รายละเอียดสัญญา',
 			'pc_sign_date' => 'วันที่ลงนาม',
-			'pc_end_date' => 'วันที่ครบกำหนด',
+			'pc_end_date' => 'วันที่ครบกำหนดสัญญา',
 			'pc_cost' => 'วงเงิน',
 			'pc_T_percent' => '%ความก้าวหน้าด้านเทคนิค (T)',
 			'pc_A_percent' => '%ความก้าวหน้าการเรียกเก็บเงิน (A)',

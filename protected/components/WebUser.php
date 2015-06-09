@@ -33,6 +33,11 @@ function getLastName(){
     
 }
 
+function getUserDept(){
+    $user = $this->loadUser(Yii::app()->user->id);
+    return $user->department_id;
+    
+}
 // access it by Yii::app()->user->usertype
 function getUsertype(){
     $user = $this->loadUser(Yii::app()->user->id);
@@ -56,6 +61,7 @@ function getUsertype(){
  function isAdmin(){
     $user = $this->loadUser(Yii::app()->user->id);
     return $user->u_group == "1";
+    //return UserModule::isAdmin();
   }
 
 function isSuperUser(){

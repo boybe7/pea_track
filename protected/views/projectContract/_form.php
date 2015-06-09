@@ -819,9 +819,9 @@ Yii::app()->clientScript->registerScript('edit','
 
 
     
-	$("body").on("click","#approve-grid'.$index.'update,#link",function(e){
+	$("body").on("click","#approve-grid'.$index.' .update,#link",function(e){
 				link = $(this).attr("href");
-				//console.log(myBackup2)
+				console.log(link)
 
 				//if(myBackup2!="")
 				//	 $("body").append(myBackup2);

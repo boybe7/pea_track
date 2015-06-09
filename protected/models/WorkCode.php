@@ -55,6 +55,7 @@ class WorkCode extends CActiveRecord
 			'id' => 'id',
 			'code' => 'project code',
 			'pj_id' => 'id project',
+			'department_id'=>'หน่วยงาน'
 		);
 	}
 

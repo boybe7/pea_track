@@ -215,7 +215,7 @@ class OutsourceContract extends CActiveRecord
 			'oc_vendor_id' => 'บริษัท',
 			'oc_detail' => 'รายละเอียดสัญญา',
 			'oc_sign_date' => 'วันที่ลงนาม',
-			'oc_end_date' => 'วันที่ครบกำหนด',
+			'oc_end_date' => 'วันที่ครบกำหนดสัญญา',
 			'oc_approve_date' => 'วันที่รับรองงบ',
 			'oc_cost' => 'วงเงิน',
 			'oc_T_percent' => '%ความก้าวหน้าด้านเทคนิค (T)',

@@ -19,13 +19,14 @@ function renderDate($value)
         $mi = substr($mi, 1);
     if(substr($dates[0], 0,1)==0)
         $d = substr($dates[0], 1);
-
+    else
+        $d = $dates[0];
 
     $renderDate = $d." ".$th_month[$mi]." ".$yi;
     if($renderDate==0)
         $renderDate = "";   
 
-    return $renderDate;             
+    return $renderDate;               
 }
 
 
@@ -231,10 +232,18 @@ foreach ($model as $key => $pj) {
         
         $iPayOC = 0;
         $iPayPC = 0;
+         $sumPayPCAll = 0;
         //echo count($pcs);
         for ($i=0; $i < $pj_rowspan; $i++) 
         { 
             $html .='<tr>';
+            if($i%$maxPayment==0)
+            {
+                $paymentOC = array();
+                //$paymentPC = array();
+                $sumPayOCAll = 0;
+                
+            }
             
             //draw PC
             if(!empty($pcs[$iPC]))

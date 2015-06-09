@@ -145,7 +145,7 @@ $('#search-form form').submit(function(){
                         ->select('SUM(money) as sum')
                         ->from('payment_outsource_contract')
                         //->join('vendor vd', 'pj.pc_vendor_id = vd.v_id')
-                        ->where('contract_id=:id', array(':id'=>$pid))
+                        ->where('contract_id=:id AND (approve_date!="" AND approve_date!="0000-00-00")', array(':id'=>$pid))
                         ->queryAll();
             //echo ($pc[0]["sum"]);
             $cost = str_replace(",", "", $cost);
