@@ -48,7 +48,12 @@ class ProjectController extends Controller
 	public function actionGetProject(){
             $request=trim($_GET['term']);
                     
-            $models=Project::model()->findAll(array("condition"=>"pj_name like '$request%' AND pj_status=1"));
+            //$models=Project::model()->findAll(array("condition"=>"pj_name like '$request%' AND pj_status=1"));
+            $Criteria = new CDbCriteria();
+			$user_dept = Yii::app()->user->userdept;
+			$Criteria->join = 'LEFT JOIN user ON pj_user_create=user.u_id';
+			$Criteria->condition = "pj_name like '$request%' AND pj_status=1 AND department_id='$user_dept'";
+			$models = Project::model()->findAll($Criteria);
             $data=array();
             foreach($models as $model){
                 
@@ -78,7 +83,13 @@ class ProjectController extends Controller
     public function actionGetMProject(){
             $request=trim($_GET['term']);
                     
-            $models=Project::model()->findAll(array("condition"=>"pj_name like '%$request%' AND pj_status=1"));
+            //$models=Project::model()->findAll(array("condition"=>"pj_name like '%$request%' AND pj_status=1"));
+            $Criteria = new CDbCriteria();
+			$user_dept = Yii::app()->user->userdept;
+			$Criteria->join = 'LEFT JOIN user ON pj_user_create=user.u_id';
+			$Criteria->condition = "pj_name like '$request%' AND pj_status=1 AND department_id='$user_dept'";
+			$models = Project::model()->findAll($Criteria);
+
             $data=array();
             foreach($models as $model){
                 

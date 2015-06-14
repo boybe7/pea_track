@@ -36,7 +36,14 @@ class ProjectContractController extends Controller
 	public function actionGetProjectContract(){
             $request=trim($_GET['term']);
                     
-            $models=ProjectContract::model()->findAll(array("condition"=>"pc_code like '$request%'"));
+            //$models=ProjectContract::model()->findAll(array("condition"=>"pc_code like '$request%'"));
+            $Criteria = new CDbCriteria();
+			$user_dept = Yii::app()->user->userdept;
+			$Criteria->join = 'LEFT JOIN user ON pc_user_update=user.u_id';
+			$Criteria->condition = "(pc_code like '$request%') AND department_id='$user_dept'";
+			$models = ProjectContract::model()->findAll($Criteria);
+
+
             $data=array();
             foreach($models as $model){
                 //$data[]["label"]=$get->v_name;

@@ -92,6 +92,12 @@ class ManagementCost extends CActiveRecord
 		$criteria->compare('mc_cost',$this->mc_cost);
 		$criteria->compare('mc_date',$this->mc_date,true);
 		$criteria->compare('mc_user_update',$this->mc_user_update);
+		$user_dept = Yii::app()->user->userdept;
+		if(!Yii::app()->user->isExecutive())
+		{
+			$criteria->join = 'LEFT JOIN user ON mc_user_update=user.u_id';
+			$criteria->addCondition('user.department_id='.$user_dept);
+		}	
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -122,7 +122,12 @@ class Project extends CActiveRecord
 		$criteria->compare('pj_CA',$this->pj_CA,true);
 		$criteria->compare('pj_status',$this->pj_status,true);
 		$criteria->compare('workcat.wc_name',$this->workcat_search);
-
+		$user_dept = Yii::app()->user->userdept;
+		if(!Yii::app()->user->isExecutive())
+		{
+			$criteria->join = 'LEFT JOIN user ON pj_user_create=user.u_id';
+			$criteria->addCondition('user.department_id='.$user_dept);
+		}	
 		$sort=new CSort;
                 $sort->attributes=array(
                         

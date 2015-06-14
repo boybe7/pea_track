@@ -84,11 +84,23 @@ window.onload = function (){
 	<div class="span3">
 		<?php
 
-		    $workcat = Yii::app()->db->createCommand()
+		     $user_dept = Yii::app()->user->userdept;
+        if(!Yii::app()->user->isExecutive())
+        {
+              $workcat = Yii::app()->db->createCommand()
+                    ->select('wc_id,wc_name as name')
+                    ->from('work_category')
+                    ->where('department_id='.$user_dept)
+                    ->queryAll();
+        }
+        else 
+        {
+              $workcat = Yii::app()->db->createCommand()
                     ->select('wc_id,wc_name as name')
                     ->from('work_category')
                     ->queryAll();
-     
+        }            
+                 
             $list = CHtml::listData($workcat,'wc_id','name');
     
             echo CHtml::label('ประเภทงาน','workcat');  
@@ -109,11 +121,27 @@ window.onload = function (){
 	<div class="span4">
 		<?php
 
-		    $projects =Project::model()->findAll(array(
-    				'select'=>'pj_id,pj_name',
-            'order'=>'pj_name ASC', 
-    				'distinct'=>true,
-				));   
+		     $user_dept = Yii::app()->user->userdept;
+      if(!Yii::app()->user->isExecutive())
+      {
+        $projects =Project::model()->findAll(array(
+            'select'=>'pj_id,pj_name',
+            'join'=>'LEFT JOIN user ON pj_user_create=user.u_id',
+            'condition'=>'department_id='.$user_dept,
+            'order'=>'pj_name ASC',
+            'distinct'=>true,
+        ));   
+      
+      }
+      else{
+        $projects =Project::model()->findAll(array(
+            'select'=>'pj_id,pj_name',
+            'order'=>'pj_name ASC',
+            'distinct'=>true,
+        ));   
+
+
+      }  
 
 			//print_r($projects);	     
      

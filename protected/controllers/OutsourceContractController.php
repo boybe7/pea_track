@@ -47,7 +47,13 @@ class OutsourceContractController extends Controller
 	public function actionGetContract(){
             $request=trim($_GET['term']);
                     
-            $models=OutsourceContract::model()->findAll(array("condition"=>"oc_code like '$request%'"));
+            //$models=OutsourceContract::model()->findAll(array("condition"=>"oc_code like '$request%'"));
+            $Criteria = new CDbCriteria();
+			$user_dept = Yii::app()->user->userdept;
+			$Criteria->join = 'LEFT JOIN user ON oc_user_update=user.u_id';
+			$Criteria->condition = "(oc_code like '$request%') AND department_id='$user_dept'";
+			$models = OutsourceContract::model()->findAll($Criteria);
+
             $data=array();
             foreach($models as $model){
                 //$data[]["label"]=$get->v_name;

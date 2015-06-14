@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Payment Project Contracts',
+	'รายการรับเงินงวด',
 );
 
 $this->menu=array(

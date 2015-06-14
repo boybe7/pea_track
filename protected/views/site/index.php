@@ -49,8 +49,13 @@ Yii::app()->clientScript->registerScript('loadcontract', '
  <?php
 
         $year = date("Y")+543;
+        $user_dept = Yii::app()->user->userdept;
         //echo $year;
-        $sql = "SELECT wc_name,wc_id FROM project LEFT JOIN work_category ON wc_id= pj_work_cat WHERE pj_fiscalyear='$year' GROUP BY pj_work_cat";
+        if(Yii::app()->user->isExecutive())
+           $sql = "SELECT wc_name,wc_id FROM project LEFT JOIN work_category ON wc_id= pj_work_cat WHERE pj_fiscalyear='$year' GROUP BY pj_work_cat";
+		else
+		   $sql = "SELECT wc_name,wc_id FROM project LEFT JOIN work_category ON wc_id= pj_work_cat WHERE pj_fiscalyear='$year'  AND department_id='$user_dept' GROUP BY pj_work_cat";
+		
 		$command = Yii::app()->db->createCommand($sql);
 		$workcats = $command->queryAll();	
 		//echo $sql;
@@ -63,7 +68,13 @@ Yii::app()->clientScript->registerScript('loadcontract', '
         	  $wid = $workcat['wc_id'];	
 	          
 			  $Criteria = new CDbCriteria();
-			  $Criteria->condition = "pj_work_cat='$wid' AND pj_fiscalyear='$year'";
+			  if(!Yii::app()->user->isExecutive())
+			  {
+			  	$Criteria->join = 'LEFT JOIN user ON pj_user_create=user.u_id';
+			  	$Criteria->condition = "pj_work_cat='$wid' AND pj_fiscalyear='$year' AND department_id='$user_dept'";
+			  }
+			  else   
+			    $Criteria->condition = "pj_work_cat='$wid' AND pj_fiscalyear='$year'";
 			  $projects = Project::model()->findAll($Criteria);//$command->queryAll();	
 
 

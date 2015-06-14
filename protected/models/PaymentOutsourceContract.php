@@ -110,6 +110,12 @@ class PaymentOutsourceContract extends CActiveRecord
 		$criteria->compare('user_create',$this->user_create);
 		$criteria->compare('user_update',$this->user_update);
 		$criteria->compare('last_update',$this->last_update,true);
+		$user_dept = Yii::app()->user->userdept;
+		if(!Yii::app()->user->isExecutive())
+		{
+			$criteria->join = 'LEFT JOIN user ON user_create=user.u_id';
+			$criteria->addCondition('user.department_id='.$user_dept);
+		}	
 
 		$sort = new CSort();
         $sort->attributes = array(

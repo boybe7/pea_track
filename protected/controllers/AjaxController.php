@@ -2,39 +2,38 @@
 <?php
 class AjaxController extends Controller {
 
-    public function actionGetCities() {        
-    //Fetch all city name and id from state_id
-        $data = Amphur::model()->findAll('PROVINCE_ID=:id', array(':id' => (int) $_POST['state_id']));        
-    //Passing city id and city name to list data which generates the data suitable for list-based HTML elements
-        $data = CHtml::listData($data, 'AMPHUR_ID', 'AMPHUR_NAME');
-    //CHtml::tag which generates an HTML element
-        foreach ($data as $value => $name) {            
-            echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
-        }
-    }
-    
-    public function actionGetTumbon() {        
-    //Fetch all city name and id from state_id
-        $data = Tumbon::model()->findAll('AMPHUR_ID=:id', array(':id' => (int) $_POST['amphur_id']));        
-    //Passing city id and city name to list data which generates the data suitable for list-based HTML elements
-        $data = CHtml::listData($data, 'DISTRICT_ID', 'DISTRICT_NAME');
-    //CHtml::tag which generates an HTML element
-        foreach ($data as $value => $name) {            
-            echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
-        }
-    }
 
      public function actionGetProjectList() {        
     
         
-       if( $_POST['workcat_id']!='' && $_POST['year']!='') 
-        $data = Project::model()->findAll('pj_work_cat=:id AND pj_fiscalyear=:year', array(':id' => (int) $_POST['workcat_id'],':year'=>(int)$_POST['year']));        
-       else if( $_POST['workcat_id']!='' && $_POST['year']=='') 
-        $data = Project::model()->findAll('pj_work_cat=:id', array(':id' => (int) $_POST['workcat_id']));        
-       else if($_POST['workcat_id']=='' && $_POST['year']!='') 
-        $data = Project::model()->findAll('pj_fiscalyear=:year', array(':year'=>(int)$_POST['year']));        
-       else    
-        $data = Project::model()->findAll();        
+       
+
+        $user_dept = Yii::app()->user->userdept;
+        if(!Yii::app()->user->isExecutive())
+        {
+
+            if( $_POST['workcat_id']!='' && $_POST['year']!='') 
+                $data = Project::model()->findAll('pj_work_cat=:id AND pj_fiscalyear=:year', array(':id' => (int) $_POST['workcat_id'],':year'=>(int)$_POST['year']));        
+            else if( $_POST['workcat_id']!='' && $_POST['year']=='') 
+                $data = Project::model()->findAll('pj_work_cat=:id', array(':id' => (int) $_POST['workcat_id']));        
+            else if($_POST['workcat_id']=='' && $_POST['year']!='') 
+                $data = Project::model()->findAll(array('join'=>'LEFT JOIN user ON pj_user_create=user.u_id LEFT JOIN work_category ON wc_id=pj_work_cat','condition'=>'pj_fiscalyear='.(int)$_POST['year'].' AND user.department_id='.$user_dept)); 
+            else    
+                $data = Project::model()->findAll(array('join'=>'LEFT JOIN user ON pj_user_create=user.u_id LEFT JOIN work_category ON wc_id=pj_work_cat','condition'=>'user.department_id='.$user_dept));
+
+        }
+        else
+        {
+            if( $_POST['workcat_id']!='' && $_POST['year']!='') 
+            $data = Project::model()->findAll('pj_work_cat=:id AND pj_fiscalyear=:year', array(':id' => (int) $_POST['workcat_id'],':year'=>(int)$_POST['year']));        
+           else if( $_POST['workcat_id']!='' && $_POST['year']=='') 
+            $data = Project::model()->findAll('pj_work_cat=:id', array(':id' => (int) $_POST['workcat_id']));        
+           else if($_POST['workcat_id']=='' && $_POST['year']!='') 
+            $data = Project::model()->findAll('pj_fiscalyear=:year', array(':year'=>(int)$_POST['year']));        
+           else    
+            $data = Project::model()->findAll();
+
+         }    
          // header('Content-type: text/plain');
          //   if(isset($_POST["workcat_id"]))
          //     echo "work";
@@ -56,15 +55,35 @@ class AjaxController extends Controller {
 
     public function actionGetProjectList2() {        
     
+        $user_dept = Yii::app()->user->userdept;
+        if(!Yii::app()->user->isExecutive())
+        {
         
-       if( $_POST['workcat_id']!='' && $_POST['year']!='') 
-        $data = Project::model()->findAll('pj_work_cat=:id AND pj_fiscalyear=:year', array(':id' => (int) $_POST['workcat_id'],':year'=>(int)$_POST['year']));        
-       else if( $_POST['workcat_id']!='' && $_POST['year']=='') 
-        $data = Project::model()->findAll('pj_work_cat=:id', array(':id' => (int) $_POST['workcat_id']));        
-       else if($_POST['workcat_id']=='' && $_POST['year']!='') 
-        $data = Project::model()->findAll('pj_fiscalyear=:year', array(':year'=>(int)$_POST['year']));        
-       else    
-        $data = array();
+           if( $_POST['workcat_id']!='' && $_POST['year']!='') 
+            $data = Project::model()->findAll('pj_work_cat=:id AND pj_fiscalyear=:year', array(':id' => (int) $_POST['workcat_id'],':year'=>(int)$_POST['year']));        
+           else if( $_POST['workcat_id']!='' && $_POST['year']=='') 
+            $data = Project::model()->findAll('pj_work_cat=:id', array(':id' => (int) $_POST['workcat_id']));        
+           else if($_POST['workcat_id']=='' && $_POST['year']!='') 
+              $data = Project::model()->findAll(array('join'=>'LEFT JOIN user ON pj_user_create=user.u_id LEFT JOIN work_category ON wc_id=pj_work_cat','condition'=>'pj_fiscalyear='.(int)$_POST['year'].' AND user.department_id='.$user_dept));        
+           else    
+            $data = array();
+         }
+        else
+        {
+
+            if( $_POST['workcat_id']!='' && $_POST['year']!='') 
+            $data = Project::model()->findAll('pj_work_cat=:id AND pj_fiscalyear=:year', array(':id' => (int) $_POST['workcat_id'],':year'=>(int)$_POST['year']));        
+           else if( $_POST['workcat_id']!='' && $_POST['year']=='') 
+            $data = Project::model()->findAll('pj_work_cat=:id', array(':id' => (int) $_POST['workcat_id']));        
+           else if($_POST['workcat_id']=='' && $_POST['year']!='') 
+            $data = Project::model()->findAll('pj_fiscalyear=:year', array(':year'=>(int)$_POST['year']));        
+           else    
+            $data = array();
+
+        } 
+
+
+
          if(empty($data))
              echo CHtml::tag('option', array('value' => ''), CHtml::encode(""), true);
         else
