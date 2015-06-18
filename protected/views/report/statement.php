@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Cashflow Report',
+	'รายงานงบกำไรขาดทุน',
 	
 );
 
@@ -84,7 +84,7 @@ $(document).ready(function(){
 </script>
 
 
-<h4>รายงานสรุปรายได้/ค่าใช้จ่าย</h4>
+<h4>รายงานงบกำไรขาดทุน</h4>
 
 <div class="well">
   <div class="row-fluid">
@@ -118,90 +118,56 @@ $(document).ready(function(){
 		?>
 
 	</div>
-	<div class="span3">
-		<?php
+	  <div class="span2">
+               
+              <?php
+                echo CHtml::label('ระหว่างเดือน','monthBegin');  
+                $list = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม","4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน","7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน","10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
+                echo CHtml::dropDownList('monthBegin', '', 
+                        $list,array('class'=>'span12'
+                    ));
+               
 
-		    
-         $user_dept = Yii::app()->user->userdept;
-        if(!Yii::app()->user->isExecutive())
-        {
-              $workcat = Yii::app()->db->createCommand()
-                    ->select('wc_id,wc_name as name')
-                    ->from('work_category')
-                    ->where('department_id='.$user_dept)
-                    ->queryAll();
-        }
-        else 
-        {
-              $workcat = Yii::app()->db->createCommand()
-                    ->select('wc_id,wc_name as name')
-                    ->from('work_category')
-                    ->queryAll();
-        }            
+              ?>
+    </div>
+    <div class="span1">
+            <?php
+                
+                echo CHtml::label('ปี','yearBegin');  
+                $yy = date("Y")+543;
+                $list = array($yy-2=>$yy-2,$yy-1=>$yy-1,$yy=>$yy,$yy+1=>$yy+1,$yy+2=>$yy+2);
+                echo CHtml::dropDownList('yearBegin', '', 
+                        $list,array('class'=>'span12'
+                    ));
 
-            $list = CHtml::listData($workcat,'wc_id','name');
-    
-            echo CHtml::label('ประเภทงาน','workcat');  
-            echo CHtml::dropDownList('workcat', '', 
-                            $list,array('empty' => 'ทั้งหมด','class'=>'span12'
-                            	,
-                            	'ajax' => array(
-							                'type' => 'POST', //request type
-							                'url' => CController::createUrl('ajax/getProjectList'), //url to call.                
-							                'update' => '#project', //selector to update   
-							                'data' => array('workcat_id' => 'js:this.value','year' => 'js:$("#fiscalyear").val()'),
-							        )	
-                            	));
-             	
-		?>
+              ?>
+    </div>
+     <div class="span2">
+               
+              <?php
+                echo CHtml::label('ถึงเดือน','monthEnd');  
+                $list = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม","4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน","7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน","10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
+                echo CHtml::dropDownList('monthEnd', '', 
+                        $list,array('class'=>'span12'
+                    ));
+               
 
-	</div>
+              ?>
+    </div>
+    <div class="span1">
+            <?php
+                
+                echo CHtml::label('ปี','yearEnd');  
+                $yy = date("Y")+543;
+                $list = array($yy-2=>$yy-2,$yy-1=>$yy-1,$yy=>$yy,$yy+1=>$yy+1,$yy+2=>$yy+2);
+                echo CHtml::dropDownList('yearEnd', '', 
+                        $list,array('class'=>'span12'
+                    ));
+
+              ?>
+    </div>
+  
 	<div class="span4">
-		<?php
-
-		  //   $projects =Project::model()->findAll(array(
-    // 				'select'=>'pj_id,pj_name',
-    //                 'condition'=>'pj_fiscalyear='.$fiscalyear,
-    // 				'distinct'=>true,
-				// ));  
-      $user_dept = Yii::app()->user->userdept;
-      if(!Yii::app()->user->isExecutive())
-      {
-        $projects =Project::model()->findAll(array(
-            'select'=>'pj_id,pj_name',
-            'join'=>'LEFT JOIN user ON pj_user_create=user.u_id',
-            'condition'=>'pj_fiscalyear='.$fiscalyear.' AND  department_id='.$user_dept,
-            'order'=>'pj_name ASC',
-            'distinct'=>true,
-        ));   
-      
-      }
-      else{
-        $projects =Project::model()->findAll(array(
-            'select'=>'pj_id,pj_name',
-            'condition'=>'pj_fiscalyear='.$fiscalyear,
-            'order'=>'pj_name ASC',
-            'distinct'=>true,
-        ));   
-
-
-      }  
- 
-
-			//print_r($projects);	 
-            //$projects = new Project();    
-     
-            $list = CHtml::listData($projects,'pj_id','pj_name');
-    
-            echo CHtml::label('โครงการ','project');  
-            echo CHtml::dropDownList('project', '', 
-                            $list,array('empty' => 'ทั้งหมด','class'=>'span12'
-                            	));
-             	
-		?>
-
-	</div>
-	<div class="span3">
       <?php
         $this->widget('bootstrap.widgets.TbButton', array(
               'buttonType'=>'link',
@@ -238,7 +204,7 @@ $(document).ready(function(){
               'buttonType'=>'link',
               
               'type'=>'info',
-              'label'=>'',
+              'label'=>'Print',
               'icon'=>'print white',
               
               'htmlOptions'=>array(
@@ -251,57 +217,7 @@ $(document).ready(function(){
     </div>
   </div>
 
-
-  <div class="row-fluid">
-    <div class="offset1 span2">
-               
-              <?php
-                echo CHtml::label('ระหว่างเดือน','monthBegin');  
-                $list = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม","4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน","7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน","10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
-                echo CHtml::dropDownList('monthBegin', '', 
-                        $list,array('class'=>'span12'
-                    ));
-               
-
-              ?>
-    </div>
-    <div class="span2">
-            <?php
-                
-                echo CHtml::label('ปี','yearBegin');  
-                $yy = date("Y")+543;
-                $list = array($yy-2=>$yy-2,$yy-1=>$yy-1,$yy=>$yy,$yy+1=>$yy+1,$yy+2=>$yy+2);
-                echo CHtml::dropDownList('yearBegin', '', 
-                        $list,array('class'=>'span8'
-                    ));
-
-              ?>
-    </div>
-     <div class="span2">
-               
-              <?php
-                echo CHtml::label('ถึงเดือน','monthEnd');  
-                $list = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม","4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน","7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน","10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
-                echo CHtml::dropDownList('monthEnd', '', 
-                        $list,array('class'=>'span12'
-                    ));
-               
-
-              ?>
-    </div>
-    <div class="span2">
-            <?php
-                
-                echo CHtml::label('ปี','yearEnd');  
-                $yy = date("Y")+543;
-                $list = array($yy-2=>$yy-2,$yy-1=>$yy-1,$yy=>$yy,$yy+1=>$yy+1,$yy+2=>$yy+2);
-                echo CHtml::dropDownList('yearEnd', '', 
-                        $list,array('class'=>'span8'
-                    ));
-
-              ?>
-    </div>
-  </div>  
+    
 </div>
 
 

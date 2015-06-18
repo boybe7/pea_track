@@ -45,6 +45,14 @@ class ReportController extends Controller
 		$this->render('service');
 	}
 
+	public function actionStatement()
+	{
+            		
+		// display the progress form
+		$this->render('statement');
+	}
+
+
 	public function actionCashflow()
 	{
             		

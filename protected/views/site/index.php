@@ -26,7 +26,11 @@ $cs->registerScriptFile( $theme->getBaseUrl() . '/js/highcharts.js' );
 
 
 <?php
-Yii::app()->clientScript->registerScript('loadcontract', '
+
+if(!Yii::app()->user->isExecutive())
+{
+
+	Yii::app()->clientScript->registerScript('loadnotify', '
     var _url = "'. Yii::app()->controller->createUrl("notify/getnotify").'";
     var _url2 = "'. Yii::app()->controller->createUrl("notify/content").'";
     $.ajax({
@@ -39,7 +43,9 @@ Yii::app()->clientScript->registerScript('loadcontract', '
     });			
 
 
-', CClientScript::POS_END);
+	', CClientScript::POS_END);
+
+}
 
 
 ?>
