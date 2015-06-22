@@ -58,8 +58,8 @@ $(document).ready(function(){
             options[options.length] = new Option(text, text);
         });
         //console.log(selectedOption);
-        select.val(selectedOption-1);
-        $('#monthBegin').val(10);
+        select.val(selectedOption);
+        //$('#monthBegin').val(10);
 
         var select = $('#yearEnd');
         if(select.prop) {
@@ -88,36 +88,7 @@ $(document).ready(function(){
 
 <div class="well">
   <div class="row-fluid">
-	<div class="span2">
-		<?php
-
-            $projects =Project::model()->findAll(array(
-    				'select'=>'pj_fiscalyear',
-    				//'group'=>'t.Category',
-    				'distinct'=>true,
-				));   
-
-			//print_r($projects);	     
-     
-            $list = CHtml::listData($projects,'pj_fiscalyear','pj_fiscalyear');
-            $fiscalyear = $projects[0]->pj_fiscalyear;
-            //echo $fiscalyear;
-
-            echo CHtml::label('ปีงบประมาณ','fiscalyear');  
-            echo CHtml::dropDownList('fiscalyear', '', 
-                            $list,array('class'=>'span12'
-                            	,
-                            	'ajax' => array(
-							                'type' => 'POST', //request type
-							                'url' => CController::createUrl('ajax/getProjectList'), //url to call.                
-							                'update' => '#project', //selector to update   
-							                'data' => array('year' => 'js:this.value','workcat_id' => 'js:$("#workcat").val()'),
-							        )
-                            	));
-             	
-		?>
-
-	</div>
+	
 	  <div class="span2">
                
               <?php
@@ -130,14 +101,14 @@ $(document).ready(function(){
 
               ?>
     </div>
-    <div class="span1">
+    <div class="span2">
             <?php
                 
                 echo CHtml::label('ปี','yearBegin');  
                 $yy = date("Y")+543;
                 $list = array($yy-2=>$yy-2,$yy-1=>$yy-1,$yy=>$yy,$yy+1=>$yy+1,$yy+2=>$yy+2);
                 echo CHtml::dropDownList('yearBegin', '', 
-                        $list,array('class'=>'span12'
+                        $list,array('class'=>'span12','options' => array($yy=>array('selected'=>true))
                     ));
 
               ?>
@@ -146,22 +117,23 @@ $(document).ready(function(){
                
               <?php
                 echo CHtml::label('ถึงเดือน','monthEnd');  
+                $mm = date("n");
                 $list = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม","4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน","7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน","10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
                 echo CHtml::dropDownList('monthEnd', '', 
-                        $list,array('class'=>'span12'
+                        $list,array('class'=>'span12','options' => array($mm=>array('selected'=>true))
                     ));
                
 
               ?>
     </div>
-    <div class="span1">
+    <div class="span2">
             <?php
                 
                 echo CHtml::label('ปี','yearEnd');  
                 $yy = date("Y")+543;
                 $list = array($yy-2=>$yy-2,$yy-1=>$yy-1,$yy=>$yy,$yy+1=>$yy+1,$yy+2=>$yy+2);
                 echo CHtml::dropDownList('yearEnd', '', 
-                        $list,array('class'=>'span12'
+                        $list,array('class'=>'span12','options' => array($yy=>array('selected'=>true)),
                     ));
 
               ?>
@@ -232,9 +204,9 @@ $("#gentReport").click(function(e){
 
        
         $.ajax({
-            url: "genCashflow",
+            url: "genStatement",
             cache:false,
-            data: {fiscalyear:$("#fiscalyear").val(),project: $("#project").val(),monthBegin:$("#monthBegin").val(),monthEnd:$("#monthEnd").val(),yearBegin:$("#yearBegin").val(),yearEnd:$("#yearEnd").val(),workcat:$("#workcat").val()
+            data: {monthBegin:$("#monthBegin").val(),monthEnd:$("#monthEnd").val(),yearBegin:$("#yearBegin").val(),yearEnd:$("#yearEnd").val()
               },
             success:function(response){
                
@@ -251,8 +223,8 @@ $("#printReport").click(function(e){
     e.preventDefault();
 
     $.ajax({
-        url: "printCashflow",
-        data: {fiscalyear:$("#fiscalyear").val(),project: $("#project").val(),monthBegin:$("#monthBegin").val(),monthEnd:$("#monthEnd").val(),yearBegin:$("#yearBegin").val(),yearEnd:$("#yearEnd").val(),workcat:$("#workcat").val()
+        url: "printStatement",
+        data: {monthBegin:$("#monthBegin").val(),monthEnd:$("#monthEnd").val(),yearBegin:$("#yearBegin").val(),yearEnd:$("#yearEnd").val()
               },
         success:function(response){
             window.open("../tempReport.pdf", "_blank", "fullscreen=yes");              
@@ -267,7 +239,7 @@ $("#printReport").click(function(e){
 Yii::app()->clientScript->registerScript('exportExcel', '
 $("#exportExcel").click(function(e){
     e.preventDefault();
-    window.location.href = "genCashflowExcel?fiscalyear="+$("#fiscalyear").val()+"&project="+$("#project").val()+"&monthBegin="+$("#monthBegin").val()+"&monthEnd="+$("#monthEnd").val()+"&yearBegin="+$("#yearBegin").val()+"&yearEnd="+$("#yearEnd").val()+"&workcat="+$("#workcat").val();
+    window.location.href = "genStatementExcel?monthBegin="+$("#monthBegin").val()+"&monthEnd="+$("#monthEnd").val()+"&yearBegin="+$("#yearBegin").val()+"&yearEnd="+$("#yearEnd").val();
               
 
 

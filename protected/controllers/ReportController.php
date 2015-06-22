@@ -177,6 +177,52 @@ class ReportController extends Controller
         
     }
 
+    public function actionGenStatement()
+    {
+        	
+	    
+	    $model = Project::model()->findAll();	
+	    
+    	$monthBegin = $_GET["monthBegin"];
+    	$monthEnd = $_GET["monthEnd"];
+    	$yearBegin = $_GET["yearBegin"];
+    	$yearEnd = $_GET["yearEnd"];
+
+    	// header('Content-type: text/plain');
+     //       echo($_GET["fiscalyear"]);                    
+     //    exit;
+
+        $this->renderPartial('_formStatement', array(
+            'model' => $model,'monthBegin'=>$monthBegin,'monthEnd'=>$monthEnd,'yearBegin'=>$yearBegin,'yearEnd'=>$yearEnd,
+            'display' => 'block',
+        ), false, true);
+
+        
+    }
+
+    public function actionPrintStatement()
+    {
+        	
+	    
+	    $model = Project::model()->findAll();	
+	    
+    	$monthBegin = $_GET["monthBegin"];
+    	$monthEnd = $_GET["monthEnd"];
+    	$yearBegin = $_GET["yearBegin"];
+    	$yearEnd = $_GET["yearEnd"];
+
+    	// header('Content-type: text/plain');
+     //       echo($_GET["fiscalyear"]);                    
+     //    exit;
+
+        $this->renderPartial('_formStatementPDF', array(
+            'model' => $model,'monthBegin'=>$monthBegin,'monthEnd'=>$monthEnd,'yearBegin'=>$yearBegin,'yearEnd'=>$yearEnd,
+            'display' => 'block',
+        ), false, true);
+
+        
+    }
+
     public function actionGenSummaryCashflow()
     {
         
@@ -742,7 +788,7 @@ class ReportController extends Controller
 			ob_start();
 
 			header('Content-Type: application/vnd.ms-excel');
-			header('Content-Disposition: attachment;filename="01simple.xls"');
+			header('Content-Disposition: attachment;filename="summary_report.xls"');
 			header('Cache-Control: max-age=0');
 			// If you're serving to IE 9, then the following may be needed
 			header('Cache-Control: max-age=1');
@@ -1528,7 +1574,7 @@ class ReportController extends Controller
 		ob_start();
 
 		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="01simple.xls"');
+		header('Content-Disposition: attachment;filename="progress_report.xls"');
 		header('Cache-Control: max-age=0');
 		// If you're serving to IE 9, then the following may be needed
 		header('Cache-Control: max-age=1');
@@ -2306,7 +2352,401 @@ class ReportController extends Controller
 		ob_start();
 
 		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="01simple.xls"');
+		header('Content-Disposition: attachment;filename="cashflow_report.xls"');
+		header('Cache-Control: max-age=0');
+		// If you're serving to IE 9, then the following may be needed
+		header('Cache-Control: max-age=1');
+
+		// If you're serving to IE over SSL, then the following may be needed
+		header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+		header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+		header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+		header ('Pragma: public'); // HTTP/1.0
+        
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+		$objWriter->save('php://output');  //
+		Yii::app()->end(); 
+    }       
+
+
+    public function actionGenStatementExcel()
+    {
+			
+
+    	$monthBegin = $_GET["monthBegin"];
+    	$monthEnd = $_GET["monthEnd"];
+    	$yearBegin = $_GET["yearBegin"];
+    	$yearEnd = $_GET["yearEnd"];
+	
+		Yii::import('ext.phpexcel.XPHPExcel');    
+		$objPHPExcel= XPHPExcel::createPHPExcel();
+
+        $header = new PHPExcel_Style();
+		$header->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 18,   
+			            'bold'  => true,           
+			            'color' => array(
+			            	'rgb'   => '000000'
+			            	)
+			       		)
+			    	)  
+			  ); 
+		$tableHead = new PHPExcel_Style();
+	    $tableHead->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 16,   
+			             'bold'  => true,              
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			            
+			    ));
+
+		$tableHeadOne = new PHPExcel_Style();
+	    $tableHeadOne->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 16,   
+			             'bold'  => true,              
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			            'fill'  => array(
+			            'type'  => PHPExcel_Style_Fill::FILL_SOLID,
+			            //'color' => array('rgb' =>'FA9D8E')
+			        ),
+			         'borders' => array(
+			            	'bottom'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_DOTTED ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'left'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+				           	'right'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	)             
+			        	)
+			    ));
+
+		$cashsum = new PHPExcel_Style();
+	    $cashsum->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 16,   
+			                          
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			         
+			            'borders' => array(
+				            'bottom'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_THIN ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+			        	)
+			    ));
+
+	    $cashsumAll = new PHPExcel_Style();
+	    $cashsumAll->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 16,   
+			                          
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			         
+			            'borders' => array(
+				            'bottom'    => array(
+				            	'style'   => PHPExcel_Style_Border::BORDER_DOUBLE ,
+				            	'color'   => array(
+				            		'rgb'     => '000000'
+				              	)
+				           	),
+			        	)
+			    ));
+
+
+		$normal = new PHPExcel_Style();
+	    $normal->applyFromArray(
+			        array(
+			            'font'  => array(
+			            'name'  => 'TH SarabunPSK', 
+			            'size'  => 16,   
+			                          
+			            'color' => array(
+			            'rgb'   => '000000'
+			            )
+			        ),
+			    ));
+		
+
+		
+		$month_th = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม","4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน","7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน","10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
+
+		if($monthBegin==$monthEnd && $yearBegin==$yearEnd)
+		    $monthBetween = $month_th[$monthBegin]." ".$yearBegin;
+		else if($yearBegin==$yearEnd)
+			$monthBetween = $month_th[$monthBegin]."-".$month_th[$monthEnd]." ".$yearEnd;
+		else
+		    $monthBetween = $month_th[$monthBegin]." ".$yearBegin."-".$month_th[$monthEnd]." ".$yearEnd;
+
+		$number = cal_days_in_month(CAL_GREGORIAN, $monthEnd, $yearEnd-543);
+		$monthBegin2 = $monthBegin<10 ? "0".$monthBegin : $monthBegin;
+		$monthEnd2 = $monthEnd<10 ? "0".$monthEnd : $monthEnd;
+		$dayBegin = $yearBegin."-".$monthBegin2."-"."01";
+
+		$number = $number<10 ? "0".$number : $number;
+		$dayEnd = $yearEnd."-".$monthEnd2."-".$number;
+		$monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
+			    
+
+				$sheet = 0;
+			    $objPHPExcel->createSheet(0);
+				$objPHPExcel->setActiveSheetIndex($sheet)->setTitle("งบกำไรขาดทุน");
+				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('A')->setWidth(10);
+				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('B')->setWidth(50);	
+				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('C')->setWidth(20);	
+				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('D')->setWidth(20);	
+				$objPHPExcel->setActiveSheetIndex($sheet)->getColumnDimension('E')->setWidth(20);	
+						   	      
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->mergeCells("A1:E1");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A1', "ฝ่ายบริการวิศวกรรม การไฟฟ้าส่วนภูมิภาค");
+				$objPHPExcel->setActiveSheetIndex($sheet)->mergeCells('A2:E2');
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A2', "งบกำไรขาดทุน");
+				$objPHPExcel->setActiveSheetIndex($sheet)->mergeCells('A3:E3');
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A3', "ประจำเดือน ".$monthBetween);
+				$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($header, 'A1:E3');
+				$objPHPExcel->setActiveSheetIndex($sheet)->getStyle('A1:E3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+				//table header
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D4', "จำนวนเงิน (บาท)");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E4', "หมายเหตุ");
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A5', "รายได้ :");
+
+				$row = 6;
+				 //tsd กองบริการวิศวกรรมระบบส่ง
+				 $pp = Yii::app()->db->createCommand()
+		                                            ->select('SUM(money) as sum')
+		                                            ->from('payment_project_contract')
+		                                            ->join('user','user_create=u_id')
+		                                            ->where("department_id='0' AND bill_date!='' AND bill_date ".$monthCondition)
+		                                            ->queryAll();
+		         $tsd_sum = $pp[0]["sum"];
+				
+				 //msd กองบริการบำรุงรักษา
+				 $pp = Yii::app()->db->createCommand()
+		                                            ->select('SUM(money) as sum')
+		                                            ->from('payment_project_contract')
+		                                            ->join('user','user_create=u_id')
+		                                            ->where("department_id='1' AND bill_date!='' AND bill_date ".$monthCondition)
+		                                            ->queryAll();
+		         $msd_sum = $pp[0]["sum"];
+
+		         //dsd กองบริการวิศวกรรมระบบจำหน่าย
+				 $pp = Yii::app()->db->createCommand()
+		                                            ->select('SUM(money) as sum')
+		                                            ->from('payment_project_contract')
+		                                            ->join('user','user_create=u_id')
+		                                            ->where("department_id='2' AND bill_date!='' AND bill_date ".$monthCondition)
+		                                            ->queryAll();
+		         $dsd_sum = $pp[0]["sum"];
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"รายได้จากกองบริการวิศวกรรมระบบส่ง");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($tsd_sum,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"1");
+				$row++;
+
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"รายได้จากกองบริการบำรุงรักษา");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($msd_sum,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"2");
+				$row++;
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"รายได้จากกองบริการวิศวกรรมระบบจำหน่าย");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($dsd_sum,2));
+				$income = $dsd_sum+$tsd_sum+$msd_sum;
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,number_format($income,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($cashsum, 'D'.$row);
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"3");
+				$row++;
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A'.$row, "หักค่าใช้จ่าย :");
+				$row++;
+
+				 //tsd กองบริการวิศวกรรมระบบส่ง
+				 $pp = Yii::app()->db->createCommand()
+		                                            ->select('SUM(money) as sum')
+		                                            ->from('payment_outsource_contract')
+		                                            ->join('user','user_create=u_id')
+		                                            ->where("department_id='0' AND approve_date!='' AND approve_date ".$monthCondition)
+		                                            ->queryAll();
+		         $tsd_sum = $pp[0]["sum"];
+				
+				 //msd กองบริการบำรุงรักษา
+				 $pp = Yii::app()->db->createCommand()
+		                                            ->select('SUM(money) as sum')
+		                                            ->from('payment_outsource_contract')
+		                                            ->join('user','user_create=u_id')
+		                                            ->where("department_id='1' AND approve_date!='' AND approve_date ".$monthCondition)
+		                                            ->queryAll();
+		         $msd_sum = $pp[0]["sum"];
+
+		         //dsd กองบริการวิศวกรรมระบบจำหน่าย
+				 $pp = Yii::app()->db->createCommand()
+		                                            ->select('SUM(money) as sum')
+		                                            ->from('payment_outsource_contract')
+		                                            ->join('user','user_create=u_id')
+		                                            ->where("department_id='2' AND approve_date!='' AND approve_date ".$monthCondition)
+		                                            ->queryAll();
+		         $dsd_sum = $pp[0]["sum"];
+				
+				
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าจ้างเหมา-กองบริการวิศวกรรมระบบส่ง");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($tsd_sum,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"1");
+				$row++;
+
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าจ้างเหมา-กองบริการบำรุงรักษา");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($msd_sum,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"2");
+				$row++;
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าจ้างเหมา-กองบริการวิศวกรรมระบบจำหน่าย");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($dsd_sum,2));
+				
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"3");
+				$row++;
+				
+
+
+		  				$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->join('user','mc_user_update=u_id')
+                                            ->where("department_id='0' AND mc_type=1 AND mc_date ".$monthCondition)
+                                            ->queryAll();
+                        $m_type1_tsd = $pp[0]["sum"];                    
+
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->join('user','mc_user_update=u_id')
+                                            ->where("department_id='0' AND mc_type=2 AND mc_date ".$monthCondition)
+                                            ->queryAll();
+                      
+                        $m_real_tsd = $pp[0]["sum"];
+                        $m_tsd = $m_real_tsd + $m_type1_tsd;
+
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->join('user','mc_user_update=u_id')
+                                            ->where("department_id='1' AND mc_type=1 AND mc_date ".$monthCondition)
+                                            ->queryAll();
+                        $m_type1_msd = $pp[0]["sum"];                    
+
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->join('user','mc_user_update=u_id')
+                                            ->where("department_id='1' AND mc_type=2 AND mc_date ".$monthCondition)
+                                            ->queryAll();
+                      
+                        $m_real_msd = $pp[0]["sum"];
+                        $m_msd = $m_real_msd + $m_type1_msd;
+
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->join('user','mc_user_update=u_id')
+                                            ->where("department_id='2' AND mc_type=1 AND mc_date ".$monthCondition)
+                                            ->queryAll();
+                        $m_type1_dsd = $pp[0]["sum"];                    
+
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->join('user','mc_user_update=u_id')
+                                            ->where("department_id='2' AND mc_type=2 AND mc_date ".$monthCondition)
+                                            ->queryAll();
+                      
+                        $m_real_dsd = $pp[0]["sum"];
+                        $m_dsd = $m_real_dsd + $m_type1_dsd;
+
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการบริหารงาน-กองบริการวิศวกรรมระบบส่ง");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($m_tsd,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"1");
+				$row++;
+
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการบริหารงาน-กองบริการบำรุงรักษา");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($m_msd,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"2");
+				$row++;
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการบริหารงาน-กองบริการวิศวกรรมระบบจำหน่าย");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($m_dsd,2));
+				$outcome = $dsd_sum+$tsd_sum+$msd_sum+$m_tsd+$m_msd+$m_dsd;
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,number_format($outcome,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($cashsum, 'D'.$row);
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"3");
+				$row++;
+        
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A'.$row, "กำไรสุทธิ :");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,"=D8-D".($row-1).")");//number_format($income - $outcome,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($cashsumAll, 'D'.$row);
+				//$row++;
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($tableHead, 'A4:E5');
+				$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($tableHead, 'A4:A10');
+				
+				$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($normal, 'B6:C20');
+				$objPHPExcel->setActiveSheetIndex($sheet)->getStyle('B4:E5')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+				
+	            $objPHPExcel->setActiveSheetIndex($sheet)->getStyle('C4:D20')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+	            $objPHPExcel->setActiveSheetIndex($sheet)->getStyle('D'.$row)->getNumberFormat()->setFormatCode('#,##0.00'); 
+				
+	            
+	            $objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($normal, 'E6:E20');
+	            $objPHPExcel->setActiveSheetIndex($sheet)->getStyle('E6:E20')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		///header('Content-type: text/plain');
+         //   echo($pj_sheetname);                    
+         //exit;
+		ob_end_clean();
+		ob_start();
+
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="statement_report.xls"');
 		header('Cache-Control: max-age=0');
 		// If you're serving to IE 9, then the following may be needed
 		header('Cache-Control: max-age=1');
@@ -2982,7 +3422,7 @@ class ReportController extends Controller
 		ob_start();
 
 		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="01simple.xls"');
+		header('Content-Disposition: attachment;filename="summaryCashflow_report.xls"');
 		header('Cache-Control: max-age=0');
 		// If you're serving to IE 9, then the following may be needed
 		header('Cache-Control: max-age=1');

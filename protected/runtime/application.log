@@ -19,3 +19,440 @@ Stack trace:
 REQUEST_URI=/pea_track/report/genProgress?project=&fiscalyear=&workcat=
 HTTP_REFERER=http://localhost/pea_track/report/progress
 ---
+2015/06/19 22:26:50 [error] [php] Undefined index: workcat_id (C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php:15)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): AjaxController->runAction()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): AjaxController->runActionWithFilters()
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): AjaxController->run()
+#3 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/ajax/getProjectList
+in C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php (15)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/06/19 22:26:58 [error] [php] Undefined index: workcat_id (C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php:15)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): AjaxController->runAction()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): AjaxController->runActionWithFilters()
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): AjaxController->run()
+#3 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/ajax/getProjectList
+in C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php (15)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/06/19 22:27:01 [error] [php] Undefined index: workcat_id (C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php:15)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): AjaxController->runAction()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): AjaxController->runActionWithFilters()
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): AjaxController->run()
+#3 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/ajax/getProjectList
+in C:\xampp\htdocs\pea_track\protected\controllers\AjaxController.php (15)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/06/20 00:50:49 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3. The SQL statement executed was: SELECT `wc_id`, `wc_name` AS `name`
+FROM `work_category`
+WHERE department_id=.
+in C:\xampp\htdocs\pea_track\protected\views\report\cashflow.php (132)
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (60)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/06/20 00:50:49 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3. The SQL statement executed was: SELECT `wc_id`, `wc_name` AS `name`
+FROM `work_category`
+WHERE department_id=' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\views\report\cashflow.php(132): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('cashflow', NULL, true)
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(60): CController->render('cashflow')
+#7 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionCashflow()
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('cashflow')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/cashflow')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/report/cashflow
+HTTP_REFERER=http://localhost/pea_track/report/statement
+---
+2015/06/20 00:50:54 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3. The SQL statement executed was: SELECT `wc_id`, `wc_name` AS `name`
+FROM `work_category`
+WHERE department_id=.
+in C:\xampp\htdocs\pea_track\protected\views\report\cashflow.php (132)
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (60)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/06/20 00:50:54 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3. The SQL statement executed was: SELECT `wc_id`, `wc_name` AS `name`
+FROM `work_category`
+WHERE department_id=' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\views\report\cashflow.php(132): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('cashflow', NULL, true)
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(60): CController->render('cashflow')
+#7 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionCashflow()
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('cashflow')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/cashflow')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/report/cashflow
+HTTP_REFERER=http://localhost/pea_track/report/summaryCashflow
+---
+2015/06/20 00:50:59 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3. The SQL statement executed was: SELECT `wc_id`, `wc_name` AS `name`
+FROM `work_category`
+WHERE department_id=.
+in C:\xampp\htdocs\pea_track\protected\views\report\cashflow.php (132)
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (60)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/06/20 00:50:59 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3. The SQL statement executed was: SELECT `wc_id`, `wc_name` AS `name`
+FROM `work_category`
+WHERE department_id=' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\views\report\cashflow.php(132): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(782): CController->renderPartial('cashflow', NULL, true)
+#6 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(60): CController->render('cashflow')
+#7 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionCashflow()
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('cashflow')
+#12 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/cashflow')
+#13 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/pea_track/report/cashflow
+HTTP_REFERER=http://localhost/pea_track/report/summaryCashflow
+---
+2015/06/20 01:47:00 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mc_update' in 'on clause'. The SQL statement executed was: SELECT SUM(mc_cost) as sum
+FROM `management_cost`
+JOIN `user` ON mc_update=u_id
+WHERE department_id='0' AND mc_type=1 AND mc_date  BETWEEN '2558-01-01' AND '2558-06-30'.
+in C:\xampp\htdocs\pea_track\protected\views\report\_formStatement.php (215)
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (198)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/06/20 01:47:00 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mc_update' in 'on clause'. The SQL statement executed was: SELECT SUM(mc_cost) as sum
+FROM `management_cost`
+JOIN `user` ON mc_update=u_id
+WHERE department_id='0' AND mc_type=1 AND mc_date  BETWEEN '2558-01-01' AND '2558-06-30'' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\views\report\_formStatement.php(215): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(198): CController->renderPartial('_formStatement', Array, false, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionGenStatement()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('genStatement')
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/genState...')
+#12 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/pea_track/report/genStatement?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558&_=1434739620039
+HTTP_REFERER=http://localhost/pea_track/report/statement
+---
+2015/06/20 01:47:02 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mc_update' in 'on clause'. The SQL statement executed was: SELECT SUM(mc_cost) as sum
+FROM `management_cost`
+JOIN `user` ON mc_update=u_id
+WHERE department_id='0' AND mc_type=1 AND mc_date  BETWEEN '2558-01-01' AND '2558-06-30'.
+in C:\xampp\htdocs\pea_track\protected\views\report\_formStatement.php (215)
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (198)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/06/20 01:47:02 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mc_update' in 'on clause'. The SQL statement executed was: SELECT SUM(mc_cost) as sum
+FROM `management_cost`
+JOIN `user` ON mc_update=u_id
+WHERE department_id='0' AND mc_type=1 AND mc_date  BETWEEN '2558-01-01' AND '2558-06-30'' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\views\report\_formStatement.php(215): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(198): CController->renderPartial('_formStatement', Array, false, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionGenStatement()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('genStatement')
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/genState...')
+#12 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/pea_track/report/genStatement?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558&_=1434739622088
+HTTP_REFERER=http://localhost/pea_track/report/statement
+---
+2015/06/20 01:47:07 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mc_update' in 'on clause'. The SQL statement executed was: SELECT SUM(mc_cost) as sum
+FROM `management_cost`
+JOIN `user` ON mc_update=u_id
+WHERE department_id='0' AND mc_type=1 AND mc_date  BETWEEN '2558-01-01' AND '2558-06-30'.
+in C:\xampp\htdocs\pea_track\protected\views\report\_formStatement.php (215)
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (198)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/06/20 01:47:07 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mc_update' in 'on clause'. The SQL statement executed was: SELECT SUM(mc_cost) as sum
+FROM `management_cost`
+JOIN `user` ON mc_update=u_id
+WHERE department_id='0' AND mc_type=1 AND mc_date  BETWEEN '2558-01-01' AND '2558-06-30'' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\views\report\_formStatement.php(215): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(198): CController->renderPartial('_formStatement', Array, false, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionGenStatement()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('genStatement')
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/genState...')
+#12 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/pea_track/report/genStatement?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558&_=1434739627309
+HTTP_REFERER=http://localhost/pea_track/report/statement
+---
+2015/06/20 01:47:16 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mc_update' in 'on clause'. The SQL statement executed was: SELECT SUM(mc_cost) as sum
+FROM `management_cost`
+JOIN `user` ON mc_update=u_id
+WHERE department_id='0' AND mc_type=1 AND mc_date  BETWEEN '2558-01-01' AND '2558-06-30'.
+in C:\xampp\htdocs\pea_track\protected\views\report\_formStatement.php (215)
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (198)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/06/20 01:47:16 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mc_update' in 'on clause'. The SQL statement executed was: SELECT SUM(mc_cost) as sum
+FROM `management_cost`
+JOIN `user` ON mc_update=u_id
+WHERE department_id='0' AND mc_type=1 AND mc_date  BETWEEN '2558-01-01' AND '2558-06-30'' in C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\pea_track\protected\views\report\_formStatement.php(215): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(198): CController->renderPartial('_formStatement', Array, false, true)
+#6 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionGenStatement()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('genStatement')
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/genState...')
+#12 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/pea_track/report/genStatement?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558&_=1434739636064
+HTTP_REFERER=http://localhost/pea_track/report/statement
+---
+2015/06/21 11:39:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "printStatement" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('printStatement')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('printStatement')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/printSta...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/report/printStatement?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558
+HTTP_REFERER=http://localhost/pea_track/report/statement
+---
+2015/06/21 12:34:03 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\tcpdf\tcpdf.php:17155)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\views\report\_formStatementPDF.php(396): MYPDF->writeHTMLCell()
+#1 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ReportController->renderInternal()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ReportController->renderFile()
+#4 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(221): ReportController->renderPartial()
+#5 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionPrintStatement()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#9 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/printStatement?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558
+in C:\xampp\htdocs\tcpdf\tcpdf.php (17155)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (5828)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (17094)
+2015/06/21 12:34:52 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\tcpdf\tcpdf.php:17155)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\views\report\_formStatementPDF.php(396): MYPDF->writeHTMLCell()
+#1 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ReportController->renderInternal()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ReportController->renderFile()
+#4 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(221): ReportController->renderPartial()
+#5 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionPrintStatement()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#9 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/printStatement?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558
+in C:\xampp\htdocs\tcpdf\tcpdf.php (17155)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (5828)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (17094)
+2015/06/21 12:35:51 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\tcpdf\tcpdf.php:17155)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\views\report\_formStatementPDF.php(398): MYPDF->writeHTMLCell()
+#1 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ReportController->renderInternal()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ReportController->renderFile()
+#4 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(221): ReportController->renderPartial()
+#5 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionPrintStatement()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#9 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/printStatement?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558
+in C:\xampp\htdocs\tcpdf\tcpdf.php (17155)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (5828)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (17094)
+2015/06/21 12:36:01 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\tcpdf\tcpdf.php:17155)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\views\report\_formStatementPDF.php(398): MYPDF->writeHTMLCell()
+#1 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ReportController->renderInternal()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ReportController->renderFile()
+#4 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(221): ReportController->renderPartial()
+#5 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionPrintStatement()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#9 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/printStatement?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558
+in C:\xampp\htdocs\tcpdf\tcpdf.php (17155)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (5828)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (17094)
+2015/06/21 12:38:06 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\tcpdf\tcpdf.php:17155)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\views\report\_formStatementPDF.php(398): MYPDF->writeHTMLCell()
+#1 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ReportController->renderInternal()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ReportController->renderFile()
+#4 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(221): ReportController->renderPartial()
+#5 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionPrintStatement()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#9 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/printStatement?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558
+in C:\xampp\htdocs\tcpdf\tcpdf.php (17155)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (5828)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (17094)
+2015/06/21 12:38:13 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\tcpdf\tcpdf.php:17155)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\views\report\_formStatementPDF.php(398): MYPDF->writeHTMLCell()
+#1 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ReportController->renderInternal()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ReportController->renderFile()
+#4 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(221): ReportController->renderPartial()
+#5 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionPrintStatement()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#9 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/printStatement?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558
+in C:\xampp\htdocs\tcpdf\tcpdf.php (17155)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (5828)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (17094)
+2015/06/21 12:39:02 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\tcpdf\tcpdf.php:17155)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\protected\views\report\_formStatementPDF.php(398): MYPDF->writeHTMLCell()
+#1 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ReportController->renderInternal()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ReportController->renderFile()
+#4 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(221): ReportController->renderPartial()
+#5 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionPrintStatement()
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#9 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/printStatement?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558
+in C:\xampp\htdocs\tcpdf\tcpdf.php (17155)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (5828)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (17094)
+2015/06/21 12:42:31 [error] [php] Undefined index: trids (C:\xampp\htdocs\tcpdf\tcpdf.php:19477)
+Stack trace:
+#0 C:\xampp\htdocs\tcpdf\tcpdf.php(17094): MYPDF->MultiCell()
+#1 C:\xampp\htdocs\pea_track\protected\views\report\_formStatementPDF.php(398): MYPDF->writeHTMLCell()
+#2 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(126): require()
+#3 C:\xampp\htdocs\pea_track\framework\web\CBaseController.php(95): ReportController->renderInternal()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(869): ReportController->renderFile()
+#5 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(221): ReportController->renderPartial()
+#6 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionPrintStatement()
+#7 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#9 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#10 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#11 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/printStatement?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558
+in C:\xampp\htdocs\tcpdf\tcpdf.php (19477)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (18283)
+in C:\xampp\htdocs\tcpdf\tcpdf.php (5828)
+2015/06/21 17:19:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "genStatementExcel" ตามคำสั่งได้' in C:\xampp\htdocs\pea_track\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(270): CController->missingAction('genStatementExc...')
+#1 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('genStatementExc...')
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/genState...')
+#3 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/pea_track/report/genStatementExcel?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558
+HTTP_REFERER=http://localhost/pea_track/report/statement
+---
+2015/06/21 19:45:54 [error] [php] Undefined variable: sheet (C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php:2616)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#3 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/genStatementExcel?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (2616)
+in C:\xampp\htdocs\pea_track\index.php (13)
+2015/06/21 19:46:26 [error] [php] Undefined variable: sheet (C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php:2617)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#2 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#3 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/genStatementExcel?monthBegin=1&monthEnd=6&yearBegin=2558&yearEnd=2558
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (2617)
+in C:\xampp\htdocs\pea_track\index.php (13)
