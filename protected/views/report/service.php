@@ -36,111 +36,129 @@ body * { visibility: hidden;}
 
 
 <h4>รายงานสรุปรายได้ ค่าใช้จ่ายงานบริการวิศวกรรม</h4>
+<div class="row-fluid">
+  <div class="well span4">
+    
+      <div class="row-fluid">
+    	<div class="span3">
+    		<?php
 
-<div class="well">
-  <div class="row-fluid">
-	<div class="span2">
-		<?php
+                $projects =Project::model()->findAll(array(
+        				'select'=>'pj_fiscalyear',
+                'order'=>'pj_fiscalyear ASC',
+        				//'group'=>'t.Category',
+        				'distinct'=>true,
+    				));   
 
-            $projects =Project::model()->findAll(array(
-    				'select'=>'pj_fiscalyear',
-            'order'=>'pj_fiscalyear ASC',
-    				//'group'=>'t.Category',
-    				'distinct'=>true,
-				));   
+    			//print_r($projects);	     
+         
+                $list = CHtml::listData($projects,'pj_fiscalyear','pj_fiscalyear');
+                
+                $list = array();
+                $current_y =  date("Y")+543;
+                for($i=$current_y;$i>=$current_y-10;$i--)
+                    $list[$i] = $i;  
+                
+                //print_r($list);
+                echo CHtml::label('ปี','fiscalyear');  
+                echo CHtml::dropDownList('fiscalyear', '', 
+                                $list,array('class'=>'span12'
+                                	
+                                ));
+                 	
+    		?>
 
-			//print_r($projects);	     
-     
-            $list = CHtml::listData($projects,'pj_fiscalyear','pj_fiscalyear');
+    	</div>
 
-            echo CHtml::label('ปีงบประมาณ','fiscalyear');  
-            echo CHtml::dropDownList('fiscalyear', '', 
-                            $list,array('class'=>'span12'
-                            	,
-                            	'ajax' => array(
-							                'type' => 'POST', //request type
-							                 
-							                'data' => array('year' => 'js:this.value','workcat_id' => 'js:$("#workcat").val()'),
-							        )
-                            	));
-             	
-		?>
+    	<div class="span9">
 
-	</div>
+    	<!-- </div> -->
+    	<!-- <div class="span1"> -->
+    	  <?php
+    		$this->widget('bootstrap.widgets.TbButton', array(
+                  'buttonType'=>'link',
+                  
+                  'type'=>'success',
+                  'label'=>'Excel',
+                  'icon'=>'excel',
+                  
+                  'htmlOptions'=>array(
+                    'class'=>'span6',
+                    'style'=>'margin:25px 10px 0px 0px;padding-left:0px;padding-right:0px',
+                    'id'=>'exportExcel'
+                  ),
+              ));
 
-	<div class="span3">
-	  <?php
-		$this->widget('bootstrap.widgets.TbButton', array(
-              'buttonType'=>'link',
+          $this->widget('bootstrap.widgets.TbButton', array(
+                  'buttonType'=>'link',
+                  
+                  'type'=>'info',
+                  'label'=>'',
+                  'icon'=>'print white',
+                  
+                  'htmlOptions'=>array(
+                    'class'=>'span4',
+                    'style'=>'margin:25px 0px 0px 0px;',
+                    'id'=>'printReport'
+                  ),
+              ));
+          ?>
+    	</div>
+    
+    </div>
+
+
+    <div class="row-fluid">
+      <div class="span12">
+          <?php
+
+                $projects =Project::model()->findByPK(58);   
+                print_r($projects->getManageCost(" BETWEEN '2558-01-01' AND '2558-06-30' "));
               
-              'type'=>'inverse',
-              'label'=>'view',
-              'icon'=>'list-alt white',
-              
-              'htmlOptions'=>array(
-                'class'=>'span4',
-                'style'=>'margin:25px 10px 0px 0px;',
-                'id'=>'gentReport'
-              ),
-          ));
+                echo CHtml::label('กราฟ','chart');  
+                echo CHtml::dropDownList('chart', '', 
+                                array("1"=>"รายได้การให้บริการงานวิศวกรรม","2"=>"ค่าใช้จ่ายจ้างเหมาและค่าดำเนินงาน",
+                                      ),array('class'=>'span12'
+                              
+                                  ));
+                  
+        ?>
+
+      </div>
+    </div>
+
+
+      <?php
+        $this->widget('bootstrap.widgets.TbButton', array(
+                  'buttonType'=>'link',
+                  
+                  'type'=>'inverse',
+                  'label'=>'view',
+                  'icon'=>'list-alt white',
+                  
+                  'htmlOptions'=>array(
+                    'class'=>'span4',
+                    'style'=>'margin:25px 10px 0px 0px;',
+                    'id'=>'gentReport'
+                  ),
+              ));
       ?>
-	<!-- </div> -->
-	<!-- <div class="span1"> -->
-	  <?php
-		$this->widget('bootstrap.widgets.TbButton', array(
-              'buttonType'=>'link',
-              
-              'type'=>'success',
-              'label'=>'Excel',
-              'icon'=>'excel',
-              
-              'htmlOptions'=>array(
-                'class'=>'span4',
-                'style'=>'margin:25px 10px 0px 0px;padding-left:0px;padding-right:0px',
-                'id'=>'exportExcel'
-              ),
-          ));
-
-      $this->widget('bootstrap.widgets.TbButton', array(
-              'buttonType'=>'link',
-              
-              'type'=>'info',
-              'label'=>'',
-              'icon'=>'print white',
-              
-              'htmlOptions'=>array(
-                'class'=>'span3',
-                'style'=>'margin:25px 0px 0px 0px;',
-                'id'=>'printReport'
-              ),
-          ));
-      ?>
-	</div>
-  </div>
-</div>
-
-<!-- <div class="row"> -->
-    <!-- <div id="reportContent" class="" style="overflow: auto;"> -->
-
+  </div><!-- end span4--> 
+  <div class="span8"> 
     <div id="reportContent" >
         
     </div>
+  </div>
+</div>    
 
-    <!--  <div id="print">
-    <div id="reportContent" class="" style="overflow:scroll;">
-      
-    </div>
-    <div class="pull-right" id="dateprint"></div>
-  </div>  -->
-<!-- </div> -->
 <?php
 //Yii::app()->clientScript->registerCoreScript('jquery');
 Yii::app()->clientScript->registerScript('gentReport', '
 $("#gentReport").click(function(e){
     e.preventDefault();
     $.ajax({
-        url: "genProgress",
-        data: {project: $("#project").val(),fiscalyear: $("#fiscalyear").val(),workcat: $("#workcat").val()},
+        url: "genService",
+        data: {fiscalyear: $("#fiscalyear").val(),report:$("#chart").val()},
         success:function(response){
             
             $("#reportContent").html(response);

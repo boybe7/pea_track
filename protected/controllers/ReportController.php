@@ -177,6 +177,21 @@ class ReportController extends Controller
         
     }
 
+    public function actionGenService()
+    {
+    	$year = $_GET["fiscalyear"];
+    	$report = $_GET["report"];
+
+    	if($report==1)
+    	{
+    		 $projects =Project::model()->findByPK(58);   
+    		 $dateBegin = $year."-01-01";
+    		 $dateEnd = $year."-12-31";
+             print_r($projects->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' "));
+    	}	
+
+    }
+
     public function actionGenStatement()
     {
         	
