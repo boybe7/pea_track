@@ -7,6 +7,7 @@ $this->breadcrumbs=array(
 $theme = Yii::app()->theme;
 $cs = Yii::app()->clientScript;
 $cs->registerScriptFile( $theme->getBaseUrl() . '/js/highcharts.js' );
+$cs->registerScriptFile( $theme->getBaseUrl() . '/js/drilldown.js' );
 
 ?>
 
@@ -112,8 +113,7 @@ body * { visibility: hidden;}
       <div class="span12">
           <?php
 
-                $projects =Project::model()->findByPK(58);   
-                print_r($projects->getManageCost(" BETWEEN '2558-01-01' AND '2558-06-30' "));
+               
               
                 echo CHtml::label('กราฟ','chart');  
                 echo CHtml::dropDownList('chart', '', 
@@ -144,24 +144,247 @@ body * { visibility: hidden;}
               ));
       ?>
   </div><!-- end span4--> 
-  <div class="span8"> 
-    <div id="reportContent" >
+  <div class="span8 well"> 
+    <div id="reportContent" style="width: auto; height: 400px; margin: 0 auto">
         
     </div>
   </div>
 </div>    
+<?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
+<script type="text/javascript">
+  var chart;
+  function format(num, fix) {
+    var p = num.toFixed(fix).split(".");
+    return p[0].split("").reduceRight(function(acc, num, i, orig) {
+        if ("-" === num && 0 === i) {
+            return num + acc;
+        }
+        var pos = orig.length - i - 1
+        return  num + (pos && !(pos % 3) ? "," : "") + acc;
+    }, "") + (p[1] ? "." + p[1] : "");
+$(document).ready(function(){
+    alert('hello');
+    // Enter code here
+});
+    jQuery(function($) {
+      alert("gg")
+      
+    });
+  }
+</script>
 
 <?php
 //Yii::app()->clientScript->registerCoreScript('jquery');
 Yii::app()->clientScript->registerScript('gentReport', '
+var boy = "xxx";
+var chart = $("#reportContent").highcharts({
+                    chart:{
+                    type:"pie",
+                                style: {
+                                    fontFamily: "Boon400"
+                                },
+                                events: {
+                                  load: function(event) {
+                                     
+                                  }
+                                }
+                                
+                                },
+                    credits:{enabled: false},
+                          colors:[
+                              "#5485BC", "#EDD447", "#5C9384", "#981A37", "#FCB319","#86A033","#614931", "#00526F","#594266","#cb6828","#aaaaab","#a89375"
+                              ],
+                          title:{text: $( "#chart option:selected" ).text()},
+                    tooltip:{
+                      enabled: true,
+                      animation: true
+                    },
+                    plotOptions: {
+                              pie: {
+                                  allowPointSelect: true,
+                                  animation: true,
+                                  cursor: "pointer",
+                                  showInLegend: true,
+                                  dataLabels: {
+                                      enabled: false,                        
+                                      formatter: function() {
+                                          return this.percentage.toFixed(2) ;
+                                      }
+                                  },
+                                  point: {
+                                    events: {
+                                       click: function() {
+                                            
+                                            //showData(this.drilldown);
+                                            
+                                        }
+                                    }
+                                }                      
+                              },
+                              series: {
+                                  dataLabels: {
+                                      enabled: true,
+                                      formatter: function() {
+                                          return Math.round(this.percentage*100)/100 + " %";
+                                      },
+                                      distance: -30,
+                                      
+                                  }
+                              }
+                          },
+                          legend: {
+                              enabled: true,
+                              layout: "vertical",
+                              align: "left",
+                              width: 220,
+                              verticalAlign: "middle",
+                              borderWidth: 0,
+                              useHTML: true,
+                              labelFormatter: function() {
+                                  
+                                  return "<div><span>" + this.name + "</span><span>  " + format(this.y) + "  บาท</span></div>";
+                              },
+                          title: {
+                            text: "",
+                            style: {
+                              fontWeight: "bold"
+                            }
+                          }
+                          },
+
+                          drilldown: {
+                             
+                          },      
+                    series: [
+                    ]
+                  });
+
+
+
 $("#gentReport").click(function(e){
     e.preventDefault();
     $.ajax({
         url: "genService",
         data: {fiscalyear: $("#fiscalyear").val(),report:$("#chart").val()},
+        dataType: "json",
         success:function(response){
-            
-            $("#reportContent").html(response);
+           
+          var series1 = [];
+          var seriesDrill = [];
+          var drill = [];
+                        
+                           var idx = 0;
+                           $.each(response, function(key, val) {
+                                
+                                if(val["drill"].length > 0)
+                                {  
+                                  
+                                  
+                                  series1.push({name:val["name"],y:parseInt(val["value"]),drilldown:"fruits"});
+                                  
+                                  //seriesDrill.push({id:"drill"+idx,data:val["drill"]});
+                                                                    
+                                  drill = val["drill"];
+                                  idx++;
+
+                                }else  
+                                  series1.push({name:val["name"],y:parseInt(val["value"])});
+                              
+                           });
+           
+           $("#reportContent").highcharts({
+                    chart:{
+                    type:"pie",
+                                style: {
+                                    fontFamily: "Boon400"
+                                },
+                                events: {
+                                  load: function(event) {
+                                     
+                                  }
+                                }
+                                
+                                },
+                    credits:{enabled: false},
+                          colors:[
+                              "#5485BC", "#EDD447", "#5C9384", "#981A37", "#FCB319","#86A033","#614931", "#00526F","#594266","#cb6828","#aaaaab","#a89375"
+                              ],
+                          title:{text: $( "#chart option:selected" ).text()},
+                    tooltip:{
+                      enabled: true,
+                      animation: true
+                    },
+                    plotOptions: {
+                              pie: {
+                                  allowPointSelect: true,
+                                  animation: true,
+                                  cursor: "pointer",
+                                  showInLegend: true,
+                                  dataLabels: {
+                                      enabled: false,                        
+                                      formatter: function() {
+                                          return this.percentage.toFixed(2) ;
+                                      }
+                                  },
+                                  point: {
+                                    events: {
+                                       click: function() {
+                                            
+                                            //showData(this.drilldown);
+                                            
+                                        }
+                                    }
+                                }                      
+                              },
+                              series: {
+                                  dataLabels: {
+                                      enabled: true,
+                                      formatter: function() {
+                                          return Math.round(this.percentage*100)/100 + " %";
+                                      },
+                                      distance: -30,
+                                      
+                                  }
+                              }
+                          },
+                          legend: {
+                              enabled: true,
+                              layout: "vertical",
+                              align: "left",
+                              width: 220,
+                              verticalAlign: "middle",
+                              borderWidth: 0,
+                              useHTML: true,
+                              labelFormatter: function() {
+                                  
+                                  return "<div><span>" + this.name + "</span><span>  " + format(this.y) + "  บาท</span></div>";
+                              },
+                          title: {
+                            text: "",
+                            style: {
+                              fontWeight: "bold"
+                            }
+                          }
+                          },
+
+                          drilldown: {
+                              series: [{
+                                  id: "fruits",
+                                  name: "Fruits",
+                                  data: drill
+                              }]
+                          },      
+                    series: [{
+                      type: "pie",
+                      dataLabels:{
+                      
+                      },
+                      data: series1
+                    }]
+                  });
+
+              
+           console.log(chart);
             
         }
 

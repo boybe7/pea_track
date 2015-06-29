@@ -532,3 +532,20 @@ Stack trace:
 REQUEST_URI=/pea_track/report/genService?fiscalyear=2558&report=2
 HTTP_REFERER=http://localhost/pea_track/report/service
 ---
+2015/06/28 22:00:15 [error] [exception.CException] exception 'CException' with message 'Project and its behaviors do not have a method or closure named "findByAll".' in C:\xampp\htdocs\pea_track\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\db\ar\CActiveRecord.php(227): CComponent->__call('findByAll', Array)
+#1 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(195): CActiveRecord->__call('findByAll', Array)
+#2 C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php(195): Project->findByAll(Array)
+#3 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionGenService()
+#4 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): CController->run('genService')
+#8 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController('report/genServi...')
+#9 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\pea_track\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/pea_track/report/genService?fiscalyear=2558&report=1
+HTTP_REFERER=http://localhost/pea_track/report/service
+---
