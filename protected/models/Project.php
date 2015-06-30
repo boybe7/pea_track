@@ -154,6 +154,63 @@ class Project extends CActiveRecord
     		return $sum;
 	}
 
+	public function getIncome($dateCon){
+	     	$sum = 0;
+	     	foreach($this->getRelated('contract') as $ProjectContract)
+   			{
+     			
+     			$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_project_contract')
+                                            ->join('project_contract','proj_id=pc_id')
+                                            ->where("pc_id='$ProjectContract->pc_id' AND bill_date!='' AND bill_date!='0000-00-00' AND bill_date ".$dateCon)
+                                            ->queryAll();
+                        //echo $pp[0]["sum"];
+                $sum += $pp[0]["sum"];
+     			
+   			}
+    		return $sum;
+	}
+
+	public function getOutcome($dateCon){
+	     	$sum = 0;
+	     	//header('Content-type: text/plain');
+	     	foreach($this->getRelated('outsource') as $OutsourceContract)
+   			{
+
+     			$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_outsource_contract')
+                                            ->join('outsource_contract','contract_id=oc_id')
+                                            ->where("oc_id='$OutsourceContract->oc_id' AND approve_date!='' AND approve_date!='0000-00-00' AND approve_date ".$dateCon)
+                                            ->queryAll();
+                        //echo $pp[0]["sum"];
+
+                $sum += $pp[0]["sum"];
+                  
+                //echo($OutsourceContract->oc_id.":".$sum."<br>");                    
+                
+     			
+   			}
+   			//exit;
+    		return $sum;
+	}
+
+	public function getManageCost($dateCon)
+	{
+			$sum = 0;
+
+	     	//management
+                         $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$this->pj_id' AND mc_type!=0 AND mc_date ".$dateCon)
+                                            ->queryAll();
+                        $sum = $pp[0]["sum"];
+   			//exit;
+    		return $sum;
+	}
+
 	protected function afterFind(){
             parent::afterFind();
             $str_date = explode("-", $this->pj_date_approved);

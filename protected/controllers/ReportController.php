@@ -177,6 +177,72 @@ class ReportController extends Controller
         
     }
 
+    public function actionGenService()
+    {
+    	$year = $_GET["fiscalyear"];
+    	$report = $_GET["report"];
+
+    	if($report==1)
+    	{
+    		 $dateBegin = $year."-01-01";
+    		 $dateEnd = $year."-12-31";
+             
+
+             $workcat = WorkCategory::model()->findAll();
+             $data = array();
+             foreach ($workcat as $key => $wc) {
+             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+             	$sum = 0;
+             	foreach ($projects as $key => $pj) {
+             		$sum += $pj->getIncome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+             	}
+             	$data[] = array("name"=>$wc->wc_name, "value"=>$sum,"drill"=> 0);
+             }
+             echo json_encode($data);
+    	}
+
+    	if($report==2)
+    	{
+    		    
+    		 $dateBegin = $year."-01-01";
+    		 $dateEnd = $year."-12-31";
+             
+
+             $data = array();
+             
+             	$projects =Project::model()->findAll();
+             	$sum = 0;
+             	$sum2 = 0;
+             	foreach ($projects as $key => $pj) {
+             		$sum += $pj->getOutcome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+             		$sum2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+             	}
+
+             	$workcat = WorkCategory::model()->findAll();
+	             $dataW = array();
+	             $dataW2 = array();
+	             foreach ($workcat as $key => $wc) {
+	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+	             	$sumW = 0;
+	             	$sumW2 = 0;
+	             	foreach ($projects as $key => $pj) {
+	             		$sumW += $pj->getIncome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             		$sumW2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             
+	             	}
+	             	$dataW[] = array("name"=>$wc->wc_name, "y"=>$sumW);
+	             	$dataW2[] = array("name"=>$wc->wc_name, "y"=>$sumW2);
+	             }
+
+             	$data[] = array("name"=>"ค่าจ้างเหมา", "value"=>$sum,"drill"=>$dataW);
+             	$data[] = array("name"=>"ค่าดำเนินงาน", "value"=>$sum2,"drill"=>$dataW2);
+             
+
+             echo json_encode($data);
+    	}		
+
+    }
+
     public function actionGenStatement()
     {
         	
