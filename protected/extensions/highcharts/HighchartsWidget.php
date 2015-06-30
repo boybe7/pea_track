@@ -101,7 +101,14 @@ class HighchartsWidget extends CWidget
         // merge options with default values
         $defaultOptions = array('chart' => array('renderTo' => $this->id));
         $this->options = CMap::mergeArray($defaultOptions, $this->options);
+         if (isset($this->options['chart']['options3d']['enabled']))
+        {
+            if ($this->options['chart']['options3d']['enabled']===true) {
+                array_unshift($this->scripts, 'highcharts-3d');
+            }
+        }
         array_unshift($this->scripts, $this->_baseScript);
+
 
         $this->registerAssets();
     }

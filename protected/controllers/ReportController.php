@@ -233,7 +233,8 @@ class ReportController extends Controller
 	             	$dataW[] = array("name"=>$wc->wc_name, "y"=>$sumW);
 	             	$dataW2[] = array("name"=>$wc->wc_name, "y"=>$sumW2);
 	             }
-
+	            // $sum = 50;
+	            // $sum2 = 80;
              	$data[] = array("name"=>"ค่าจ้างเหมา", "value"=>$sum,"drill"=>$dataW);
              	$data[] = array("name"=>"ค่าดำเนินงาน", "value"=>$sum2,"drill"=>$dataW2);
              
