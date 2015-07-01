@@ -226,7 +226,7 @@ class ReportController extends Controller
 	             	$sumW = 0;
 	             	$sumW2 = 0;
 	             	foreach ($projects as $key => $pj) {
-	             		$sumW += $pj->getIncome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             		$sumW += $pj->getOutcome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
 	             		$sumW2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
 	             
 	             	}

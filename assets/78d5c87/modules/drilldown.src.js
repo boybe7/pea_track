@@ -192,15 +192,28 @@
 
 	Chart.prototype.showDrillUpButton = function () {
 		var chart = this,
-			backText = this.getDrilldownBackText(),
-			buttonOptions = chart.options.drilldown.drillUpButton,
-			attr,
-			states;
+			backText = this.getDrilldownBackText();
+			
+			
+			// buttonOptions.position.align = "right";
+			// buttonOptions.position.x = -10;
+			// buttonOptions.position.y = 0;
+
 			
 
+			//chart.options.drilldown.drillUpButton 
+			//chart.options.drilldown.drillUpButton = array('position'=>array("align"=>"right"));
+		
+			// buttonOptions = chart.options.drilldown.drillUpButton,
+			// attr,
+			// states;
+			
+			
+
+
 		if (!this.drillUpButton) {
-			attr = buttonOptions.theme;
-			states = attr && attr.states;
+			// attr = buttonOptions.theme;
+			// states = attr && attr.states;
 						
 			this.drillUpButton = this.renderer.button(
 				backText,
@@ -208,17 +221,14 @@
 				null,
 				function () {
 					chart.drillUp(); 
-				},
-				attr, 
-				states && states.hover,
-				states && states.select
+				}
 			)
 			.attr({
-				align: buttonOptions.position.align,
+				align: "right",
 				zIndex: 9
 			})
 			.add()
-			.align(buttonOptions.position, false, buttonOptions.relativeTo || 'plotBox');
+			.align({align: "right", x: -10, y: 10}, false, 'plotBox');
 		} else {
 			this.drillUpButton.attr({
 				text: backText

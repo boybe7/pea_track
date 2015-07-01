@@ -148,6 +148,10 @@ body * { visibility: hidden;}
     <div id="reportContent" style="width: auto; height: 400px; margin: 0 auto">
        <?php $this->widget('ext.highcharts.HighchartsWidget', array('id' => 'divChart',
                        'htmlOptions'=>array(),  
+                       'scripts' => array(
+                          'modules/drilldown', // in fact, this is mandatory :)
+                          ),
+
                        'options'=>array(
                            'gradient' => array('enabled'=> true),
                            'chart' => array('type' => 'pie',
@@ -155,7 +159,7 @@ body * { visibility: hidden;}
                                                             'enabled'=> true,
                                                             'alpha'=> 45,
                                                             'beta'=> 0
-                                                        ) 
+                                             )  
                             ), 
                            'title' => array('text' => 'รายได้การให้บริการงานวิศวกรรม','style' => array(
                                           'fontWeight' => 'bold',
@@ -181,7 +185,12 @@ body * { visibility: hidden;}
                                   ),
                                  
                               ),
-                            )    
+                            ),
+                            'drilldown'=> array(
+                               'id'=>'xx',
+                            
+                               'data'=> array(10.85, 7.35, 33.06, 2.81)
+                            )   
 
                         )
 
@@ -236,11 +245,13 @@ $("#gentReport").click(function(e){
                                 if(val["drill"].length > 0)
                                 {  
                                   
+                                  if(idx==0)
+                                    series1.push({name:val["name"],y:parseInt(val["value"]),selected: true,drilldown:"drill"+idx});
+                                  else
+                                    series1.push({name:val["name"],y:parseInt(val["value"]),drilldown:"drill"+idx});
                                   
-                                  series1.push({name:val["name"],y:parseInt(val["value"]),drilldown:"drill"+idx});
-                                  
-                                  seriesDrill.push({id:"drill"+idx,data:val["drill"]});
-                                                                    
+                                  seriesDrill.push({id:"drill"+idx,data:val["drill"],showInLegend : true});
+                                                                   
                                   drill = val["drill"];
                                   idx++;
 
@@ -259,13 +270,26 @@ $("#gentReport").click(function(e){
             // add new data
             var seriesOpts_01 = {
                 
-                name: "xxx",
+                name: "",
                 data: series1,
                 showInLegend : true
                           
             }
             chart.addSeries(seriesOpts_01);
-            chart.drilldown.series(seriesDrill);
+
+            var seriesOpts_02 = {
+                
+                name: "",
+                series: seriesDrill,
+                showInLegend : true
+                          
+            }
+
+            chart.options.drilldown = seriesOpts_02;
+            
+           // console.log(chart);
+           // chart.options.drilldown = {series: [{name: "drill0",id: "drill0",showInLegend : true,data:[{name:"A", y:70},{name:"C", y:90}]},{name: "drill0",id: "drill1",showInLegend : true,data:[{name:"A", y:50},{name:"C", y:50}]}]}; 
+           //console.log(chart);
         }
 
     });

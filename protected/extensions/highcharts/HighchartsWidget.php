@@ -126,6 +126,7 @@ class HighchartsWidget extends CWidget
 
         // register additional scripts
         $extension = YII_DEBUG ? '.src.js' : '.js';
+        //$extension = '.js';
         foreach ($this->scripts as $script) {
             $cs->registerScriptFile("{$baseUrl}/{$script}{$extension}");
         }
