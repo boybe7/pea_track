@@ -177,27 +177,83 @@ class ReportController extends Controller
         
     }
 
+    public function actionGenServiceWord()
+    {
+    	   //$model = Project::model()->findByPk($_GET["project"]);
+    		$year = $_GET["fiscalyear"];
+    		$workcat = $_GET["workcat"];
+
+		   Yii::import('ext.phpword.XPHPWord');    
+		   $objPHPWord= XPHPWord::createPHPWord();
+
+		   //style
+		    $objPHPWord->addFontStyle('rStyle', array('bold'=>true, 'italic'=>true, 'size'=>16));
+			$objPHPWord->addParagraphStyle('pStyle', array('align'=>'center', 'spaceAfter'=>100));
+
+		   // New portrait section
+			$section = $objPHPWord->createSection();
+
+			// Add text elements
+			$section->addText('สรุปรายได้ ค่าใช้จ่ายงานบริการวิศวกรรมแก่ลูกค้าภายนอก', array('name'=>'TH SarabunPSK', 'color'=>'black','bold'=>true, 'size'=>20),array('align'=>'center'));
+
+		   ob_end_clean();
+			ob_start();
+
+			header('Content-Type: application/vnd.ms-word');
+			header('Content-Disposition: attachment;filename="service_report.docx"');
+			header('Cache-Control: max-age=0');
+			// If you're serving to IE 9, then the following may be needed
+			header('Cache-Control: max-age=1');
+
+			// If you're serving to IE over SSL, then the following may be needed
+			header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+			header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+			header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+			header ('Pragma: public'); // HTTP/1.0
+
+			$objWriter = PHPWord_IOFactory::createWriter($objPHPWord, 'Word2007');
+			$objWriter->save('php://output');  //
+			 Yii::app()->end(); 
+
+
+	}	   
+
     public function actionGenService()
     {
     	$year = $_GET["fiscalyear"];
     	$report = $_GET["report"];
+    	$workcat = $_GET["workcat"];
 
     	if($report==1)
     	{
     		 $dateBegin = $year."-01-01";
     		 $dateEnd = $year."-12-31";
              
-
-             $workcat = WorkCategory::model()->findAll();
-             $data = array();
-             foreach ($workcat as $key => $wc) {
-             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
-             	$sum = 0;
-             	foreach ($projects as $key => $pj) {
-             		$sum += $pj->getIncome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
-             	}
-             	$data[] = array("name"=>$wc->wc_name, "value"=>$sum,"drill"=> 0);
-             }
+    		 if(empty($workcat))
+    		 {	
+	             $workcat = WorkCategory::model()->findAll();
+	             $data = array();
+	             foreach ($workcat as $key => $wc) {
+	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+	             	$sum = 0;
+	             	foreach ($projects as $key => $pj) {
+	             		$sum += $pj->getIncome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             	}
+	             	$data[] = array("name"=>$wc->wc_name, "value"=>$sum,"drill"=> 0);
+	             }
+	        }
+	        else{
+	        	$wc = WorkCategory::model()->findByPk($workcat);
+	             $data = array();
+	            
+	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+	             	$sum = 0;
+	             	foreach ($projects as $key => $pj) {
+	             		$sum += $pj->getIncome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             	}
+	             	$data[] = array("name"=>$wc->wc_name, "value"=>$sum,"drill"=> 0);
+	            
+	        }     
              echo json_encode($data);
     	}
 
@@ -240,7 +296,108 @@ class ReportController extends Controller
              
 
              echo json_encode($data);
-    	}		
+    	}	
+
+    	if($report==3)
+    	{
+    		    
+    		 $dateBegin = $year."-01-01";
+    		 $dateEnd = $year."-12-31";
+             
+
+             $data = array();
+             if(empty($workcat))
+    		 {	
+             	$workcat = WorkCategory::model()->findAll();
+	          
+	             foreach ($workcat as $key => $wc) {
+	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+	             	$sumW = 0;
+	             	$sumW2 = 0;
+	             	foreach ($projects as $key => $pj) {
+	             		$sumW += $pj->getOutcome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             		$sumW2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             
+	             	}
+	             	$data[] = array("name"=>"ค่าจ้างเหมา".$wc->wc_name, "value"=>$sumW,"drill"=> 0);
+	             	$data[] = array("name"=>"ค่าดำเนินงาน".$wc->wc_name, "value"=>$sumW2,"drill"=> 0);
+	             }
+	         }
+	         else{
+	         	  $wc = WorkCategory::model()->findByPk($workcat);
+	          
+	             
+	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+	             	$sumW = 0;
+	             	$sumW2 = 0;
+	             	foreach ($projects as $key => $pj) {
+	             		$sumW += $pj->getOutcome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             		$sumW2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             
+	             	}
+	             	$data[] = array("name"=>"ค่าจ้างเหมา".$wc->wc_name, "value"=>$sumW,"drill"=> 0);
+	             	$data[] = array("name"=>"ค่าดำเนินงาน".$wc->wc_name, "value"=>$sumW2,"drill"=> 0);
+	            
+	         }    
+	            // $sum = 50;
+	            // $sum2 = 80;
+             
+
+             echo json_encode($data);
+    	}
+
+    	if($report==4)
+    	{
+    		    
+    		 $dateBegin = $year."-01-01";
+    		 $dateEnd = $year."-12-31";
+             
+
+             $data = array();
+             if(empty($workcat))
+    		 {	
+             	$workcat = WorkCategory::model()->findAll();
+	          
+	             foreach ($workcat as $key => $wc) {
+	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+	             	$sumW = 0;
+	             	$sumW2 = 0;
+	             	foreach ($projects as $key => $pj) {
+	             		$sumW += $pj->getOutcome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             		$sumW2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             
+	             	}
+	             	$data[] = array("name"=>"ค่าจ้างเหมา".$wc->wc_name, "value"=>$sumW,"drill"=> 0);
+	             	$data[] = array("name"=>"ค่าดำเนินงาน".$wc->wc_name, "value"=>$sumW2,"drill"=> 0);
+	             }
+	         }
+	         else{
+	         	  
+	         	    $wc = WorkCategory::model()->findByPk($workcat);
+	          
+	             
+	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+	             	$sum = 0;
+	             	$sumW = 0;
+	             	$sumW2 = 0;
+	             	foreach ($projects as $key => $pj) {
+	             		$sumW += $pj->getOutcome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             		$sumW2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             		$sum += $pj->getIncome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             
+	             	}
+	             	$data[] = array("name"=>"รายได้".$wc->wc_name, "value"=>$sum,"drill"=> 0);
+	             	$data[] = array("name"=>"ค่าจ้างเหมา".$wc->wc_name, "value"=>$sumW,"drill"=> 0);
+	             	$data[] = array("name"=>"ค่าดำเนินงาน".$wc->wc_name, "value"=>$sumW2,"drill"=> 0);
+	            
+	         }    
+	            // $sum = 50;
+	            // $sum2 = 80;
+             
+
+             echo json_encode($data);
+    	}			
+	
 
     }
 

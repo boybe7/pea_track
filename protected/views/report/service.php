@@ -76,33 +76,7 @@ body * { visibility: hidden;}
     	<!-- </div> -->
     	<!-- <div class="span1"> -->
     	  <?php
-    		$this->widget('bootstrap.widgets.TbButton', array(
-                  'buttonType'=>'link',
-                  
-                  'type'=>'success',
-                  'label'=>'Excel',
-                  'icon'=>'excel',
-                  
-                  'htmlOptions'=>array(
-                    'class'=>'span6',
-                    'style'=>'margin:25px 10px 0px 0px;padding-left:0px;padding-right:0px',
-                    'id'=>'exportExcel'
-                  ),
-              ));
-
-          $this->widget('bootstrap.widgets.TbButton', array(
-                  'buttonType'=>'link',
-                  
-                  'type'=>'info',
-                  'label'=>'',
-                  'icon'=>'print white',
-                  
-                  'htmlOptions'=>array(
-                    'class'=>'span4',
-                    'style'=>'margin:25px 0px 0px 0px;',
-                    'id'=>'printReport'
-                  ),
-              ));
+    		
           ?>
     	</div>
     
@@ -118,7 +92,31 @@ body * { visibility: hidden;}
                 echo CHtml::label('กราฟ','chart');  
                 echo CHtml::dropDownList('chart', '', 
                                 array("1"=>"รายได้การให้บริการงานวิศวกรรม","2"=>"ค่าใช้จ่ายจ้างเหมาและค่าดำเนินงาน",
+                                      "3"=>"ค่าใช้จ่ายจ้างเหมาและค่าดำเนินงานแยกตามประเภทงาน",
+                                      "4"=>"เปรียบเทียบรายได้กับค่าใช้จ่าย"
                                       ),array('class'=>'span12'
+                              
+                                  ));
+                  
+        ?>
+
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+          <?php
+
+               
+              
+                echo CHtml::label('ประเภทงาน','workcat');  
+                $workcat = Yii::app()->db->createCommand()
+                    ->select('wc_id,wc_name as name')
+                    ->from('work_category')
+                    ->where('department_id='.Yii::app()->user->userdept)
+                    ->queryAll();
+     
+                $typelist = CHtml::listData($workcat,'wc_id','name');
+                echo CHtml::dropDownList('workcat', '',$typelist,array('empty'=>'ทุกประเภท','class'=>'span12'
                               
                                   ));
                   
@@ -142,6 +140,34 @@ body * { visibility: hidden;}
                     'id'=>'gentReport'
                   ),
               ));
+
+        $this->widget('bootstrap.widgets.TbButton', array(
+                  'buttonType'=>'link',
+                  
+                  'type'=>'info',
+                  'label'=>'Word',
+                  'icon'=>'word',
+                  
+                  'htmlOptions'=>array(
+                    'class'=>'span4',
+                    'style'=>'margin:25px 10px 0px 0px;padding-left:0px;padding-right:0px',
+                    'id'=>'exportWord'
+                  ),
+              ));
+
+          $this->widget('bootstrap.widgets.TbButton', array(
+                  'buttonType'=>'link',
+                  
+                  'type'=>'success',
+                  'label'=>'',
+                  'icon'=>'print white',
+                  
+                  'htmlOptions'=>array(
+                    'class'=>'span2',
+                    'style'=>'margin:25px 0px 0px 0px;',
+                    'id'=>'printReport'
+                  ),
+              ));
       ?>
   </div><!-- end span4--> 
   <div class="span8 well"> 
@@ -161,13 +187,29 @@ body * { visibility: hidden;}
                                                             'beta'=> 0
                                              )  
                             ), 
-                           'title' => array('text' => 'รายได้การให้บริการงานวิศวกรรม','style' => array(
+                           'title' => array('text' => '','style' => array(
                                           'fontWeight' => 'bold',
                                           'fontFamily' => 'Boon700') ), 
                            'tooltip'=>array(
                                 'pointFormat'=>'<b>{point.percentage:.2f}% <br> {point.y} บาท</b>'
                             ),
+                           'legend' => array(
+                                    'enabled'=> true,
+                                    'layout'=> "vertical",
+                                    'align'=>"left",
+                                    'width'=> 220,
+                                    'verticalAlign'=>"middle",
+                                    'borderWidth'=> 0,
+                                    'title'=> array(
+                                      'text'=> "",
+                                      'style'=> array(
+                                        'fontWeight'=> "bold"
+                                     )
+                                    )
+                                   
+                               ),
                            'plotOptions'=>array (
+                             
                               'pie' => array(
                                   'allowPointSelect'=> true,
                                   //'animation'=> true,
@@ -185,6 +227,7 @@ body * { visibility: hidden;}
                                   ),
                                  
                               ),
+
                             ),
                             'drilldown'=> array(
                                'id'=>'xx',
@@ -231,7 +274,7 @@ $("#gentReport").click(function(e){
     e.preventDefault();
     $.ajax({
         url: "genService",
-        data: {fiscalyear: $("#fiscalyear").val(),report:$("#chart").val()},
+        data: {fiscalyear: $("#fiscalyear").val(),report:$("#chart").val(),workcat:$("#workcat").val()},
         dataType: "json",
         success:function(response){
            
@@ -286,6 +329,7 @@ $("#gentReport").click(function(e){
             }
 
             chart.options.drilldown = seriesOpts_02;
+            chart.setTitle({text: $( "#chart option:selected" ).text()+" ปี "+$("#fiscalyear").val()}); 
             
            // console.log(chart);
            // chart.options.drilldown = {series: [{name: "drill0",id: "drill0",showInLegend : true,data:[{name:"A", y:70},{name:"C", y:90}]},{name: "drill0",id: "drill1",showInLegend : true,data:[{name:"A", y:50},{name:"C", y:50}]}]}; 
@@ -313,21 +357,12 @@ $("#printReport").click(function(e){
 });
 ', CClientScript::POS_END);
 
-Yii::app()->clientScript->registerScript('exportExcel', '
-$("#exportExcel").click(function(e){
+Yii::app()->clientScript->registerScript('exportWord', '
+$("#exportWord").click(function(e){
     e.preventDefault();
 
-     window.location.href = "genProgressExcel?project="+$("#project").val()+"&fiscalyear="+$("#fiscalyear").val()+"&workcat="+$("#workcat").val();
-    // $.ajax({
-    //     url: "genExcel",
-    //     data: {project: $("#project").val()},
-    //     success:function(response){
-            
-    //         //$("#reportContent").html(response);
-            
-    //     }
-
-    // });
+     window.location.href = "genServiceWord?fiscalyear="+$("#fiscalyear").val()+"&workcat="+$("#workcat").val();
+   
 
 });
 ', CClientScript::POS_END);

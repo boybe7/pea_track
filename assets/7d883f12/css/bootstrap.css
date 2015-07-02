@@ -2458,6 +2458,11 @@ table th[class*="span"],
     background-position: center center;
 }
 
+.icon-word {
+    background-image: url("../img/word.png");
+    background-position: center center;
+}
+
 .icon-temp {
     background-image: url("../img/temp.png");
     background-position: center center;
