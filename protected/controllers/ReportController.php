@@ -1,5 +1,8 @@
 <?php
 
+define ('BATIK_PATH', '../../exporting-server/batik-rasterizer.jar');
+define ('TEMP_PATH', '../../exporting-server/temp/');
+
 class ReportController extends Controller
 {
 	/**
@@ -183,8 +186,13 @@ class ReportController extends Controller
     		$year = $_GET["fiscalyear"];
     		$workcat = $_GET["workcat"];
 
-		   Yii::import('ext.phpword.XPHPWord');    
-		   $objPHPWord= XPHPWord::createPHPWord();
+ 
+  
+
+		    Yii::import('ext.Classes.XPHPWord2');  
+		    // Yii::import('ext.phpword.XPHPWord');  
+
+		   $objPHPWord= XPHPWord2::createPHPWord();
 
 		   //style
 		    $objPHPWord->addFontStyle('rStyle', array('bold'=>true, 'italic'=>true, 'size'=>16));
@@ -215,7 +223,7 @@ class ReportController extends Controller
 			$objWriter->save('php://output');  //
 			 Yii::app()->end(); 
 
-
+			
 	}	   
 
     public function actionGenService()

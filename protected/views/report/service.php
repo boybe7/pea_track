@@ -176,6 +176,7 @@ body * { visibility: hidden;}
                        'htmlOptions'=>array(),  
                        'scripts' => array(
                           'modules/drilldown', // in fact, this is mandatory :)
+                          'modules/exporting',
                           ),
 
                        'options'=>array(
@@ -228,6 +229,10 @@ body * { visibility: hidden;}
                                  
                               ),
 
+                            ),
+                            'exporting'=> array(
+                              'type'=> 'image/jpeg',
+                              'url'=>''
                             ),
                             'drilldown'=> array(
                                'id'=>'xx',
