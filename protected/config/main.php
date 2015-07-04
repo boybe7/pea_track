@@ -56,6 +56,11 @@ return array(
                'emptytext' => 'Click to edit'
             )
         ),  
+        'word'=>array(
+
+               'class'=>'application.extensions.phpoffice.PhpWord.PhpWord',
+
+        ),
         'clientScript' => array(
 	        // disable yiigridview auto include
 	        'scriptMap'=>array(
