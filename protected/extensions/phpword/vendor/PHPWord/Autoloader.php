@@ -36,6 +36,13 @@ class PHPWord_Autoloader
 			return false;
 		}
 
+		 if($strObjectName=="Style")
+        {
+             header('Content-type: text/plain');
+              echo($strObjectName);                    
+        exit;
+        }
+
 		$strObjectFilePath = PHPWORD_BASE_PATH . str_replace('_', '/', $strObjectName) . '.php';
 		
 		if((file_exists($strObjectFilePath) === false) || (is_readable($strObjectFilePath) === false)) {

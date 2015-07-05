@@ -1,5 +1,10 @@
 <?php
 
+define('BATIK_PATH', Yii::getPathOfAlias('BATIK_PATH'));//'/../extensions/highcharts/exporting-server/batik-rasterizer.jar');
+define('TEMP_PATH', Yii::getPathOfAlias('TEMP_PATH'));//'/../extensions/highcharts/exporting-server/temp/');
+
+
+
 class ReportController extends Controller
 {
 	/**
@@ -182,8 +187,9 @@ class ReportController extends Controller
     	   //$model = Project::model()->findByPk($_GET["project"]);
     		$year = $_GET["fiscalyear"];
     		$workcat = $_GET["workcat"];
+  
+		    Yii::import('ext.phpword.XPHPWord');  
 
-		   Yii::import('ext.phpword.XPHPWord');    
 		   $objPHPWord= XPHPWord::createPHPWord();
 
 		   //style
@@ -215,14 +221,399 @@ class ReportController extends Controller
 			$objWriter->save('php://output');  //
 			 Yii::app()->end(); 
 
-
+			
 	}	   
+
+function svgToJpg($item){
+  /*CONVERTS SVG TO JPG*/
+  
+  ///////////////////////////////////////////////////////////////////////////////
+  ini_set('magic_quotes_gpc', 'off');
+  
+  
+  $filename =  isset($_POST['filename']) ? $_POST['filename'] : 'chart';
+  $width =  isset($_POST['width']) ? $_POST['width'] : 600;
+  
+  $svg=$item->svg;
+  if (get_magic_quotes_gpc()) {
+    $svg = stripslashes($svg);  
+  }
+  
+  
+  
+  $tempName = md5(rand());
+  $typeString = '-m image/jpeg';
+  $ext = '.jpg';
+  $outfile = TEMP_PATH.$tempName.$ext;
+
+      
+  if (isset($typeString)) {
+    
+    // size
+   $width = "-w $width";
+   
+  
+    // generate the temporary file
+    if (!file_put_contents(TEMP_PATH.$tempName.".svg", $svg)) { 
+      die("Couldn't create temporary file. Check that the directory permissions for
+        the /temp directory are set to 777.");
+    }
+    
+    // do the conversion
+    shell_exec("chmod 777 ".TEMP_PATH.$tempName.".svg");
+    $output = shell_exec("java -jar ". BATIK_PATH ." $typeString -d $outfile $width ".TEMP_PATH.$tempName.".svg");
+    
+    // catch error
+    if (!is_file($outfile) || filesize($outfile) < 10) {
+      echo "<pre>$output</pre>";
+      echo "Error while converting SVG. ";
+      
+      if (strpos($output, 'SVGConverter.error.while.rasterizing.file') !== false) {
+        echo "SVG code for debugging: <hr/>";
+        echo htmlentities($svg);
+      }
+    } 
+    
+    // stream it
+    else {
+      unlink(TEMP_PATH.$tempName.".svg");
+      $item->filename=$outfile;
+      return $item;
+    }
+    
+    // delete it
+    
+    unlink($outfile);
+  
+  // SVG can be streamed directly back
+  } else {
+    echo "Invalid type";
+  }
+}
+
+
+
+
+function doDoc($year,$headertext,$footertext,$items){
+  // New Word Document
+	 Yii::import('ext.phpword.XPHPWord');  
+
+  $PHPWord= XPHPWord::createPHPWord();
+  //$PHPWord = new PHPWord();
+  // New portrait section
+  $section = $PHPWord->createSection();
+
+  $section->addText('สรุปรายได้ ค่าใช้จ่ายงานบริการวิศวกรรมแก่ลูกค้าภายนอก', array('name'=>'TH SarabunPSK', 'color'=>'black','bold'=>true, 'size'=>20),array('align'=>'center','spaceAfter'=>0));
+  $section->addText('แนวทางการปรับค่า EP ของฝ่ายบริการวิศวกรรม', array('name'=>'TH SarabunPSK', 'color'=>'black','bold'=>true, 'size'=>20),array('align'=>'center','spaceAfter'=>50));
+
+  
+  // Add header
+  // $header = $section->createHeader();
+  // $table = $header->addTable();
+  // $table->addRow();
+  // $table->addCell(4500)->addText($headertext);
+  
+  // Add footer
+  // $footer = $section->createFooter();
+  // //$footer->addPreserveText('Page {PAGE} of {NUMPAGES}.', array('align'=>'center'));
+  // $footer->addPreserveText($footertext, array('align'=>'center'));
+  
+  // Title styles
+  //style
+		    $PHPWord->addFontStyle('rStyle', array('name'=>'TH SarabunPSK', 'color'=>'black', 'size'=>17));
+			$PHPWord->addFontStyle('hStyle', array('name'=>'TH SarabunPSK','bold'=>true, 'color'=>'black', 'size'=>17));
+			
+			$PHPWord->addParagraphStyle('pStyle', array('align'=>'center', 'spaceAfter'=>0));
+
+$section->addText("",array('name'=>'TH SarabunPSK', 'color'=>'black', 'size'=>17),array('align'=>'left', 'spaceBefore'=>100));
+   
+
+  $section->addText("                   ตามที่ กบว. ได้ให้บริการงานวิศวกรมแก่ลูกค้าภายนอกในปี ".$year." นั้น นบท. 9 ขอ
+สรุปรายได้และค่าใช้จ่ายในการดำเนินการตามสัญญาของงานตาสัญญาในปี ".$year." โดยมีรายละเอียดดังนี้
+",array('name'=>'TH SarabunPSK', 'color'=>'black', 'size'=>17),array('align'=>'left', 'spaceBefore'=>100));
+  
+
+$table = $section->addTable(array("cellMargin"=>0));
+
+
+ $dateBegin = $year."-01-01";
+ $dateEnd = $year."-12-31";
+//chart 1: income 
+	             $workcat = WorkCategory::model()->findAll();
+	             $data = array();
+	             $sumAll = 0;
+	             foreach ($workcat as $key => $wc) {
+	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+	             	$sum = 0;
+	             	foreach ($projects as $key => $pj) {
+	             		$sum += $pj->getIncome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             	}
+	             	$sumAll += $sum;
+	             	$data[] = array("name"=>$wc->wc_name, "value"=>$sum,"drill"=> 0);
+	             	$table->addRow();
+					$table->addCell(5350)->addText("รายได้".$wc->wc_name,'rStyle',array('spaceAfter'=>0));
+					$table->addCell(1750)->addText("เป็นจำนวนเงิน",'rStyle',array('spaceAfter'=>0));
+					$table->addCell(1450)->addText(number_format($sum,2),'rStyle',array("align"=>"right",'spaceAfter'=>0));
+					$table->addCell(750)->addText("บาท",'rStyle',array("align"=>"right",'spaceAfter'=>0));
+	             }
+
+	    $section->addText("รายได้งานบริการงานวิศวกรรมตามสัญญาในปี ".$year." ดังนี้",array('name'=>'TH SarabunPSK', 'color'=>'black','bold'=>true, 'size'=>17),array('align'=>'left', 'spaceBefore'=>300,'spaceAfter'=>0));
+	    $table = $section->addTable(array("cellMargin"=>0));
+	    $no = 1;
+	    foreach ($data as $key => $value) {
+			        $table->addRow();
+					$table->addCell(250)->addText($no.".",'rStyle',array('align'=>'right','spaceAfter'=>0));
+					$table->addCell(6650)->addText("  รายได้".$value["name"],'rStyle',array('spaceAfter'=>0));
+					$table->addCell(1750)->addText("คิดเป็นร้อยละ",'rStyle',array('spaceAfter'=>0));
+					$table->addCell(250)->addText(number_format(($value["value"]*100)/$sumAll),'rStyle',array("align"=>"right",'spaceAfter'=>0));
+					$table->addCell(2450)->addText("  ของรายได้ทั้งหมด",'rStyle',array('spaceAfter'=>0));
+	            $no++; 	    	
+	    }
+
+	    $section->addImage($items[0]->filename);
+        $section->addText("รูปที่ 1",array('name'=>'TH SarabunPSK', 'color'=>'black','size'=>17),array('align'=>'center', 'spaceBefore'=>300));
+	     
+	        
+	        //chart 2: outcome by workcat
+	        $section->addText("ค่าใช้จ่ายงานบริการวิศวกรรมตามสัญญาในปี ".$year." ดังนี้",array('name'=>'TH SarabunPSK', 'color'=>'black','bold'=>true, 'size'=>17),array('align'=>'left', 'spaceBefore'=>300,'spaceAfter'=>0));
+		    
+		   
+	        $data = array();
+	        $data2 = array();
+	        $no = 1;
+	        $sumWAll = 0;
+	        $sumWAll2 = 0;
+	         foreach ($workcat as $key => $wc) {
+	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+	             	$sumW = 0;
+	             	$sumW2 = 0;
+	             	foreach ($projects as $key => $pj) {
+	             		$sumW += $pj->getOutcome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             		$sumW2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             
+	             	}
+	             	$sumWAll += $sumW;
+	             	$sumWAll2 += $sumW2;
+	             	$data[] = array("name"=>"ค่าจ้างเหมา".$wc->wc_name, "value"=>$sumW,"drill"=> 0);
+	             	$data2[] = array("name"=>"ค่าดำเนินงาน".$wc->wc_name, "value"=>$sumW2,"drill"=> 0);
+
+	              
+	    			$section->addText("  ".($no++).". ".$wc->wc_name,array('name'=>'TH SarabunPSK', 'bold'=>true,'color'=>'black','size'=>17),array('spaceBefore'=>0,'spaceAfter'=>0));
+	              
+
+	             	$table = $section->addTable(array("cellMargin"=>0));
+	             	$table->addRow();
+					$table->addCell(6850)->addText("ค่าใช้จ่ายจ้างเหมา",'rStyle',array('spaceAfter'=>0));
+					$table->addCell(1750)->addText("เป็นจำนวนเงิน",'rStyle',array('spaceAfter'=>0));
+					$table->addCell(1950)->addText(number_format($sumW,2),'rStyle',array("align"=>"right",'spaceAfter'=>0));
+					$table->addCell(750)->addText("บาท",'rStyle',array("align"=>"right",'spaceAfter'=>0));
+	            
+
+					$table->addRow();
+					$table->addCell(6850)->addText("ค่าใช้จ่ายดำเนินงาน",'rStyle',array('spaceAfter'=>0));
+					$table->addCell(1750)->addText("เป็นจำนวนเงิน",'rStyle',array('spaceAfter'=>0));
+					$table->addCell(1950)->addText(number_format($sumW2,2),'rStyle',array("align"=>"right",'spaceAfter'=>0));
+					$table->addCell(750)->addText("บาท",'rStyle',array("align"=>"right",'spaceAfter'=>0));
+	            					
+					
+
+	             }     
+
+
+		    $section->addImage($items[1]->filename);
+	        $section->addText("รูปที่ 2",array('name'=>'TH SarabunPSK', 'color'=>'black','size'=>17),array('align'=>'center', 'spaceBefore'=>300));
+		   
+		    $section->addText("ค่าใช้จ่ายงานบริการวิศวกรรมตามสัญญาในปี ".$year." ดังนี้",array('name'=>'TH SarabunPSK', 'color'=>'black','bold'=>true, 'size'=>17),array('align'=>'left', 'spaceBefore'=>300,'spaceAfter'=>0));
+		    $section->addText("  1. ค่าจ้างเหมาช่วงของงานบริการวิศวกรรมคิดเป็นร้อยละ   ".number_format(($sumWAll*100)/($sumWAll+$sumWAll2),1)."  ของค่าใช้จ่ายรวมที่เกิดขึ้น ของแต่ละประเภทของงาน โดยสรุปได้ ดังนี้",array('name'=>'TH SarabunPSK', 'color'=>'black','size'=>17),array('spaceBefore'=>0,'spaceAfter'=>0));
+	        $no = 1;
+	        foreach ($data as $key => $value) {
+	                $section->addText("      1.".($no++)." ค่าจ้างเหมาช่วง".$value["name"]."     คิดเป็นร้อยละ   ".number_format(($value["value"]*100)/($sumWAll),0)."  ของค่าใช้จ่ายทั้งหมด ",array('name'=>'TH SarabunPSK', 'color'=>'black','size'=>17),array('spaceBefore'=>0,'spaceAfter'=>0));
+	        
+	        }        
+			$section->addText("  2. ค่าใช้จ่ายในการดำเนินงานของงานบริการวิศวกรรมคิดเป็นร้อยละ   ".number_format(($sumWAll2*100)/($sumWAll+$sumWAll2),1)."  ของค่าใช้จ่ายรวมที่เกิดขึ้น ของแต่ละประเภทของงาน โดยสรุปได้ ดังนี้",array('name'=>'TH SarabunPSK', 'color'=>'black','size'=>17),array('spaceBefore'=>300,'spaceAfter'=>0));
+	        $no = 1;
+	        foreach ($data2 as $key => $value) {
+	                $section->addText("      1.".($no++)." ค่าใช้จ่ายในการดำเนินงานของ".$value["name"]."     คิดเป็นร้อยละ   ".number_format(($value["value"]*100)/($sumWAll2),1)."  ของค่าใช้จ่ายทั้งหมด ",array('name'=>'TH SarabunPSK', 'color'=>'black','size'=>17),array('spaceBefore'=>0,'spaceAfter'=>0));
+	        
+	        }
+			//chart 3: outcome by workcat
+			$section->addText("แยกค่าใช้จ่ายของงานแต่ละประเภทของปี ".$year." มีรายละเอียดดังนี้",array('name'=>'TH SarabunPSK', 'color'=>'black','bold'=>true, 'size'=>17),array('align'=>'left', 'spaceBefore'=>300,'spaceAfter'=>0));
+		    $no_pic = 3;	 
+		    $no = 1;
+			foreach ($workcat as $key => $wc) {
+	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+	             	$sumW = 0;
+	             	$sumW2 = 0;
+	             	$data = array();
+	             	foreach ($projects as $key => $pj) {
+	             		$sumW += $pj->getOutcome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             		$sumW2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             
+	             	}
+	             	$data[] = array("name"=>"ค่าจ้างเหมา", "value"=>$sumW,"drill"=> 0);
+	             	$data[] = array("name"=>"ค่าดำเนินงาน", "value"=>$sumW2,"drill"=> 0);
+
+
+	             	$section->addText("  ".($no++).". ".$wc->wc_name,array('name'=>'TH SarabunPSK', 'bold'=>true,'color'=>'black','size'=>17),array('spaceBefore'=>0,'spaceAfter'=>0));
+	              
+
+	             	$table = $section->addTable(array("cellMargin"=>0));
+	             	$table->addRow();
+					$table->addCell(6850)->addText("ค่าใช้จ่ายจ้างเหมา",'rStyle',array('spaceAfter'=>0));
+					$table->addCell(1750)->addText("เป็นจำนวนเงิน",'rStyle',array('spaceAfter'=>0));
+					$table->addCell(1950)->addText(number_format($sumW,2),'rStyle',array("align"=>"right",'spaceAfter'=>0));
+					$table->addCell(750)->addText("บาท",'rStyle',array("align"=>"right",'spaceAfter'=>0));
+	            
+					$table->addRow();
+					$table->addCell(6850)->addText("ค่าใช้จ่ายดำเนินงาน",'rStyle',array('spaceAfter'=>0));
+					$table->addCell(1750)->addText("เป็นจำนวนเงิน",'rStyle',array('spaceAfter'=>0));
+					$table->addCell(1950)->addText(number_format($sumW2,2),'rStyle',array("align"=>"right",'spaceAfter'=>0));
+					$table->addCell(750)->addText("บาท",'rStyle',array("align"=>"right",'spaceAfter'=>0));
+	            	
+
+	             	$section->addImage($items[$no_pic-1]->filename);
+	                $section->addText("รูปที่ ".($no_pic++),array('name'=>'TH SarabunPSK', 'color'=>'black','size'=>17),array('align'=>'center', 'spaceBefore'=>300));
+		   
+	             }     
+	         
+
+          $section->addText("การเพิ่มค่า EP",array('name'=>'TH SarabunPSK', 'color'=>'black','bold'=>true, 'size'=>17),array('align'=>'left', 'spaceBefore'=>300,'spaceAfter'=>0));
+		  $section->addText("             EP  = NOPAT – Capital Charge",array('name'=>'TH SarabunPSK', 'color'=>'black','bold'=>true, 'size'=>17),array('align'=>'left', 'spaceBefore'=>0,'spaceAfter'=>0));
+		  $section->addText("             NOPAT	= รายได้ – ค่าใช้จ่าย- ภาษี",array('name'=>'TH SarabunPSK', 'color'=>'black','bold'=>true, 'size'=>17),array('align'=>'left', 'spaceBefore'=>0,'spaceAfter'=>0));
+		       
+    //$section->addTextBreak(1);
+  
+
+		   ob_end_clean();
+			ob_start();
+
+			header('Content-Type: application/vnd.ms-word');
+			header('Content-Disposition: attachment;filename="service_report.docx"');
+			header('Cache-Control: max-age=0');
+			// If you're serving to IE 9, then the following may be needed
+			header('Cache-Control: max-age=1');
+
+			// If you're serving to IE over SSL, then the following may be needed
+			header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+			header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+			header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+			header ('Pragma: public'); // HTTP/1.0
+
+			$objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
+			$objWriter->save('php://output');  //
+
+//delete images file form exporter-server			 
+    $files = glob(Yii::getPathOfAlias('EXPORT_PATH').'/*.jpg');
+	foreach($files as $file) {
+	    unlink($file);
+	}
+
+			 Yii::app()->end(); 
+
+    
+	
+}	   
+
+
+
+	public function actionDocgen()
+    {
+	    if(isset($_POST['type']) && isset($_POST['title']) && isset($_POST['header']) && isset($_POST['footer']) && isset($_POST['data'])){
+	    
+	  $title=urldecode($_POST['title']);
+	  $header=urldecode($_POST['header']);
+	  $footer=urldecode($_POST['footer']);
+	    
+	  $type=urldecode($_POST['type']);
+	  $data=json_decode(urldecode($_POST['data']));
+	  
+	  
+	  $items=array();
+	  for($i=0; $i < count($data); $i++){
+	    $items[]= $this->svgToJpg($data[$i]);
+	  }
+	 
+	  if($type=='pdf'){
+	    $this->doPDF($title,$header,$footer,$items);
+	  }elseif($type=='doc'){
+	    $this->doDoc($title,$header,$footer,$items);
+	  }
+	  foreach($items as $item){
+	    unlink($item->filename);
+	  }
+	  
+	}else{
+	  print 'ERROR docgen.php: no post data!';
+	}
+ }
+
 
     public function actionGenService()
     {
     	$year = $_GET["fiscalyear"];
     	$report = $_GET["report"];
     	$workcat = $_GET["workcat"];
+
+    	if($report=="all")
+    	{
+    		 $report = array();
+    		 $dateBegin = $year."-01-01";
+    		 $dateEnd = $year."-12-31";
+             
+    		//chart 1: income 
+	             $workcat = WorkCategory::model()->findAll();
+	             $data = array();
+	             foreach ($workcat as $key => $wc) {
+	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+	             	$sum = 0;
+	             	foreach ($projects as $key => $pj) {
+	             		$sum += $pj->getIncome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             	}
+	             	$data[] = array("name"=>$wc->wc_name, "value"=>$sum,"drill"=> 0);
+	             }
+	        $report[] = array("name"=>"รายได้งานบริการวิศวกรรมของ กบว.","data"=>$data);
+	        
+	        //chart 2: outcome by workcat
+	        $data = array();
+	         foreach ($workcat as $key => $wc) {
+	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+	             	$sumW = 0;
+	             	$sumW2 = 0;
+	             	foreach ($projects as $key => $pj) {
+	             		$sumW += $pj->getOutcome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             		$sumW2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             
+	             	}
+	             	$data[] = array("name"=>"ค่าจ้างเหมา".$wc->wc_name, "value"=>$sumW,"drill"=> 0);
+	             	$data[] = array("name"=>"ค่าดำเนินงาน".$wc->wc_name, "value"=>$sumW2,"drill"=> 0);
+	             }     
+	        $report[] = array("name"=>"ค่าใช้จ่ายงานบริการวิศวกรรมตามสัญญา ","data"=>$data);
+	        
+
+			//chart 3: outcome by workcat
+				 
+			foreach ($workcat as $key => $wc) {
+	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+	             	$sumW = 0;
+	             	$sumW2 = 0;
+	             	$data = array();
+	             	foreach ($projects as $key => $pj) {
+	             		$sumW += $pj->getOutcome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             		$sumW2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+	             
+	             	}
+	             	$data[] = array("name"=>"ค่าจ้างเหมา", "value"=>$sumW,"drill"=> 0);
+	             	$data[] = array("name"=>"ค่าดำเนินงาน", "value"=>$sumW2,"drill"=> 0);
+
+	             	$report[] = array("name"=>"ค่าใช้จ่าย".$wc->wc_name,"data"=>$data); 
+	             }     
+	         
+
+
+
+
+	        echo json_encode($report);     
+    	}
 
     	if($report==1)
     	{

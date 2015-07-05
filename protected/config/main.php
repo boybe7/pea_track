@@ -8,6 +8,10 @@
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 Yii::setPathOfAlias('editable', dirname(__FILE__).'/../extensions/x-editable');
 
+Yii::setPathOfAlias('BATIK_PATH', dirname(__FILE__).'/../extensions/highcharts/exporting-server/batik-rasterizer.jar');
+Yii::setPathOfAlias('TEMP_PATH', dirname(__FILE__).'/../extensions/highcharts/exporting-server/temp/');
+Yii::setPathOfAlias('EXPORT_PATH', dirname(__FILE__).'/../extensions/highcharts/exporting-server/');
+
 return array(
     'theme'=>'bootstrap',
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',

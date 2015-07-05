@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 
 $theme = Yii::app()->theme;
 $cs = Yii::app()->clientScript;
-//$cs->registerScriptFile( $theme->getBaseUrl() . '/js/highcharts.js' );
+$cs->registerScriptFile( $theme->getBaseUrl() . '/js/jquery.json-2.3.min.js' );
 //$cs->registerScriptFile( $theme->getBaseUrl() . '/js/drilldown.js' );
 
 ?>
@@ -155,27 +155,28 @@ body * { visibility: hidden;}
                   ),
               ));
 
-          $this->widget('bootstrap.widgets.TbButton', array(
-                  'buttonType'=>'link',
+          // $this->widget('bootstrap.widgets.TbButton', array(
+          //         'buttonType'=>'link',
                   
-                  'type'=>'success',
-                  'label'=>'',
-                  'icon'=>'print white',
+          //         'type'=>'success',
+          //         'label'=>'',
+          //         'icon'=>'print white',
                   
-                  'htmlOptions'=>array(
-                    'class'=>'span2',
-                    'style'=>'margin:25px 0px 0px 0px;',
-                    'id'=>'printReport'
-                  ),
-              ));
+          //         'htmlOptions'=>array(
+          //           'class'=>'span2',
+          //           'style'=>'margin:25px 0px 0px 0px;',
+          //           'id'=>'printReport'
+          //         ),
+          //     ));
       ?>
   </div><!-- end span4--> 
   <div class="span8 well"> 
-    <div id="reportContent" style="width: auto; height: 400px; margin: 0 auto">
+    <div id="reportContent" style="width: auto; height: 400px; margin: 0 auto;">
        <?php $this->widget('ext.highcharts.HighchartsWidget', array('id' => 'divChart',
                        'htmlOptions'=>array(),  
                        'scripts' => array(
                           'modules/drilldown', // in fact, this is mandatory :)
+                          'modules/exporting',
                           ),
 
                        'options'=>array(
@@ -187,9 +188,17 @@ body * { visibility: hidden;}
                                                             'beta'=> 0
                                              )  
                             ), 
+                            'colors'=>array(
+                              '#BA514B','#5280BE','#8165A2','#9DBB5B','#50A9C7','#F29B4B','#A8BED5'
+                              ),
+                            'credits'=> array(
+                                  'enabled'=> false
+                              ),
                            'title' => array('text' => '','style' => array(
                                           'fontWeight' => 'bold',
-                                          'fontFamily' => 'Boon700') ), 
+                                          'fontSize'=>'25px',
+                                          'fontFamily' => 'TH SarabunPSK'
+                                          ) ), 
                            'tooltip'=>array(
                                 'pointFormat'=>'<b>{point.percentage:.2f}% <br> {point.y} บาท</b>'
                             ),
@@ -200,10 +209,17 @@ body * { visibility: hidden;}
                                     'width'=> 220,
                                     'verticalAlign'=>"middle",
                                     'borderWidth'=> 0,
+                                    'itemStyle'=> array(
+                                        'fontWeight'=> "bold",
+                                        'fontSize'=>'18px',
+                                        'fontFamily' => 'TH SarabunPSK'
+                                     ),
                                     'title'=> array(
                                       'text'=> "",
                                       'style'=> array(
-                                        'fontWeight'=> "bold"
+                                        'fontWeight'=> "bold",
+                                        'fontSize'=>'18px',
+                                        'fontFamily' => 'TH SarabunPSK'
                                      )
                                     )
                                    
@@ -212,6 +228,7 @@ body * { visibility: hidden;}
                              
                               'pie' => array(
                                   'allowPointSelect'=> true,
+                                  'borderWidth'=> 3,
                                   //'animation'=> true,
                                   'depth'=> 35,
                                   'cursor'=> "pointer",
@@ -220,7 +237,9 @@ body * { visibility: hidden;}
                                       'distance' => -50,
                                       'style' => array(
                                           'fontWeight' => 'bold',
-                                          'fontFamily' => 'Boon700',
+                                          //'fontFamily' => 'Boon700',
+                                          'fontSize'=>'18px',
+                                          'fontFamily' => 'TH SarabunPSK',
                                           'color' => 'white',
                                           'textShadow' => '0px 1px 2px black',
                                       ),
@@ -228,6 +247,102 @@ body * { visibility: hidden;}
                                  
                               ),
 
+                            ),
+                            'exporting'=> array(
+                              'type'=> 'image/jpeg',
+                              'url'=>''
+                            ),
+                            'drilldown'=> array(
+                               'id'=>'xx',
+                            
+                               'data'=> array(10.85, 7.35, 33.06, 2.81)
+                            )   
+
+                        )
+
+                    )); ?>
+    </div>
+
+    <div id="reportContent" style="width: auto; height: 400px; margin: 0 auto; display:none">
+       <?php $this->widget('ext.highcharts.HighchartsWidget', array('id' => 'divChart2',
+                       'htmlOptions'=>array(),  
+                       'scripts' => array(
+                          'modules/drilldown', // in fact, this is mandatory :)
+                          'modules/exporting',
+                          ),
+
+                       'options'=>array(
+                           'gradient' => array('enabled'=> true),
+                           'chart' => array('type' => 'pie',
+                                                      'options3d'=>array(
+                                                            'enabled'=> true,
+                                                            'alpha'=> 45,
+                                                            'beta'=> 0
+                                             )  
+                            ), 
+                            'colors'=>array(
+                              '#BA514B','#5280BE','#8165A2','#9DBB5B','#50A9C7','#F29B4B','#A8BED5'
+                              ),
+                            'credits'=> array(
+                                  'enabled'=> false
+                              ),
+                           'title' => array('text' => '','style' => array(
+                                          'fontWeight' => 'bold',
+                                          'fontSize'=>'25px',
+                                          'fontFamily' => 'TH SarabunPSK'
+                                          ) ), 
+                           'tooltip'=>array(
+                                'pointFormat'=>'<b>{point.percentage:.2f}% <br> {point.y} บาท</b>'
+                            ),
+                           'legend' => array(
+                                    'enabled'=> true,
+                                    'layout'=> "vertical",
+                                    'align'=>"left",
+                                    'width'=> 220,
+                                    'verticalAlign'=>"middle",
+                                    'borderWidth'=> 0,
+                                    'itemStyle'=> array(
+                                        'fontWeight'=> "bold",
+                                        'fontSize'=>'18px',
+                                        'fontFamily' => 'TH SarabunPSK'
+                                     ),
+                                    'title'=> array(
+                                      'text'=> "",
+                                      'style'=> array(
+                                        'fontWeight'=> "bold",
+                                        'fontSize'=>'18px',
+                                        'fontFamily' => 'TH SarabunPSK'
+                                     )
+                                    )
+                                   
+                               ),
+                           'plotOptions'=>array (
+                             
+                              'pie' => array(
+                                  'allowPointSelect'=> true,
+                                  'borderWidth'=> 3,
+                                  //'animation'=> true,
+                                  'depth'=> 35,
+                                  'cursor'=> "pointer",
+                                  'dataLabels' => array(
+                                      'enabled' => false,
+                                      'distance' => -50,
+                                      'style' => array(
+                                          'fontWeight' => 'bold',
+                                          //'fontFamily' => 'Boon700',
+                                          'fontSize'=>'18px',
+                                          'fontFamily' => 'TH SarabunPSK',
+                                          'color' => 'white',
+                                          'textShadow' => '0px 1px 2px black',
+                                      ),
+                                  ),
+                                 
+                              ),
+
+                            ),
+                            'exporting'=> array(
+                              'type'=> 'image/jpeg',
+                              'url'=>''
                             ),
                             'drilldown'=> array(
                                'id'=>'xx',
@@ -253,21 +368,30 @@ body * { visibility: hidden;}
         var pos = orig.length - i - 1
         return  num + (pos && !(pos % 3) ? "," : "") + acc;
     }, "") + (p[1] ? "." + p[1] : "");
-$(document).ready(function(){
-    alert('hello');
-    // Enter code here
-});
-    jQuery(function($) {
-      alert("gg")
-      
+}
+
+function download(url, data, method){
+  //url and data options required
+  if( url && data ){ 
+    //data can be string of parameters or array/object
+    data = typeof data == 'string' ? data : jQuery.param(data);
+    //split params into form inputs
+    var inputs = '';
+    jQuery.each(data.split('&'), function(){ 
+      var pair = this.split('=');
+      inputs+='<input type="hidden" name="'+ pair[0] +'" value="'+ pair[1] +'" />'; 
     });
-  }
+    //send request
+    jQuery('<form action="'+ url +'" method="'+ (method||'post') +'">'+inputs+'</form>')
+    .appendTo('body').submit().remove();
+  };
+};
+
 </script>
 
 <?php
 //Yii::app()->clientScript->registerCoreScript('jquery');
 Yii::app()->clientScript->registerScript('gentReport', '
-
 
 
 $("#gentReport").click(function(e){
@@ -289,17 +413,17 @@ $("#gentReport").click(function(e){
                                 {  
                                   
                                   if(idx==0)
-                                    series1.push({name:val["name"],y:parseInt(val["value"]),selected: true,drilldown:"drill"+idx});
+                                    series1.push({name:val["name"],y:parseInt(val["value"]),selected: true,sliced: true,drilldown:"drill"+idx});
                                   else
-                                    series1.push({name:val["name"],y:parseInt(val["value"]),drilldown:"drill"+idx});
+                                    series1.push({name:val["name"],y:parseInt(val["value"]),sliced: true,drilldown:"drill"+idx});
                                   
-                                  seriesDrill.push({id:"drill"+idx,data:val["drill"],showInLegend : true});
+                                  seriesDrill.push({id:"drill"+idx,data:val["drill"],sliced: true,showInLegend : true});
                                                                    
                                   drill = val["drill"];
                                   idx++;
 
                                 }else  
-                                  series1.push({name:val["name"],y:parseInt(val["value"])});
+                                  series1.push({name:val["name"],y:parseInt(val["value"]),sliced: true});
                               
                            });
            
@@ -330,10 +454,7 @@ $("#gentReport").click(function(e){
 
             chart.options.drilldown = seriesOpts_02;
             chart.setTitle({text: $( "#chart option:selected" ).text()+" ปี "+$("#fiscalyear").val()}); 
-            
-           // console.log(chart);
-           // chart.options.drilldown = {series: [{name: "drill0",id: "drill0",showInLegend : true,data:[{name:"A", y:70},{name:"C", y:90}]},{name: "drill0",id: "drill1",showInLegend : true,data:[{name:"A", y:50},{name:"C", y:50}]}]}; 
-           //console.log(chart);
+
         }
 
     });
@@ -358,11 +479,102 @@ $("#printReport").click(function(e){
 ', CClientScript::POS_END);
 
 Yii::app()->clientScript->registerScript('exportWord', '
+
+var charts = [];
+
 $("#exportWord").click(function(e){
     e.preventDefault();
 
-     window.location.href = "genServiceWord?fiscalyear="+$("#fiscalyear").val()+"&workcat="+$("#workcat").val();
-   
+
+    //chart 1: income
+    nchart = 0;
+    $.ajax({
+        url: "genService",
+        data: {fiscalyear: $("#fiscalyear").val(),report:"all",workcat:""},
+        dataType: "json",
+        success:function(response){
+           
+           $.each(response, function(key, response2) {
+
+                    var series1 = [];
+                    var seriesDrill = [];
+                    var drill = [];
+                                  
+                                     var idx = 0;
+                                     $.each(response2["data"], function(key, val) {
+                                          
+                                          if(val["drill"].length > 0)
+                                          {  
+                                            
+                                            if(idx==0)
+                                              series1.push({name:val["name"],y:parseInt(val["value"]),selected: true,sliced: true,drilldown:"drill"+idx});
+                                            else
+                                              series1.push({name:val["name"],y:parseInt(val["value"]),sliced: true,drilldown:"drill"+idx});
+                                            
+                                            seriesDrill.push({id:"drill"+idx,data:val["drill"],sliced: true,showInLegend : true});
+                                                                             
+                                            drill = val["drill"];
+                                            idx++;
+
+                                          }else  
+                                            series1.push({name:val["name"],y:parseInt(val["value"]),sliced: true});
+                                        
+                                     });
+                     
+                    var chart = $("#divChart2").highcharts();
+
+                      // remove old data
+                      $(chart.series).each(function() {
+                          this.remove();
+                      });
+
+                      // add new data
+                      var seriesOpts_01 = {
+                          
+                          name: "",
+                          data: series1,
+                          showInLegend : true
+                                    
+                      }
+                      chart.addSeries(seriesOpts_01);
+
+                      var seriesOpts_02 = {
+                          
+                          name: "",
+                          series: seriesDrill,
+                          showInLegend : true
+                                    
+                      }
+
+                      chart.options.drilldown = seriesOpts_02;
+                      chart.setTitle({text: response2["name"]+" ปี "+$("#fiscalyear").val()}); 
+
+                      /*ADD CHART DATA TO ARRAY, getSVG for exporting*/
+
+                     charts.push({title:"test",text:"text",svg:chart.getSVG()})
+                     nchart++;
+                     //console.log(charts); 
+            });   
+
+             var json={
+              "type":"doc", 
+              "title":$("#fiscalyear").val(),
+              "header":"header",
+              "footer":"footer",
+              "data": $.toJSON(charts)
+            };
+
+
+            /*TRICK CLIENT INTO DOWNLOAD FILE WITH jQuery*/
+                 download("docgen",json,"POST");
+            
+        }
+
+    });
+
+
+
+          
 
 });
 ', CClientScript::POS_END);
