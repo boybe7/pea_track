@@ -216,6 +216,9 @@ $html .='<center><div style="text-align:center;font-size:16px;"><b>ฝ่าย�
                                             ->where("department_id='2' AND bill_date!='' AND bill_date ".$monthCondition)
                                             ->queryAll();
          $dsd_sum = $pp[0]["sum"];
+
+
+
 		
 			 
          $html .='<tr>';
@@ -358,6 +361,62 @@ $html .='<center><div style="text-align:center;font-size:16px;"><b>ฝ่าย�
                         $m_real_dsd = $pp[0]["sum"];
                         $m_dsd = $m_real_dsd + $m_type1_dsd;
 
+          $tsd_sap = 0;
+          $msd_sap = 0;
+          $dsd_sap = 0;
+
+          $pp = Yii::app()->db->createCommand()
+                                            ->select('cost')
+                                            ->from('management_cost_sap')
+                                            ->where("department_id=0 AND year=".$yearEnd)
+                                            ->queryAll();
+         
+          if(count($pp)>0)
+             $tsd_sap = $pp[0]["cost"];
+          
+          $pp = Yii::app()->db->createCommand()
+                                            ->select('cost')
+                                            ->from('management_cost_sap')
+                                            ->where("department_id=1 AND year=".$yearEnd)
+                                            ->queryAll();
+          if(count($pp)>0)
+             $msd_sap = $pp[0]["cost"];
+          
+          $pp = Yii::app()->db->createCommand()
+                                            ->select('cost')
+                                            ->from('management_cost_sap')
+                                            ->where("department_id=2 AND year=".$yearEnd)
+                                            ->queryAll();
+          if(count($pp)>0)
+             $dsd_sap = $pp[0]["cost"];
+          
+
+          $html .='<tr>';
+             $html .='<td style="text-align:center;width:5%"></td>';
+             $html .='<td style="text-align:left;width:43%">ค่าใช้จ่ายในการดำเนินงาน-กองบริการวิศวกรรมระบบส่ง</td>';
+             $html .='<td style="text-align:right;width:20%">'.number_format($tsd_sap,2).'</td>';
+             $html .='<td style="text-align:center;width:2%"></td>';
+             $html .='<td style="text-align:center;width:20%"></td>';
+             $html .='<td style="text-align:center;width:10%">1</td>';
+          $html .='</tr>';
+          $html .='<tr>';
+             $html .='<td style="text-align:center;width:5%"></td>';
+             $html .='<td style="text-align:left;width:43%">ค่าใช้จ่ายในการดำเนินงาน-กองบริการบำรุงรักษา</td>';
+             $html .='<td style="text-align:right;width:20%">'.number_format($msd_sap,2).'</td>';
+             $html .='<td style="text-align:center;width:2%"></td>';
+             $html .='<td style="text-align:center;width:20%"></td>';
+             $html .='<td style="text-align:center;width:10%">2</td>';
+          $html .='</tr>';
+                       
+          $html .='<tr>';
+             $html .='<td style="text-align:center;width:5%"></td>';
+             $html .='<td style="text-align:left;width:43%">ค่าใช้จ่ายในการดำเนินงาน-กองบริการวิศวกรรมระบบจำหน่าย</td>';
+             $html .='<td style="text-align:right;width:20%;">'.number_format($dsd_sap,2).'</td>';
+             $html .='<td style="text-align:center;width:2%"></td>';
+             $html .='<td style="text-align:center;width:20%"></td>';
+             $html .='<td style="text-align:center;width:10%">3</td>';
+          $html .='</tr>';
+                        
 
           $html .='<tr>';
 			 $html .='<td style="text-align:center;width:5%"></td>';
@@ -381,7 +440,7 @@ $html .='<center><div style="text-align:center;font-size:16px;"><b>ฝ่าย�
 			 $html .='<td style="text-align:left;width:43%">ค่าใช้จ่ายในการบริหารงาน-กองบริการวิศวกรรมระบบจำหน่าย</td>';
 			 $html .='<td style="text-align:right;width:20%;border-bottom:0.2mm solid black">'.number_format($m_dsd,2).'</td>';
 			 $html .='<td style="text-align:center;width:2%"></td>';
-			 $outcome = $dsd_sum+$tsd_sum+$msd_sum+$m_tsd+$m_msd+$m_dsd;
+			 $outcome = $dsd_sap+$tsd_sap+$msd_sap+$dsd_sum+$tsd_sum+$msd_sum+$m_tsd+$m_msd+$m_dsd;
 			 $html .='<td style="text-align:right;width:20%;border-bottom:0.2mm solid black">'.number_format($outcome,2).'</td>';
 			 $html .='<td style="text-align:center;width:10%">3</td>';
 		  $html .='</tr>';

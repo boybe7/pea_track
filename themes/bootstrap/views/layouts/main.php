@@ -290,6 +290,7 @@ if(!Yii::app()->user->isGuest)
                      array('label'=>'บันทึกค่าบริหารโครงการ', 'url'=>array('/managementCost/index'),'visible'=>!Yii::app()->user->isExecutive()),
                      array('label'=>'บันทึกความก้าวหน้าสัญญาหลัก', 'url'=>array('/paymentProjectContract/index'),'visible'=>!Yii::app()->user->isExecutive()),
                      array('label'=>'บันทึกความก้าวหน้าสัญญาจ้างช่วง/ซื้อ', 'url'=>array('/paymentOutsourceContract/index'),'visible'=>!Yii::app()->user->isExecutive()),
+                     array('label'=>'บันทึกค่าบริหารโครงการ (SAP)', 'url'=>array('/managementCostSap/index'),'visible'=>Yii::app()->user->isExecutive()),
                      
                     ),
                 ),

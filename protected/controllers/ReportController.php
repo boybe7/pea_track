@@ -3316,6 +3316,51 @@ $table = $section->addTable(array("cellMargin"=>0));
                         $m_real_dsd = $pp[0]["sum"];
                         $m_dsd = $m_real_dsd + $m_type1_dsd;
 
+	                 $tsd_sap = 0;
+	          $msd_sap = 0;
+	          $dsd_sap = 0;
+
+	          $pp = Yii::app()->db->createCommand()
+	                                            ->select('cost')
+	                                            ->from('management_cost_sap')
+	                                            ->where("department_id=0 AND year=".$yearEnd)
+	                                            ->queryAll();
+	         
+	          if(count($pp)>0)
+	             $tsd_sap = $pp[0]["cost"];
+	          
+	          $pp = Yii::app()->db->createCommand()
+	                                            ->select('cost')
+	                                            ->from('management_cost_sap')
+	                                            ->where("department_id=1 AND year=".$yearEnd)
+	                                            ->queryAll();
+	          if(count($pp)>0)
+	             $msd_sap = $pp[0]["cost"];
+	          
+	          $pp = Yii::app()->db->createCommand()
+	                                            ->select('cost')
+	                                            ->from('management_cost_sap')
+	                                            ->where("department_id=2 AND year=".$yearEnd)
+	                                            ->queryAll();
+	          if(count($pp)>0)
+	             $dsd_sap = $pp[0]["cost"];   
+	             
+	                  $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการดำเนินงาน-กองบริการวิศวกรรมระบบส่ง");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($tsd_sap,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"1");
+				$row++;
+
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการดำเนินงาน-กองบริการบำรุงรักษา");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($msd_sap,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"2");
+				$row++;
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการดำเนินงาน-กองบริการวิศวกรรมระบบจำหน่าย");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($dsd_sap,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"3");
+				$row++;     
+
                 $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการบริหารงาน-กองบริการวิศวกรรมระบบส่ง");
 				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($m_tsd,2));
 				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"1");
@@ -3329,7 +3374,7 @@ $table = $section->addTable(array("cellMargin"=>0));
 
 				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการบริหารงาน-กองบริการวิศวกรรมระบบจำหน่าย");
 				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($m_dsd,2));
-				$outcome = $dsd_sum+$tsd_sum+$msd_sum+$m_tsd+$m_msd+$m_dsd;
+				 $outcome = $dsd_sap+$tsd_sap+$msd_sap+$dsd_sum+$tsd_sum+$msd_sum+$m_tsd+$m_msd+$m_dsd;
 				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,number_format($outcome,2));
 				$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($cashsum, 'D'.$row);
 				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"3");

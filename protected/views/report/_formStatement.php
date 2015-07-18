@@ -261,7 +261,63 @@ $monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
                       
                         $m_real_dsd = $pp[0]["sum"];
                         $m_dsd = $m_real_dsd + $m_type1_dsd;
+          
+          $tsd_sap = 0;
+          $msd_sap = 0;
+          $dsd_sap = 0;
 
+          $pp = Yii::app()->db->createCommand()
+                                            ->select('cost')
+                                            ->from('management_cost_sap')
+                                            ->where("department_id=0 AND year=".$yearEnd)
+                                            ->queryAll();
+         
+          if(count($pp)>0)
+             $tsd_sap = $pp[0]["cost"];
+          
+          $pp = Yii::app()->db->createCommand()
+                                            ->select('cost')
+                                            ->from('management_cost_sap')
+                                            ->where("department_id=1 AND year=".$yearEnd)
+                                            ->queryAll();
+          if(count($pp)>0)
+             $msd_sap = $pp[0]["cost"];
+          
+          $pp = Yii::app()->db->createCommand()
+                                            ->select('cost')
+                                            ->from('management_cost_sap')
+                                            ->where("department_id=2 AND year=".$yearEnd)
+                                            ->queryAll();
+          if(count($pp)>0)
+             $dsd_sap = $pp[0]["cost"];
+          
+
+          echo "<tr>";
+             echo "<td style='text-align:center;width:5%'></td>";
+             echo "<td style='text-align:left;width:40%'>ค่าใช้จ่ายในการดำเนินงาน-กองบริการวิศวกรรมระบบส่ง</td>";
+             echo "<td style='text-align:right;width:20%'>".number_format($tsd_sap,2)."</td>";
+             echo "<td style='text-align:center;width:5%'></td>";
+             echo "<td style='text-align:center;width:20%'></td>";
+             echo "<td style='text-align:center;width:10%'>1</td>";
+          echo "</tr>";
+          echo "<tr>";
+             echo "<td style='text-align:center;width:5%'></td>";
+             echo "<td style='text-align:left;width:40%'>ค่าใช้จ่ายในการดำเนินงาน-กองบริการบำรุงรักษา</td>";
+             echo "<td style='text-align:right;width:20%'>".number_format($msd_sap,2)."</td>";
+             echo "<td style='text-align:center;width:5%'></td>";
+             echo "<td style='text-align:center;width:20%'></td>";
+             echo "<td style='text-align:center;width:10%'>2</td>";
+          echo "</tr>";
+                       
+          echo "<tr>";
+             echo "<td style='text-align:center;width:5%'></td>";
+             echo "<td style='text-align:left;width:40%'>ค่าใช้จ่ายในการดำเนินงาน-กองบริการวิศวกรรมระบบจำหน่าย</td>";
+             echo "<td style='text-align:right;width:20%;'>".number_format($dsd_sap,2)."</td>";
+             echo "<td style='text-align:center;width:5%'></td>";
+             echo "<td style='text-align:center;width:20%'></td>";
+             echo "<td style='text-align:center;width:10%'>3</td>";
+          echo "</tr>";
+                        
 
           echo "<tr>";
 			 echo "<td style='text-align:center;width:5%'></td>";
@@ -285,7 +341,7 @@ $monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
 			 echo "<td style='text-align:left;width:40%'>ค่าใช้จ่ายในการบริหารงาน-กองบริการวิศวกรรมระบบจำหน่าย</td>";
 			 echo "<td style='text-align:right;width:20%;border-bottom:1px solid black'>".number_format($m_dsd,2)."</td>";
 			 echo "<td style='text-align:center;width:5%'></td>";
-			 $outcome = $dsd_sum+$tsd_sum+$msd_sum+$m_tsd+$m_msd+$m_dsd;
+			 $outcome = $dsd_sap+$tsd_sap+$msd_sap+$dsd_sum+$tsd_sum+$msd_sum+$m_tsd+$m_msd+$m_dsd;
 			 echo "<td style='text-align:right;width:20%;border-bottom:1px solid black'>".number_format($outcome,2)."</td>";
 			 echo "<td style='text-align:center;width:10%'>3</td>";
 		  echo "</tr>";

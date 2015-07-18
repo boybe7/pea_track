@@ -137,7 +137,7 @@ class Project extends CActiveRecord
                                 'desc'=>'cost ASC',
                         ),
                 );
-
+        $criteria->order = 'pj_fiscalyear ASC';        
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'sort'=>$sort

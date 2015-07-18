@@ -112,7 +112,6 @@ body * { visibility: hidden;}
                 $workcat = Yii::app()->db->createCommand()
                     ->select('wc_id,wc_name as name')
                     ->from('work_category')
-                    ->where('department_id='.Yii::app()->user->userdept)
                     ->queryAll();
      
                 $typelist = CHtml::listData($workcat,'wc_id','name');

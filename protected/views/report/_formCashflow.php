@@ -75,6 +75,10 @@ $number = $number<10 ? "0".$number : $number;
 $dayEnd = $yearEnd."-".$monthEnd2."-".$number;
 $monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
 
+//check year
+///if($yearEnd>$yearBegin)
+
+
 //echo $monthCondition;
 
 $maxPayment = 6;
