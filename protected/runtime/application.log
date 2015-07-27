@@ -178,3 +178,17 @@ REQUEST_URI=/pea_track/report/genCashflow?fiscalyear=2557&project=&monthEnd=7&ye
 in C:\xampp\htdocs\pea_track\protected\views\report\_formCashflow.php (155)
 in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (180)
 in C:\xampp\htdocs\pea_track\index.php (13)
+2015/07/28 00:10:05 [error] [php] file_put_contents(c:\xampp\htdocs\pea_track\protected\extensions\highcharts\exporting-server\temp/100f962d991f6846fc9b3e6699ed9b13.svg) [<a href='function.file-put-contents'>function.file-put-contents</a>]: failed to open stream: No such file or directory (C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php:261)
+Stack trace:
+#0 C:\xampp\htdocs\pea_track\framework\web\actions\CInlineAction.php(49): ReportController->actionDocgen()
+#1 C:\xampp\htdocs\pea_track\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\xampp\htdocs\pea_track\framework\web\CController.php(286): ReportController->runAction()
+#3 C:\xampp\htdocs\pea_track\framework\web\CController.php(265): ReportController->runActionWithFilters()
+#4 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(282): ReportController->run()
+#5 C:\xampp\htdocs\pea_track\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\pea_track\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\pea_track\index.php(13): CWebApplication->run()
+REQUEST_URI=/pea_track/report/docgen
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (261)
+in C:\xampp\htdocs\pea_track\protected\controllers\ReportController.php (618)
+in C:\xampp\htdocs\pea_track\index.php (13)
