@@ -245,7 +245,7 @@ body * { visibility: hidden;}
                            'legend' => array(
                                     'enabled'=> true,
                                     //'layout'=> "horizontal",
-                                    //'align'=>"left",
+                                    'align'=>"center",
                                     'width'=> 520,
                                     //'verticalAlign'=>"middle",
                                     'borderWidth'=> 0,
@@ -347,7 +347,7 @@ body * { visibility: hidden;}
                            'legend' => array(
                                     'enabled'=> true,
                                     //'layout'=> "vertical",
-                                    //'align'=>"left",
+                                    'align'=>"center",
                                     'width'=> 420,
                                     //'verticalAlign'=>"middle",
                                     'borderWidth'=> 0,
