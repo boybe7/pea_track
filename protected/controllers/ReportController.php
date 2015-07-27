@@ -165,9 +165,9 @@ class ReportController extends Controller
 	    	else
 	    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
 	    }
-    	$monthBegin = $_GET["monthBegin"];
+    	$monthBegin = 0;//$_GET["monthBegin"];
     	$monthEnd = $_GET["monthEnd"];
-    	$yearBegin = $_GET["yearBegin"];
+    	$yearBegin = 0;//$_GET["yearBegin"];
     	$yearEnd = $_GET["yearEnd"];
 
     	// header('Content-type: text/plain');
@@ -480,7 +480,88 @@ $table = $section->addTable(array("cellMargin"=>0));
           $section->addText("การเพิ่มค่า EP",array('name'=>'TH SarabunPSK', 'color'=>'black','bold'=>true, 'size'=>17),array('align'=>'left', 'spaceBefore'=>300,'spaceAfter'=>0));
 		  $section->addText("             EP  = NOPAT – Capital Charge",array('name'=>'TH SarabunPSK', 'color'=>'black','bold'=>true, 'size'=>17),array('align'=>'left', 'spaceBefore'=>0,'spaceAfter'=>0));
 		  $section->addText("             NOPAT	= รายได้ – ค่าใช้จ่าย- ภาษี",array('name'=>'TH SarabunPSK', 'color'=>'black','bold'=>true, 'size'=>17),array('align'=>'left', 'spaceBefore'=>0,'spaceAfter'=>0));
-		       
+		   
+		  $section->addText("ค่าใช้จ่ายเปรียบเทียบกับรายได้ ปี ".$year." ดังนี้",array('name'=>'TH SarabunPSK', 'color'=>'black','bold'=>true, 'size'=>17),array('align'=>'left', 'spaceBefore'=>300,'spaceAfter'=>0));
+		  
+		  $departments = Department::model()->findAll();
+
+		  $income = array();
+		  $outcome = array();
+		  $management = array();
+		  $sap = array();
+		  $no = 1;
+		  foreach ($departments as $key => $dept) {
+		  	    $department = $dept->id;
+		  	    $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_project_contract')
+                                            ->join('user','user_create=u_id')
+                                            ->where("department_id='$department' AND bill_date!='' AND YEAR(bill_date)!=0 AND bill_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+         		$income[$dept->id] = !empty($pp[0]) ? $pp[0]["sum"] : 0;
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_outsource_contract')
+                                            ->join('user','user_create=u_id')
+                                            ->where("department_id='$department' AND approve_date!='' AND YEAR(approve_date)!=0 AND approve_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+         		$outcome[$dept->id] = !empty($pp[0]) ? $pp[0]["sum"] : 0;
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('cost')
+                                            ->from('management_cost_sap')
+                                            ->where("department_id='$department' AND year='$year'")
+                                            ->queryAll();
+         		//print_r($pp);
+         		$sap[$dept->id] = !empty($pp[0]) ? $pp[0]["cost"] : 0;
+
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->join('user','mc_user_update=u_id')
+                                            ->where("department_id='$department' AND mc_type!=0 AND mc_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+                $manage[$dept->id] = !empty($pp[0]) ? $pp[0]["sum"] : 0;
+
+                $section->addText(($no++).". ".$dept->name,array('name'=>'TH SarabunPSK', 'bold'=>true,'color'=>'black','size'=>17),array('spaceBefore'=>0,'spaceAfter'=>0));
+	        
+                $table = $section->addTable(array("cellMargin"=>0));
+	            $table->addRow();
+				$table->addCell(6850)->addText("รายได้",'rStyle',array('spaceAfter'=>0));
+				$table->addCell(1750)->addText("เป็นจำนวนเงิน",'rStyle',array('spaceAfter'=>0));
+				$table->addCell(1950)->addText(number_format($income[$dept->id],2),'rStyle',array("align"=>"right",'spaceAfter'=>0));
+				$table->addCell(750)->addText("บาท",'rStyle',array("align"=>"right",'spaceAfter'=>0));
+
+				
+	            $table->addRow();
+				$table->addCell(6850)->addText("ค่าใช้จ่ายจ้างเหมา",'rStyle',array('spaceAfter'=>0));
+				$table->addCell(1750)->addText("เป็นจำนวนเงิน",'rStyle',array('spaceAfter'=>0));
+				$table->addCell(1950)->addText(number_format($outcome[$dept->id],2),'rStyle',array("align"=>"right",'spaceAfter'=>0));
+				$table->addCell(750)->addText("บาท",'rStyle',array("align"=>"right",'spaceAfter'=>0));
+	       		
+	            $table->addRow();
+				$table->addCell(6850)->addText("ค่าใช้จ่ายดำเนินงาน",'rStyle',array('spaceAfter'=>0));
+				$table->addCell(1750)->addText("เป็นจำนวนเงิน",'rStyle',array('spaceAfter'=>0));
+				$table->addCell(1950)->addText(number_format($manage[$dept->id],2),'rStyle',array("align"=>"right",'spaceAfter'=>0));
+				$table->addCell(750)->addText("บาท",'rStyle',array("align"=>"right",'spaceAfter'=>0));
+	       		
+	            $table->addRow();
+				$table->addCell(6850)->addText("ค่าใช้จ่ายบริหารงาน",'rStyle',array('spaceAfter'=>0));
+				$table->addCell(1750)->addText("เป็นจำนวนเงิน",'rStyle',array('spaceAfter'=>0));
+				$table->addCell(1950)->addText(number_format($sap[$dept->id],2),'rStyle',array("align"=>"right",'spaceAfter'=>0));
+				$table->addCell(750)->addText("บาท",'rStyle',array("align"=>"right",'spaceAfter'=>0));
+	       		
+	       		$section->addImage($items[$no_pic-1]->filename);
+	            $section->addText("รูปที่ ".($no_pic++),array('name'=>'TH SarabunPSK', 'color'=>'black','size'=>17),array('align'=>'center', 'spaceBefore'=>300));
+		        
+
+		  }
+      
+      	        $section->addImage($items[$no_pic-1]->filename);
+	            $section->addText("รูปที่ ".($no_pic++),array('name'=>'TH SarabunPSK', 'color'=>'black','size'=>17),array('align'=>'center', 'spaceBefore'=>300));
+		   		
     //$section->addTextBreak(1);
   
 
@@ -553,6 +634,7 @@ $table = $section->addTable(array("cellMargin"=>0));
     	$year = $_GET["fiscalyear"];
     	$report = $_GET["report"];
     	$workcat = $_GET["workcat"];
+    	$department = $_GET["department"];
 
     	if($report=="all")
     	{
@@ -608,6 +690,56 @@ $table = $section->addTable(array("cellMargin"=>0));
 	             	$report[] = array("name"=>"ค่าใช้จ่าย".$wc->wc_name,"data"=>$data); 
 	             }     
 	         
+			//chart 4 : compare income and outcome
+	          
+	         $departments = Department::model()->findAll(); 
+             $data = array();
+             foreach ($departments as $key => $value) {
+               $department = $value->id;
+	           $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_project_contract')
+                                            ->join('user','user_create=u_id')
+                                            ->where("department_id='$department' AND bill_date!='' AND YEAR(bill_date)!=0 AND bill_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+         		$tsd_income = !empty($pp[0]) ? $pp[0]["sum"] : 0;
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_outsource_contract')
+                                            ->join('user','user_create=u_id')
+                                            ->where("department_id='$department' AND approve_date!='' AND YEAR(approve_date)!=0 AND approve_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+         		$tsd_outcome = !empty($pp[0]) ? $pp[0]["sum"] : 0;
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('cost')
+                                            ->from('management_cost_sap')
+                                            ->where("department_id='$department' AND year='$year'")
+                                            ->queryAll();
+         		//print_r($pp);
+         		$tsd_sap = !empty($pp[0]) ? $pp[0]["cost"] : 0;
+
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->join('user','mc_user_update=u_id')
+                                            ->where("department_id='$department' AND mc_type!=0 AND mc_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+                $tsd_manage = !empty($pp[0]) ? $pp[0]["sum"] : 0;
+                
+                $data2 = array();
+                $data2[] = array("name"=>"รายได้", "value"=>$tsd_income,"drill"=> 0);
+                $data2[] = array("name"=>"ค่าจ้างเหมา", "value"=>$tsd_outcome,"drill"=> 0);
+                $data2[] = array("name"=>"ค่าดำเนินงาน", "value"=>$tsd_manage,"drill"=> 0);
+                $data2[] = array("name"=>"ค่าบริหารงาน", "value"=>$tsd_sap,"drill"=> 0);
+                $report[] = array("name"=>"รายได้เปรียบเทียบกับค่าใช้จ่าย ของ".$value->name,"data"=>$data2);
+
+                $data[] = array("name"=>$value->shortname,"value"=>$data2,"drill"=> 0);
+                     
+            }    
+            $report[] = array("name"=>"รายได้เปรียบเทียบกับค่าใช้จ่าย","data"=>$data);
 
 
 
@@ -745,46 +877,215 @@ $table = $section->addTable(array("cellMargin"=>0));
              
 
              $data = array();
-             if(empty($workcat))
-    		 {	
-             	$workcat = WorkCategory::model()->findAll();
-	          
-	             foreach ($workcat as $key => $wc) {
-	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
-	             	$sumW = 0;
-	             	$sumW2 = 0;
-	             	foreach ($projects as $key => $pj) {
-	             		$sumW += $pj->getOutcome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
-	             		$sumW2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
-	             
-	             	}
-	             	$data[] = array("name"=>"ค่าจ้างเหมา".$wc->wc_name, "value"=>$sumW,"drill"=> 0);
-	             	$data[] = array("name"=>"ค่าดำเนินงาน".$wc->wc_name, "value"=>$sumW2,"drill"=> 0);
-	             }
-	         }
-	         else{
-	         	  
-	         	    $wc = WorkCategory::model()->findByPk($workcat);
-	          
-	             
-	             	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
-	             	$sum = 0;
-	             	$sumW = 0;
-	             	$sumW2 = 0;
-	             	foreach ($projects as $key => $pj) {
-	             		$sumW += $pj->getOutcome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
-	             		$sumW2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
-	             		$sum += $pj->getIncome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
-	             
-	             	}
-	             	$data[] = array("name"=>"รายได้".$wc->wc_name, "value"=>$sum,"drill"=> 0);
-	             	$data[] = array("name"=>"ค่าจ้างเหมา".$wc->wc_name, "value"=>$sumW,"drill"=> 0);
-	             	$data[] = array("name"=>"ค่าดำเนินงาน".$wc->wc_name, "value"=>$sumW2,"drill"=> 0);
-	            
-	         }    
-	            // $sum = 50;
-	            // $sum2 = 80;
              
+		     if($department!="")
+		     {        
+		       //       if(empty($workcat))
+		    		 // {	
+		       //       	$workcat = WorkCategory::model()->findAll();
+			          
+			      //        foreach ($workcat as $key => $wc) {
+			      //        	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+			      //        	$sumW = 0;
+			      //        	$sumW2 = 0;
+			      //        	foreach ($projects as $key => $pj) {
+			      //        		$sumW += $pj->getOutcome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+			      //        		$sumW2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+			             
+			      //        	}
+			      //        	$data[] = array("name"=>"ค่าจ้างเหมา".$wc->wc_name, "value"=>$sumW,"drill"=> 0);
+			      //        	$data[] = array("name"=>"ค่าดำเนินงาน".$wc->wc_name, "value"=>$sumW2,"drill"=> 0);
+			      //        }
+			      //    }
+			      //    else{
+			         	  
+			      //    	    $wc = WorkCategory::model()->findByPk($workcat);
+			          
+			             
+			      //        	$projects =Project::model()->findAll(array('condition'=>'pj_work_cat='.$wc->wc_id));
+			      //        	$sum = 0;
+			      //        	$sumW = 0;
+			      //        	$sumW2 = 0;
+			      //        	foreach ($projects as $key => $pj) {
+			      //        		$sumW += $pj->getOutcome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+			      //        		$sumW2 += $pj->getManageCost(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+			      //        		$sum += $pj->getIncome(" BETWEEN '$dateBegin' AND '$dateEnd' ");
+			             
+			      //        	}
+			      //        	$data[] = array("name"=>"รายได้".$wc->wc_name, "value"=>$sum,"drill"=> 0);
+			      //        	$data[] = array("name"=>"ค่าจ้างเหมา".$wc->wc_name, "value"=>$sumW,"drill"=> 0);
+			      //        	$data[] = array("name"=>"ค่าดำเนินงาน".$wc->wc_name, "value"=>$sumW2,"drill"=> 0);
+			            
+			      //    } 
+
+			      $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_project_contract')
+                                            ->join('user','user_create=u_id')
+                                            ->where("department_id='$department' AND bill_date!='' AND YEAR(bill_date)!=0 AND bill_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+         		$tsd_income = $pp[0]["sum"];
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_outsource_contract')
+                                            ->join('user','user_create=u_id')
+                                            ->where("department_id='$department' AND approve_date!='' AND YEAR(approve_date)!=0 AND approve_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+         		$tsd_outcome = $pp[0]["sum"];
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('cost')
+                                            ->from('management_cost_sap')
+                                            ->where("department_id='$department' AND year='$year'")
+                                            ->queryAll();
+         		//print_r($pp);
+         		$tsd_sap = !empty($pp[0]) ? $pp[0]["cost"] : 0;
+
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->join('user','mc_user_update=u_id')
+                                            ->where("department_id='$department' AND mc_type!=0 AND mc_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+                $tsd_manage = $pp[0]["sum"];
+
+                $data[] = array("name"=>"รายได้", "value"=>$tsd_income,"drill"=> 0);
+                $data[] = array("name"=>"ค่าจ้างเหมา", "value"=>$tsd_outcome,"drill"=> 0);
+                $data[] = array("name"=>"ค่าดำเนินงาน", "value"=>$tsd_manage,"drill"=> 0);
+                $data[] = array("name"=>"ค่าบริหารงาน", "value"=>$tsd_sap,"drill"=> 0);
+                
+   
+	        }
+	        else{
+
+	        	
+
+	        	//tsd กองบริการวิศวกรรมระบบส่ง
+	        	$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_project_contract')
+                                            ->join('user','user_create=u_id')
+                                            ->where("department_id='0' AND bill_date!='' AND YEAR(bill_date)!=0 AND bill_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+         		$tsd_income = $pp[0]["sum"];
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_outsource_contract')
+                                            ->join('user','user_create=u_id')
+                                            ->where("department_id='0' AND approve_date!='' AND YEAR(approve_date)!=0 AND approve_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+         		$tsd_outcome = $pp[0]["sum"];
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('cost')
+                                            ->from('management_cost_sap')
+                                            ->where("department_id='0' AND year='$year'")
+                                            ->queryAll();
+         		//print_r($pp);
+         		$tsd_sap = !empty($pp[0]) ? $pp[0]["cost"] : 0;
+
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->join('user','mc_user_update=u_id')
+                                            ->where("department_id='0' AND mc_type!=0 AND mc_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+                $tsd_manage = $pp[0]["sum"];
+
+                $data2 = array();
+                $data2[] = array("name"=>"รายได้", "value"=>$tsd_income,"drill"=> 0);
+                $data2[] = array("name"=>"ค่าจ้างเหมา", "value"=>$tsd_outcome,"drill"=> 0);
+                $data2[] = array("name"=>"ค่าดำเนินงาน", "value"=>$tsd_manage,"drill"=> 0);
+                $data2[] = array("name"=>"ค่าบริหารงาน", "value"=>$tsd_sap,"drill"=> 0);
+                $data[] = array("name"=>"กบศ.","value"=>$data2);
+
+         		//msd กองบริการบำรุงรักษา
+				 $pp = Yii::app()->db->createCommand()
+		                                            ->select('SUM(money) as sum')
+		                                            ->from('payment_project_contract')
+		                                            ->join('user','user_create=u_id')
+		                                            ->where("department_id='1' AND bill_date!='' AND YEAR(bill_date)!=0 AND bill_date BETWEEN '$dateBegin' AND '$dateEnd'")
+		                                            ->queryAll();
+		         $msd_income = $pp[0]["sum"];
+
+		        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_outsource_contract')
+                                            ->join('user','user_create=u_id')
+                                            ->where("department_id='1' AND approve_date!='' AND YEAR(approve_date)!=0 AND approve_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+         		$msd_outcome = $pp[0]["sum"];
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('cost')
+                                            ->from('management_cost_sap')
+                                            ->where("department_id='1' AND year='$year'")
+                                            ->queryAll();
+         		$msd_sap = !empty($pp[0]) ? $pp[0]["cost"] : 0;
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->join('user','mc_user_update=u_id')
+                                            ->where("department_id='1' AND mc_type!=0 AND mc_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+                $msd_manage = $pp[0]["sum"];
+
+
+                $data2 = array();
+                $data2[] = array("name"=>"รายได้", "value"=>$msd_income,"drill"=> 0);
+                $data2[] = array("name"=>"ค่าจ้างเหมา", "value"=>$msd_outcome,"drill"=> 0);
+                $data2[] = array("name"=>"ค่าดำเนินงาน", "value"=>$msd_manage,"drill"=> 0);
+                $data2[] = array("name"=>"ค่าบริหารงาน", "value"=>$msd_sap,"drill"=> 0);
+                $data[] = array("name"=>"กรษ.","value"=>$data2);
+
+
+		         //dsd กองบริการวิศวกรรมระบบจำหน่าย
+				 $pp = Yii::app()->db->createCommand()
+		                                            ->select('SUM(money) as sum')
+		                                            ->from('payment_project_contract')
+		                                            ->join('user','user_create=u_id')
+		                                            ->where("department_id='2' AND bill_date!='' AND YEAR(bill_date)!=0 AND bill_date BETWEEN '$dateBegin' AND '$dateEnd'")
+		                                            ->queryAll();
+		         $dsd_income = $pp[0]["sum"];
+
+		         $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum')
+                                            ->from('payment_outsource_contract')
+                                            ->join('user','user_create=u_id')
+                                            ->where("department_id='2' AND approve_date!='' AND YEAR(approve_date)!=0 AND approve_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+         		$dsd_outcome = $pp[0]["sum"];
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('cost')
+                                            ->from('management_cost_sap')
+                                            ->where("department_id='2' AND year='$year'")
+                                            ->queryAll();
+         		$dsd_sap = !empty($pp[0]) ? $pp[0]["cost"] : 0;
+
+
+         		$pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->join('user','mc_user_update=u_id')
+                                            ->where("department_id='2' AND mc_type!=0 AND mc_date BETWEEN '$dateBegin' AND '$dateEnd'")
+                                            ->queryAll();
+                $dsd_manage = $pp[0]["sum"];
+
+                $data2 = array();
+                $data2[] = array("name"=>"รายได้", "value"=>$dsd_income,"drill"=> 0);
+                $data2[] = array("name"=>"ค่าจ้างเหมา", "value"=>$dsd_outcome,"drill"=> 0);
+                $data2[] = array("name"=>"ค่าดำเนินงาน", "value"=>$dsd_manage,"drill"=> 0);
+                $data2[] = array("name"=>"ค่าบริหารงาน", "value"=>$dsd_sap,"drill"=> 0);
+                $data[] = array("name"=>"กบจ.","value"=>$data2);
+
+
+	        }
 
              echo json_encode($data);
     	}			
@@ -1686,7 +1987,7 @@ $table = $section->addTable(array("cellMargin"=>0));
 
                          //management cost
                         $Criteria = new CDbCriteria();
-                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=0";
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=0 AND mc_in_project!=3";
                         $m_plan = ManagementCost::model()->findAll($Criteria);
 
                         $Criteria = new CDbCriteria();
@@ -1694,7 +1995,7 @@ $table = $section->addTable(array("cellMargin"=>0));
                         $m_real = ManagementCost::model()->findAll($Criteria);
 
                         $Criteria = new CDbCriteria();
-                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=1";
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=0 AND mc_in_project=3";
                         $m_type1 = ManagementCost::model()->findAll($Criteria);
 
                         //find tax
@@ -1715,14 +2016,14 @@ $table = $section->addTable(array("cellMargin"=>0));
                         $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
-                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=1")
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=0 AND mc_in_project=3")
                                             ->queryAll();
                         $m_type1_sum = $pp[0]["sum"];                    
 
                         $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
-                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=2")
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type!=0")
                                             ->queryAll();
                         $m_real_sum = $pp[0]["sum"];
 
@@ -1749,7 +2050,7 @@ $table = $section->addTable(array("cellMargin"=>0));
                                             ->where("oc_proj_id='$pj->pj_id'")
                                             ->queryAll();                    
                         $outcome = $pp[0]["sum"];                    
-                        $m_profit = $income - $outcome - $m_type1_sum - $m_real_sum;
+                        $m_profit = $income - $outcome  - $m_real_sum;
 
                         $sum_profit += $m_profit;
 
@@ -2288,9 +2589,9 @@ $table = $section->addTable(array("cellMargin"=>0));
 	    	else
 	    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
 	    	}
-    	$monthBegin = $_GET["monthBegin"];
+    	$monthBegin = 0;///$_GET["monthBegin"];
     	$monthEnd = $_GET["monthEnd"];
-    	$yearBegin = $_GET["yearBegin"];
+    	$yearBegin = 0;//$_GET["yearBegin"];
     	$yearEnd = $_GET["yearEnd"];
 
     	// header('Content-type: text/plain');
@@ -2446,9 +2747,9 @@ $table = $section->addTable(array("cellMargin"=>0));
 	    	    $model = Project::model()->findAll(array('order'=>'CONCAT(pj_fiscalyear,pj_work_cat)', 'condition'=>'', 'params'=>array()));	
 	    }
 
-    	$monthBegin = $_GET["monthBegin"];
+    	$monthBegin = 0;//$_GET["monthBegin"];
     	$monthEnd = $_GET["monthEnd"];
-    	$yearBegin = $_GET["yearBegin"];
+    	$yearBegin = 0;//$_GET["yearBegin"];
     	$yearEnd = $_GET["yearEnd"];
 	
 		Yii::import('ext.phpexcel.XPHPExcel');    
@@ -2670,21 +2971,15 @@ $table = $section->addTable(array("cellMargin"=>0));
 		
 		$month_th = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม","4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน","7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน","10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
 
-		if($monthBegin==$monthEnd && $yearBegin==$yearEnd)
-		    $monthBetween = $month_th[$monthBegin]." ".$yearBegin;
-		else if($yearBegin==$yearEnd)
-			$monthBetween = $month_th[$monthBegin]."-".$month_th[$monthEnd]." ".$yearEnd;
-		else
-		    $monthBetween = $month_th[$monthBegin]." ".$yearBegin."-".$month_th[$monthEnd]." ".$yearEnd;
+		$monthBetween = $month_th[$monthEnd]." ".$yearEnd;
+
 
 		$number = cal_days_in_month(CAL_GREGORIAN, $monthEnd, $yearEnd-543);
-		$monthBegin2 = $monthBegin<10 ? "0".$monthBegin : $monthBegin;
 		$monthEnd2 = $monthEnd<10 ? "0".$monthEnd : $monthEnd;
-		$dayBegin = $yearBegin."-".$monthBegin2."-"."01";
 
 		$number = $number<10 ? "0".$number : $number;
 		$dayEnd = $yearEnd."-".$monthEnd2."-".$number;
-		$monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
+		$monthCondition = " <= '".$dayEnd."'";
 
 		$sheet = 0;
 		$sumPayPCAll = 0;
@@ -2807,7 +3102,7 @@ $table = $section->addTable(array("cellMargin"=>0));
 	            		$rowPC++;
 		            	//pc payment
 		            	$Criteria = new CDbCriteria();
-                		$Criteria->condition = "proj_id='$pc->pc_id' AND bill_date!='' AND bill_date ".$monthCondition;
+                		$Criteria->condition = "proj_id='$pc->pc_id' AND bill_date!='' AND YEAR(bill_date)!=0 AND bill_date ".$monthCondition;
                 		$payment = PaymentProjectContract::model()->findAll($Criteria);
 
                 		foreach ($payment as $key => $pay) {
@@ -2865,7 +3160,7 @@ $table = $section->addTable(array("cellMargin"=>0));
 
                 	//payment
                 	$Criteria = new CDbCriteria();
-                	$Criteria->condition = "contract_id='$oc->oc_id' AND approve_date!='' AND approve_date ".$monthCondition;
+                	$Criteria->condition = "contract_id='$oc->oc_id' AND approve_date!='' AND YEAR(approve_date)!=0 AND approve_date ".$monthCondition;
                 	$paymentOC = PaymentOutsourceContract::model()->findAll($Criteria);
                 	foreach ($paymentOC as $key => $pay) {
                 		$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$rowOC,$this->renderDate($pay->approve_date));
@@ -2901,25 +3196,102 @@ $table = $section->addTable(array("cellMargin"=>0));
                 
                 $rowMaxOC = empty($rowRemainOC) ? 5 :  $rowRemainOC[$rowNOC];
 
+
                 //summary
+                
+                $pay_pc = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum,YEAR(bill_date) as year')
+                                            ->from('payment_project_contract')
+                                            ->join('project_contract p', 'proj_id=p.pc_id')
+                                            ->where("p.pc_proj_id='$pj->pj_id' AND bill_date!='' AND YEAR(bill_date)!=0 AND bill_date ".$monthCondition)
+                                            ->group("YEAR(bill_date)")
+                                            ->queryAll();
+
+                 $pay_oc = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum,YEAR(approve_date) as year')
+                                            ->from('payment_outsource_contract')
+                                            ->join('outsource_contract o', 'contract_id=o.oc_id')
+                                            ->where("o.oc_proj_id='$pj->pj_id' AND approve_date!='' AND YEAR(approve_date)!=0 AND approve_date ".$monthCondition)
+                                            ->group("YEAR(approve_date)")
+                                            ->queryAll();                            
                 $rowSum = $row;
-                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A'.$row,'รวมรายรับ ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd);
-                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($sumPayPCAll,2));
-                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,'รวมรายจ่าย ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd);
-                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F'.$row,number_format($sumPayOCAll,2));
-                $row++;
+                $max = count($pay_pc) < count($pay_oc) ? count($pay_oc): count($pay_pc);
+        		for ($i=0; $i < $max; $i++) { 
+        			if(!empty($pay_pc[$i]))
+	                {
+	                	if($pay_pc[$i]["year"]==$yearEnd)
+	                      $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A'.$row,'รวมรายรับ ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd);
+	               		else
+	               		  $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('A'.$row,'รวมรายรับ ณ เดือน ธันวาคม '.$pay_pc[$i]["year"]);	
+	                
+	                	$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($pay_pc[$i]["sum"],2));
+	                }
+	           
+	                
+	                if(!empty($pay_oc[$i]))
+	                {
+	                	if($pay_oc[$i]["year"]==$yearEnd)
+	                      $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,'รวมรายรับ ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd);
+	               		else
+	               		  $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,'รวมรายรับ ณ เดือน ธันวาคม '.$pay_oc[$i]["year"]);	
+	                
+	                	$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F'.$row,number_format($pay_oc[$i]["sum"],2));
+	                }
+	               
+	                $row++;
+                }
                 //management
+                $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=2 AND mc_date ".$monthCondition)
+                                            ->queryAll();
+                        $m_sum1 = $pp[0]["sum"];
                          $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
-                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type!=0 AND mc_date ".$monthCondition)
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=1 AND mc_date ".$monthCondition)
                                             ->queryAll();
-                        $m_sum = $pp[0]["sum"];
-                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,'ค่าบริหารโครงการ เดือน '.$month_th[$monthEnd].' '.$yearEnd);
-                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F'.$row,number_format($m_sum,2));
+                        $m_sum2 = $pp[0]["sum"];
+                         $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=3 AND mc_date ".$monthCondition)
+                                            ->queryAll();
+                        $m_sum3 = $pp[0]["sum"];
+
+
+                         $pp = Yii::app()->db->createCommand()
+                                            ->select('sum(mc_cost) as mc_cost')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=0 AND mc_in_project=1")
+                                            ->queryAll();
+                        $m_plan1 = $pp[0]["mc_cost"];
+
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('sum(mc_cost)  as mc_cost')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=0 AND mc_in_project=2")
+                                            ->queryAll();
+                        $m_plan2 = $pp[0]["mc_cost"];
+
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('sum(mc_cost)  as mc_cost')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=0 AND mc_in_project=3")
+                                            ->queryAll();
+                        $m_plan3 = $pp[0]["mc_cost"];
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,'ค่าบริหารโครงการ ('.number_format($m_plan1,2).')');
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F'.$row,number_format($m_sum1,2));
+                $row++;
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,'ค่ารับรอง ('.number_format($m_plan2,2).')');
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F'.$row,number_format($m_sum2,2));
+                $row++;
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,'ค่าบุคลากร ('.number_format($m_plan3,2).')');
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F'.$row,number_format($m_sum3,2));
                 $row++;
                 $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,'กำไร/ขาดทุน');
-                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F'.$row,number_format($sumPayPCAll-$sumPayOCAll-$m_sum,2));
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('F'.$row,number_format($sumPayPCAll-$sumPayOCAll-$m_sum1-$m_sum2-$m_sum3,2));
 
 
                 
@@ -3262,59 +3634,78 @@ $table = $section->addTable(array("cellMargin"=>0));
 				
 
 
-		  				$pp = Yii::app()->db->createCommand()
-                                            ->select('SUM(mc_cost) as sum')
-                                            ->from('management_cost')
-                                            ->join('user','mc_user_update=u_id')
-                                            ->where("department_id='0' AND mc_type=1 AND mc_date ".$monthCondition)
-                                            ->queryAll();
-                        $m_type1_tsd = $pp[0]["sum"];                    
+		  				// $pp = Yii::app()->db->createCommand()
+        //                                     ->select('SUM(mc_cost) as sum')
+        //                                     ->from('management_cost')
+        //                                     ->join('user','mc_user_update=u_id')
+        //                                     ->where("department_id='0' AND mc_type=1 AND mc_date ".$monthCondition)
+        //                                     ->queryAll();
+        //                 $m_type1_tsd = $pp[0]["sum"];                    
 
+        //                 $pp = Yii::app()->db->createCommand()
+        //                                     ->select('SUM(mc_cost) as sum')
+        //                                     ->from('management_cost')
+        //                                     ->join('user','mc_user_update=u_id')
+        //                                     ->where("department_id='0' AND mc_type=2 AND mc_date ".$monthCondition)
+        //                                     ->queryAll();
+                      
+        //                 $m_real_tsd = $pp[0]["sum"];
+                        
                         $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
                                             ->join('user','mc_user_update=u_id')
-                                            ->where("department_id='0' AND mc_type=2 AND mc_date ".$monthCondition)
+                                            ->where("department_id='0' AND mc_type!=0 AND mc_date ".$monthCondition)
                                             ->queryAll();
                       
                         $m_real_tsd = $pp[0]["sum"];
-                        $m_tsd = $m_real_tsd + $m_type1_tsd;
+                        
+                        $m_tsd = $m_real_tsd;// + $m_type1_tsd;
 
+                        // $pp = Yii::app()->db->createCommand()
+                        //                     ->select('SUM(mc_cost) as sum')
+                        //                     ->from('management_cost')
+                        //                     ->join('user','mc_user_update=u_id')
+                        //                     ->where("department_id='1' AND mc_type=1 AND mc_date ".$monthCondition)
+                        //                     ->queryAll();
+                        // $m_type1_msd = $pp[0]["sum"];                    
+
+                        // $pp = Yii::app()->db->createCommand()
+                        //                     ->select('SUM(mc_cost) as sum')
+                        //                     ->from('management_cost')
+                        //                     ->join('user','mc_user_update=u_id')
+                        //                     ->where("department_id='1' AND mc_type=2 AND mc_date ".$monthCondition)
+                        //                     ->queryAll();
+                      
+                        // $m_real_msd = $pp[0]["sum"];
                         $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
                                             ->join('user','mc_user_update=u_id')
-                                            ->where("department_id='1' AND mc_type=1 AND mc_date ".$monthCondition)
-                                            ->queryAll();
-                        $m_type1_msd = $pp[0]["sum"];                    
-
-                        $pp = Yii::app()->db->createCommand()
-                                            ->select('SUM(mc_cost) as sum')
-                                            ->from('management_cost')
-                                            ->join('user','mc_user_update=u_id')
-                                            ->where("department_id='1' AND mc_type=2 AND mc_date ".$monthCondition)
+                                            ->where("department_id='1' AND mc_type!=0 AND mc_date ".$monthCondition)
                                             ->queryAll();
                       
                         $m_real_msd = $pp[0]["sum"];
-                        $m_msd = $m_real_msd + $m_type1_msd;
+
+                        $m_msd = $m_real_msd;// + $m_type1_msd;
+
+                        // $pp = Yii::app()->db->createCommand()
+                        //                     ->select('SUM(mc_cost) as sum')
+                        //                     ->from('management_cost')
+                        //                     ->join('user','mc_user_update=u_id')
+                        //                     ->where("department_id='2' AND mc_type=1 AND mc_date ".$monthCondition)
+                        //                     ->queryAll();
+                        // $m_type1_dsd = $pp[0]["sum"];                    
 
                         $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
                                             ->join('user','mc_user_update=u_id')
-                                            ->where("department_id='2' AND mc_type=1 AND mc_date ".$monthCondition)
-                                            ->queryAll();
-                        $m_type1_dsd = $pp[0]["sum"];                    
-
-                        $pp = Yii::app()->db->createCommand()
-                                            ->select('SUM(mc_cost) as sum')
-                                            ->from('management_cost')
-                                            ->join('user','mc_user_update=u_id')
-                                            ->where("department_id='2' AND mc_type=2 AND mc_date ".$monthCondition)
+                                            ->where("department_id='2' AND mc_type!=0 AND mc_date ".$monthCondition)
                                             ->queryAll();
                       
                         $m_real_dsd = $pp[0]["sum"];
-                        $m_dsd = $m_real_dsd + $m_type1_dsd;
+                        $m_dsd = $m_real_dsd;// + $m_type1_dsd;
 
 	                 $tsd_sap = 0;
 	          $msd_sap = 0;
@@ -3346,34 +3737,34 @@ $table = $section->addTable(array("cellMargin"=>0));
 	             $dsd_sap = $pp[0]["cost"];   
 	             
 	                  $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการดำเนินงาน-กองบริการวิศวกรรมระบบส่ง");
-				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($tsd_sap,2));
-				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"1");
-				$row++;
-
-
-				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการดำเนินงาน-กองบริการบำรุงรักษา");
-				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($msd_sap,2));
-				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"2");
-				$row++;
-
-				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการดำเนินงาน-กองบริการวิศวกรรมระบบจำหน่าย");
-				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($dsd_sap,2));
-				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"3");
-				$row++;     
-
-                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการบริหารงาน-กองบริการวิศวกรรมระบบส่ง");
 				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($m_tsd,2));
 				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"1");
 				$row++;
 
 
-				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการบริหารงาน-กองบริการบำรุงรักษา");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการดำเนินงาน-กองบริการบำรุงรักษา");
 				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($m_msd,2));
 				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"2");
 				$row++;
 
-				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการบริหารงาน-กองบริการวิศวกรรมระบบจำหน่าย");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการดำเนินงาน-กองบริการวิศวกรรมระบบจำหน่าย");
 				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($m_dsd,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"3");
+				$row++;     
+
+                $objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการบริหารงาน-กองบริการวิศวกรรมระบบส่ง");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($tsd_sap,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"1");
+				$row++;
+
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการบริหารงาน-กองบริการบำรุงรักษา");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($msd_sap,2));
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('E'.$row,"2");
+				$row++;
+
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('B'.$row,"ค่าใช้จ่ายในการบริหารงาน-กองบริการวิศวกรรมระบบจำหน่าย");
+				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('C'.$row,number_format($dsd_sap,2));
 				 $outcome = $dsd_sap+$tsd_sap+$msd_sap+$dsd_sum+$tsd_sum+$msd_sum+$m_tsd+$m_msd+$m_dsd;
 				$objPHPExcel->setActiveSheetIndex($sheet)->setCellValue('D'.$row,number_format($outcome,2));
 				$objPHPExcel->setActiveSheetIndex($sheet)->setSharedStyle($cashsum, 'D'.$row);
@@ -3836,7 +4227,7 @@ $table = $section->addTable(array("cellMargin"=>0));
                         $m_plan = ManagementCost::model()->findAll($Criteria);
 
                         $Criteria = new CDbCriteria();
-                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=2";
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type!=0 AND mc_type!=1";
                         $m_real = ManagementCost::model()->findAll($Criteria);
 
                         $Criteria = new CDbCriteria();
@@ -3866,7 +4257,7 @@ $table = $section->addTable(array("cellMargin"=>0));
                         $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
-                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=2")
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type!=0 AND mc_type!=1")
                                             ->queryAll();
                         $m_real_sum = $pp[0]["sum"];
 

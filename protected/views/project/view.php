@@ -157,7 +157,7 @@ hr {
              if(!empty($mc))
                $value = $mc[0]["mc_cost"];       
      
-             echo CHtml::label('เงินประมาณการใช้ได้จริง (บาท)','expect_cost1');        
+             echo CHtml::label('เงินประมาณการค่าใช้จ่ายในการบริหารโครงการ (บาท)','expect_cost1');        
              echo "<input type='text' id='expect_cost1' name='expect_cost1' class='span12' style='text-align:right' value='$value' readonly>"; 
           ?>
           </div>
@@ -172,7 +172,25 @@ hr {
              $value = "";
              if(!empty($mc))
               $value = $mc[0]["mc_cost"]; 
-             echo CHtml::label('เงินประมาณการบุคลากร (บาท)','expect_cost2');        
+             echo CHtml::label('เงินประมาณการค่าใช้จ่ายด้านบุคลากร (บาท)','expect_cost2');        
+             echo "<input type='text' id='expect_cost2' name='expect_cost2' class='span12' style='text-align:right' value='$value' readonly>";
+
+          ?>
+          </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span6">
+           <?php 
+             $mc = Yii::app()->db->createCommand()
+                    ->select('mc_cost')
+                    ->from('management_cost')
+                    ->where('mc_proj_id=:id AND mc_in_project=3 AND mc_type=0', array(':id'=>$model->pj_id))
+                    ->queryAll();
+
+             $value = "";
+             if(!empty($mc))
+              $value = $mc[0]["mc_cost"]; 
+             echo CHtml::label('เงินประมาณการค่ารับรอง (บาท)','expect_cost2');        
              echo "<input type='text' id='expect_cost2' name='expect_cost2' class='span12' style='text-align:right' value='$value' readonly>";
 
           ?>

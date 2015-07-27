@@ -280,7 +280,7 @@ $html = "";
                         $m_plan = ManagementCost::model()->findAll($Criteria);
 
                         $Criteria = new CDbCriteria();
-                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=2";
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type!=0 AND mc_type!=1";
                         $m_real = ManagementCost::model()->findAll($Criteria);
 
                         $Criteria = new CDbCriteria();
@@ -310,7 +310,7 @@ $html = "";
                         $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
-                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=2")
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type!=0 AND mc_type!=1")
                                             ->queryAll();
                         $m_real_sum = $pp[0]["sum"];
 

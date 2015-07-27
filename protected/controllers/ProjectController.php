@@ -449,7 +449,7 @@ class ProjectController extends Controller
                         $modelMCost->mc_type = 0;
                         $modelMCost->mc_proj_id = $model->pj_id;
                         $modelMCost->mc_cost = $_POST["expect_cost1"];
-                        $modelMCost->mc_detail = "เงินประมาณการใช้ได้จริง";
+                        $modelMCost->mc_detail = "เงินประมาณการค่าใช้จ่ายในการบริหารโครงการ";
                         $modelMCost->mc_date = (date("Y")+543).date("-m-d");
 				        $modelMCost->mc_user_update = Yii::app()->user->ID; 
 				        $modelMCost->mc_in_project = 1;
@@ -464,8 +464,18 @@ class ProjectController extends Controller
                         $modelMCost->mc_date = (date("Y")+543).date("-m-d");
 				        $modelMCost->mc_user_update = Yii::app()->user->ID; 
                         $modelMCost->mc_cost = $_POST["expect_cost2"];
-                        $modelMCost->mc_detail = "เงินประมาณการบุคลากร";
+                        $modelMCost->mc_detail = "เงินประมาณการค่าใช้จ่ายด้านบุคลากร";
                         $modelMCost->mc_in_project = 2;
+                        $modelMCost->save();
+
+                        $modelMCost = new ManagementCost("search");
+                        $modelMCost->mc_type = 0;
+                        $modelMCost->mc_proj_id = $model->pj_id;
+                        $modelMCost->mc_date = (date("Y")+543).date("-m-d");
+				        $modelMCost->mc_user_update = Yii::app()->user->ID; 
+                        $modelMCost->mc_cost = $_POST["expect_cost3"];
+                        $modelMCost->mc_detail = "เงินประมาณการค่ารับรอง";
+                        $modelMCost->mc_in_project = 3;
                         $modelMCost->save();
 
 				    	//end
@@ -923,6 +933,31 @@ class ProjectController extends Controller
 	                        $modelMCost->mc_type = 0;
 	                        $modelMCost->mc_proj_id = $id;
 	                        $modelMCost->mc_in_project = 2;
+					        $modelMCost->mc_user_update = Yii::app()->user->ID; 				        
+	                        $modelMCost->save();
+             			}
+                    }    
+
+                    if(isset($_POST["expect_cost3"])&& $_POST["expect_cost3"]!='')
+		    		{    
+                        $Criteria = new CDbCriteria();
+             			$Criteria->condition = "mc_proj_id='$id' AND mc_type=0 AND mc_in_project=3";
+             			$modelMCost = ManagementCost::model()->findAll($Criteria);                       
+                        if(!empty($modelMCost))
+             			{
+             				$modelMCost[0]->mc_cost = $_POST["expect_cost3"];                        
+	                        $modelMCost[0]->mc_date = (date("Y")+543).date("-m-d");
+	                        $modelMCost[0]->mc_type = 0;
+					        $modelMCost[0]->mc_user_update = Yii::app()->user->ID; 				        
+	                        $modelMCost[0]->save();	
+             			}
+             			else{
+             				$modelMCost = new ManagementCost("search");
+             				$modelMCost->mc_cost = $_POST["expect_cost3"];                        
+	                        $modelMCost->mc_date = (date("Y")+543).date("-m-d");
+	                        $modelMCost->mc_type = 0;
+	                        $modelMCost->mc_proj_id = $id;
+	                        $modelMCost->mc_in_project = 3;
 					        $modelMCost->mc_user_update = Yii::app()->user->ID; 				        
 	                        $modelMCost->save();
              			}

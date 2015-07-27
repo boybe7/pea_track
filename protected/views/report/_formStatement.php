@@ -208,60 +208,78 @@ $monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
 		  echo "</tr>";	
 
 
-		  				$pp = Yii::app()->db->createCommand()
-                                            ->select('SUM(mc_cost) as sum')
-                                            ->from('management_cost')
-                                            ->join('user','mc_user_update=u_id')
-                                            ->where("department_id='0' AND mc_type=1 AND mc_date ".$monthCondition)
-                                            ->queryAll();
-                        $m_type1_tsd = $pp[0]["sum"];                    
+		  				// $pp = Yii::app()->db->createCommand()
+        //                                     ->select('SUM(mc_cost) as sum')
+        //                                     ->from('management_cost')
+        //                                     ->join('user','mc_user_update=u_id')
+        //                                     ->where("department_id='0' AND mc_type=1 AND mc_date ".$monthCondition)
+        //                                     ->queryAll();
+        //                 $m_type1_tsd = $pp[0]["sum"];                    
 
+        //                 $pp = Yii::app()->db->createCommand()
+        //                                     ->select('SUM(mc_cost) as sum')
+        //                                     ->from('management_cost')
+        //                                     ->join('user','mc_user_update=u_id')
+        //                                     ->where("department_id='0' AND mc_type=2 AND mc_date ".$monthCondition)
+        //                                     ->queryAll();
+                      
+        //                 $m_real_tsd = $pp[0]["sum"];
+                        
                         $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
                                             ->join('user','mc_user_update=u_id')
-                                            ->where("department_id='0' AND mc_type=2 AND mc_date ".$monthCondition)
+                                            ->where("department_id='0' AND mc_type!=0 AND mc_date ".$monthCondition)
                                             ->queryAll();
                       
                         $m_real_tsd = $pp[0]["sum"];
-                        $m_tsd = $m_real_tsd + $m_type1_tsd;
+                        
+                        $m_tsd = $m_real_tsd;// + $m_type1_tsd;
 
+                        // $pp = Yii::app()->db->createCommand()
+                        //                     ->select('SUM(mc_cost) as sum')
+                        //                     ->from('management_cost')
+                        //                     ->join('user','mc_user_update=u_id')
+                        //                     ->where("department_id='1' AND mc_type=1 AND mc_date ".$monthCondition)
+                        //                     ->queryAll();
+                        // $m_type1_msd = $pp[0]["sum"];                    
+
+                        // $pp = Yii::app()->db->createCommand()
+                        //                     ->select('SUM(mc_cost) as sum')
+                        //                     ->from('management_cost')
+                        //                     ->join('user','mc_user_update=u_id')
+                        //                     ->where("department_id='1' AND mc_type=2 AND mc_date ".$monthCondition)
+                        //                     ->queryAll();
+                      
+                        // $m_real_msd = $pp[0]["sum"];
                         $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
                                             ->join('user','mc_user_update=u_id')
-                                            ->where("department_id='1' AND mc_type=1 AND mc_date ".$monthCondition)
-                                            ->queryAll();
-                        $m_type1_msd = $pp[0]["sum"];                    
-
-                        $pp = Yii::app()->db->createCommand()
-                                            ->select('SUM(mc_cost) as sum')
-                                            ->from('management_cost')
-                                            ->join('user','mc_user_update=u_id')
-                                            ->where("department_id='1' AND mc_type=2 AND mc_date ".$monthCondition)
+                                            ->where("department_id='1' AND mc_type!=0 AND mc_date ".$monthCondition)
                                             ->queryAll();
                       
                         $m_real_msd = $pp[0]["sum"];
-                        $m_msd = $m_real_msd + $m_type1_msd;
+
+                        $m_msd = $m_real_msd;// + $m_type1_msd;
+
+                        // $pp = Yii::app()->db->createCommand()
+                        //                     ->select('SUM(mc_cost) as sum')
+                        //                     ->from('management_cost')
+                        //                     ->join('user','mc_user_update=u_id')
+                        //                     ->where("department_id='2' AND mc_type=1 AND mc_date ".$monthCondition)
+                        //                     ->queryAll();
+                        // $m_type1_dsd = $pp[0]["sum"];                    
 
                         $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
                                             ->join('user','mc_user_update=u_id')
-                                            ->where("department_id='2' AND mc_type=1 AND mc_date ".$monthCondition)
-                                            ->queryAll();
-                        $m_type1_dsd = $pp[0]["sum"];                    
-
-                        $pp = Yii::app()->db->createCommand()
-                                            ->select('SUM(mc_cost) as sum')
-                                            ->from('management_cost')
-                                            ->join('user','mc_user_update=u_id')
-                                            ->where("department_id='2' AND mc_type=2 AND mc_date ".$monthCondition)
+                                            ->where("department_id='2' AND mc_type!=0 AND mc_date ".$monthCondition)
                                             ->queryAll();
                       
                         $m_real_dsd = $pp[0]["sum"];
-                        $m_dsd = $m_real_dsd + $m_type1_dsd;
-          
+                        $m_dsd = $m_real_dsd;// + $m_type1_dsd;
           $tsd_sap = 0;
           $msd_sap = 0;
           $dsd_sap = 0;
@@ -295,7 +313,7 @@ $monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
           echo "<tr>";
              echo "<td style='text-align:center;width:5%'></td>";
              echo "<td style='text-align:left;width:40%'>ค่าใช้จ่ายในการดำเนินงาน-กองบริการวิศวกรรมระบบส่ง</td>";
-             echo "<td style='text-align:right;width:20%'>".number_format($tsd_sap,2)."</td>";
+             echo "<td style='text-align:right;width:20%'>".number_format($m_tsd,2)."</td>";
              echo "<td style='text-align:center;width:5%'></td>";
              echo "<td style='text-align:center;width:20%'></td>";
              echo "<td style='text-align:center;width:10%'>1</td>";
@@ -303,7 +321,7 @@ $monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
           echo "<tr>";
              echo "<td style='text-align:center;width:5%'></td>";
              echo "<td style='text-align:left;width:40%'>ค่าใช้จ่ายในการดำเนินงาน-กองบริการบำรุงรักษา</td>";
-             echo "<td style='text-align:right;width:20%'>".number_format($msd_sap,2)."</td>";
+             echo "<td style='text-align:right;width:20%'>".number_format($m_msd,2)."</td>";
              echo "<td style='text-align:center;width:5%'></td>";
              echo "<td style='text-align:center;width:20%'></td>";
              echo "<td style='text-align:center;width:10%'>2</td>";
@@ -312,7 +330,7 @@ $monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
           echo "<tr>";
              echo "<td style='text-align:center;width:5%'></td>";
              echo "<td style='text-align:left;width:40%'>ค่าใช้จ่ายในการดำเนินงาน-กองบริการวิศวกรรมระบบจำหน่าย</td>";
-             echo "<td style='text-align:right;width:20%;'>".number_format($dsd_sap,2)."</td>";
+             echo "<td style='text-align:right;width:20%;'>".number_format($m_dsd,2)."</td>";
              echo "<td style='text-align:center;width:5%'></td>";
              echo "<td style='text-align:center;width:20%'></td>";
              echo "<td style='text-align:center;width:10%'>3</td>";
@@ -322,7 +340,7 @@ $monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
           echo "<tr>";
 			 echo "<td style='text-align:center;width:5%'></td>";
 			 echo "<td style='text-align:left;width:40%'>ค่าใช้จ่ายในการบริหารงาน-กองบริการวิศวกรรมระบบส่ง</td>";
-			 echo "<td style='text-align:right;width:20%'>".number_format($m_tsd,2)."</td>";
+			 echo "<td style='text-align:right;width:20%'>".number_format($tsd_sap,2)."</td>";
 			 echo "<td style='text-align:center;width:5%'></td>";
 			 echo "<td style='text-align:center;width:20%'></td>";
 			 echo "<td style='text-align:center;width:10%'>1</td>";
@@ -330,7 +348,7 @@ $monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
 		  echo "<tr>";
 			 echo "<td style='text-align:center;width:5%'></td>";
 			 echo "<td style='text-align:left;width:40%'>ค่าใช้จ่ายในการบริหารงาน-กองบริการบำรุงรักษา</td>";
-			 echo "<td style='text-align:right;width:20%'>".number_format($m_msd,2)."</td>";
+			 echo "<td style='text-align:right;width:20%'>".number_format($msd_sap,2)."</td>";
 			 echo "<td style='text-align:center;width:5%'></td>";
 			 echo "<td style='text-align:center;width:20%'></td>";
 			 echo "<td style='text-align:center;width:10%'>2</td>";
@@ -339,7 +357,7 @@ $monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
 		  echo "<tr>";
 			 echo "<td style='text-align:center;width:5%'></td>";
 			 echo "<td style='text-align:left;width:40%'>ค่าใช้จ่ายในการบริหารงาน-กองบริการวิศวกรรมระบบจำหน่าย</td>";
-			 echo "<td style='text-align:right;width:20%;border-bottom:1px solid black'>".number_format($m_dsd,2)."</td>";
+			 echo "<td style='text-align:right;width:20%;border-bottom:1px solid black'>".number_format($dsd_sap,2)."</td>";
 			 echo "<td style='text-align:center;width:5%'></td>";
 			 $outcome = $dsd_sap+$tsd_sap+$msd_sap+$dsd_sum+$tsd_sum+$msd_sum+$m_tsd+$m_msd+$m_dsd;
 			 echo "<td style='text-align:right;width:20%;border-bottom:1px solid black'>".number_format($outcome,2)."</td>";

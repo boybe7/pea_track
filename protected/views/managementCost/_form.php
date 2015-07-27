@@ -117,15 +117,18 @@
             	case "ค่ารับรอง":
             		$model->mc_type = 1;
             		break;
-            	case "ใช้จริง":
+            	case "ค่าใช้จ่ายบริหารโครงการ":
             		$model->mc_type = 2;
             		break;	
+              case "ค่าใช้จ่ายด้านบุคลากร":
+                $model->mc_type = 3;
+                break;    
             	default:
             		# code...
             	
             		break;
             }
-       echo $form->dropDownListRow($model,'mc_type',array(0=>'ประมาณการ',1=>'ค่ารับรอง',2=>'ใช้จริง'),array('class'=>'span12','options' => array($model->mc_type=>array('selected'=>true)))); 
+       echo $form->dropDownListRow($model,'mc_type',array(1=>'ค่ารับรอง',2=>'ค่าใช้จ่ายบริหารโครงการ',3=>'ค่าใช้จ่ายด้านบุคลากร'),array('class'=>'span12','options' => array($model->mc_type=>array('selected'=>true)))); 
 
        ?>
        

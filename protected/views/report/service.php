@@ -11,6 +11,31 @@ $cs->registerScriptFile( $theme->getBaseUrl() . '/js/jquery.json-2.3.min.js' );
 
 ?>
 
+<script type="text/javascript">
+$(document).ready(function(){
+ 
+  
+  $('#chart').change(function() {
+
+       if($(this).val()==4)
+       {
+          $('#department').removeAttr('disabled');
+          $('#workcat').attr('disabled', 'disabled');
+       }
+       else if($(this).val()==2)
+       {
+          $('#workcat').attr('disabled', 'disabled');
+          $('#department').attr('disabled', 'disabled');
+       
+       } 
+       else
+       {
+          $('#workcat').removeAttr('disabled');
+          $('#department').attr('disabled', 'disabled');
+       }
+   });
+});    
+</script>
 <style>
 
 .reportTable thead th {
@@ -100,6 +125,22 @@ body * { visibility: hidden;}
                   
         ?>
 
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <?php
+                $workcat = Yii::app()->db->createCommand()
+                    ->select('id,name')
+                    ->from('department')
+                    ->queryAll();
+     
+                $typelist = CHtml::listData($workcat,'id','name');
+                 echo CHtml::label('กอง','department');
+                echo CHtml::dropDownList('department', '', $typelist,array('empty'=>'ทุกกอง','class'=>'span12'
+                              
+                                  ));
+        ?>
       </div>
     </div>
     <div class="row-fluid">
@@ -203,10 +244,10 @@ body * { visibility: hidden;}
                             ),
                            'legend' => array(
                                     'enabled'=> true,
-                                    'layout'=> "vertical",
-                                    'align'=>"left",
+                                    //'layout'=> "horizontal",
+                                    //'align'=>"left",
                                     'width'=> 220,
-                                    'verticalAlign'=>"middle",
+                                    //'verticalAlign'=>"middle",
                                     'borderWidth'=> 0,
                                     'itemStyle'=> array(
                                         'fontWeight'=> "bold",
@@ -232,19 +273,27 @@ body * { visibility: hidden;}
                                   'depth'=> 35,
                                   'cursor'=> "pointer",
                                   'dataLabels' => array(
-                                      'enabled' => false,
-                                      'distance' => -50,
+                                      'enabled' => true,
+                                      //'distance' => -30,
                                       'style' => array(
                                           'fontWeight' => 'bold',
                                           //'fontFamily' => 'Boon700',
                                           'fontSize'=>'18px',
                                           'fontFamily' => 'TH SarabunPSK',
-                                          'color' => 'white',
-                                          'textShadow' => '0px 1px 2px black',
+                                          'color' => 'black',
+                                          //'textShadow' => '0px 1px 2px black',
                                       ),
+                                       'formatter'=> 'js:function() {
+
+                                          return "<b>"+this.point.y.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+" บาท ("+Math.round(this.point.percentage)+"%)</b>"; }',
+                                  
                                   ),
                                  
                               ),
+                              'column'=> array(
+                                  'pointPadding'=> 0.2,
+                                  'borderWidth'=> 0
+                              )
 
                             ),
                             'exporting'=> array(
@@ -262,7 +311,9 @@ body * { visibility: hidden;}
                     )); ?>
     </div>
 
-    <div id="reportContent" style="width: auto; height: 400px; margin: 0 auto; display:none">
+
+
+    <div id="reportContent2" style="width: auto; height: 400px; margin: 0 auto; display:none">
        <?php $this->widget('ext.highcharts.HighchartsWidget', array('id' => 'divChart2',
                        'htmlOptions'=>array(),  
                        'scripts' => array(
@@ -295,10 +346,10 @@ body * { visibility: hidden;}
                             ),
                            'legend' => array(
                                     'enabled'=> true,
-                                    'layout'=> "vertical",
-                                    'align'=>"left",
-                                    'width'=> 220,
-                                    'verticalAlign'=>"middle",
+                                    //'layout'=> "vertical",
+                                    //'align'=>"left",
+                                    'width'=> 420,
+                                    //'verticalAlign'=>"middle",
                                     'borderWidth'=> 0,
                                     'itemStyle'=> array(
                                         'fontWeight'=> "bold",
@@ -325,7 +376,8 @@ body * { visibility: hidden;}
                                   'cursor'=> "pointer",
                                   'dataLabels' => array(
                                       'enabled' => false,
-                                      'distance' => -50,
+                                      'useHTML'=> true,
+                                      'distance' => -30,
                                       'style' => array(
                                           'fontWeight' => 'bold',
                                           //'fontFamily' => 'Boon700',
@@ -334,6 +386,7 @@ body * { visibility: hidden;}
                                           'color' => 'white',
                                           'textShadow' => '0px 1px 2px black',
                                       ),
+                                      'formatter'=> 'js:function() { return " <b>"+Math.round(this.point.percentage)+"</b>%"; }',
                                   ),
                                  
                               ),
@@ -397,17 +450,54 @@ $("#gentReport").click(function(e){
     e.preventDefault();
     $.ajax({
         url: "genService",
-        data: {fiscalyear: $("#fiscalyear").val(),report:$("#chart").val(),workcat:$("#workcat").val()},
+        data: {fiscalyear: $("#fiscalyear").val(),report:$("#chart").val(),workcat:$("#workcat").val(),department:$("#department").val()},
         dataType: "json",
         success:function(response){
            
           var series1 = [];
+          var series2 = [];
+          var series3 = [];
           var seriesDrill = [];
           var drill = [];
-                        
+          
+          if($("#chart").val()==4 && $("#department").val()=="")
+          {
+                 
+                           $.each(response, function(key, val2) {
+                                  
+                                  if(val2["name"]=="กบศ.")
+                                  {
+                                    
+                                    $.each(val2["value"], function(key, val) {
+                                        
+                                      series1.push({name:val["name"],y:parseInt(val["value"])});
+                                    });  
+                                      
+                                  }
+                                  else if(val2["name"]=="กบจ.")
+                                  {
+
+                                    $.each(val2["value"], function(key, val) {
+                                      //console.log(val)
+                                      series2.push({name:val["name"],y:parseInt(val["value"])});
+                                    });
+                                  }
+                                  else
+                                  {
+                                    $.each(val2["value"], function(key, val) {
+                                      series3.push({name:val["name"],y:parseInt(val["value"])});
+                                    });
+                                  }
+
+                                  
+                              
+                           });
+          } 
+          else
+          {             
                            var idx = 0;
                            $.each(response, function(key, val) {
-                                
+                                val["value"] = val["value"]==null ? 0 : val["value"];
                                 if(val["drill"].length > 0)
                                 {  
                                   
@@ -425,14 +515,105 @@ $("#gentReport").click(function(e){
                                   series1.push({name:val["name"],y:parseInt(val["value"]),sliced: true});
                               
                            });
-           
+          } 
           var chart = $("#divChart").highcharts();
-
+          
+             
             // remove old data
             $(chart.series).each(function() {
                 this.remove();
             });
 
+            
+          if($("#chart").val()==4 && $("#department").val()=="")
+          {
+            
+             chart.options.chart.type = "column";
+              chart.options.chart.options3d.enabled = false;
+             //console.log(chart)
+            
+             chart.legend.options.layout = "horizontal";
+             
+            //  console.log(chart)
+            // add new data
+            var seriesOpts_01 = {
+                
+                name: "กบศ.",
+                data: series1,
+                showInLegend : true,
+                dataLabels: {
+                    enabled: true,
+                    rotation:-90,
+                    align: "top",
+                    format: "{point.y:,.2f}", // one decimal
+                    
+                    style: {
+                        fontSize: "13px",
+                        fontFamily: "Verdana, sans-serif"
+                    }
+                }
+                          
+            }
+            
+            chart.addSeries(seriesOpts_01);
+
+            var seriesOpts_03 = {
+                
+                name: "กบจ.",
+                data: series2,
+                showInLegend : true,
+                dataLabels: {
+                    enabled: true,
+                    rotation:-90,
+                    align: "top",
+                    format: "{point.y:,.2f}", // one decimal
+                    
+                    style: {
+                        fontSize: "13px",
+                        fontFamily: "Verdana, sans-serif"
+                    }
+                }
+                          
+            }
+            chart.addSeries(seriesOpts_03);
+
+            var seriesOpts_04 = {
+                
+                name: "กรษ.",
+                data: series3,
+                showInLegend : true,
+                dataLabels: {
+                    enabled: true,
+                    rotation:-90,
+                    align: "top",
+                    format: "{point.y:,.2f}", // one decimal
+                    
+                    style: {
+                        fontSize: "13px",
+                        fontFamily: "Verdana, sans-serif"
+                    }
+                }
+                          
+            }
+            chart.addSeries(seriesOpts_04);
+            //chart.yAxis[0].options.title = "จำนวนเงิน";
+            //console.log(chart)
+            chart.xAxis[0].setCategories(["รายได้","ค่าใช้จ่ายจ้างเหมา","ค่าใช้จ่ายดำเนินงาน","ค่าใช้จ่ายบริหารงาน"]);
+
+
+              chart.setTitle({text: $( "#chart option:selected" ).text()+" ปี "+$("#fiscalyear").val()}); 
+
+          } 
+          else{
+            chart.options.chart.type = "pie";
+              chart.options.chart.options3d.enabled = true; 
+              //console.log(chart.userOptions.legend.layout); 
+              //chart.legend.options.layout = "vertical";
+              //chart.legend.options.verticalAlign = "middle";
+              //chart.legend.options.align = "left";
+              //console.log(chart);
+              chart.yAxis[0].options.title.text = "";
+            
             // add new data
             var seriesOpts_01 = {
                 
@@ -441,19 +622,28 @@ $("#gentReport").click(function(e){
                 showInLegend : true
                           
             }
+            
             chart.addSeries(seriesOpts_01);
+            
+            if($("#department").val()!="")
+            {  
+              
+              chart.setTitle({text: $( "#chart option:selected" ).text()+ " ของ "+$( "#department option:selected" ).text()+" ปี "+$("#fiscalyear").val()});  
+            
+            }else  
+              chart.setTitle({text: $( "#chart option:selected" ).text()+" ปี "+$("#fiscalyear").val()}); 
 
+          } 
             var seriesOpts_02 = {
                 
                 name: "",
                 series: seriesDrill,
                 showInLegend : true
-                          
+                            
             }
 
             chart.options.drilldown = seriesOpts_02;
-            chart.setTitle({text: $( "#chart option:selected" ).text()+" ปี "+$("#fiscalyear").val()}); 
-
+            
         }
 
     });
@@ -489,19 +679,58 @@ $("#exportWord").click(function(e){
     nchart = 0;
     $.ajax({
         url: "genService",
-        data: {fiscalyear: $("#fiscalyear").val(),report:"all",workcat:""},
+        data: {fiscalyear: $("#fiscalyear").val(),report:"all",workcat:"",department:""},
         dataType: "json",
         success:function(response){
            
            $.each(response, function(key, response2) {
 
                     var series1 = [];
+                    var series2 = [];
+                    var series3 = [];
+
                     var seriesDrill = [];
                     var drill = [];
+
+                    if(response2["name"]=="รายได้เปรียบเทียบกับค่าใช้จ่าย")
+                    {
+                              $.each(response2["data"], function(key, val2) {
+                                  
+                                 // console.log(val2)
+                                  if(val2["name"]=="กบศ.")
+                                  {
+                                    
+                                    $.each(val2["value"], function(key, val) {
+                                        
+                                      series1.push({name:val["name"],y:parseInt(val["value"])});
+                                    });  
+                                      
+                                  }
+                                  else if(val2["name"]=="กบจ.")
+                                  {
+
+                                    $.each(val2["value"], function(key, val) {
+                                      //console.log(val)
+                                      series2.push({name:val["name"],y:parseInt(val["value"])});
+                                    });
+                                  }
+                                  else
+                                  {
+                                    $.each(val2["value"], function(key, val) {
+                                      series3.push({name:val["name"],y:parseInt(val["value"])});
+                                    });
+                                  }
+
+                                  
+                              
+                           });
+                    }
+                    else
+                    {  
                                   
                                      var idx = 0;
                                      $.each(response2["data"], function(key, val) {
-                                          
+                                          val["value"] = val["value"]==null ? 0 : val["value"];
                                           if(val["drill"].length > 0)
                                           {  
                                             
@@ -519,7 +748,7 @@ $("#exportWord").click(function(e){
                                             series1.push({name:val["name"],y:parseInt(val["value"]),sliced: true});
                                         
                                      });
-                     
+                    } 
                     var chart = $("#divChart2").highcharts();
 
                       // remove old data
@@ -527,6 +756,86 @@ $("#exportWord").click(function(e){
                           this.remove();
                       });
 
+                     
+                if(response2["name"]=="รายได้เปรียบเทียบกับค่าใช้จ่าย")
+                {
+                    chart.options.chart.type = "column";
+                    chart.options.chart.options3d.enabled = false;
+                   //console.log(chart)
+                  
+                   chart.legend.options.layout = "horizontal";
+                   
+                  //  console.log(chart)
+                  // add new data
+                  var seriesOpts_01 = {
+                      
+                      name: "กบศ.",
+                      data: series1,
+                      showInLegend : true,
+                      dataLabels: {
+                          enabled: true,
+                          rotation:-90,
+                          align: "top",
+                          format: "{point.y:,.2f}", // one decimal
+                          
+                          style: {
+                              fontSize: "13px",
+                              fontFamily: "Verdana, sans-serif"
+                          }
+                      }
+                                
+                  }
+                  
+                  chart.addSeries(seriesOpts_01);
+
+                  var seriesOpts_03 = {
+                      
+                      name: "กบจ.",
+                      data: series2,
+                      showInLegend : true,
+                      dataLabels: {
+                          enabled: true,
+                          rotation:-90,
+                          align: "top",
+                          format: "{point.y:,.2f}", // one decimal
+                          
+                          style: {
+                              fontSize: "13px",
+                              fontFamily: "Verdana, sans-serif"
+                          }
+                      }
+                                
+                  }
+                  chart.addSeries(seriesOpts_03);
+
+                  var seriesOpts_04 = {
+                      
+                      name: "กรษ.",
+                      data: series3,
+                      showInLegend : true,
+                      dataLabels: {
+                          enabled: true,
+                          rotation:-90,
+                          align: "top",
+                          format: "{point.y:,.2f}", // one decimal
+                          
+                          style: {
+                              fontSize: "13px",
+                              fontFamily: "Verdana, sans-serif"
+                          }
+                      }
+                                
+                  }
+                  chart.addSeries(seriesOpts_04);
+                  //chart.yAxis[0].options.title = "จำนวนเงิน";
+                  //console.log(chart)
+                  chart.xAxis[0].setCategories(["รายได้","ค่าใช้จ่ายจ้างเหมา","ค่าใช้จ่ายดำเนินงาน","ค่าใช้จ่ายบริหารงาน"]);
+
+
+
+                }
+                else
+                {  
                       // add new data
                       var seriesOpts_01 = {
                           
@@ -536,7 +845,7 @@ $("#exportWord").click(function(e){
                                     
                       }
                       chart.addSeries(seriesOpts_01);
-
+                }      
                       var seriesOpts_02 = {
                           
                           name: "",

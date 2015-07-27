@@ -157,21 +157,15 @@ $html = "";
 $pj = $model;
 $month_th = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม","4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน","7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน","10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
 
-if($monthBegin==$monthEnd && $yearBegin==$yearEnd)
-    $monthBetween = $month_th[$monthBegin]." ".$yearBegin;
-else if($yearBegin==$yearEnd)
-    $monthBetween = $month_th[$monthBegin]."-".$month_th[$monthEnd]." ".$yearEnd;
-else
-    $monthBetween = $month_th[$monthBegin]." ".$yearBegin."-".$month_th[$monthEnd]." ".$yearEnd;
+$monthBetween = $month_th[$monthEnd]." ".$yearEnd;
+
 
 $number = cal_days_in_month(CAL_GREGORIAN, $monthEnd, $yearEnd-543);
-$monthBegin2 = $monthBegin<10 ? "0".$monthBegin : $monthBegin;
 $monthEnd2 = $monthEnd<10 ? "0".$monthEnd : $monthEnd;
-$dayBegin = $yearBegin."-".$monthBegin2."-"."01";
 
 $number = $number<10 ? "0".$number : $number;
 $dayEnd = $yearEnd."-".$monthEnd2."-".$number;
-$monthCondition = " BETWEEN '".$dayBegin."' AND '".$dayEnd."'";
+$monthCondition = " <= '".$dayEnd."'";
 
 //$html .= $monthCondition;
 
@@ -210,6 +204,14 @@ foreach ($model as $key => $pj) {
                          $pcs = ProjectContract::model()->findAll($Criteria);
                          $nPC = count($pcs);
 
+                          $pay_pc = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum,YEAR(bill_date) as year')
+                                            ->from('payment_project_contract')
+                                            ->join('project_contract p', 'proj_id=p.pc_id')
+                                            ->where("p.pc_proj_id='$pj->pj_id' AND bill_date!='' AND YEAR(bill_date)!=0 AND bill_date ".$monthCondition)
+                                            ->group("YEAR(bill_date)")
+                                            ->queryAll();
+
                          //2.outsource contract
                          $Criteria = new CDbCriteria();
                          $Criteria->condition = "oc_proj_id='$pj->pj_id'";
@@ -218,13 +220,56 @@ foreach ($model as $key => $pj) {
                          $maxContract = $nPC < $nOC ? $nOC : $nPC ;
                          $pj_rowspan = $maxContract * $maxPayment;
 
+                          $pay_oc = Yii::app()->db->createCommand()
+                                            ->select('SUM(money) as sum,YEAR(approve_date) as year')
+                                            ->from('payment_outsource_contract')
+                                            ->join('outsource_contract o', 'contract_id=o.oc_id')
+                                            ->where("o.oc_proj_id='$pj->pj_id' AND approve_date!='' AND YEAR(approve_date)!=0 AND approve_date ".$monthCondition)
+                                            ->group("YEAR(approve_date)")
+                                            ->queryAll();
+                        
+
                          //management
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=2 AND mc_date ".$monthCondition)
+                                            ->queryAll();
+                        $m_sum1 = $pp[0]["sum"];
                          $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
-                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type!=0 AND mc_date ".$monthCondition)
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=1 AND mc_date ".$monthCondition)
                                             ->queryAll();
-                        $m_sum = $pp[0]["sum"];
+                        $m_sum2 = $pp[0]["sum"];
+                         $pp = Yii::app()->db->createCommand()
+                                            ->select('SUM(mc_cost) as sum')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=3 AND mc_date ".$monthCondition)
+                                            ->queryAll();
+                        $m_sum3 = $pp[0]["sum"];
+
+
+                         $pp = Yii::app()->db->createCommand()
+                                            ->select('sum(mc_cost) as mc_cost')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=0 AND mc_in_project=1")
+                                            ->queryAll();
+                        $m_plan1 = $pp[0]["mc_cost"];
+
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('sum(mc_cost)  as mc_cost')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=0 AND mc_in_project=2")
+                                            ->queryAll();
+                        $m_plan2 = $pp[0]["mc_cost"];
+
+                        $pp = Yii::app()->db->createCommand()
+                                            ->select('sum(mc_cost)  as mc_cost')
+                                            ->from('management_cost')
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=0 AND mc_in_project=3")
+                                            ->queryAll();
+                        $m_plan3 = $pp[0]["mc_cost"];
                         //$html .= $m_sum;   
 
         $iPC = 0;
@@ -270,7 +315,7 @@ foreach ($model as $key => $pj) {
                     $html .='<td align="right">'.number_format($costPC,2).'</td>';
 
                     $Criteria = new CDbCriteria();
-                    $Criteria->condition = "proj_id='$pc->pc_id' AND bill_date!='' AND bill_date ".$monthCondition;
+                    $Criteria->condition = "proj_id='$pc->pc_id' AND bill_date!='' AND YEAR(bill_date)!=0 AND bill_date ".$monthCondition;
                     $payment = PaymentProjectContract::model()->findAll($Criteria);
 
                     $iPayPC = 0;
@@ -359,7 +404,7 @@ foreach ($model as $key => $pj) {
                     $html .='<td align="right">'.number_format($costOC,2).'</td>';
 
                     $Criteria = new CDbCriteria();
-                    $Criteria->condition = "contract_id='$oc->oc_id' AND approve_date!='' AND approve_date ".$monthCondition;
+                    $Criteria->condition = "contract_id='$oc->oc_id' AND approve_date!='' AND YEAR(approve_date)!=0 AND approve_date ".$monthCondition;
                     $paymentOC = PaymentOutsourceContract::model()->findAll($Criteria);
                     //echo(count($paymentOC));
                     $iPayOC = 0;
@@ -427,23 +472,68 @@ foreach ($model as $key => $pj) {
                         
         }                 
         //summary project
-        $html .= '<tr style="background-color:#D7A8F7">';
-            $html .= '<td colspan="2">รวมรายรับ ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
-            $html .= '<td align="right">'.number_format($sumPayPCAll,2).'</td>';
-            $html .= '<td colspan="2">รวมรายจ่าย ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
-            $html .= '<td align="right">'.number_format($sumPayOCAll,2).'</td>';
-        $html .= '</tr>';
-         $html .= '<tr style="background-color:#D7A8F7">';
+
+        $max = count($pay_pc) < count($pay_oc) ? count($pay_oc): count($pay_pc);
+        for ($i=0; $i < $max; $i++) { 
+           $html .= '<tr style="background-color:#D7A8F7">';
+        
+            if(!empty($pay_pc[$i]))
+            {   
+                if($pay_pc[$i]["year"]==$yearEnd)
+                  $html .= '<td colspan="2">รวมรายรับ ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
+                else
+                  $html .= '<td colspan="2">รวมรายรับ ณ เดือน ธันวาคม '.$pay_pc[$i]["year"].'</td>';
+                
+                $html .= '<td align="right">'.number_format($pay_pc[$i]["sum"],2).'</td>';
+            }
+            else{
+                $html .= '<td colspan="2"></td><td></td>';  
+            }           
+            if(!empty($pay_oc[$i]))
+            {   
+                if($pay_oc[$i]["year"]==$yearEnd)
+                  $html .= '<td colspan="2">รวมรายจ่าย ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
+                else
+                  $html .= '<td colspan="2">รวมรายจ่าย ณ เดือน ธันวาคม '.$pay_oc[$i]["year"].'</td>';
+
+                $html .= '<td align="right">'.number_format($pay_oc[$i]["sum"],2).'</td>';
+            }
+            else{
+                $html .='<td colspan="2"></td><td></td>';  
+            }
+            
+            $html .='</tr>';
+        
+        }
+        // $html .= '<tr style="background-color:#D7A8F7">';
+        //     $html .= '<td colspan="2">รวมรายรับ ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
+        //     $html .= '<td align="right">'.number_format($sumPayPCAll,2).'</td>';
+        //     $html .= '<td colspan="2">รวมรายจ่าย ณ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
+        //     $html .= '<td align="right">'.number_format($sumPayOCAll,2).'</td>';
+        // $html .= '</tr>';
+          $html .= '<tr style="background-color:#D7A8F7">';
             $html .= '<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>';
             
-          $html .= '<td colspan="2">ค่าบริหารโครงการ เดือน '.$month_th[$monthEnd].' '.$yearEnd.'</td>';
-          $html .= '<td align="right">'.number_format($m_sum,2).'</td>';
+          $html .= '<td colspan="2">ค่าบริหารโครงการ ('.number_format($m_plan1,2).')</td>';
+          $html .= '<td align="right">'.number_format($m_sum1,2).'</td>';
+        $html .= '</tr>';
+          $html .= '<tr style="background-color:#D7A8F7">';
+            $html .= '<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>';
+            
+          $html .= '<td colspan="2">ค่ารับรอง ('.number_format($m_plan2,2).')</td>';
+          $html .= '<td align="right">'.number_format($m_sum2,2).'</td>';
+        $html .= '</tr>';
+          $html .= '<tr style="background-color:#D7A8F7">';
+            $html .= '<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>';
+            
+          $html .= '<td colspan="2">ค่าบุคลากร ('.number_format($m_plan3,2).')</td>';
+          $html .= '<td align="right">'.number_format($m_sum3,2).'</td>';
         $html .= '</tr>';
           $html .= '<tr style="background-color:#D7A8F7">';
              $html .= '<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>';
             
              $html .= '<td colspan="2"><b>กำไร/ขาดทุน</b></td>';
-             $html .= '<td align="right"><b>'.number_format($sumPayPCAll-$sumPayOCAll-$m_sum,2).'</b></td>';
+             $html .= '<td align="right"><b>'.number_format($sumPayPCAll-$sumPayOCAll-$m_sum1-$m_sum3-$m_sum2,2).'</b></td>';
          $html .= '</tr>';
         $html .= '</tbody>';
     $html .="</table>";

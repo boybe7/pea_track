@@ -275,15 +275,15 @@ $pdf->AddPage('L', 'A3');
 
                          //management cost
                         $Criteria = new CDbCriteria();
-                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=0";
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=0  AND mc_in_project!=3";
                         $m_plan = ManagementCost::model()->findAll($Criteria);
 
                         $Criteria = new CDbCriteria();
-                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=2";
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=2 ";
                         $m_real = ManagementCost::model()->findAll($Criteria);
 
                         $Criteria = new CDbCriteria();
-                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=1";
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=1  AND mc_in_project=3";
                         $m_type1 = ManagementCost::model()->findAll($Criteria);
 
                         //find tax
@@ -304,14 +304,14 @@ $pdf->AddPage('L', 'A3');
                         $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
-                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=1")
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=0 and mc_in_project=3")
                                             ->queryAll();
                         $m_type1_sum = $pp[0]["sum"];                    
 
                         $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
-                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=2")
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type!=0")
                                             ->queryAll();
                         $m_real_sum = $pp[0]["sum"];
 
@@ -338,7 +338,7 @@ $pdf->AddPage('L', 'A3');
                                             ->where("oc_proj_id='$pj->pj_id'")
                                             ->queryAll();                    
                         $outcome = $pp[0]["sum"];                    
-                        $m_profit = $income - $outcome - $m_type1_sum - $m_real_sum;
+                        $m_profit = $income - $outcome - $m_real_sum;
 
                         $sum_profit += $m_profit;
 

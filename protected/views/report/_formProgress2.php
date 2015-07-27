@@ -227,7 +227,7 @@ function renderDate($value)
 
                          //management cost
                         $Criteria = new CDbCriteria();
-                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=0";
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=0 AND mc_in_project!=3";
                         $m_plan = ManagementCost::model()->findAll($Criteria);
 
                         $Criteria = new CDbCriteria();
@@ -235,8 +235,9 @@ function renderDate($value)
                         $m_real = ManagementCost::model()->findAll($Criteria);
 
                         $Criteria = new CDbCriteria();
-                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=1";
+                        $Criteria->condition = "mc_proj_id='$pj->pj_id' AND mc_type=0 AND mc_in_project=3";
                         $m_type1 = ManagementCost::model()->findAll($Criteria);
+                        //print_r($m_type1);
 
                         //find tax
                         $Criteria = new CDbCriteria();
@@ -256,14 +257,14 @@ function renderDate($value)
                         $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
-                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=1")
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=0 AND mc_in_project=3")
                                             ->queryAll();
                         $m_type1_sum = $pp[0]["sum"];                    
 
                         $pp = Yii::app()->db->createCommand()
                                             ->select('SUM(mc_cost) as sum')
                                             ->from('management_cost')
-                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type=2")
+                                            ->where("mc_proj_id='$pj->pj_id' AND mc_type!=0")
                                             ->queryAll();
                         $m_real_sum = $pp[0]["sum"];
 
@@ -290,7 +291,7 @@ function renderDate($value)
                                             ->where("oc_proj_id='$pj->pj_id'")
                                             ->queryAll();                    
                         $outcome = $pp[0]["sum"];                    
-                        $m_profit = $income - $outcome - $m_type1_sum - $m_real_sum;
+                        $m_profit = $income - $outcome - $m_real_sum;
 
                         $sum_profit += $m_profit;
 
@@ -623,10 +624,8 @@ function renderDate($value)
 
 								if($i==0)
 								{
-									if($m_type1_sum!=0)
-									 	echo "<td style='text-align:right;'>".number_format($m_type1_sum,2)."</td>";
-									else
-									 	echo "<td style='text-align:right;'></td>";	
+									
+									echo "<td style='text-align:right;'>".number_format($m_type1[0]->mc_cost,2)."</td>";
 									if($m_real_sum!=0)
 										echo "<td style='text-align:right;'>".number_format($m_real_sum,2)."</td>";
 									else

@@ -24,64 +24,6 @@ $this->breadcrumbs=array(
 <!-- <script type="text/javascript" src="/pea_track/themes/bootstrap/js/pdfobject.js"></script> -->
 <!-- <script type="text/javascript" src="/pea_track/themes/bootstrap/js/pdf.js"></script> -->
 <!-- <script type="text/javascript" src="/pea_track/themes/bootstrap/js/compatibility.js"></script> -->
-<script type="text/javascript">
-
-$(document).ready(function(){
- 
-  
-  $('#fiscalyear').change(function() {
-         //console.log($(this).val());
-      if($(this).val()!="")
-      {
-
-
-         var yy =  parseInt($(this).val());
-         
-         yy1 = yy-2;
-         yy2 = yy-1;
-         yy3 = yy+1;
-         yy4 = yy+2;
-         
-        var newOptions =  {yy1:yy1,yy2:yy2,yy:yy,yy3:yy3,yy4:yy4};
-        var selectedOption = yy;
-
-        var select = $('#yearBegin');
-        if(select.prop) {
-          var options = select.prop('options');
-        }
-        else {
-          var options = select.attr('options');
-        }
-        $('option', select).remove();
-
-        $.each(newOptions, function(val, text) {
-            options[options.length] = new Option(text, text);
-        });
-        //console.log(selectedOption);
-        select.val(selectedOption-1);
-        $('#monthBegin').val(10);
-
-        var select = $('#yearEnd');
-        if(select.prop) {
-          var options = select.prop('options');
-        }
-        else {
-          var options = select.attr('options');
-        }
-        $('option', select).remove();
-
-        $.each(newOptions, function(val, text) {
-            options[options.length] = new Option(text, text);
-        });
-        
-        var d = new Date();
-        select.val(d.getFullYear()+543);
-        $('#monthEnd').val(d.getMonth()+1);        
-      }  
-  });
-    
-});   
-</script>
 
 
 <h4>รายงานสรุปรายได้/ค่าใช้จ่าย</h4>
@@ -118,7 +60,7 @@ $(document).ready(function(){
 		?>
 
 	</div>
-	<div class="span3">
+	<div class="span2">
 		<?php
 
 		    
@@ -156,7 +98,7 @@ $(document).ready(function(){
 		?>
 
 	</div>
-	<div class="span4">
+	<div class="span3">
 		<?php
 
 		  //   $projects =Project::model()->findAll(array(
@@ -201,6 +143,32 @@ $(document).ready(function(){
 		?>
 
 	</div>
+  <div class="span1">
+               
+              <?php
+                echo CHtml::label('ณ เดือน','monthEnd');  
+                $list = array("1" => "ม.ค.", "2" => "ก.พ.", "3" => "มี.ค.","4" => "เม.ย.", "5" => "พ.ค.", "6" => "มิ.ย.","7" => "ก.ค.", "8" => "ส.ค.", "9" => "ก.ย.","10" => "ต.ค.", "11" => "พ.ย.", "12" => "ธ.ค.");
+                $mm = date("n");
+                echo CHtml::dropDownList('monthEnd', '', 
+                        $list,array('class'=>'span12',"options"=>array($mm=>array("selected"=>true))
+                    ));
+               
+
+              ?>
+    </div>
+    <div class="span1">
+            <?php
+                
+                echo CHtml::label('ปี','yearEnd');  
+                $yy = date("Y")+543;
+                $list = array($yy-2=>$yy-2,$yy-1=>$yy-1,$yy=>$yy,$yy+1=>$yy+1,$yy+2=>$yy+2);
+                echo CHtml::dropDownList('yearEnd', '', 
+                        $list,array('class'=>'span12',"options"=>array($yy=>array("selected"=>true))
+                  
+                    ));
+
+              ?>
+    </div>
 	<div class="span3">
       <?php
         $this->widget('bootstrap.widgets.TbButton', array(
@@ -252,56 +220,7 @@ $(document).ready(function(){
   </div>
 
 
-  <div class="row-fluid">
-    <div class="offset1 span2">
-               
-              <?php
-                echo CHtml::label('ระหว่างเดือน','monthBegin');  
-                $list = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม","4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน","7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน","10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
-                echo CHtml::dropDownList('monthBegin', '', 
-                        $list,array('class'=>'span12'
-                    ));
-               
-
-              ?>
-    </div>
-    <div class="span2">
-            <?php
-                
-                echo CHtml::label('ปี','yearBegin');  
-                $yy = date("Y")+543;
-                $list = array($yy-2=>$yy-2,$yy-1=>$yy-1,$yy=>$yy,$yy+1=>$yy+1,$yy+2=>$yy+2);
-                echo CHtml::dropDownList('yearBegin', '', 
-                        $list,array('class'=>'span8'
-                    ));
-
-              ?>
-    </div>
-     <div class="span2">
-               
-              <?php
-                echo CHtml::label('ถึงเดือน','monthEnd');  
-                $list = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม","4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน","7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน","10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
-                echo CHtml::dropDownList('monthEnd', '', 
-                        $list,array('class'=>'span12'
-                    ));
-               
-
-              ?>
-    </div>
-    <div class="span2">
-            <?php
-                
-                echo CHtml::label('ปี','yearEnd');  
-                $yy = date("Y")+543;
-                $list = array($yy-2=>$yy-2,$yy-1=>$yy-1,$yy=>$yy,$yy+1=>$yy+1,$yy+2=>$yy+2);
-                echo CHtml::dropDownList('yearEnd', '', 
-                        $list,array('class'=>'span8'
-                    ));
-
-              ?>
-    </div>
-  </div>  
+    
 </div>
 
 
@@ -318,7 +237,7 @@ $("#gentReport").click(function(e){
         $.ajax({
             url: "genCashflow",
             cache:false,
-            data: {fiscalyear:$("#fiscalyear").val(),project: $("#project").val(),monthBegin:$("#monthBegin").val(),monthEnd:$("#monthEnd").val(),yearBegin:$("#yearBegin").val(),yearEnd:$("#yearEnd").val(),workcat:$("#workcat").val()
+            data: {fiscalyear:$("#fiscalyear").val(),project: $("#project").val(),monthEnd:$("#monthEnd").val(),yearEnd:$("#yearEnd").val(),workcat:$("#workcat").val()
               },
             success:function(response){
                
@@ -336,7 +255,7 @@ $("#printReport").click(function(e){
 
     $.ajax({
         url: "printCashflow",
-        data: {fiscalyear:$("#fiscalyear").val(),project: $("#project").val(),monthBegin:$("#monthBegin").val(),monthEnd:$("#monthEnd").val(),yearBegin:$("#yearBegin").val(),yearEnd:$("#yearEnd").val(),workcat:$("#workcat").val()
+        data: {fiscalyear:$("#fiscalyear").val(),project: $("#project").val(),monthEnd:$("#monthEnd").val(),yearEnd:$("#yearEnd").val(),workcat:$("#workcat").val()
               },
         success:function(response){
             window.open("../tempReport.pdf", "_blank", "fullscreen=yes");              
@@ -351,7 +270,7 @@ $("#printReport").click(function(e){
 Yii::app()->clientScript->registerScript('exportExcel', '
 $("#exportExcel").click(function(e){
     e.preventDefault();
-    window.location.href = "genCashflowExcel?fiscalyear="+$("#fiscalyear").val()+"&project="+$("#project").val()+"&monthBegin="+$("#monthBegin").val()+"&monthEnd="+$("#monthEnd").val()+"&yearBegin="+$("#yearBegin").val()+"&yearEnd="+$("#yearEnd").val()+"&workcat="+$("#workcat").val();
+    window.location.href = "genCashflowExcel?fiscalyear="+$("#fiscalyear").val()+"&project="+$("#project").val()+"&monthEnd="+$("#monthEnd").val()+"&yearEnd="+$("#yearEnd").val()+"&workcat="+$("#workcat").val();
               
 
 

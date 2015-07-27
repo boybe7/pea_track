@@ -209,7 +209,7 @@ $('#search-form form').submit(function(){
  $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'management-cost-grid',
 	'type'=>'bordered condensed',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$model->search2(),
 	'filter'=>$model,
 	'selectableRows' =>2,
 	'htmlOptions'=>array('style'=>'padding-top:40px;width:100%'),
@@ -243,7 +243,7 @@ $('#search-form form').submit(function(){
 	  	),
 		'type'=>array(
 			    'name' => 'mc_type',
-			    'filter'=>CHtml::activeDropDownList($model,'mc_type',array(0=>'ประมาณการ',1=>'ค่ารับรอง',2=>'ใช้จริง')),
+			    'filter'=>CHtml::activeDropDownList($model,'mc_type',array(1=>'ค่ารับรอง',2=>'ค่าใช้จ่ายบริหารโครงการ',3=>'ค่าใช้จ่ายด้านบุคลากร'),array('empty'=>'','style'=>'height:30px')),
 				'headerHtmlOptions' => array('style' => 'width:10%;text-align:center;background-color: #f5f5f5'),  	            	  	
 				'htmlOptions'=>array('style'=>'text-align:right')
 	  	),

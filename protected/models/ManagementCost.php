@@ -104,6 +104,32 @@ class ManagementCost extends CActiveRecord
 		));
 	}
 
+	public function search2()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('mc_id',$this->mc_id);
+		$criteria->compare('mc_proj_id',$this->mc_proj_id);
+		$criteria->compare('mc_type',$this->mc_type);
+		$criteria->compare('mc_detail',$this->mc_detail,true);
+		$criteria->compare('mc_cost',$this->mc_cost);
+		$criteria->compare('mc_date',$this->mc_date,true);
+		$criteria->compare('mc_user_update',$this->mc_user_update);
+		$user_dept = Yii::app()->user->userdept;
+		if(!Yii::app()->user->isExecutive())
+		{
+			$criteria->join = 'LEFT JOIN user ON mc_user_update=user.u_id';
+			$criteria->addCondition('user.department_id='.$user_dept);
+			$criteria->addCondition('mc_type!=0');
+		}	
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
 	protected function afterFind(){
             parent::afterFind();
 
@@ -115,7 +141,10 @@ class ManagementCost extends CActiveRecord
             		$this->mc_type = "ค่ารับรอง";
             		break;
             	case 2:
-            		$this->mc_type = "ใช้จริง";
+            		$this->mc_type = "ค่าใช้จ่ายบริหารโครงการ";
+            		break;	
+            	case 3:
+            		$this->mc_type = "ค่าใช้จ่ายด้านบุคลากร";
             		break;	
             	default:
             		# code...
