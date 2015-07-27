@@ -2,7 +2,7 @@
 
 define('BATIK_PATH', Yii::getPathOfAlias('BATIK_PATH'));//'/../extensions/highcharts/exporting-server/batik-rasterizer.jar');
 define('TEMP_PATH', Yii::getPathOfAlias('TEMP_PATH'));//'/../extensions/highcharts/exporting-server/temp/');
-
+define('EXPORT_PATH', Yii::getPathOfAlias('EXPORT_PATH'));
 
 
 class ReportController extends Controller
