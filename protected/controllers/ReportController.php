@@ -1,10 +1,10 @@
 <?php
 
-define('BATIK_PATH', Yii::getPathOfAlias('BATIK_PATH'));//'/../extensions/highcharts/exporting-server/batik-rasterizer.jar');
-define('TEMP_PATH', Yii::getPathOfAlias('TEMP_PATH'));//'/../extensions/highcharts/exporting-server/temp/');
+//define('BATIK_PATH', Yii::getPathOfAlias('BATIK_PATH'));//'/../extensions/highcharts/exporting-server/batik-rasterizer.jar');
+//define('TEMP_PATH', Yii::getPathOfAlias('TEMP_PATH'));//'/../extensions/highcharts/exporting-server/temp/');
 
-//define('BATIK_PATH', 'c:\xampp\htdocs\pea_track\protected\extensions\highcharts\exporting-server\batik-rasterizer.jar');//'/../);
-//define('TEMP_PATH', 'c:\xampp\htdocs\pea_track\protected\extensions\highcharts\exporting-server/');
+define('BATIK_PATH', 'c:\xampp\htdocs\pea_track\protected\extensions\highcharts\exporting-server\batik-rasterizer.jar');//'/../);
+define('TEMP_PATH', 'c:\xampp\htdocs\pea_track\protected\extensions\highcharts\exporting-server/');
 
 define('EXPORT_PATH', Yii::getPathOfAlias('EXPORT_PATH'));
 
