@@ -246,7 +246,7 @@ body * { visibility: hidden;}
                                     'enabled'=> true,
                                     //'layout'=> "horizontal",
                                     //'align'=>"left",
-                                    'width'=> 220,
+                                    'width'=> 520,
                                     //'verticalAlign'=>"middle",
                                     'borderWidth'=> 0,
                                     'itemStyle'=> array(
