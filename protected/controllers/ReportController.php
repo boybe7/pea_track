@@ -287,7 +287,7 @@ function svgToJpg($item){
     
     // delete it
     
-    unlink($outfile);
+   // unlink($outfile);
   
   // SVG can be streamed directly back
   } else {
